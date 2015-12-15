@@ -25,7 +25,7 @@ public class Constant
 	public static final String LOGIN_STATE = "LoginState";
 	// 私密
 	public static final String PRIVATEKEY = "szrjk2015";
-	// 开发环境
+	// 开发环境111
 
 	//	 测试环境
 	public static String RQEUEST_URL = "http://192.168.1.82:8888/qry";

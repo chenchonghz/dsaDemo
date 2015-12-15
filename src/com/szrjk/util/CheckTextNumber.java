@@ -17,10 +17,12 @@ public class CheckTextNumber {
 			 private CharSequence temp;
 	         private int selectionStart;
 	         private int selectionEnd;
+			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				temp = s;
 			}
 			
+			@Override
 			public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
 					int arg3) {
 			}

@@ -2,7 +2,6 @@ package com.szrjk.adapter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,11 +11,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -24,6 +20,7 @@ import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.text.style.DynamicDrawableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.ImageSpan;
 import android.util.DisplayMetrics;
@@ -54,7 +51,6 @@ import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.IPhotoClickOper;
 import com.szrjk.entity.IPullPostListCallback;
 import com.szrjk.entity.InitSrcPostInterface;
-import com.szrjk.entity.OperContextClick;
 import com.szrjk.entity.PostAbstractList;
 import com.szrjk.entity.PostInfo;
 import com.szrjk.entity.PostOtherImformationInfo;
@@ -111,6 +107,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 	ViewHolder7 recommend_user_Holder;
 	ViewHolder8 viewHolder8;
 	private Handler hander = new Handler(){
+		@Override
 		public void handleMessage(android.os.Message msg) {
 			notifyDataSetChanged();
 			hander.sendEmptyMessageDelayed(0, 60000);
@@ -1721,7 +1718,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		int icon_start = userName.length();
 		int icon_end = userName.length();
 		Bitmap b = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_yellow_v_24);
-		ImageSpan imgSpan = new ImageSpan(context, b, ImageSpan.ALIGN_BASELINE);
+		ImageSpan imgSpan = new ImageSpan(context, b, DynamicDrawableSpan.ALIGN_BASELINE);
 		if(userLevel.equals("11")){
 			sb_content.append(" icon");
 			icon_start += 1;
@@ -1771,7 +1768,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		spanStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.link_text_color)), start, end,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		spanStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.font_titleanduname)), icon_end,sb_content.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		if(userLevel.equals("11")){	
-			spanStr.setSpan(imgSpan, icon_start, icon_end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			spanStr.setSpan(imgSpan, icon_start, icon_end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		}
 		return spanStr;
 	}
@@ -1785,7 +1782,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		int icon_start = userName.length();
 		int icon_end = userName.length();
 		Bitmap b = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_yellow_v_24);
-		ImageSpan imgSpan = new ImageSpan(context, b, ImageSpan.ALIGN_BASELINE);
+		ImageSpan imgSpan = new ImageSpan(context, b, DynamicDrawableSpan.ALIGN_BASELINE);
 		if(userLevel.equals("11")){
 			sb_content.append(" icon");
 			icon_start += 1;
@@ -1835,7 +1832,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		spanStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.link_text_color)), start, end,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		spanStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.font_titleanduname)), icon_end,sb_content.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		if(userLevel.equals("11")){	
-			spanStr.setSpan(imgSpan, icon_start, icon_end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			spanStr.setSpan(imgSpan, icon_start, icon_end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		}
 		return spanStr;
 	}
@@ -1854,7 +1851,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			start = 2;
 			end = sb_content.length();		
 			Bitmap b = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_yellow_v_24);
-			ImageSpan imgSpan = new ImageSpan(context, b, ImageSpan.ALIGN_BASELINE);
+			ImageSpan imgSpan = new ImageSpan(context, b, DynamicDrawableSpan.ALIGN_BASELINE);
 			icon_start = sb_content.length();
 			if(userCard.getUserLevel().equals("11")){
 				sb_content.append(" icon");
@@ -1900,7 +1897,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			spanStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.font_titleanduname)), icon_end,sb_content.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);	
 			spanStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.link_text_color)), start, end,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 			if(userCard.getUserLevel().equals("11")){	
-				spanStr.setSpan(imgSpan, icon_start, icon_end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+				spanStr.setSpan(imgSpan, icon_start, icon_end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 			}
 			return spanStr;
 		}else{

@@ -27,7 +27,6 @@ import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.UserInfo;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
-import com.szrjk.self.more.SetingActivity;
 import com.szrjk.util.BusiUtils;
 import com.szrjk.util.DesUtil;
 import com.szrjk.util.SharePerferenceUtil;

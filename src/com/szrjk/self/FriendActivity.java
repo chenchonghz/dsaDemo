@@ -9,7 +9,6 @@ import com.szrjk.entity.RemindEvent;
 
 import de.greenrobot.event.EventBus;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -81,10 +80,12 @@ private MypagerAdapter adapter;
 			
 		}
 		
+		@Override
 		public void onPageScrolled(int arg0, float arg1, int arg2) {
 			
 		}
 		
+		@Override
 		public void onPageScrollStateChanged(int arg0) {
 			
 		}
@@ -92,6 +93,7 @@ private MypagerAdapter adapter;
 	}
 
 
+	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.rly_myfriend:
@@ -144,10 +146,12 @@ private MypagerAdapter adapter;
 			super(fm);
 		}
 
+		@Override
 		public Fragment getItem(int position) {
 			return Flist.get(position);
 		}
 
+		@Override
 		public int getCount() {
 			return Flist.size();
 		}

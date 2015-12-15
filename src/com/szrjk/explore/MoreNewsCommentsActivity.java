@@ -1,7 +1,6 @@
 package com.szrjk.explore;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,9 +25,6 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.adapter.CommendListAdapter;
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.R;
-import com.szrjk.dhome.R.id;
-import com.szrjk.dhome.R.layout;
-import com.szrjk.dhome.R.string;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.NewsCommentEntity;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
@@ -56,6 +52,7 @@ public class MoreNewsCommentsActivity extends Activity {
 	private CommendListAdapter commendAdapter;
 	private static final String LOADING_POST = "正在加载评论";
 	private Handler handler = new Handler(){
+		@Override
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case Constant.HAVE_NEW_POST:

@@ -225,6 +225,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener , 
 	private OnClickListener itemsOnClick = new OnClickListener()
 	{
 
+		@Override
 		public void onClick(View v)
 		{
 			switch (v.getId())
@@ -471,6 +472,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener , 
 	}
 
 
+	@Override
 	protected void onNewIntent(Intent intent) {
 		//		String url =intent.getStringExtra("bg");
 		//		BitmapUtils bitmapUtils = new BitmapUtils(this);

@@ -56,16 +56,19 @@ public class PictureGalleryActivity extends Activity {
 
 		private int location;
 
+		@Override
 		public void onPageSelected(int position)
 		{
 			location = position;
 		}
 
+		@Override
 		public void onPageScrolled(int arg0, float arg1, int arg2)
 		{
 
 		}
 
+		@Override
 		public void onPageScrollStateChanged(int arg0)
 		{
 
@@ -133,25 +136,30 @@ public class PictureGalleryActivity extends Activity {
 			size = listViews == null ? 0 : listViews.size();
 		}
 
+		@Override
 		public int getCount()
 		{
 			return size;
 		}
 
+		@Override
 		public int getItemPosition(Object object)
 		{
 			return POSITION_NONE;
 		}
 
+		@Override
 		public void destroyItem(View arg0, int arg1, Object arg2)
 		{
 			((ViewPagerFixed) arg0).removeView(listViews.get(arg1 % size));
 		}
 
+		@Override
 		public void finishUpdate(View arg0)
 		{
 		}
 
+		@Override
 		public Object instantiateItem(View arg0, int arg1)
 		{
 			try
@@ -165,6 +173,7 @@ public class PictureGalleryActivity extends Activity {
 			return listViews.get(arg1 % size);
 		}
 
+		@Override
 		public boolean isViewFromObject(View arg0, Object arg1)
 		{
 			return arg0 == arg1;

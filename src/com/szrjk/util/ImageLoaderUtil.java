@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.alibaba.fastjson.parser.deserializer.ThrowableDeserializer;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -152,7 +151,7 @@ public class ImageLoaderUtil {
 			.cacheOnDisk(true)
 			.bitmapConfig(Bitmap.Config.RGB_565)//设置图片的解码类型
 			.build();
-			imageLoader.getInstance().displayImage(url, imageView, ops);
+			ImageLoader.getInstance().displayImage(url, imageView, ops);
 		} catch (Exception e) {
 			// TODO: handle exception
 			Log.e("ImageLoader", e.toString());

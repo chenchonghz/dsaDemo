@@ -37,6 +37,7 @@ public class MyFriendFragment extends Fragment {
 	private Dialog dialog;
 	
 
+	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_my_friend, null);
@@ -77,6 +78,7 @@ public class MyFriendFragment extends Fragment {
 		busiParams.put("endNum",500);
 		paramMap.put("BusiParams", busiParams);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				dialog.dismiss();
 				ErrorInfo errorObj = JSON.parseObject(
@@ -92,12 +94,15 @@ public class MyFriendFragment extends Fragment {
 				}
 			}
 
+			@Override
 			public void start() {dialog.show();
 
 			}
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 
 			}
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 				dialog.dismiss();
 				ToastUtils.showMessage(getActivity(), "获取失败");

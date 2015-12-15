@@ -3,7 +3,6 @@ package com.szrjk.widget;
 import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -14,8 +13,6 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.szrjk.dhome.R;
-import com.szrjk.dhome.SelfFragment;
-import com.szrjk.self.UserBackgroundSelectActivity;
 /**
  * 我的界面按背景墙弹出的更换背景墙选项菜单
  * @author 郑斯铭
@@ -39,6 +36,7 @@ public class SelfChangeBgPopup extends PopupWindow
 		tv_cancel.setOnClickListener(new OnClickListener()
 		{
 
+			@Override
 			public void onClick(View v)
 			{
 				// 销毁弹出框
@@ -50,9 +48,9 @@ public class SelfChangeBgPopup extends PopupWindow
 		// 设置SelectPicPopupWindow的View
 		this.setContentView(mMenuView);
 		// 设置SelectPicPopupWindow弹出窗体的宽
-		this.setWidth(LayoutParams.MATCH_PARENT);
+		this.setWidth(android.view.ViewGroup.LayoutParams.MATCH_PARENT);
 		// 设置SelectPicPopupWindow弹出窗体的高
-		this.setHeight(LayoutParams.WRAP_CONTENT);
+		this.setHeight(android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
 		// 设置SelectPicPopupWindow弹出窗体可点击
 		this.setFocusable(true);
 		// 设置SelectPicPopupWindow弹出窗体动画效果
@@ -64,6 +62,7 @@ public class SelfChangeBgPopup extends PopupWindow
 		// mMenuView添加OnTouchListener监听判断获取触屏位置如果在选择框外面则销毁弹出框
 		mMenuView.setOnTouchListener(new OnTouchListener()
 		{
+			@Override
 			public boolean onTouch(View v, MotionEvent event)
 			{
 

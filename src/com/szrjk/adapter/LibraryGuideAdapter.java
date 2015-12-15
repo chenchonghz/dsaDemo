@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.szrjk.dhome.R;
 import com.szrjk.entity.LibraryEntity;
-import com.szrjk.util.ImageLoaderUtil;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,18 +26,22 @@ public class LibraryGuideAdapter extends BaseAdapter{
 		this.mInflater = LayoutInflater.from(mContext);
 	}
 
+	@Override
 	public int getCount() {
 		return list.size();
 	}
 
+	@Override
 	public Object getItem(int position) {
 		return list.get(position);
 	}
 
+	@Override
 	public long getItemId(int position) {
 		return position;
 	}
 
+	@Override
 	public View getView(int position, View convertview, ViewGroup parent) {
 		ViewHolder viewHolder = null;
 		if (convertview==null) {

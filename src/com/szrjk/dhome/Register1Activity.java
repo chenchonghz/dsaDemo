@@ -75,6 +75,7 @@ public class Register1Activity extends BaseActivity implements OnClickListener
 		btn_pharmacist.setOnClickListener(this);
 		lly_hv.setOnClickListener(new OnClickListener() {
 			
+			@Override
 			public void onClick(View arg0) {
 				goLogin();
 			}

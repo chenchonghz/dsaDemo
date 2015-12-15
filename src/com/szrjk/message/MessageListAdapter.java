@@ -1,6 +1,5 @@
 package com.szrjk.message;
 
-import java.text.ParseException;
 import java.util.List;
 
 import com.szrjk.dhome.R;
@@ -9,7 +8,6 @@ import com.szrjk.util.DisplayTimeUtil;
 import com.szrjk.widget.UserCardLayout;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

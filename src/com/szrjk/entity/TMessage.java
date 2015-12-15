@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
-import android.content.Context;
 import android.util.Log;
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.db.annotation.Column;
@@ -169,6 +168,7 @@ public class TMessage extends AbstractUserEntity<TMessage>{
 	 * @param iversion
 	 *            版本号
 	 */
+	@Override
 	public  void initTable(final DbUtils db)
 	{
 		super.initTable(db);

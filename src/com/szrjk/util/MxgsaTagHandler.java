@@ -19,7 +19,8 @@ public class MxgsaTagHandler implements TagHandler {
 	        mContext=context;
 	    }
 	    
-	    public void handleTag(boolean opening, String tag, Editable output, XMLReader xmlReader) {
+	    @Override
+		public void handleTag(boolean opening, String tag, Editable output, XMLReader xmlReader) {
 	        // TODO Auto-generated method stub
 	        if (tag.toLowerCase().equals("mxgsa")) {
 	            if (opening) {

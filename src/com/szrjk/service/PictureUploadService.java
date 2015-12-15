@@ -1,24 +1,13 @@
 package com.szrjk.service;
 
-import com.alibaba.sdk.android.oss.callback.SaveCallback;
-import com.alibaba.sdk.android.oss.model.OSSException;
 import com.szrjk.dhome.BaseActivity;
 import com.szrjk.entity.IImgUrlCallback;
-import com.szrjk.entity.PhotoType;
-import com.szrjk.http.InterfaceComm;
-import com.szrjk.util.ImageUploadUtil;
-import com.szrjk.util.OssUpdateImgUtil;
-import com.szrjk.util.ToastUtils;
-
-import android.app.Dialog;
 import android.app.IntentService;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
 
 public class PictureUploadService extends IntentService {
 	private IImgUrlCallback imgUrlCallback;

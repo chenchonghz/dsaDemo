@@ -182,7 +182,7 @@ public class BootstrapButton extends FrameLayout
 					R.styleable.BootstrapButton_android_layout_width, 0);
 		}
 
-		if ((layoutWidth == LayoutParams.MATCH_PARENT))
+		if ((layoutWidth == android.view.ViewGroup.LayoutParams.MATCH_PARENT))
 		{
 			fillparent = true;
 		}
@@ -308,7 +308,7 @@ public class BootstrapButton extends FrameLayout
 
 			if ((iconRight.length() == 0) && onlyIcon == false)
 			{
-				lblMiddle.setPadding(paddingA, 0, (int) paddingB, 0);
+				lblMiddle.setPadding(paddingA, 0, paddingB, 0);
 			}
 
 		}
@@ -329,7 +329,7 @@ public class BootstrapButton extends FrameLayout
 
 			if ((iconLeft.length() == 0) && onlyIcon == false)
 			{
-				lblMiddle.setPadding(paddingB, 0, (int) paddingA, 0);
+				lblMiddle.setPadding(paddingB, 0, paddingA, 0);
 			}
 		}
 

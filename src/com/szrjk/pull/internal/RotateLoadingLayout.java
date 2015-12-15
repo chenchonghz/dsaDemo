@@ -45,6 +45,7 @@ public class RotateLoadingLayout extends LoadingLayout
 		mRotateAnimation.setRepeatMode(Animation.RESTART);
 	}
 
+	@Override
 	public void onLoadingDrawableSet(Drawable imageDrawable)
 	{
 		if (null != imageDrawable)
@@ -56,6 +57,7 @@ public class RotateLoadingLayout extends LoadingLayout
 		}
 	}
 
+	@Override
 	protected void onPullImpl(float scaleOfLayout)
 	{
 		float angle;

@@ -64,7 +64,7 @@ public class ItemPopupLayout extends RelativeLayout
 			tv_pop_content.setTextColor(popupItem.getColor());
 		}else{
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-					LinearLayout.LayoutParams.MATCH_PARENT, h);
+					android.view.ViewGroup.LayoutParams.MATCH_PARENT, h);
 			lp.setMargins(0, 8, 0, 0);
 			tv_pop_content.setLayoutParams(lp);
 		}

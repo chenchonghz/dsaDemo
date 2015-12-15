@@ -11,16 +11,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -31,14 +27,11 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.szrjk.adapter.CircleListAdapter;
-import com.szrjk.adapter.MyFriendListAdapter;
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.CircleInfo;
 import com.szrjk.entity.ErrorInfo;
-import com.szrjk.entity.FriendList;
 import com.szrjk.entity.UserHomePageInfo;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
@@ -93,6 +86,7 @@ public class MyCircleFragment extends Fragment {
 		busiParams.put("endNum",Integer.valueOf(20));
 		paramMap.put("BusiParams", busiParams);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -111,14 +105,17 @@ public class MyCircleFragment extends Fragment {
 				}
 			}
 			
+			@Override
 			public void start() {
 				
 			}
 			
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 				
 			}
 			
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 				
 			}
@@ -135,6 +132,7 @@ public class MyCircleFragment extends Fragment {
 		busiParams.put("endNum",Integer.valueOf(500));
 		paramMap.put("BusiParams", busiParams);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				dialog.dismiss();
 				ErrorInfo errorObj = JSON.parseObject(
@@ -154,13 +152,16 @@ public class MyCircleFragment extends Fragment {
 				}
 			}
 
+			@Override
 			public void start() {dialog.show();
 			}
 
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 
 			}
 
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 				dialog.dismiss();
 				ToastUtils.showMessage(getActivity(), "获取失败");
@@ -232,6 +233,7 @@ public class MyCircleFragment extends Fragment {
 		});
 		ib_more.setOnClickListener(new OnClickListener() {
 			
+			@Override
 			public void onClick(View arg0) {
 				if (hotlist.size()==0) {
 					ToastUtils.showMessage(instance, "未有热门圈子");

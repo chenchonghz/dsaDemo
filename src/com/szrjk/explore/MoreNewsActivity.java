@@ -3,7 +3,6 @@ package com.szrjk.explore;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import javax.crypto.spec.IvParameterSpec;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
@@ -11,9 +10,7 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.DisplayMetrics;
@@ -27,8 +24,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.PopupWindow.OnDismissListener;
 import android.widget.RelativeLayout;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -43,8 +38,6 @@ import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.NewType;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
-import com.szrjk.indicator.TabPageIndicator;
-import com.szrjk.widget.AddNewsTypePopup;
 import com.szrjk.widget.AddNewsTypePopup2;
 import com.szrjk.widget.ColumnHorizontalScrollView;
 import com.szrjk.widget.HeaderView;
@@ -95,6 +88,7 @@ public class MoreNewsActivity extends FragmentActivity {
 	private int mScreenHeight;
 	private int popupHeight;
 	private Handler handler = new Handler(){
+		@Override
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case Constant.HAVE_NEW_TYPE:

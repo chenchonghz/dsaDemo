@@ -6,13 +6,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ToggleButton;
@@ -41,16 +39,19 @@ public class AlbumGridViewAdapter extends BaseAdapter
 		((Activity) mContext).getWindowManager().getDefaultDisplay().getMetrics(dm);
 	}
 
+	@Override
 	public int getCount()
 	{
 		return dataList.size();
 	}
 
+	@Override
 	public Object getItem(int position)
 	{
 		return dataList.get(position);
 	}
 
+	@Override
 	public long getItemId(int position)
 	{
 		return position;
@@ -65,9 +66,9 @@ public class AlbumGridViewAdapter extends BaseAdapter
 			if (imageView != null && bitmap != null)
 			{
 				String url = (String) params[0];
-				if (url != null && url.equals((String) imageView.getTag()))
+				if (url != null && url.equals(imageView.getTag()))
 				{
-					((ImageView) imageView).setImageBitmap(bitmap);
+					imageView.setImageBitmap(bitmap);
 				}
 				else
 				{
@@ -89,6 +90,7 @@ public class AlbumGridViewAdapter extends BaseAdapter
 		public CheckBox btn_choose;
 	}
 
+	@Override
 	public View getView(int position, View convertView, ViewGroup parent)	{
 		ViewHolder viewHolder;
 		if (convertView == null)

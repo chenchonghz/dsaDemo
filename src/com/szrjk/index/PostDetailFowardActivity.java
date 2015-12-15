@@ -6,10 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.KeyEvent;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -17,7 +14,6 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
-import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.IndexFragment;
@@ -72,6 +68,7 @@ public class PostDetailFowardActivity extends BaseActivity
 
 	private Handler handler = new Handler()
 	{
+		@Override
 		public void handleMessage(Message msg)
 		{
 			if (msg.what == LOAD_CASEDETAIL_SUCCESS)
@@ -229,7 +226,7 @@ public class PostDetailFowardActivity extends BaseActivity
 						ordinaryPostDetail.setPostStatis(postStatis);
 						ordinaryPostDetail.setPostType(listOut.getIntValue("postType"));
 
-						PostDetail postDetail = JSONObject.parseObject(listOut.getString("postDetail"),PostDetail.class);
+						PostDetail postDetail = JSON.parseObject(listOut.getString("postDetail"),PostDetail.class);
 						//不知为啥，下面几个都没set进去
 						postDetail.setpUserName(listOut.getJSONObject("postDetail").getString("pUserName"));
 						postDetail.setpContent(listOut.getJSONObject("postDetail").getString("pContent"));

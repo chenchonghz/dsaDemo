@@ -1,16 +1,8 @@
 package com.szrjk.adapter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import javax.crypto.spec.IvParameterSpec;
-
 import android.content.Context;
 import android.content.Intent;
-import android.opengl.Visibility;
-import android.sax.StartElementListener;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;

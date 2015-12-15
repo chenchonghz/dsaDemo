@@ -10,7 +10,6 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -21,8 +20,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -42,7 +39,6 @@ import com.szrjk.entity.UserCard;
 import com.szrjk.entity.UserInfo;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.util.SetListViewHeightUtils;
-import com.szrjk.util.ToastUtils;
 import com.szrjk.widget.CreatorManagePopup;
 import com.szrjk.widget.OrdinaryMemberManagePopup;
 import com.szrjk.widget.UserCardLayout;
@@ -76,6 +72,7 @@ public class CoterieMemberActivity extends BaseActivity{
 
 	private Handler handler=new Handler(){
 
+		@Override
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case GET_COTERIE_SUCCESS:
@@ -134,6 +131,7 @@ public class CoterieMemberActivity extends BaseActivity{
 		ucl_usercardlayout.setUser(creator);
 		ucl_usercardlayout.closeClick();
 		ucl_usercardlayout.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(View view) {
 				switch (view.getId()) {
 				case R.id.ucl_usercardlayout:
@@ -154,6 +152,7 @@ public class CoterieMemberActivity extends BaseActivity{
 		lv_coteriemember.setAdapter(coterieMemberListAdapter);
 		SetListViewHeightUtils.setListViewHeight(lv_coteriemember);
 		lv_coteriemember.setOnItemClickListener(new OnItemClickListener() {
+			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				if (Constant.userInfo.getUserSeqId().equals(memberCardList.get(arg2).getUserSeqId())){
@@ -182,6 +181,7 @@ public class CoterieMemberActivity extends BaseActivity{
 		paramMap.put("BusiParams", busiParams);
 		httpPost(paramMap, new AbstractDhomeRequestCallBack() {
 			
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -216,10 +216,13 @@ public class CoterieMemberActivity extends BaseActivity{
 					handler.sendMessage(message);
 				}
 			}
+			@Override
 			public void start() {
 			}
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 			}
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 			}
 		});
@@ -279,6 +282,7 @@ public class CoterieMemberActivity extends BaseActivity{
 		}
 	};
 	
+	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
 		case DELETE_COTERIE_MEMBER_SUCCESS:
@@ -293,6 +297,7 @@ public class CoterieMemberActivity extends BaseActivity{
 		}
 	};
 	
+	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		 
         if (keyCode == KeyEvent.KEYCODE_BACK

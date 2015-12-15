@@ -4,9 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Parcel;
 import android.text.method.LinkMovementMethod;
-import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -20,9 +18,7 @@ import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.IndexGalleryActivity;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.ICallback;
-import com.szrjk.entity.IContextClickOper;
 import com.szrjk.entity.IPhotoClickOper;
-import com.szrjk.entity.OperContextClick;
 
 /**
  * 病例分享,疑难杂症 的title,content和gridview,的简单封装
@@ -79,7 +75,7 @@ public class PostDetailCaseView extends RelativeLayout
 		tvDetailTitle.setText(title);
 
 		SharedPreferences mySharedPreferences= context.getSharedPreferences("text_size",
-				Activity.MODE_PRIVATE);
+				Context.MODE_PRIVATE);
 		//用putString的方法保存数据
 		String size = mySharedPreferences.getString("size","");
 		float textSize = tvDetailedContent.getTextSize();

@@ -1,23 +1,13 @@
 package com.szrjk.adapter;
 
-import android.content.Intent;
-
-import com.szrjk.dhome.IndexGalleryActivity;
 import com.szrjk.dhome.R;
-import com.szrjk.entity.IContextClickOper;
 import com.szrjk.entity.IPhotoClickOper;
-import com.szrjk.self.UserBackgroundSelectActivity;
-import com.szrjk.self.UserBackgroundShower;
 import com.szrjk.util.ImageLoaderUtil;
 
 import android.content.Context;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView.LayoutParams;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 
 public class IndexPhotoGridViewAdapter extends BaseAdapter{

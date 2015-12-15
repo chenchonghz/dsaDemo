@@ -2,8 +2,6 @@ package com.szrjk.self;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Currency;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,8 +11,6 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.SystemClock;
-import android.text.format.Time;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -85,6 +81,7 @@ public class CircleIntroductionActivity extends BaseActivity {
 
 	private static final int EDIT_DATA_SUCCESS = 2;
 	private Handler handler = new Handler() {
+		@Override
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case GET_COTERIE_SUCCESS:
@@ -115,11 +112,13 @@ public class CircleIntroductionActivity extends BaseActivity {
 		userInfo = Constant.userInfo;
 		loadCoterieData(coterieId);
 		new Thread() {
+			@Override
 			public void run() {
 				try {
 					// Log.i("time2", System.currentTimeMillis()+"");
 					Thread.sleep(500);
 					runOnUiThread(new Runnable() {
+						@Override
 						public void run() {
 							// Log.i("time3", System.currentTimeMillis()+"");
 							if (coterie.getMemberType().equals("3")) {
@@ -180,6 +179,7 @@ public class CircleIntroductionActivity extends BaseActivity {
 		paramMap.put("BusiParams", busiParams);
 		httpPost(paramMap, new AbstractDhomeRequestCallBack() {
 
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -224,12 +224,15 @@ public class CircleIntroductionActivity extends BaseActivity {
 				}
 			}
 
+			@Override
 			public void start() {
 			}
 
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 			}
 
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 			}
 		});
@@ -242,6 +245,7 @@ public class CircleIntroductionActivity extends BaseActivity {
 		finish();
 	}
 
+	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 
 		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
@@ -269,6 +273,7 @@ public class CircleIntroductionActivity extends BaseActivity {
 		startActivityForResult(intent, EDIT_DATA_SUCCESS);
 	}
 
+	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
 		case COTERIE_MEMBER_SUCCESS:

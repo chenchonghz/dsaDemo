@@ -67,6 +67,7 @@ public class AlbumActivity extends BaseActivity
 	List<ImageItem> imgItems = new ArrayList<ImageItem>();
 	private int maxnum;
 
+	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
@@ -254,6 +255,7 @@ public class AlbumActivity extends BaseActivity
 		//		btn_preview.setTextColor(Color.WHITE);
 	}
 
+	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event)
 	{
 		if (keyCode == KeyEvent.KEYCODE_BACK)

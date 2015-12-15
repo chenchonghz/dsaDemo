@@ -4,17 +4,11 @@ import java.util.List;
 
 import com.szrjk.dhome.R;
 import com.szrjk.entity.CircleInfo;
-import com.szrjk.self.CircleHomepageActivity;
 import com.szrjk.util.ImageLoaderUtil;
-import com.umeng.analytics.c;
-
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;

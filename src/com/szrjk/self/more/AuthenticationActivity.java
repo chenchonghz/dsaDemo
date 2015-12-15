@@ -95,6 +95,7 @@ public class AuthenticationActivity extends BaseActivity{
 	private static final int CHECK_PASSWORD_SUCCESS=0;
 	
 	private Handler handler=new Handler(){
+		@Override
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case CHECK_PASSWORD_SUCCESS:
@@ -135,12 +136,14 @@ public class AuthenticationActivity extends BaseActivity{
 		}
 		checkPassword(oldPassword);
 		new Thread(){
+			@Override
 			public void run() {
 				try {
 					Thread.sleep(200);
 					runOnUiThread(new Runnable() {
 						
 
+						@Override
 						public void run() {
 							if(isOK){
 								//Log.i("isOk3", isOK+""+System.currentTimeMillis());
@@ -171,6 +174,7 @@ public class AuthenticationActivity extends BaseActivity{
 		paramMap.put("BusiParams", busiParams);
 		httpPost(paramMap, new AbstractDhomeRequestCallBack() {
 			
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -190,10 +194,12 @@ public class AuthenticationActivity extends BaseActivity{
 				
 			}
 			
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 				
 			}
 			
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 				
 			}

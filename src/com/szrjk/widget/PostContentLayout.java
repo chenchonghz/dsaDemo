@@ -22,8 +22,6 @@ import com.szrjk.self.CircleHomepageActivity;
 import com.szrjk.util.DisplayTimeUtil;
 import com.szrjk.util.ImageLoaderUtil;
 
-import org.w3c.dom.Text;
-
 import java.util.Map;
 
 
@@ -178,6 +176,7 @@ public class PostContentLayout extends RelativeLayout
 	 * 设置背景颜色
 	 * @param colorid
 	 */
+	@Override
 	public void setBackgroundColor(int colorid){
 		ll_normal_post_content.setBackgroundColor(colorid);
 		rl_post_detailed_doctorinfo.setBackgroundColor(colorid);

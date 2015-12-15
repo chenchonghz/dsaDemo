@@ -15,7 +15,6 @@ import com.szrjk.adapter.LibraryPaperListAdaper;
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.R;
-import com.szrjk.dhome.R.layout;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.LibraryEntity;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
@@ -23,11 +22,9 @@ import com.szrjk.http.DHttpService;
 import com.szrjk.widget.HeaderView;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -64,6 +61,7 @@ private List<LibraryEntity> list_head = new ArrayList<LibraryEntity>();
 		paramMap.put("BusiParams", busiParams);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
 
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -75,10 +73,13 @@ private List<LibraryEntity> list_head = new ArrayList<LibraryEntity>();
 					setadapter(list_head);
 				}
 			}
+			@Override
 			public void start() {dialog.show();
 			}
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 			}
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 				dialog.dismiss();
 			}
@@ -92,6 +93,7 @@ private List<LibraryEntity> list_head = new ArrayList<LibraryEntity>();
 	}
 	private void initListener() {
 		lv_paper.setOnItemClickListener(new OnItemClickListener() {
+			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 					long arg3) {
 				Intent intent = new Intent(instance, LibraryPaperListActivity.class);

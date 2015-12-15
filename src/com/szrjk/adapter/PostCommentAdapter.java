@@ -4,25 +4,19 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.SpannableString;
-import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.CommentActivity;
-import com.szrjk.dhome.OtherPeopleActivity;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.Comment;
 import com.szrjk.entity.Forward;
@@ -33,7 +27,6 @@ import com.szrjk.util.DisplayTimeUtil;
 import com.szrjk.util.ImageLoaderUtil;
 import com.szrjk.util.SpannableStringUtils;
 import com.szrjk.widget.PostDetailBottomOperLayout;
-import com.szrjk.widget.PostDetailViewCommentListLayout;
 import com.szrjk.widget.UserCardLayout;
 
 /**

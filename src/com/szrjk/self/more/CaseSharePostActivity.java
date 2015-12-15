@@ -27,7 +27,6 @@ import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
 import com.szrjk.pull.PullToRefreshListView;
 import com.szrjk.util.ShowDialogUtil;
-import com.umeng.common.message.Log;
 
 @ContentView(R.layout.activity_caseshare_post)
 public class CaseSharePostActivity extends BaseActivity {
@@ -55,9 +54,11 @@ public class CaseSharePostActivity extends BaseActivity {
 		Intent intent = getIntent();
 		type = intent.getStringExtra("postType");
 		postListComm = new PostListComm(instance, userId, mPullRefreshListView, new IPostListCallback() {
+			@Override
 			public void getNewPosts(String userId2, String basePostId, boolean isNew, String beginNum, String endNum) {
 				doGetNewPosts(userId2,basePostId,isNew,beginNum,endNum);
 			}
+			@Override
 			public void getMorePosts(String userId2, String basePostId, boolean isNew, String beginNum, String endNum) {
 				doGetMorePosts(userId2,basePostId,isNew,beginNum,endNum);
 			}

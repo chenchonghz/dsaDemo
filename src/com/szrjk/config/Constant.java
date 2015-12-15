@@ -31,10 +31,10 @@ public class Constant
 	//外网环境
 //	public static  String RQEUEST_URL = "http://120.236.165.150:8888/qry";
 //	 测试环境
-//	 public static String RQEUEST_URL = "http://192.168.1.82:8888/qry";
+	 public static String RQEUEST_URL = "http://192.168.1.82:8888/qry";
 	//UAT环境
 //	public static String RQEUEST_URL = "http://112.74.109.173:8888/qry";
-	public static String RQEUEST_URL = "http://120.25.134.160:1127/qry";
+//	public static String RQEUEST_URL = "http://120.25.134.160:1127/qry";
 
 
 

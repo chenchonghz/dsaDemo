@@ -78,10 +78,15 @@ public class AboutYou2Activity extends BaseActivity implements OnClickListener
 	public String[] hnameArr;
 
 	public String[] subDeptName;
+	
+	
+	
+	
+	
+	private String userType;
 
 	public String[] titleName;
 
-	private String userType;
 	
 	
 

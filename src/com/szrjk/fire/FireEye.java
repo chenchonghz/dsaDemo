@@ -14,6 +14,7 @@ public class FireEye
 	private static final String TAG = FireEye.class.getSimpleName();
 
 	private final Context mContext;
+	
 	private final List<TypeWrapper> mOrderedFields = new ArrayList<TypeWrapper>();
 	private final SparseArray<StaticPatternInvoker> mStaticPatterns = new SparseArray<StaticPatternInvoker>();
 	private final SparseArray<ValuePatternInvoker> mValuePatterns = new SparseArray<ValuePatternInvoker>();

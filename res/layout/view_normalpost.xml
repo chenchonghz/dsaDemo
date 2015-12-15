@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    style="@style/IndexButton"
+    android:orientation="vertical" >
+    
+    <TextView
+        android:id="@+id/tv_post_text" 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/view_post_margin_5"
+        android:layout_marginBottom="@dimen/view_post_margin_6"
+        android:layout_marginLeft="@dimen/view_post_margin_11"
+        android:layout_marginRight="@dimen/view_post_margin_11"
+        android:textColor="@color/font_titleanduname"
+        android:textSize="@dimen/font_size_small"
+        android:lineSpacingExtra="@dimen/textview_linespace"
+        />
+
+       <com.szrjk.widget.IndexGridView
+        android:id="@+id/gv_pic" 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/view_post_margin_10"
+        android:layout_marginRight="@dimen/view_post_margin_10"
+        android:layout_marginBottom="@dimen/view_post_margin_11"
+        android:numColumns="auto_fit"
+        android:listSelector="@color/transparent"
+        android:gravity="center"
+        android:horizontalSpacing="4dp"
+        android:verticalSpacing="4dp"
+        android:scrollbars="none"
+        android:visibility="gone"
+
+        />
+
+   
+     <View 
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_line_height"
+        android:background="@color/line_list"
+        />
+    
+
+</LinearLayout>

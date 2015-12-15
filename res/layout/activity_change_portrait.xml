@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.szrjk.dhome"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/albumback"
+    android:orientation="vertical" >
+
+    <com.szrjk.widget.HeaderView
+        android:id="@+id/hv_user_avatar_changer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:htextstr="" >
+    </com.szrjk.widget.HeaderView>
+
+    <RelativeLayout
+        android:id="@+id/rl_img"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/black"
+        android:layout_weight="11" >
+
+        <ImageView
+            android:id="@+id/iv_portrait"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:scaleType="centerCrop"
+            android:background="@color/plugin_camera_black" >
+        </ImageView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:paddingBottom="3dp"
+        android:paddingTop="6dp" >
+
+        <Button
+            android:id="@+id/btn_change_portrait"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_submit_selector"
+            android:layout_centerInParent="true"
+            android:text="更改头像"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_middle" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="FromButBlue">
+        <item name="android:gravity">center</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:background">@drawable/button_green_selector</item>
+        <item name="android:textSize">@dimen/font_size_small</item>
+        <item name="android:textColor">@color/font_cell</item>
+    </style>
+    
+    
+    
+    
+    <style name="MyCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/checkbox_selector_circle</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+    
+    <!-- 绿色按钮 -->
+    <style name="SendButton">
+        <item name="android:background">@drawable/button_send_selector</item>
+    </style>
+    
+    <!-- 白色底部 -->
+    <style name="PopButton">
+        <item name="android:background">@drawable/button_pop_selector</item>
+    </style>
+    <!-- 首页白色底部 -->
+    <style name="IndexButton">
+        <item name="android:background">@drawable/button_index_selector</item>
+    </style>
+    
+    <style name="anim_popup_dir">
+        <item name="android:windowEnterAnimation">@anim/slide_in</item>
+        <item name="android:windowExitAnimation">@anim/slide_out</item>
+    </style>
+</resources>

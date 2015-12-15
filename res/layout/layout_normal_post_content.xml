@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:id="@+id/ll_normal_post_content"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <RelativeLayout
+            android:id="@+id/rl_post_detailed_doctorinfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_medium" >
+
+        <com.szrjk.widget.UserCardLayout
+                android:id="@+id/ucl_post"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                />
+
+
+        <TextView
+                android:id="@+id/tv_post_detailed_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:textColor="@color/font_cell"
+                android:textSize="@dimen/font_size_msmall" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+            android:id="@+id/rl_post_normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rl_post_detailed_doctorinfo" >
+
+        <LinearLayout
+                android:id="@+id/ll_case_detail_list"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/padding_small"
+                android:paddingRight="@dimen/padding_small"
+                >
+        </LinearLayout>
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>

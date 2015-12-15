@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
+    xmlns:headerattr="http://schemas.android.com/apk/res/com.szrjk.dhome"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/base_bg"
+    android:orientation="vertical" >
+
+    <com.szrjk.widget.HeaderView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        headerattr:htextstr="@string/forget_header" >
+    </com.szrjk.widget.HeaderView>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:id="@+id/lly_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/base_bg"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/et_phone"
+                android:layout_width="fill_parent"
+                android:layout_height="50dip"
+                android:background="@drawable/white"
+                android:digits="@string/edit_text_type"
+                android:hint="@string/code_phone"
+                android:inputType="phone"
+                android:maxLength="11"
+                 android:textSize="@dimen/font_size_middle"
+                android:paddingLeft="@dimen/base_input_left"
+                android:singleLine="true" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/line_scrap" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@+id/et_code"
+                    android:layout_width="0dip"
+                    android:layout_height="50dip"
+                    android:layout_weight="5"
+                    android:background="@drawable/white"
+                    android:hint="@string/code_code"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:textSize="@dimen/font_size_middle"
+                    android:paddingLeft="@dimen/base_input_left" />
+
+                <Button
+                    android:id="@+id/btnCode"
+                    style="@style/FromButton"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:background="@color/global_main"
+                    android:text="@string/code_get"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_size_middle" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/line_scrap" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dip"
+                android:background="@color/base_bg" >
+
+                <EditText
+                    android:id="@+id/et_pwd"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dip"
+                    android:background="@drawable/white"
+                    android:hint="@string/code_psw"
+                    android:textSize="@dimen/font_size_middle"
+                    android:inputType="textPassword"
+                    android:maxLength="20"
+                    android:paddingLeft="@dimen/base_input_left" />
+
+                <ImageView
+                    android:id="@+id/iv_password_hiddenorshow"
+                    android:layout_width="20dip"
+                    android:layout_height="20dip"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/icon_hidden" />
+            </FrameLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/line_scrap" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dip"
+                android:background="@color/base_bg" >
+
+                <EditText
+                    android:id="@+id/et_repwd"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dip"
+                    android:background="@drawable/white"
+                    android:ems="10"
+                    android:hint="@string/code_repsw"
+                    android:inputType="textPassword"
+                    android:maxLength="20"
+                    android:textSize="@dimen/font_size_middle"
+                    android:paddingLeft="@dimen/base_input_left" >
+                </EditText>
+
+                <ImageView
+                    android:id="@+id/iv_repwd_hiddenorshow"
+                    android:layout_width="20dip"
+                    android:layout_height="20dip"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/icon_hidden" />
+            </FrameLayout>
+
+            <requestFocus />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/line_scrap" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/margin_15dp"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:layout_marginTop="2dp"
+                android:text="@string/code_msg"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/font_size_xsmall" />
+
+            <Button
+                android:id="@+id/btnSubmit"
+                style="@style/FromButton"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/edit_input_height"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/base_padding_left"
+                android:layout_marginRight="@dimen/base_padding_right"
+                android:layout_marginTop="20dip"
+                android:text="@string/btn_submit" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

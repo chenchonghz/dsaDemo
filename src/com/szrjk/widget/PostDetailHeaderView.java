@@ -1,0 +1,178 @@
+package com.szrjk.widget;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.res.TypedArray;
+import android.util.AttributeSet;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.lidroid.xutils.exception.HttpException;
+import com.szrjk.config.Constant;
+import com.szrjk.dhome.R;
+import com.szrjk.entity.ErrorInfo;
+import com.szrjk.entity.IPopupItemCallback;
+import com.szrjk.entity.PopupItem;
+import com.szrjk.http.AbstractDhomeRequestCallBack;
+import com.szrjk.http.DHttpService;
+import com.szrjk.index.CaseDetailActivity;
+import com.szrjk.index.PostDetailActivity;
+import com.szrjk.index.PostDetailFowardActivity;
+import com.szrjk.util.ToastUtils;
+
+public class PostDetailHeaderView extends RelativeLayout {
+
+	private TextView tv_text;
+	private LinearLayout lly_hv;
+	private ImageView iv_back;
+	private ImageView iv_dotmore;
+	private Context context;
+	private String postId;
+
+	public TextView gettv_text() {
+		return tv_text;
+	}
+
+	public void settv_text(TextView tv_text) {
+		this.tv_text = tv_text;
+	}
+
+	public LinearLayout getLly_hv() {
+		return lly_hv;
+	}
+
+	public void setLly_hv(LinearLayout lly_hv) {
+		this.lly_hv = lly_hv;
+	}
+
+	public ImageView getIv_back() {
+		return iv_back;
+	}
+
+	public void setIv_back(ImageView iv_back) {
+		this.iv_back = iv_back;
+	}
+
+	public ImageView getIv_dotmore() {
+		return iv_dotmore;
+	}
+
+	public void setIv_dotmore(ImageView iv_dotmore) {
+		this.iv_dotmore = iv_dotmore;
+	}
+
+	public PostDetailHeaderView(Context context) {
+		super(context);
+	}
+
+	public PostDetailHeaderView(final Context context, AttributeSet attrs) {
+		super(context, attrs);
+		this.context = context;
+		LayoutInflater inflater = (LayoutInflater) context
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		inflater.inflate(R.layout.postdetail_headerview, this);
+		tv_text = (TextView) findViewById(R.id.tv_header);
+		iv_back = (ImageView) findViewById(R.id.iv_back);
+		iv_dotmore = (ImageView) findViewById(R.id.iv_dotmore);
+		lly_hv = (LinearLayout) findViewById(R.id.lly_hv);
+
+		TypedArray a = getContext().obtainStyledAttributes(attrs,
+				R.styleable.PostDetailHeaderView);
+		String textStr = a.getString(R.styleable.PostDetailHeaderView_text);
+		a.recycle();
+		tv_text.setText(textStr);
+		lly_hv.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				((Activity) context).onKeyDown(KeyEvent.KEYCODE_BACK,new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_BACK));
+				((Activity) context).finish();
+			}
+		});
+		iv_dotmore.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				// DeletePostPopup deletePostPopup = new
+				// DeletePostPopup((Activity)context, null);
+				// deletePostPopup.showAtLocation(PostDetailHeaderView.this,
+				// Gravity.BOTTOM
+				// | Gravity.CENTER_HORIZONTAL, 0, 0);
+				List<PopupItem> popupItems = new ArrayList<PopupItem>();
+				PopupItem popupItem = new PopupItem();
+				popupItem.setItemname("删除帖子");
+				popupItem
+						.setColor(context.getResources().getColor(R.color.red));
+				popupItem.setiPopupItemCallback(new IPopupItemCallback() {
+
+					@Override
+					public void itemClickFunc(PopupWindow sendWindow) {
+						sendWindow.dismiss();
+						postId = getPostId();
+						deletePost();
+					}
+				});
+				popupItems.add(popupItem);
+				ListPopup listPopup = new ListPopup((Activity) context,
+						popupItems, PostDetailHeaderView.this);
+			}
+		});
+	}
+
+	private void deletePost() {
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("ServiceName", "deletePostById");
+		Map<String, Object> busiParams = new HashMap<String, Object>();
+		busiParams.put("userSeqId", Constant.userInfo.getUserSeqId());
+		busiParams.put("postId", postId);
+		paramMap.put("BusiParams", busiParams);
+		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			public void success(JSONObject jsonObject) {
+				ErrorInfo errorObj = JSON.parseObject(
+						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
+				ToastUtils.showMessage(context, errorObj.getErrorMessage());
+				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode())) {
+					// ToastUtils.showMessage(context, "删除成功");
+					((Activity) context).onKeyDown(KeyEvent.KEYCODE_BACK, null);
+					((Activity) context).finish();
+				}
+			}
+
+			public void start() {
+
+			}
+
+			public void loading(long total, long current, boolean isUploading) {
+
+			}
+
+			public void failure(HttpException exception, JSONObject jobj) {
+				ToastUtils.showMessage(context, jobj.getString("ErrorMessage"));
+			}
+		});
+	}
+
+	public String getPostId() {
+		if (context instanceof CaseDetailActivity) {
+			return ((CaseDetailActivity) context).getPostId();
+		}
+		if (context instanceof PostDetailActivity) {
+			return ((PostDetailActivity) context).getPostId();
+		}
+		if (context instanceof PostDetailFowardActivity) {
+			return ((PostDetailFowardActivity) context).getPostId();
+		}
+		return null;
+	}
+}

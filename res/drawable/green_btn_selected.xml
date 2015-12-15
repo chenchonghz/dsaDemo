@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!-- 颜色 -->
+    <solid android:color="@color/green_button_selected" />
+    <!-- 边框 -->
+    <stroke
+        android:width="@dimen/green_button_stroke"
+        android:color="@color/green_button_selected" />
+    <!-- 边距 -->
+    <padding
+        android:left="@dimen/green_button_padding_left"
+        android:right="@dimen/green_button_padding_right"
+        android:top="@dimen/green_button_padding_top"
+        android:bottom="@dimen/green_button_padding_bottom" />
+    <!-- 圆角 -->
+    <corners android:radius="@dimen/green_button_radius" />
+    
+
+</shape>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="13dp" 
+        >
+        <ImageView 
+        android:id="@+id/iv_doctor"
+        android:layout_width="55dp"
+        android:layout_height="55dp"/>
+    <LinearLayout
+        android:id="@+id/ll_doctorname" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/iv_doctor"
+        android:layout_alignTop="@id/iv_doctor"
+        android:orientation="horizontal"
+        >
+        <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textSize="@dimen/font_size_large"
+        android:textColor="@color/font_titleanduname"
+        android:text="终南山"/>
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_size_msmall"
+            android:text="教授"/>      
+    </LinearLayout>
+    <LinearLayout 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_doctorname"
+            android:layout_toRightOf="@id/iv_doctor"
+            android:layout_alignBottom="@id/iv_doctor"
+            >
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="@color/font_cell"
+            android:textSize="@dimen/font_size_msmall"
+            android:text="广州呼吸疾病研究所"
+            />
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_size_msmall"
+            android:textColor="@color/font_cell"
+            android:text="呼吸科"
+            />
+    </LinearLayout> 
+    <Button 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"/>
+    </RelativeLayout>
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:background="@color/line_scrap"
+        />
+   
+
+    
+
+</LinearLayout>

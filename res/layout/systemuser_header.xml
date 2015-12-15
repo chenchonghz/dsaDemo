@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/base_bg"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/Rly_self_user_bg"
+            android:layout_width="match_parent"
+            android:layout_height="245dp" >
+
+            <ImageView
+                android:id="@+id/iv_other_user_background"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:scaleType="centerCrop"
+                android:src="@color/gray" />
+
+            <TextView
+                android:id="@+id/tv_other_location_district"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:paddingRight="10dp"
+                android:paddingTop="55dp"
+                android:text="@string/self_user_district"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_msmall" />
+
+            <TextView
+                android:id="@+id/tv_other_location_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/tv_other_location_district"
+                android:paddingRight="10dp"
+                android:paddingTop="55dp"
+                android:text="@string/self_user_city"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_msmall" />
+
+            <RelativeLayout
+                android:id="@+id/rly_self_avatar"
+                android:layout_width="@dimen/rly_self_avatar"
+                android:layout_height="@dimen/rly_self_avatar"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="10dp"
+                android:background="@color/white"
+                android:gravity="center" >
+
+                <ImageView
+                    android:id="@+id/iv_system_avatar"
+                    android:layout_width="@dimen/iv_self_avatar"
+                    android:layout_height="@dimen/iv_self_avatar"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/header" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_other_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="50dp"
+                android:layout_toRightOf="@id/rly_self_avatar"
+                android:text="@string/self_user_name"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_large" />
+
+            <TextView
+                android:id="@+id/tv_other_user_quarters"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/tv_other_user_name"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/tv_other_user_name"
+                android:text="@string/self_user_quarters"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_msmall" />
+
+            <TextView
+                android:id="@+id/tv_system_user_hospital"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/tv_other_user_name"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="20dp"
+                android:ellipsize="end"
+                android:maxEms="10"
+                android:singleLine="true"
+                android:text="@string/self_user_hospital"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_xsmall" />
+
+            <TextView
+                android:id="@+id/tv_other_user_department"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/tv_other_user_hospital"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/tv_other_user_hospital"
+                android:text="@string/self_user_department"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_xsmall" />
+
+            
+             <ImageView
+                android:id="@+id/iv_vip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/rly_self_avatar"
+                android:layout_marginBottom="-5dp"
+                android:layout_marginLeft="-25dp"
+                android:layout_toRightOf="@id/rly_self_avatar"
+                android:src="@drawable/icon_yellow_v_32"
+                android:visibility="gone" 
+                />
+             <LinearLayout
+                android:id="@+id/lly_hv"
+                style="@style/SendButton"
+                android:layout_width="@dimen/header_height"
+                android:layout_height="@dimen/header_height"
+                android:layout_alignParentTop="true"
+                android:background="@null" >
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:src="@drawable/icon_back_32" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/Lly_other_btns"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:baselineAligned="false"
+            android:orientation="horizontal" >
+
+            <FrameLayout
+                android:id="@+id/fl_message"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/tab_height"
+                android:layout_weight="1"
+                android:visibility="gone"
+                android:paddingBottom="@dimen/tab_padding_bottom"
+                android:paddingTop="@dimen/tab_padding_top" >
+
+                <ImageView
+                    android:id="@+id/iv_message"
+                    android:layout_width="@dimen/tab_iv_size"
+                    android:layout_height="@dimen/tab_iv_size"
+                    android:layout_gravity="top|center"
+                    android:contentDescription="@string/tab_iv_index"
+                    android:src="@drawable/icon_messages" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginTop="@dimen/tab_txt_margin_top"
+                    android:text="@string/message_name"
+                    android:textColor="@color/global_main"
+                    android:textSize="@dimen/tab_size" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_le_msg"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/tab_height"
+                android:layout_weight="1"
+                android:paddingBottom="@dimen/tab_padding_bottom"
+                android:paddingTop="@dimen/tab_padding_top" >
+
+                <ImageView
+                    android:id="@+id/iv_le_message"
+                    android:layout_width="@dimen/tab_iv_size"
+                    android:layout_height="@dimen/tab_iv_size"
+                    android:layout_gravity="top|center"
+                    android:contentDescription="@string/tab_iv_index"
+                    android:src="@drawable/icon_leavemessage" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginTop="@dimen/tab_txt_margin_top"
+                    android:text="@string/Leave_a_message"
+                    android:textColor="@color/global_main"
+                    android:textSize="@dimen/tab_size" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_about"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/tab_height"
+                android:layout_weight="1"
+                android:paddingBottom="@dimen/tab_padding_bottom"
+                android:paddingTop="@dimen/tab_padding_top" >
+
+                <ImageView
+                    android:id="@+id/iv_addfriends"
+                    android:layout_width="@dimen/tab_iv_size"
+                    android:layout_height="@dimen/tab_iv_size"
+                    android:layout_gravity="top|center"
+                    android:contentDescription="@string/tab_iv_index"
+                    android:src="@drawable/icon_aboutus" />
+
+                <TextView
+                    android:id="@+id/tv_addFriends"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginTop="@dimen/tab_txt_margin_top"
+                    android:text="@string/about"
+                    android:textColor="@color/global_main"
+                    
+                    android:textSize="@dimen/tab_size" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_focus"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/tab_height"
+                android:layout_weight="1"
+                android:visibility="gone"
+                android:paddingBottom="@dimen/tab_padding_bottom"
+                android:paddingTop="@dimen/tab_padding_top" >
+
+                <ImageView
+                    android:id="@+id/iv_focus"
+                    android:layout_width="@dimen/tab_iv_size"
+                    android:layout_height="@dimen/tab_iv_size"
+                    android:layout_gravity="top|center"
+                    android:contentDescription="@string/tab_iv_index"
+                    android:src="@drawable/icon_canclefocus" />
+
+                <TextView
+                    android:id="@+id/tv_focus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginTop="@dimen/tab_txt_margin_top"
+                    android:text="@string/canclefocus"
+                    android:textColor="@color/global_main"
+                    android:textSize="@dimen/tab_size" />
+            </FrameLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_normal_post"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+    
+    <include
+        layout="@layout/view_group"
+        />
+    <include
+        android:id="@+id/view_doctorinfo"  
+        layout="@layout/view_doctorinfo"/>
+    <include 
+        android:id="@+id/view_normal_post"
+        layout="@layout/view_normalpost"
+        />
+    <include 
+        android:id="@+id/view_command"
+        layout="@layout/view_command"/>
+    
+
+</LinearLayout>

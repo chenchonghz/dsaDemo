@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flowlayout="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/lly_post"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/base_bg"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/header_height"
+        android:background="@color/search_bg" >
+
+        <LinearLayout
+            android:id="@+id/lly_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                style="@style/SendButton"
+                android:gravity="center"
+                android:paddingLeft="@dimen/send_header_margin"
+                android:paddingRight="@dimen/send_header_margin"
+                android:text="@string/post_cancel"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_middle" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/puzzle_header"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_large" />
+
+        <TextView
+            android:id="@+id/tv_send"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@string/post_send"
+            style="@style/SendButton"
+            android:gravity="center"
+            android:paddingLeft="@dimen/send_header_margin"
+                android:paddingRight="@dimen/send_header_margin"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_middle" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/sl_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/base_bg"
+            android:orientation="vertical" >
+
+            <com.szrjk.widget.UpdateProgressBar
+                android:id="@+id/pb_loading"
+                style="@style/UpdateProgressBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:progress="0"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/lly_content"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical" >
+
+                <EditText
+                    android:id="@+id/et_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/send_edit_title_height"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/white"
+                    android:gravity="top|left"
+                    android:hint="标题"
+                    android:inputType="textMultiLine"
+                    android:lineSpacingExtra="6dp"
+                    android:minLines="4"
+                    android:maxLength="30"
+                    android:padding="@dimen/send_header_margin"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_small" />
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dip"
+                    android:layout_marginRight="12dip"
+                    android:gravity="right"
+                    android:text="@string/title_length"
+                    android:textColor="@color/font_cell"
+                    android:textSize="@dimen/font_size_xsmall" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1px"
+                    android:background="@color/line_scrap" />
+
+                <LinearLayout
+                    android:id="@+id/lly_dept"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/tv_dept"
+                        android:layout_width="0dip"
+                        android:layout_height="@dimen/edit_input_height"
+                        android:layout_marginLeft="@dimen/header_left_margin"
+                        android:layout_weight="2"
+                        android:drawableLeft="@drawable/i_dept"
+                        android:drawablePadding="4dip"
+                        android:gravity="center_vertical"
+                        android:text="选择科室"
+                        android:textColor="@color/font_cell" />
+
+                    <com.szrjk.widget.FlowDeptLayout
+                        android:id="@+id/fl_content"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_weight="3"
+                        android:gravity="center_vertical"
+                        flowlayout:horizontal_spacing="6dip"
+                        flowlayout:vertical_spacing="6dip" >
+                    </com.szrjk.widget.FlowDeptLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1px"
+                    android:background="@color/line_scrap" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dip"
+                android:background="@color/white"
+                android:orientation="vertical" >
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1px"
+                    android:background="@color/line_scrap" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/tv_case"
+                        android:layout_width="0dip"
+                        android:layout_height="@dimen/edit_input_height"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:gravity="center"
+                        android:text="主诉、病史"
+                        android:textColor="@color/search_bg"
+                        android:textSize="@dimen/font_size_small" />
+
+                    <TextView
+                        android:id="@+id/tv_check"
+                        android:layout_width="0dip"
+                        android:layout_height="@dimen/edit_input_height"
+                        android:layout_weight="1"
+                        android:background="@color/base_bg"
+                        android:gravity="center"
+                        android:text="查体、辅查"
+                        android:textColor="@color/font_cell"
+                        android:textSize="@dimen/font_size_msmall" />
+
+                    <TextView
+                        android:id="@+id/tv_treat"
+                        android:layout_width="0dip"
+                        android:layout_height="@dimen/edit_input_height"
+                        android:layout_weight="1"
+                        android:background="@color/base_bg"
+                        android:gravity="center"
+                        android:text="诊断、治疗"
+                        android:textColor="@color/font_cell"
+                        android:textSize="@dimen/font_size_msmall" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lly_case"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <EditText
+                        android:id="@+id/et_case"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/send_edit_height"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/white"
+                        android:gravity="top|left"
+                        android:inputType="textMultiLine"
+                        android:lineSpacingExtra="6dp"
+                        android:maxHeight="@dimen/send_edit_height"
+                        android:minLines="10"
+                        android:padding="@dimen/send_header_margin"
+                        android:scrollbarStyle="insideOverlay"
+                        android:scrollbars="vertical"
+                        android:textColor="@color/black"
+                        android:maxLength="800"
+                        android:textSize="@dimen/font_size_small" />
+
+                    <TextView
+                        android:id="@+id/tv_case_length"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dip"
+                        android:layout_marginRight="12dip"
+                        android:gravity="right"
+                        android:text="@string/content_length"
+                        android:textColor="@color/font_cell"
+                        android:textSize="@dimen/font_size_xsmall" />
+
+                    <com.szrjk.widget.IndexGridView
+                        android:id="@+id/gv_case_list"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="@dimen/photo_margin"
+                        android:gravity="center_horizontal"
+                        android:horizontalSpacing="6dip"
+                        android:numColumns="4"
+                        android:scrollbars="none"
+                        android:verticalSpacing="6dip" >
+                    </com.szrjk.widget.IndexGridView>
+                    
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lly_check"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone" >
+
+                    <EditText
+                        android:id="@+id/et_check"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/send_edit_height"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/white"
+                        android:gravity="top|left"
+                        android:inputType="textMultiLine"
+                        android:lineSpacingExtra="6dp"
+                        android:maxHeight="@dimen/send_edit_height"
+                        android:minLines="10"
+                        android:padding="@dimen/send_header_margin"
+                        android:scrollbarStyle="insideOverlay"
+                        android:scrollbars="vertical"
+                        android:maxLength="800"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/font_size_small" />
+
+                    <TextView
+                        android:id="@+id/tv_check_length"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dip"
+                        android:layout_marginRight="12dip"
+                        android:gravity="right"
+                        android:text="@string/content_length"
+                        android:textColor="@color/font_cell"
+                        android:textSize="@dimen/font_size_xsmall" />
+
+                    <com.szrjk.widget.IndexGridView
+                        android:id="@+id/gv_check_list"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="@dimen/photo_margin"
+                        android:gravity="center_horizontal"
+                        android:horizontalSpacing="6dip"
+                        android:numColumns="4"
+                        android:scrollbars="none"
+                        android:verticalSpacing="6dip"
+                         >
+                    </com.szrjk.widget.IndexGridView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lly_treat"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone" >
+
+                    <EditText
+                        android:id="@+id/et_treat"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/send_edit_height"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/white"
+                        android:gravity="top|left"
+                        android:inputType="textMultiLine"
+                        android:lineSpacingExtra="6dp"
+                        android:maxHeight="@dimen/send_edit_height"
+                        android:minLines="10"
+                        android:padding="@dimen/send_header_margin"
+                        android:scrollbarStyle="insideOverlay"
+                        android:scrollbars="vertical"
+                        android:maxLength="800"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/font_size_small" />
+
+                    <TextView
+                        android:id="@+id/tv_treat_length"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dip"
+                        android:layout_marginRight="12dip"
+                        android:gravity="right"
+                        android:text="@string/content_length"
+                        android:textColor="@color/font_cell"
+                        android:textSize="@dimen/font_size_xsmall" />
+
+                    <com.szrjk.widget.IndexGridView
+                        android:id="@+id/gv_treat_list"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="@dimen/photo_margin"
+                        android:gravity="center_horizontal"
+                        android:horizontalSpacing="6dip"
+                        android:numColumns="4"
+                        android:scrollbars="none"
+                        android:verticalSpacing="6dip" >
+                    </com.szrjk.widget.IndexGridView>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

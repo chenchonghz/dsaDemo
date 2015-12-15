@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:headerattr="http://schemas.android.com/apk/res/com.szrjk.dhome"
+    android:id="@+id/ll_about_you"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/base_bg"
+    android:onClick="true"
+    android:orientation="vertical" >
+
+    <com.szrjk.widget.HeaderView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        headerattr:htextstr="关于你" >
+    </com.szrjk.widget.HeaderView>
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/reg_contain_title"
+        android:text="@string/reg_abouttitle" />
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/reg_contain_subtitle"
+        android:text="@string/reg_aboutsubtitle" />
+
+    <LinearLayout
+        android:id="@+id/lly_case_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/img_reg1faceimg"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:scaleType="fitXY" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/text_pname"
+        style="@style/comm_form_text1"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/edit_input_height"
+        android:hint="姓名"
+        android:maxLength="8" />
+
+    <EditText
+        android:id="@+id/text_pdate"
+        style="@style/comm_form_text1"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/edit_input_height"
+        android:hint="出生年月" />
+
+    <EditText
+        android:id="@+id/text_sex"
+        style="@style/comm_form_text1"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/edit_input_height"
+        android:hint="性别"
+        android:tag="1" />
+
+    <Button
+        android:id="@+id/btn_continue"
+        style="@style/FromButton"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/edit_input_height"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/base_padding_left"
+        android:layout_marginRight="@dimen/base_padding_right"
+        android:layout_marginTop="10dip"
+        android:enabled="false"
+        android:text="继续" />
+
+</LinearLayout>

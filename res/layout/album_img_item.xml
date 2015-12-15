@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.szrjk.widget.SquareLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/iv_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        android:background="@drawable/album_no_pictures"
+        android:scaleType="centerCrop" />
+
+    <RelativeLayout
+        android:id="@+id/toggle"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <ToggleButton
+            android:id="@+id/btn_toggle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/album_pic_selector"
+            android:textOff="@null"
+            android:textOn="@null"
+            android:visibility="gone" />
+
+        <CheckBox
+            android:id="@+id/btn_choose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="2dp"
+            android:button="@drawable/gallery_checkbox" />
+    </RelativeLayout>
+
+</com.szrjk.widget.SquareLayout>

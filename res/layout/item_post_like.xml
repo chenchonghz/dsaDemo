@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="@dimen/padding_large" >
+
+    <ImageView
+        android:id="@+id/iv_item_post_comment_portrait"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_launcher" />
+
+   <TextView
+        android:id="@+id/tv_item_post_comment_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_left_small"
+        android:text="@string/post_detailed_name"
+        android:textColor="@color/black"
+        android:textSize="@dimen/font_size_middle"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    
+
+</LinearLayout>

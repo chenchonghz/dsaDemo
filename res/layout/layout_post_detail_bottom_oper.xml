@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/view_command_padding_4"
+    android:paddingTop="@dimen/view_command_padding_4" >
+
+    <RelativeLayout
+        android:id="@+id/rl_transmit"
+        style="@style/PopButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/tv_transmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:padding="@dimen/view_post_title_padding"
+            android:text="@string/transmit_text"
+            android:textColor="@color/font_cell"
+            android:textSize="@dimen/font_size_small" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@id/tv_transmit"
+            android:src="@drawable/icon_transmit_24" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_command"
+        style="@style/PopButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/tv_command"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:padding="@dimen/view_post_title_padding"
+            android:text="@string/command_text"
+            android:textColor="@color/font_cell"
+            android:textSize="@dimen/font_size_small" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@id/tv_command"
+            android:src="@drawable/icon_comment_24" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_like"
+        style="@style/PopButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/tv_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:padding="@dimen/view_post_title_padding"
+            android:text="@string/like_text"
+            android:textColor="@color/font_cell"
+            android:textSize="@dimen/font_size_small" />
+
+        <ImageView
+            android:id="@+id/iv_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@id/tv_like"
+            android:src="@drawable/icon_laud_24" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/base_bg"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/Rly_circle_bg"
+            android:layout_width="match_parent"
+            android:layout_height="280dp" >
+
+            <ImageView
+                android:id="@+id/iv_circle_background"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:scaleType="centerCrop"
+                android:src="@color/gray" />
+
+            <RelativeLayout
+                android:id="@+id/rly_circle_avatar"
+                android:layout_width="@dimen/rly_self_avatar"
+                android:layout_height="@dimen/rly_self_avatar"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="10dp"
+                android:background="@color/white"
+                android:gravity="center" >
+
+                <ImageView
+                    android:id="@+id/iv_circle_avatar"
+                    android:layout_width="@dimen/iv_self_avatar"
+                    android:layout_height="@dimen/iv_self_avatar"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/header" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_circle_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="50dp"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:layout_toRightOf="@id/rly_circle_avatar"
+                android:text="@string/self_user_name"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_large" />
+
+            <LinearLayout
+                android:id="@+id/lly_hv"
+                style="@style/SendButton"
+                android:layout_width="@dimen/header_height"
+                android:layout_height="@dimen/header_height"
+                android:layout_alignParentTop="true"
+                android:background="@null" >
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:src="@drawable/icon_back_32" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="80dp"
+                android:layout_height="20dp"
+                android:layout_alignBottom="@+id/rly_circle_avatar"
+                android:layout_alignLeft="@id/tv_circle_name"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/bg_pubset" >
+
+                <ImageView
+                    android:id="@+id/iv_circle_state"
+                    android:layout_width="15dp"
+                    android:layout_height="14dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="3dp"
+                    android:src="@drawable/icon_public" />
+
+                <TextView
+                    android:id="@+id/tv_circle_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_toRightOf="@id/iv_circle_state"
+                    android:gravity="center"
+                    android:text="公开"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_size_small" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_toRightOf="@id/tv_circle_state"
+                    android:gravity="center"
+                    android:text="·圈子"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_size_small" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/Lly_circle_btns"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:visibility="visible" >
+
+            <FrameLayout
+                android:id="@+id/fl_circlepost"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/tab_height"
+                android:layout_weight="1"
+                android:background="@drawable/button_pop_selector"
+                android:paddingBottom="@dimen/tab_padding_bottom"
+                android:paddingTop="@dimen/tab_padding_top" >
+
+                <ImageView
+                    android:id="@+id/iv_circlepost"
+                    android:layout_width="@dimen/tab_iv_size"
+                    android:layout_height="@dimen/tab_iv_size"
+                    android:layout_gravity="top|center"
+                    android:contentDescription="@string/tab_iv_index"
+                    android:src="@drawable/icon_circlepost" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginTop="@dimen/tab_txt_margin_top"
+                    android:text="@string/circlepost"
+                    android:textColor="@color/global_main"
+                    android:textSize="@dimen/tab_size" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_addfriends"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/tab_height"
+                android:layout_weight="1"
+                android:background="@drawable/button_pop_selector"
+                android:paddingBottom="@dimen/tab_padding_bottom"
+                android:paddingTop="@dimen/tab_padding_top" >
+
+                <ImageView
+                    android:id="@+id/iv_addfriends"
+                    android:layout_width="@dimen/tab_iv_size"
+                    android:layout_height="@dimen/tab_iv_size"
+                    android:layout_gravity="top|center"
+                    android:contentDescription="@string/tab_iv_index"
+                    android:src="@drawable/icon_addfriends" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginTop="@dimen/tab_txt_margin_top"
+                    android:text="@string/add_friends"
+                    android:textColor="@color/global_main"
+                    android:textSize="@dimen/tab_size" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_profile"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/tab_height"
+                android:layout_weight="1"
+                android:background="@drawable/button_pop_selector"
+                android:paddingBottom="@dimen/tab_padding_bottom"
+                android:paddingTop="@dimen/tab_padding_top" >
+
+                <ImageView
+                    android:id="@+id/iv_profile"
+                    android:layout_width="@dimen/tab_iv_size"
+                    android:layout_height="@dimen/tab_iv_size"
+                    android:layout_gravity="top|center"
+                    android:contentDescription="@string/tab_iv_index"
+                    android:src="@drawable/icon_profile" />
+
+                <TextView
+                    android:id="@+id/tv_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginTop="@dimen/tab_txt_margin_top"
+                    android:text="@string/profile"
+                    android:textColor="@color/global_main"
+                    android:textSize="@dimen/tab_size" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_dissolvecircle"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/tab_height"
+                android:layout_weight="1"
+                android:background="@drawable/button_pop_selector"
+                android:paddingBottom="@dimen/tab_padding_bottom"
+                android:paddingTop="@dimen/tab_padding_top"
+                android:visibility="gone" >
+
+                <ImageView
+                    android:id="@+id/iv_dissolvecircle"
+                    android:layout_width="@dimen/tab_iv_size"
+                    android:layout_height="@dimen/tab_iv_size"
+                    android:layout_gravity="top|center"
+                    android:contentDescription="@string/tab_iv_index"
+                    android:src="@drawable/icon_dissolvecircle" />
+
+                <TextView
+                    android:id="@+id/tv_dissolvecircle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginTop="@dimen/tab_txt_margin_top"
+                    android:text="@string/dissolvecircle"
+                    android:textColor="@color/global_main"
+                    android:textSize="@dimen/tab_size" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_exitcircle"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/tab_height"
+                android:layout_weight="1"
+                android:background="@drawable/button_pop_selector"
+                android:paddingBottom="@dimen/tab_padding_bottom"
+                android:paddingTop="@dimen/tab_padding_top"
+                android:visibility="gone" >
+
+                <ImageView
+                    android:id="@+id/iv_exitcircle"
+                    android:layout_width="@dimen/tab_iv_size"
+                    android:layout_height="@dimen/tab_iv_size"
+                    android:layout_gravity="top|center"
+                    android:contentDescription="@string/tab_iv_index"
+                    android:src="@drawable/icon_exitcircle" />
+
+                <TextView
+                    android:id="@+id/tv_exitcircle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginTop="@dimen/tab_txt_margin_top"
+                    android:text="@string/exitcircle"
+                    android:textColor="@color/global_main"
+                    android:textSize="@dimen/tab_size" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/Lly_other_circle_btns"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:visibility="gone" >
+
+            <FrameLayout
+                android:id="@+id/fl_join_circle"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/tab_height"
+                android:layout_weight="1"
+                android:background="@drawable/button_pop_selector"
+                android:paddingBottom="@dimen/tab_padding_bottom"
+                android:paddingTop="@dimen/tab_padding_top" >
+
+                <ImageView
+                    android:id="@+id/iv_join_circle"
+                    android:layout_width="@dimen/tab_iv_size"
+                    android:layout_height="@dimen/tab_iv_size"
+                    android:layout_gravity="top|center"
+                    android:contentDescription="@string/tab_iv_index"
+                    android:src="@drawable/icon_applyjoin" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginTop="@dimen/tab_txt_margin_top"
+                    android:text="@string/joincircle"
+                    android:textColor="@color/global_main"
+                    android:textSize="@dimen/tab_size" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_circle_profile"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/tab_height"
+                android:layout_weight="1"
+                android:background="@drawable/button_pop_selector"
+                android:paddingBottom="@dimen/tab_padding_bottom"
+                android:paddingTop="@dimen/tab_padding_top" >
+
+                <ImageView
+                    android:id="@+id/iv_circle_profile"
+                    android:layout_width="@dimen/tab_iv_size"
+                    android:layout_height="@dimen/tab_iv_size"
+                    android:layout_gravity="top|center"
+                    android:contentDescription="@string/tab_iv_index"
+                    android:src="@drawable/icon_profile" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginTop="@dimen/tab_txt_margin_top"
+                    android:text="@string/profile"
+                    android:textColor="@color/global_main"
+                    android:textSize="@dimen/tab_size" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/line_scrap" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_hint_text"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/base_bg"
+        android:visibility="gone" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="80dp"
+            android:text="私密圈子，您没有权限查看帖子"
+            android:textColor="@color/font_hint"
+            android:textSize="@dimen/font_size_small" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/base_bg"
+    android:orientation="vertical" >
+
+    <!-- <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/header_height"
+        android:background="@color/search_bg"
+        android:orientation="horizontal" >
+        
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/header_left_margin"
+                android:id="@+id/btn_back"
+                android:src="@drawable/icon_back_32" />
+
+        
+
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="0dip"
+            android:layout_height="@dimen/search_height"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="6"
+            android:background="@drawable/search_input_bg"
+            android:paddingLeft="@dimen/search_txt_padding_left"
+            android:paddingBottom="7dp"
+            android:imeOptions="actionSearch"
+            android:hint="搜索"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_middle"
+             />
+
+        <ImageView
+            android:id="@+id/iv_search"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/i_search" />
+    </LinearLayout> -->
+     <com.szrjk.search.SearchView
+        android:id="@+id/sv_search"  
+        android:layout_width="match_parent"  
+        android:layout_height="wrap_content">  
+    </com.szrjk.search.SearchView>
+
+    <TextView 
+        android:id="@+id/tv_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="85dp"
+        android:gravity="center"
+        android:text="搜索更多内容"
+        android:textSize="@dimen/font_size_small"
+        android:textColor="@color/font_disable"/>
+      
+    <ImageView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:src="@drawable/icon_lump_01"/>
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="40dp"
+        android:orientation="horizontal">
+        <LinearLayout 
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+            <ImageView 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_search_users"/>
+            <TextView 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="找人"
+                android:gravity="center"
+                android:textSize="@dimen/font_size_msmall"
+                android:textColor="@color/font_disable"/>
+        </LinearLayout>
+        <LinearLayout 
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+            <ImageView 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_search_circle"/>
+            <TextView 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="圈子"
+                android:gravity="center"
+                android:textSize="@dimen/font_size_msmall"
+                android:textColor="@color/font_disable"/>
+        </LinearLayout>
+        <LinearLayout 
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+            <ImageView 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_search_sick"/>
+            <TextView 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="疾病"
+                android:gravity="center"
+                android:textSize="@dimen/font_size_msmall"
+                android:textColor="@color/font_disable"/>
+        </LinearLayout>
+        <LinearLayout 
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+            <ImageView 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_search_medical"/>
+            <TextView 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="药物"
+                android:gravity="center"
+                android:textSize="@dimen/font_size_msmall"
+                android:textColor="@color/font_disable"/>
+        </LinearLayout>
+        <LinearLayout 
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+            <ImageView 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_search_sickcase"/>
+            <TextView 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="病例"
+                android:gravity="center"
+                android:textSize="@dimen/font_size_msmall"
+                android:textColor="@color/font_disable"/>
+        </LinearLayout>
+        <LinearLayout 
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+            <ImageView 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_search_book"/>
+            <TextView 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="论文"
+                android:gravity="center"
+                android:textSize="@dimen/font_size_msmall"
+                android:textColor="@color/font_disable"/>
+        </LinearLayout>
+        
+    </LinearLayout>
+
+</LinearLayout>

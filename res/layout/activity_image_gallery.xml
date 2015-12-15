@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout 
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/black"
+        >
+        <ImageButton 
+            android:id="@+id/ib_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/icon_back_32"
+            android:layout_centerVertical="true"
+            android:paddingRight="@dimen/send_header_margin"
+            android:paddingLeft="@dimen/send_header_margin"
+            android:background="@null"
+            />
+        <TextView 
+            android:id="@+id/tv_number"
+            android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="0/0"
+			android:textSize="18dp"
+			android:textColor="@android:color/white"
+			android:layout_centerInParent="true"
+            />
+        
+        <TextView 
+            android:id="@+id/tv_comp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:paddingRight="@dimen/send_header_margin"
+            android:paddingLeft="@dimen/send_header_margin"
+            android:gravity="center"
+            android:text="完成"
+            android:textSize="@dimen/font_size_middle"
+			android:textColor="@android:color/white"
+            />
+    </RelativeLayout>
+    <GridView
+        android:id="@+id/id_gridView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:horizontalSpacing="1dp"
+        android:verticalSpacing="1dp"
+        android:numColumns="3"
+        android:stretchMode="columnWidth"
+        android:layout_below="@id/rl_title">
+    </GridView>
+
+    <RelativeLayout
+        android:id="@+id/id_bottom_ly"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:layout_alignParentBottom="true"
+        android:background="#e0000000"
+        android:clickable="true" >
+
+        <TextView
+            android:id="@+id/id_choose_dir"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dip"
+            android:text="所有图片"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/id_total_count"
+            android:layout_width="50dip"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="0张"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
+
+</RelativeLayout>

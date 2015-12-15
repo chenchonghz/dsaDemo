@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    tools:context=".CropImageActivity" >
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="11" >
+            <com.szrjk.util.corpimageview.CropImageView
+                android:id="@+id/img_crop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                 />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white" >
+
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/white"
+                android:background="@drawable/button_submit_selector"
+                android:text="确定" 
+                android:textSize="@dimen/font_size_middle"/>
+
+        </RelativeLayout>
+
+</LinearLayout>

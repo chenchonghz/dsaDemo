@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical" >
+    
+    <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/view_post_padding_11"
+        android:text="推荐关注"
+        android:textColor="@color/link_text_color"
+        android:textSize="@dimen/font_size_middle"/>
+     <View 
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_line_height"
+        android:background="@color/line_list"
+        />
+    <com.szrjk.widget.IndexRecommandListView
+        android:id="@+id/lv_recommend_doctor" 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:divider="@color/line_list"
+        android:dividerHeight="@dimen/view_line_height">
+    </com.szrjk.widget.IndexRecommandListView>
+     <View 
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_line_height"
+        android:background="@color/line_list"
+        />
+    <Button 
+        android:id="@+id/bt_change"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/view_post_padding_11"
+        android:background="@color/white"
+        android:text="换一批"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textSize="@dimen/font_size_middle"
+        android:textColor="@color/font_cell"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_height_2"
+        android:background="@drawable/shadow_color" />
+
+</LinearLayout>

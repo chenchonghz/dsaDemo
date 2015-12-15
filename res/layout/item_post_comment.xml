@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="60dp"
+                android:background="@color/white"
+                android:descendantFocusability="blocksDescendants">
+
+<RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" 
+                android:paddingLeft="@dimen/padding"
+                android:paddingRight="@dimen/padding"
+                >
+
+    <com.szrjk.widget.UserCardLayout
+            android:id="@+id/request_usercard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+    <TextView
+            android:id="@+id/tv_item_post_comment_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="@dimen/font_size_xsmall"
+            android:textColor="@color/font_cell"
+            android:paddingTop="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            />
+
+    <ImageView
+            android:id="@+id/iv_item_post_comment_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_item_post_comment_time"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/icon_comment_28"
+            android:visibility="gone"/>
+
+    <TextView
+            android:id="@+id/tv_item_post_comment_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_middle"
+            android:layout_marginLeft="@dimen/comment_text_left_margin"
+            android:layout_below="@id/request_usercard"
+            android:paddingBottom="@dimen/base_padding_left_small"
+            />
+</RelativeLayout>
+</LinearLayout>

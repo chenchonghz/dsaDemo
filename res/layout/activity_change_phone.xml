@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.szrjk.dhome"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_bg"
+    android:orientation="vertical" >
+
+    <com.szrjk.widget.HeaderView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:htextstr="身份验证" >
+    </com.szrjk.widget.HeaderView>
+
+   <EditText
+        android:id="@+id/et_new_phone"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        android:hint="请输入新手机号码"
+        android:padding="10dp"
+        android:textColor="@color/font_cell"
+        android:textSize="@dimen/font_size_middle" />
+   <View 
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/line_list"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        >
+    <EditText
+        android:id="@+id/et_vcode"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:hint="请输入验证码"
+        android:padding="10dp"
+        android:textColor="@color/font_cell"
+        android:textSize="@dimen/font_size_middle" />    
+        
+        	
+		<Button 
+		    android:id="@+id/btn_get_code"
+		    android:layout_width="100dp"
+		    android:layout_height="50dp"
+		    style="@style/FromButton"
+		    android:layout_alignParentRight="true"
+		    android:padding="10dp"
+		    android:gravity="center"
+		    android:text="获取验证码"
+		    />
+    <View 
+        android:layout_width="1px"
+        android:layout_height="40dp"
+        android:layout_toLeftOf="@id/btn_get_code"
+        android:background="@color/line_scrap"
+        android:layout_centerVertical="true"/>
+    </RelativeLayout>
+    <Button
+        android:id="@+id/btn_complete"
+        style="@style/FromButton"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/edit_input_height"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/base_padding_left"
+        android:layout_marginRight="@dimen/base_padding_right"
+        android:layout_marginTop="30dp"
+        android:enabled="false"
+        android:text="完成" />
+
+</LinearLayout>

@@ -1,0 +1,140 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:headerattr="http://schemas.android.com/apk/res/com.szrjk.dhome"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_more_news_activity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_bg"
+    android:orientation="vertical"
+    tools:context="com.szrjk.explore.MoreNewsActivity" >
+
+     <com.szrjk.widget.HeaderView
+         android:id="@+id/hv_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        headerattr:htextstr="@string/more_news_text" >
+    </com.szrjk.widget.HeaderView>
+
+
+    <LinearLayout
+        android:id="@+id/ll_indicator" 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <FrameLayout 
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@color/white">
+
+             <RelativeLayout
+                 android:id="@+id/rl_column"
+                 android:layout_width="match_parent"
+                 android:layout_height="50dip"
+                 android:background="@color/white"
+                 android:layout_weight="1.0" >
+
+                 <com.szrjk.widget.ColumnHorizontalScrollView
+                     android:id="@+id/mColumnHorizontalScrollView"
+                     android:layout_width="match_parent"
+                     android:background="@color/white"
+                     android:layout_height="50dip"
+                     android:scrollbars="none" >
+
+                     <LinearLayout
+                         android:id="@+id/mRadioGroup_content"
+                         android:layout_width="fill_parent"
+                         android:layout_height="50dip"
+                         android:layout_centerVertical="true"
+                         android:background="@color/white"
+                         android:gravity="center_vertical"
+                         android:orientation="horizontal" />
+                 </com.szrjk.widget.ColumnHorizontalScrollView>
+
+                 <ImageView
+                     android:id="@+id/shade_left"
+                     android:layout_width="10.0dip"
+                     android:layout_height="50dip"
+                     android:layout_alignParentLeft="true"
+                     android:layout_centerVertical="true"
+                     android:background="@drawable/channel_leftblock"
+                     android:visibility="gone" />
+
+                 <ImageView
+                     android:id="@+id/shade_right"
+                     android:layout_width="10.0dip"
+                     android:layout_height="50dip"
+                     android:layout_alignParentRight="true"
+                     android:layout_centerVertical="true"
+                     android:background="@drawable/channel_rightblock"
+                     android:visibility="gone" />
+             </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_my_news" 
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/white"
+                android:visibility="gone"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <TextView 
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/view_post_padding_11"
+                    android:gravity="center"
+                    android:text="@string/my_news_text"
+                    android:textColor="@color/link_text_color"
+                    android:textSize="@dimen/font_size_middle"
+                    />
+                <TextView 
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/my_news_hint"
+                    android:textColor="@color/font_cell"
+                    android:textSize="@dimen/font_size_xsmall"/>
+            </LinearLayout>
+            
+            
+        </FrameLayout>
+       
+           
+       <FrameLayout
+           android:layout_width="20dp"
+           android:layout_height="20dp"
+           android:layout_margin="@dimen/view_post_margin_11" 
+           >
+        <Button
+            android:id="@+id/bt_more_type" 
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/icon_down"
+            />
+        <Button
+            android:id="@+id/bt_more_type_close" 
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:background="@drawable/icon_up"
+            />      
+           
+       </FrameLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_height_1"
+        android:background="@color/line_shadow" />
+    
+
+        
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_new"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v4.view.ViewPager>
+
+    
+</LinearLayout>

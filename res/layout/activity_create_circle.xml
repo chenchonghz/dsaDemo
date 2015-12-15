@@ -1,0 +1,259 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_bg"
+    android:orientation="vertical"
+    tools:context=".CreateCircleActivity" >
+
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/header_height"
+        android:background="@color/search_bg" >
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:src="@drawable/icon_back_32" />
+
+        <TextView
+            android:id="@+id/tv_coterieTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/circle_create"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_large" />
+
+        <TextView
+            android:id="@+id/tv_complete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:text="@string/competition"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_middle" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/circle_height"
+        android:background="@color/white" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/input_bg" />
+
+        <ImageView
+            android:id="@+id/iv_face"
+            android:layout_width="@dimen/avatar_doctor_small_height"
+            android:layout_height="@dimen/avatar_doctor_small_height"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/circle_margin10"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/tv_change_face"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/message_item_height"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/circle_margin10"
+            android:gravity="center_vertical"
+            android:text="@string/change_image"
+            android:textColor="@color/font_tabletitle"
+            android:textSize="@dimen/font_size_middle" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/circle_item_height"
+        android:layout_marginTop="@dimen/circle_margin10"
+        android:background="@color/white" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentTop="true"
+            android:background="@color/input_bg" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/input_bg" />
+
+        <EditText
+            android:id="@+id/et_coterieName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:ems="10"
+            android:hint="@string/circle_names"
+            android:paddingLeft="@dimen/circle_margin10"
+            android:singleLine="true"
+            android:maxLength="8"
+            android:textColor="@color/font_tabletitle"
+            android:textSize="@dimen/font_size_middle" >
+
+            <requestFocus />
+        </EditText>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@color/white" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/input_bg" />
+
+        <EditText
+            android:id="@+id/et_coterieDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="1000dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="@dimen/circle_margin10"
+            android:background="@null"
+            android:ems="10"
+            android:hint="@string/circle_desc"
+            android:maxLength="200"
+            android:gravity="top|left"
+            android:lineSpacingExtra="5dp"
+            android:textColor="@color/font_tabletitle"
+            android:textSize="@dimen/font_size_middle" />
+        <TextView 
+            android:id="@+id/tv_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="200"
+            android:textSize="@dimen/font_size_small"
+            android:textColor="@color/font_disable"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/circle_item_height"
+        android:layout_marginTop="@dimen/circle_margin10"
+        android:background="@color/white" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentTop="true"
+            android:background="@color/input_bg" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/input_bg" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/circle_margin10"
+            android:text="@string/jurisdiction"
+            android:textColor="@color/font_link"
+            android:textSize="@dimen/font_size_middle" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp" >
+        
+        <RadioGroup
+            android:id="@+id/rg_radiogroup"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+            
+            >
+
+            <RadioButton
+                android:id="@+id/rb_public"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="0dp"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableLeft="@drawable/checkbox_selector_circle"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:text="@string/pub"
+                android:textColor="@color/font_titleanduname"
+                android:textSize="@dimen/font_size_small" />
+
+            <RadioButton
+                android:id="@+id/rb_private"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="0dp"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableLeft="@drawable/checkbox_selector_circle"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:text="@string/pri"
+                android:textColor="@color/font_titleanduname"
+                android:textSize="@dimen/font_size_small" />
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_toRightOf="@+id/rg_radiogroup"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/pub_desc" 
+                android:textColor="@color/font_cell"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/pri_desc"
+                android:textColor="@color/font_cell" />
+        </LinearLayout>
+    </RelativeLayout>
+	<View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/input_bg" />
+</LinearLayout>

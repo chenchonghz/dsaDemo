@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+    
+    <include
+        android:id="@+id/view_doctorinfo"  
+        layout="@layout/view_doctorinfo"/>
+    <include 
+        layout="@layout/view_transmit"/>
+    <include
+        android:id="@+id/view_src_doctorinfo"  
+        layout="@layout/view_srcdoctorinfo"
+        android:visibility="gone"/>
+    <include
+        android:id="@+id/view_src_normal_post" 
+        layout="@layout/view_srcnormalpost"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_line_height"
+        android:background="@color/line_list" />
+    <include 
+        layout="@layout/view_command"/>
+    
+
+</LinearLayout>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/base_bg"
+    android:orientation="vertical" >
+
+
+    <com.szrjk.pull.PullToRefreshListView
+        android:id="@+id/lv_postlist"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:divider="@color/base_bg"
+        android:dividerHeight="10dp"
+        android:descendantFocusability="blocksDescendants"
+        android:fastScrollEnabled="false" />
+
+</LinearLayout>

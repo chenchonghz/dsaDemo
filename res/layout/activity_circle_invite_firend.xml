@@ -1,0 +1,126 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:headerattr="http://schemas.android.com/apk/res/com.szrjk.dhome"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/line_list" >
+
+    <com.szrjk.widget.HeaderView
+        android:id="@+id/hv_invite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        headerattr:htextstr="邀请好友" >
+    </com.szrjk.widget.HeaderView>
+
+    <TextView
+        android:id="@+id/tv_invite"
+        android:layout_width="60dip"
+        android:layout_height="@dimen/header_height"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/button_send_selector"
+        android:gravity="center"
+        android:text="邀请"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_size_middle" />
+
+    <LinearLayout
+        android:id="@+id/lly_invite"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/hv_invite"
+        android:background="@color/white"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:id="@+id/rly_friend"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/tv_friend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="15dp"
+                android:text="好友"
+                android:textColor="@color/global_main"
+                android:textSize="@dimen/font_size_msmall" />
+
+            <View
+                android:id="@+id/v_line1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/global_main"
+                android:visibility="visible" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rly_follow"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/tv_follow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="15dp"
+                android:text="关注"
+                android:textColor="@color/font_titleanduname"
+                android:textSize="@dimen/font_size_msmall" />
+
+            <View
+                android:id="@+id/v_line2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/global_main"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rly_fans"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/tv_fans"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="15dp"
+                android:text="粉丝"
+                android:textColor="@color/font_titleanduname"
+                android:textSize="@dimen/font_size_msmall" />
+
+            <View
+                android:id="@+id/v_line3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/global_main"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/lly_invite"
+        android:background="@color/line_list" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_invite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/line3"
+        android:background="@color/white" />
+
+</RelativeLayout>

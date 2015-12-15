@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lly_post"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/base_bg"
+    android:orientation="vertical"
+    android:gravity="bottom"
+     >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/header_height"
+        android:background="@color/search_bg" >
+
+        <LinearLayout
+            android:id="@+id/lly_cancel"
+            android:layout_width="@dimen/header_height"
+            android:layout_height="@dimen/header_height"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/header_left_margin" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/post_cancel"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_middle" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/post_header"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_large" />
+
+        <TextView
+            android:id="@+id/tv_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/header_left_margin"
+            android:text="@string/post_send"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_middle" />
+    </RelativeLayout>
+
+    <com.szrjk.widget.UpdateProgressBar
+        android:id="@+id/pb_loading"
+        style="@style/UpdateProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:progress="0"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/lly_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <EditText
+            android:id="@+id/et_content"
+            android:layout_width="fill_parent"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/white"
+            android:gravity="top|left"
+            android:hint="@string/hint_content"
+            android:inputType="textMultiLine"
+            android:lineSpacingExtra="6dp"
+            android:minLines="10"
+            android:paddingLeft="@dimen/send_edittext_padding_left"
+            android:paddingRight="@dimen/send_edittext_padding_right"
+            android:paddingTop="@dimen/send_edittext_paddingtop"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_small" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dip"
+            android:background="@color/white"
+            android:gravity="right"
+            android:paddingRight="12dip"
+            android:text="@string/content_post_length"
+            android:textColor="@color/font_cell"
+            android:textSize="@dimen/font_size_xsmall"
+            android:visibility="gone" />
+
+        <GridView
+            android:id="@+id/gv_case_list"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/photo_margin"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:horizontalSpacing="6dip"
+            android:numColumns="4"
+            android:scrollbars="none"
+            android:verticalSpacing="6dip"
+            android:visibility="gone" >
+        </GridView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ccf" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true" >
+
+            <TextView
+                android:id="@+id/tv_private_chat_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:text="+"
+                android:textSize="32sp" />
+
+            <EditText
+                android:id="@+id/et_private_chat_body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+
+                <requestFocus />
+            </EditText>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

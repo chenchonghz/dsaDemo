@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/header_height"
+    android:paddingTop="@dimen/header_height"
+    android:background="@color/transparent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/pop_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/base_bg"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:background="@color/base_bg" />
+
+        <TextView
+            android:id="@+id/tv_delete_coterie_member"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/edit_input_height"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="删除成员"
+            android:textColor="@color/red"
+            android:textSize="@dimen/font_size_small" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:background="@color/base_bg" />
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/edit_input_height"
+            android:layout_marginTop="4dip"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@color/font_cell"
+            android:textSize="@dimen/font_size_small" />
+    </LinearLayout>
+
+</RelativeLayout>

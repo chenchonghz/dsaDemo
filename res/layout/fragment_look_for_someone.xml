@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ptr="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.szrjk.pull.PullToRefreshListView
+        android:id="@+id/lv_paperlist"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:descendantFocusability="blocksDescendants"
+        android:divider="@color/line_scrap"
+        android:dividerHeight="1px"
+        android:fastScrollEnabled="false"
+        android:scrollbars="none"
+        ptr:ptrHeaderTextColor="@color/font_cell" />
+
+    <TextView
+        android:id="@+id/tv_none_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:gravity="center_horizontal"
+        android:text="没有相关搜索结果!"
+        android:textColor="@color/font_cell"
+        android:textSize="@dimen/font_size_middle"
+        android:visibility="gone" />
+
+</LinearLayout>

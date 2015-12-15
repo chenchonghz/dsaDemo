@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <color name="blue">#0000FF</color>
+    <color name="gray">#ff789089</color>
+    <!-- 底部tab背景颜色 -->
+    <color name="tab_bg">#e5e5e5</color>
+    <!-- 输入框底部背景颜色 -->
+    <color name="input_bg">#e5e5e5</color>
+
+    <!--来自UI的颜色-->
+    <!--主色调7%-->
+    <color name="global_main">#05c1f1</color>
+    <!--辅助色3%-->
+    <color name="global_assist">#f47263</color>
+    <!--文字1 标题，用户名加粗文字-->
+    <color name="font_titleanduname">#293133</color>
+    <!--文字2正文文字,少用-->
+    <color name="font_main">#414a4d</color>
+    <!--文字3table栏目标题文字,-->
+    <color name="font_tabletitle">#5c6466</color>
+    <!--文字4单位，科室，职称，时间等文字，少用-->
+    <color name="font_cell">#858b8c</color>
+    <color name="font_jobtitle">#293133</color>
+    <!--文字4提示失效文字-->
+    <color name="font_disable">#b6bdbf</color>
+    <color name="font_link">#05c1f1</color>
+    <!--文字5彩色按钮文字颜色-->
+    <color name="font_btnc">#ffffff</color>
+    <color name="font_hint">#b2babb</color>
+
+    <!--背景1顶部导航栏背景-->
+    <color name="bg_nav">#05c1f1</color>
+    <color name="search_bg">#05c1f1</color>
+    <color name="header_bg">#05c1f1</color>
+    <!-- 标题栏底部背景颜色 -->
+    <color name="search_bottom_bg">#b2f0ff</color>
+
+    <!--背影2全局背景-->
+    <color name="bg_global">#f0f1f5</color>
+    <color name="base_bg">#f0f1f5</color>
+    <color name="base_bg2">#ffffff</color>
+
+    <!--背景3可点击按钮背景-->
+    <color name="bg_btnc">#f47263</color>
+
+    <!--分隔线1外部描边颜色-->
+    <color name="line_scrap">#c2cacc</color>
+    <!--分隔线2列表栏目，小模块分隔线颜色-->
+    <color name="line_list">#dae3e6</color>
+    <!-- 知识库导航栏背景色 -->
+    <color name="bg_librarguide">#e8eeef</color>
+
+
+</resources>

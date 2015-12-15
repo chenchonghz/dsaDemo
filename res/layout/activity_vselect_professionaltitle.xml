@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:headerattr="http://schemas.android.com/apk/res/com.szrjk.dhome"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="@color/base_bg"
+              android:orientation="vertical"
+        >
+
+    <com.szrjk.widget.HeaderView android:layout_width="fill_parent"
+                                 headerattr:htextstr="职称"
+                                 android:layout_height="wrap_content">
+    </com.szrjk.widget.HeaderView>
+
+    <ListView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/dh_scroll_list"
+                android:background="@color/white"
+                android:divider="@null"
+                android:scrollbars="none"
+                android:layout_marginTop="0dp"
+            />
+
+</LinearLayout>

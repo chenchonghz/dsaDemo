@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_transmit_content"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    >
+    
+     <com.szrjk.widget.TransmitTextView
+        android:id="@+id/tv_post_text" 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/view_post_padding_5"
+        android:paddingBottom="@dimen/view_post_padding_5"
+        android:paddingLeft="@dimen/backgroundPic_margin"
+        android:paddingRight="@dimen/backgroundPic_margin"
+        android:textColor="@color/font_titleanduname"
+        android:textSize="@dimen/font_size_small"
+        android:lineSpacingExtra="@dimen/textview_linespace"
+        android:background="@color/white"
+        />   
+
+</LinearLayout>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!-- 颜色  里面-->
+    <solid android:color="@color/white" />
+    <!-- 边框 -->
+    <stroke
+        android:width="@dimen/green_button_stroke"
+        android:color="@color/input_bg" />
+   
+    <!-- 圆角 -->
+    <corners android:radius="@dimen/green_button_radius" />
+
+</shape>

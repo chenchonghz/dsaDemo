@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.szrjk.dhome"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_bg"
+    android:orientation="vertical" >
+
+    <com.szrjk.widget.HeaderView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:htextstr="相册" >
+    </com.szrjk.widget.HeaderView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+
+        <com.szrjk.widget.IndexGridView
+            android:id="@+id/igv_photo_album"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:horizontalSpacing="10dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:paddingBottom="60dp"
+            android:numColumns="2"
+            android:scrollbars="none"
+            android:verticalSpacing="12dp" >
+        </com.szrjk.widget.IndexGridView>
+    </ScrollView>
+
+</LinearLayout>

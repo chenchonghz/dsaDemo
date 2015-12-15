@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <LinearLayout
+        android:id="@+id/lly_check"
+        android:layout_width="fill_parent"
+        android:layout_height="400dp"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <EditText
+            android:id="@+id/et_check"
+            android:layout_width="fill_parent"
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/white"
+            android:gravity="top|left"
+            android:inputType="textMultiLine"
+            android:lineSpacingExtra="6dp"
+            android:maxHeight="150dp"
+            android:minLines="10"
+            android:padding="@dimen/send_header_margin"
+            android:scrollbarStyle="insideOverlay"
+            android:scrollbars="vertical"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_small" />
+
+        <TextView
+            android:id="@+id/tv_check_length"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dip"
+            android:layout_marginRight="12dip"
+            android:gravity="right"
+            android:text="@string/content_length"
+            android:textColor="@color/font_cell"
+            android:textSize="@dimen/font_size_xsmall" />
+
+        <GridView
+            android:id="@+id/gv_check_list"
+            android:layout_width="fill_parent"
+            android:layout_height="400dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/photo_margin"
+            android:gravity="center_horizontal"
+            android:horizontalSpacing="6dip"
+            android:numColumns="4"
+            android:scrollbars="none"
+            android:verticalSpacing="6dip" >
+        </GridView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lly_treat"
+        android:layout_width="fill_parent"
+        android:layout_height="400dp"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <EditText
+            android:id="@+id/et_treat"
+            android:layout_width="fill_parent"
+            android:layout_height="150dip"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/white"
+            android:gravity="top|left"
+            android:inputType="textMultiLine"
+            android:lineSpacingExtra="6dp"
+            android:maxHeight="150dp"
+            android:minLines="10"
+            android:padding="@dimen/send_header_margin"
+            android:scrollbarStyle="insideOverlay"
+            android:scrollbars="vertical"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_small" />
+
+        <TextView
+            android:id="@+id/tv_treat_length"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dip"
+            android:layout_marginRight="12dip"
+            android:gravity="right"
+            android:text="@string/content_length"
+            android:textColor="@color/font_cell"
+            android:textSize="@dimen/font_size_xsmall" />
+
+        <GridView
+            android:id="@+id/gv_treat_list"
+            android:layout_width="fill_parent"
+            android:layout_height="400dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/photo_margin"
+            android:gravity="center_horizontal"
+            android:horizontalSpacing="6dip"
+            android:numColumns="4"
+            android:scrollbars="none"
+            android:verticalSpacing="6dip" >
+        </GridView>
+    </LinearLayout>
+
+</LinearLayout>

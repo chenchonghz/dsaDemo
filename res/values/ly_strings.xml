@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pull_up_lable_text">上拉加载更多</string>
+    <string name="refreshing_lable_text">正在加载</string>
+    <string name="release_lable_text">放开加载更多</string>
+    <string name="pull_down_lable_text">下拉加载更多</string>
+    <string name="normal_text">普通帖子</string>
+    <string name="caseshare_text">病例分享</string>
+    <string name="problemhelp_text">疑难求助</string>
+    <string name="minesendlike_text">我送出的赞</string>
+    <string name="transmit_text">转发</string>
+    <string name="command_text">评论</string>
+    <string name="like_text">赞</string>
+    <item name="tag_caseshare" type="id"></item>
+    <item name="tag_problemhelp" type="id"></item>
+    <item name="tag_normalpost" type="id"></item>
+    <item name="tag_transmit_normalpost" type="id"></item>
+    <item name="tag_transmit_caseshare" type="id"></item>
+    <item name="tag_transmit_problemhelp" type="id"></item>
+    <item name="tag_recommend_user" type="id"></item>
+    <string name="edit_profile">编辑资料</string> 
+    <string name="group_from_text">来自圈子</string>
+    <string name="news_text">最新资讯</string> 
+    <string name="bt_more_text">更多</string>
+    <string name="more_news_text">资讯</string>
+    <string name="news_detail_text">新闻详情</string>
+    <string name="ref_news_text">相关资讯</string>
+    <string name="other_news_text">其他订阅</string>
+    <string name="other_news_hint">点击添加频道</string>
+    <string name="my_news_text">我的订阅</string>
+    <string name="my_news_hint">单击删除</string>
+</resources>

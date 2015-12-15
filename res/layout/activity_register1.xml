@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:headerattr="http://schemas.android.com/apk/res/com.szrjk.dhome"
+    xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/base_bg"
+    android:orientation="vertical" >
+
+    <com.szrjk.widget.HeaderView
+        android:id="@+id/hv_register"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        headerattr:htextstr="@string/title_reg_privacy" >
+    </com.szrjk.widget.HeaderView>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textView"
+            style="@style/reg_contain_title"
+            android:text="@string/reg1title" />
+
+        <TextView
+            android:id="@+id/textView2"
+            style="@style/reg_contain_subtitle"
+            android:text="@string/reg1subtitle" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="5dip"
+            android:layout_marginLeft="@dimen/base_padding_left"
+            android:layout_marginRight="@dimen/base_padding_right"
+            android:layout_marginTop="15dip"
+            android:lineSpacingExtra="4dp"
+            android:lineSpacingMultiplier="1"
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/font_tabletitle"
+            android:textSize="@dimen/font_size_middle" />
+
+        <Button
+            android:id="@+id/btn_doctor"
+            style="@style/FromButton"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/edit_input_height"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/base_padding_left"
+            android:layout_marginRight="@dimen/base_padding_right"
+            android:layout_marginTop="50dp"
+            android:text="医生" />
+
+        <Button
+            android:id="@+id/btn_pharmacist"
+            style="@style/FromButton"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/edit_input_height"
+            android:layout_marginLeft="@dimen/base_padding_left"
+            android:layout_marginRight="@dimen/base_padding_right"
+            android:layout_marginTop="12dp"
+            android:text="药剂师" />
+
+        <Button
+            android:id="@+id/btn_nurse"
+            style="@style/FromButton"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/edit_input_height"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/base_padding_left"
+            android:layout_marginRight="@dimen/base_padding_right"
+            android:layout_marginTop="12dp"
+            android:text="护士" />
+
+        <Button
+            android:id="@+id/btn_student"
+            style="@style/FromButton"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/edit_input_height"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/base_padding_left"
+            android:layout_marginRight="@dimen/base_padding_right"
+            android:layout_marginTop="12dp"
+            android:text="医学生" />
+
+        <Button
+            android:id="@+id/btn_other"
+            style="@style/FromButton"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/edit_input_height"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/base_padding_left"
+            android:layout_marginRight="@dimen/base_padding_right"
+            android:layout_marginTop="12dp"
+            android:text="其他" />
+    </LinearLayout>
+
+</LinearLayout>

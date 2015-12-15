@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flowlayout="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@color/base_bg"
+    xmlns:app="http://schemas.android.com/apk/res/com.szrjk.dhome">
+    <com.szrjk.widget.FlowDeptLayout
+        android:id="@+id/fl_type"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="5dip"
+        android:background="@color/base_bg"
+        android:minHeight="40dp"
+        android:paddingBottom="6dp"
+        android:paddingLeft="9dp"
+        android:paddingRight="9dp"
+        android:paddingTop="6dip"
+        flowlayout:horizontal_spacing="20dip"
+        flowlayout:vertical_spacing="20dip" >
+    </com.szrjk.widget.FlowDeptLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="@dimen/view_post_padding_11"
+            android:text="@string/other_news_text"
+            android:textColor="@color/link_text_color"
+            android:textSize="@dimen/font_size_middle" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/other_news_hint"
+            android:textColor="@color/font_cell"
+            android:textSize="@dimen/font_size_xsmall" />
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/base_bg"
+        android:layout_marginBottom="50dp"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/base_bg"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:layout_marginTop="10dip"
+                android:background="@color/base_bg"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dip"
+                android:text="临  床" />
+
+            <com.szrjk.widget.FlowLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="5dip"
+                android:background="@color/base_bg"
+                android:padding="6dip" >
+
+                <TextView
+                    android:id="@+id/tv_ek"
+                    style="@style/flow_style2"
+                    android:layout_gravity="center"
+                    android:tag="EK"
+                    android:text="儿科" />
+
+                <TextView
+                    android:id="@+id/tv_nk"
+                    style="@style/flow_style2"
+                    android:layout_gravity="center"
+                    android:tag="NK"
+                    android:text="内科" />
+
+                <TextView
+                    android:id="@+id/tv_wk"
+                    style="@style/flow_style2"
+                    android:layout_gravity="center"
+                    android:tag="WK"
+                    android:text="外科" />
+
+                <TextView
+                    android:id="@+id/tv_zy"
+                    style="@style/flow_style2"
+                    android:layout_gravity="center"
+                    android:tag="ZY"
+                    android:text="中医" />
+
+                <TextView
+                    android:id="@+id/tv_fc"
+                    style="@style/flow_style2"
+                    android:layout_gravity="center"
+                    android:tag="FC"
+                    android:text="妇产科" />
+
+                <TextView
+                    android:id="@+id/tv_wg"
+                    style="@style/flow_style2"
+                    android:layout_gravity="center"
+                    android:tag="WG"
+                    android:text="五官科" />
+
+                <TextView
+                    android:id="@+id/tv_pf"
+                    style="@style/flow_style2"
+                    android:layout_gravity="center"
+                    android:tag="PF"
+                    android:text="皮肤科" />
+
+                <TextView
+                    android:id="@+id/tv_jz"
+                    style="@style/flow_style2"
+                    android:layout_gravity="center"
+                    android:tag="JZ"
+                    android:text="急诊科" />
+
+                <TextView
+                    android:id="@+id/tv_mz"
+                    style="@style/flow_style2"
+                    android:layout_gravity="center"
+                    android:tag="MZ"
+                    android:text="麻醉科" />
+
+                <TextView
+                    android:id="@+id/tv_qt"
+                    style="@style/flow_style2"
+                    android:layout_gravity="center"
+                    android:tag="QT"
+                    android:text="其它" />
+            </com.szrjk.widget.FlowLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:background="@color/base_bg"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dip"
+                android:text="药  物" />
+
+            <com.szrjk.widget.FlowLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:background="@color/base_bg"
+                android:padding="6dip" >
+
+                <TextView
+                    android:id="@+id/tv_xy"
+                    style="@style/flow_style2"
+                    android:layout_gravity="center"
+                    android:tag="XY"
+                    android:text="新药" />
+
+                <TextView
+                    android:id="@+id/tv_yx"
+                    style="@style/flow_style2"
+                    android:layout_gravity="center"
+                    android:tag="YX"
+                    android:text="药讯" />
+
+                <TextView
+                    android:id="@+id/tv_za"
+                    style="@style/flow_style2"
+                    android:layout_gravity="center"
+                    android:tag="ZA"
+                    android:text="中药" />
+
+                <TextView
+                    android:id="@+id/tv_bl"
+                    style="@style/flow_style2"
+                    android:layout_gravity="center"
+                    android:tag="BL"
+                    android:text="不良反应" />
+
+                <TextView
+                    android:id="@+id/tv_yj"
+                    style="@style/flow_style2"
+                    android:layout_gravity="center"
+                    android:tag="YJ"
+                    android:text="药品监测" />
+            </com.szrjk.widget.FlowLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:background="@color/base_bg"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dip"
+                android:text="资  讯" />
+
+            <com.szrjk.widget.FlowLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:background="@color/base_bg"
+                android:padding="6dip" >
+
+                <TextView
+                    android:id="@+id/tv_qy"
+                    style="@style/flow_style2"
+                    android:layout_gravity="center"
+                    android:tag="QY"
+                    android:text="前沿" />
+
+                <TextView
+                    android:id="@+id/tv_zn"
+                    style="@style/flow_style2"
+                    android:layout_gravity="center"
+                    android:tag="ZN"
+                    android:text="指南" />
+
+                <TextView
+                    android:id="@+id/tv_zc"
+                    style="@style/flow_style2"
+                    android:layout_gravity="center"
+                    android:tag="ZC"
+                    android:text="政策" />
+
+                <TextView
+                    android:id="@+id/tv_mj"
+                    style="@style/flow_style2"
+                    android:layout_gravity="center"
+                    android:tag="MJ"
+                    android:text="名家" />
+
+                <TextView
+                    android:id="@+id/tv_rd"
+                    style="@style/flow_style2"
+                    android:layout_gravity="center"
+                    android:tag="RD"
+                    android:text="热点" />
+            </com.szrjk.widget.FlowLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:background="@color/base_bg"
+                android:orientation="horizontal" >
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1px"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="4"
+                    android:background="@color/line_scrap" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="40dip"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="特别推荐"
+                    android:textColor="@color/font_cell" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1px"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="4"
+                    android:background="@color/line_scrap" />
+            </LinearLayout>
+
+            <com.szrjk.widget.FlowLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:background="@color/base_bg"
+                android:padding="6dip" >
+
+                <TextView
+                    android:id="@+id/tv_zt"
+                    style="@style/flow_style2"
+                    android:layout_gravity="center"
+                    android:tag="ZT"
+                    android:text="专题" />
+
+                <TextView
+                    android:id="@+id/tv_ht"
+                    style="@style/flow_style2"
+                    android:layout_gravity="center"
+                    android:tag="HT"
+                    android:text="话题" />
+
+                <TextView
+                    android:id="@+id/tv_dj"
+                    style="@style/flow_style2"
+                    android:layout_gravity="center"
+                    android:tag="DJ"
+                    android:text="独家" />
+
+                <TextView
+                    android:id="@+id/tv_ft"
+                    style="@style/flow_style2"
+                    android:layout_gravity="center"
+                    android:tag="FT"
+                    android:text="访谈" />
+
+                <TextView
+                    android:id="@+id/tv_hd"
+                    style="@style/flow_style2"
+                    android:layout_gravity="center"
+                    android:tag="HD"
+                    android:text="活动" />
+            </com.szrjk.widget.FlowLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

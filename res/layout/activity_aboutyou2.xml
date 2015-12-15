@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:headerattr="http://schemas.android.com/apk/res/com.szrjk.dhome"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="@color/base_bg"
+              android:orientation="vertical"
+        >
+
+    <com.szrjk.widget.HeaderView android:layout_width="fill_parent"
+                                 headerattr:htextstr="关于你"
+                                 android:layout_height="wrap_content">
+    </com.szrjk.widget.HeaderView>
+
+    <TextView
+            style="@style/reg_contain_title"
+            android:text="@string/reg_about2title"
+            android:id="@+id/textView"/>
+
+    <TextView
+            android:text="@string/reg_about2subtitle"
+            style="@style/reg_contain_subtitle"
+            android:id="@+id/textView2"/>
+
+
+    <EditText
+            android:hint="所在地"
+            android:id="@+id/text_parea"
+            style="@style/comm_form_text1"
+            android:layout_marginTop="40dp"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/edit_input_height"
+            />
+
+    <AutoCompleteTextView
+            android:hint="医院"
+            android:id="@+id/text_hospital"
+            style="@style/comm_form_text1"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/edit_input_height"
+            android:completionThreshold="1"
+            android:maxLength="16"
+            android:ems="10"
+            />
+
+
+    <AutoCompleteTextView
+            android:hint="科室"
+            android:id="@+id/text_dept"
+            style="@style/comm_form_text1"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/edit_input_height"
+            android:completionThreshold="1"
+            android:ems="10"
+            />
+
+    <AutoCompleteTextView
+            android:hint="就读院校"
+            android:id="@+id/text_school"
+            style="@style/comm_form_text1"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/edit_input_height"
+            android:completionThreshold="1"
+            android:maxLength="16"
+            android:ems="10"
+            />
+    <EditText 
+            android:hint="学历"
+            android:id="@+id/text_edubg"
+            style="@style/comm_form_text1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_input_height"
+            android:ems="10"
+            />
+    <AutoCompleteTextView
+            android:hint="专业"
+            android:id="@+id/text_major"
+            style="@style/comm_form_text1"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/edit_input_height"
+            android:completionThreshold="1"
+            android:maxLength="6"
+            android:ems="10"
+            />
+
+
+    <AutoCompleteTextView
+            android:hint="职称"
+            android:id="@+id/text_professionaltitle"
+            style="@style/comm_form_text1"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/edit_input_height"
+            android:completionThreshold="1"
+            android:ems="10"
+            />
+	
+	<EditText 
+            android:hint="职位"
+            android:id="@+id/text_jobtitle"
+            style="@style/comm_form_text1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_input_height"
+            android:maxLength="6"
+            android:ems="10"
+            />
+    <Button
+            android:id="@+id/btn_continue"
+            style="@style/FromButton"
+            android:layout_marginLeft="@dimen/base_padding_left"
+            android:layout_marginRight="@dimen/base_padding_right"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/edit_input_height"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dip"
+            android:enabled="false"
+            android:text="继续" />
+
+
+</LinearLayout>

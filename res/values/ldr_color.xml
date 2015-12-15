@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <drawable name="red">#f00</drawable>  
+    <drawable name="white">#ffffff</drawable>  
+    <drawable name="gray">#ccc</drawable> 
+    <drawable name="blue_white">#ff05c1f1</drawable>
+    <drawable name="pop_pressed">#f0f1f5</drawable>
+    <drawable name="index_pressed">#F8F9FB</drawable>
+    <color name="pop_pressed">#f0f1f5</color>
+    <color name="rz_title">#293133</color>
+</resources>

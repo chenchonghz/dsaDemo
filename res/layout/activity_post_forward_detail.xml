@@ -1,0 +1,110 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:headerattr="http://schemas.android.com/apk/res/com.szrjk.dhome"
+    android:id="@+id/rl_case_detail_base"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_bg" >
+
+    <com.szrjk.widget.PostDetailHeaderView
+        android:id="@+id/pdhv_headerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        headerattr:text="@string/post_detailed_header" >
+    </com.szrjk.widget.PostDetailHeaderView>
+
+    <ScrollView
+        android:id="@+id/sv_case_detail_casecontent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pdhv_headerview"
+        android:layout_marginBottom="45dp"
+        android:background="@color/base_bg2"
+        android:scrollbars="none" >
+
+        <RelativeLayout
+            android:id="@+id/rl_post_detailed_ordinary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+            
+            <TextView
+                android:id="@+id/tv_post_detailed_interval1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding"
+                android:background="@color/base_bg" />
+
+            <com.szrjk.widget.NormalForwardPostContentLayout
+                android:id="@+id/pfncl_post"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_post_detailed_interval1"
+                android:paddingBottom="@dimen/view_post_padding_5" >
+            </com.szrjk.widget.NormalForwardPostContentLayout>
+
+            <com.szrjk.widget.PostContentLayout
+                android:id="@+id/npcl_postForward"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pfncl_post" >
+            </com.szrjk.widget.PostContentLayout>
+
+            <View 
+                 android:id="@+id/v_shadow"
+                 android:layout_width="match_parent"
+                 android:layout_below="@id/npcl_postForward"
+                 android:layout_height="@dimen/line_height_2"
+                 android:background="@drawable/shadow_color"/>
+            
+
+            <TextView
+                android:id="@+id/tv_post_detailed_interval2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding"
+                android:layout_below="@id/v_shadow"
+                android:background="@color/base_bg" />
+            
+            <View 
+			    android:id="@+id/line"
+                 android:layout_width="match_parent"
+                 android:layout_height="1px"
+                 android:layout_below="@id/tv_post_detailed_interval2"
+                 android:background="@color/line_scrap"/>
+
+            <com.szrjk.widget.PostDetailViewCommentListLayout
+                android:id="@+id/layout_pdvcl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/line" >
+            </com.szrjk.widget.PostDetailViewCommentListLayout>
+            
+             <View 
+                 android:id="@+id/shadow"
+                 android:layout_width="match_parent"
+                 android:layout_below="@id/layout_pdvcl"
+                android:layout_height="@dimen/line_height_2"
+                 android:background="@drawable/shadow_color"/>
+            
+             <TextView
+                    android:id="@+id/tv_post_detailed_interval3"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/shadow"
+                    android:background="@color/base_bg" />
+             
+             
+        </RelativeLayout>
+    </ScrollView>
+
+    <com.szrjk.widget.PostDetailBottomOperLayout
+        android:id="@+id/layout_pdbottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
+    </com.szrjk.widget.PostDetailBottomOperLayout>
+    
+    <View 
+                 android:layout_width="match_parent"
+                 android:layout_height="1px"
+                 android:layout_above="@id/layout_pdbottom"
+                 android:background="@color/line_scrap"/>
+
+</RelativeLayout>

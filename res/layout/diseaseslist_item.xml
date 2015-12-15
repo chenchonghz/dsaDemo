@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_sortitem"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/rl_zm"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/base_bg"
+        android:gravity="center_vertical"
+        android:paddingBottom="5dip"
+        android:paddingLeft="5dip"
+        android:paddingTop="5dip" >
+
+        <TextView
+            android:id="@+id/catalog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/pic_alphabet_bg"
+            android:gravity="center"
+            android:text="A"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
+    	android:background="@drawable/button_index_selector"
+
+        android:gravity="center_vertical"
+        android:paddingLeft="10dip"
+        android:paddingRight="20dp"
+        android:text="hhhh"
+        android:textSize="@dimen/font_size_small"
+        android:textColor="@color/font_jobtitle" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.1dp"
+        android:background="#dae3e6" />
+
+</LinearLayout>

@@ -1,0 +1,184 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:headerattr="http://schemas.android.com/apk/res/com.szrjk.dhome"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_bg"
+    android:orientation="vertical"
+    tools:context="com.szrjk.explore.NewsDetailActivity" >
+
+    <com.szrjk.widget.HeaderView
+        android:id="@+id/hv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        headerattr:htextstr="@string/news_detail_text" >
+    </com.szrjk.widget.HeaderView>
+    
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/base_bg">
+        <ScrollView
+            android:id="@+id/sv_news_detail"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/base_bg"
+            android:descendantFocusability="blocksDescendants" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:background="@color/base_bg"
+                android:orientation="vertical" >
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height_0.5"
+                    android:layout_marginTop="@dimen/view_post_margin_11"
+                    android:background="@color/line_shadow" />
+
+                <WebView
+                    android:id="@+id/wv_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height_2"
+                    android:background="@drawable/shadow_color" />
+
+                <com.szrjk.widget.IndexRecommandListView
+                    android:id="@+id/lv_news"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/view_post_margin_11"
+                    android:background="@color/white"
+                    android:divider="@color/transparent"
+                    android:scrollbars="none" >
+                </com.szrjk.widget.IndexRecommandListView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height_2"
+                    android:background="@drawable/shadow_color" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height_0.5"
+                    android:layout_marginTop="@dimen/view_post_margin_11"
+                    android:background="@color/line_shadow" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/view_post_padding_11"
+                    android:paddingLeft="@dimen/view_post_padding_11"
+                    android:paddingRight="@dimen/view_post_padding_11"
+                    android:paddingTop="@dimen/view_post_padding_11" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/command_text"
+                        android:textColor="@color/font_titleanduname"
+                        android:textSize="@dimen/font_size_middle" />
+
+                    <TextView
+                        android:id="@+id/tv_commend_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="5dp"
+                        android:textColor="@color/font_titleanduname"
+                        android:textSize="@dimen/font_size_middle" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/view_line_height"
+                    android:background="@color/line_list" />
+
+                <com.szrjk.widget.InnerListView
+                    android:id="@+id/lv_commends"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:divider="@color/line_list"
+                    android:dividerHeight="@dimen/view_line_height"
+                    android:scrollbars="none" >
+                </com.szrjk.widget.InnerListView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height_2"
+                    android:layout_marginBottom="@dimen/view_post_margin_11"
+                    android:background="@drawable/shadow_color" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height_0.5"
+                    android:background="@color/line_shadow" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_commend"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/white" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:orientation="horizontal"
+                        android:paddingBottom="@dimen/view_post_padding_11"
+                        android:paddingTop="@dimen/view_post_padding_11" >
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="2dp"
+                            android:src="@drawable/icon_comment_28" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="center"
+                            android:text="评论"
+                            android:textColor="@color/font_cell"
+                            android:textSize="@dimen/font_size_middle" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+        
+        <ImageButton 
+            android:id="@+id/ib_big_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_comment88"
+            android:background="@color/transparent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_above="@+id/ib_big_up"/>
+        <ImageButton 
+            android:id="@+id/ib_big_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_up88"
+             android:background="@color/transparent"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="80dp"/>
+
+    </RelativeLayout>
+    
+
+
+</LinearLayout>

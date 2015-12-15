@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/pic_aboutus_bg"
+    android:orientation="vertical"
+     xmlns:app="http://schemas.android.com/apk/res/com.szrjk.dhome">
+    
+    <com.szrjk.widget.HeaderView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:htextstr="关于我们"></com.szrjk.widget.HeaderView>
+    
+     <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="25dip"
+                android:src="@drawable/szrjk_logo" />
+     <TextView 
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_gravity="center_horizontal"
+         android:layout_marginTop="-30dp"
+         android:text="@string/about_digitaldoctor"
+         android:textSize="@dimen/font_size_middle"
+         android:textColor="@color/font_jobtitle"/>
+     <TextView 
+         android:id="@+id/tv_version"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_gravity="center_horizontal"
+         android:layout_marginTop="2dp"
+         android:text=""
+         android:textSize="@dimen/font_size_middle"
+         android:textColor="@color/search_bg"/>
+     <TextView 
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_gravity="center_horizontal"
+         android:layout_marginTop="30dp"
+         android:layout_marginBottom="8dip"
+         android:text="@string/about_thank"
+         android:textSize="18sp"
+         android:textColor="@color/font_jobtitle"/>
+     <TextView 
+         style="@style/about"
+         android:text="@string/about_main1"/>
+     <TextView 
+         style="@style/about"
+         android:text="@string/about_main2"/>
+     <TextView 
+         style="@style/about"
+         android:text="@string/about_main3"/>
+     <TextView 
+         style="@style/about"
+         android:text="@string/about_main4"/>
+     <TextView 
+         style="@style/about"
+         android:text="@string/about_main5"/>
+     <TextView 
+         style="@style/about"
+         android:text="@string/about_main6"/>
+     <TextView 
+         style="@style/about"
+         android:text="@string/about_main7"/>
+     <TextView 
+         style="@style/about"
+         android:text="@string/about_main8"
+         android:layout_marginBottom="35dip"/>
+     <TextView 
+         style="@style/about"
+         android:text="@string/about_service_tel"
+         android:textSize="@dimen/font_size_small"
+         android:textColor="@color/font_cell"/>
+     <TextView 
+         style="@style/about"
+         android:layout_marginTop="5dp"
+         android:text="@string/about_copyright"
+         android:textSize="@dimen/font_size_small"
+         android:textColor="@color/font_cell"/>
+
+</LinearLayout>

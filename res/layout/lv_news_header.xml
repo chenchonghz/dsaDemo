@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/view_post_padding_11"
+    android:paddingRight="@dimen/view_post_padding_11"
+    android:background="@color/white"
+    android:orientation="vertical" >
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:paddingTop="@dimen/view_post_padding_11"
+        android:paddingBottom="@dimen/view_post_padding_11"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/icon_information" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/view_post_padding_11"
+            android:text="@string/news_text"
+            android:textColor="@color/font_titleanduname"
+            android:textSize="@dimen/font_size_middle" />
+
+        <Button
+            android:id="@+id/bt_more"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="3dp"
+            android:gravity="center"
+            android:background="@color/white"
+            android:text="@string/bt_more_text"
+            android:textColor="@color/font_cell"
+            android:textSize="@dimen/font_size_small" />
+        
+    </LinearLayout>
+
+</LinearLayout>

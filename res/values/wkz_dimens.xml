@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="edit_paddingRight">58dip</dimen>
+    <dimen name="image_width">160dip</dimen>
+    <dimen name="image_large">120dip</dimen>
+    <dimen name="image_medium">48dip</dimen>
+    <dimen name="image_small">12dip</dimen>
+    <dimen name="image_micro">8dip</dimen>
+    <dimen name="tv_height">24dip</dimen>
+    <dimen name="tv_height_small">20dip</dimen>
+    <dimen name="tv_height_large">240dip</dimen>
+    <dimen name="tv_height_middle">120dip</dimen>
+    <dimen name="ed_height">72dip</dimen>
+    <dimen name="btn_height">30dip</dimen>
+    <dimen name="rl_width">50dip</dimen>
+    <dimen name="rl_width_large">60dip</dimen>
+    <dimen name="margin_top">20dip</dimen>
+    <dimen name="margin_top_middle">10dip</dimen>
+    <dimen name="margin_top_xsmall">8dip</dimen>
+    <dimen name="margin_top_micro">2dip</dimen>
+    <dimen name="margin_top_small">6dip</dimen>
+    <dimen name="margin_top_large">40dip</dimen>
+    <dimen name="margin_left_xlarge">56dip</dimen>
+    <dimen name="margin_left">10dip</dimen>
+    <dimen name="margin_left_medium">8dip</dimen>
+    <dimen name="margin_left_small">6dip</dimen>
+    <dimen name="margin_left_smicro">2dip</dimen>
+    <dimen name="margin_right_micro">4dip</dimen>
+    <dimen name="line_height">1px</dimen>
+    <dimen name="padding_xlarge">30dip</dimen>
+    <dimen name="seting_padding">10dip</dimen>
+    <dimen name="seting_marginLeft">10dip</dimen>
+    <dimen name="seting_marginRight">10dip</dimen>
+</resources>

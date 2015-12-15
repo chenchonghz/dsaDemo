@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:headerattr="http://schemas.android.com/apk/res/com.szrjk.dhome"
+    xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ScrollView
+        android:id="@+id/sv_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/base_bg" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <com.szrjk.widget.HeaderView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                headerattr:htextstr="@string/title_reg_phone" >
+            </com.szrjk.widget.HeaderView>
+
+            <TextView
+                android:id="@+id/textView"
+                style="@style/reg_contain_title"
+                android:text="@string/reg2title" />
+
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/reg_contain_subtitle"
+                android:text="@string/reg2subtitle" />
+
+            <EditText
+                android:id="@+id/text_phonenum"
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:layout_marginLeft="@dimen/base_padding_left"
+                android:layout_marginRight="@dimen/base_padding_right"
+                android:layout_marginTop="60dip"
+                android:background="@drawable/edit_input_bg"
+                android:digits="@string/edit_phone_type"
+                android:hint="手机号码"
+                android:textSize="@dimen/font_size_middle" />
+
+            <Button
+                android:id="@+id/btn_vcode"
+                style="@style/FromButton"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/edit_input_height"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/base_padding_left"
+                android:layout_marginRight="@dimen/base_padding_right"
+                android:layout_marginTop="15dp"
+                android:enabled="false"
+                android:text="获取验证码" />
+
+            <EditText
+                android:id="@+id/text_vcode"
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                 android:layout_marginLeft="@dimen/base_padding_left"
+                android:layout_marginRight="@dimen/base_padding_right"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/edit_input_bg"
+                android:digits="@string/edit_phone_type"
+                android:hint="验证码"
+                android:textSize="@dimen/font_size_middle" />
+
+            <Button
+                android:id="@+id/btn_continue"
+                style="@style/FromButton"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/edit_input_height"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/base_padding_left"
+                android:layout_marginRight="@dimen/base_padding_right"
+                android:layout_marginTop="15dp"
+                android:enabled="false"
+                android:text="继续" />
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

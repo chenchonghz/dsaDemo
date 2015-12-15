@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:headerattr="http://schemas.android.com/apk/res/com.szrjk.dhome"
+    android:id="@+id/ll_rootlayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/base_bg"
+    android:orientation="vertical" >
+
+    <com.szrjk.widget.HeaderView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        headerattr:htextstr="保护账户" >
+    </com.szrjk.widget.HeaderView>
+
+    <ScrollView
+        android:id="@+id/sv_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" 
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView"
+                style="@style/reg_contain_title"
+                android:text="@string/reg_paccounttitle" />
+
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/reg_contain_subtitle"
+                android:text="@string/reg_paccountsubtitle" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edit_input_height"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="40dp"
+                android:background="@color/base_bg" >
+
+                <EditText
+                    android:id="@+id/text_password"
+                    style="@style/comm_form_text1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/edit_input_height"
+                    android:digits="@string/edit_text_type"
+                    android:hint="密码"
+                    android:inputType="textPassword" />
+
+                <ImageView
+                    android:id="@+id/iv_password_hiddenorshow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginRight="40dp"
+                    android:src="@drawable/icon_hidden" />
+            </FrameLayout>
+
+             <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="@dimen/base_padding_left"
+        android:layout_marginRight="@dimen/base_padding_right"
+        android:background="@color/line_list" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edit_input_height"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/base_bg" >
+
+                <EditText
+                    android:id="@+id/text_confirmpwd"
+                    style="@style/comm_form_text1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/edit_input_height"
+                    android:digits="@string/edit_text_type"
+                    android:hint="确认密码"
+                    android:inputType="textPassword" />
+
+                <ImageView
+                    android:id="@+id/iv_confirmpwd_hiddenorshow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginRight="40dp"
+                    android:src="@drawable/icon_hidden" />
+            </FrameLayout>
+
+             <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="@dimen/base_padding_left"
+        android:layout_marginRight="@dimen/base_padding_right"
+        android:background="@color/line_list" />
+            <Button
+                android:id="@+id/btn_continue"
+                style="@style/FromButton"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/edit_input_height"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/base_padding_left"
+                android:layout_marginRight="@dimen/base_padding_right"
+                android:layout_marginTop="20dip"
+                android:enabled="false"
+                android:text="继续" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/button_pop_selector" >
+
+    <TextView
+        android:id="@+id/tv_item_library"
+        android:layout_width="wrap_content"
+        android:layout_height="49dp"
+        android:layout_marginLeft="@dimen/margin_15dp"
+        android:gravity="center_vertical"
+        android:text="@string/Library3"
+        android:textColor="@color/font_jobtitle"
+        android:textSize="@dimen/font_size_small" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_below="@id/tv_item_library"
+        android:background="@color/line_list" />
+
+</RelativeLayout>

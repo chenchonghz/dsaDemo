@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/base_bg"
+    android:orientation="vertical" >
+
+
+    <com.szrjk.widget.SlideShowView
+        android:id="@+id/slideshowView"
+        android:layout_width="fill_parent"
+        android:layout_height="180dp"
+        android:layout_gravity="center_horizontal" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding"
+        android:paddingRight="@dimen/padding"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/library_margin_bottom"
+            android:layout_marginTop="@dimen/library_margin_top"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:id="@+id/rl_sick"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+               android:background="@drawable/button_pop_selector"
+                android:padding="@dimen/library_padding" >
+
+                <ImageView
+                    android:id="@+id/iv_sick"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/i_sick" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_15dp"
+                    android:layout_toRightOf="@+id/iv_sick"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/library_margin_left"
+                        android:text="@string/library_sick"
+                        android:textColor="@color/font_jobtitle"
+                        android:textSize="@dimen/font_size_middle" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/library_margin_left"
+                        android:layout_marginTop="@dimen/library_mark_top"
+                        android:text="@string/library_sick_mark"
+                        android:textColor="@color/font_cell"
+                        android:textSize="@dimen/font_size_msmall" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height_2"
+                android:background="@drawable/shadow_color" />
+
+            <RelativeLayout
+                android:id="@+id/rl_case"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/library_line_top"
+               android:background="@drawable/button_pop_selector"
+                android:padding="@dimen/library_padding" >
+
+                <ImageView
+                    android:id="@+id/iv_case"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/i_case" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_15dp"
+                    android:layout_toRightOf="@+id/iv_case"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/library_margin_left"
+                        android:text="@string/library_case"
+                        android:textColor="@color/font_jobtitle"
+                        android:textSize="@dimen/font_size_middle" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/library_margin_left"
+                        android:layout_marginTop="@dimen/library_mark_top"
+                        android:text="@string/library_case_mark"
+                        android:textColor="@color/font_cell"
+                        android:textSize="@dimen/font_size_msmall" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height_2"
+                android:background="@drawable/shadow_color" />
+
+            <RelativeLayout
+                android:id="@+id/rl_drug"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/library_line_top"
+                android:background="@drawable/button_pop_selector"
+                android:padding="@dimen/library_padding" >
+
+                <ImageView
+                    android:id="@+id/iv_drug"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/i_drug" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_15dp"
+                    android:layout_toRightOf="@+id/iv_drug"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/library_margin_left"
+                        android:text="@string/library_drug"
+                        android:textColor="@color/font_jobtitle"
+                        android:textSize="@dimen/font_size_middle" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/library_margin_left"
+                        android:layout_marginTop="@dimen/library_mark_top"
+                        android:text="@string/library_drug_mark"
+                        android:textColor="@color/font_cell"
+                        android:textSize="@dimen/font_size_msmall" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height_2"
+                android:background="@drawable/shadow_color" />
+
+            <RelativeLayout
+                android:id="@+id/rl_paper"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/library_line_top"
+                android:background="@drawable/button_pop_selector"
+                android:padding="@dimen/library_padding" >
+
+                <ImageView
+                    android:id="@+id/iv_paper"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/i_paper" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_15dp"
+                    android:layout_toRightOf="@+id/iv_paper"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/library_margin_left"
+                        android:text="@string/library_paper"
+                        android:textColor="@color/font_jobtitle"
+                        android:textSize="@dimen/font_size_middle" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/library_margin_left"
+                        android:layout_marginTop="@dimen/library_mark_top"
+                        android:text="@string/library_paper_mark"
+                        android:textColor="@color/font_cell"
+                        android:textSize="@dimen/font_size_msmall" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height_2"
+                android:background="@drawable/shadow_color" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

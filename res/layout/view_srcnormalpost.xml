@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/pic_transmit_post_bg"
+    android:orientation="vertical" >
+    
+    <LinearLayout
+        android:id="@+id/ll_src_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/base_bg"
+        android:orientation="vertical"
+        android:visibility="visible" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="@dimen/view_post_margin_6"
+                android:layout_marginLeft="@dimen/view_post_margin_6"
+                android:layout_marginTop="@dimen/view_post_margin_6"
+                android:src="@drawable/icon_postcircle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:paddingLeft="@dimen/view_post_padding_6"
+                android:text="@string/group_from_text"
+                android:textColor="@color/font_cell"
+                android:textSize="@dimen/font_size_small" />
+
+            <TextView
+                android:id="@+id/tv_src_group_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:paddingLeft="@dimen/view_post_padding_6"
+                android:paddingTop="1dp"
+                android:singleLine="true"
+                android:text="医生"
+                android:textColor="@color/link_text_color"
+                android:textSize="@dimen/font_size_small" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_line_height"
+            android:background="@color/line_list" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_src_post_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/base_bg"
+        android:lineSpacingExtra="@dimen/textview_linespace"
+        android:paddingBottom="6dp"
+        android:paddingLeft="@dimen/view_post_padding_11"
+        android:paddingRight="@dimen/view_post_padding_11"
+        android:paddingTop="@dimen/view_post_padding_6"
+        android:textColor="@color/font_titleanduname"
+        android:textSize="@dimen/font_size_small" />
+
+       <com.szrjk.widget.IndexGridView
+        android:id="@+id/gv_src_pic" 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/view_post_margin_10"
+        android:layout_marginRight="@dimen/view_post_margin_10"
+        android:layout_marginBottom="@dimen/view_post_padding_11"
+        android:numColumns="auto_fit"
+        android:listSelector="@color/transparent"
+        android:gravity="center"
+        android:horizontalSpacing="4dp"
+        android:verticalSpacing="4dp"
+        android:scrollbars="none"
+        android:visibility="gone"
+        android:stretchMode="columnWidth"
+        />
+</LinearLayout>

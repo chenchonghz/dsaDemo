@@ -1,0 +1,72 @@
+<resources>
+
+    <!-- 标题栏 -->
+    <dimen name="font_size_large">20sp</dimen>
+    <dimen name="font_size_middle">16sp</dimen>
+    <!-- 正文 -->
+    <dimen name="font_size_small">14sp</dimen>
+    <!-- 正文 -->
+    <dimen name="font_size_msmall">12sp</dimen>
+    <!-- 正文 -->
+    <dimen name="font_size_xsmall">10sp</dimen>
+    <dimen name="search_bg_height">30dip</dimen>
+    <dimen name="search_height">30dip</dimen>
+    <dimen name="search_txt_padding_left">6dip</dimen>
+    <dimen name="search_padding_top">4dip</dimen>
+    <dimen name="search_padding_bottom">4dip</dimen>
+    <dimen name="search_padding_left">14dip</dimen>
+    <dimen name="search_padding_right">14dip</dimen>
+    <dimen name="header_height">45dip</dimen>
+    <dimen name="header_left_margin">12dip</dimen>
+    <dimen name="header_right_margin">15dip</dimen>
+    <dimen name="base_padding_left">33dip</dimen>
+    <dimen name="base_padding_left_small">20dip</dimen>
+    <dimen name="base_padding_right">33dip</dimen>
+     <dimen name="base_padding_right_small">20dip</dimen>
+    <dimen name="base_input_left">10dip</dimen>
+    <dimen name="edit_input_height">40dip</dimen>
+    <dimen name="edit_input_margin_top">10dip</dimen>
+    <dimen name="code_btn_margin_left">10dip</dimen>
+    <dimen name="code_btn_margin_right">10dip</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="bbuton_rounded_corner_radius">5dp</dimen>
+    <dimen name="bthumbnail_rounded_corner_radius">3dp</dimen>
+    <dimen name="padding_micro">4dp</dimen>
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding">10dp</dimen>
+    <dimen name="padding_medium">12dp</dimen>
+    <dimen name="padding_large">16dp</dimen>
+    <dimen name="green_button_padding_left">20dp</dimen>
+    <dimen name="green_button_padding_right">20dp</dimen>
+    <dimen name="green_button_padding_top">10dp</dimen>
+    <dimen name="green_button_padding_bottom">10dp</dimen>
+    <dimen name="green_button_stroke">1px</dimen>
+    <dimen name="green_button_radius">2dp</dimen>
+    <dimen name="add_pic_size">65dip</dimen>
+    <!-- 头像大小 -->
+    <dimen name="avatar_size_large">120dp</dimen>
+    <dimen name="avatar_size_Lmiddle">100dp</dimen>
+    <dimen name="avatar_size_middle">80dp</dimen>
+    <dimen name="avatar_size_Smiddle">60dp</dimen>
+    <dimen name="avatar_size_small">40dp</dimen>
+    <dimen name="pic_size_middle">110dp</dimen>
+    <dimen name="blue_button_padding">5dp</dimen>
+    <dimen name="blue_button_radius">5dp</dimen>
+    <dimen name="indicator_right_padding">10dp</dimen>
+    <dimen name="indicator_corner_radius">12dp</dimen>
+    <dimen name="indicator_internal_padding">4dp</dimen>
+    <dimen name="header_footer_left_right_padding">24dp</dimen>
+    <dimen name="header_footer_top_bottom_padding">12dp</dimen>
+
+    <dimen name="comment_text_left_margin">50dp</dimen>
+    <dimen name="comment_item_margin">10dp</dimen>
+    
+
+
+    
+
+    
+
+
+</resources>

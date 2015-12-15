@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/button_pop_selector"
+    android:descendantFocusability="blocksDescendants"
+    android:minHeight="60dp" >
+
+    <com.szrjk.widget.UserCardLayout
+        android:id="@+id/request_usercard"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="@dimen/margin_10dp" />
+
+    <TextView
+        android:id="@+id/tv_request_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/request_usercard"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="-8dp"
+        android:text="@string/rightnow"
+        android:textColor="@color/font_cell"
+        android:textSize="@dimen/font_size_xsmall" />
+	<View 
+	    android:layout_width="match_parent"
+	    android:layout_height="5dp"
+	    android:layout_below="@id/tv_request_date"/>
+    <Button
+        android:id="@+id/bt_request"
+        android:layout_width="55dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/margin_10dp"
+        android:layout_marginTop="@dimen/margin_15dp"
+        android:background="@drawable/icon_request1"
+        android:text="@string/request_agree"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_size_msmall"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/bt_ignore"
+        android:layout_width="55dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/margin_10dp"
+        android:layout_marginTop="@dimen/margin_15dp"
+        android:background="@drawable/icon_request3"
+        android:text="@string/request_ignore"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_size_msmall"
+        android:visibility="gone" />
+
+</RelativeLayout>

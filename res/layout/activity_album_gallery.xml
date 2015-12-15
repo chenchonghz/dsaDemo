@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.szrjk.dhome"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/base_bg2" >
+
+    <com.szrjk.widget.HeaderView
+        android:id="@+id/hv_album_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:htextstr="最近照片" >
+    </com.szrjk.widget.HeaderView>
+
+    <GridView
+        android:id="@+id/gv_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/hv_album_gallery"
+        android:gravity="center"
+        android:horizontalSpacing="5dp"
+        android:numColumns="3"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="5dp" />
+
+    <TextView
+        android:id="@+id/tv_album"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/no_photo"
+        android:textColor="@color/black" />
+
+</RelativeLayout>

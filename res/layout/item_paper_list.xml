@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/base_bg" >
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/base_bg" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view"
+        android:background="@color/white" >
+
+        <TextView
+            android:id="@+id/id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_marginTop="@dimen/margin_15dp"
+            android:lineSpacingExtra="12dp"
+            android:text="阿尔茨海默病患者吞咽功能障碍的临床调查分析"
+            android:textColor="@color/font_titleanduname"
+            android:textSize="@dimen/font_size_middle" />
+
+        <TextView
+            android:id="@+id/tv_author_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tv_title"
+            android:layout_below="@id/tv_title"
+            android:layout_marginTop="3dp"
+            android:text="作者 :"
+            android:textColor="@color/font_cell"
+            android:textSize="@dimen/font_size_xsmall" />
+
+        <TextView
+            android:id="@+id/tv_author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_marginLeft="@dimen/margin_5dp"
+            android:layout_marginTop="3dp"
+            android:layout_toRightOf="@id/tv_author_title"
+            android:text="陈淑玲,金建烽,阎同军,高志斌,孙剑,江景娟,徐乐平"
+            android:textColor="@color/font_cell"
+            android:textSize="@dimen/font_size_xsmall" />
+
+        <TextView
+            android:id="@+id/tv_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tv_title"
+            android:layout_below="@id/tv_author"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_marginTop="@dimen/margin_15dp"
+            android:ellipsize="end"
+            android:lineSpacingExtra="12dp"
+            android:lines="3"
+            android:text="目的:了解阿尔茨海默病(Alzheimer&apos;s disease,AD)患者吞咽障碍的发生率及临床特点。\n方法:自制量表调查239例轻中度AD患者人口学资料和临床特征,采用洼田饮水试验联合血氧饱和度监测对吞咽障碍患者进行初筛,初筛阳性者经视频吞咽造影检查确诊。\n结果:\n(1)AD患者吞咽障碍发生率为20.5%(49/239),其中轻度AD和中度AD患者的吞咽障碍发生率分别为13.6%(18/132)、29.0%(31/107);误吸发生率为7.5% (18/239)。(2)吞咽障碍患者中,年龄≥75岁、中度痴呆、使用抗精神病药、使用苯二氮卓类药、有吞咽困难临床表现、有吞咽困难相关体征者的比例显著高于无吞Ⅱ因障碍者(χ2=4.086～8.527,P=0.003～0.043)。(3)Logistic回归分析显示,年龄≥75岁(OR=2.099)、中度痴呆(OR=2.310)、使用抗精神病药(OR=2.202)、有吞咽困难临床表现(OR=2.306)与吞咽障碍相关(P=0.016～0.039)。\n结论:\nAD患者中吞咽障碍有一定普遍性,以高龄、痴呆程度较严重、使用抗精神病药或有吞咽困难临床表现者尤著。"
+            android:textColor="@color/font_jobtitle"
+            android:textSize="@dimen/font_size_small" />
+
+        <TextView
+            android:id="@+id/tv_provenance_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tv_title"
+            android:layout_below="@id/tv_summary"
+            android:layout_marginTop="3dp"
+            android:text="摘录:"
+            android:textColor="@color/font_link"
+            android:textSize="@dimen/font_size_xsmall" />
+
+        <TextView
+            android:id="@+id/tv_provenance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tv_provenance_title"
+            android:layout_marginLeft="@dimen/margin_5dp"
+            android:layout_toRightOf="@id/tv_provenance_title"
+            android:text="《中华精神科杂志》第48卷第2期(2015年4月)"
+            android:textColor="@color/font_link"
+            android:textSize="@dimen/font_size_xsmall" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_alignTop="@id/tv_provenance_title"
+            android:text="2015-09-10"
+            android:textColor="@color/font_cell"
+            android:textSize="@dimen/font_size_xsmall" />
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_below="@id/tv_date"
+            android:background="@color/white" />
+
+        <View
+            android:layout_below="@id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height_2"
+            android:background="@drawable/shadow_color" />
+
+        
+    </RelativeLayout>
+
+</RelativeLayout>

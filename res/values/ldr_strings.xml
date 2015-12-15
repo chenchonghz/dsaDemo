@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="person_introduction">个人简介</string>
+    <string name="canclefocus">取消关注</string>
+    <string name="canclefriends">取消好友</string>
+    <string name="addfriends">加好友</string>
+    <string name="addfocus">加关注</string>
+    <string name="issue">发布</string>
+    <string name="notProfessionalTitle">暂无</string>
+    <string name="userinfo">账号信息</string>
+    <string name="hospital">医院</string>
+    <string name="departments">科室</string>
+    <string name="professional_title">职称</string>
+    <string name="school">就读院校</string>
+    <string name="education">学历</string>
+    <string name="professional">专业</string>
+    <string name="admission_date">入学时间</string>
+    <string name="company">公司</string>
+    <string name="job_title">职位</string>
+    <string name="my_circle">我的圈子</string>
+    <string name="circle_request">圈子请求</string>
+    <string name="circle_create">创建圈子</string>
+    <string name="circle_hot">热门圈</string>
+    <string name="competition">完成</string>
+    <string name="change_image">更改头像</string>
+    <string name="circle_names">圈子名称</string>
+    <string name="circle_desc">圈子说明</string>
+    <string name="jurisdiction">权限设置</string>
+    <string name="pub">公开</string>
+    <string name="pri">私密</string>
+    <string name="pub_desc">任何用户都能搜索到圈子并查看圈内内容。</string>
+    <string name="pri_desc">只有圈内成员能查看并发布内容。</string>
+    <string name="feedback_hint_content">请简要描述你的问题和意见</string>
+    <string name="Leave_a_message">留言</string>
+    <string name="about">关于我们</string>
+    
+    
+</resources>

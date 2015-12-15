@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="message_item_height">60dp</dimen>
+    <dimen name="message_item_margin">10dp</dimen>
+    <dimen name="button_height">48dp</dimen>
+    <dimen name="circle_margin10">10dp</dimen>
+    <dimen name="circle_margin8">8dp</dimen>
+    <dimen name="circle_height">68dp</dimen>
+    <dimen name="circle_item_height">50dp</dimen>
+    <dimen name="circle_item_margin_top">5dp</dimen>
+    <dimen name="line_height_0.5">0.5dp</dimen>
+    <dimen name="line_height_1">1dp</dimen>
+    <dimen name="line_height_2">2dp</dimen>
+    <dimen name="send_header_margin">12dp</dimen>
+    <dimen name="send_edittext_paddingtop">15dp</dimen>
+    <dimen name="send_edittext_padding_left">12dp</dimen>
+    <dimen name="send_edittext_padding_right">12dp</dimen>
+    <dimen name="send_tools_margin_left">17dp</dimen>
+    <dimen name="send_grid_height">400dp</dimen>
+    <dimen name="send_edit_height">185dp</dimen>
+    <dimen name="send_edit_title_height">80dp</dimen>
+    
+    
+</resources>

@@ -1,0 +1,27 @@
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:headerattr="http://schemas.android.com/apk/res/com.szrjk.dhome"
+    xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    >
+	<com.szrjk.widget.HeaderView
+        android:id="@+id/hv_user_bg_select"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        headerattr:htextstr="@string/background_activity" 
+        android:layout_alignParentTop="true">
+    </com.szrjk.widget.HeaderView>
+    <GridView 
+        android:id="@+id/gv_user_bg_select"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/hv_user_bg_select"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentBottom="true"
+        android:numColumns="3"
+        >
+        
+    </GridView>
+</RelativeLayout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         android:background="@drawable/button_pop_selector">
+
+        <ImageView
+            android:id="@+id/iv_search"
+            android:layout_width="@dimen/avatar_size_small"
+            android:layout_height="@dimen/avatar_size_small"
+            android:layout_margin="@dimen/margin_10dp"
+            android:src="@drawable/icon_book_80" />
+
+        <TextView
+            android:id="@+id/tv_search_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:layout_toRightOf="@id/iv_search"
+            android:text="强迫障碍药物循证治疗进展"
+            android:textColor="@color/font_titleanduname"
+            android:textSize="@dimen/font_size_middle" />
+
+        <TextView
+            android:id="@+id/tv_search_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tv_search_title"
+            android:layout_below="@id/tv_search_title"
+            android:layout_marginTop="@dimen/margin_15dp"
+            android:text="曹敬毅,王乾"
+            android:textColor="@color/font_titleanduname"
+            android:textSize="@dimen/font_size_msmall" />
+
+        <TextView
+            android:id="@+id/tv_search_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tv_search_title"
+            android:layout_below="@id/tv_search_author"
+            android:layout_marginTop="@dimen/margin_15dp"
+            android:text="2015-09-10"
+            android:textColor="@color/font_cell"
+            android:textSize="@dimen/font_size_xsmall" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_below="@id/tv_search_date"
+            android:layout_marginTop="@dimen/margin_15dp"
+            android:background="@color/line_scrap" />
+    </RelativeLayout>
+
+</RelativeLayout>

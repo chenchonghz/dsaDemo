@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:headerattr="http://schemas.android.com/apk/res/com.szrjk.dhome"
+    xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.szrjk.widget.HeaderView
+        android:id="@+id/hv_user_avatar_changer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        headerattr:htextstr="@string/space" 
+        android:layout_alignParentTop="true">
+    </com.szrjk.widget.HeaderView>
+<LinearLayout 
+    android:id="@+id/lly_user_avator_changer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical"
+    android:layout_below="@id/hv_user_avatar_changer"
+    android:gravity="center">
+    <ImageView
+        android:id="@+id/iv_avatar_changer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/header"
+        />
+    </LinearLayout>
+    <RelativeLayout 
+        android:id="@+id/rly_user_avatar_changer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        >
+        <Button 
+        	android:id="@+id/btn_user_avatar_change"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:background="@color/global_main"
+        	android:gravity="center"
+        	android:layout_margin="10dp"
+        	android:text="更改头像"
+        	android:textColor="@color/white"
+        	android:onClick="doClick"
+        	android:padding="10dp"
+        	
+        	 />
+    </RelativeLayout>
+
+</RelativeLayout>

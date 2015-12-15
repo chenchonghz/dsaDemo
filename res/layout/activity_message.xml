@@ -1,0 +1,77 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:headerattr="http://schemas.android.com/apk/res/com.szrjk.dhome"
+    android:id="@+id/rly_message"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <com.szrjk.widget.HeaderView
+        android:id="@+id/hv_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        headerattr:htextstr="@string/space" >
+    </com.szrjk.widget.HeaderView>
+
+    <RelativeLayout
+        android:id="@+id/rly_sendMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white" >
+
+        <ImageView
+            android:id="@+id/iv_sendImage"
+            android:layout_width="wrap_content"
+            android:layout_height="49dp"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:src="@drawable/icon_images" />
+
+        <ImageView
+            android:id="@+id/iv_send"
+            android:layout_width="wrap_content"
+            android:layout_height="49dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:src="@drawable/icon_send" />
+
+        <EditText
+            android:id="@+id/et_talk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_marginTop="@dimen/margin_15dp"
+            android:layout_toLeftOf="@id/iv_send"
+            android:layout_toRightOf="@id/iv_sendImage"
+            android:background="@null" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_alignLeft="@id/et_talk"
+            android:layout_alignRight="@id/et_talk"
+            android:layout_below="@id/et_talk"
+            android:background="@color/global_main" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_above="@id/rly_sendMessage"
+        android:background="@color/line_scrap" />
+
+    <com.szrjk.pull.PullToRefreshListView
+        android:id="@+id/lv_message"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/rly_sendMessage"
+        android:layout_below="@id/hv_message"
+        android:background="@color/base_bg"
+        android:divider="@null"
+        android:fastScrollEnabled="true"
+        android:scrollbarStyle="insideInset"
+        android:transcriptMode="alwaysScroll" >
+    </com.szrjk.pull.PullToRefreshListView>
+
+</RelativeLayout>

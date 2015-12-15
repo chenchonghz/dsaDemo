@@ -1,0 +1,229 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                 xmlns:flowlayout="http://schemas.android.com/apk/res-auto"
+                 xmlns:headerattr="http://schemas.android.com/apk/res/com.szrjk.dhome"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/rl_case_detail_base"
+                android:background="@color/base_bg">
+
+
+    <com.szrjk.widget.PostDetailHeaderView 
+        android:id="@+id/pdhv_headerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        headerattr:text="@string/post_detailed_header"
+        ></com.szrjk.widget.PostDetailHeaderView>
+
+    <ScrollView
+            android:id="@+id/sv_case_detail_casecontent"
+            android:layout_below="@id/pdhv_headerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="45dp"
+            android:background="@color/base_bg2"
+            android:scrollbars="none"
+            >
+
+        <RelativeLayout
+                android:id="@+id/rl_post_detailed_ordinary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+            <TextView
+                    android:id="@+id/tv_post_detailed_interval1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding"
+                    android:background="@color/base_bg" />
+
+            <RelativeLayout
+                    android:id="@+id/rl_post_detailed_doctorinfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_post_detailed_interval1"
+                    android:paddingLeft="@dimen/padding"
+                    android:paddingRight="@dimen/padding" >
+
+                <com.szrjk.widget.UserCardLayout
+                        android:id="@+id/ucl_post"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        />
+
+
+                <TextView
+                        android:id="@+id/tv_post_detailed_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="@dimen/margin_top_small"
+                        android:textColor="@color/font_cell"
+                        android:textSize="@dimen/font_size_msmall" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                    android:id="@+id/rl_post_detailed_case"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rl_post_detailed_doctorinfo" >
+
+                <!--病历分享和疑难杂症-->
+                <LinearLayout
+                        android:id="@+id/ll_case_detail_caseshare"
+                        android:layout_width="fill_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="@dimen/padding"
+                        android:layout_marginBottom="@dimen/view_post_marginBottom"
+                        android:layout_marginLeft="@dimen/padding"
+                        android:layout_marginRight="@dimen/padding"
+                        android:orientation="horizontal" >
+
+                    <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent"
+                            android:layout_marginLeft="@dimen/padding"
+                            android:layout_weight="4"
+                            android:background="@color/bg_global"
+                            android:gravity="center"
+                            android:orientation="vertical" >
+
+                        <TextView
+                                android:id="@+id/tv_case_detail_casetitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical|left"
+                                android:background="@color/bg_global"
+                                android:ellipsize="end"
+                                android:lineSpacingExtra="@dimen/textview_linespace"
+                                android:maxLines="3"
+                                android:padding="@dimen/view_post_title_padding"
+                                android:textColor="@color/font_titleanduname"
+                                android:textSize="@dimen/font_size_middle" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:id="@+id/ll_post_type_content"
+                            android:layout_width="80dp"
+                            android:layout_height="fill_parent"
+                            android:layout_marginRight="@dimen/padding"
+                            android:background="@color/post_type_caseshare"
+                            android:gravity="center"
+                            android:orientation="vertical" >
+
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:paddingRight="@dimen/view_post_type_paddingRight"
+                                android:paddingTop="@dimen/view_doctorInfo_paddingTop"
+                                android:src="@drawable/icon_purple_pin" />
+
+                        <TextView
+                                android:id="@+id/tv_case_detail_share"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:textColor="@color/font_btnc"
+                                android:textSize="@dimen/font_size_middle" />
+
+                        <TextView
+                                android:id="@+id/tv_case_detail_completerate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="@dimen/view_post_type_maginBottom"
+                                android:textColor="@color/font_btnc"
+                                android:textSize="@dimen/font_size_msmall" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <com.szrjk.widget.FlowDeptLayout
+                        android:id="@+id/fl_post_detailed_section"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/ll_case_detail_caseshare"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="@dimen/base_padding_left_small"
+                        flowlayout:horizontal_spacing="20dip"
+                    flowlayout:vertical_spacing="20dip"
+                        >
+
+                </com.szrjk.widget.FlowDeptLayout>
+
+
+                <LinearLayout
+                        android:id="@+id/ll_case_detail_list"
+                        android:layout_below="@id/fl_post_detailed_section"
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/padding"
+                        android:paddingRight="@dimen/padding"
+                        android:paddingBottom="@dimen/margin_top"
+                        >
+                </LinearLayout>
+            </RelativeLayout>
+            
+            <View 
+                 android:id="@+id/v_shadow"
+                 android:layout_below="@id/rl_post_detailed_case"
+                 android:layout_width="match_parent"
+                 android:layout_height="@dimen/line_height_2"
+                 android:background="@drawable/shadow_color"/>
+
+            <TextView
+                    android:id="@+id/tv_post_detailed_interval2"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding"
+                    android:layout_below="@id/v_shadow"
+                    android:background="@color/base_bg" />
+
+			<View 
+			    android:id="@+id/line"
+                 android:layout_width="match_parent"
+                 android:layout_height="1px"
+                 android:layout_below="@id/tv_post_detailed_interval2"
+                 android:background="@color/line_scrap"/>
+            <com.szrjk.widget.PostDetailViewCommentListLayout
+                    android:layout_below="@id/line"
+                    android:id="@+id/layout_pdvcl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+            </com.szrjk.widget.PostDetailViewCommentListLayout>
+            
+             <View 
+                 android:id="@+id/shadow"
+                 android:layout_width="match_parent"
+                 android:layout_below="@id/layout_pdvcl"
+                  android:layout_height="@dimen/line_height_2"
+                 android:background="@drawable/shadow_color"/>
+            
+             <TextView
+                    android:id="@+id/tv_post_detailed_interval3"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/shadow"
+                    android:background="@color/base_bg" />
+             
+             
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+    <com.szrjk.widget.PostDetailBottomOperLayout
+            android:id="@+id/layout_pdbottom"
+            android:layout_width="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content">
+
+    </com.szrjk.widget.PostDetailBottomOperLayout>
+
+
+    <View 
+                 android:layout_width="match_parent"
+                 android:layout_height="1px"
+                 android:layout_above="@id/layout_pdbottom"
+                 android:background="@color/line_scrap"/>
+</RelativeLayout>

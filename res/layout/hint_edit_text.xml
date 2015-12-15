@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/et_title"
+        android:layout_width="fill_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:gravity="top|left"
+        android:hint="标题"
+        android:inputType="textMultiLine"
+        android:minLines="4"
+        android:padding="4dip"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dip"
+        android:layout_marginRight="4dip"
+        android:gravity="right"
+        android:text="还可以输入30字"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/font_size_xsmall" />
+
+</LinearLayout>

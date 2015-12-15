@@ -1,0 +1,174 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_bg"
+    tools:context=".MyCircleFragment" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:id="@+id/rl_create"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="#F0F1F5" >
+
+                <RelativeLayout
+                    android:id="@+id/rl_create_circle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/button" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:orientation="horizontal" >
+
+                        <RelativeLayout
+                            android:id="@+id/rly_myfriend"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" >
+
+                            <ImageView
+                                android:id="@+id/iv_myfriend"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/icon_create" />
+
+                            <TextView
+                                android:id="@+id/tv_myfriend"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@+id/iv_myfriend"
+                                android:paddingLeft="@dimen/margin_10dp"
+                                android:text="@string/circle_create"
+                                android:textColor="@color/font_titleanduname"
+                                android:textSize="@dimen/font_size_middle" />
+                        </RelativeLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_hot"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@color/white" >
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_alignParentTop="true"
+                    android:background="@color/line_list" />
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/circle_margin10"
+                    android:src="@drawable/icon_hot" />
+
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/line_list" />
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/circle_margin8"
+                    android:layout_toRightOf="@+id/imageView1"
+                    android:text="@string/circle_hot"
+                    android:textColor="@color/font_titleanduname"
+                    android:textSize="@dimen/font_size_middle" />
+
+                <ImageView
+                    android:id="@+id/ib_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/circle_margin8"
+                    android:background="@null"
+                    android:src="@drawable/icon_more_circle" />
+            </RelativeLayout>
+
+            <ListView
+                android:id="@+id/lv_hot_circle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="#c2cacc"
+                android:dividerHeight="0.1dp" >
+            </ListView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/line_scrap" />
+			
+            <View 
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_10dp"
+                android:background="@color/base_bg"/>
+            <RelativeLayout
+                android:id="@+id/rl_hot"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@color/white" >
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_alignParentTop="true"
+                    android:background="@color/line_list" />
+
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/line_list" />
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/circle_margin8"
+                    android:text="@string/my_circle"
+                    android:textColor="@color/font_titleanduname"
+                    android:textSize="@dimen/font_size_middle" />
+            </RelativeLayout>
+
+            <ListView
+                android:id="@+id/lv_my_circle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="#c2cacc"
+                android:dividerHeight="0.1dp" >
+            </ListView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/line_scrap" />
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

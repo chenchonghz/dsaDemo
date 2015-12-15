@@ -1,0 +1,25 @@
+<resources>
+
+    <string name="title_reg_privacy">条款和隐私</string>
+    <string name="title_reg_phone">手机号码</string>
+    <string name="title_reg_aboutyou">关于你</string>
+    <string name="title_reg_pwd">保护账户</string>
+
+    <string name="reg1title">加入 数字医生</string>
+    <string name="reg1subtitle">只需简单几步即可创建用户</string>
+
+    <string name="reg2title">加入 数字医生</string>
+    <string name="reg2subtitle">登陆和需要重设密码时，你将使用此号码。</string>
+
+    <string name="reg_abouttitle">个性头像</string>
+    <string name="reg_aboutsubtitle">添加一张个人照片以便朋友能够找到你</string>
+
+
+    <string name="reg_about2title">完善资料</string>
+    <string name="reg_about2subtitle">填写完整的资料以便他人更好地了解你</string>
+
+    <string name="reg_paccounttitle">设置密码</string>
+    <string name="reg_paccountsubtitle">请输入至少由6-20位数字加字母组合的密码</string>
+
+
+</resources>

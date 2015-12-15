@@ -1,0 +1,80 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000" >
+
+    <RelativeLayout
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ff05c1f1" >
+
+        <TextView
+            android:id="@+id/tv_back"
+            style="@style/SendButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:paddingLeft="@dimen/send_header_margin"
+            android:paddingRight="@dimen/send_header_margin"
+            android:text="@string/post_cancel"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_middle" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="20dp"
+            android:singleLine="true"
+            android:text="移动和缩放"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_large" />
+    </RelativeLayout>
+
+    <com.szrjk.util.clip.ClipImageLayout
+        android:id="@+id/id_clipImageLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/rl_botom"
+        android:layout_below="@+id/title_bar" />
+
+    <RelativeLayout
+        android:id="@+id/rl_botom"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="#FFFFFF" >
+
+        <!--
+             <Button
+            android:id="@+id/id_action_clip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_centerInParent="true"
+            android:background="@null"
+            android:padding="5dp"
+            android:text="确 定"
+            android:textColor="#18B4ED"
+            android:textSize="16sp" />
+        -->
+
+        <Button
+            android:id="@+id/id_action_clip"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/button_submit_selector"
+            android:text="确定"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_middle" />
+    </RelativeLayout>
+
+</RelativeLayout>

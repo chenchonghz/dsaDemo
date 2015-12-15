@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.szrjk.dhome"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_bg"
+    android:orientation="vertical" >
+
+    <com.szrjk.widget.HeaderView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:htextstr="身份验证" >
+    </com.szrjk.widget.HeaderView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:text="@string/authentication_text_string"
+        android:textColor="@color/font_cell"
+        android:textSize="@dimen/font_size_small" />
+
+    <FrameLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        >
+    <EditText
+        android:id="@+id/et_old_password"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:hint="请输入旧密码"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:textColor="@color/font_disable"
+        android:textSize="@dimen/font_size_middle" />
+		
+    	<ImageView 
+    	    android:id="@+id/iv_oldpassword_hiddenorshow"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:layout_gravity="right|center_vertical"
+    	    android:layout_marginRight="10dp"
+    	    android:src="@drawable/icon_hidden"
+    	    />
+    </FrameLayout>
+    <Button
+        android:id="@+id/btn_continue"
+        style="@style/FromButton"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/edit_input_height"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/base_padding_left"
+        android:layout_marginRight="@dimen/base_padding_right"
+        android:layout_marginTop="30dp"
+        android:enabled="false"
+        android:text="下一步" />
+
+</LinearLayout>

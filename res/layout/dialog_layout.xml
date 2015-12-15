@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:background="@color/white">
+    <RelativeLayout 
+        android:id="@+id/rly_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/white"
+        android:gravity="center">
+        <TextView 
+            android:id="@+id/tv_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingMultiplier="1.8"
+            android:textSize="@dimen/font_size_msmall"
+            android:textColor="@color/font_tabletitle"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/lly_dialogbtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rly_dialog"
+        android:orientation="horizontal"
+        android:layout_marginTop="40dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="20dp"
+        android:background="@color/white"
+         >
+
+        <Button
+            android:id="@+id/btn_enter"
+            android:layout_width="75dp"
+            android:layout_height="36dp"
+            android:linksClickable="true"
+            android:background="@color/global_main"
+            android:text="立即注册" 
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_msmall"
+            android:layout_marginRight="25dp"
+            android:layout_weight="1"
+            />
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="75dp"
+            android:layout_height="32dp"
+            android:background="@color/base_bg"
+            android:linksClickable="true"
+            android:layout_weight="1"
+            android:layout_marginLeft="25dp"
+            android:text="取消"
+            android:textColor="@color/font_disable"
+            android:textSize="@dimen/font_size_msmall" />
+    </LinearLayout>
+    
+
+</RelativeLayout>

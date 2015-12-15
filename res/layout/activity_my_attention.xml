@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@color/base_bg"
+    xmlns:app="http://schemas.android.com/apk/res/com.szrjk.dhome">
+    
+    <com.szrjk.widget.HeaderView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:htextstr="我的关注">
+    </com.szrjk.widget.HeaderView>
+
+    <ListView 
+        android:id="@+id/lv_my_attention"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/line_list"
+        android:dividerHeight="1px"
+        android:background="@color/white"
+        android:scrollbars="none"
+        ></ListView>
+</LinearLayout>

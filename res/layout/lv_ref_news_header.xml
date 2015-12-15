@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/view_post_padding_11"
+    android:paddingRight="@dimen/view_post_padding_11"
+    android:paddingTop="@dimen/view_post_padding_11"
+    android:paddingBottom="@dimen/view_post_padding_11"
+    android:background="@color/white"
+    android:orientation="vertical" >
+    
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ref_news_text"
+        android:textColor="@color/link_text_color"
+        android:textSize="@dimen/font_size_middle"/>
+
+</LinearLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="post_title_background">#E5FFFFFF</color>
+    <color name="post_type_caseshare">#8f82bc</color>
+    <color name="post_type_problemhelp">#f19149</color>
+    <color name="link_text_color">#05c1f1</color>
+    <color name="btn_text_red">#f47263</color>
+    <color name="line_shadow">#D8DCDF</color>
+    <color name="dot_focus">#08c2f2</color>
+    <color name="textview_color">#84cbc4</color>
+    <color name="job_title_red">#f47667</color>
+    <color name="time_color">#b5bcbe</color>
+</resources>

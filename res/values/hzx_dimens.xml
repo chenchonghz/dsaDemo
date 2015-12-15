@@ -1,0 +1,34 @@
+<resources>
+
+    <dimen name="login_left">10.0dip</dimen>
+    <dimen name="tab_size">10.0sp</dimen>
+    <dimen name="tab_iv_size">20dip</dimen>
+    <dimen name="tab_padding_top">6dip</dimen>
+    <dimen name="tab_padding_bottom">6dip</dimen>
+    <dimen name="tab_height">50dip</dimen>
+    <dimen name="tab_txt_margin_top">6dip</dimen>
+    <dimen name="more_padding">10dip</dimen>
+    <dimen name="more_margin_left">15dip</dimen>
+    <dimen name="more_margin_top">10dip</dimen>
+    <dimen name="more_margin_bottom">15dip</dimen>
+    <dimen name="more_line_top">15dip</dimen>
+    <dimen name="library_padding">10dip</dimen>
+    <dimen name="library_margin_left">6dip</dimen>
+    <dimen name="library_mark_top">6dip</dimen>
+    <dimen name="library_margin_top">10dip</dimen>
+    <dimen name="library_margin_bottom">15dip</dimen>
+    <dimen name="library_padding_bottom">30dip</dimen>
+    <dimen name="library_line_top">10dip</dimen>
+    <dimen name="loading_padding">16dip</dimen>
+    <dimen name="loading_img_size">30dip</dimen>
+    <dimen name="loading_margin_left">6dip</dimen>
+    <dimen name="loading_margin_top">6dip</dimen>
+    <dimen name="auth_margin_top">30dip</dimen>
+    <dimen name="auth_margin_left">20dip</dimen>
+    <dimen name="auth_margin_right">20dip</dimen>
+    <dimen name="album_margin">10dip</dimen>
+    <dimen name="tab_post_size">80dip</dimen>
+    <dimen name="photo_size">70dip</dimen>
+    <dimen name="photo_margin">10dip</dimen>
+
+</resources>

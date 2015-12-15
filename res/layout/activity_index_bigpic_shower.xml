@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:headerattr="http://schemas.android.com/apk/res/com.szrjk.dhome"
+    xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+	<com.szrjk.widget.HeaderView
+        android:id="@+id/hv_user_background_changer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        headerattr:htextstr="@string/space" 
+        android:layout_alignParentTop="true">
+    </com.szrjk.widget.HeaderView>
+   
+    
+<android.support.v4.view.ViewPager
+    android:id="@+id/vp_user_background_changer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_below="@id/hv_user_background_changer">
+    </android.support.v4.view.ViewPager>
+
+</RelativeLayout>

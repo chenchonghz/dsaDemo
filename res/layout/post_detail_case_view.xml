@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:orientation="vertical"
+              android:layout_height="wrap_content"
+              >
+
+    <TextView
+            android:id="@+id/tv_post_detailed_case"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top"
+            android:paddingLeft="@dimen/padding"
+            android:paddingRight="@dimen/padding"
+            android:textColor="@color/search_bg"
+            android:textSize="@dimen/font_size_middle"/>
+
+    <TextView
+            android:id="@+id/tv_post_detailed_casecontent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding"
+            android:layout_below="@id/tv_post_detailed_case"
+            android:paddingBottom="@dimen/padding_small"
+            android:lineSpacingExtra="5dp"
+            android:textColor="@color/font_titleanduname"
+            android:textSize="@dimen/font_size_small"/>
+
+
+    <com.szrjk.widget.IndexGridView
+            android:id="@+id/gv_post_detailed_case"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="-5dp"
+            android:layout_marginRight="-5dp"
+            android:layout_below="@id/tv_post_detailed_casecontent"
+            android:gravity="center"
+            android:horizontalSpacing="4dp"
+            android:numColumns="auto_fit"
+            android:scrollbars="none"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="4dp">
+    </com.szrjk.widget.IndexGridView>
+
+</LinearLayout>

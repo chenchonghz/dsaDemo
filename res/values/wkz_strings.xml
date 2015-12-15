@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="post_detailed_header">帖子详情</string>
+    <string name="post_detailed_name"></string>
+    <string name="post_detailed_title"></string>
+    <string name="post_detailed_company"></string>
+    <string name="post_detailed_setion"></string>
+    <string name="post_detailed_time">刚刚11</string>
+    <string name="post_detailed_postcircle">来自圈子</string>
+    <string name="post_detailed_circle">中华医学会心脑血管疾病圈</string>
+    <string name="post_detailed_transmit">转发</string>
+    <string name="post_detailed_comment">评论</string>
+    <string name="post_detailed_laud">赞</string>
+    <string name="post_detailed_share">病例分享</string>
+    <string name="post_detailed_problem">疑难求助</string>
+    <string name="post_detailed_completed">完成度</string>
+    <string name="post_detailed_case">主诉、病史</string>
+    <string name="post_detailed_check">查体、辅查</string>
+    <string name="post_detailed_treat">诊断、治疗</string>
+    <string name="post_detailed_visit">随访、讨论</string>
+    <string name="post_detailed_tv_likenone">还没有人赞过</string>
+    <string name="post_detailed_tv_commentnone">还没有人评论过</string>
+    <string name="post_detailed_tv_forwardnone">还没有人转发过</string>
+    <string name="post_detailed_percent">100%</string>
+    <string name="post_detailed_tv_count">0</string>
+    <string name="post_detailed_gv_columnWidth">3</string>
+    <string name="seting_change_hportrait">更改头像</string>
+    <string name="seting_change_background">更改背景</string>
+    <string name="seting_change_password">修改密码</string>
+    <string name="seting_change_phonenumber">更换手机号码</string>
+    <string name="seting_clear_cache">清理缓存</string>
+    <string name="seting_text_size">字体大小</string>
+    <string name="seting_log_out">退出登录</string>
+    <string name="authentication_text_string">更换手机号码需要通过旧密码验证。</string>
+    <string name="legal_notice">法律声明</string>
+    <string name="digital_doctor_terms_main1">数字人提醒您：在使用数字医生平台各项服务前，请您务必仔细阅读并透彻理解本声明。如对本声明内容有任何疑问，您可向数字医生平台客服咨询。阅读本声明的过程中，如果您不同意本声明或其中任何内容，您应立即停止使用数字医生平台服务。如果您使用数字医生平台服务的，您的使用行为将被视为对本声明全部内容的认可。</string>
+    <string name="digital_doctor_terms_main2">数字医生平台是指广州数字人健康科技有限公司自主研制开发的网络服务平台（域名为www.digi123.cn）的网站及客户端。</string>
+    <string name="digital_doctor_terms_main3">除非数字人另行声明，数字医生平台内的所有产品、技术、软件、程序、数据、音频、视频、图表、色彩、版面设计、电子文档及其他信息的所有知识产权（包括但不限于版权、商标权、专利权、商业秘密等）及相关权利，均归广州数字人健康科技有限公司所有。未经数字人许可，任何人不得擅自使用（包括但不限于复制、传播、展示、镜像、上载、下载）。</string>
+    <string name="digital_doctor_terms_main4">数字医生平台的Logo、“数字人”、“shuziren”等文字、图形及其组合，以及数字医生平台的其他标识、徵记、产品和服务名称均为数字人公司在中国的商标，未经数字人书面授权，任何人不得以任何方式展示、使用或作其他处理，也不得向他人表明您有权展示、使用或作其他处理。</string>
+    <string name="digital_doctor_terms_main5">鉴于数字医生平台提供的免费服务均由会员自行提供并上传，由会员对其提供并上传的所有信息承担相应法律责任。</string>
+    <string name="digital_doctor_terms_main6">数字医生平台转载作品（包括论坛内容）出于传递更多信息之目的，并不意味数字人赞同其观点或已经证实其内容的真实性。</string>
+    <string name="platform_service_contract">数字医生平台服务协议</string>
+    <string name="platform_service_contract_main1">【提示与说明】欢迎您与数字医生平台经营者共同签署本《数字医生平台服务协议》（下称“本协议”）并使用数字医生平台服务！
+        各服务条款前所列索引关键词仅为帮助您理解该条款表达的主旨之用，不影响或限制本协议条款的含义或解释。为维护您自身权益，建议您仔细阅读各条款具体表述。</string>
+    <string name="platform_service_contract_main2">【服务宗旨】数字医生平台旨在提供一个供广大医务工作者查阅，学习、研究、讨论的一个免费公共平台，学习医药知识，了解卫生资讯，帮助会员熟悉普通病例，解决疑难杂症，更好地服务大众，治病救人。</string>
+    <string name="platform_service_contract_main3">【审慎阅读】您在申请注册流程中点击同意本协议之前，应当认真阅读本协议。请您务必审慎阅读、充分理解各条款内容，特别是免除或者限制责任的条款、法律适用和争议解决条款。免除或者限制责任的条款将以粗体下划线标识，您应重点阅读。如您对协议有任何疑问，可向数字医生平台客服咨询。</string>
+    <string name="platform_service_contract_main4">【签约动作】当您按照注册页面提示填写信息、阅读并同意本协议且完成全部注册程序后，即表示您已充分阅读、理解并接受本协议的全部内容，并与数字人达成一致，成为数字医生平台“用户”。阅读本协议的过程中，如果您不同意本协议或其中任何条款约定，您应立即停止注册程序。</string>
+    <string name="platform_service_contract_main5">【签约主体】本协议由您与数字医生平台经营者共同缔结，本协议对您与数字医生平台经营者均具有合同效力。</string>
+    <string name="platform_service_contract_main6">【主体信息】数字医生平台经营者是指经营数字医生平台的法律主体，即广州数字人健康科技有限公司。本公司自主研发的网络服务平台，以下一律简称数字医生平台，公司名称一律简称为数字人。</string>
+    <string name="platform_service_contract_main7">【补充协议】由于互联网高速发展，您与数字人签署的本协议列明的条款并不能完整罗列并覆盖您与数字人所有权利与义务，现有的约定也不能保证完全符合未来发展的需求。因此，数字医生平台法律声明及其他平台规则均为本协议的补充协议，与本协议不可分割且具有同等法律效力。如您使用数字医生平台服务，视为您同意上述补充协议。</string>
+    <string name="platform_service_contract_main8">【用户资格】您确认，在您开始注册程序使用数字医生平台服务前，您应当是符合中华人民共和国国务院教育和卫生行政部门规定的医务工作者（包括经县级以上人民政府卫生行政部门确定的传统医学专业组织或者医疗、预防、保健机构的工作人员）、高等院校医学专业的在校师生或者毕业生。医务工作者应当具有相应的医师执业资格证书、助理医师执业资格证书、护士执业资格证书、药师执业资格证书等。</string>
+    <string name="platform_service_contract_main9">【账户获得】当您按照注册页面提示填写信息、阅读并同意本协议且完成全部注册程序后，您可获得数字医生平台账户并成为数字医生平台用户。</string>
+    <string name="platform_service_contract_main10">【账户使用】您有权使用您设置或确认的数字医生平台会员名、邮箱、手机号码（以下简称“账户名称”）及您设置的密码（账户名称及密码合称“账户”）登录数字医生平台。</string>
+    <string name="platform_service_contract_main11">【账户转让】由于用户账户关联用户信用信息，仅当有法律明文规定、司法裁定或经数字人同意，并符合数字医生平台规则规定的用户账户转让流程的情况下，您可进行账户的转让。您的账户一经转让，该账户项下权利义务一并转移。除此外，您的账户不得以任何方式转让，否则由此产生的一切责任均由您承担。</string>
+    <string name="platform_service_contract_main12">【信息真实】在使用数字医生平台服务时，您应当按数字医生平台页面的提示准确完整地提供您的信息（包括您的姓名及电子邮件地址、联系电话、联系地址等），以便数字人或其他用户与您联系。您了解并同意，您有义务保持您提供信息的真实性及有效性。</string>
+    <string name="platform_service_contract_main13">【会员名的合法性】您设置的数字医生会员名不得违反国家法律法规关于会员名的管理规定，否则数字人可回收您的数字医生平台会员名。数字医生平台会员名的回收不影响您以邮箱、手机号码登录数字医生平台并使用数字医生平台服务。</string>
+    <string name="platform_service_contract_main14">【会员权限】您设置的数字医生平台会员名（昵称）可以是实名，也可以是其他名称，但只有向数字医生平台提交“实名认证资料”并审核通过的会员，才拥有“VIP”标志。只有VIP用户具备发布帖子、参与讨论的权利。</string>
+    <string name="platform_service_contract_main15">【更新维护】您应当及时更新您提供的信息，在法律有明确规定要求数字人作为平台服务提供者必须对部分用户的信息进行核实的情况下，数字人将依法不时地对您的信息进行检查核实，您应当配合提供最新、真实、完整的信息。
+如数字人按您最后一次提供的信息与您联系未果、您未按数字人的要求及时提供信息、您提供的信息存在明显不实的，您将承担因此对您自身、他人及数字人造成的全部损失与不利后果。</string>
+    <string name="platform_service_contract_main16">数字人为数字医生平台向您提供的服务付出了大量的成本，向您提供的服务目前是免费的。如未来数字人向您收取合理费用，数字人会采取合理途径并以足够合理的期限提前通过法定程序并以本协议第八条约定的方式通知您，确保您有充分选择的权利。</string>
+    <string name="platform_service_contract_main17">【不可抗力】数字人负责"按现状"和"可得到"的状态向您提供数字医生平台服务。数字人依法律规定承担基础保障义务，但无法对由于信息网络设备维护、连接故障，电脑、通讯或其他系统的故障，电力故障，罢工，暴乱，火灾，洪水，风暴，爆炸，战争，政府行为，司法行政机关的命令或因第三方原因而给您造成的损害结果承担责任。</string>
+    <string name="platform_service_contract_main18">【信息与言论】数字人仅向会员免费提供查阅、参考、讨论的平台服务，不具其他任何营利性目的，鉴于数字医生平台的内容全都系由网友提供或整理，难免会存在风险和瑕疵，平台上的文字和图片仅供合理使用，禁止作商业用途，否则视为违约。若您恶意复制、下载数字医生平台的文字和图片造成数字人及他人的合法权益遭受损失的，应承担赔偿责任。</string>
+    <string name="platform_service_contract_main19">【美文推荐】欢迎会员推荐好的文章与观点，提供疑难杂症供会员研究探讨，数字人将及时予以刊登。文章最好是原创，若是摘录，请标明作者及出处。如果您有充分证据认为数字医生平台侵犯您的合法权益的，请及时向数字人说明并举证，数字人将及时作出删除、屏蔽等处理。</string>
+    <string name="platform_service_contract_main20">【信息的发布】您声明并保证，您对您所发布的信息拥有相应、合法的权利。否则，数字人可对您发布的信息依法或依本协议进行删除或屏蔽。</string>
+    <string name="platform_service_contract_main21">【禁止性信息】您应当确保您所发布的信息和言论不包含以下内容：
+（一）违反国家法律法规禁止性规定的；
+（二）政治宣传、封建迷信、淫秽、色情、赌博、暴力、恐怖或者教唆犯罪的；
+（三）欺诈、虚假、不准确或存在误导性的；
+（四）侵犯他人知识产权或涉及第三方商业秘密及其他专有权利的；
+（五）侮辱、诽谤、恐吓、涉及他人隐私等侵害他人合法权益的；
+（六）存在可能破坏、篡改、删除、影响数字医生平台任何系统正常运行或未经授权秘密获取数字医生平台及其他用户的数据、个人资料的病毒、木马、爬虫等恶意软件、程序代码的；
+（七）内容是垃圾信息，广告宣传的；
+（八）其他违背社会公共利益或公共道德或依据相关数字人平台协议、规则的规定不适合在数字医生平台上发布的。</string>
+    <string name="platform_service_contract_main22">【个人信息的保护】数字人非常重视用户个人信息（即能够独立或与其他信息结合后识别用户身份的信息）的保护，在您使用数字人提供的服务时，您同意数字人收集、存储、使用、披露和保护您的个人信息。</string>
+    <string name="platform_service_contract_main23">【授权使用】对于您提供及发布除个人信息外的文字、图片、视频、音频等非个人信息，将视为在版权保护期内您免费授予数字人使用，数字人有权进行存储、使用、复制、修订、编辑、发布、展示、翻译、分发您的非个人信息或制作其派生作品，并以已知或日后开发的形式、媒体或技术将上述信息纳入其它作品内。</string>
+    <string name="platform_service_contract_main24">【违约认定】发生如下情形之一的，视为您违约：
+（一）使用数字医生平台服务时违反有关法律法规规定的；
+（二）违反本协议或本协议补充协议约定的。</string>
+    <string name="platform_service_contract_main25">【违约处理措施】您在数字医生平台上发布的信息或言论构成违约的，数字人可根据相应规则立即对相应信息进行删除、屏蔽处理甚至中止对您的服务。造成数字人损失的（包括自身的直接经济损失、商誉损失及对外支付的赔偿金、和解款、律师费、诉讼费等间接经济损失），应赔偿数字人全部损失，数字人保留对您提起诉讼的权利。</string>
+    <string name="platform_service_contract_main26">【处理结果公示】数字人可将对您上述违约行为处理措施信息以及其他经国家行政或司法机关生效法律文书确认的违法信息在数字医生平台上予以公示。</string>
+    <string name="platform_service_contract_main27">【商业贿赂】如您向数字人的雇员或顾问等提供实物、现金、现金等价物、劳务、旅游等价值明显超出正常商务洽谈范畴的利益，则可视为您存在商业贿赂行为。发生上述情形的，数字人可立即终止与您的所有合作并向您收取违约金及/或赔偿金，该等金额以数字人因您的贿赂行为而遭受的经济损失和商誉损失作为计算依据。</string>
+    <string name="platform_service_contract_main28">数字人可根据国家法律法规变化及维护平台秩序、保护本平台会员的需要，不时修改本协议、补充协议，变更后的协议、补充协议（下称“变更事项”）将通过法定程序并以本协议第八条约定的方式通知您。
+如您不同意变更事项，您有权于变更事项确定的生效日前联系数字人反馈意见。如反馈意见得以采纳，数字人将酌情调整变更事项。
+如您对已生效的变更事项仍不同意的，您应当于变更事项确定的生效之日起停止使用数字医生平台服务，变更事项对您不产生效力；如您在变更事项生效后仍继续使用数字医生平台服务，则视为您同意已生效的变更事项。</string>
+    <string name="platform_service_contract_main29">您同意数字人以以下合理的方式向您送达各类通知：
+（一）公示的文案；
+（二）站内信、客户端推送的消息；
+（三）根据您预留于数字医生平台的联系方式发出的电子邮件、短信、函件等。</string>
+    <string name="platform_service_contract_main30">【用户发起的终止】您有权通过以下任一方式终止本协议：
+（一）您明示不愿继续使用数字医生平台服务，且符合数字人网站终止条件的。
+（二）变更事项生效前您停止使用并明示不愿接受变更事项的；</string>
+    <string name="platform_service_contract_main31">【数字人发起的终止】出现以下情况时，数字人可以本协议第八条的所列的方式通知您终止本协议：
+（一）您违反本协议约定，数字人依据违约条款终止本协议的；
+（二）您盗用他人账户、发布违禁信息、骗取他人财物、售假、扰乱市场秩序、采取不正当手段谋利等行为，数字人依据数字医生平台规则对您的账户予以查封的；
+（三）除上述情形外，因您多次违反数字医生平台规则相关规定且情节严重，数字人依据数字医生平台规则对您的账户予以查封的；
+（四）您的账户被数字人依据本协议回收的；
+（五）您在数字医生平台有欺诈、发布或销售假冒伪劣/侵权商品、侵犯他人合法权益或其他严重违法违约行为的；
+（六）其它应当终止服务的情况。</string>
+    <string name="platform_service_contract_main32">【用户信息披露】本协议终止后，除法律有明确规定外，数字人无义务向您或您指定的第三方披露您账户中的任何信息。</string>
+    <string name="platform_service_contract_main33">【数字人权利】本协议终止后，数字人仍享有下列权利：
+（一）继续保存您留存于数字医生平台的各类信息；
+（二）对于您过往的违约行为，数字人仍可依据本协议向您追究违约责任。</string>
+    <string name="platform_service_contract_main34">【法律适用】本协议之订立、生效、解释、修订、补充、终止、执行与争议解决均适用中华人民共和国大陆地区法律；如法律无相关规定的，参照商业惯例及/或行业惯例。</string>
+    <string name="platform_service_contract_main35">【管辖】您因使用数字医生平台服务所产生及与数字人平台服务有关的争议，由数字人与您协商解决。协商不成时，任何一方均应向被告所在地人民法院提起诉讼。</string>
+    <string name="platform_service_contract_main36">【可分性】若本协议任一条款被视为废止、无效或不可执行，则该条应视为可分的且并不影响本协议其余条款的有效性及可执行性。</string>
+    <string name="copyright_notice">版权声明</string>
+    <string name="copyright_notice_main">本平台旨在免费提供查阅、学习、讨论、研究、交流之目的。图文、言论均由会员自行提供并上传，如有侵权由上传者承担，本平台对此不承担法律责任。</string>
+    <string name="about_digitaldoctor">数字医生</string>
+    <string name="about_thank">感谢您使用数字医生</string>
+    <string name="about_main1">数字医生由广州数字人健康科技有限公司顶尖团队倾力打造</string>
+    <string name="about_main2">构建医务工作者学术社交第一平台</string>
+    <string name="about_main3">学术交流、疑难求助、病例分享、咨询推送</string>
+    <string name="about_main4">医药百科、循症文献关联检索与阅读</string>
+    <string name="about_main5">为医务工作者实现学术交流与资源共享提供一站式服务</string>
+    <string name="about_main6">在这里</string>
+    <string name="about_main7">社交圈子与人脉齐升</string>
+    <string name="about_main8">执业形象与品牌同塑</string>
+    <string name="about_service_tel">客服电话 (020-37810388)</string>
+    <string name="about_copyright">Copyright©2015 广州数字人健康科技有限公司</string>
+
+</resources>

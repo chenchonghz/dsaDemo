@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:minHeight="60dp" >
+    
+    <CheckBox  
+        android:id="@+id/item_cb"  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:clickable="false"  
+        android:focusable="false"  
+        android:focusableInTouchMode="false"  
+        android:gravity="center_vertical" 
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/margin_10dp"
+        android:layout_marginTop="@dimen/margin_20dp"
+        android:background="@drawable/circle_invite_selector"
+        android:button="@null"/>
+
+    <com.szrjk.widget.UserCardLayout
+        android:id="@+id/circle_usercard"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_alignParentTop="true" >
+    </com.szrjk.widget.UserCardLayout>
+
+</RelativeLayout>

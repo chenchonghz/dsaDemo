@@ -45,6 +45,10 @@ public class AboutYou2Activity extends BaseActivity implements OnClickListener
 	final static int RESULT_VSEDUCATIONLEVEL = 0;
 	final static int RESULT_DEPARTMENT = 2;
 	public static final int TPROFESSIONALTITLE = 4;
+	
+	
+	
+	
 
 	@ViewInject(R.id.text_parea)
 	private EditText text_parea;

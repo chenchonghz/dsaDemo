@@ -70,7 +70,7 @@
             </LinearLayout>
 
             <RelativeLayout
-                android:layout_width="80dp"
+                android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_alignBottom="@+id/rly_circle_avatar"
                 android:layout_alignLeft="@id/tv_circle_name"
@@ -91,16 +91,26 @@
                     android:layout_height="20dp"
                     android:layout_toRightOf="@id/iv_circle_state"
                     android:gravity="center"
-                    android:text="公开"
+                    android:text="@string/circlepublic"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_size_small" />
+                <TextView
+                    android:id="@+id/tv_point"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_toRightOf="@id/tv_circle_state"
+                    android:gravity="center"
+                    android:text="@string/point"
                     android:textColor="@color/white"
                     android:textSize="@dimen/font_size_small" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
-                    android:layout_toRightOf="@id/tv_circle_state"
+                    android:layout_toRightOf="@id/tv_point"
                     android:gravity="center"
-                    android:text="·圈子"
+                    android:text="@string/circle"
+                    android:singleLine="true"
                     android:textColor="@color/white"
                     android:textSize="@dimen/font_size_small" />
             </RelativeLayout>

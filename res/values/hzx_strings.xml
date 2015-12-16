@@ -7,6 +7,7 @@
     <string name="more_header">更多</string>
     <string name="more_home">查看个人主页</string>
     <string name="more_letter">我的消息</string>
+    <string name="explore_news">新闻频道</string>
     <string name="more_photo">我的相册</string>
     <string name="more_profile">我的简介</string>
     <string name="more_identification">我的认证</string>
@@ -14,6 +15,10 @@
     <string name="more_sick">病例分享</string>
     <string name="more_help">疑难求助</string>
     <string name="more_friend">我的好友</string>
+    <string name="explore_friend_request">好友请求</string>
+    <string name="explore_circle_request">圈子请求</string>
+    <string name="explore_circle">我的圈子</string>
+    <string name="explore_message">消息</string>
     <string name="more_send_like">我送出的赞</string>
     <string name="more_get_like">我获得的赞</string>
     <string name="more_feed_back">意见反馈</string>

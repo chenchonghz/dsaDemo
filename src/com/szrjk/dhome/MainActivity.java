@@ -55,7 +55,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener , 
 	//首页
 	private IndexFragment indexFragment;
 	//发现
-	private ExploreFragment exploreFragment;
+	private ExploreFragment2 exploreFragment;
 	//知识库
 	private LibraryFragment libraryFragment;
 	//我
@@ -316,7 +316,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener , 
 	private void clickExplore()
 	{
 		if (exploreFragment==null) {
-			exploreFragment = new ExploreFragment();
+			exploreFragment = new ExploreFragment2();
 		}
 
 		FragmentTransaction fragmentTransaction = this
@@ -332,7 +332,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener , 
 			//			fristFragment = exploreFragment;
 		}
 		fragmentTransaction.commit();
-		exploreFragment.scrollToTop();
+//		exploreFragment.scrollToTop();
 		indexLayout.setSelected(false);
 		ivIndex.setSelected(false);
 		tv_explore.setTextColor(getResources().getColor(R.color.link_text_color));

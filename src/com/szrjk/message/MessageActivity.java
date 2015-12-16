@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.exception.DbException;
@@ -18,7 +17,6 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.R;
-import com.szrjk.dhome.R.layout;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.TMessage;
 import com.szrjk.entity.UserCard;
@@ -32,30 +30,20 @@ import com.szrjk.pull.PullToRefreshListView;
 import com.szrjk.util.ToastUtils;
 import com.szrjk.widget.HeaderView;
 
-import android.R.string;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Paint.Join;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLayoutChangeListener;
-import android.view.WindowManager;
-import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ScrollView;
-import android.widget.Toast;
 @ContentView(R.layout.activity_message)
 public class MessageActivity extends BaseActivity implements OnClickListener {
 	@ViewInject(R.id.rly_message)
@@ -87,7 +75,8 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		instance =this;
-		time = new TimeCount(25000, 25000);
+//		time = new TimeCount(25000, 25000);
+		time = new TimeCount(10000, 10000);
 		ViewUtils.inject(instance);
 		mPullToRefreshListView.setMode(Mode.PULL_FROM_START);
 		list_message = mPullToRefreshListView.getRefreshableView();
@@ -348,8 +337,8 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 					} catch (DbException e) {
 						e.printStackTrace();
 					}
-					messages.add(TempMe);
-					adapter.notifyDataSetChanged();
+//					messages.add(TempMe);
+//					adapter.notifyDataSetChanged();
 					
 				}
 			}
@@ -376,20 +365,27 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 			ToastUtils.showMessage(instance, "敬请期待");
 			break;
 
+			//发送按钮逻辑
 		case R.id.iv_send:
-			//发消息接口
 			if (TextUtils.isEmpty(et_talk.getText()) ) {
 				et_talk.setError("不能发空消息");
+			}else{
+				chattext = et_talk.getText().toString();
+				MessageEntity TempMe = new MessageEntity();
+				TempMe.setSendUserCard(selfUserCard);
+				TempMe.setReceiveUserCard(objUserCard);
+				TempMe.setContent(chattext);
+				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				String date =df.format(new Date());
+				TempMe.setCreateDate(date);
+				messages.add(TempMe);
+				adapter.notifyDataSetChanged();
+				et_talk.setText("");
+				sendMessage();
+				time.cancel();
+				//			time = new TimeCount(10000, 1000);
+				time.start();
 			}
-			//			BeginNum =0;
-			//			EndNum =19;
-			//			messages = new ArrayList<MessageEntity>();
-			chattext = et_talk.getText().toString();
-			et_talk.setText("");
-			sendMessage();
-			time.cancel();
-			//			time = new TimeCount(10000, 1000);
-			time.start();
 			break;
 		}
 	}

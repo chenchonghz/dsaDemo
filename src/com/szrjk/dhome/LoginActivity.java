@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
@@ -65,7 +66,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener
 	@ViewInject(R.id.tv_url)
 	private TextView tv_url;
 	@ViewInject(R.id.lly_login)
-	private LinearLayout lly_login;
+	private RelativeLayout lly_login;
 	//
 	private String name, pwd;
 	private LoginActivity instance;
@@ -307,6 +308,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener
 		});
 		pilist.add(pi4);
 		window = new ListPopup(this,pilist,v);
+		
 	}
 	public void errormsg(String msg){
 		if(msg==null||msg.equals("")){

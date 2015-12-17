@@ -197,7 +197,7 @@
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:textSize="@dimen/font_size_middle"
-                android:visibility="gone" />
+                android:visibility="visible" />
         </LinearLayout>
     </ScrollView>
 

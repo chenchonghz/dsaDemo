@@ -1,5 +1,6 @@
 package com.szrjk.message;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.exception.DbException;
@@ -18,7 +18,6 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.R;
-import com.szrjk.dhome.R.layout;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.TMessage;
 import com.szrjk.entity.UserCard;
@@ -32,30 +31,20 @@ import com.szrjk.pull.PullToRefreshListView;
 import com.szrjk.util.ToastUtils;
 import com.szrjk.widget.HeaderView;
 
-import android.R.string;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Paint.Join;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLayoutChangeListener;
-import android.view.WindowManager;
-import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ScrollView;
-import android.widget.Toast;
 @ContentView(R.layout.activity_message)
 public class MessageActivity extends BaseActivity implements OnClickListener {
 	@ViewInject(R.id.rly_message)
@@ -83,11 +72,13 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 	private int screenHeight = 0;
 	private int keyHeight = 0;
 	private String chattext;
+	private long lastreflashtime=0;
 	@Override 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		instance =this;
-		time = new TimeCount(25000, 25000);
+		//		time = new TimeCount(25000, 25000);
+		time = new TimeCount(25000, 10000);
 		ViewUtils.inject(instance);
 		mPullToRefreshListView.setMode(Mode.PULL_FROM_START);
 		list_message = mPullToRefreshListView.getRefreshableView();
@@ -107,11 +98,11 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 			System.out.println(e.toString());
 		}
 		//获取消息列表
-//		DisplayMetrics dm = new DisplayMetrics();
-//		getWindowManager().getDefaultDisplay().getMetrics(dm);
-//		screenHeight = dm.heightPixels;
-//		keyHeight = screenHeight/3;
-//		initListener();
+		//		DisplayMetrics dm = new DisplayMetrics();
+		//		getWindowManager().getDefaultDisplay().getMetrics(dm);
+		//		screenHeight = dm.heightPixels;
+		//		keyHeight = screenHeight/3;
+		//		initListener();
 		//发送消息
 		//		sendMessage();
 	}
@@ -125,6 +116,7 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 		busiParam.put("objUserId", Constant.userInfo.getUserSeqId());
 		paramMap.put("BusiParams", busiParam);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj  =JSON.parseObject(
 						jsonObject.getString("ErrorInfo"),ErrorInfo.class);
@@ -155,11 +147,14 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 				}
 
 			}
+			@Override
 			public void start() {
 			}
 
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 			}
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 			}
 		});
@@ -170,6 +165,7 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 	private void initListener() {
 		LinearLayout lly = hv_message.getLLy();
 		lly.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(View arg0) {
 				instance.finish();
 				time.cancel();
@@ -178,11 +174,33 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 		iv_sendImage.setOnClickListener(instance);
 		iv_send.setOnClickListener(instance);
 		mPullToRefreshListView.setOnRefreshListener(new OnRefreshListener<ListView>() {
-
+			@Override
+			//当两次刷新间隔小于5秒时，走一个假刷新界面
 			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
-				time.cancel();
-				getMessage();
-				list_message.setSelectionFromTop(20,0);
+				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Date currentTime = null;
+				try {
+					currentTime = df.parse(df.format(new Date()));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if (lastreflashtime==0||currentTime.getTime()-lastreflashtime>5000) {
+					time.cancel();
+					getMessage();
+					list_message.setSelectionFromTop(20,0);
+					lastreflashtime = currentTime.getTime();
+
+				}else{
+//					ToastUtils.showMessage(instance, "歇一会吧");
+					mPullToRefreshListView.postDelayed(new Runnable() {
+						public void run() {
+							   mPullToRefreshListView.onRefreshComplete();
+						}
+					}, 1000);
+
+				}
+
 			}
 		});
 		messageView.addOnLayoutChangeListener(new OnLayoutChangeListener() {
@@ -209,19 +227,6 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 
 	}
 
-	private void setUsercard() {
-		objUserCard = new UserCard();
-		objUserCard.setUserName("张三");
-		objUserCard.setDeptName("神经内科");
-		objUserCard.setUserSeqId("100590");
-		objUserCard.setUserFaceUrl("http://dd-feed.digi123.cn/201510/857df4c62ddacc71.jpg");
-		objUserCard.setUserLevel("0");
-		objUserCard.setProfessionalTitle("主任医师");
-		objUserCard.setCompanyName("中山三院");
-		objUserCard.setUserType("2");
-
-	}
-
 	private void getMessage() {
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("ServiceName", "queryCmChatHis");
@@ -235,6 +240,7 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 		paramMap.put("BusiParams", busiParams);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
 
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -253,18 +259,20 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 							}else{
 								new TMessage().addmessage(list.get(0).getSendUserCard(),list.get(0).getCreateDate());
 							}
+							for(MessageEntity message : list){
+								messages.add(0, message);
+							}
+							Log.i("TAG",messages.toString());
+							BeginNum+=20;
+							EndNum+=20;
+							setAdapter();
+						}else{
+							ToastUtils.showMessage(instance, "没有更多消息了");
 						}
 					} catch (DbException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					for(MessageEntity message : list){
-						messages.add(0, message);
-					}
-					Log.i("TAG",messages.toString());
-					BeginNum+=20;
-					EndNum+=20;
-					setAdapter();
 					if (mPullToRefreshListView.isRefreshing()) {
 						mPullToRefreshListView.onRefreshComplete();
 					}
@@ -274,16 +282,22 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 				}
 			}
 
+			@Override
 			public void start() {
 
 			}
 
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 
 			}
 
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
-
+				if (mPullToRefreshListView.isRefreshing()) {
+					mPullToRefreshListView.onRefreshComplete();
+				}
+				time.start();
 			}
 		});
 	}
@@ -328,6 +342,7 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 		busiParams.put("chatType", "1");
 		paramMap.put("BusiParams", busiParams);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -348,20 +363,23 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 					} catch (DbException e) {
 						e.printStackTrace();
 					}
-					messages.add(TempMe);
-					adapter.notifyDataSetChanged();
-					
+					//					messages.add(TempMe);
+					//					adapter.notifyDataSetChanged();
+
 				}
 			}
 
+			@Override
 			public void start() {
 
 			}
 
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 
 			}
 
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 
 			}
@@ -376,20 +394,27 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 			ToastUtils.showMessage(instance, "敬请期待");
 			break;
 
+			//发送按钮逻辑
 		case R.id.iv_send:
-			//发消息接口
 			if (TextUtils.isEmpty(et_talk.getText()) ) {
 				et_talk.setError("不能发空消息");
+			}else{
+				chattext = et_talk.getText().toString();
+				MessageEntity TempMe = new MessageEntity();
+				TempMe.setSendUserCard(selfUserCard);
+				TempMe.setReceiveUserCard(objUserCard);
+				TempMe.setContent(chattext);
+				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				String date =df.format(new Date());
+				TempMe.setCreateDate(date);
+				messages.add(TempMe);
+				adapter.notifyDataSetChanged();
+				et_talk.setText("");
+				sendMessage();
+				time.cancel();
+				//			time = new TimeCount(10000, 1000);
+				time.start();
 			}
-			//			BeginNum =0;
-			//			EndNum =19;
-			//			messages = new ArrayList<MessageEntity>();
-			chattext = et_talk.getText().toString();
-			et_talk.setText("");
-			sendMessage();
-			time.cancel();
-			//			time = new TimeCount(10000, 1000);
-			time.start();
 			break;
 		}
 	}
@@ -406,7 +431,7 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 			BeginNum =0;
 			EndNum =19;
 			messages.clear();
-			
+
 			getMessage();
 		}
 

@@ -1,10 +1,8 @@
 package com.szrjk.util;
 
-import java.io.IOException;
 import java.io.Serializable;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;

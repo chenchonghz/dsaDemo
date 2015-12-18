@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.provider.MediaStore.MediaColumns;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -89,6 +90,7 @@ public class MainGalleryActivity extends BaseActivity implements OnImageDirSelec
 
 	private Handler mHandler = new Handler()
 	{
+		@Override
 		public void handleMessage(android.os.Message msg)
 		{
 
@@ -204,17 +206,17 @@ public class MainGalleryActivity extends BaseActivity implements OnImageDirSelec
 
 				// 只查询jpeg和png的图片
 				Cursor mCursor = mContentResolver.query(mImageUri, null,
-						MediaStore.Images.Media.MIME_TYPE + "=? or "
-								+ MediaStore.Images.Media.MIME_TYPE + "=?",
+						MediaColumns.MIME_TYPE + "=? or "
+								+ MediaColumns.MIME_TYPE + "=?",
 								new String[] { "image/jpeg", "image/png" },
-								MediaStore.Images.Media.DATE_MODIFIED);
+								MediaColumns.DATE_MODIFIED);
 
 				Log.i("TAG", mCursor.getCount() + "");
 				while (mCursor.moveToNext())
 				{
 					// 获取图片的路径
 					String path = mCursor.getString(mCursor
-							.getColumnIndex(MediaStore.Images.Media.DATA));
+							.getColumnIndex(MediaColumns.DATA));
 
 					//					Log.i("TAG", path);
 					// 拿到第一张图片的路径

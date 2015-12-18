@@ -17,7 +17,6 @@ import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.IPostListCallback;
 import com.szrjk.dhome.PostListComm;
 import com.szrjk.dhome.R;
-import com.szrjk.dhome.R.layout;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.PostList;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
@@ -53,9 +52,11 @@ public class MineSendLikeActivity extends BaseActivity {
 		userId = Constant.userInfo.getUserSeqId();
 		dialog = ShowDialogUtil.createDialog(this, LOADING_POST);
 		postListComm = new PostListComm(instance, userId, mPullRefreshListView, new IPostListCallback() {
+			@Override
 			public void getNewPosts(String userId2, String basePostId, boolean isNew, String beginNum, String endNum) {
 				doGetNewPosts(userId2,basePostId,isNew,beginNum,endNum);
 			}
+			@Override
 			public void getMorePosts(String userId2, String basePostId, boolean isNew, String beginNum, String endNum) {
 				doGetMorePosts(userId2,basePostId,isNew,beginNum,endNum);
 			}

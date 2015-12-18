@@ -3,7 +3,6 @@ package com.szrjk.entity;
 import java.util.List;
 
 import android.app.Activity;
-import android.content.Context;
 import android.util.Log;
 
 import com.lidroid.xutils.DbUtils;
@@ -36,7 +35,7 @@ public abstract class AbstractTBEntity<T extends  Object> {
 
     public void initTable(final DbUtils db){
 
-        this.db = db;
+        AbstractTBEntity.db = db;
     }
 
     /**

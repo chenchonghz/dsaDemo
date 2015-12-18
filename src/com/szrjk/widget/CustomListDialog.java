@@ -4,11 +4,8 @@ import java.util.List;
 
 import com.szrjk.dhome.R;
 import com.szrjk.entity.DialogItem;
-import com.szrjk.entity.PopupItem;
-
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +39,7 @@ public class CustomListDialog extends Dialog{
 		listdialogAdapter adpater = new listdialogAdapter(mContext, list);
 		lv_dialog.setAdapter(adpater);
 		lv_dialog.setOnItemClickListener(new OnItemClickListener() {
+			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				list.get(arg2).getDialogItemCallback().DialogitemClick();
@@ -63,10 +61,12 @@ public class CustomListDialog extends Dialog{
 			this.mInflater = LayoutInflater.from(mContext);
 		}
 
+		@Override
 		public int getCount() {
 			return list.size();
 		}
 
+		@Override
 		public Object getItem(int position) {
 			return list.get(position);
 		}

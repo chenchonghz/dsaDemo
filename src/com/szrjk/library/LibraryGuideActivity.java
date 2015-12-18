@@ -26,7 +26,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -146,6 +145,7 @@ public class LibraryGuideActivity extends Activity implements OnClickListener{
 		busiParams.put("page","1");
 		paramMap.put("BusiParams", busiParams);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -159,14 +159,17 @@ public class LibraryGuideActivity extends Activity implements OnClickListener{
 
 			}
 
+			@Override
 			public void start() {
 
 			}
 
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 
 			}
 
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 				dialog.dismiss();
 				ToastUtils.showMessage(instance, "获取失败");
@@ -181,6 +184,7 @@ public class LibraryGuideActivity extends Activity implements OnClickListener{
 		dialog.dismiss();
 		lv_library_guide_child.setOnItemClickListener(new OnItemClickListener() {
 
+			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 					long arg3) {
 				Intent intent  = new Intent(instance,DiseasesListActivity.class);
@@ -223,6 +227,7 @@ public class LibraryGuideActivity extends Activity implements OnClickListener{
 			R.drawable.icon_64_surgery,R.drawable.icon_64_pediatrics,
 			R.drawable.icon_64_otherdepartment
 	};
+	@Override
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.rly_library_medicine:

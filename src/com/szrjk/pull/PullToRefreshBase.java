@@ -389,6 +389,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout
 		return false;
 	}
 
+	@Override
 	public final void setScrollingWhileRefreshingEnabled(
 			boolean allowScrollingWhileRefreshing)
 	{
@@ -443,6 +444,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout
 		}
 	}
 
+	@Override
 	public void setOnPullEventListener(OnPullEventListener<T> listener)
 	{
 		mOnPullEventListener = listener;
@@ -522,6 +524,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout
 				mode.showFooterLoadingLayout()).setReleaseLabel(releaseLabel);
 	}
 
+	@Override
 	public void setScrollAnimationInterpolator(Interpolator interpolator)
 	{
 		mScrollAnimationInterpolator = interpolator;
@@ -1019,7 +1022,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout
 				ViewGroup.LayoutParams.MATCH_PARENT);
 
 		addViewInternal(mRefreshableViewWrapper, new LinearLayout.LayoutParams(
-				LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+				android.view.ViewGroup.LayoutParams.MATCH_PARENT, android.view.ViewGroup.LayoutParams.MATCH_PARENT));
 	}
 
 	private void callRefreshListener()
@@ -1208,13 +1211,13 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout
 		{
 			case HORIZONTAL:
 				return new LinearLayout.LayoutParams(
-						LinearLayout.LayoutParams.WRAP_CONTENT,
-						LinearLayout.LayoutParams.MATCH_PARENT);
+						android.view.ViewGroup.LayoutParams.WRAP_CONTENT,
+						android.view.ViewGroup.LayoutParams.MATCH_PARENT);
 			case VERTICAL:
 			default:
 				return new LinearLayout.LayoutParams(
-						LinearLayout.LayoutParams.MATCH_PARENT,
-						LinearLayout.LayoutParams.WRAP_CONTENT);
+						android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+						android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
 		}
 	}
 

@@ -20,19 +20,13 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.ErrorInfo;
-import com.szrjk.entity.RemindEvent;
 import com.szrjk.entity.TMessage;
 import com.szrjk.entity.UserCard;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
-import com.szrjk.message.MessageActivity.TimeCount;
-import com.szrjk.self.FriendActivity;
 import com.szrjk.widget.HeaderView;
 
-import de.greenrobot.event.EventBus;
-
 import android.content.Intent;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -50,6 +44,7 @@ public class MessageListActivity extends Activity {
 	private MessageListActivity instance;
 	private TimeCount time;
 	private List<MessageListEntity> allmessage = new ArrayList<MessageListEntity>();
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		instance = this;
@@ -92,6 +87,7 @@ public class MessageListActivity extends Activity {
 	private void initListener() {
 		LinearLayout lly = hv_message.getLLy();
 		lly.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(View arg0) {
 				instance.finish();
 				time.cancel();				
@@ -122,6 +118,7 @@ public class MessageListActivity extends Activity {
 		paramMap.put("BusiParams", busiParam);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
 
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -163,11 +160,14 @@ public class MessageListActivity extends Activity {
 
 			}
 
+			@Override
 			public void start() {
 			}
 
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 			}
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 			}
 		});
@@ -193,11 +193,13 @@ public class MessageListActivity extends Activity {
 		{// 计时过程显示
 		}
 	}
+	@Override
 	protected void onDestroy() {
 		time.cancel();
 		finish();
 		super.onDestroy();
 	}
+	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			instance.finish();

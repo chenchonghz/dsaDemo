@@ -251,6 +251,7 @@ public class SendPost1Activity extends BaseActivity {
 //						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
 //				Log.i("errorObj", errorObj.toString());
 				runOnUiThread(new  Runnable() {
+					@Override
 					public void run() {
 						showToast(instance, "发帖失败、再试试呗", 0);
 					}

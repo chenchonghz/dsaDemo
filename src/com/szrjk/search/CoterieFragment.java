@@ -20,13 +20,10 @@ import com.szrjk.pull.PullToRefreshBase;
 import com.szrjk.pull.PullToRefreshListView;
 import com.szrjk.pull.PullToRefreshBase.OnRefreshListener;
 import com.szrjk.self.CircleHomepageActivity;
-import com.szrjk.util.ToastUtils;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Browser.SearchColumns;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,7 +31,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -51,6 +47,7 @@ public class CoterieFragment extends Fragment{
 	private String keyword;
 	private CoterieFragmentAdapter adapter;
 	private boolean isFrist = true;
+	@Override
 	public View onCreateView(LayoutInflater inflater,
 			ViewGroup container,Bundle savedInstanceState) {
 		instance = (SearchMoreActivity) getActivity();
@@ -78,6 +75,7 @@ public class CoterieFragment extends Fragment{
 		//上拉加载监听器
 		mPullToRefreshListView.setOnRefreshListener(new OnRefreshListener<ListView>() {
 			//上拉加载方法
+			@Override
 			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
 				//				new GetDataTask().execute();
 				//发送请求得到新项目报文
@@ -152,6 +150,7 @@ public class CoterieFragment extends Fragment{
 		busiParams.put("pageSize","10");
 		paramMap.put("BusiParams", busiParams);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -196,14 +195,17 @@ public class CoterieFragment extends Fragment{
 				}
 			}
 
+			@Override
 			public void start() {
 
 			}
 
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 
 			}
 
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 
 			}

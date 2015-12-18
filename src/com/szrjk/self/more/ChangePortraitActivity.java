@@ -169,6 +169,7 @@ public class ChangePortraitActivity extends BaseActivity {
 		paramMap.put("BusiParams", busiParams);
 		// 调用接口
 		httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				Intent intent = new Intent();
 				Bundle bundle = new Bundle();
@@ -180,15 +181,19 @@ public class ChangePortraitActivity extends BaseActivity {
 				finish();
 			}
 
+			@Override
 			public void start() {
 			}
 
+			@Override
 			public void loading(long total, long current,
 					boolean isUploading) {
 			}
 
+			@Override
 			public void failure(HttpException exception, final JSONObject jobj) {
 				runOnUiThread(new  Runnable() {
+					@Override
 					public void run() {
 						ToastUtils.showMessage(instance,jobj.getString("ReturnInfo"));
 					}
@@ -235,6 +240,7 @@ public class ChangePortraitActivity extends BaseActivity {
 		userfaceUrl = savedInstanceState.getString("userfaceUrl");
 		clipBitmap = savedInstanceState.getByteArray("clipBitmap");
 	}
+	@Override
 	public void onConfigurationChanged(Configuration newConfig)
 	{
 		Log.i("onConfigurationChanged", "onConfigurationChanged");
@@ -249,6 +255,7 @@ public class ChangePortraitActivity extends BaseActivity {
 	private void getRelaHeight() {
 		ViewTreeObserver vto2 = rl_img.getViewTreeObserver();
 		vto2.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+			@Override
 			public void onGlobalLayout() {
 				rl_img.getViewTreeObserver().removeGlobalOnLayoutListener(this);
 				rl_img_height = rl_img.getHeight();

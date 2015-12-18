@@ -31,6 +31,7 @@ public class LogoutPopup extends PopupWindow
 		tv_cancel.setOnClickListener(new OnClickListener()
 		{
 
+			@Override
 			public void onClick(View v)
 			{
 				// 销毁弹出框
@@ -42,9 +43,9 @@ public class LogoutPopup extends PopupWindow
 		// 设置SelectPicPopupWindow的View
 		this.setContentView(mMenuView);
 		// 设置SelectPicPopupWindow弹出窗体的宽
-		this.setWidth(LayoutParams.FILL_PARENT);
+		this.setWidth(android.view.ViewGroup.LayoutParams.FILL_PARENT);
 		// 设置SelectPicPopupWindow弹出窗体的高
-		this.setHeight(LayoutParams.WRAP_CONTENT);
+		this.setHeight(android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
 		// 设置SelectPicPopupWindow弹出窗体可点击
 		this.setFocusable(true);
 		// 设置SelectPicPopupWindow弹出窗体动画效果
@@ -56,6 +57,7 @@ public class LogoutPopup extends PopupWindow
 		// mMenuView添加OnTouchListener监听判断获取触屏位置如果在选择框外面则销毁弹出框
 		mMenuView.setOnTouchListener(new OnTouchListener()
 		{
+			@Override
 			public boolean onTouch(View v, MotionEvent event)
 			{
 

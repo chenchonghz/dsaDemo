@@ -1,5 +1,4 @@
 package com.szrjk.dhome;
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import com.lidroid.xutils.ViewUtils;
@@ -7,7 +6,6 @@ import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.szrjk.dhome.R;
-import com.szrjk.util.BitMapUtil;
 import com.szrjk.util.ImageLoaderUtil;
 import com.szrjk.widget.HeaderView;
 
@@ -17,15 +15,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 /**
  * 帖子大图浏览，使用ViewPager展示，可左右滑动
  * @author liyi
@@ -45,6 +38,7 @@ public class ShowBigPicActivity extends Activity{
 	private ArrayList<ImageView> viewContainter = new ArrayList<ImageView>();
 	private ImageLoaderUtil imageLoader;
 //	private ArrayList<Bitmap> bitmaps = new ArrayList<Bitmap>();
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ViewUtils.inject(this);
@@ -77,12 +71,15 @@ public class ShowBigPicActivity extends Activity{
 	}
 	private void initListener() {
 		vp_user_bg.addOnPageChangeListener(new OnPageChangeListener() {
+			@Override
 			public void onPageSelected(int position) {
 				hv_user_background.setHtext((position+1)+"/"+imgs.length);
 			}
+			@Override
 			public void onPageScrolled(int arg0, float arg1, int arg2) {
 				
 			}
+			@Override
 			public void onPageScrollStateChanged(int arg0) {
 				
 			}
@@ -113,10 +110,12 @@ public class ShowBigPicActivity extends Activity{
 
 	public class UserBackgroundViewPagerAdapter extends PagerAdapter{
 
+		@Override
 		public int getCount() {
 			return viewContainter.size();
 		}
 
+		@Override
 		public boolean isViewFromObject(View arg0, Object arg1) {
 			return arg0 == arg1;
 		}

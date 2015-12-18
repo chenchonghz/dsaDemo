@@ -1,9 +1,5 @@
 package com.szrjk.util;
 
-import java.io.File;
-import java.security.NoSuchAlgorithmException;
-import java.util.Calendar;
-
 import android.content.Context;
 
 import com.alibaba.sdk.android.oss.OSSService;

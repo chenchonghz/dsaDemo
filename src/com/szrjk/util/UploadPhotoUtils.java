@@ -1,17 +1,11 @@
 package com.szrjk.util;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.util.ArrayList;
-
 import android.app.Dialog;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -77,7 +71,7 @@ public class UploadPhotoUtils {
 						@Override
 						public void run() {
 							alertdialog.dismiss();
-							context.showToast(context, "上传成功", 0);
+							BaseActivity.showToast(context, "上传成功", 0);
 							
 						}
 					});

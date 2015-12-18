@@ -4,12 +4,9 @@ import com.szrjk.config.Constant;
 import com.szrjk.dhome.OtherPeopleActivity;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.UserCard;
-import com.szrjk.entity.UserInfo;
 import com.szrjk.util.BusiUtils;
 import com.szrjk.util.DialogUtil;
 import com.szrjk.util.ImageLoaderUtil;
-import com.umeng.message.proguard.U;
-
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
@@ -44,6 +41,7 @@ public class UserCardLayout extends RelativeLayout{
 	}
 
 
+	@Override
 	public void setBackgroundColor(int colorid){
 		rl_usercard.setBackgroundColor(colorid);
 	}
@@ -90,6 +88,8 @@ public class UserCardLayout extends RelativeLayout{
 		//黄v显示判断，以后加上蓝v显示判断
 		if (userCard.getUserLevel().equals("11")) {
 			user_vip.setVisibility(View.VISIBLE);
+		}else if(userCard.getUserLevel().equals("0")){
+			user_vip.setVisibility(View.GONE);
 		}
 		rl_usercard.setOnClickListener(new OnClickListener() {
 
@@ -119,16 +119,16 @@ public class UserCardLayout extends RelativeLayout{
 	public void changeline(UserCard userCard){
 		if (userCard.getCompanyName().length()+userCard.getDeptName().length()>18) {
 			RelativeLayout.LayoutParams layoutParams = 
-					new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, 
-							RelativeLayout.LayoutParams.WRAP_CONTENT);
+					new RelativeLayout.LayoutParams(android.view.ViewGroup.LayoutParams.WRAP_CONTENT, 
+							android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
 			layoutParams.addRule(RelativeLayout.BELOW, R.id.tv_user_hospital);
 //			layoutParams.setMargins(0, 10, 0, 0);
 			layoutParams.setMargins(0, 3, 0, 0);
 			user_dept.setLayoutParams(layoutParams);
 		}else{
 			RelativeLayout.LayoutParams layoutParams = 
-					new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, 
-							RelativeLayout.LayoutParams.WRAP_CONTENT);
+					new RelativeLayout.LayoutParams(android.view.ViewGroup.LayoutParams.WRAP_CONTENT, 
+							android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
 			layoutParams.addRule(RelativeLayout.RIGHT_OF, R.id.tv_user_hospital);
 			layoutParams.setMargins(10, 0, 0, 0);
 			user_dept.setLayoutParams(layoutParams);

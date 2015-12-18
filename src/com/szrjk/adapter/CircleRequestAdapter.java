@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -20,8 +21,6 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lidroid.xutils.exception.HttpException;
-import com.szrjk.adapter.FriendRequestAdapter.requestBtnListener;
-import com.szrjk.adapter.FriendRequestAdapter.requestBtnLongListener;
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.CircleInfo;
@@ -30,7 +29,6 @@ import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.UserCard;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
-import com.szrjk.self.CircleActivity;
 import com.szrjk.self.CircleHomepageActivity;
 import com.szrjk.util.DisplayTimeUtil;
 import com.szrjk.widget.UserCardLayout;
@@ -73,6 +71,7 @@ public class CircleRequestAdapter extends BaseAdapter {
 	//	public  void setIsSelected(HashMap<String, Boolean> isSelected) {  
 	//		CircleRequestAdapter.isSelected = isSelected;  
 	//	}  
+	@Override
 	public int getCount() {
 		return list.size();
 	}
@@ -156,14 +155,14 @@ public class CircleRequestAdapter extends BaseAdapter {
 		viewHolder.tv_circle_name.setText(list.get(position).getCoterieName());
 		if (userCard.getCompanyName().length()+userCard.getDeptName().length()>18) {
 			RelativeLayout.LayoutParams layoutParams = 
-					new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 
-							RelativeLayout.LayoutParams.WRAP_CONTENT);
+					new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, 
+							LayoutParams.WRAP_CONTENT);
 			layoutParams.addRule(RelativeLayout.BELOW, R.id.request_usercard);
 			layoutParams.setMargins(118, -5, 0, 0);
 			viewHolder.tv_date.setLayoutParams(layoutParams);
 			RelativeLayout.LayoutParams layoutParams2 = 
-					new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 
-							RelativeLayout.LayoutParams.WRAP_CONTENT);
+					new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, 
+							LayoutParams.WRAP_CONTENT);
 			layoutParams2.addRule(RelativeLayout.BELOW, R.id.tv_request_date);
 			layoutParams2.setMargins(118, 0, 0, 0);
 			viewHolder.rly_fromCircle.setLayoutParams(layoutParams2);
@@ -217,6 +216,7 @@ public class CircleRequestAdapter extends BaseAdapter {
 			this.position = position;
 			this.viewHolder = viewHolder;
 		}
+		@Override
 		public boolean onLongClick(View v) {
 			switch (v.getId()) {
 			case R.id.bt_request:
@@ -242,6 +242,7 @@ public class CircleRequestAdapter extends BaseAdapter {
 		//		private int isAgree = 0;
 		//		private int isIgnore = 0;
 
+		@Override
 		public void onClick(View view) {
 			switch (view.getId()) {
 			case R.id.bt_request:
@@ -295,6 +296,7 @@ public class CircleRequestAdapter extends BaseAdapter {
 			busiParams.put("isAgree", "Y");
 			paramMap.put("BusiParams", busiParams);
 			DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+				@Override
 				public void success(JSONObject jsonObject) {
 					ErrorInfo errorObj = JSON.parseObject(
 							jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -306,14 +308,17 @@ public class CircleRequestAdapter extends BaseAdapter {
 					}
 				}
 
+				@Override
 				public void start() {
 
 				}
 
+				@Override
 				public void loading(long total, long current, boolean isUploading) {
 
 				}
 
+				@Override
 				public void failure(HttpException exception, JSONObject jobj) {
 
 				}
@@ -329,6 +334,7 @@ public class CircleRequestAdapter extends BaseAdapter {
 			busiParams.put("isAgree", "N");
 			paramMap.put("BusiParams", busiParams);
 			DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+				@Override
 				public void success(JSONObject jsonObject) {
 					ErrorInfo errorObj = JSON.parseObject(
 							jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -340,14 +346,17 @@ public class CircleRequestAdapter extends BaseAdapter {
 					}
 				}
 
+				@Override
 				public void start() {
 
 				}
 
+				@Override
 				public void loading(long total, long current, boolean isUploading) {
 
 				}
 
+				@Override
 				public void failure(HttpException exception, JSONObject jobj) {
 
 				}
@@ -363,6 +372,7 @@ public class CircleRequestAdapter extends BaseAdapter {
 		busiParams.put("memberLimitCount", "0");
 		paramMap.put("BusiParams", busiParams);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -380,14 +390,17 @@ public class CircleRequestAdapter extends BaseAdapter {
 				}
 			}
 
+			@Override
 			public void start() {
 
 			}
 
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 
 			}
 
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 
 			}

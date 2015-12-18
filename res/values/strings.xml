@@ -33,5 +33,6 @@
     <string name="title_activity_crop_image">CropImageActivity</string>
     <string name="title_activity_more_news_comments">MoreNewsCommentsActivity</string>
     <string name="title_activity_authentication">AuthenticationActivity</string>
+    <string name="title_activity_my_circle">MyCircleActivity</string>
 
 </resources>

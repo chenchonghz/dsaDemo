@@ -1,15 +1,11 @@
 package com.szrjk.db;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
-
-import com.lidroid.xutils.exception.DbException;
 import com.szrjk.entity.AbstractTBEntity;
 
 import java.io.*;

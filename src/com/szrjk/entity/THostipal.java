@@ -1,26 +1,14 @@
 package com.szrjk.entity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.util.Log;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.db.annotation.Column;
 import com.lidroid.xutils.db.annotation.Id;
 import com.lidroid.xutils.db.annotation.Table;
 import com.lidroid.xutils.db.sqlite.Selector;
 import com.lidroid.xutils.exception.DbException;
-import com.lidroid.xutils.exception.HttpException;
-import com.szrjk.config.Constant;
-import com.szrjk.http.AbstractDhomeRequestCallBack;
-import com.szrjk.http.DHttpService;
-import com.szrjk.util.SharePerferenceUtil;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * denggm on 2015/10/21. DHome

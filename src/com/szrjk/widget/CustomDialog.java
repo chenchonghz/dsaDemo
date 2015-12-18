@@ -2,7 +2,6 @@ package com.szrjk.widget;
 
 import com.szrjk.dhome.R;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -27,6 +26,7 @@ public class CustomDialog extends Dialog {
 		this.mContext = context;
 		this.confrimButtonListener = confrimButtonListener;
 	}
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.dialog_layout);
@@ -45,6 +45,7 @@ public class CustomDialog extends Dialog {
 			btn_cancel.setText("取消");
 		}
 		btn_cancel.setOnClickListener(new View.OnClickListener() {
+			@Override
 			public void onClick(View arg0) {
 				CustomDialog.this.dismiss();
 			}

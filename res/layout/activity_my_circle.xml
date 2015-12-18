@@ -1,0 +1,161 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:headerattr="http://schemas.android.com/apk/res/com.szrjk.dhome"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_bg"
+    android:orientation="vertical"
+    >
+     <com.szrjk.widget.HeaderView
+        android:id="@+id/hv_mycircle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        headerattr:htextstr="@string/circle_name" >
+    </com.szrjk.widget.HeaderView>
+    
+     <ScrollView 
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:scrollbars="none">
+         <LinearLayout 
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginBottom="@dimen/more_margin_bottom"
+             android:orientation="vertical">
+             
+             <RelativeLayout
+                 android:id="@+id/rl_createCircle" 
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:background="@drawable/button"
+                 android:layout_margin="@dimen/view_post_margin_11"
+                 android:padding="@dimen/view_post_padding_11">
+                 <LinearLayout 
+                     android:layout_width="wrap_content"
+                     android:layout_height="match_parent"
+                     android:layout_centerInParent="true"
+                     android:orientation="horizontal">
+                     <ImageView
+                        android:id="@+id/iv_createCircle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/icon_create" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/view_post_margin_10"
+                        android:layout_gravity="center"
+                        android:textColor="@color/font_titleanduname"
+                        android:textSize="@dimen/font_size_middle"
+                        android:text="@string/circle_create"/>
+                 </LinearLayout>                   
+             </RelativeLayout>
+             
+             <RelativeLayout 
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:padding="@dimen/view_post_padding_11"
+                 android:background="@color/white">
+                 <ImageView
+                     android:id="@+id/iv_hot" 
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_centerVertical="true"
+                     android:src="@drawable/icon_hot"/>
+                 <TextView 
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_centerVertical="true"
+                     android:layout_marginLeft="@dimen/view_post_margin_10"
+                     android:layout_toRightOf="@id/iv_hot"
+                     android:text="@string/circle_hot"
+                     android:textSize="@dimen/font_size_middle"
+                     android:textColor="@color/font_titleanduname"/>
+                 <ImageButton
+                     android:id="@+id/ib_more" 
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_alignParentRight="true"
+                     android:layout_centerVertical="true"
+                     style="@style/IndexButton"
+                     android:src="@drawable/icon_more_circle"
+                     />
+             </RelativeLayout>
+
+             <View
+                 android:layout_width="match_parent"
+                 android:layout_height="@dimen/view_line_height"
+                 android:background="#c2cacc" />
+
+             <com.szrjk.widget.InnerListView
+                 android:id="@+id/lv_hotCircle" 
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:divider="#c2cacc"
+                 android:dividerHeight="0.1dp"
+                 android:scrollbars="none"
+                 >
+             </com.szrjk.widget.InnerListView>
+
+             <View
+                 android:layout_width="match_parent"
+                 android:layout_height="@dimen/line_height_2"
+                 android:background="@drawable/shadow_color" />
+             
+             <RelativeLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:background="@color/white"
+                 android:padding="@dimen/view_post_padding_11"
+                 android:layout_marginTop="@dimen/view_post_margin_10" 
+                 >
+                 <TextView 
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="@string/my_circle"
+                     android:textSize="@dimen/font_size_middle"
+                     android:textColor="@color/font_titleanduname"/>
+             </RelativeLayout>
+             <View
+                 android:layout_width="match_parent"
+                 android:layout_height="@dimen/view_line_height"
+                 android:background="#c2cacc" />
+             <FrameLayout 
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content">
+                 <RelativeLayout
+                     android:id="@+id/rl_not_circle"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:background="@color/white"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="您还没有创建或加入过圈子"
+                        android:textColor="@color/font_cell"
+                        android:textSize="@dimen/font_size_small" />
+                </RelativeLayout>
+                <com.szrjk.widget.InnerListView
+                    android:id="@+id/lv_myCircle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="#c2cacc"
+                    android:dividerHeight="0.1dp"
+                    android:scrollbars="none" >
+                </com.szrjk.widget.InnerListView>
+
+             </FrameLayout>
+             <View
+                 android:layout_width="match_parent"
+                 android:layout_height="@dimen/line_height_2"
+                 android:background="@drawable/shadow_color" />
+         </LinearLayout>
+     </ScrollView>
+
+</LinearLayout>

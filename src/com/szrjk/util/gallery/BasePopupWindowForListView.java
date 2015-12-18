@@ -1,6 +1,5 @@
 package com.szrjk.util.gallery;
 
-import java.util.Collections;
 import java.util.List;
 
 import android.content.Context;

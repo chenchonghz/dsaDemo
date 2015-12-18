@@ -8,7 +8,6 @@ import java.util.Map;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -43,10 +42,8 @@ import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.ISelectImgCallback;
 import com.szrjk.entity.UserCard;
 import com.szrjk.entity.UserInfo;
-import com.szrjk.fire.FireEye;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.util.CheckTextNumber;
-import com.szrjk.util.DjsonUtils;
 import com.szrjk.util.ImageItem;
 import com.szrjk.util.MultipleUploadPhotoUtils;
 import com.szrjk.util.OssUpdateImgUtil;
@@ -303,6 +300,7 @@ public class FeedbackActivity extends BaseActivity {
 			@Override
 			public void failure(HttpException exception, JSONObject jsonObject) {
 				runOnUiThread(new Runnable() {
+					@Override
 					public void run() {
 						dialog.dismiss();
 						showToast(instance, "提交失败、再试试呗", 0);

@@ -3,26 +3,16 @@ package com.szrjk.search;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.Html;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.dhome.BaseActivity;
-import com.szrjk.dhome.MainActivity;
 import com.szrjk.dhome.R;
-import com.szrjk.util.MxgsaTagHandler;
-import com.szrjk.util.ToastUtils;
 
 @ContentView(R.layout.activity_search_main)
 public class SearchMainActivity extends BaseActivity implements SearchView.SearchViewListener

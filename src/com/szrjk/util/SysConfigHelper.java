@@ -2,12 +2,7 @@ package com.szrjk.util;
 
 import android.content.Context;
 import android.os.Environment;
-import android.util.Log;
-import com.szrjk.dhome.R;
-
 import java.io.*;
-import java.util.HashMap;
-import java.util.Properties;
 
 public class SysConfigHelper
 {
@@ -51,7 +46,7 @@ public class SysConfigHelper
 //	}
 //
 //	/**
-//	 * ½µµÍ´úÂë¸´ÔÓ¶È£¬±ÜÃâÃ¿Ìí¼ÓÒ»¸öÅäÖÃÏî£¬¶¼Òª¸üÐÂSysConfigHelperÀà
+//	 * ï¿½ï¿½ï¿½Í´ï¿½ï¿½ë¸´ï¿½Ó¶È£ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î£¬ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½SysConfigHelperï¿½ï¿½
 //	 *
 //	 * @param context
 //	 * @param resId
@@ -161,13 +156,13 @@ public class SysConfigHelper
 //	{
 //		File extFile = null;
 //		InputStream is = null;
-//		// Èç¹ûÏàµÈµÄ»°±íÊ¾µ±Ç°µÄsdcard¹ÒÔØÔÚÊÖ»úÉÏ²¢ÇÒÊÇ¿ÉÓÃµÄ
+//		// ï¿½ï¿½ï¿½ï¿½ï¿½ÈµÄ»ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ç°ï¿½ï¿½sdcardï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½Ï²ï¿½ï¿½ï¿½ï¿½Ç¿ï¿½ï¿½Ãµï¿½
 //		if (Environment.getExternalStorageState().equals(
 //				Environment.MEDIA_MOUNTED))
 //		{
 //			try
 //			{
-//				// confi.properties·ÇÔËÐÐÊ±±ØÐëÎÄ¼þ£¬ÎÞsdcardÊ±£¬²»Éú³É¼´¿É
+//				// confi.propertiesï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½sdcardÊ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¼ï¿½ï¿½ï¿½
 //				File dir = new File(Environment.getExternalStorageDirectory(),
 //						"dhome");
 //				if (!dir.exists())
@@ -190,7 +185,7 @@ public class SysConfigHelper
 //						BufferedWriter bw = new BufferedWriter(
 //								outputStreamWriter);
 //
-//						String str = "#ÅäÖÃ·þÎñµØÖ·";
+//						String str = "#ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½Ö·";
 //						bw.write(str);
 //						bw.newLine();
 //						str = "serverUrl=";
@@ -222,7 +217,7 @@ public class SysConfigHelper
 //						if (uatFlag.equalsIgnoreCase("true"))
 //						{
 //							isUAT = true;
-//							// UATÄ£Ê½µÈÍ¬ÓÚÕýÊ½°æ
+//							// UATÄ£Ê½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½
 //							isTest = false;
 //						}
 //					}

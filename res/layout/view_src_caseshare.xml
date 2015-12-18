@@ -11,6 +11,7 @@
         android:paddingLeft="@dimen/view_post_padding_11"
         android:paddingRight="@dimen/view_post_padding_11"
         android:paddingTop="@dimen/view_post_padding_6"
+        android:gravity="center_vertical"
         android:lineSpacingExtra="@dimen/textview_linespace"
         android:textSize="@dimen/font_size_small"
         android:textColor="@color/font_titleanduname"
@@ -42,6 +43,7 @@
 
     </FrameLayout>
     <LinearLayout 
+        android:id="@+id/ll_caseshare"
         android:layout_width="fill_parent"
         android:layout_height="80dp"
         android:layout_marginLeft="@dimen/view_post_margin_5"

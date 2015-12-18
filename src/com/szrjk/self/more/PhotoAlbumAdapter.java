@@ -12,7 +12,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.lidroid.xutils.BitmapUtils;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.PhotoAlbum;
 import com.szrjk.util.DDateUtils;

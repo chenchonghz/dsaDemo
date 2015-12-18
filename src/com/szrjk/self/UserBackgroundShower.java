@@ -1,19 +1,11 @@
 package com.szrjk.self;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.xmlpull.v1.XmlPullParser;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -36,11 +28,9 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
-import android.util.Xml;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -64,6 +54,7 @@ public class UserBackgroundShower extends BaseActivity implements OnClickListene
 	private String Url;
 	private boolean needOper;
 	private ArrayList<DragImageView> viewContainter = new ArrayList<DragImageView>();
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ViewUtils.inject(this);
@@ -103,16 +94,19 @@ public class UserBackgroundShower extends BaseActivity implements OnClickListene
 		}
 	}
 	private void initListener() {
-		btn_user_bg_change.setOnClickListener((OnClickListener) this);
+		btn_user_bg_change.setOnClickListener(this);
 		vp_user_bg.addOnPageChangeListener(new OnPageChangeListener() {
+			@Override
 			public void onPageSelected(int position) {
 				Log.i("TAG","position="+position);
 				Url=imgs[position];
 				hv_user_background.setHtext((position+1)+"/"+imgs.length);
 			}
+			@Override
 			public void onPageScrolled(int arg0, float arg1, int arg2) {
 
 			}
+			@Override
 			public void onPageScrollStateChanged(int arg0) {
 
 			}
@@ -180,6 +174,7 @@ public class UserBackgroundShower extends BaseActivity implements OnClickListene
 		busiParams.put("backgroundUrl",url);
 		paramMap.put("BusiParams",busiParams);
 		httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -191,9 +186,11 @@ public class UserBackgroundShower extends BaseActivity implements OnClickListene
 				}
 			}
 
+			@Override
 			public void start() {
 			}
 
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 
 			}
@@ -209,10 +206,12 @@ public class UserBackgroundShower extends BaseActivity implements OnClickListene
 	//ViewPager适配器
 	public class UserBackgroundViewPagerAdapter extends PagerAdapter{
 
+		@Override
 		public int getCount() {
 			return viewContainter.size();
 		}
 
+		@Override
 		public boolean isViewFromObject(View arg0, Object arg1) {
 			return arg0 == arg1;
 		}

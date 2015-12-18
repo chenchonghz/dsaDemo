@@ -28,6 +28,7 @@ public class ImageFileActivity extends Activity
 	private TextView tv_title;
 	private ImageFileActivity instance;
 
+	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
@@ -47,6 +48,7 @@ public class ImageFileActivity extends Activity
 		startActivity(intent);
 	}
 
+	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event)
 	{
 		if (keyCode == KeyEvent.KEYCODE_BACK)

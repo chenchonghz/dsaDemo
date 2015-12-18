@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -22,13 +21,11 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
-import com.lidroid.xutils.view.annotation.event.OnItemClick;
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.DoctorActivity;
@@ -86,7 +83,7 @@ public class MainAuthenticationActivity extends BaseActivity implements OnClickL
 			}
 			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
-				Log.i("getUserAuthenticationInfo", jobj.toString());
+				Log.i("HttpException", jobj.toString());
 			}
 			@Override
 			public void success(JSONObject jsonObject) {

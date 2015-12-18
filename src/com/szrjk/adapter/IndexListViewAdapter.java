@@ -1011,7 +1011,11 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 				}else{
 					tran_normalPost_Holder.tv_transmit.setText(context.getResources().getString(R.string.transmit_text));
 				}
-				tran_normalPost_Holder.tv_transmit.setTextColor(context.getResources().getColor(R.color.font_disable));
+				if(postInfo.getPostType().equals(Constant.TRANSMIT_POST)){	
+					tran_normalPost_Holder.tv_transmit.setTextColor(context.getResources().getColor(R.color.font_disable));
+				}else{
+					tran_normalPost_Holder.tv_transmit.setTextColor(context.getResources().getColor(R.color.font_cell));
+				}
 				if(postOtherInfo != null && postOtherInfo.getCOMMENT_NUM()!=0){
 					tran_normalPost_Holder.tv_command.setText(""+postOtherInfo.getCOMMENT_NUM());
 				}else{
@@ -1056,12 +1060,15 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					if(isTourist){
 						DialogUtil.showGuestDialog(context, null);
 					}else{
-						IndexFragment.POSITION = position;
-						skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getContent(),
-								userInfo.getUserFaceUrl(),postInfo.getPostId(),
-								userInfo.getUserName(),postInfo.getPostType(),postInfo.getPostLevel()
-								,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM());
-						ToastUtils.showMessage(context, "多次转发功能正在开发中，敬请期待");
+						if(postInfo.getPostType().equals(Constant.TRANSMIT_POST)){
+							ToastUtils.showMessage(context, "多次转发功能正在开发中，敬请期待");
+						}else{
+							IndexFragment.POSITION = position;
+							skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getContent(),
+									userInfo.getUserFaceUrl(),postInfo.getPostId(),
+									userInfo.getUserName(),postInfo.getPostType(),postInfo.getPostLevel()
+									,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM());
+						}		
 					}
 			  }
 			});
@@ -1245,7 +1252,11 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 				}else{
 					tran_caseShare_Holder.tv_transmit.setText(context.getResources().getString(R.string.transmit_text));
 				}
-				tran_caseShare_Holder.tv_transmit.setTextColor(context.getResources().getColor(R.color.font_disable));
+				if(postInfo.getPostType().equals(Constant.TRANSMIT_POST)){		
+					tran_caseShare_Holder.tv_transmit.setTextColor(context.getResources().getColor(R.color.font_disable));
+				}else{
+					tran_caseShare_Holder.tv_transmit.setTextColor(context.getResources().getColor(R.color.font_cell));
+				}
 				if(postOtherInfo != null &&postOtherInfo.getCOMMENT_NUM()!=0){
 					tran_caseShare_Holder.tv_command.setText(""+postOtherInfo.getCOMMENT_NUM());
 				}else{
@@ -1291,12 +1302,15 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					if(isTourist){
 						DialogUtil.showGuestDialog(context, null);
 					}else{
-						IndexFragment.POSITION = position;
-						skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getContent(),
-								userInfo.getUserFaceUrl(),postInfo.getPostId(),
-								userInfo.getUserName(),postInfo.getPostType(),postInfo.getPostLevel()
-								,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM());
-						ToastUtils.showMessage(context, "多次转发功能正在开发中，敬请期待");
+						if(postInfo.getPostType().equals(Constant.TRANSMIT_POST)){
+							ToastUtils.showMessage(context, "多次转发功能正在开发中，敬请期待");
+						}else{
+							IndexFragment.POSITION = position;
+							skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getContent(),
+									userInfo.getUserFaceUrl(),postInfo.getPostId(),
+									userInfo.getUserName(),postInfo.getPostType(),postInfo.getPostLevel()
+									,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM());
+						}				
 					}
 				}
 			});
@@ -1479,7 +1493,11 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 				}else{
 					tran_problemHelp_Holder.tv_transmit.setText(context.getResources().getString(R.string.transmit_text));
 				}
-				tran_problemHelp_Holder.tv_transmit.setTextColor(context.getResources().getColor(R.color.font_disable));
+				if(postInfo.getPostType().equals(Constant.TRANSMIT_POST)){			
+					tran_problemHelp_Holder.tv_transmit.setTextColor(context.getResources().getColor(R.color.font_disable));
+				}else{
+					tran_problemHelp_Holder.tv_transmit.setTextColor(context.getResources().getColor(R.color.font_cell));
+				}
 				if(postOtherInfo != null &&postOtherInfo.getCOMMENT_NUM()!=0){
 					tran_problemHelp_Holder.tv_command.setText(""+postOtherInfo.getCOMMENT_NUM());
 				}else{
@@ -1524,12 +1542,15 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					if(isTourist){
 						DialogUtil.showGuestDialog(context, null);
 					}else{
-						IndexFragment.POSITION = position;
-						skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getContent(),
-						userInfo.getUserFaceUrl(),postInfo.getPostId(),
-						userInfo.getUserName(),postInfo.getPostType(),postInfo.getPostLevel()
-						,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM());
-						ToastUtils.showMessage(context, "多次转发功能正在开发中，敬请期待");
+						if(postInfo.getPostType().equals(Constant.TRANSMIT_POST)){
+							ToastUtils.showMessage(context, "多次转发功能正在开发中，敬请期待");
+						}else{
+							IndexFragment.POSITION = position;
+							skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getContent(),
+							userInfo.getUserFaceUrl(),postInfo.getPostId(),
+							userInfo.getUserName(),postInfo.getPostType(),postInfo.getPostLevel()
+							,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM());	
+						}		
 					}
 				}
 			});

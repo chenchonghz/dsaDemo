@@ -63,7 +63,7 @@
     <application
         android:name=".DHomeApplication"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/szrjk_logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity

@@ -84,9 +84,9 @@ public class ListPopup extends LinearLayout
 		// 设置SelectPicPopupWindow的View
 		sendWindow.setContentView(myview);
 		// 设置SelectPicPopupWindow弹出窗体的宽
-		sendWindow.setWidth(LayoutParams.FILL_PARENT);
+		sendWindow.setWidth(android.view.ViewGroup.LayoutParams.FILL_PARENT);
 		// 设置SelectPicPopupWindow弹出窗体的高
-		sendWindow.setHeight(LayoutParams.WRAP_CONTENT);
+		sendWindow.setHeight(android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
 		// 设置SelectPicPopupWindow弹出窗体可点击
 		sendWindow.setFocusable(true);
 		// 设置SelectPicPopupWindow弹出窗体动画效果
@@ -97,6 +97,7 @@ public class ListPopup extends LinearLayout
 		sendWindow.setBackgroundDrawable(dw);
 		// mMenuView添加OnTouchListener监听判断获取触屏位置如果在选择框外面则销毁弹出框
 		myview.setOnTouchListener(new OnTouchListener() {
+			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				int height = pop_layout.getTop();
 				int y = (int) event.getY();

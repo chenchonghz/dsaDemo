@@ -2,11 +2,6 @@ package com.szrjk.entity;
 
 import java.util.Arrays;
 
-import android.graphics.Bitmap;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-
 public class PostComment {
 
 	private byte[] ivPortrait;

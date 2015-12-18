@@ -2,7 +2,6 @@ package com.szrjk.adapter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,11 +11,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
+import android.opengl.Visibility;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -24,6 +21,7 @@ import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.text.style.DynamicDrawableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.ImageSpan;
 import android.util.DisplayMetrics;
@@ -33,6 +31,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -54,7 +53,6 @@ import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.IPhotoClickOper;
 import com.szrjk.entity.IPullPostListCallback;
 import com.szrjk.entity.InitSrcPostInterface;
-import com.szrjk.entity.OperContextClick;
 import com.szrjk.entity.PostAbstractList;
 import com.szrjk.entity.PostInfo;
 import com.szrjk.entity.PostOtherImformationInfo;
@@ -111,6 +109,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 	ViewHolder7 recommend_user_Holder;
 	ViewHolder8 viewHolder8;
 	private Handler hander = new Handler(){
+		@Override
 		public void handleMessage(android.os.Message msg) {
 			notifyDataSetChanged();
 			hander.sendEmptyMessageDelayed(0, 60000);
@@ -908,15 +907,18 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 							public void initSrcPost(Context context, UserCard userCard,
 									PostInfo postInfo, String isDelete) {
 								// TODO Auto-generated method stub
-								initSrcUserData(tran_normalPost_Holder.iv_srcSmallPhoto,tran_normalPost_Holder.tv_srcDoctorName,tran_normalPost_Holder.tv_srcJobTitle,
-										tran_normalPost_Holder.tv_srcHospital,tran_normalPost_Holder.tv_srcDepartment,tran_normalPost_Holder.iv_src_headphoto_icon,userCard);
-								initSrcGroupData(tran_normalPost_Holder.ll_src_group,tran_normalPost_Holder.tv_src_group_name,postInfo);
-								try {
-									initSrcNormalPostData(tran_normalPost_Holder.tv_src_post_text,tran_normalPost_Holder.gv_src_pic,tran_normalPost_Holder.tv_srcTime,postInfo,userCard,position);
-								} catch (Exception e1) {
-									e1.printStackTrace();
+								if(isDelete != null && isDelete.equals("true")){
+									tran_normalPost_Holder.tv_src_post_text.setText("抱歉，此帖子已被作者删除");
+									tran_normalPost_Holder.tv_src_post_text.setTextColor(context.getResources().getColor(R.color.font_cell));
+								}else{	
+									initSrcGroupData(tran_normalPost_Holder.ll_src_group,tran_normalPost_Holder.tv_src_group_name,postInfo);
+									try {
+										initSrcNormalPostData(tran_normalPost_Holder.tv_src_post_text,tran_normalPost_Holder.gv_src_pic,tran_normalPost_Holder.tv_srcTime,postInfo,userCard,position);
+									} catch (Exception e1) {
+										e1.printStackTrace();
+									}
+									initSrcNormalPostListner(tran_normalPost_Holder.gv_src_pic,tran_normalPost_Holder.ll_src_normal_post,tran_normalPost_Holder.ll_srcDoctorInfo,tran_normalPost_Holder.tv_src_group_name,position,postInfo,userCard);
 								}
-								initSrcNormalPostListner(tran_normalPost_Holder.gv_src_pic,tran_normalPost_Holder.ll_src_normal_post,tran_normalPost_Holder.ll_srcDoctorInfo,tran_normalPost_Holder.tv_src_group_name,position,postInfo,userCard);
 							}
 						}, iPullPostListCallback);
 						
@@ -1163,14 +1165,18 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 							public void initSrcPost(Context context, UserCard userCard,
 									PostInfo postInfo, String isDelete) {
 								// TODO Auto-generated method stub
-								initSrcUserData(tran_caseShare_Holder.iv_srcSmallPhoto,tran_caseShare_Holder.tv_srcDoctorName,tran_caseShare_Holder.tv_srcJobTitle,
-										tran_caseShare_Holder.tv_srcHospital,tran_caseShare_Holder.tv_srcDepartment,tran_caseShare_Holder.iv_src_headphoto_icon,userCard);
-								try {
-									initSrcPostInfoData(tran_caseShare_Holder.iv_src_backgroudpic,tran_caseShare_Holder.tv_src_postTitle,
-											tran_caseShare_Holder.tv_src_completeRate,tran_caseShare_Holder.tv_srcTime,tran_caseShare_Holder.iv_gray,tran_caseShare_Holder.tv_srcname,postInfo,userCard,position);
-									initSrcPostListner(tran_caseShare_Holder.rl_src_view_post,tran_caseShare_Holder.ll_srcDoctorInfo,position,postInfo,userCard);
-								} catch (Exception e1) {
-									e1.printStackTrace();
+								if(isDelete != null && isDelete.equals("true")){
+									hintCaseShareView(tran_caseShare_Holder.ll_caseShare,tran_caseShare_Holder.fl_bg);
+									tran_caseShare_Holder.tv_srcname.setText("抱歉，此帖子已被作者删除");
+									tran_caseShare_Holder.tv_srcname.setTextColor(context.getResources().getColor(R.color.font_cell));
+								}else{		
+									try {
+										initSrcPostInfoData(tran_caseShare_Holder.ll_caseShare,tran_caseShare_Holder.fl_bg,tran_caseShare_Holder.iv_src_backgroudpic,tran_caseShare_Holder.tv_src_postTitle,
+												tran_caseShare_Holder.tv_src_completeRate,tran_caseShare_Holder.tv_srcTime,tran_caseShare_Holder.iv_gray,tran_caseShare_Holder.tv_srcname,postInfo,userCard,position);
+										initSrcPostListner(tran_caseShare_Holder.rl_src_view_post,tran_caseShare_Holder.ll_srcDoctorInfo,position,postInfo,userCard);
+									} catch (Exception e1) {
+										e1.printStackTrace();
+									}
 								}
 							}
 						}, iPullPostListCallback);
@@ -1384,14 +1390,20 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 							public void initSrcPost(Context context, UserCard userCard,
 									PostInfo postInfo, String isDelete) {
 								// TODO Auto-generated method stub
-								try {
-								initSrcUserData(tran_problemHelp_Holder.iv_srcSmallPhoto,tran_problemHelp_Holder.tv_srcDoctorName,tran_problemHelp_Holder.tv_srcJobTitle,
-										tran_problemHelp_Holder.tv_srcHospital,tran_problemHelp_Holder.tv_srcDepartment,tran_problemHelp_Holder.iv_src_headphoto_icon,userCard);
-								initSrcPostInfoData(tran_problemHelp_Holder.iv_src_backgroudpic,tran_problemHelp_Holder.tv_src_postTitle,
-										tran_problemHelp_Holder.tv_src_completeRate,tran_problemHelp_Holder.tv_srcTime,tran_problemHelp_Holder.iv_gray,tran_problemHelp_Holder.tv_srcname,postInfo,userCard,position);
-								initSrcPostListner(tran_problemHelp_Holder.rl_src_view_post,tran_problemHelp_Holder.ll_srcDoctorInfo,position,postInfo,userCard);
-								} catch (Exception e1) {
-									e1.printStackTrace();
+								if(isDelete != null && isDelete.equals("true")){
+									hintCaseShareView(tran_problemHelp_Holder.ll_problemHelp,tran_problemHelp_Holder.fl_bg);
+									tran_problemHelp_Holder.tv_srcname.setText("抱歉，此帖子已被作者删除");
+									tran_problemHelp_Holder.tv_srcname.setTextColor(context.getResources().getColor(R.color.font_cell));
+								}else{							
+									try {
+										initSrcUserData(tran_problemHelp_Holder.iv_srcSmallPhoto,tran_problemHelp_Holder.tv_srcDoctorName,tran_problemHelp_Holder.tv_srcJobTitle,
+												tran_problemHelp_Holder.tv_srcHospital,tran_problemHelp_Holder.tv_srcDepartment,tran_problemHelp_Holder.iv_src_headphoto_icon,userCard);
+										initSrcPostInfoData(tran_problemHelp_Holder.ll_problemHelp,tran_problemHelp_Holder.fl_bg,tran_problemHelp_Holder.iv_src_backgroudpic,tran_problemHelp_Holder.tv_src_postTitle,
+												tran_problemHelp_Holder.tv_src_completeRate,tran_problemHelp_Holder.tv_srcTime,tran_problemHelp_Holder.iv_gray,tran_problemHelp_Holder.tv_srcname,postInfo,userCard,position);
+										initSrcPostListner(tran_problemHelp_Holder.rl_src_view_post,tran_problemHelp_Holder.ll_srcDoctorInfo,position,postInfo,userCard);
+									} catch (Exception e1) {
+										e1.printStackTrace();
+									}
 								}
 							}
 						}, iPullPostListCallback);
@@ -1587,6 +1599,12 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 	}
 	
 
+	protected void hintCaseShareView(LinearLayout ll_caseShare,
+			FrameLayout fl_bg) {
+		ll_caseShare.setVisibility(View.GONE);
+		fl_bg.setVisibility(View.GONE);
+	}
+
 	private int getWindowsWidth() {
 		DisplayMetrics dm = new DisplayMetrics();
 		mainActivity.getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -1721,7 +1739,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		int icon_start = userName.length();
 		int icon_end = userName.length();
 		Bitmap b = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_yellow_v_24);
-		ImageSpan imgSpan = new ImageSpan(context, b, ImageSpan.ALIGN_BASELINE);
+		ImageSpan imgSpan = new ImageSpan(context, b, DynamicDrawableSpan.ALIGN_BASELINE);
 		if(userLevel.equals("11")){
 			sb_content.append(" icon");
 			icon_start += 1;
@@ -1771,7 +1789,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		spanStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.link_text_color)), start, end,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		spanStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.font_titleanduname)), icon_end,sb_content.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		if(userLevel.equals("11")){	
-			spanStr.setSpan(imgSpan, icon_start, icon_end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			spanStr.setSpan(imgSpan, icon_start, icon_end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		}
 		return spanStr;
 	}
@@ -1785,7 +1803,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		int icon_start = userName.length();
 		int icon_end = userName.length();
 		Bitmap b = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_yellow_v_24);
-		ImageSpan imgSpan = new ImageSpan(context, b, ImageSpan.ALIGN_BASELINE);
+		ImageSpan imgSpan = new ImageSpan(context, b, DynamicDrawableSpan.ALIGN_BASELINE);
 		if(userLevel.equals("11")){
 			sb_content.append(" icon");
 			icon_start += 1;
@@ -1835,7 +1853,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		spanStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.link_text_color)), start, end,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		spanStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.font_titleanduname)), icon_end,sb_content.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		if(userLevel.equals("11")){	
-			spanStr.setSpan(imgSpan, icon_start, icon_end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			spanStr.setSpan(imgSpan, icon_start, icon_end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		}
 		return spanStr;
 	}
@@ -1854,7 +1872,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			start = 2;
 			end = sb_content.length();		
 			Bitmap b = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_yellow_v_24);
-			ImageSpan imgSpan = new ImageSpan(context, b, ImageSpan.ALIGN_BASELINE);
+			ImageSpan imgSpan = new ImageSpan(context, b, DynamicDrawableSpan.ALIGN_BASELINE);
 			icon_start = sb_content.length();
 			if(userCard.getUserLevel().equals("11")){
 				sb_content.append(" icon");
@@ -1900,7 +1918,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			spanStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.font_titleanduname)), icon_end,sb_content.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);	
 			spanStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.link_text_color)), start, end,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 			if(userCard.getUserLevel().equals("11")){	
-				spanStr.setSpan(imgSpan, icon_start, icon_end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+				spanStr.setSpan(imgSpan, icon_start, icon_end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 			}
 			return spanStr;
 		}else{
@@ -2041,10 +2059,12 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		}
 	}
 
-	private void initSrcPostInfoData(ImageView iv_src_backgroudpic,
+	private void initSrcPostInfoData(LinearLayout ll_caseShare, FrameLayout fl_bg, ImageView iv_src_backgroudpic,
 			TextView tv_src_postTitle, TextView tv_src_completeRate,
 			TextView tv_srcTime, ImageView iv_gray, TextView tv_srcname,
 			PostInfo postInfo, UserCard userCard, int position) throws Exception {
+		ll_caseShare.setVisibility(View.VISIBLE);
+		fl_bg.setVisibility(View.VISIBLE);
 		SpannableString contentText = getContentText(null,userCard.getUserName(),userCard.getUserSeqId(),userCard.getUserLevel(),userCard.getUserType(),postInfo,position);
 		tv_srcname.setText(contentText);
 		tv_srcname.setMovementMethod(LinkMovementMethod.getInstance());
@@ -2074,6 +2094,8 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		tran_problemHelp_Holder.rl_src_view_post = (RelativeLayout)convertView.findViewById(R.id.view_src_problemhelp);	
 		tran_problemHelp_Holder.tv_srcname = (TextView)convertView.findViewById(R.id.tv_srcname);
 		tran_problemHelp_Holder.iv_gray = (ImageView)convertView.findViewById(R.id.iv_gray);
+		tran_problemHelp_Holder.ll_problemHelp = (LinearLayout)convertView.findViewById(R.id.ll_problemHelp);
+		tran_problemHelp_Holder.fl_bg = (FrameLayout)convertView.findViewById(R.id.fl_bg);		
 	}
 	/**
 	 * 初始化被转发病例分享帖子信息view
@@ -2086,6 +2108,8 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		tran_caseShare_Holder.rl_src_view_post = (RelativeLayout)convertView.findViewById(R.id.view_src_caseshare);
 		tran_caseShare_Holder.tv_srcname = (TextView)convertView.findViewById(R.id.tv_srcname);
 		tran_caseShare_Holder.iv_gray = (ImageView)convertView.findViewById(R.id.iv_gray);
+		tran_caseShare_Holder.ll_caseShare = (LinearLayout)convertView.findViewById(R.id.ll_caseshare);
+		tran_caseShare_Holder.fl_bg = (FrameLayout)convertView.findViewById(R.id.fl_bg);
 	}
 	/**
 	 * 设置被转发普通帖子的各种点击监听
@@ -2906,9 +2930,10 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		TextView tv_doctorName,tv_srcDoctorName,tv_jobTitle,tv_srcJobTitle,tv_hospital,tv_srcHospital,tv_time,tv_srcTime,
 		tv_department,tv_srcDepartment,tv_transmit,tv_command,tv_like,
 		tv_src_postTitle,tv_src_completeRate,tv_srcname;
-		LinearLayout ll_doctorInfo,ll_srcDoctorInfo;
+		LinearLayout ll_doctorInfo,ll_srcDoctorInfo,ll_caseShare;
 		RelativeLayout rl_transmit,rl_command,rl_like,rl_src_view_post;
 		TransmitTextView tv_post_text;
+		FrameLayout fl_bg;
 	}
 	/**
 	 * 转发疑难求助分享帖子的viewHolder
@@ -2920,9 +2945,10 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		TextView tv_doctorName,tv_srcDoctorName,tv_jobTitle,tv_srcJobTitle,tv_hospital,tv_srcHospital,tv_time,tv_srcTime,
 		tv_department,tv_srcDepartment,tv_transmit,tv_command,tv_like,
 		tv_src_postTitle,tv_src_completeRate,tv_srcname;
-		LinearLayout ll_doctorInfo,ll_srcDoctorInfo;
+		LinearLayout ll_doctorInfo,ll_srcDoctorInfo,ll_problemHelp;
 		RelativeLayout rl_transmit,rl_command,rl_like,rl_src_view_post;
 		TransmitTextView tv_post_text;
+		FrameLayout fl_bg;
 	}
 	/**
 	 * 推荐关注

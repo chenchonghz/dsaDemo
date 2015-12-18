@@ -24,14 +24,10 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.config.Constant;
-import com.szrjk.entity.DialogItem;
-import com.szrjk.entity.DialogItemCallback;
 import com.szrjk.entity.IPopupItemCallback;
 import com.szrjk.entity.PopupItem;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.util.SharePerferenceUtil;
-import com.szrjk.util.ToastUtils;
-import com.szrjk.widget.CustomListDialog;
 import com.szrjk.widget.ListPopup;
 
 @ContentView(R.layout.activity_login)

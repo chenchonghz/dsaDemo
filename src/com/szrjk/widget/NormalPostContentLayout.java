@@ -72,6 +72,7 @@ public class NormalPostContentLayout extends RelativeLayout
 	 * 设置背景颜色
 	 * @param colorid
 	 */
+	@Override
 	public void setBackgroundColor(int colorid){
 		ll_normal_post_content.setBackgroundColor(colorid);
 		rl_post_detailed_doctorinfo.setBackgroundColor(colorid);

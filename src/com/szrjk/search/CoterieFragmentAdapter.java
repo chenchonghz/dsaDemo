@@ -3,7 +3,6 @@ package com.szrjk.search;
 import java.util.List;
 
 import com.szrjk.dhome.R;
-import com.szrjk.entity.Coterie;
 import com.szrjk.entity.SearchEntity;
 import com.szrjk.util.ImageLoaderUtil;
 

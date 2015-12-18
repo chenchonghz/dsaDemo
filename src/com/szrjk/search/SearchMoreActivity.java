@@ -1,44 +1,25 @@
 package com.szrjk.search;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import u.aly.v;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.lidroid.xutils.ViewUtils;
-import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
-import com.szrjk.config.Constant;
 import com.szrjk.dhome.R;
-import com.szrjk.entity.Coterie;
-import com.szrjk.entity.ErrorInfo;
-import com.szrjk.entity.UserCard;
-import com.szrjk.http.AbstractDhomeRequestCallBack;
-import com.szrjk.http.DHttpService;
 
 @ContentView(R.layout.activity_search)
 public class SearchMoreActivity extends FragmentActivity implements OnClickListener{
@@ -172,6 +153,7 @@ public class SearchMoreActivity extends FragmentActivity implements OnClickListe
 		adapter = new SearchVpAdapter(getSupportFragmentManager());
 		vp_search.setAdapter(adapter);
 		vp_search.addOnPageChangeListener(new OnPageChangeListener() {
+			@Override
 			public void onPageSelected(int position) {
 				switch (position) {
 				case 0:changeLayout(id[0]);			
@@ -190,10 +172,12 @@ public class SearchMoreActivity extends FragmentActivity implements OnClickListe
 				}
 			}
 
+			@Override
 			public void onPageScrolled(int arg0, float arg1, int arg2) {
 
 			}
 
+			@Override
 			public void onPageScrollStateChanged(int arg0) {
 
 			}
@@ -251,9 +235,11 @@ public class SearchMoreActivity extends FragmentActivity implements OnClickListe
 		public SearchVpAdapter(FragmentManager fm) {
 			super(fm);
 		}
+		@Override
 		public Fragment getItem(int position) {
 			return list.get(position);
 		}
+		@Override
 		public int getCount() {
 			return list.size();
 		}

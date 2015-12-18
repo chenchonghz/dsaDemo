@@ -25,7 +25,7 @@ public class KeyWordUtils {
 						@Override
 						public void run() {
 							ScrollView runSv = (ScrollView)activity.findViewById(svID);
-							View v = (View)activity.findViewById(vID);
+							View v = activity.findViewById(vID);
 							int[] loca = new int[2];
 							v.getLocationOnScreen(loca);
 							Rect frame = new Rect();

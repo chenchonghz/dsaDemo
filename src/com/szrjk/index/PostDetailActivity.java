@@ -6,10 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.KeyEvent;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -17,7 +14,6 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
-import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.IndexFragment;
@@ -25,7 +21,6 @@ import com.szrjk.dhome.R;
 import com.szrjk.entity.*;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.util.ToastUtils;
-import com.szrjk.widget.DeletePostPopup;
 import com.szrjk.widget.PostContentLayout;
 import com.szrjk.widget.PostDetailBottomOperLayout;
 import com.szrjk.widget.PostDetailViewCommentListLayout;
@@ -62,6 +57,7 @@ public class PostDetailActivity extends BaseActivity {
 	private static final int LOAD_CASEDETAIL_SUCCESS = 0;
 
 	private Handler handler = new Handler() {
+		@Override
 		public void handleMessage(Message msg) {
 			if (msg.what == LOAD_CASEDETAIL_SUCCESS) {
 				postDetail2 = (OrdinaryPostDetail) msg.obj;

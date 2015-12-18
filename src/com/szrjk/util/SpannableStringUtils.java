@@ -11,7 +11,6 @@ import android.view.View;
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.OtherPeopleActivity;
 import com.szrjk.dhome.R;
-import com.szrjk.dhome.Register2Activity;
 
 /**
  * denggm on 2015/11/7.

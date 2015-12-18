@@ -123,6 +123,7 @@ public class ShowAllPhoto extends BaseActivity
 		gridImageAdapter
 				.setOnItemClickListener(new AlbumGridViewAdapter.OnItemClickListener()
 				{
+					@Override
 					public void onItemClick(final ToggleButton toggleButton,
 							int position, boolean isChecked, CheckBox button)
 					{
@@ -206,6 +207,7 @@ public class ShowAllPhoto extends BaseActivity
 		}
 	}
 
+	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event)
 	{
 		if (keyCode == KeyEvent.KEYCODE_BACK)

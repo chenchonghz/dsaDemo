@@ -13,6 +13,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -82,12 +83,13 @@ public class Register2Activity extends BaseActivity implements OnClickListener
 		text_phonenum.setFocusable(true);
     	text_phonenum.setFocusableInTouchMode(true);
     	text_phonenum.requestFocus();
-    	text_phonenum.setInputType(EditorInfo.TYPE_CLASS_PHONE);
-    	text_vcode.setInputType(EditorInfo.TYPE_CLASS_PHONE);
+    	text_phonenum.setInputType(InputType.TYPE_CLASS_PHONE);
+    	text_vcode.setInputType(InputType.TYPE_CLASS_PHONE);
     	Timer timer = new Timer();
     	     timer.schedule(new TimerTask()
     	     {
-    	         public void run() 
+    	         @Override
+				public void run() 
     	         {
     	             InputMethodManager inputManager =
     	                 (InputMethodManager)text_phonenum.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);

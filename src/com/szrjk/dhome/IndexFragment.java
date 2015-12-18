@@ -1,16 +1,13 @@
 package com.szrjk.dhome;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -22,12 +19,10 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.view.annotation.ViewInject;
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.szrjk.adapter.IndexListViewAdapter;
 import com.szrjk.config.Constant;
 import com.szrjk.entity.*;
@@ -36,7 +31,6 @@ import com.szrjk.http.DHttpService;
 import com.szrjk.pull.PullToRefreshBase;
 import com.szrjk.pull.PullToRefreshBase.OnRefreshListener;
 import com.szrjk.pull.PullToRefreshListView;
-import com.szrjk.util.DjsonUtils;
 import com.szrjk.util.ShowDialogUtil;
 import com.szrjk.util.ToastUtils;
 
@@ -72,6 +66,7 @@ public class IndexFragment extends Fragment
 	public static String SRC_POSEID = "-1";
 	private Handler handler = new Handler()
 	{
+		@Override
 		public void handleMessage(Message msg)
 		{
 			switch (msg.what)
@@ -463,7 +458,7 @@ public class IndexFragment extends Fragment
 	 */
 	private void initData()
 	{
-		context = (MainActivity) getActivity();
+		context = getActivity();
 		mainActivity = (MainActivity) getActivity();
 		mPullRefreshListView
 		.setMode(com.szrjk.pull.PullToRefreshBase.Mode.BOTH);

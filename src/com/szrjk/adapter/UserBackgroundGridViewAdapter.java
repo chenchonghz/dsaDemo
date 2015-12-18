@@ -1,7 +1,6 @@
 package com.szrjk.adapter;
 
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,16 +26,19 @@ public class UserBackgroundGridViewAdapter extends BaseAdapter {
 		this.mInflater= LayoutInflater.from(mContext);
 	}
 
+	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
 		return imgs.length;
 	}
 
+	@Override
 	public Object getItem(int position) {
 		// TODO Auto-generated method stub
 		return imgs[position];
 	}
 
+	@Override
 	public long getItemId(int position) {
 		// TODO Auto-generated method stub
 		return position;
@@ -45,6 +47,7 @@ public class UserBackgroundGridViewAdapter extends BaseAdapter {
 		public ImageView iv_bg_item;
 	}
 
+	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder viewHolder;
 		if(convertView==null){

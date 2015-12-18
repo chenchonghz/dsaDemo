@@ -1,10 +1,7 @@
 package com.szrjk.widget;
 
 import android.content.Context;
-import android.content.Intent;
 import android.text.SpannableString;
-import android.text.TextPaint;
-import android.text.style.ClickableSpan;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.szrjk.config.Constant;
-import com.szrjk.dhome.OtherPeopleActivity;
 import com.szrjk.dhome.R;
-import com.szrjk.dhome.Register2Activity;
 import com.szrjk.entity.PostDetail;
 import com.szrjk.entity.UserCard;
 import com.szrjk.util.DisplayTimeUtil;

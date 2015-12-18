@@ -2,18 +2,13 @@ package com.szrjk.adapter;
 
 import java.util.ArrayList;
 
-import com.szrjk.entity.NewType;
 import com.szrjk.explore.NewsFragment;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.View;
 import android.view.ViewGroup;
 
 public class TabPageIndicatorAdapter extends FragmentStatePagerAdapter{

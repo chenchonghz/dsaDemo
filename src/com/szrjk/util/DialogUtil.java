@@ -1,25 +1,15 @@
 package com.szrjk.util;
 
 
-import com.szrjk.dhome.LoginActivity;
 import com.szrjk.dhome.LoginHelper;
 import com.szrjk.dhome.MainActivity;
-import com.szrjk.dhome.R; 
 import com.szrjk.dhome.Register1Activity;
 import com.szrjk.widget.CustomDialog;
 import com.szrjk.widget.CustomDialog.ConfrimButtonListener;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.sax.StartElementListener;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.TextView;
 
 public class DialogUtil {
 	//弹框显示 传入context与text  text可为空
@@ -63,6 +53,7 @@ public class DialogUtil {
 		String Canceltext = "取消";
 		CustomDialog dialog = new CustomDialog(mContext, dialogtext, Confrimtext, Canceltext,
 				new ConfrimButtonListener() {
+					@Override
 					public void confrim() {
 						LoginHelper.Logout(mContext);
 						Intent intent = new Intent(mContext, Register1Activity.class);

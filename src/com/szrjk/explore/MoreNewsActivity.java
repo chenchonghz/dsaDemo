@@ -3,17 +3,14 @@ package com.szrjk.explore;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import javax.crypto.spec.IvParameterSpec;
+
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.DisplayMetrics;
@@ -24,12 +21,12 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.PopupWindow.OnDismissListener;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lidroid.xutils.ViewUtils;
@@ -43,8 +40,6 @@ import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.NewType;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
-import com.szrjk.indicator.TabPageIndicator;
-import com.szrjk.widget.AddNewsTypePopup;
 import com.szrjk.widget.AddNewsTypePopup2;
 import com.szrjk.widget.ColumnHorizontalScrollView;
 import com.szrjk.widget.HeaderView;
@@ -78,6 +73,8 @@ public class MoreNewsActivity extends FragmentActivity {
 	private HeaderView hv_header;
 	@ViewInject(R.id.ll_more_news_activity)
 	private LinearLayout ll_more_news_activity;
+	@ViewInject(R.id.fl_more_type)
+	private FrameLayout fl_more_type;
 	private TabPageIndicatorAdapter mAdapter;
 	private ArrayList<NewType> titles;
 	private ArrayList<String> titles_id;
@@ -95,6 +92,7 @@ public class MoreNewsActivity extends FragmentActivity {
 	private int mScreenHeight;
 	private int popupHeight;
 	private Handler handler = new Handler(){
+		@Override
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case Constant.HAVE_NEW_TYPE:
@@ -108,12 +106,8 @@ public class MoreNewsActivity extends FragmentActivity {
 					indicatorTitle.add("热点");
 				}
 				Log.e("MoreNews", titles_id.toString());
-
-						// TODO Auto-generated method stub
-						setTypeView();	
-
+				setTypeView();	
 				break;
-
 			}
 		};
 	};
@@ -162,7 +156,6 @@ public class MoreNewsActivity extends FragmentActivity {
 				gone.setDuration(300);  
 				gone.start();
 				ll_my_news.setVisibility(View.VISIBLE);
-				Log.e("MoreNews", "长度："+width);
 				ObjectAnimator in = ObjectAnimator.ofFloat(ll_my_news, "translationX", width, 0);  
 				ObjectAnimator show = ObjectAnimator.ofFloat(ll_my_news, "alpha", 0f, 1f);
 				AnimatorSet animSet = new AnimatorSet();
@@ -185,26 +178,89 @@ public class MoreNewsActivity extends FragmentActivity {
 		// TODO Auto-generated method stub
 		indicatorTitle = new ArrayList<String>();
 		titles_id = new ArrayList<String>();
-		Intent intent = getIntent();
-		titles = (ArrayList<NewType>) intent.getSerializableExtra("typeList");
-		if(titles == null || titles.isEmpty()){
-			titles_id.add("RD");
-			indicatorTitle.add("热点");
-		}else{
-			for (NewType i : titles) {
-				String type = i.getTypeId();
-				titles_id.add(type);
-				String title = i.getTypeName();
-				indicatorTitle.add(title);
-			}
-		}
+		getTpyes();
+//		Intent intent = getIntent();
+//		titles = (ArrayList<NewType>) intent.getSerializableExtra("typeList");
+//		if(titles == null || titles.isEmpty()){
+//			titles_id.add("RD");
+//			indicatorTitle.add("热点");
+//		}else{
+//			for (NewType i : titles) {
+//				String type = i.getTypeId();
+//				titles_id.add(type);
+//				String title = i.getTypeName();
+//				indicatorTitle.add(title);
+//			}
+//		}
 		mScreenWidth = getWindowsWidth();
 		mItemWidth = (mScreenWidth / 4)-20;
-		setTypeView();
+//		setTypeView();
 		
-//		getNewType();	
+
 	}
 	
+	private void getTpyes() {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("ServiceName", "queryInfCol");
+		Map<String, Object> busiParams = new HashMap<String, Object>();
+		busiParams.put("userSeqId", Constant.userInfo.getUserSeqId());
+		paramMap.put("BusiParams", busiParams);
+		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			
+			@Override
+			public void success(JSONObject jsonObject) {
+				// TODO Auto-generated method stub
+				ErrorInfo errorObj = JSON.parseObject(
+						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
+				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode()))
+				{
+					JSONObject returnObj = jsonObject
+							.getJSONObject("ReturnInfo");
+					titles = (ArrayList<NewType>)JSON.parseArray(returnObj.getString("ListOut"), NewType.class);
+					if(titles == null || titles.isEmpty()){
+						titles_id.add("RD");
+						indicatorTitle.add("热点");
+					}else{
+						for (NewType i : titles) {
+							String type = i.getTypeId();
+							titles_id.add(type);
+							String title = i.getTypeName();
+							indicatorTitle.add(title);
+						}
+					}
+					setTypeView();
+				}else{
+					titles = new ArrayList<NewType>();
+					titles_id.add("RD");
+					indicatorTitle.add("热点");
+					setTypeView();
+				}
+			}
+			
+			@Override
+			public void start() {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void loading(long total, long current, boolean isUploading) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void failure(HttpException exception, JSONObject jobj) {
+				// TODO Auto-generated method stub
+				titles = new ArrayList<NewType>();
+				titles_id.add("RD");
+				indicatorTitle.add("热点");
+				setTypeView();
+			}
+		});
+	}
+
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
 		// TODO Auto-generated method stub

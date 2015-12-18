@@ -1,6 +1,5 @@
 package com.szrjk.self;
 
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,18 +14,13 @@ import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.MainActivity;
 import com.szrjk.dhome.R;
-import com.szrjk.dhome.R.id;
-import com.szrjk.dhome.R.layout;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.OtherHomePageInfo;
 import com.szrjk.entity.TCity;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
 import com.szrjk.index.VSelectActivity;
-import com.szrjk.util.DDateUtils;
 import com.szrjk.util.ImageLoaderUtil;
-import com.szrjk.util.ToastUtils;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
@@ -34,7 +28,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.InputType;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -78,6 +71,7 @@ public class EditDataOthersActivity extends Activity {
 	TCity tCity = new TCity();
 	private int Type  = InputType.TYPE_CLASS_TEXT| InputType.TYPE_TEXT_VARIATION_NORMAL;
 	private int RESULT_VSElECTCITY = 101;
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ViewUtils.inject(this);
@@ -151,6 +145,7 @@ public class EditDataOthersActivity extends Activity {
 		busiParams.put("backgroundUrl",homePageInfo.getBackgroundUrl());
 		paramMap.put("BusiParams", busiParams);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj  =JSON.parseObject(
 						jsonObject.getString("ErrorInfo"),ErrorInfo.class);
@@ -163,14 +158,17 @@ public class EditDataOthersActivity extends Activity {
 				}
 			}
 			
+			@Override
 			public void start() {
 				
 			}
 			
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 				
 			}
 			
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 				
 			}
@@ -208,7 +206,7 @@ public class EditDataOthersActivity extends Activity {
 		handler.post(new Runnable() {  
 			@Override  
 			public void run() {  
-				sv_edit_other.fullScroll(ScrollView.FOCUS_DOWN);  
+				sv_edit_other.fullScroll(View.FOCUS_DOWN);  
 			}  
 		});
 	}
@@ -231,11 +229,12 @@ public class EditDataOthersActivity extends Activity {
 		handler.post(new Runnable() {  
 			@Override  
 			public void run() {  
-				sv_edit_other.fullScroll(ScrollView.FOCUS_DOWN);  
+				sv_edit_other.fullScroll(View.FOCUS_DOWN);  
 			}  
 		});
 	}
 	//获取回传的tcity
+	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode==101&&resultCode==11) {
 			if (data==null) {
@@ -272,7 +271,7 @@ public class EditDataOthersActivity extends Activity {
 		handler.post(new Runnable() {  
 			@Override  
 			public void run() {  
-				sv_edit_other.fullScroll(ScrollView.FOCUS_DOWN);  
+				sv_edit_other.fullScroll(View.FOCUS_DOWN);  
 			}  
 		});
 	}
@@ -293,7 +292,7 @@ public class EditDataOthersActivity extends Activity {
 		handler.post(new Runnable() {  
 			@Override  
 			public void run() {  
-				sv_edit_other.fullScroll(ScrollView.FOCUS_DOWN);  
+				sv_edit_other.fullScroll(View.FOCUS_DOWN);  
 			}  
 		});
 	}

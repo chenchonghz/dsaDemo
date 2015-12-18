@@ -28,13 +28,11 @@ import com.szrjk.entity.OtherHomePageInfo;
 import com.szrjk.entity.TCity;
 import com.szrjk.entity.UserInfo;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
-import com.szrjk.self.EditDataActivity;
 import com.szrjk.self.EditDataDoctorsActivity;
 import com.szrjk.self.EditDataOthersActivity;
 import com.szrjk.self.EditDataStudentsActivity;
 import com.szrjk.self.UserAvatarImageChangerActivity;
 import com.szrjk.util.DDateUtils;
-import com.szrjk.util.ImageLoaderUtil;
 
 /**
  * 

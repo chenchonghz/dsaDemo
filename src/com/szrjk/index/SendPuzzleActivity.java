@@ -18,7 +18,6 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
@@ -345,6 +344,7 @@ public class SendPuzzleActivity extends BaseActivity {
 			public void failure(HttpException exception, JSONObject jsonObject) {
 				final String err = jsonObject.toString();
 				runOnUiThread(new Runnable() {
+					@Override
 					public void run() {
 						dialog.dismiss();
 						showToast(instance, "发帖失败、再试试呗", 0);
@@ -1098,6 +1098,7 @@ public class SendPuzzleActivity extends BaseActivity {
 	 * 当回收之后，会执行onCreate方法里面的检查草稿方法。导致把草稿恢复覆盖当前编辑的内容
 	 * @param newConfig
 	 */
+	@Override
 	public void onConfigurationChanged(Configuration newConfig)
 	{
 		Log.i("onConfigurationChanged", "onConfigurationChanged");

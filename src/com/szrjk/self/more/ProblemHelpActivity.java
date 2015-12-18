@@ -53,9 +53,11 @@ public class ProblemHelpActivity extends BaseActivity {
 		Intent intent = getIntent();
 		type = intent.getStringExtra("postType");
 		postListComm = new PostListComm(instance, userId, mPullRefreshListView, new IPostListCallback() {
+			@Override
 			public void getNewPosts(String userId2, String basePostId, boolean isNew, String beginNum, String endNum) {
 				doGetNewPosts(userId2,basePostId,isNew,beginNum,endNum);
 			}
+			@Override
 			public void getMorePosts(String userId2, String basePostId, boolean isNew, String beginNum, String endNum) {
 				doGetMorePosts(userId2,basePostId,isNew,beginNum,endNum);
 			}

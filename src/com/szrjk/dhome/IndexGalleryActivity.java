@@ -23,8 +23,6 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
-import com.szrjk.entity.IContextClickOper;
-import com.szrjk.entity.IPhotoClickOper;
 import com.szrjk.entity.OperContextClick;
 import com.szrjk.util.ImageItem;
 import com.szrjk.util.ImageLoaderUtil;
@@ -148,6 +146,7 @@ public class IndexGalleryActivity extends Activity
 	private OnPageChangeListener pageChangeListener = new OnPageChangeListener()
 	{
 
+		@Override
 		public void onPageSelected(int arg0)
 		{
 			location = arg0;
@@ -155,11 +154,13 @@ public class IndexGalleryActivity extends Activity
 			id = arg0;
 		}
 
+		@Override
 		public void onPageScrolled(int arg0, float arg1, int arg2)
 		{
 
 		}
 
+		@Override
 		public void onPageScrollStateChanged(int arg0)
 		{
 
@@ -203,22 +204,26 @@ public class IndexGalleryActivity extends Activity
 			size = listViews == null ? 0 : listViews.size();
 		}
 
+		@Override
 		public int getCount()
 		{
 			return size;
 		}
 
+		@Override
 		public int getItemPosition(Object object)
 		{
 
 			return POSITION_NONE;
 		}
 
+		@Override
 		public void destroyItem(View arg0, int arg1, Object arg2)
 		{
 			((ViewPagerFixed) arg0).removeView(listViews.get(arg1 % size));
 		}
 
+		@Override
 		public void finishUpdate(View arg0)
 		{
 		}
@@ -267,6 +272,7 @@ public class IndexGalleryActivity extends Activity
 			//return super.instantiateItem(container, position);
 		}
 
+		@Override
 		public boolean isViewFromObject(View arg0, Object arg1)
 		{
 			return arg0 == arg1;

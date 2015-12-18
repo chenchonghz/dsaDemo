@@ -13,17 +13,13 @@ import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.R;
-import com.szrjk.dhome.R.layout;
-import com.szrjk.dhome.R.menu;
 import com.szrjk.entity.ErrorInfo;
-import com.szrjk.entity.UserCard;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
 import com.szrjk.util.ToastUtils;
 import com.szrjk.widget.HeaderView;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -34,13 +30,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 @ContentView(R.layout.activity_circle_invite_firend)
 public class CircleInviteFirendActivity extends FragmentActivity implements OnClickListener {
@@ -78,6 +72,7 @@ public class CircleInviteFirendActivity extends FragmentActivity implements OnCl
 	private LinearLayout lly_btn;
 	private Dialog dialog;
 	private String fromCreate;
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ViewUtils.inject(this);
@@ -114,6 +109,7 @@ public class CircleInviteFirendActivity extends FragmentActivity implements OnCl
 		});
 		vp_invite.addOnPageChangeListener(new OnPageChangeListener() {
 
+			@Override
 			public void onPageSelected(int position) {
 				switch (position) {
 				case 0:
@@ -128,10 +124,12 @@ public class CircleInviteFirendActivity extends FragmentActivity implements OnCl
 				}
 			}
 
+			@Override
 			public void onPageScrolled(int arg0, float arg1, int arg2) {
 
 			}
 
+			@Override
 			public void onPageScrollStateChanged(int arg0) {
 
 			}
@@ -152,13 +150,16 @@ public class CircleInviteFirendActivity extends FragmentActivity implements OnCl
 		public MypagerAdapter(FragmentManager fm) {
 			super(fm);
 		}
+		@Override
 		public Fragment getItem(int position) {
 			return list.get(position);
 		}
+		@Override
 		public int getCount() {
 			return list.size();
 		}
 	}
+	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.rly_friend:
@@ -194,6 +195,7 @@ public class CircleInviteFirendActivity extends FragmentActivity implements OnCl
 		paramMap.put("BusiParams", busiParams);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
 
+			@Override
 			public void success(JSONObject jsonObject) {
 				dialog.dismiss();
 				tv_invite.setClickable(true);
@@ -216,17 +218,21 @@ public class CircleInviteFirendActivity extends FragmentActivity implements OnCl
 				}
 			}
 
+			@Override
 			public void start() {
 //				dialog.setCancelable(false);
 				dialog.show();
 				tv_invite.setClickable(false);
 			}
 
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 			}
 
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 				runOnUiThread(new Runnable() {
+					@Override
 					public void run() {
 						dialog.dismiss();
 						ToastUtils.showMessage(instance, "邀请失败，再试一次");
@@ -297,6 +303,7 @@ public class CircleInviteFirendActivity extends FragmentActivity implements OnCl
 		textView.setText(msg);
 		return dialog;
 	}
+	@Override
 	protected void onDestroy() {
 		inviteFriendFragment = null;
 		invitefollowFragment = null;

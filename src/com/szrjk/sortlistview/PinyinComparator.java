@@ -11,6 +11,7 @@ import com.szrjk.entity.LibraryEntity;
  */
 public class PinyinComparator implements Comparator<LibraryEntity> {
 
+	@Override
 	public int compare(LibraryEntity o1, LibraryEntity o2) {
 		if (o1.getSortLetters().equals("@")
 				|| o2.getSortLetters().equals("#")) {

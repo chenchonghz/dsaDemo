@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.szrjk.dhome.R;
 import com.szrjk.entity.LibraryEntity;
-import com.szrjk.util.DjsonUtils;
 
 public class SortAdapter extends BaseAdapter implements SectionIndexer{
 	private List<LibraryEntity> list = null;
@@ -38,18 +37,22 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer{
 		notifyDataSetChanged();
 	}
 
+	@Override
 	public int getCount() {
 		return this.list.size();
 	}
 
+	@Override
 	public Object getItem(int position) {
 		return list.get(position);
 	}
 
+	@Override
 	public long getItemId(int position) {
 		return position;
 	}
 
+	@Override
 	public View getView(final int position, View view, ViewGroup arg2) {
 		ViewHolder viewHolder = null;
 		final LibraryEntity mContent = list.get(position);
@@ -95,6 +98,7 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer{
 	/**
 	 * ���ListView�ĵ�ǰλ�û�ȡ���������ĸ��Char asciiֵ
 	 */
+	@Override
 	public int getSectionForPosition(int position) {
 		return list.get(position).getSortLetters().charAt(0);
 	}
@@ -102,6 +106,7 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer{
 	/**
 	 * ��ݷ��������ĸ��Char asciiֵ��ȡ���һ�γ��ָ�����ĸ��λ��
 	 */
+	@Override
 	public int getPositionForSection(int section) {
 		for (int i = 0; i < getCount(); i++) {
 			String sortStr = list.get(i).getSortLetters();

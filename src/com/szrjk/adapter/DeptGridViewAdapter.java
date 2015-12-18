@@ -3,7 +3,6 @@ package com.szrjk.adapter;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -87,7 +86,7 @@ public class DeptGridViewAdapter extends BaseAdapter{
 	{
 	 // We need a fake parent
 	 FrameLayout buffer = new FrameLayout( context );
-	 android.widget.AbsListView.LayoutParams layoutParams = new android.widget.AbsListView.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+	 android.widget.AbsListView.LayoutParams layoutParams = new android.widget.AbsListView.LayoutParams(android.view.ViewGroup.LayoutParams.WRAP_CONTENT, android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
 	 buffer.addView( cell, layoutParams);
 	 cell.forceLayout();
 	 cell.measure(1000, 1000);

@@ -88,6 +88,7 @@ public class ExploreFragment extends Fragment
 	 * 定时轮播viewPager
 	 */
 	private Handler handler = new Handler(){
+		@Override
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case Constant.HAVE_NEW_POST:

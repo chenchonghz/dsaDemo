@@ -3,7 +3,6 @@ package com.szrjk.index;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;

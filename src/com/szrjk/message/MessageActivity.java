@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.exception.DbException;
@@ -18,7 +17,6 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.R;
-import com.szrjk.dhome.R.layout;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.TMessage;
 import com.szrjk.entity.UserCard;
@@ -32,30 +30,20 @@ import com.szrjk.pull.PullToRefreshListView;
 import com.szrjk.util.ToastUtils;
 import com.szrjk.widget.HeaderView;
 
-import android.R.string;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Paint.Join;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLayoutChangeListener;
-import android.view.WindowManager;
-import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ScrollView;
-import android.widget.Toast;
 @ContentView(R.layout.activity_message)
 public class MessageActivity extends BaseActivity implements OnClickListener {
 	@ViewInject(R.id.rly_message)
@@ -125,6 +113,7 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 		busiParam.put("objUserId", Constant.userInfo.getUserSeqId());
 		paramMap.put("BusiParams", busiParam);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj  =JSON.parseObject(
 						jsonObject.getString("ErrorInfo"),ErrorInfo.class);
@@ -155,11 +144,14 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 				}
 
 			}
+			@Override
 			public void start() {
 			}
 
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 			}
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 			}
 		});
@@ -170,6 +162,7 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 	private void initListener() {
 		LinearLayout lly = hv_message.getLLy();
 		lly.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(View arg0) {
 				instance.finish();
 				time.cancel();
@@ -179,6 +172,7 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 		iv_send.setOnClickListener(instance);
 		mPullToRefreshListView.setOnRefreshListener(new OnRefreshListener<ListView>() {
 
+			@Override
 			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
 				time.cancel();
 				getMessage();
@@ -235,6 +229,7 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 		paramMap.put("BusiParams", busiParams);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
 
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -274,14 +269,17 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 				}
 			}
 
+			@Override
 			public void start() {
 
 			}
 
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 
 			}
 
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 
 			}
@@ -328,6 +326,7 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 		busiParams.put("chatType", "1");
 		paramMap.put("BusiParams", busiParams);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -354,14 +353,17 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 				}
 			}
 
+			@Override
 			public void start() {
 
 			}
 
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 
 			}
 
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 
 			}

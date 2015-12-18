@@ -30,6 +30,7 @@ private LinearLayout lly_user_avator_shower;
 private int ScreenX;
 
 
+	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);

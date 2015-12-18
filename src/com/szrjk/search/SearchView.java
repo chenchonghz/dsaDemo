@@ -40,11 +40,13 @@ public class SearchView extends LinearLayout implements OnClickListener {
 	 * 搜索键
 	 */
 	private ImageView iv_search;
+	private LinearLayout lly_search;
 
 	/**
 	 * 返回
 	 */
 	private ImageView ivBack;
+	private LinearLayout lly_back;
 
 	/**
 	 * 上下文对象
@@ -94,6 +96,8 @@ public class SearchView extends LinearLayout implements OnClickListener {
 		iv_search = (ImageView) findViewById(R.id.iv_search);
 		ivBack = (ImageView) findViewById(R.id.iv_back);
 		lvTips = (ListView) findViewById(R.id.lv_search_tips);
+		lly_back = (LinearLayout) findViewById(R.id.lly_back);
+		lly_search = (LinearLayout) findViewById(R.id.lly_search);
 
 		lvTips.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
@@ -110,8 +114,8 @@ public class SearchView extends LinearLayout implements OnClickListener {
 		});
 
 		ivDelete.setOnClickListener(this);
-		ivBack.setOnClickListener(this);
-		iv_search.setOnClickListener(this);
+		lly_back.setOnClickListener(this);
+		lly_search.setOnClickListener(this);
 
 		etInput.addTextChangedListener(new EditChangedListener());
 		etInput.setOnClickListener(this);
@@ -242,10 +246,10 @@ public class SearchView extends LinearLayout implements OnClickListener {
 			etInput.setText("");
 			ivDelete.setVisibility(GONE);
 			break;
-		case R.id.iv_back:
+		case R.id.lly_back:
 			((Activity) mContext).finish();
 			break;
-		case R.id.iv_search:
+		case R.id.lly_search:
 			String search = etInput.getText().toString();
 			if (search.equals("")) {
 				ToastUtils.showMessage(mContext, "请输入搜索内容!");

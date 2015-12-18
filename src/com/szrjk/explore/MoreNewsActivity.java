@@ -54,6 +54,7 @@ public class MoreNewsActivity extends FragmentActivity {
 	@ViewInject(R.id.mRadioGroup_content)
 	private LinearLayout mRadioGroup_content;
 	@ViewInject(R.id.rl_column)
+	//
 	private RelativeLayout rl_column;
 	@ViewInject(R.id.shade_left)
 	public ImageView shade_left;

@@ -38,10 +38,6 @@ public class Constant
 
 //	public static String RQEUEST_URL = "http://192.168.1.71:8888/qry";
 
-
-
-
-	
 //	public static final String RQEUEST_URL = "http://192.168.2.217:8888/qry";
 
 	// public static final String RQEUEST_URL = "http://112.74.126.158:8888/qry";

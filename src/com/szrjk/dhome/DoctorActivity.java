@@ -464,7 +464,7 @@ public class DoctorActivity extends BaseActivity implements OnClickListener
 		// busiParams.put("userSeqId", "100543");
 		busiParams.put("userSeqId", userId);
 
-		List l = new ArrayList();
+//		List l = new ArrayList();
 		List list_id = new ArrayList();
 
 		if (bt_identity.getTag().equals("1"))
@@ -474,11 +474,12 @@ public class DoctorActivity extends BaseActivity implements OnClickListener
 
 			m1.put("certType", bt_identity.getTag());
 			m1.put("certId", identity_imgname);
+			m1.put("certPicUrl", identity_imgurl);
 			list_id.add(m1);
 
-			Map m11 = new HashMap();
-			m11.put("picUrl", identity_imgurl);
-			l.add(m11);
+//			Map m11 = new HashMap();
+//			m11.put("picUrl", identity_imgurl);
+//			l.add(m11);
 
 		}
 		if (bt_certificate.getTag().equals("2"))
@@ -486,11 +487,12 @@ public class DoctorActivity extends BaseActivity implements OnClickListener
 			Map m2 = new HashMap();
 			m2.put("certType", bt_certificate.getTag());
 			m2.put("certId", cetificater_imgname);
+			m2.put("certPicUrl", cetificater_imgurl);
 			list_id.add(m2);
 
-			Map m22 = new HashMap();
-			m22.put("picUrl", cetificater_imgurl);
-			l.add(m22);
+//			Map m22 = new HashMap();
+//			m22.put("picUrl", cetificater_imgurl);
+//			l.add(m22);
 
 		}
 		if (bt_workpermit.getTag().equals("3"))
@@ -498,16 +500,17 @@ public class DoctorActivity extends BaseActivity implements OnClickListener
 			Map m3 = new HashMap();
 			m3.put("certType", bt_workpermit.getTag());
 			m3.put("certId", workpermit_imgname);
+			m3.put("certPicUrl", workpermit_imgurl);
 			list_id.add(m3);
 
-			Map m33 = new HashMap();
-			m33.put("picUrl", workpermit_imgurl);
-			l.add(m33);
+//			Map m33 = new HashMap();
+//			m33.put("picUrl", workpermit_imgurl);
+//			l.add(m33);
 		}
 
-		busiParams.put("listCertIn", list_id);
+		busiParams.put("certListIn", list_id);
 
-		busiParams.put("listCertPicIn", l);
+//		busiParams.put("listCertPicIn", l);
 
 		paramMap.put("BusiParams", busiParams);
 

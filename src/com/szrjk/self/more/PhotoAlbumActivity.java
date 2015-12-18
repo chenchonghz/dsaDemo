@@ -43,6 +43,7 @@ public class PhotoAlbumActivity extends BaseActivity{
 	private ArrayList<PhotoAlbum> photoAlbumList;
 	
 	private Handler handler=new Handler(){
+		@Override
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case GET_PHOTO_ALBUM_SUCCESS:

@@ -10,15 +10,12 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.adapter.FriendRequestAdapter;
 import com.szrjk.config.Constant;
-import com.szrjk.dhome.OtherPeopleActivity;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.RequestList;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
 
-import android.R.integer;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -26,10 +23,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.Button;
 import android.widget.ListView;
 
 public class FriendRequestFragment extends Fragment {
@@ -41,6 +34,7 @@ public class FriendRequestFragment extends Fragment {
 
 	
 
+	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_friend_request, null);
@@ -65,6 +59,7 @@ public class FriendRequestFragment extends Fragment {
 		paramMap.put("BusiParams", busiParams);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
 
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -76,9 +71,9 @@ public class FriendRequestFragment extends Fragment {
 							returnObj.getString("requestList"),RequestList.class);
 					Log.i("TAG", requestlist.size()+"");
 					if (requestlist.size()==0) {
-						friendActivity.changeremind(2);
+						FriendActivity.changeremind(2);
 					}else{
-						friendActivity.changeremind(1);
+						FriendActivity.changeremind(1);
 //						Log.i("TAG", requestlist.toString());
 						for (RequestList rl:requestlist) {
 							RequestState.put(rl.getUserCard().getUserSeqId(), 0);
@@ -90,13 +85,16 @@ public class FriendRequestFragment extends Fragment {
 				}
 			}
 
+			@Override
 			public void start() {
 			}
 
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 
 			}
 
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 
 			}

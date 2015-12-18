@@ -9,7 +9,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lidroid.xutils.exception.HttpException;
 import com.szrjk.adapter.CircleInviteAdapter;
-import com.szrjk.adapter.CircleInviteAdapter.ViewHolder;
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.ErrorInfo;
@@ -30,10 +29,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class InviteFansFragment extends Fragment {
 	private  CircleInviteFirendActivity instance;
@@ -46,6 +43,7 @@ public class InviteFansFragment extends Fragment {
 		super();
 	}
 
+	@Override
 	public View onCreateView(LayoutInflater inflater,
 			ViewGroup container,Bundle savedInstanceState) {
 		dialog = createDialog(getActivity(), "加载中...");
@@ -64,6 +62,7 @@ public class InviteFansFragment extends Fragment {
 		busiParams.put("userSeqId",Constant.userInfo.getUserSeqId());
 		paramMap.put("BusiParams", busiParams);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -82,12 +81,15 @@ public class InviteFansFragment extends Fragment {
 				}
 			}
 
+			@Override
 			public void start() {dialog.show();
 
 			}
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 
 			}
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 				dialog.dismiss();
 				ToastUtils.showMessage(getActivity(), "获取失败");
@@ -104,6 +106,7 @@ public class InviteFansFragment extends Fragment {
 		lv_fans.setAdapter(fans_adapter);
 		fans_adapter.initDate();
 		lv_fans.setOnItemClickListener(new OnItemClickListener() {
+			@Override
 			public void onItemClick(AdapterView<?> arg0, View view, int position,
 					long arg3) {
 				String uid = fanslist.get(position).getUserSeqId();
@@ -126,6 +129,7 @@ public class InviteFansFragment extends Fragment {
 		});
 		select_all.setOnClickListener(new OnClickListener() {
 
+			@Override
 			public void onClick(View arg0) {
 				for (int i = 0; i < fanslist.size(); i++) {
 					if (fans_adapter.getIsSelected().get(fanslist.get(i).getUserSeqId())==null) {

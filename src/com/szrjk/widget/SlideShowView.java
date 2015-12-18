@@ -139,7 +139,7 @@ public class SlideShowView extends FrameLayout
 
 			ImageView dotView = new ImageView(context);
 			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-					LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+					android.view.ViewGroup.LayoutParams.WRAP_CONTENT, android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
 			params.leftMargin = 4;
 			params.rightMargin = 4;
 			dotLayout.addView(dotView, params);
@@ -254,12 +254,12 @@ public class SlideShowView extends FrameLayout
 			{
 				if (i == pos)
 				{
-					((View) dotViewsList.get(pos))
+					dotViewsList.get(pos)
 							.setBackgroundResource(R.drawable.dot_blur);
 				}
 				else
 				{
-					((View) dotViewsList.get(i))
+					dotViewsList.get(i)
 							.setBackgroundResource(R.drawable.dot_blur);
 				}
 			}

@@ -49,6 +49,7 @@ public class CircleInviteAdapter extends BaseAdapter {
 	public  void setIsSelected(HashMap<String, Boolean> isSelected) {  
 		CircleInviteAdapter.isSelected = isSelected;  
 	}  
+	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
 		return list.size();
@@ -79,7 +80,7 @@ public class CircleInviteAdapter extends BaseAdapter {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 		viewHolder.userCard.setContext(mContext);
-		viewHolder.userCard.setUser((UserCard)list.get(position));
+		viewHolder.userCard.setUser(list.get(position));
 		// 根据isSelected来设置checkbox的选中状况
 		if (isSelected.get(list.get(position).getUserSeqId())!=null) {
 			viewHolder.cb.setChecked(isSelected.get(list.get(position).getUserSeqId()));

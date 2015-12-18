@@ -138,6 +138,7 @@ public class PostDetailHeaderView extends RelativeLayout {
 		busiParams.put("postId", postId);
 		paramMap.put("BusiParams", busiParams);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -149,14 +150,17 @@ public class PostDetailHeaderView extends RelativeLayout {
 				}
 			}
 
+			@Override
 			public void start() {
 
 			}
 
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 
 			}
 
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 				ToastUtils.showMessage(context, jobj.getString("ErrorMessage"));
 			}

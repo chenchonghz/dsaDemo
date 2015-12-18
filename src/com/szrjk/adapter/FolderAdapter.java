@@ -74,9 +74,9 @@ public class FolderAdapter extends BaseAdapter
 			if (imageView != null && bitmap != null)
 			{
 				String url = (String) params[0];
-				if (url != null && url.equals((String) imageView.getTag()))
+				if (url != null && url.equals(imageView.getTag()))
 				{
-					((ImageView) imageView).setImageBitmap(bitmap);
+					imageView.setImageBitmap(bitmap);
 				}
 				else
 				{
@@ -166,6 +166,7 @@ public class FolderAdapter extends BaseAdapter
 			this.choose_back = choose_back;
 		}
 
+		@Override
 		public void onClick(View v)
 		{
 			ShowAllPhoto.dataList = (ArrayList<ImageItem>) AlbumActivity.contentList
@@ -175,7 +176,7 @@ public class FolderAdapter extends BaseAdapter
 			intent.putExtra("folderName", folderName);
 			intent.setClass(mContext, ShowAllPhoto.class);
 			mContext.startActivity(intent);
-			choose_back.setVisibility(v.VISIBLE);
+			choose_back.setVisibility(View.VISIBLE);
 		}
 	}
 

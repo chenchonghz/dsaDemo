@@ -4,8 +4,6 @@ package com.szrjk.self;
 
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.ViewUtils;
-import com.lidroid.xutils.bitmap.BitmapDisplayConfig;
-import com.lidroid.xutils.bitmap.core.BitmapSize;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.config.Constant;
@@ -13,18 +11,15 @@ import com.szrjk.dhome.R;
 import com.szrjk.widget.HeaderView;
 
 import android.os.Bundle;
-import android.provider.Contacts;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 /**
  * 用户点击自己头像显示大图界面
  * @author 郑斯铭
@@ -44,6 +39,7 @@ public class UserAvatarImageChangerActivity extends Activity implements OnClickL
 	private Button btn_user_avatar_change;
 
 
+		@Override
 		protected void onCreate(Bundle savedInstanceState) 
 		{
 			super.onCreate(savedInstanceState);
@@ -95,6 +91,7 @@ public class UserAvatarImageChangerActivity extends Activity implements OnClickL
 			return Screenwidth;
 		}
 		//点击线性布局黑色界面退出 ，点击btn更换头像
+		@Override
 		public void onClick(View view) {
 			switch (view.getId()) {
 			case R.id.lly_user_avator_changer:

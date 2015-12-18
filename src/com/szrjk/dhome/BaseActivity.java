@@ -11,7 +11,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +24,6 @@ import com.szrjk.http.DHttpService;
 import com.szrjk.util.*;
 import com.szrjk.widget.AddPhotoPopup;
 import com.szrjk.widget.ListPopup;
-import com.szrjk.widget.PostSendPopup;
 import com.umeng.analytics.MobclickAgent;
 
 public class BaseActivity extends Activity

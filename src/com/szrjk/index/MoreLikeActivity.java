@@ -26,7 +26,6 @@ import com.szrjk.pull.PullToRefreshBase;
 import com.szrjk.pull.PullToRefreshBase.Mode;
 import com.szrjk.pull.PullToRefreshBase.OnRefreshListener;
 import com.szrjk.pull.PullToRefreshListView;
-import com.szrjk.util.DjsonUtils;
 
 @ContentView(R.layout.activity_more_like)
 public class MoreLikeActivity extends BaseActivity{
@@ -89,6 +88,7 @@ public class MoreLikeActivity extends BaseActivity{
 		busiParams.put("endNum", "10");
 		paramMap.put("BusiParams", busiParams);
 		httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				try {
 					ErrorInfo errorObj = JSON.parseObject(
@@ -127,10 +127,13 @@ public class MoreLikeActivity extends BaseActivity{
 					Log.e(TAG, "", e);
 				}
 			}
+			@Override
 			public void start() {
 			}
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 			}
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 			}
 		});
@@ -144,6 +147,7 @@ public class MoreLikeActivity extends BaseActivity{
 	
 	private void initListener(){
 		ptrl_more_like.setOnRefreshListener(new OnRefreshListener<ListView>() {
+			@Override
 			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
 				//				new GetDataTask().execute();
 				

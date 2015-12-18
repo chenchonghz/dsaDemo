@@ -36,6 +36,7 @@ import com.szrjk.dhome.IndexGalleryActivity;
 import com.szrjk.dhome.OtherActivity;
 import com.szrjk.dhome.R;
 import com.szrjk.dhome.StudentActivity;
+import com.szrjk.entity.AuthencitionEntity;
 import com.szrjk.entity.CeriItemEntity;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.IPopupItemCallback;
@@ -93,45 +94,19 @@ public class MainAuthenticationActivity extends BaseActivity implements OnClickL
 				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode())) {
 					JSONObject returnObj = jsonObject.getJSONObject("ReturnInfo");
 					//					showToast(instance, "!"+returnObj, Toast.LENGTH_SHORT);
-					Log.i("getUserAuthenticationInfo", ""+returnObj);
+//					Log.i("getUserAuthenticationInfo", ""+returnObj);
 					try {
-						//						AuthencitionEntity lau = JSON.parseObject(returnObj.toString(), AuthencitionEntity.class);
-						//						Log.i("lau",lau.toString());
-						JSONArray cer = returnObj.getJSONArray("certListOut");
-						Log.i("cer", ""+cer.toString());
-						//						 [{"certName":"身份证","certType":1},
-						//						    {"picUrl":"http://dd-face.digi123.cn/201512/7c1d53de9a598db8.jpg"}]
-						int len = cer.size();
-						if (len > 1) {
-							ArrayList<String> ls = new ArrayList<String>();
-							switch (len) {
-							case 2:
-								JSONObject cobj2 = cer.getJSONObject(1);
-								ls.add(cobj2.getString("picUrl"));
-								break;
-							case 4:
-								JSONObject cobj3 = cer.getJSONObject(2);
-								ls.add(cobj3.getString("picUrl"));
-								JSONObject cobj4 = cer.getJSONObject(3);
-								ls.add(cobj4.getString("picUrl"));
-
-								break;
-							case 6:
-								JSONObject cobj5 = cer.getJSONObject(3);
-								ls.add(cobj5.getString("picUrl"));
-								JSONObject cobj6 = cer.getJSONObject(4);
-								ls.add(cobj6.getString("picUrl"));
-								JSONObject cobj7 = cer.getJSONObject(5);
-								ls.add(cobj7.getString("picUrl"));
-								break;
-							}
-//							Log.i("len", ""+len);
-							updateUI(ls);
-						}else{
-							Log.i("len", ""+len);
+						AuthencitionEntity lau = JSON.parseObject(returnObj.toString(), AuthencitionEntity.class);
+						
+						List<CeriItemEntity> cerData = lau.getCertListOut();
+						
+						Log.i("cerData",cerData.toString());
+						if (cerData.size() == 0) {
+							//0；一个证件都没有，提示目前无证件
 							textView1.setVisibility(View.VISIBLE);
+						}else{
+							updateUI(cerData);
 						}
-						//						updateUI(lau);//更新UI
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -144,7 +119,7 @@ public class MainAuthenticationActivity extends BaseActivity implements OnClickL
 
 	// 更新UI
 	//	private void updateUI(AuthencitionEntity lau) {
-	private void updateUI(ArrayList<String> rulls) {
+	private void updateUI(List<CeriItemEntity> cerData) {
 		try {
 			//			picls = (ArrayList<PicItemEntity>) lau.getPicListOut();
 			//			cerls = (ArrayList<CeriItemEntity>) lau.getCertListOut();
@@ -152,13 +127,13 @@ public class MainAuthenticationActivity extends BaseActivity implements OnClickL
 //				textView1.setVisibility(View.VISIBLE);
 //				//				textView1.setGravity(Gravity.CENTER);
 //			}
-			imgageArr = new String[rulls.size()];
+			imgageArr = new String[cerData.size()];
 			//取得图片URL数组，预览用的
-			for (int i = 0; i < rulls.size(); i++) {
+			for (int i = 0; i < cerData.size(); i++) {
 //				imgageArr[i] = ((PicItemEntity) picls.get(i)).getPicUrl();
-				imgageArr[i] = rulls.get(i);
+				imgageArr[i] = cerData.get(i).getCertPicUrl();
 			}
-			lv_auth.setAdapter(new MyCerAdapter(rulls));
+			lv_auth.setAdapter(new MyCerAdapter(cerData));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -166,23 +141,21 @@ public class MainAuthenticationActivity extends BaseActivity implements OnClickL
 
 	class MyCerAdapter extends BaseAdapter{
 
-		ArrayList<PicItemEntity> picls;
-		ArrayList<CeriItemEntity> cerls;
-		ArrayList<String> urlls;
+		List<CeriItemEntity> cerData;
 //		public MyCerAdapter(ArrayList<PicItemEntity> picls,ArrayList<CeriItemEntity> cerls) {
-		public MyCerAdapter(ArrayList<String> urlls) {
+		public MyCerAdapter(List<CeriItemEntity> cerData) {
 //			this.picls = picls;
 //			this.cerls = cerls;
-			this.urlls = urlls;
+			this.cerData = cerData;
 		}
 		@Override
 		public int getCount() {
-			return urlls.size();
+			return cerData.size();
 		}
 
 		@Override
 		public Object getItem(int index) {
-			return urlls.get(index);
+			return cerData.get(index);
 		}
 
 		@Override
@@ -191,14 +164,28 @@ public class MainAuthenticationActivity extends BaseActivity implements OnClickL
 		}
 
 		@Override
-		public View getView(int index, View arg1, ViewGroup arg2) {
+		public View getView(final int index, View arg1, ViewGroup arg2) {
 			View v = View.inflate(instance, R.layout.authentications_item, null);
-			TextView textView = (TextView) v.findViewById(R.id.tv_time);
+			TextView textView = (TextView) v.findViewById(R.id.tv_type);
+			TextView tv_time = (TextView) v.findViewById(R.id.tv_time);
 			ImageView imageView = (ImageView) v.findViewById(R.id.iv_authemtications);
-			textView.setText("证件"+String.valueOf(index+1));
-			Log.i("getView", urlls.get(index));
-			ImageLoaderUtil util = new ImageLoaderUtil(instance, urlls.get(index), imageView, R.drawable.pic_downloadfailed_bg, R.drawable.pic_downloadfailed_bg);
+//			textView.setText("证件"+String.valueOf(index+1));
+			CeriItemEntity data = cerData.get(index);
+			textView.setText(data.getCertName());
+			tv_time.setText(data.getCreateDate());
+			ImageLoaderUtil util = new ImageLoaderUtil(instance, data.getCertPicUrl(), imageView, R.drawable.pic_downloadfailed_bg, R.drawable.pic_downloadfailed_bg);
 			util.showImage();
+			imageView.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(instance,IndexGalleryActivity.class);
+					Bundle bundle = new Bundle();
+					bundle.putInt("position", index);
+					intent.putExtras(bundle);
+					intent.putExtra("imgs", imgageArr);
+					startActivity(intent);
+				}
+			});
 			return v;
 		}
 
@@ -220,15 +207,15 @@ public class MainAuthenticationActivity extends BaseActivity implements OnClickL
 			e.printStackTrace();
 		}
 	}
-	@OnItemClick(R.id.lv_auth)
-	public void caseItemClick(AdapterView<?> adapterView, View view, int num,long position) {
-		Intent intent = new Intent(instance,IndexGalleryActivity.class);
-		Bundle bundle = new Bundle();
-		bundle.putInt("position", (int)position);
-		intent.putExtras(bundle);
-		intent.putExtra("imgs", imgageArr);
-		startActivity(intent);
-	}
+//	@OnItemClick(R.id.lv_auth)
+//	public void caseItemClick(AdapterView<?> adapterView, View view, int num,long position) {
+//		Intent intent = new Intent(instance,IndexGalleryActivity.class);
+//		Bundle bundle = new Bundle();
+//		bundle.putInt("position", (int)position);
+//		intent.putExtras(bundle);
+//		intent.putExtra("imgs", imgageArr);
+//		startActivity(intent);
+//	}
 
 	/**显示sendWindow**/
 	private void showPopNew(View v){
@@ -287,6 +274,7 @@ public class MainAuthenticationActivity extends BaseActivity implements OnClickL
 	 * 当回收之后，会执行onCreate方法里面的检查草稿方法。导致把草稿恢复覆盖当前编辑的内容
 	 * @param newConfig
 	 */
+	@Override
 	public void onConfigurationChanged(Configuration newConfig)
 	{
 		Log.i("onConfigurationChanged", "onConfigurationChanged");

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.szrjk.dhome"
-
     android:versionCode="300"
-
     android:versionName="170.0.1" >
 
     <uses-sdk
@@ -63,13 +61,13 @@
     <!--  -->
 
     <application
-        android:name="com.szrjk.dhome.DHomeApplication"
+        android:name=".DHomeApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.szrjk.dhome.SplashActivity"
+            android:name=".SplashActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
@@ -80,31 +78,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.szrjk.dhome.GuideActivity"
+            android:name=".GuideActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
-            android:name="com.szrjk.dhome.MainActivity"
+            android:name=".MainActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
-            android:name="com.szrjk.dhome.LoginActivity"
+            android:name=".LoginActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
-            android:name="com.szrjk.dhome.ForgetActivity"
+            android:name=".ForgetActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
-            android:name="com.szrjk.dhome.DigitalDoctorTermsActivity"
+            android:name=".DigitalDoctorTermsActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
@@ -128,7 +126,7 @@
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
-            android:name="com.szrjk.dhome.Register2Activity"
+            android:name=".Register2Activity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
@@ -136,8 +134,8 @@
         <activity
             android:name="com.szrjk.self.more.MoreActivity"
             android:configChanges="orientation|screenSize"
-            android:theme="@style/Theme.dhome"
             android:launchMode="singleTask"
+            android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
@@ -202,21 +200,21 @@
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
-            android:name="com.szrjk.dhome.StudentActivity"
+            android:name=".StudentActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
-            android:name="com.szrjk.dhome.OtherActivity"
+            android:name=".OtherActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
-            android:name="com.szrjk.dhome.DoctorActivity"
+            android:name=".DoctorActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.dhome"
@@ -250,20 +248,20 @@
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
-            android:name="com.szrjk.dhome.AboutYouActivity"
+            android:name=".AboutYouActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
-            android:name="com.szrjk.dhome.AboutYou2Activity"
+            android:name=".AboutYou2Activity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
-            android:name="com.szrjk.dhome.ProtectAccountActivity"
+            android:name=".ProtectAccountActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
@@ -293,26 +291,26 @@
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
-            android:name="com.szrjk.dhome.AlbumGalleryActivity"
+            android:name=".AlbumGalleryActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
-            android:name="com.szrjk.dhome.GalleryActivity"
+            android:name=".GalleryActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
-            android:name="com.szrjk.dhome.ImageFileActivity"
+            android:name=".ImageFileActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
-            android:name="com.szrjk.dhome.ShowAllPhoto"
+            android:name=".ShowAllPhoto"
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
@@ -324,7 +322,7 @@
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
-            android:name="com.szrjk.dhome.AlbumActivity"
+            android:name=".AlbumActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
@@ -416,19 +414,19 @@
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
-            android:name="com.szrjk.dhome.CommentActivity"
+            android:name=".CommentActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
-            android:name="com.szrjk.dhome.OtherPeopleActivity"
+            android:name=".OtherPeopleActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
-            android:name="com.szrjk.dhome.ShowBigPicActivity"
+            android:name=".ShowBigPicActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
@@ -446,7 +444,7 @@
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
-            android:name="com.szrjk.dhome.IntroduceActivity"
+            android:name=".IntroduceActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
@@ -562,7 +560,7 @@
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
-            android:name="com.szrjk.dhome.ActErrorReport"
+            android:name=".ActErrorReport"
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
@@ -580,7 +578,7 @@
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
-            android:name="com.szrjk.dhome.IndexGalleryActivity"
+            android:name=".IndexGalleryActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustResize" >
@@ -785,17 +783,24 @@
         </activity>
         <activity
             android:name="com.szrjk.util.clip.ClipActivity"
-             android:configChanges="orientation|keyboardHidden|screenSize"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
             android:name="com.szrjk.util.gallery.MainGalleryActivity"
-             android:configChanges="orientation|keyboardHidden|screenSize"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
+        </activity>
+        <activity
+            android:name="com.szrjk.explore.MyCircleActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.dhome"
+            android:windowSoftInputMode="adjustNothing">
         </activity>
     </application>
 

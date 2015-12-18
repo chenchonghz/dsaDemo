@@ -81,6 +81,7 @@ public class BitmapCache extends Activity
 		{
 			Bitmap thumb;
 
+			@Override
 			public void run()
 			{
 

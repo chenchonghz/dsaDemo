@@ -3,17 +3,10 @@ package com.szrjk.index;
 import java.util.HashMap;
 import java.util.Map;
 
-import u.aly.l;
-import android.R.integer;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,7 +19,6 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.view.annotation.ContentView;
@@ -40,8 +32,6 @@ import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
 import com.szrjk.util.CheckTextNumber;
 import com.szrjk.util.ImageLoaderUtil;
-import com.szrjk.widget.CustomDialog;
-import com.szrjk.widget.CustomDialog.ConfrimButtonListener;
 
 //转发界面
 @ContentView(R.layout.activity_repeat)
@@ -81,6 +71,7 @@ public class RepeatActivity extends BaseActivity implements OnClickListener {
 	private int forward_num;
 	private Dialog dialog;
 
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		instance = this;
@@ -179,6 +170,7 @@ public class RepeatActivity extends BaseActivity implements OnClickListener {
 		lly_back.setOnClickListener(instance);
 	}
 
+	@Override
 	public void onClick(View view) {
 		switch (view.getId()) {
 		// 回退按钮逻辑
@@ -223,6 +215,7 @@ public class RepeatActivity extends BaseActivity implements OnClickListener {
 		}
 		paramMap.put("BusiParams", busiParams);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				dialog.dismiss();
 				tvSendRepeat.setClickable(true);
@@ -244,6 +237,7 @@ public class RepeatActivity extends BaseActivity implements OnClickListener {
 
 			}
 
+			@Override
 			public void start() {
 				dialog.show();
 				dialog.setCancelable(false);
@@ -251,13 +245,16 @@ public class RepeatActivity extends BaseActivity implements OnClickListener {
 			
 			}
 
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 			}
 
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 				String err =jobj.toString();
 				if (err.contains("Incorrect string value")) {
 					runOnUiThread(new Runnable() {
+						@Override
 						public void run() {
 							dialog.dismiss();
 							tvSendRepeat.setClickable(true);
@@ -266,6 +263,7 @@ public class RepeatActivity extends BaseActivity implements OnClickListener {
 					});
 				}else{
 					runOnUiThread(new Runnable() {
+						@Override
 						public void run() {
 							dialog.dismiss();
 							tvSendRepeat.setClickable(true);

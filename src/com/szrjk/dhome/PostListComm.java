@@ -10,26 +10,18 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.widget.ListView;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.adapter.IndexListViewAdapter;
 import com.szrjk.config.Constant;
 import com.szrjk.entity.*;
-import com.szrjk.http.AbstractDhomeRequestCallBack;
-import com.szrjk.http.DHttpService;
 import com.szrjk.pull.PullToRefreshBase;
 import com.szrjk.pull.PullToRefreshListView;
 import com.szrjk.self.CircleHomepageActivity;
 import com.szrjk.util.ShowDialogUtil;
 import com.szrjk.util.ToastUtils;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * denggm on 2015/10/29.
@@ -156,7 +148,8 @@ public class PostListComm {
     private Handler handler = new Handler()
     {
 
-        public void handleMessage(Message msg)
+        @Override
+		public void handleMessage(Message msg)
         {
             switch (msg.what)
             {

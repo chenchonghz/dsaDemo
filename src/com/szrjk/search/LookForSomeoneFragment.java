@@ -88,6 +88,7 @@ public class LookForSomeoneFragment extends Fragment{
 		paramMap.put("BusiParams", busiParams);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
 
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -151,14 +152,17 @@ public class LookForSomeoneFragment extends Fragment{
 				}
 			}
 
+			@Override
 			public void start() {
 
 			}
 
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 
 			}
 
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 
 			}
@@ -178,6 +182,7 @@ public class LookForSomeoneFragment extends Fragment{
 		//上拉加载监听器
 		mPullToRefreshListView.setOnRefreshListener(new OnRefreshListener<ListView>() {
 			//上拉加载方法
+			@Override
 			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
 				//				new GetDataTask().execute();
 				//发送请求得到新项目报文

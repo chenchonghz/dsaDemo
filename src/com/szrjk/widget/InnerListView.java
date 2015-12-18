@@ -2,12 +2,7 @@ package com.szrjk.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
-import android.view.View.MeasureSpec;
-import android.widget.AbsListView;
-import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
-import android.widget.ScrollView;
 
 
 public class InnerListView extends ListView{

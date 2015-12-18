@@ -64,6 +64,7 @@ public class PostDetailActivity extends BaseActivity {
 	private static final int LOAD_CASEDETAIL_SUCCESS = 0;
 
 	private Handler handler = new Handler() {
+		@Override
 		public void handleMessage(Message msg) {
 			if (msg.what == LOAD_CASEDETAIL_SUCCESS) {
 				postDetail2 = (OrdinaryPostDetail) msg.obj;

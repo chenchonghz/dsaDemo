@@ -2,7 +2,6 @@ package com.szrjk.self.more;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -25,7 +24,6 @@ import com.szrjk.dhome.R;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.IPhotoClickOper;
 import com.szrjk.entity.OperContextClick;
-import com.szrjk.entity.PhotoAlbum;
 import com.szrjk.entity.PhotoAlbum2;
 import com.szrjk.entity.UserInfo;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
@@ -52,6 +50,7 @@ public class PhotoAlbumGalleryActivity extends BaseActivity {
 
 	private Handler handler = new Handler() {
 
+		@Override
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case GET_PHOTO_ALBUM_LIST_SUCCESS:

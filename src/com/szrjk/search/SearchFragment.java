@@ -8,7 +8,6 @@ import java.util.Map;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lidroid.xutils.exception.HttpException;
-import com.szrjk.adapter.CoterieMemberListAdapter;
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.ErrorInfo;
@@ -20,8 +19,6 @@ import com.szrjk.pull.ILoadingLayout;
 import com.szrjk.pull.PullToRefreshBase;
 import com.szrjk.pull.PullToRefreshListView;
 import com.szrjk.pull.PullToRefreshBase.OnRefreshListener;
-import com.szrjk.search.SearchPagerFragment.SearchPagerAdapter;
-
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
@@ -99,6 +96,7 @@ public class SearchFragment extends Fragment{
 		busiParams.put("pageSize","10");
 		paramMap.put("BusiParams", busiParams);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -143,14 +141,17 @@ public class SearchFragment extends Fragment{
 				}
 			}
 
+			@Override
 			public void start() {
 
 			}
 
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 
 			}
 
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 
 			}
@@ -170,6 +171,7 @@ public class SearchFragment extends Fragment{
 		//上拉加载监听器
 		mPullToRefreshListView.setOnRefreshListener(new OnRefreshListener<ListView>() {
 			//上拉加载方法
+			@Override
 			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
 				//				new GetDataTask().execute();
 				//发送请求得到新项目报文

@@ -14,8 +14,6 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.adapter.LibraryPaperAdapter;
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.R;
-import com.szrjk.dhome.R.layout;
-import com.szrjk.dhome.R.menu;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.PaperListInfo;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
@@ -23,24 +21,16 @@ import com.szrjk.http.DHttpService;
 import com.szrjk.pull.PullToRefreshBase;
 import com.szrjk.pull.PullToRefreshBase.OnRefreshListener;
 import com.szrjk.pull.PullToRefreshListView;
-import com.szrjk.util.ToastUtils;
-
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 @ContentView(R.layout.activity_library_paper_list)
 public class LibraryPaperListActivity extends Activity {
@@ -89,6 +79,7 @@ public class LibraryPaperListActivity extends Activity {
 		//				.getString(R.string.refreshing_lable_text));
 		mPullToRefreshListView.setOnRefreshListener(new OnRefreshListener<ListView>() {
 
+			@Override
 			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
 //				new GetDataTask().execute();
 				getpapers(page);
@@ -132,6 +123,7 @@ public class LibraryPaperListActivity extends Activity {
 		busiParams.put("page",String.valueOf(page));
 		paramMap.put("BusiParams", busiParams);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -155,14 +147,17 @@ public class LibraryPaperListActivity extends Activity {
 				}
 			}
 
+			@Override
 			public void start() {
 
 			}
 
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 
 			}
 
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 
 			}

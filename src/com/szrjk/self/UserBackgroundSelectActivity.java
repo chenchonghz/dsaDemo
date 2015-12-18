@@ -36,6 +36,7 @@ private String[]img_bg={
 
 
 
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ViewUtils.inject(this);
@@ -43,6 +44,7 @@ private String[]img_bg={
 				new UserBackgroundGridViewAdapter(this.getApplication(), img_bg);
 		gv_user_bg_select.setAdapter(adapter);
 		gv_user_bg_select.setOnItemClickListener(new OnItemClickListener() {
+			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long id) {
 				Intent intent = new Intent(UserBackgroundSelectActivity.this,UserBackgroundShower.class);

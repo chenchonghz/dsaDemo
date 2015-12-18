@@ -89,6 +89,7 @@ public class MoreCommentActivity extends BaseActivity{
 		busiParams.put("endNum", "10");
 		paramMap.put("BusiParams", busiParams);
 		httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				try {
 					ErrorInfo errorObj = JSON.parseObject(
@@ -135,10 +136,13 @@ public class MoreCommentActivity extends BaseActivity{
 					Log.e(TAG, "", e);
 				}
 			}
+			@Override
 			public void start() {
 			}
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 			}
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 			}
 		});
@@ -152,6 +156,7 @@ public class MoreCommentActivity extends BaseActivity{
 	
 	private void initListener(){
 		ptrl_more_comment.setOnRefreshListener(new OnRefreshListener<ListView>() {
+			@Override
 			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
 				//				new GetDataTask().execute();
 				

@@ -13,7 +13,6 @@ import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.szrjk.config.Constant;
-import com.szrjk.dhome.AboutYou2Activity;
 import com.szrjk.dhome.MainActivity;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.ErrorInfo;
@@ -36,20 +35,15 @@ import android.os.Message;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.text.Editable;
-import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnFocusChangeListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -161,6 +155,7 @@ public class EditDataDoctorsActivity extends Activity {
 			}
 		});
 		et_dept.setOnItemClickListener(new OnItemClickListener() {
+			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long id) {
 				ListView listView = (ListView) parent;
@@ -173,6 +168,7 @@ public class EditDataDoctorsActivity extends Activity {
 			}
 		});
 		et_hospital.setOnItemClickListener(new OnItemClickListener() {
+			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long id) {
 				ListView listView = (ListView) parent;
@@ -354,6 +350,7 @@ public class EditDataDoctorsActivity extends Activity {
 		paramMap.put("BusiParams", busiParams);
 		Log.i("TAG", paramMap.toString());
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj  =JSON.parseObject(
 						jsonObject.getString("ErrorInfo"),ErrorInfo.class);
@@ -366,14 +363,17 @@ public class EditDataDoctorsActivity extends Activity {
 				}
 			}
 
+			@Override
 			public void start() {
 
 			}
 
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 
 			}
 
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 
 			}
@@ -411,7 +411,7 @@ public class EditDataDoctorsActivity extends Activity {
 		handler.post(new Runnable() {  
 			@Override  
 			public void run() {  
-				sv_edit_doctor.fullScroll(ScrollView.FOCUS_DOWN);  
+				sv_edit_doctor.fullScroll(View.FOCUS_DOWN);  
 			}  
 		});
 	}
@@ -429,6 +429,7 @@ public class EditDataDoctorsActivity extends Activity {
 		startActivityForResult(i,3);
 	}
 	//获取回传的tcity
+	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode==101&&resultCode==11) {
 			if (data==null) {
@@ -469,6 +470,7 @@ public class EditDataDoctorsActivity extends Activity {
 		Handler mHandler = new Handler();  
 
 		mHandler.post(new Runnable() {  
+			@Override
 			public void run() {  
 				if (scroll == null || inner == null) {  
 					return;  

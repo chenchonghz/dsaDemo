@@ -16,6 +16,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
+            android:paddingRight="12dp"
             android:background="@drawable/button_send_selector" >
 
             <TextView
@@ -100,6 +101,7 @@
                 android:background="@color/base_bg"
                 android:divider="@null"
                 android:dividerHeight="10dp"
+                android:descendantFocusability="blocksDescendants"
                  >
             </ListView>
         </RelativeLayout>

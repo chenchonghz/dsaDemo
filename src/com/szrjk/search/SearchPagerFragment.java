@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import u.aly.l;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lidroid.xutils.exception.HttpException;
@@ -24,13 +22,10 @@ import com.szrjk.pull.PullToRefreshListView;
 import com.szrjk.pull.PullToRefreshBase.OnRefreshListener;
 import com.szrjk.util.DDateUtils;
 import com.szrjk.util.MxgsaTagHandler;
-import com.szrjk.util.ToastUtils;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.util.Log;
@@ -56,6 +51,7 @@ public class SearchPagerFragment extends Fragment{
 	private boolean isFrist = true;
 	private SearchPagerAdapter adapter;
 
+	@Override
 	public View onCreateView(LayoutInflater inflater,
 			ViewGroup container, Bundle savedInstanceState) {
 		instance = (SearchMoreActivity) getActivity();
@@ -92,6 +88,7 @@ public class SearchPagerFragment extends Fragment{
 		busiParams.put("pageSize","10");
 		paramMap.put("BusiParams", busiParams);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -137,14 +134,17 @@ public class SearchPagerFragment extends Fragment{
 				}
 			}
 
+			@Override
 			public void start() {
 
 			}
 
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 
 			}
 
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 
 			}
@@ -164,6 +164,7 @@ public class SearchPagerFragment extends Fragment{
 		//上拉加载监听器
 		mPullToRefreshListView.setOnRefreshListener(new OnRefreshListener<ListView>() {
 			//上拉加载方法
+			@Override
 			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
 				//				new GetDataTask().execute();
 				//发送请求得到新项目报文
@@ -199,6 +200,7 @@ public class SearchPagerFragment extends Fragment{
 
 		}
 
+		@Override
 		public int getCount() {
 			// TODO Auto-generated method stub
 			return list.size();

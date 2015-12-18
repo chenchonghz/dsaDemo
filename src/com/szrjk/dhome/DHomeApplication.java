@@ -19,8 +19,6 @@ import com.lidroid.xutils.DbUtils;
 import com.szrjk.db.DbHelper;
 import com.szrjk.db.userDbHelper;
 import com.szrjk.entity.*;
-import com.szrjk.util.ToastUtils;
-
 import com.umeng.message.PushAgent;
 
 public class DHomeApplication extends Application
@@ -143,6 +141,7 @@ public class DHomeApplication extends Application
 		userDbHelper.initDb(this);
 		final DbUtils db = DbUtils.create(this, AbstractTBEntity.dir,AbstractTBEntity.dbname,AbstractTBEntity.dhdbVersion, new DbUtils.DbUpgradeListener() {
 
+			@Override
 			public void onUpgrade(DbUtils db,int oldVersion,int newVersion) 
 			{
 				if (newVersion>oldVersion) {

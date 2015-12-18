@@ -6,7 +6,6 @@ import java.util.List;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.SearchEntity;
 import com.szrjk.util.DDateUtils;
-import com.szrjk.util.ImageLoaderUtil;
 import com.szrjk.util.MxgsaTagHandler;
 
 import android.content.Context;

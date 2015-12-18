@@ -1,7 +1,6 @@
 package com.szrjk.dhome;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,7 +14,6 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lidroid.xutils.ViewUtils;
@@ -25,13 +23,9 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.config.Constant;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.UpdataInfo;
-import com.szrjk.entity.UserInfo;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
-import com.szrjk.receiver.DHomePushService;
 import com.szrjk.util.*;
 import com.umeng.analytics.MobclickAgent;
-import com.umeng.message.PushAgent;
-
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -191,6 +185,7 @@ public class SplashActivity extends BaseActivity
 		}
 		builer.setPositiveButton("确定", new DialogInterface.OnClickListener()
 		{
+			@Override
 			public void onClick(DialogInterface dialog, int which)
 			{
 				//进行下载
@@ -204,6 +199,7 @@ public class SplashActivity extends BaseActivity
 			builer.setNegativeButton("退出",
 					new DialogInterface.OnClickListener()
 					{
+						@Override
 						public void onClick(DialogInterface dialog, int which)
 						{
 //							SharePerferenceUtil sharePerferenceUtil = SharePerferenceUtil
@@ -220,6 +216,7 @@ public class SplashActivity extends BaseActivity
 			builer.setNegativeButton("取消",
 					new DialogInterface.OnClickListener()
 					{
+						@Override
 						public void onClick(DialogInterface dialog, int which)
 						{
 							jumpNextActivity();

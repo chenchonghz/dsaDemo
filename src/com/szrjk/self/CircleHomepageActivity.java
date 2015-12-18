@@ -25,6 +25,7 @@ import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.PostInfo;
 import com.szrjk.entity.PostList;
 import com.szrjk.entity.UserCard;
+import com.szrjk.explore.MyCircleActivity;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
 import com.szrjk.index.SendPostActivity;
@@ -583,7 +584,7 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
 				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode())) {
 					Toast.makeText(instance, "解散成功", Toast.LENGTH_SHORT).show();
-					Intent intent = new Intent(instance, CircleActivity.class);
+					Intent intent = new Intent(instance, MyCircleActivity.class);
 					intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					startActivity(intent);
@@ -624,7 +625,7 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
 				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode())) {
 					Toast.makeText(instance, "退出成功", Toast.LENGTH_SHORT).show();
-					Intent intent = new Intent(instance, CircleActivity.class);
+					Intent intent = new Intent(instance, MyCircleActivity.class);
 					intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					startActivity(intent);

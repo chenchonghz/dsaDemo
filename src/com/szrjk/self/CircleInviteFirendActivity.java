@@ -14,6 +14,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.ErrorInfo;
+import com.szrjk.explore.MyCircleActivity;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
 import com.szrjk.util.ToastUtils;
@@ -100,7 +101,7 @@ public class CircleInviteFirendActivity extends FragmentActivity implements OnCl
 				if (fromCreate==null) {
 					finish();
 				}else if (fromCreate.equals("YES")) {
-					Intent intent = new Intent(instance, CircleActivity.class);
+					Intent intent = new Intent(instance, MyCircleActivity.class);
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 					startActivity(intent);
@@ -206,7 +207,7 @@ public class CircleInviteFirendActivity extends FragmentActivity implements OnCl
 				{
 					if (fromCreate!=null&&fromCreate.equals("YES")) {
 						ToastUtils.showMessage(instance, "已发送邀请");
-						Intent intent = new Intent(instance, CircleActivity.class);
+						Intent intent = new Intent(instance, MyCircleActivity.class);
 						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 						startActivity(intent);

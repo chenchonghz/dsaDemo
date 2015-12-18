@@ -26,7 +26,6 @@ import com.szrjk.adapter.ExploreMoreNewsListAdapter;
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.ErrorInfo;
-import com.szrjk.entity.NewType;
 import com.szrjk.entity.NewsEntity;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
@@ -42,6 +41,7 @@ public class NewsFragment extends Fragment{
 	private static final String LOADING_POST = "正在加载帖子";
 	private ArrayList<NewsEntity> newsList;
 	private Handler handler = new Handler(){
+		@Override
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case Constant.HAVE_NEW_POST:

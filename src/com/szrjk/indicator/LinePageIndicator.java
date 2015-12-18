@@ -192,7 +192,8 @@ public class LinePageIndicator extends View implements PageIndicator {
         }
     }
 
-    public boolean onTouchEvent(android.view.MotionEvent ev) {
+    @Override
+	public boolean onTouchEvent(android.view.MotionEvent ev) {
         if (super.onTouchEvent(ev)) {
             return true;
         }

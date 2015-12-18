@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
@@ -24,14 +25,10 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.config.Constant;
-import com.szrjk.entity.DialogItem;
-import com.szrjk.entity.DialogItemCallback;
 import com.szrjk.entity.IPopupItemCallback;
 import com.szrjk.entity.PopupItem;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.util.SharePerferenceUtil;
-import com.szrjk.util.ToastUtils;
-import com.szrjk.widget.CustomListDialog;
 import com.szrjk.widget.ListPopup;
 
 @ContentView(R.layout.activity_login)
@@ -65,7 +62,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener
 	@ViewInject(R.id.tv_url)
 	private TextView tv_url;
 	@ViewInject(R.id.lly_login)
-	private LinearLayout lly_login;
+	private RelativeLayout lly_login;
 	//
 	private String name, pwd;
 	private LoginActivity instance;
@@ -307,6 +304,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener
 		});
 		pilist.add(pi4);
 		window = new ListPopup(this,pilist,v);
+		
 	}
 	public void errormsg(String msg){
 		if(msg==null||msg.equals("")){

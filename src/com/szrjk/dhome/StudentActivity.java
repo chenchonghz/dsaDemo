@@ -6,9 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -436,6 +434,7 @@ public class StudentActivity extends BaseActivity implements OnClickListener{
 			{
 				Log.e("", "失败！");
 				runOnUiThread(new  Runnable() {
+					@Override
 					public void run() {
 						showToast(instance, "提交失败，再试试呗", 0);
 						alertdialog.dismiss();
@@ -708,6 +707,7 @@ public class StudentActivity extends BaseActivity implements OnClickListener{
 	 * 当回收之后，会执行onCreate方法里面的检查草稿方法。导致把草稿恢复覆盖当前编辑的内容
 	 * @param newConfig
 	 */
+	@Override
 	public void onConfigurationChanged(Configuration newConfig)
 	{
 		Log.i("onConfigurationChanged", "onConfigurationChanged");

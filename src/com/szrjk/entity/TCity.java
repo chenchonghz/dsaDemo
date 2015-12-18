@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
-import android.content.Context;
-
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.db.annotation.Column;
 import com.lidroid.xutils.db.annotation.Id;
@@ -105,6 +103,7 @@ public class TCity extends AbstractTBEntity<TCity>
 	 * @param iversion
 	 *            版本号
 	 */
+	@Override
 	public  void initTable(final DbUtils db)
 	{
 		super.initTable(db);

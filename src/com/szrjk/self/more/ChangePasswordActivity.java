@@ -23,7 +23,6 @@ import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.DHomeApplication;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.ErrorInfo;
-import com.szrjk.entity.RegisterInfo;
 import com.szrjk.entity.UserInfo;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.util.DesUtil;
@@ -169,10 +168,13 @@ public class ChangePasswordActivity extends BaseActivity{
 					instance.finish();
 				} 
 			}
+			@Override
 			public void start() {
 			}
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 			}
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 				ToastUtils.showMessage(instance, jobj.getString("ErrorMessage"));
 			}

@@ -2,11 +2,6 @@ package com.szrjk.entity;
 
 import java.io.Serializable;
 
-import android.database.Cursor;
-
-import com.lidroid.xutils.db.converter.ColumnConverter;
-import com.lidroid.xutils.db.sqlite.ColumnDbType;
-
 
 /**
  * 用户名片实体类

@@ -3,7 +3,6 @@ package com.szrjk.library;
 import java.util.HashMap;
 import java.util.Map;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;

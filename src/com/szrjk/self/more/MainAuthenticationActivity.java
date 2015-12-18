@@ -274,6 +274,7 @@ public class MainAuthenticationActivity extends BaseActivity implements OnClickL
 	 * 当回收之后，会执行onCreate方法里面的检查草稿方法。导致把草稿恢复覆盖当前编辑的内容
 	 * @param newConfig
 	 */
+	@Override
 	public void onConfigurationChanged(Configuration newConfig)
 	{
 		Log.i("onConfigurationChanged", "onConfigurationChanged");

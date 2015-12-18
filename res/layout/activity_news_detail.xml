@@ -158,8 +158,8 @@
         
         <ImageButton 
             android:id="@+id/ib_big_comment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/icon_comment88"
             android:background="@color/transparent"
             android:layout_alignParentRight="true"
@@ -168,8 +168,8 @@
             android:layout_above="@+id/ib_big_up"/>
         <ImageButton 
             android:id="@+id/ib_big_up"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/icon_up88"
              android:background="@color/transparent"
             android:layout_alignParentRight="true"

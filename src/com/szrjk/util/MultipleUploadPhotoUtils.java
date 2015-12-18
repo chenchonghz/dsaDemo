@@ -4,12 +4,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ContentUris;
@@ -19,12 +17,13 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.BaseColumns;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.provider.MediaStore.MediaColumns;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -331,7 +330,7 @@ public class MultipleUploadPhotoUtils {
 				} else if ("audio".equals(type)) {
 					contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
 				}
-				String selection = MediaStore.Images.Media._ID + "=?";
+				String selection = BaseColumns._ID + "=?";
 				String[] selectionArgs = new String[] { split[1] };
 				return getDataColumn(context, contentUri, selection, selectionArgs);
 			}
@@ -351,7 +350,7 @@ public class MultipleUploadPhotoUtils {
 
 	public static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
 		Cursor cursor = null;
-		String column = MediaStore.Images.Media.DATA;
+		String column = MediaColumns.DATA;
 		String[] projection = { column };
 		try {
 			cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, null);

@@ -25,6 +25,7 @@ import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.PostInfo;
 import com.szrjk.entity.PostList;
 import com.szrjk.entity.UserCard;
+import com.szrjk.explore.MyCircleActivity;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
 import com.szrjk.index.SendPostActivity;
@@ -104,9 +105,11 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 		getData();
 		//绑定控件
 		postListComm = new PostListComm(instance, Constant.userInfo.getUserSeqId(), mPullRefreshListView, new IPostListCallback() {
+			@Override
 			public void getNewPosts(String userId2, String basePostId, boolean isNew, String beginNum, String endNum) {
 				doGetNewPosts(userId2,basePostId,isNew,beginNum,endNum);
 			}
+			@Override
 			public void getPosts(String userId2, String basePostId, boolean isNew, String beginNum, String endNum) {
 				doGetPosts(userId2,basePostId,isNew,beginNum,endNum);
 			}
@@ -281,6 +284,7 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 		busiParams.put("memberLimitCount", "0");
 		paramMap.put("BusiParams", busiParams);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -302,14 +306,17 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 
 			}
 
+			@Override
 			public void start() {dialog.show();
 
 			}
 
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 
 			}
 
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 				dialog.dismiss();
 			}
@@ -455,6 +462,7 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 
 	private SelfChangeBgPopup pop_dissolvecircle;
 	private SelfChangeBgPopup pop_exit;
+	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.fl_circlepost:
@@ -505,6 +513,7 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 		busiParams.put("coterieId",circleId);
 		paramMap.put("BusiParams", busiParams);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -514,14 +523,17 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 				}
 			}
 
+			@Override
 			public void start() {
 
 			}
 
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 
 			}
 
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 
 			}
@@ -529,6 +541,7 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 
 	}
 	private OnClickListener dissolvecircle = new OnClickListener() {
+		@Override
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.tv_change_bg:
@@ -539,6 +552,7 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 		}
 	};
 	private OnClickListener exit = new OnClickListener() {
+		@Override
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.tv_change_bg:
@@ -564,26 +578,30 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 		busiParams.put("coterieInfo", coterieInfo);
 		paramMap.put("BusiParams", busiParams);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
 				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode())) {
 					Toast.makeText(instance, "解散成功", Toast.LENGTH_SHORT).show();
-					Intent intent = new Intent(instance, CircleActivity.class);
+					Intent intent = new Intent(instance, MyCircleActivity.class);
 					intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-					intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					startActivity(intent);
 				}
 			}
 
+			@Override
 			public void start() {
 
 			}
 
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 
 			}
 
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 
 			}
@@ -601,26 +619,30 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 		busiParams.put("coterieId", circleInfo.getCoterieId());
 		paramMap.put("BusiParams", busiParams);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
 				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode())) {
 					Toast.makeText(instance, "退出成功", Toast.LENGTH_SHORT).show();
-					Intent intent = new Intent(instance, CircleActivity.class);
+					Intent intent = new Intent(instance, MyCircleActivity.class);
 					intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-					intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					startActivity(intent);
 				}	
 			}
 
+			@Override
 			public void start() {
 
 			}
 
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 
 			}
 
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 
 			}

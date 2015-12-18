@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
@@ -35,12 +35,9 @@ import com.szrjk.entity.PopupItem;
 import com.szrjk.entity.UserInfo;
 import com.szrjk.self.UserBackgroundSelectActivity;
 import com.szrjk.util.FileUtils;
-import com.szrjk.util.SharePerferenceUtil;
 import com.szrjk.util.ToastUtils;
 import com.szrjk.widget.ListPopup;
-import com.szrjk.widget.LogoutPopup;
 import com.szrjk.widget.TextSizePopup;
-import com.umeng.message.PushAgent;
 
 @ContentView(R.layout.activity_seting)
 public class SetingActivity extends BaseActivity {
@@ -108,7 +105,7 @@ public class SetingActivity extends BaseActivity {
 
 
 		SharedPreferences mySharedPreferences= this.getSharedPreferences("text_size",
-				Activity.MODE_PRIVATE);
+				Context.MODE_PRIVATE);
 		//用putString的方法保存数据
 		String size = mySharedPreferences.getString("size","");
 		if(size==null){
@@ -277,7 +274,7 @@ public class SetingActivity extends BaseActivity {
 	public void changeTextSize(String size){
 		//实例化SharedPreferences对象（第一步） 
 		SharedPreferences mySharedPreferences= getSharedPreferences("text_size", 
-		Activity.MODE_PRIVATE); 
+		Context.MODE_PRIVATE); 
 		//实例化SharedPreferences.Editor对象（第二步） 
 		SharedPreferences.Editor editor = mySharedPreferences.edit(); 
 		//用putString的方法保存数据 

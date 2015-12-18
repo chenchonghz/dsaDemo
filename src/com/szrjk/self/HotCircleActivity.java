@@ -14,8 +14,6 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.adapter.CircleListAdapter;
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.R;
-import com.szrjk.dhome.R.layout;
-import com.szrjk.dhome.R.menu;
 import com.szrjk.entity.CircleInfo;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
@@ -24,13 +22,9 @@ import com.szrjk.pull.PullToRefreshBase;
 import com.szrjk.pull.PullToRefreshBase.OnRefreshListener;
 import com.szrjk.pull.PullToRefreshListView;
 import com.szrjk.pull.PullToRefreshBase.Mode;
-import com.szrjk.util.ToastUtils;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
@@ -45,6 +39,7 @@ public class HotCircleActivity extends Activity {
 	private List<CircleInfo> hotcircle;
 	private HotCircleActivity instance;
 
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ViewUtils.inject(this);
@@ -83,6 +78,7 @@ public class HotCircleActivity extends Activity {
 		});
 		mPullToRefreshListView.setOnRefreshListener(new OnRefreshListener<ListView>() {
 
+			@Override
 			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
 				if (mPullToRefreshListView.isHeaderShown())
 				{
@@ -105,6 +101,7 @@ public class HotCircleActivity extends Activity {
 		busiParams.put("endNum",Integer.valueOf(20));
 		paramMap.put("BusiParams", busiParams);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -129,14 +126,17 @@ public class HotCircleActivity extends Activity {
 				}
 			}
 
+			@Override
 			public void start() {
 
 			}
 
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 
 			}
 
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 				if (mPullToRefreshListView.isRefreshing()) {
 					mPullToRefreshListView.onRefreshComplete();
@@ -156,6 +156,7 @@ public class HotCircleActivity extends Activity {
 		busiParams.put("endNum",endNum);
 		paramMap.put("BusiParams", busiParams);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -177,14 +178,17 @@ public class HotCircleActivity extends Activity {
 					}
 				}
 			}
+			@Override
 			public void start() {
 
 			}
 
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 
 			}
 
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 				if (mPullToRefreshListView.isRefreshing()) {
 					mPullToRefreshListView.onRefreshComplete();

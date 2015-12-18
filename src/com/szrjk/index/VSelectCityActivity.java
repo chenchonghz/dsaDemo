@@ -16,7 +16,6 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.TCity;
-import com.szrjk.util.ToastUtils;
 
 /**
  * denggm on 2015/10/20.

@@ -15,20 +15,17 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
@@ -155,9 +152,9 @@ public class AddNewsTypePopup extends PopupWindow implements OnClickListener{
 		getTextviewHeight(); 
 		this.setContentView(mChooseTypeView);
 		// 设置SelectPicPopupWindow弹出窗体的宽
-		this.setWidth(LayoutParams.FILL_PARENT);
+		this.setWidth(android.view.ViewGroup.LayoutParams.FILL_PARENT);
 		// 设置SelectPicPopupWindow弹出窗体的高
-		this.setHeight(LayoutParams.WRAP_CONTENT);
+		this.setHeight(android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
 		this.setFocusable(true);
 		this.setOutsideTouchable(true);
 		ColorDrawable dw = new ColorDrawable(color.white);

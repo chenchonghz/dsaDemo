@@ -14,7 +14,6 @@ import com.szrjk.config.Constant;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.CircleRequest;
 import com.szrjk.entity.ErrorInfo;
-import com.szrjk.entity.RequestList;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
 import android.content.Intent;
@@ -36,6 +35,7 @@ public class CircleRequestFragment extends Fragment {
 	private List<CircleRequest> requestList;
 	private HashMap<String, Integer> RequestState;
 
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		v = inflater.inflate(R.layout.fragment_circle_request, container, false);
@@ -56,6 +56,7 @@ public class CircleRequestFragment extends Fragment {
 		paramMap.put("BusiParams", busiParams);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
 
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -65,10 +66,10 @@ public class CircleRequestFragment extends Fragment {
 							.getJSONObject("ReturnInfo");
 					if (returnObj==null) {
 						CircleActivity circleActivity = (CircleActivity) getActivity();
-						circleActivity.changeremind(2);
+						CircleActivity.changeremind(2);
 					}else{
 						CircleActivity circleActivity = (CircleActivity) getActivity();
-						circleActivity.changeremind(1);
+						CircleActivity.changeremind(1);
 						requestList=JSON.parseArray(
 								returnObj.getString("returnList"),CircleRequest.class);
 						for (CircleRequest rl:requestList) {
@@ -89,14 +90,17 @@ public class CircleRequestFragment extends Fragment {
 				}	
 			}
 
+			@Override
 			public void start() {
 
 			}
 
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 
 			}
 
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 
 			}
@@ -108,6 +112,7 @@ public class CircleRequestFragment extends Fragment {
 		CircleRequestAdapter adapter = new CircleRequestAdapter(getActivity(), requestList2,RequestState);
 		lv_circle_request.setAdapter(adapter);
 		lv_circle_request.setOnItemClickListener(new OnItemClickListener() {
+			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				Intent intent = new Intent(getActivity(), CircleHomepageActivity.class);

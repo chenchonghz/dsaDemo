@@ -1,11 +1,7 @@
 package com.szrjk.db;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.ContextWrapper;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import com.szrjk.entity.AbstractTBEntity;
 import com.szrjk.entity.AbstractUserEntity;
 
 import java.io.*;

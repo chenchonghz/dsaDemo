@@ -32,7 +32,6 @@ import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.message.MessageListActivity;
 import com.szrjk.self.FriendActivity;
 import com.szrjk.util.ImageLoaderUtil;
-import com.szrjk.util.ToastUtils;
 
 
 @ContentView(R.layout.activity_more)
@@ -157,6 +156,7 @@ public class MoreActivity extends BaseActivity
 		busiParams.put("userSeqId", userInfo.getUserSeqId());
 		paramMap.put("BusiParams", busiParams);
 		httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -173,10 +173,13 @@ public class MoreActivity extends BaseActivity
 					tv_fans.setText(followUserCount+"");
 				}
 			}
+			@Override
 			public void start() {
 			}
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 			}
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 			}
 		});
@@ -190,6 +193,7 @@ public class MoreActivity extends BaseActivity
 		busiParams.put("userSeqId", userInfo.getUserSeqId());
 		paramMap.put("BusiParams", busiParams);
 		httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -210,10 +214,13 @@ public class MoreActivity extends BaseActivity
 					tv_getLikeCount.setText("("+mineCount.getMineReceivelike()+")");
 				}
 			}
+			@Override
 			public void start() {
 			}
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 			}
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 			}
 		});

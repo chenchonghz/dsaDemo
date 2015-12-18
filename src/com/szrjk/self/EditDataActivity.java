@@ -9,17 +9,12 @@ import com.szrjk.entity.OtherHomePageInfo;
 import com.szrjk.entity.TCity;
 import com.szrjk.index.VSelectActivity;
 import com.szrjk.util.ImageLoaderUtil;
-import com.szrjk.util.KeyWordUtils;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.InputType;
-import android.text.Selection;
-import android.text.Spannable;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
@@ -86,6 +81,7 @@ public class EditDataActivity extends Activity implements OnClickListener{
 //	private InputMethodManager imm = null;
 	//	private InputMethodManager imm = null;
 
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ViewUtils.inject(this);
@@ -176,6 +172,7 @@ public class EditDataActivity extends Activity implements OnClickListener{
 
 	}
 	//通用点击方法
+	@Override
 	public void onClick(View view) {
 		//输入框输入方法
 		int Type  = InputType.TYPE_CLASS_TEXT| InputType.TYPE_TEXT_VARIATION_NORMAL;
@@ -186,7 +183,7 @@ public class EditDataActivity extends Activity implements OnClickListener{
 				handler.post(new Runnable() {  
 				    @Override  
 				    public void run() {  
-				        sv_edit.fullScroll(ScrollView.FOCUS_DOWN);  
+				        sv_edit.fullScroll(View.FOCUS_DOWN);  
 				    }  
 				});
 		switch (view.getId()) {
@@ -209,7 +206,7 @@ public class EditDataActivity extends Activity implements OnClickListener{
 			et_hospital.setFocusableInTouchMode(true);
 			et_hospital.requestFocus();
 			et_hospital.setInputType(Type);
-			sv_edit.fullScroll(ScrollView.FOCUS_DOWN);
+			sv_edit.fullScroll(View.FOCUS_DOWN);
 			break;
 		case R.id.rl_ptitle:
 			Toast.makeText(this, "按了一下职称", Toast.LENGTH_SHORT).show();
@@ -220,12 +217,13 @@ public class EditDataActivity extends Activity implements OnClickListener{
 			et_ptitle.setFocusableInTouchMode(true);
 			et_ptitle.requestFocus();
 			et_ptitle.setInputType(Type);
-			sv_edit.fullScroll(ScrollView.FOCUS_DOWN);
+			sv_edit.fullScroll(View.FOCUS_DOWN);
 			break;
 		}
 
 	}
 
+	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) 
 	{
 		if (requestCode==12&&resultCode==11) {

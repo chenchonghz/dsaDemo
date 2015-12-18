@@ -142,17 +142,20 @@ public class GalleryActivity extends Activity
 	private OnPageChangeListener pageChangeListener = new OnPageChangeListener()
 	{
 
+		@Override
 		public void onPageSelected(int arg0)
 		{
 			location = arg0;
 			tv_number.setText(  location+1	+ "/" + listViews.size() );
 		}
 
+		@Override
 		public void onPageScrolled(int arg0, float arg1, int arg2)
 		{
 
 		}
 
+		@Override
 		public void onPageScrollStateChanged(int arg0)
 		{
 
@@ -508,25 +511,30 @@ public class GalleryActivity extends Activity
 			size = listViews == null ? 0 : listViews.size();
 		}
 
+		@Override
 		public int getCount()
 		{
 			return size;
 		}
 
+		@Override
 		public int getItemPosition(Object object)
 		{
 			return POSITION_NONE;
 		}
 
+		@Override
 		public void destroyItem(View arg0, int arg1, Object arg2)
 		{
 			((ViewPagerFixed) arg0).removeView(listViews.get(arg1 % size));
 		}
 
+		@Override
 		public void finishUpdate(View arg0)
 		{
 		}
 
+		@Override
 		public Object instantiateItem(View arg0, int arg1)
 		{
 			try
@@ -540,6 +548,7 @@ public class GalleryActivity extends Activity
 			return listViews.get(arg1 % size);
 		}
 
+		@Override
 		public boolean isViewFromObject(View arg0, Object arg1)
 		{
 			return arg0 == arg1;

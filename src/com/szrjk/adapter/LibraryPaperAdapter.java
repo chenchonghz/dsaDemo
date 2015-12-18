@@ -25,10 +25,12 @@ public class LibraryPaperAdapter extends BaseAdapter {
 		this.miInflater = LayoutInflater.from(mContext);
 	}
 
+	@Override
 	public int getCount() {
 		return list.size();
 	}
 
+	@Override
 	public Object getItem(int position) {
 		return list.get(position);
 	}

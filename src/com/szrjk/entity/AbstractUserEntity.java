@@ -1,14 +1,6 @@
 package com.szrjk.entity;
 
-import java.util.List;
-
-import android.app.Activity;
-import android.content.Context;
-import android.util.Log;
-
 import com.lidroid.xutils.DbUtils;
-import com.lidroid.xutils.db.sqlite.Selector;
-import com.lidroid.xutils.exception.DbException;
 
 /**
  * denggm on 2015/10/26.
@@ -32,7 +24,7 @@ public abstract class AbstractUserEntity<T extends  Object> {
 
     public void initTable(final DbUtils userdb){
 
-        this.userdb = userdb;
+        AbstractUserEntity.userdb = userdb;
     }
 
     /**

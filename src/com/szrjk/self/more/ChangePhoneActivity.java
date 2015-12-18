@@ -8,10 +8,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,19 +29,11 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.config.Constant;
-import com.szrjk.dhome.AboutYouActivity;
 import com.szrjk.dhome.BaseActivity;
-import com.szrjk.dhome.DHomeApplication;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.ErrorInfo;
-import com.szrjk.entity.RegisterInfo;
 import com.szrjk.entity.UserInfo;
-import com.szrjk.fire.FireEye;
-import com.szrjk.fire.Result;
-import com.szrjk.fire.StaticPattern;
-import com.szrjk.fire.ValuePattern;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
-import com.szrjk.util.DesUtil;
 import com.szrjk.util.ToastUtils;
 
 @ContentView(R.layout.activity_change_phone)
@@ -79,12 +71,13 @@ public class ChangePhoneActivity extends BaseActivity implements OnClickListener
 		et_new_phone.setFocusable(true);
 		et_new_phone.setFocusableInTouchMode(true);
 		et_new_phone.requestFocus();
-		et_new_phone.setInputType(EditorInfo.TYPE_CLASS_PHONE);
-		et_vcode.setInputType(EditorInfo.TYPE_CLASS_PHONE);
+		et_new_phone.setInputType(InputType.TYPE_CLASS_PHONE);
+		et_vcode.setInputType(InputType.TYPE_CLASS_PHONE);
     	Timer timer = new Timer();
     	     timer.schedule(new TimerTask()
     	     {
-    	         public void run() 
+    	         @Override
+				public void run() 
     	         {
     	             InputMethodManager inputManager =
     	                 (InputMethodManager)et_new_phone.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -309,6 +302,7 @@ public class ChangePhoneActivity extends BaseActivity implements OnClickListener
 			busiParams.put("oldPhoneNum", userInfo.getPhone());
 			paramMap.put("BusiParams", busiParams);
 			httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+				@Override
 				public void success(JSONObject jsonObject) {
 					ErrorInfo errorObj = JSON.parseObject(
 							jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -319,11 +313,14 @@ public class ChangePhoneActivity extends BaseActivity implements OnClickListener
 						finish();
 					}
 				}
+				@Override
 				public void start() {
 				}
+				@Override
 				public void loading(long total, long current,
 						boolean isUploading) {
 				}
+				@Override
 				public void failure(HttpException exception, JSONObject jobj) {
 				}
 			});

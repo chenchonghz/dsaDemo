@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import com.alibaba.fastjson.JSON;
-import com.szrjk.entity.MessageItem;
 import com.szrjk.entity.MsgItem;
 import com.szrjk.entity.RemindEvent;
 import com.umeng.message.UmengBaseIntentService;

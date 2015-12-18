@@ -193,6 +193,7 @@ private OnClickListener itemsOnClick=new OnClickListener() {
 		busiParams.put("objUserSeqIds", objUserSeqIds);
 		paramMap.put("BusiParams", busiParams);
 		httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				ToastUtils.showMessage(instance, "删除成功！");
 				Intent intent=new Intent();
@@ -202,10 +203,13 @@ private OnClickListener itemsOnClick=new OnClickListener() {
 				setResult(DELETE_COTERIE_MEMBER_SUCCESS,intent);
 				instance.finish();
 			}
+			@Override
 			public void start() {
 			}
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 			}
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 			}
 		});

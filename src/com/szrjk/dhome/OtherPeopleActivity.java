@@ -10,17 +10,15 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lidroid.xutils.BitmapUtils;
@@ -432,16 +430,16 @@ public class OtherPeopleActivity extends BaseActivity implements OnClickListener
 		tv_other_user_department.setText(homePageInfo.getDeptName());
 		if (homePageInfo.getCompanyName().length()+homePageInfo.getDeptName().length()>18) {
 			RelativeLayout.LayoutParams layoutParams = 
-					new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, 
-							RelativeLayout.LayoutParams.WRAP_CONTENT);
+					new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, 
+							LayoutParams.WRAP_CONTENT);
 			layoutParams.addRule(RelativeLayout.BELOW, R.id.tv_other_user_hospital);
 			layoutParams.setMargins(0, 10, 0, 0);
 //			layoutParams.setMargins(0, 5, 0, 0);
 			tv_other_user_department.setLayoutParams(layoutParams);
 		}else{
 			RelativeLayout.LayoutParams layoutParams = 
-					new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, 
-							RelativeLayout.LayoutParams.WRAP_CONTENT);
+					new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, 
+							LayoutParams.WRAP_CONTENT);
 			layoutParams.addRule(RelativeLayout.RIGHT_OF, R.id.tv_other_user_hospital);
 			layoutParams.setMargins(10, 0, 0, 0);
 			tv_other_user_department.setLayoutParams(layoutParams);

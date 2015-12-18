@@ -9,7 +9,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -18,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -131,6 +131,7 @@ public class SelfFragment extends Fragment implements OnClickListener
 	public UserHomePageInfo userHomePageInfo;
 	private Dialog dialog;
 
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState)
 	{
@@ -393,6 +394,7 @@ public class SelfFragment extends Fragment implements OnClickListener
 		busiParam.put("objUserId", userId2);
 		paramMap.put("BusiParams", busiParam);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 				dialog.dismiss();
 				ErrorInfo errorObj  =JSON.parseObject(
@@ -413,11 +415,14 @@ public class SelfFragment extends Fragment implements OnClickListener
 				}
 
 			}
+			@Override
 			public void start() {dialog.show();
 			}
 
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 			}
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 				try {
 					dialog.dismiss();
@@ -449,16 +454,16 @@ public class SelfFragment extends Fragment implements OnClickListener
 		tv_self_user_department.setText(userHomePageInfo.getDeptName());
 		if (userHomePageInfo.getCompanyName().length()+userHomePageInfo.getDeptName().length()>18) {
 			RelativeLayout.LayoutParams layoutParams = 
-					new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, 
-							RelativeLayout.LayoutParams.WRAP_CONTENT);
+					new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, 
+							LayoutParams.WRAP_CONTENT);
 			layoutParams.addRule(RelativeLayout.BELOW, R.id.tv_self_user_hospital);
 			layoutParams.setMargins(0, 3, 0, 0);
 //			layoutParams.setMargins(0, 5, 0, 0);
 			tv_self_user_department.setLayoutParams(layoutParams);
 		}else{
 			RelativeLayout.LayoutParams layoutParams = 
-					new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, 
-							RelativeLayout.LayoutParams.WRAP_CONTENT);
+					new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, 
+							LayoutParams.WRAP_CONTENT);
 			layoutParams.addRule(RelativeLayout.RIGHT_OF, R.id.tv_self_user_hospital);
 			layoutParams.setMargins(10, 0, 0, 0);
 			tv_self_user_department.setLayoutParams(layoutParams);
@@ -517,6 +522,7 @@ public class SelfFragment extends Fragment implements OnClickListener
 
 
 
+	@Override
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.iv_self_avatar:
@@ -589,6 +595,7 @@ public class SelfFragment extends Fragment implements OnClickListener
 
 	//pop菜单的按钮监听
 	private OnClickListener changebg = new OnClickListener() {
+		@Override
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.tv_change_bg:

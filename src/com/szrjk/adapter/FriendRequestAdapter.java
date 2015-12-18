@@ -4,32 +4,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import u.aly.bt;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lidroid.xutils.exception.HttpException;
 import com.szrjk.config.Constant;
-import com.szrjk.dhome.OtherPeopleActivity;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.RequestList;
 import com.szrjk.entity.UserCard;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
-import com.szrjk.self.CircleActivity;
-import com.szrjk.self.FriendActivity;
 import com.szrjk.util.DisplayTimeUtil;
 import com.szrjk.util.ToastUtils;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -73,18 +68,22 @@ public class FriendRequestAdapter extends BaseAdapter {
 //		FriendRequestAdapter.isSelected = isSelected;  
 //	}  
 
+	@Override
 	public int getCount() {
 		return list.size();
 	}
 
+	@Override
 	public Object getItem(int position) {
 		return list.get(position);
 	}
 
+	@Override
 	public long getItemId(int position) {
 		return position;
 	}
 
+	@Override
 	public View getView(int position,View convertview, ViewGroup parent) {
 		ViewHolder viewHolder = null;
 		int type = getItemViewType(position);
@@ -105,8 +104,8 @@ public class FriendRequestAdapter extends BaseAdapter {
 		viewHolder.usercard.changeline(userCard);
 		if (userCard.getCompanyName().length()+userCard.getDeptName().length()>18) {
 			RelativeLayout.LayoutParams layoutParams = 
-					new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 
-							RelativeLayout.LayoutParams.WRAP_CONTENT);
+					new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, 
+							LayoutParams.WRAP_CONTENT);
 			layoutParams.addRule(RelativeLayout.BELOW, R.id.request_usercard);
 			layoutParams.setMargins(118, 0, 0, 0);
 			viewHolder.tv_date.setLayoutParams(layoutParams);
@@ -159,6 +158,7 @@ public class FriendRequestAdapter extends BaseAdapter {
 			this.position = position;
 			this.viewHolder = viewHolder;
 		}
+		@Override
 		public boolean onLongClick(View v) {
 			switch (v.getId()) {
 			case R.id.bt_request:
@@ -248,6 +248,7 @@ public class FriendRequestAdapter extends BaseAdapter {
 			paramMap.put("BusiParams", busiParams);
 			Log.i("TAG", paramMap.toString());
 			DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+				@Override
 				public void success(JSONObject jsonObject) {
 					ErrorInfo errorObj = JSON.parseObject(
 							jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -259,12 +260,15 @@ public class FriendRequestAdapter extends BaseAdapter {
 					}
 				}
 
+				@Override
 				public void start() {
 
 				}
+				@Override
 				public void loading(long total, long current, boolean isUploading) {
 
 				}
+				@Override
 				public void failure(HttpException exception, JSONObject jobj) {
 					ToastUtils.showMessage(mContext, "请求失败");
 				}
@@ -282,6 +286,7 @@ public class FriendRequestAdapter extends BaseAdapter {
 			paramMap.put("BusiParams", busiParams);
 			Log.i("TAG", paramMap.toString());
 			DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+				@Override
 				public void success(JSONObject jsonObject) {
 					ErrorInfo errorObj = JSON.parseObject(
 							jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -295,12 +300,15 @@ public class FriendRequestAdapter extends BaseAdapter {
 					}
 				}
 
+				@Override
 				public void start() {
 
 				}
+				@Override
 				public void loading(long total, long current, boolean isUploading) {
 
 				}
+				@Override
 				public void failure(HttpException exception, JSONObject jobj) {
 					ToastUtils.showMessage(mContext, "请求失败");
 				}

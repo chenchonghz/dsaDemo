@@ -74,6 +74,9 @@
     <string name="Library4">医学论文</string>
     <string name="search_nothing">没有相关搜索结果！</string>
     <string name="message">消息</string>
+    <string name="circlepublic">公共</string>
+    <string name="circle">圈子</string>
+    <string name="point">·</string>
     
 
 </resources>

@@ -8,7 +8,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lidroid.xutils.exception.HttpException;
 import com.szrjk.adapter.CircleInviteAdapter;
-import com.szrjk.adapter.CircleInviteAdapter.ViewHolder;
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.ErrorInfo;
@@ -29,10 +28,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class InviteFriendFragment extends Fragment {
 	private  CircleInviteFirendActivity instance;
@@ -46,6 +43,7 @@ public class InviteFriendFragment extends Fragment {
 	}
 
 
+	@Override
 	public View onCreateView(LayoutInflater inflater,
 			ViewGroup container, Bundle savedInstanceState) {
 		dialog = createDialog(getActivity(), "加载中...");
@@ -67,6 +65,7 @@ public class InviteFriendFragment extends Fragment {
 		busiParams.put("endNum",500);
 		paramMap.put("BusiParams", busiParams);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
 			public void success(JSONObject jsonObject) {
 
 				ErrorInfo errorObj = JSON.parseObject(
@@ -88,12 +87,15 @@ public class InviteFriendFragment extends Fragment {
 				}
 			}
 
+			@Override
 			public void start() {dialog.show();
 
 			}
+			@Override
 			public void loading(long total, long current, boolean isUploading) {
 
 			}
+			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 				dialog.dismiss();
 				ToastUtils.showMessage(getActivity(), "获取失败");
@@ -114,6 +116,7 @@ public class InviteFriendFragment extends Fragment {
 		friend_adapter.initDate();
 
 		lv_friend.setOnItemClickListener(new OnItemClickListener() {
+			@Override
 			public void onItemClick(AdapterView<?> arg0, View view, int position,
 					long arg3) {
 				//				ViewHolder viewHolder = (ViewHolder) view.getTag();
@@ -147,6 +150,7 @@ public class InviteFriendFragment extends Fragment {
 		select_all.setOnClickListener(new OnClickListener() {
 
 
+			@Override
 			public void onClick(View arg0) {
 				for (int i = 0; i < friendlist.size(); i++) {  
 					if (friend_adapter.getIsSelected().get(friendlist.get(i).getUserSeqId())==null) {

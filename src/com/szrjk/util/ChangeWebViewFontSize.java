@@ -17,7 +17,7 @@ public class ChangeWebViewFontSize {
 		getFontSize();
 	}
 	private void getFontSize() {
-		SharedPreferences mySharedPreferences= context.getSharedPreferences("text_size",Activity.MODE_PRIVATE);
+		SharedPreferences mySharedPreferences= context.getSharedPreferences("text_size",Context.MODE_PRIVATE);
 		//用putString的方法保存数据
 		String size = mySharedPreferences.getString("size","");
 		if(size.equals("small")){

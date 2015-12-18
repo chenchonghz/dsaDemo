@@ -2,20 +2,16 @@ package com.szrjk.widget;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.view.annotation.ViewInject;
-import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.CommentActivity;
@@ -28,7 +24,6 @@ import com.szrjk.http.DHttpService;
 import com.szrjk.index.RepeatActivity;
 import com.szrjk.util.BusiUtils;
 import com.szrjk.util.DialogUtil;
-import com.szrjk.util.ImageLoaderUtil;
 import com.szrjk.util.ToastUtils;
 
 import java.util.HashMap;
@@ -66,7 +61,6 @@ public class PostDetailBottomOperLayout extends RelativeLayout
 
 	private String level;
 	private String srcPostId;
-	private int btnId;
 
 
 
@@ -152,7 +146,7 @@ public class PostDetailBottomOperLayout extends RelativeLayout
 					DialogUtil.showGuestDialog(context, null);
 					return;
 				}
-				setBtnId(1);
+				PostDetailViewCommentListLayout.btnId=1;
 				clickTransmitButton(view);
 			}
 		});
@@ -168,7 +162,7 @@ public class PostDetailBottomOperLayout extends RelativeLayout
 					DialogUtil.showGuestDialog(context, null);
 					return;
 				}
-				setBtnId(2);
+				PostDetailViewCommentListLayout.btnId=2;
 				clickCommentButton(view);
 			}
 		});
@@ -183,7 +177,7 @@ public class PostDetailBottomOperLayout extends RelativeLayout
 					DialogUtil.showGuestDialog(context, null);
 					return;
 				}
-				setBtnId(3);
+				PostDetailViewCommentListLayout.btnId=3;
 				clickLaudButton(view);
 			}
 		});
@@ -305,14 +299,6 @@ public class PostDetailBottomOperLayout extends RelativeLayout
 
 	public void setIslike(boolean islike) {
 		this.islike = islike;
-	}
-
-	public int getBtnId() {
-		return btnId;
-	}
-
-	public void setBtnId(int btnId) {
-		this.btnId = btnId;
 	}
 
 	public RelativeLayout getBtn_laud() {

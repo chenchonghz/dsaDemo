@@ -3,7 +3,6 @@ package com.szrjk.util;
 import java.util.List;
 
 import com.szrjk.config.Constant;
-import com.szrjk.dhome.IndexFragment;
 import com.szrjk.dhome.OtherPeopleActivity;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.IPullPostListCallback;
@@ -13,20 +12,16 @@ import com.szrjk.entity.PostInfo;
 import com.szrjk.entity.UserCard;
 import com.szrjk.self.SystemUserActivity;
 
-import android.R.color;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextPaint;
-import android.text.style.BackgroundColorSpan;
 import android.text.style.ClickableSpan;
-import android.text.style.ForegroundColorSpan;
+import android.text.style.DynamicDrawableSpan;
 import android.text.style.ImageSpan;
 import android.util.Log;
 import android.view.View;
@@ -92,7 +87,7 @@ public class InitTransmitPostUtil {
 			start = 2;
 			end = sb_content.length();		
 			Bitmap b = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_yellow_v_24);
-			ImageSpan imgSpan = new ImageSpan(context, b, ImageSpan.ALIGN_BASELINE);
+			ImageSpan imgSpan = new ImageSpan(context, b, DynamicDrawableSpan.ALIGN_BASELINE);
 			icon_start = sb_content.length();
 			if(userCard.getUserLevel().equals("11")){
 				sb_content.append(" icon");
@@ -137,7 +132,7 @@ public class InitTransmitPostUtil {
 //			spanStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.font_titleanduname)), icon_end,sb_content.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);	
 //			spanStr.setSpan(new BackgroundColorSpan(context.getResources().get), start, end,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 			if(userCard.getUserLevel().equals("11")){	
-				spanStr.setSpan(imgSpan, icon_start, icon_end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+				spanStr.setSpan(imgSpan, icon_start, icon_end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 			}
 			return spanStr;
 		}else{

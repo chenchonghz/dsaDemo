@@ -6,9 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import com.szrjk.config.Constant;
-import com.szrjk.dhome.ActErrorReport;
 import com.szrjk.dhome.DHomeApplication;
-import com.szrjk.dhome.Register1Activity;
 import com.szrjk.util.SharePerferenceUtil;
 
 import java.io.ByteArrayOutputStream;

@@ -23,6 +23,7 @@ public class MyFriendListAdapter extends BaseAdapter{
 		this.mInflater = LayoutInflater.from(mContext);
 	}
 
+	@Override
 	public int getCount() {
 		return list.size();
 	}

@@ -252,7 +252,7 @@ public class EditDataStudentsActivity extends Activity {
 		handler.post(new Runnable() {  
 			@Override  
 			public void run() {  
-				sv_students.fullScroll(ScrollView.FOCUS_DOWN);  
+				sv_students.fullScroll(View.FOCUS_DOWN);  
 			}  
 		});
 	}
@@ -275,7 +275,7 @@ public class EditDataStudentsActivity extends Activity {
 		handler.post(new Runnable() {  
 			@Override  
 			public void run() {  
-				sv_students.fullScroll(ScrollView.FOCUS_DOWN);  
+				sv_students.fullScroll(View.FOCUS_DOWN);  
 			}  
 		});
 	}
@@ -320,6 +320,7 @@ public class EditDataStudentsActivity extends Activity {
 		d.show();
 	}
 	//获取回传的tcity
+	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode==101&&resultCode==11) {
 			if (data==null) {

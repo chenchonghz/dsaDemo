@@ -16,7 +16,6 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.szrjk.config.Constant;
-import com.szrjk.dhome.MainActivity;
 
 public class CropImageView extends View {
 
@@ -288,7 +287,7 @@ public class CropImageView extends View {
 
 					case EDGE_MOVE_IN:
 						if (isTouchInSquare) {
-							mDrawableFloat.offset((int) dx, (int) dy);
+							mDrawableFloat.offset(dx, dy);
 						}
 						Log.e("mDrawableFloat", ""+mDrawableFloat.bottom);
 						Log.e("mDrawableFloat", ""+mDrawableFloat.top);

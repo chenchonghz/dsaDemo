@@ -6,49 +6,52 @@
     tools:context=".IntroduceActivity" >
 
     <RelativeLayout
-        android:id="@+id/Rly_self_user_bg"
+        android:id="@+id/rl_glo"
         android:layout_width="match_parent"
-        android:layout_height="245dp" >
-
-        <ImageView
-            android:id="@+id/iv_other_user_background"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:scaleType="centerCrop"
-            android:src="@color/gray" />
+        android:layout_height="match_parent"
+        android:background="@color/base_bg2" >
 
         <RelativeLayout
-            android:id="@+id/rly_self_avatar"
-            android:layout_width="@dimen/rly_self_avatar"
-            android:layout_height="@dimen/rly_self_avatar"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="10dp"
-            android:background="@color/white"
-            android:gravity="center" >
+            android:id="@+id/Rly_self_user_bg"
+            android:layout_width="match_parent"
+            android:layout_height="245dp" >
 
             <ImageView
-                android:id="@+id/iv_self_avatar"
-                android:layout_width="@dimen/iv_self_avatar"
-                android:layout_height="@dimen/iv_self_avatar"
+                android:id="@+id/iv_other_user_background"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/header" />
-        </RelativeLayout>
+                android:src="@drawable/default_background" />
 
-        
+            <RelativeLayout
+                android:id="@+id/rly_self_avatar"
+                android:layout_width="@dimen/rly_self_avatar"
+                android:layout_height="@dimen/rly_self_avatar"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="10dp"
+                android:background="@color/white"
+                android:gravity="center" >
 
-        <TextView
-            android:id="@+id/tv_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/rly_self_avatar"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/margin_left"
-            android:text="@string/edit_profile"
-            android:textColor="@color/white"
-            android:visibility="gone"
-             />
-        
-        <LinearLayout
+                <ImageView
+                    android:id="@+id/iv_self_avatar"
+                    android:layout_width="@dimen/iv_self_avatar"
+                    android:layout_height="@dimen/iv_self_avatar"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/header" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/rly_self_avatar"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/margin_left"
+                android:text="@string/edit_profile"
+                android:textColor="@color/white"
+                android:visibility="gone" />
+
+            <LinearLayout
                 android:id="@+id/lly_hv"
                 style="@style/SendButton"
                 android:layout_width="@dimen/header_height"
@@ -65,425 +68,430 @@
                     android:paddingRight="10dp"
                     android:src="@drawable/icon_back_32" />
             </LinearLayout>
-    </RelativeLayout>
+        </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/rl_usermessage"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/message_item_height"
-        android:layout_below="@id/Rly_self_user_bg"
-         android:background="@color/white" >
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/input_bg" />
-
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/rl_usermessage"
             android:layout_width="match_parent"
             android:layout_height="@dimen/message_item_height"
-            >
+            android:layout_below="@id/Rly_self_user_bg"
+            android:background="@color/white" >
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="@dimen/message_item_height"
-                android:layout_marginLeft="@dimen/message_item_margin"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="@string/userinfo"
-                android:textSize="@dimen/font_size_small"
-                android:textColor="@color/font_titleanduname" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/input_bg" />
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="@dimen/message_item_height"
-                android:layout_weight="3"
-                android:gravity="center_vertical"
-                android:orientation="vertical" >
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/message_item_height" >
 
                 <TextView
-                    android:id="@+id/tv_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Name"
-                    android:textSize="@dimen/font_size_small"
-                    android:textColor="@color/font_cell" />
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/message_item_height"
+                    android:layout_marginLeft="@dimen/message_item_margin"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/userinfo"
+                    android:textColor="@color/font_titleanduname"
+                    android:textSize="@dimen/font_size_small" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/message_item_height"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical" >
 
                     <TextView
-                        android:id="@+id/tv_sex"
+                        android:id="@+id/tv_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="sex"
-                        android:textSize="@dimen/font_size_msmall"
-                        android:textColor="@color/font_cell" />
+                        android:textColor="@color/font_cell"
+                        android:textSize="@dimen/font_size_small" />
 
-                    <TextView
-                        android:id="@+id/tv_age"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/message_item_margin"
-                        android:textSize="@dimen/font_size_msmall"
-                        android:textColor="@color/font_cell" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
 
-                    <TextView
-                        android:id="@+id/tv_address"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/message_item_margin"
-                        android:text="address"
-                        android:textSize="@dimen/font_size_msmall"
-                        android:textColor="@color/font_cell" />
+                        <TextView
+                            android:id="@+id/tv_sex"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/font_cell"
+                            android:textSize="@dimen/font_size_msmall" />
+
+                        <TextView
+                            android:id="@+id/tv_age"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/message_item_margin"
+                            android:textColor="@color/font_cell"
+                            android:textSize="@dimen/font_size_msmall" />
+
+                        <TextView
+                            android:id="@+id/tv_address"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/message_item_margin"
+                            android:textColor="@color/font_cell"
+                            android:textSize="@dimen/font_size_msmall" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_hospital"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/message_item_height"
+            android:layout_below="@id/rl_usermessage"
+            android:visibility="gone" >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/input_bg" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/message_item_height" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/message_item_height"
+                    android:layout_marginLeft="@dimen/message_item_margin"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/hospital"
+                    android:textColor="@color/font_titleanduname"
+                    android:textSize="@dimen/font_size_small" />
+
+                <TextView
+                    android:id="@+id/tv_hospital"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/message_item_height"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:text="sssssssss"
+                    android:textColor="@color/font_cell"
+                    android:textSize="@dimen/font_size_small" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_departments"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/message_item_height"
+            android:layout_below="@id/rl_hospital"
+            android:visibility="gone" >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/input_bg" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/message_item_height" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/message_item_height"
+                    android:layout_marginLeft="@dimen/message_item_margin"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/departments"
+                    android:textColor="@color/font_titleanduname"
+                    android:textSize="@dimen/font_size_small" />
+
+                <TextView
+                    android:id="@+id/tv_departments"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/message_item_height"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/font_cell"
+                    android:textSize="@dimen/font_size_small" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_professional_title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/message_item_height"
+            android:layout_below="@id/rl_departments"
+            android:visibility="gone" >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/input_bg" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/message_item_height" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/message_item_height"
+                    android:layout_marginLeft="@dimen/message_item_margin"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/professional_title"
+                    android:textColor="@color/font_titleanduname"
+                    android:textSize="@dimen/font_size_small" />
+
+                <TextView
+                    android:id="@+id/tv_professional_title"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/message_item_height"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/font_cell"
+                    android:textSize="@dimen/font_size_small" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_school"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/message_item_height"
+            android:layout_below="@id/rl_professional_title"
+            android:visibility="gone" >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/input_bg" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/message_item_height" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/message_item_height"
+                    android:layout_marginLeft="@dimen/message_item_margin"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/school"
+                    android:textColor="@color/font_titleanduname"
+                    android:textSize="@dimen/font_size_small" />
+
+                <TextView
+                    android:id="@+id/tv_school"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/message_item_height"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/font_cell"
+                    android:textSize="@dimen/font_size_small" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_education"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/message_item_height"
+            android:layout_below="@id/rl_school"
+            android:visibility="gone" >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/input_bg" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/message_item_height" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/message_item_height"
+                    android:layout_marginLeft="@dimen/message_item_margin"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/education"
+                    android:textColor="@color/font_titleanduname"
+                    android:textSize="@dimen/font_size_small" />
+
+                <TextView
+                    android:id="@+id/tv_education"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/message_item_height"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/font_cell"
+                    android:textSize="@dimen/font_size_small" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_professional"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/message_item_height"
+            android:layout_below="@id/rl_education"
+            android:visibility="gone" >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/input_bg" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/message_item_height" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/message_item_height"
+                    android:layout_marginLeft="@dimen/message_item_margin"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/professional"
+                    android:textColor="@color/font_titleanduname"
+                    android:textSize="@dimen/font_size_small" />
+
+                <TextView
+                    android:id="@+id/tv_professional"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/message_item_height"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/font_cell"
+                    android:textSize="@dimen/font_size_small" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_admission_date"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/message_item_height"
+            android:layout_below="@id/rl_professional"
+            android:visibility="gone" >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/input_bg" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/message_item_height" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/message_item_height"
+                    android:layout_marginLeft="@dimen/message_item_margin"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/admission_date"
+                    android:textColor="@color/font_titleanduname"
+                    android:textSize="@dimen/font_size_small" />
+
+                <TextView
+                    android:id="@+id/tv_admission_date"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/message_item_height"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/font_cell"
+                    android:textSize="@dimen/font_size_small" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_company"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/message_item_height"
+            android:layout_below="@id/rl_admission_date"
+            android:visibility="gone" >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/input_bg" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/message_item_height" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/message_item_height"
+                    android:layout_marginLeft="@dimen/message_item_margin"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/company"
+                    android:textColor="@color/font_titleanduname"
+                    android:textSize="@dimen/font_size_small" />
+
+                <TextView
+                    android:id="@+id/tv_company"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/message_item_height"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/font_cell"
+                    android:textSize="@dimen/font_size_small" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_job_title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/message_item_height"
+            android:layout_below="@id/rl_company"
+            android:visibility="gone" >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/input_bg" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/message_item_height" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/message_item_height"
+                    android:layout_marginLeft="@dimen/message_item_margin"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/job_title"
+                    android:textColor="@color/font_titleanduname"
+                    android:textSize="@dimen/font_size_small" />
+
+                <TextView
+                    android:id="@+id/tv_job_title"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/message_item_height"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/font_cell"
+                    android:textSize="@dimen/font_size_small" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_backcolor"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/rl_job_title"
+            android:background="@color/bg_global" >
+        </RelativeLayout>
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/rl_hospital"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/message_item_height"
-        android:layout_below="@id/rl_usermessage"
-        android:visibility="gone" >
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/input_bg" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/message_item_height" >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="@dimen/message_item_height"
-                android:layout_marginLeft="@dimen/message_item_margin"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="@string/hospital" 
-                android:textSize="@dimen/font_size_small"
-                android:textColor="@color/font_titleanduname"
-                />
-
-            <TextView
-                android:id="@+id/tv_hospital"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/message_item_height"
-                android:layout_weight="3"
-                android:gravity="center_vertical"
-                android:text="sssssssss"
-                android:textSize="@dimen/font_size_small"
-                android:textColor="@color/font_cell" />
-        </LinearLayout>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/rl_departments"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/message_item_height"
-        android:layout_below="@id/rl_hospital"
-        android:visibility="gone" >
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/input_bg" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/message_item_height" >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="@dimen/message_item_height"
-                android:layout_marginLeft="@dimen/message_item_margin"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="@string/departments"
-                android:textSize="@dimen/font_size_small"
-                android:textColor="@color/font_titleanduname" />
-
-            <TextView
-                android:id="@+id/tv_departments"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/message_item_height"
-                android:layout_weight="3"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/font_size_small"
-                android:textColor="@color/font_cell" />
-        </LinearLayout>
-    </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/rl_professional_title"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/message_item_height"
-        android:layout_below="@id/rl_departments"
-        android:visibility="gone" >
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/input_bg" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/message_item_height" >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="@dimen/message_item_height"
-                android:layout_marginLeft="@dimen/message_item_margin"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="@string/professional_title"
-                android:textSize="@dimen/font_size_small"
-                android:textColor="@color/font_titleanduname" />
-
-            <TextView
-                android:id="@+id/tv_professional_title"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/message_item_height"
-                android:layout_weight="3"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/font_size_small"
-                android:textColor="@color/font_cell" />
-        </LinearLayout>
-    </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/rl_school"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/message_item_height"
-        android:layout_below="@id/rl_professional_title"
-        android:visibility="gone" >
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/input_bg" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/message_item_height" >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="@dimen/message_item_height"
-                android:layout_marginLeft="@dimen/message_item_margin"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="@string/school"
-                android:textSize="@dimen/font_size_small"
-                android:textColor="@color/font_titleanduname" />
-
-            <TextView
-                android:id="@+id/tv_school"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/message_item_height"
-                android:layout_weight="3"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/font_size_small"
-                android:textColor="@color/font_cell" />
-        </LinearLayout>
-    </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/rl_education"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/message_item_height"
-        android:layout_below="@id/rl_school"
-        android:visibility="gone" >
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/input_bg" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/message_item_height" >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="@dimen/message_item_height"
-                android:layout_marginLeft="@dimen/message_item_margin"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="@string/education"
-                android:textSize="@dimen/font_size_small"
-                android:textColor="@color/font_titleanduname" />
-
-            <TextView
-                android:id="@+id/tv_education"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/message_item_height"
-                android:layout_weight="3"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/font_size_small"
-                android:textColor="@color/font_cell" />
-        </LinearLayout>
-    </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/rl_professional"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/message_item_height"
-        android:layout_below="@id/rl_education"
-        android:visibility="gone" >
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/input_bg" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/message_item_height" >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="@dimen/message_item_height"
-                android:layout_marginLeft="@dimen/message_item_margin"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="@string/professional"
-                android:textSize="@dimen/font_size_small"
-                android:textColor="@color/font_titleanduname" />
-
-            <TextView
-                android:id="@+id/tv_professional"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/message_item_height"
-                android:layout_weight="3"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/font_size_small"
-                android:textColor="@color/font_cell" />
-        </LinearLayout>
-    </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/rl_admission_date"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/message_item_height"
-        android:layout_below="@id/rl_professional"
-        android:visibility="gone" >
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/input_bg" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/message_item_height" >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="@dimen/message_item_height"
-                android:layout_marginLeft="@dimen/message_item_margin"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="@string/admission_date"
-                android:textSize="@dimen/font_size_small"
-                android:textColor="@color/font_titleanduname" />
-
-            <TextView
-                android:id="@+id/tv_admission_date"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/message_item_height"
-                android:layout_weight="3"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/font_size_small"
-                android:textColor="@color/font_cell" />
-        </LinearLayout>
-    </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/rl_company"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/message_item_height"
-        android:layout_below="@id/rl_admission_date"
-        android:visibility="gone" >
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/input_bg" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/message_item_height" >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="@dimen/message_item_height"
-                android:layout_marginLeft="@dimen/message_item_margin"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="@string/company"
-                android:textSize="@dimen/font_size_small"
-                android:textColor="@color/font_titleanduname" />
-
-            <TextView
-                android:id="@+id/tv_company"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/message_item_height"
-                android:layout_weight="3"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/font_size_small"
-                android:textColor="@color/font_cell" />
-        </LinearLayout>
-    </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/rl_job_title"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/message_item_height"
-        android:layout_below="@id/rl_company"
-        android:visibility="gone" >
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/input_bg" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/message_item_height" >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="@dimen/message_item_height"
-                android:layout_marginLeft="@dimen/message_item_margin"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="@string/job_title"
-                android:textSize="@dimen/font_size_small"
-                android:textColor="@color/font_titleanduname" />
-
-            <TextView
-                android:id="@+id/tv_job_title"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/message_item_height"
-                android:layout_weight="3"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/font_size_small"
-                android:textColor="@color/font_cell" />
-        </LinearLayout>
-    </RelativeLayout>
-<RelativeLayout 
-    android:id="@+id/rl_backcolor"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_below="@id/rl_job_title"
-    android:background="@color/bg_global"
-    ></RelativeLayout>
 </RelativeLayout>

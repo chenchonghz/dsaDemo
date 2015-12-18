@@ -88,6 +88,8 @@ public class UserCardLayout extends RelativeLayout{
 		//黄v显示判断，以后加上蓝v显示判断
 		if (userCard.getUserLevel().equals("11")) {
 			user_vip.setVisibility(View.VISIBLE);
+		}else if(userCard.getUserLevel().equals("0")){
+			user_vip.setVisibility(View.GONE);
 		}
 		rl_usercard.setOnClickListener(new OnClickListener() {
 

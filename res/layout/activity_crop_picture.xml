@@ -1,33 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res/com.szrjk.dhome"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/albumback" >
 
-    <com.szrjk.widget.HeaderView
-        android:id="@+id/hv_header"
+    <RelativeLayout
+        android:id="@+id/hv_moveandclip"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:htextstr="移动和剪切" >
-    </com.szrjk.widget.HeaderView>
+        android:layout_height="@dimen/header_height"
+        android:background="@color/search_bg" >
+
+        <LinearLayout
+            android:id="@+id/ll_backtoalbum"
+            style="@style/SendButton"
+            android:layout_width="80dp"
+            android:layout_height="@dimen/header_height"
+            android:layout_centerVertical="true"
+            android:background="@drawable/button_send_selector"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/iv_backtoalbum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/header_left_margin"
+                android:src="@drawable/icon_back_32" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="照片"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_large" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="移动和剪切"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_large" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/rl_bottom"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/edit_input_height"
         android:layout_alignParentBottom="true"
-        android:padding="5dp"
-        android:background="@color/base_bg2" >
+        android:background="@color/base_bg2"
+        android:padding="5dp" >
+
         <Button
             android:id="@+id/btn_confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_submit_selector"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
-            android:text="确  认"
+            android:background="@drawable/button_submit_selector"
             android:gravity="center"
+            android:text="确  认"
             android:textColor="@color/white"
             android:textSize="@dimen/font_size_middle" />
     </RelativeLayout>
@@ -37,16 +72,16 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/rl_bottom"
-        android:layout_below="@id/hv_header"
+        android:layout_below="@id/hv_moveandclip"
         android:layout_centerHorizontal="true"
         android:background="@color/plugin_camera_black"
-        android:padding="@dimen/album_margin"
         android:unselectedAlpha="1" >
 
-        <com.szrjk.zoom.PhotoView
-            android:id="@+id/pv_crop_picture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <com.szrjk.self.more.album.CropImageLayout
+            android:id="@+id/cil_clipImageLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" 
+        />
     </RelativeLayout>
 
 </RelativeLayout>

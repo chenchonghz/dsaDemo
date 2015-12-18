@@ -1,5 +1,7 @@
 package com.szrjk.entity;
 
+import java.util.List;
+
 public class PostDetail {
 
     private String content;
@@ -13,6 +15,8 @@ public class PostDetail {
     /***
      * 转发时会要用到的字体现
      ***/
+    
+    private List<PostAbstractList> postAbstractList;
     private String pContent;
     private String pIsDelete;
     private String pPostId;
@@ -29,38 +33,6 @@ public class PostDetail {
 
     private int isOpen;
 
-    public int getIsOpen() {
-        return isOpen;
-    }
-
-    public void setIsOpen(int isOpen) {
-        this.isOpen = isOpen;
-    }
-
-    public String getSrcPostId() {
-        return srcPostId;
-    }
-
-    public void setSrcPostId(String srcPostId) {
-        this.srcPostId = srcPostId;
-    }
-
-    public String getCoterieName() {
-        return coterieName;
-    }
-
-    public void setCoterieName(String coterieName) {
-        this.coterieName = coterieName;
-    }
-
-    public String getCoterieId() {
-        return coterieId;
-    }
-
-    public void setCoterieId(String coterieId) {
-        this.coterieId = coterieId;
-    }
-
     /**
      * 下面的字段是转发病例分享时的 原贴字段
      **/
@@ -75,61 +47,7 @@ public class PostDetail {
 
 
 
-    public String getpUserSeqId() {
-        return pUserSeqId;
-    }
-
-    public void setpUserSeqId(String pUserSeqId) {
-        this.pUserSeqId = pUserSeqId;
-    }
-
-    public String getpContent() {
-        return pContent;
-    }
-
-    public void setpContent(String pContent) {
-        this.pContent = pContent;
-    }
-
-    public String getpIsDelete() {
-        return pIsDelete;
-    }
-
-    public void setpIsDelete(String pIsDelete) {
-        this.pIsDelete = pIsDelete;
-    }
-
-    public String getpPostId() {
-        return pPostId;
-    }
-
-    public void setpPostId(String pPostId) {
-        this.pPostId = pPostId;
-    }
-
-    public String getpUserName() {
-        return pUserName;
-    }
-
-    public void setpUserName(String pUserName) {
-        this.pUserName = pUserName;
-    }
-
-    public String getPostLevel() {
-        return postLevel;
-    }
-
-    public void setPostLevel(String postLevel) {
-        this.postLevel = postLevel;
-    }
-
-    public String getSrcIsDelete() {
-        return srcIsDelete;
-    }
-
-    public void setSrcIsDelete(String srcIsDelete) {
-        this.srcIsDelete = srcIsDelete;
-    }
+   
 
     public String getContent() {
         return content;
@@ -179,44 +97,142 @@ public class PostDetail {
         this.postId = postId;
     }
 
+	public List<PostAbstractList> getPostAbstractList() {
+		return postAbstractList;
+	}
 
-    public String getBackgroundPic() {
-        return backgroundPic;
-    }
+	public void setPostAbstractList(List<PostAbstractList> postAbstractList) {
+		this.postAbstractList = postAbstractList;
+	}
 
-    public void setBackgroundPic(String backgroundPic) {
-        this.backgroundPic = backgroundPic;
-    }
+	public String getpContent() {
+		return pContent;
+	}
 
-    public String getCompleteRate() {
-        return completeRate;
-    }
+	public void setpContent(String pContent) {
+		this.pContent = pContent;
+	}
 
-    public void setCompleteRate(String completeRate) {
-        this.completeRate = completeRate;
-    }
+	public String getpIsDelete() {
+		return pIsDelete;
+	}
 
-    public String getDeptIds() {
-        return deptIds;
-    }
+	public void setpIsDelete(String pIsDelete) {
+		this.pIsDelete = pIsDelete;
+	}
 
-    public void setDeptIds(String deptIds) {
-        this.deptIds = deptIds;
-    }
+	public String getpPostId() {
+		return pPostId;
+	}
 
-    public String getDeptNames() {
-        return deptNames;
-    }
+	public void setpPostId(String pPostId) {
+		this.pPostId = pPostId;
+	}
 
-    public void setDeptNames(String deptNames) {
-        this.deptNames = deptNames;
-    }
+	public String getpUserName() {
+		return pUserName;
+	}
 
-    public String getPostTitle() {
-        return postTitle;
-    }
+	public void setpUserName(String pUserName) {
+		this.pUserName = pUserName;
+	}
 
-    public void setPostTitle(String postTitle) {
-        this.postTitle = postTitle;
-    }
+	public String getPostLevel() {
+		return postLevel;
+	}
+
+	public void setPostLevel(String postLevel) {
+		this.postLevel = postLevel;
+	}
+
+	public String getSrcIsDelete() {
+		return srcIsDelete;
+	}
+
+	public void setSrcIsDelete(String srcIsDelete) {
+		this.srcIsDelete = srcIsDelete;
+	}
+
+	public String getpUserSeqId() {
+		return pUserSeqId;
+	}
+
+	public void setpUserSeqId(String pUserSeqId) {
+		this.pUserSeqId = pUserSeqId;
+	}
+
+	public String getSrcPostId() {
+		return srcPostId;
+	}
+
+	public void setSrcPostId(String srcPostId) {
+		this.srcPostId = srcPostId;
+	}
+
+	public String getCoterieName() {
+		return coterieName;
+	}
+
+	public void setCoterieName(String coterieName) {
+		this.coterieName = coterieName;
+	}
+
+	public String getCoterieId() {
+		return coterieId;
+	}
+
+	public void setCoterieId(String coterieId) {
+		this.coterieId = coterieId;
+	}
+
+	public int getIsOpen() {
+		return isOpen;
+	}
+
+	public void setIsOpen(int isOpen) {
+		this.isOpen = isOpen;
+	}
+
+	public String getBackgroundPic() {
+		return backgroundPic;
+	}
+
+	public void setBackgroundPic(String backgroundPic) {
+		this.backgroundPic = backgroundPic;
+	}
+
+	public String getCompleteRate() {
+		return completeRate;
+	}
+
+	public void setCompleteRate(String completeRate) {
+		this.completeRate = completeRate;
+	}
+
+	public String getDeptIds() {
+		return deptIds;
+	}
+
+	public void setDeptIds(String deptIds) {
+		this.deptIds = deptIds;
+	}
+
+	public String getDeptNames() {
+		return deptNames;
+	}
+
+	public void setDeptNames(String deptNames) {
+		this.deptNames = deptNames;
+	}
+
+	public String getPostTitle() {
+		return postTitle;
+	}
+
+	public void setPostTitle(String postTitle) {
+		this.postTitle = postTitle;
+	}
+    
+	
+   
 }

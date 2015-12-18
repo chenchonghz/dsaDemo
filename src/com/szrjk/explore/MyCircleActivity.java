@@ -59,6 +59,7 @@ public class MyCircleActivity extends BaseActivity {
 	private static final int HAVE_NOT_MY_CIRCLE = 3;
 	private CircleListAdapter hotCircle_adapter;
 	private CircleListAdapter myCircle_adapter;
+	private boolean isFirstIn = true;
 	private Handler handler = new Handler(){
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
@@ -68,14 +69,17 @@ public class MyCircleActivity extends BaseActivity {
 				break;
 			case HAVE_MY_CIRCLE:
 //				rl_not_circle.setVisibility(View.GONE);
-//				lv_myCircle.setVisibility(View.VISIBLE);
+//				lv_myCircle.setVisibility(View.VISIBLE);	
 				myCircle_adapter = new CircleListAdapter(myCirclelist, instance);
 				lv_myCircle.setAdapter(myCircle_adapter);
+
 				break;
 			case HAVE_NOT_MY_CIRCLE:
 //				rl_not_circle.setVisibility(View.VISIBLE);
 //				lv_myCircle.setVisibility(View.GONE);
 //				Log.e("MyCircleActivity", "没有我的圈子");
+				myCircle_adapter = new CircleListAdapter(myCirclelist, instance);
+				lv_myCircle.setAdapter(myCircle_adapter);
 				break;
 			}
 		};
@@ -99,8 +103,10 @@ public class MyCircleActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				isFirstIn = false;
 				Intent intent = new Intent(instance,CreateCircleActivity.class);
 				startActivity(intent);
+				
 			}
 		});
 		lv_myCircle.setOnItemClickListener(new OnItemClickListener() {
@@ -109,6 +115,7 @@ public class MyCircleActivity extends BaseActivity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
+				isFirstIn = false;
 				CircleInfo circleInfo = myCirclelist.get(position);
 				Intent intent = new Intent(instance, CircleHomepageActivity.class);
 				intent.putExtra("circle", circleInfo);
@@ -121,6 +128,7 @@ public class MyCircleActivity extends BaseActivity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
+				isFirstIn = false;
 				CircleInfo circleInfo = hotlist_show.get(position);
 				Intent intent = new Intent(instance, CircleHomepageActivity.class);
 				intent.putExtra(Constant.CIRCLE, circleInfo);
@@ -132,6 +140,7 @@ public class MyCircleActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				isFirstIn = false;
 				if (allHotList.size()==0) {
 					ToastUtils.showMessage(instance, "未有热门圈子");
 				}else{
@@ -256,5 +265,14 @@ public class MyCircleActivity extends BaseActivity {
 			hotlist_show.add(allHotList.get(i));
 		}
 		return hotlist_show;
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		if(!isFirstIn){
+			getMyCircle();
+		}
+		super.onResume();
 	}
 }

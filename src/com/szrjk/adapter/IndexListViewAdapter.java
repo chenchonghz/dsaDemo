@@ -1083,7 +1083,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 //					if(isTourist){
 //						DialogUtil.showGuestDialog(context, null);
 //					}else{
-					ToastUtils.showMessage(context, "aaa");
 						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),postInfo.getUserSeqId(),position);		
 //					}
 				}
@@ -2461,7 +2460,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 				}else{
 					mainActivity.startActivityForResult(intent, 100);
 				}
-			}else if(postType.equals(Constant.TRANSMIT_POST)){
+			}else if(postType.equals(Constant.TRANSMIT_POST)||postType.equals(Constant.TRANSMIT_POST2)){
 				Intent intent = new Intent(context, PostDetailFowardActivity.class);
 				intent.putExtra(Constant.POST_ID, postId);
 				intent.putExtra(Constant.USER_SEQ_ID, userSeqId);

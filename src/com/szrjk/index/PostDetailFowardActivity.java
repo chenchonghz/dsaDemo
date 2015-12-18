@@ -264,12 +264,18 @@ public class PostDetailFowardActivity extends BaseActivity
 							public void doCallback(Map m) {
 								boolean islike = (Boolean) m.get("islike");
 								if(islike){
+									if (postDetaillviewLayout.getLikeList()!=null) {
+										postDetaillviewLayout.getLikeList().clear();
+									}
 									postDetaillviewLayout.addLike();
 									ToastUtils.showMessage(PostDetailFowardActivity.this, "点赞成功!");
 									loadPostDetailedData(userSeqId, postId, instance);
 									postDetailBottomOperLayout.getBtn_laud().setClickable(false);
 								}
 								else{
+									if (postDetaillviewLayout.getLikeList()!=null) {
+										postDetaillviewLayout.getLikeList().clear();
+									}
 									postDetaillviewLayout.minusLike();
 									ToastUtils.showMessage(PostDetailFowardActivity.this, "取消点赞成功!");
 									loadPostDetailedData(userSeqId, postId, instance);

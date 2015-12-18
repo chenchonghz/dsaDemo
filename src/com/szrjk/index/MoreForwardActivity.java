@@ -141,7 +141,8 @@ public class MoreForwardActivity extends BaseActivity{
 	}
 
 	protected void setAdapter(ArrayList<Forward> forwardList) {
-		forwardAdapter=new PostCommentAdapter<Forward>(instance, forwardList, tabId,isMore);
+		forwardAdapter=PostCommentAdapter.getPostCommentAdapter();
+		forwardAdapter.setData(instance, forwardList, tabId,isMore);
 		lv_forward.setAdapter(forwardAdapter);
 	}
 	

@@ -68,18 +68,10 @@ public class PostDetailViewCommentListLayout extends RelativeLayout {
 	private RelativeLayout rl_laud;
 
 	private PostStatis postStatis;
-	private PostCommentAdapter postCommentAdapter;
+	private PostCommentAdapter postCommentAdapter=PostCommentAdapter.getPostCommentAdapter();
 	private View contexView;
 	private PHandler handler = new PHandler();
-	private int btnId;
-
-	public int getBtnId() {
-		return btnId;
-	}
-
-	public void setBtnId(int btnId) {
-		this.btnId = btnId;
-	}
+	public static int btnId = 2;
 
 	public PostStatis getPostStatis() {
 		return postStatis;
@@ -138,27 +130,11 @@ public class PostDetailViewCommentListLayout extends RelativeLayout {
 		clickLike(contexView);
 		clickComment(contexView);
 
-		clickCommentTable();
-		// setData(context, commentList);
-		
-
+		if (btnId == 2) {
+			clickCommentTable();
+		}
 		this.context = context;
 	}
-
-	// class PThread extends Thread {
-	// private Context pcontext;
-	// private List ppostComments;
-	//
-	// PThread(Context context, List postComments) {
-	// this.pcontext = context;
-	// this.ppostComments = postComments;
-	// }
-	//
-	// @Override
-	// public void run() {
-	// setData(pcontext, ppostComments);
-	// }
-	// }
 
 	private static final int DATA_CHARGE_NOTIFY_COMMENT = 1000;
 	private static final int DATA_CHARGE_NOTIFY_FORWARD = 1001;
@@ -193,13 +169,13 @@ public class PostDetailViewCommentListLayout extends RelativeLayout {
 	public void addLike() {
 		int i = Integer.parseInt(tv_laudCount.getText().toString());
 		tv_laudCount.setText((i + 1) + "");
-		// postCommentAdapter.notifyDataSetChanged();
+		postCommentAdapter.notifyDataSetChanged();
 	}
 
 	public void minusLike() {
 		int i = Integer.parseInt(tv_laudCount.getText().toString());
 		tv_laudCount.setText((i - 1) + "");
-		// postCommentAdapter.notifyDataSetChanged();
+		postCommentAdapter.notifyDataSetChanged();
 	}
 
 	public void setNum(int forwardnum, int commentnum, int likenum) {
@@ -225,12 +201,13 @@ public class PostDetailViewCommentListLayout extends RelativeLayout {
 			}
 		});
 	}
+
 	private void clickForwardTable() {
 		tabId = 1;
 		rl_transmit.setSelected(true);
 		oneOutThree(rl_transmit, rl_comment, rl_laud);
 		setSelected();
-		
+
 		Message msg = new Message();
 		msg.what = DATA_CHARGE_NOTIFY_FORWARD;
 		handler.sendMessage(msg);
@@ -249,7 +226,7 @@ public class PostDetailViewCommentListLayout extends RelativeLayout {
 			}
 		});
 	}
-	
+
 	private void clickCommentTable() {
 		tabId = 2;
 		rl_comment.setSelected(true);
@@ -271,7 +248,7 @@ public class PostDetailViewCommentListLayout extends RelativeLayout {
 				clickLikeTable();
 				// setData(context, likeList);
 				// new PThread(context,likeList).start();
-				
+
 			}
 		});
 	}
@@ -281,7 +258,7 @@ public class PostDetailViewCommentListLayout extends RelativeLayout {
 		rl_laud.setSelected(true);
 		oneOutThree(rl_laud, rl_transmit, rl_comment);
 		setSelected();
-		
+
 		Message msg = new Message();
 		msg.what = DATA_CHARGE_NOTIFY_PRAISE;
 		handler.sendMessage(msg);
@@ -332,7 +309,7 @@ public class PostDetailViewCommentListLayout extends RelativeLayout {
 				tv_commentNone.setVisibility(View.GONE);
 				lv_comment.setVisibility(View.VISIBLE);
 				// Log.e(TAG, DjsonUtils.bean2Json(postComments));
-				postCommentAdapter = new PostCommentAdapter(context,
+				postCommentAdapter.setData(context,
 						postComments, tabId, false);
 				if (postComments.size() > 5) {
 					if (lv_comment.getFooterViewsCount() == 0) {
@@ -341,20 +318,19 @@ public class PostDetailViewCommentListLayout extends RelativeLayout {
 						mFooterView = layoutInflater.inflate(
 								R.layout.item_footer_view, null);
 						mFooterView.setOnClickListener(new OnClickListener() {
-						@Override
-						public void onClick(View view) {
-							jumpActivity();
-						}
-					});
+							@Override
+							public void onClick(View view) {
+								jumpActivity();
+							}
+						});
 						lv_comment.addFooterView(mFooterView);
 					}
 				} else {
-					//每次总是先remove掉FooterView
+					// 每次总是先remove掉FooterView
 					if (mFooterView != null)
 						lv_comment.removeFooterView(mFooterView);
 				}
 				lv_comment.setAdapter(postCommentAdapter);
-				
 
 				if (postCommentAdapter != null) {
 					postCommentAdapter.notifyDataSetChanged();
@@ -383,44 +359,41 @@ public class PostDetailViewCommentListLayout extends RelativeLayout {
 		}
 
 	}
-	
+
 	private void jumpActivity() {
 		Intent intent = null;
 		if (tabId == 1) {
 			Forward forward = forwardList.get(0);
-			intent = new Intent(
-					PostDetailViewCommentListLayout.this.context,
+			intent = new Intent(PostDetailViewCommentListLayout.this.context,
 					MoreForwardActivity.class);
-			intent.putExtra(Constant.PCOMMENT_ID,
+			intent.putExtra(Constant.PCOMMENT_ID, forward.getForwardInfo()
+					.getPostId());
+			intent.putExtra(
+					Constant.POST_ID,
 					forward.getForwardInfo()
-							.getPostId());
-			intent.putExtra(Constant.POST_ID, forward
-					.getForwardInfo().getSrcPostId());
+							.getPostAbstractList()
+							.get(forward.getForwardInfo().getPostAbstractList()
+									.size() - 1).getPostAbstract().getPostId());
 		}
 		if (tabId == 2) {
 			Comment comment = commentList.get(0);
-			intent = new Intent(
-					PostDetailViewCommentListLayout.this.context,
+			intent = new Intent(PostDetailViewCommentListLayout.this.context,
 					MoreCommentActivity.class);
 			// 当前评论的id
-			intent.putExtra(Constant.PCOMMENT_ID,
-					comment.getCommentInfo()
-							.getPostId());
-			intent.putExtra(Constant.POST_ID, comment
-					.getCommentInfo().getSrcPostId());
+			intent.putExtra(Constant.PCOMMENT_ID, comment.getCommentInfo()
+					.getPostId());
+			intent.putExtra(Constant.POST_ID, comment.getCommentInfo()
+					.getSrcPostId());
 		}
 		if (tabId == 3) {
 			Like like = likeList.get(0);
-			intent = new Intent(
-					PostDetailViewCommentListLayout.this.context,
+			intent = new Intent(PostDetailViewCommentListLayout.this.context,
 					MoreLikeActivity.class);
-			intent.putExtra(Constant.PCOMMENT_ID, like
-					.getLikeInfo().getPostId());
-			intent.putExtra(Constant.POST_ID, like
-					.getLikeInfo().getSrcPostId());
+			intent.putExtra(Constant.PCOMMENT_ID, like.getLikeInfo()
+					.getPostId());
+			intent.putExtra(Constant.POST_ID, like.getLikeInfo().getSrcPostId());
 		}
-		PostDetailViewCommentListLayout.this.context
-				.startActivity(intent);
+		PostDetailViewCommentListLayout.this.context.startActivity(intent);
 	}
 
 	public List<Forward> getForwardList() {
@@ -429,7 +402,7 @@ public class PostDetailViewCommentListLayout extends RelativeLayout {
 
 	public void setForwardList(List<Forward> forwardList) {
 		this.forwardList = forwardList;
-		if (btnId==1) {
+		if (btnId == 1) {
 			rl_transmit.performClick();
 		}
 	}
@@ -440,7 +413,7 @@ public class PostDetailViewCommentListLayout extends RelativeLayout {
 
 	public void setCommentList(List<Comment> commentList) {
 		this.commentList = commentList;
-		if (btnId==2) {
+		if (btnId == 2) {
 			rl_comment.performClick();
 		}
 	}
@@ -451,7 +424,7 @@ public class PostDetailViewCommentListLayout extends RelativeLayout {
 
 	public void setLikeList(List<Like> likeList) {
 		this.likeList = likeList;
-		if (btnId==3) {
+		if (btnId == 3) {
 			rl_laud.performClick();
 		}
 	}

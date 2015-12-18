@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.SpannableStringBuilder;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,11 +21,16 @@ import com.szrjk.dhome.CommentActivity;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.Comment;
 import com.szrjk.entity.Forward;
+import com.szrjk.entity.IPullPostListCallback;
+import com.szrjk.entity.InitSrcPostInterface;
 import com.szrjk.entity.Like;
+import com.szrjk.entity.PostAbstractList;
+import com.szrjk.entity.PostInfo;
+import com.szrjk.entity.UserCard;
 import com.szrjk.util.BusiUtils;
 import com.szrjk.util.DialogUtil;
 import com.szrjk.util.DisplayTimeUtil;
-import com.szrjk.util.ImageLoaderUtil;
+import com.szrjk.util.InitTransmitPostUtil;
 import com.szrjk.util.SpannableStringUtils;
 import com.szrjk.widget.PostDetailBottomOperLayout;
 import com.szrjk.widget.UserCardLayout;
@@ -41,9 +47,15 @@ public class PostCommentAdapter<T> extends BaseAdapter {
 	private LayoutInflater inflater;
 	private int tabId;
 	private boolean isMore;
-	private ImageLoaderUtil imageLoaderUtil;
+	
+	private PostCommentAdapter() {
+	}
+	
+	public static PostCommentAdapter getPostCommentAdapter() {
+		return new PostCommentAdapter();
+	}
 
-	public  PostCommentAdapter(Context context,List<T> postComments,int tabId, boolean isMore) {
+	public void setData(Context context,List<T> postComments,int tabId, boolean isMore) {
 		this.context= (BaseActivity) context;
 		this.postComments=postComments;
 		this.inflater=LayoutInflater.from(context);
@@ -87,20 +99,28 @@ public class PostCommentAdapter<T> extends BaseAdapter {
 		try{
 			if (tabId==1) {
 					Forward forward =(Forward) object;
-//					String userFaceUrl = forward.getUserCard().getUserFaceUrl();
 					holder.userCardLayout.setUser(forward.getUserCard());
+					
+					List<PostAbstractList> postAbstractLists = forward.getForwardInfo().getPostAbstractList();
 
-					holder.tv_time.setText(DisplayTimeUtil.displayTimeString(forward.getForwardInfo().getCreateDate()));
-
-					if (forward.getForwardInfo().getContent()!=null) {
-						holder.tv_content.setText(forward.getForwardInfo().getContent()+"//"+ forward.getForwardInfo().getSrcUserCard().getUserName()+":"+ forward.getForwardInfo().getSrcPostAbstractCard().getContent());
-					}
-					holder.tv_content.setText(forward.getForwardInfo().getContent());
+					SpannableStringBuilder content = InitTransmitPostUtil.initTransmitPost(context, new SpannableStringBuilder(), postAbstractLists, 140, new InitSrcPostInterface() {
+						@Override
+						public void initSrcPost(Context context, UserCard userCard,
+								PostInfo postInfo, String isDelete) {
+							
+						}
+					}, new IPullPostListCallback() {
+						@Override
+						public void skipToSelfFragment() {
+							
+						}
+					});
+					holder.tv_content.setText(content);
+					holder.tv_time.setText(DisplayTimeUtil.displayTimeString(forward.getForwardInfo().getPostAbstractList().get(0).getPostAbstract().getCreateDate()));
 			}
 		//评论
 			if (tabId==2) {
 					final Comment comment=(Comment) object;
-//					String userFaceUrl = comment.getUserCard().getUserFaceUrl();
 					holder.userCardLayout.setUser(comment.getUserCard());
 					holder.tv_time.setText(DisplayTimeUtil.displayTimeString(comment.getCommentInfo().getCreateDate()));
 
@@ -140,7 +160,6 @@ public class PostCommentAdapter<T> extends BaseAdapter {
 							intent.putExtra(Constant.USER_SEQ_ID, comment.getUserCard().getUserSeqId());
 							intent.putExtra(Constant.PCOMMENT_ID, comment.getCommentInfo().getPostId());
 							intent.putExtra(Constant.COMMENT_LEVEL, comment.getCommentInfo().getLevel());
-//							context.startActivity(intent);
 							context.startActivityForResult(intent, PostDetailBottomOperLayout.TO_COMMENT);
 					}
 				});
@@ -149,9 +168,9 @@ public class PostCommentAdapter<T> extends BaseAdapter {
 			if (tabId==3) {
 
 					Like like=(Like) object;
-					String userFaceUrl = like.getUserCard().getUserFaceUrl();
 					holder.userCardLayout.setUser(like.getUserCard());
 					holder.tv_content.setVisibility(View.GONE);
+					holder.tv_time.setVisibility(View.GONE);
 				return convertView;
 			}
 		} catch (Exception e) {

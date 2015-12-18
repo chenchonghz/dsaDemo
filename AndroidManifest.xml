@@ -109,6 +109,19 @@
         </activity>
         <activity
             android:name=".Register1Activity"
+            android:name="com.szrjk.dhome.DigitalDoctorPlatformServiceContractActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/Theme.dhome"
+            android:windowSoftInputMode="adjustNothing" >
+        </activity>
+        <activity
+            android:name="com.szrjk.dhome.CopyrightNoticeActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/Theme.dhome"
+            android:windowSoftInputMode="adjustNothing" >
+        </activity>
+        <activity
+            android:name="com.szrjk.dhome.Register1Activity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
@@ -145,13 +158,32 @@
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
-            android:name="com.szrjk.self.more.AlbumGalleryActivity"
+            android:name="com.szrjk.self.more.album.AlbumGalleryActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/Theme.dhome"
+            android:windowSoftInputMode="adjustNothing" >
+        </activity>
+       
+        <activity
+            android:name="com.szrjk.self.more.album.AlbumsActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
-            android:name="com.szrjk.self.more.CropPictureActivity"
+            android:name="com.szrjk.self.more.album.AlbumItemActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/Theme.dhome"
+            android:windowSoftInputMode="adjustNothing" >
+        </activity>
+        <activity
+            android:name="com.szrjk.self.more.album.CropPictureActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/Theme.dhome"
+            android:windowSoftInputMode="adjustNothing" >
+        </activity>
+        <activity
+            android:name="com.szrjk.self.imagezoom.ImageViewZoomActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
@@ -744,8 +776,13 @@
             android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
         <activity
+<<<<<<< HEAD
             android:name=".AuthenticationActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
+=======
+            android:name="com.szrjk.self.more.AuthenticationActivity"
+             android:configChanges="orientation|keyboardHidden|screenSize"
+>>>>>>> 0ba9c034d77267b67ac7d50a18f8f3ebe01303fa
             android:screenOrientation="portrait"
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >

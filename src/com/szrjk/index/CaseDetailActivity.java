@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -123,7 +122,6 @@ public class CaseDetailActivity extends BaseActivity {
 	private PostCommentAdapter postCommentAdapter;
 	private Resources resources;
 	private int position;
-	private int btnId;
 	private int flag;
 
 	@Override
@@ -158,7 +156,6 @@ public class CaseDetailActivity extends BaseActivity {
 		userSeqId = Constant.userInfo.getUserSeqId();
 		// String ptype = getIntent().getStringExtra("ptype");
 		flag = getIntent().getIntExtra("flag", 0);
-		postDetaillviewLayout.setBtnId(2);
 		loadPostDetailedData(userSeqId, postId, instance);
 	}
 
@@ -327,7 +324,7 @@ public class CaseDetailActivity extends BaseActivity {
 							caseDetail1.setLikeList(likeList);
 							postDetaillviewLayout.setLikeList(likeList);
 							if (listOut
-								.getBooleanValue("isMineLike")) {
+									.getBooleanValue("isMineLike")) {
 								Log.i("点赞成功的likelist", postDetaillviewLayout.getLikeList().toString());
 							}else {
 								Log.i("取消点赞的likelist", postDetaillviewLayout.getLikeList().toString());
@@ -384,23 +381,29 @@ public class CaseDetailActivity extends BaseActivity {
 										boolean islike = (Boolean) m
 												.get("islike");
 										if (islike) {
+											if (postDetaillviewLayout.getLikeList()!=null) {
+												postDetaillviewLayout.getLikeList().clear();
+											}else {
+												postDetaillviewLayout.getLikeList().clear();
+											}
 											postDetaillviewLayout.addLike();
 											ToastUtils.showMessage(
 													CaseDetailActivity.this,
 													"点赞成功!");
-											postDetaillviewLayout.setBtnId(postDetailBottomOperLayout.getBtnId());
 											loadPostDetailedData(userSeqId, postId, instance);
 											postDetailBottomOperLayout.getBtn_laud().setClickable(false);
-//											Log.i("点赞成功的likelist", postDetaillviewLayout.getLikeList().toString());
 										} else {
+											if (postDetaillviewLayout.getLikeList()!=null) {
+												postDetaillviewLayout.getLikeList().clear();
+											}else {
+												postDetaillviewLayout.getLikeList().clear();
+											}
 											postDetaillviewLayout.minusLike();
 											ToastUtils.showMessage(
 													CaseDetailActivity.this,
 													"取消点赞成功!");
-											postDetaillviewLayout.setBtnId(postDetailBottomOperLayout.getBtnId());
 											loadPostDetailedData(userSeqId, postId, instance);
 											postDetailBottomOperLayout.getBtn_laud().setClickable(false);
-//											Log.i("取消点赞的likelist", postDetaillviewLayout.getLikeList().toString());
 										}
 										caseDetail.setMineLike(islike);
 									}
@@ -412,8 +415,6 @@ public class CaseDetailActivity extends BaseActivity {
 						message.what = LOAD_CASEDETAIL_SUCCESS;
 						message.obj = caseDetail1;
 						handler.sendMessage(message);
-
-						// setListViewHeight(lv_comment);
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -424,39 +425,36 @@ public class CaseDetailActivity extends BaseActivity {
 	}
 
 	private void setStyle(DeptButton btnStyle) {
-		// btnStyle.setHeight(px);
 		btnStyle.setPadding(12, 10, 12, 10);
 		btnStyle.setTextColor(resources.getColor(R.color.header_bg));
 		btnStyle.setBackground(resources
 				.getDrawable(R.drawable.flow_dept_selector));
 	}
 
-	private TextView getLabel(String text) {
-		TextView label = new TextView(this);
-		label.setTextColor(Color.BLACK);
-		label.setGravity(Gravity.CENTER);
-		label.setPadding(100, 100, 100, 100);
-		label.setText(text);
-		return label;
-	}
-
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (resultCode != RESULT_OK) {
-			return;
-		}
-		switch (requestCode) {
-		case PostDetailBottomOperLayout.TO_TRANSMIT:
-			postDetaillviewLayout.setBtnId(postDetailBottomOperLayout.getBtnId());
-			loadPostDetailedData(userSeqId, postId, instance);
-			break;
-		case PostDetailBottomOperLayout.TO_COMMENT:
-			postDetaillviewLayout.setBtnId(postDetailBottomOperLayout.getBtnId());
-			loadPostDetailedData(userSeqId, postId, instance);
-			break;
-		}
-		super.onActivityResult(requestCode, resultCode, data);
+	protected void onResume() {
+		super.onResume();
+		loadPostDetailedData(userSeqId, postId, instance);
 	}
+//	@Override
+//	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//		if (resultCode != RESULT_OK) {
+//			return;
+//		}
+//		switch (requestCode) {
+//		case PostDetailBottomOperLayout.TO_TRANSMIT:
+////			postDetaillviewLayout.setBtnId(postDetailBottomOperLayout.getBtnId());
+////			PostDetailViewCommentListLayout.btnId=1;
+//			loadPostDetailedData(userSeqId, postId, instance);
+//			break;
+//		case PostDetailBottomOperLayout.TO_COMMENT:
+////			postDetaillviewLayout.setBtnId(postDetailBottomOperLayout.getBtnId());
+////			PostDetailViewCommentListLayout.btnId=2;
+//			loadPostDetailedData(userSeqId, postId, instance);
+//			break;
+//		}
+//		super.onActivityResult(requestCode, resultCode, data);
+//	}
 
 	@Override
 	protected void onDestroy() {

@@ -66,7 +66,6 @@ public class PostDetailBottomOperLayout extends RelativeLayout
 
 	private String level;
 	private String srcPostId;
-	private int btnId;
 
 
 
@@ -152,7 +151,7 @@ public class PostDetailBottomOperLayout extends RelativeLayout
 					DialogUtil.showGuestDialog(context, null);
 					return;
 				}
-				setBtnId(1);
+				PostDetailViewCommentListLayout.btnId=1;
 				clickTransmitButton(view);
 			}
 		});
@@ -168,7 +167,7 @@ public class PostDetailBottomOperLayout extends RelativeLayout
 					DialogUtil.showGuestDialog(context, null);
 					return;
 				}
-				setBtnId(2);
+				PostDetailViewCommentListLayout.btnId=2;
 				clickCommentButton(view);
 			}
 		});
@@ -183,7 +182,7 @@ public class PostDetailBottomOperLayout extends RelativeLayout
 					DialogUtil.showGuestDialog(context, null);
 					return;
 				}
-				setBtnId(3);
+				PostDetailViewCommentListLayout.btnId=3;
 				clickLaudButton(view);
 			}
 		});
@@ -305,14 +304,6 @@ public class PostDetailBottomOperLayout extends RelativeLayout
 
 	public void setIslike(boolean islike) {
 		this.islike = islike;
-	}
-
-	public int getBtnId() {
-		return btnId;
-	}
-
-	public void setBtnId(int btnId) {
-		this.btnId = btnId;
 	}
 
 	public RelativeLayout getBtn_laud() {

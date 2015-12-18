@@ -145,7 +145,8 @@ public class MoreCommentActivity extends BaseActivity{
 	}
 
 	protected void setAdapter(ArrayList<Comment> commentList) {
-		commentAdapter=new PostCommentAdapter<Comment>(instance, commentList, tabId,isMore);
+		commentAdapter=PostCommentAdapter.getPostCommentAdapter();
+		commentAdapter.setData(instance, commentList, tabId,isMore);
 		lv_comment.setAdapter(commentAdapter);
 	}
 	

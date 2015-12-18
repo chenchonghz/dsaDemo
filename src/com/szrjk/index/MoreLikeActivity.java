@@ -137,7 +137,8 @@ public class MoreLikeActivity extends BaseActivity{
 	}
 
 	protected void setAdapter(ArrayList<Like> likeList) {
-		likeAdapter=new PostCommentAdapter<Like>(instance, likeList, tabId,isMore);
+		likeAdapter=PostCommentAdapter.getPostCommentAdapter();
+		likeAdapter.setData(instance, likeList, tabId,isMore);
 		lv_like.setAdapter(likeAdapter);
 	}
 	

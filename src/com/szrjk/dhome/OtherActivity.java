@@ -384,7 +384,7 @@ public class OtherActivity extends BaseActivity implements OnClickListener
 		//			String workpermit_imgname;
 
 
-		List l = new ArrayList();
+//		List l = new ArrayList();
 		List list_id = new ArrayList();
 
 
@@ -394,27 +394,30 @@ public class OtherActivity extends BaseActivity implements OnClickListener
 
 			m1.put("certType", bt_identity.getTag());
 			m1.put("certId", identity_imgname);
+			m1.put("certPicUrl", identity_imgurl);
 			list_id.add(m1);
 
-			Map m11 = new HashMap();
-			m11.put("picUrl", identity_imgurl);
-			l.add(m11);
+//			Map m11 = new HashMap();
+//			m11.put("picUrl", identity_imgurl);
+//			l.add(m11);
 
 		}
 		if (bt_workpermit.getTag().equals("3")) {
 			Map m3 = new HashMap();
 			m3.put("certType", bt_workpermit.getTag());
 			m3.put("certId", workpermit_imgname);
+			m3.put("certPicUrl", workpermit_imgurl);
+			
 			list_id.add(m3);
 
-			Map m33 = new HashMap();
-			m33.put("picUrl", workpermit_imgurl);
-			l.add(m33);
+//			Map m33 = new HashMap();
+//			m33.put("picUrl", workpermit_imgurl);
+//			l.add(m33);
 		}
 
-		busiParams.put("listCertIn", list_id);
+		busiParams.put("certListIn", list_id);
 
-		busiParams.put("listCertPicIn", l);
+//		busiParams.put("listCertPicIn", l);
 
 
 		paramMap.put("BusiParams", busiParams);

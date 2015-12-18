@@ -13,6 +13,8 @@ public class CeriItemEntity {
 	private String createDate;
 	private String certPicUrl;
 	private int certAppId;
+	
+	
 	public String getCertName() {
 		return certName;
 	}

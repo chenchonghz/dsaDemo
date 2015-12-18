@@ -31,7 +31,6 @@ import com.szrjk.entity.UserInfo;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.message.MessageListActivity;
 import com.szrjk.self.FriendActivity;
-import com.szrjk.self.more.album.AlbumGalleryActivity;
 import com.szrjk.util.ImageLoaderUtil;
 
 

@@ -303,7 +303,7 @@ public class MoreActivity extends BaseActivity
 	}
 	@OnClick(R.id.rl_get_like)
 	public void getLikeClick(View view){
-		Intent intent=new Intent(instance,AlbumGalleryActivity.class);
+		Intent intent=new Intent(instance,MineGetLikeActivity.class);
 		startActivity(intent);
 	}
 	

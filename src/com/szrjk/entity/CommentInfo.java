@@ -75,5 +75,14 @@ public class CommentInfo {
         this.postId = postId;
     }
 
+	@Override
+	public String toString() {
+		return "CommentInfo [content=" + content + ", createDate=" + createDate
+				+ ", level=" + level + ", pPostId=" + pPostId + ", pUserCard="
+				+ pUserCard + ", postId=" + postId + ", postType=" + postType
+				+ ", srcPostId=" + srcPostId + "]";
+	}
+
+    
 
 }

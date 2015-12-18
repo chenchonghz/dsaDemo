@@ -48,4 +48,13 @@ public class LikeInfo {
     public void setUserSeqId(String userSeqId) {
         this.userSeqId = userSeqId;
     }
+
+	@Override
+	public String toString() {
+		return "LikeInfo [createDate=" + createDate + ", postId=" + postId
+				+ ", postType=" + postType + ", srcPostId=" + srcPostId
+				+ ", userSeqId=" + userSeqId + "]";
+	}
+    
+    
 }

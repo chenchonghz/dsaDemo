@@ -901,7 +901,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 								}
 							}
 						}
-						ssBuilder = InitTransmitPostUtil.initTransmitPost(context, ssBuilder, postAbstractLists, 140,new InitSrcPostInterface() {
+						ssBuilder = InitTransmitPostUtil.initTransmitPost(context, ssBuilder, postAbstractLists,new InitSrcPostInterface() {
 							
 							@Override
 							public void initSrcPost(Context context, UserCard userCard,
@@ -1063,7 +1063,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 						if(postInfo.getPostType().equals(Constant.TRANSMIT_POST)){
 							ToastUtils.showMessage(context, "多次转发功能正在开发中，敬请期待");
 						}else{
-							IndexFragment.POSITION = position;
 							skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getContent(),
 									userInfo.getUserFaceUrl(),postInfo.getPostId(),
 									userInfo.getUserName(),postInfo.getPostType(),postInfo.getPostLevel()
@@ -1165,7 +1164,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 								}
 							}
 						}
-						ssBuilder2 = InitTransmitPostUtil.initTransmitPost(context, ssBuilder2, caseSharePostAbstractLists,140, new InitSrcPostInterface() {
+						ssBuilder2 = InitTransmitPostUtil.initTransmitPost(context, ssBuilder2, caseSharePostAbstractLists, new InitSrcPostInterface() {
 
 							@Override
 							public void initSrcPost(Context context, UserCard userCard,
@@ -1398,7 +1397,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 								}
 							}
 						}
-						ssBuilder3 = InitTransmitPostUtil.initTransmitPost(context, ssBuilder3, problemHelpPostAbstractLists,140, new InitSrcPostInterface() {
+						ssBuilder3 = InitTransmitPostUtil.initTransmitPost(context, ssBuilder3, problemHelpPostAbstractLists,new InitSrcPostInterface() {
 							@Override
 							public void initSrcPost(Context context, UserCard userCard,
 									PostInfo postInfo, String isDelete) {

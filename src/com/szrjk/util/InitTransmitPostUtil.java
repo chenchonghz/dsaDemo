@@ -28,12 +28,10 @@ import android.view.View;
 
 public class InitTransmitPostUtil {
 	
-	private static int num;
 	
 	public static SpannableStringBuilder initTransmitPost(Context context,SpannableStringBuilder ssBuilder,
-			List<PostAbstractList> postAbstractLists,int string_num,InitSrcPostInterface initSrcPostInterface,IPullPostListCallback iPullPostListCallback){
+			List<PostAbstractList> postAbstractLists,InitSrcPostInterface initSrcPostInterface,IPullPostListCallback iPullPostListCallback){
 		boolean isTopTransmit = false;
-		num = string_num;
 		if(postAbstractLists != null && !postAbstractLists.isEmpty()){
 			for (int i = 0; i < postAbstractLists.size(); i++) {
 				if(postAbstractLists.get(i).getPostLevel().equals("0")){
@@ -81,7 +79,6 @@ public class InitTransmitPostUtil {
 		int icon_end = 0;
 		SpannableString spanStr = null;
 		if(isTopTransmit == false){
-			Log.e("InitTransmit", "剩余字数："+num);
 			String name = userCard.getUserName();
 			sb_content.append("//"+name);
 			start = 2;
@@ -95,18 +92,7 @@ public class InitTransmitPostUtil {
 				icon_end = sb_content.length();
 			}
 			if(postAbstract.getContent() != null){
-				if(num > 0 && postAbstract.getContent().length() <= num){
 					sb_content.append(":"+postAbstract.getContent());
-					num = num - postAbstract.getContent().length();
-				}else{
-					if(num == 0){
-						sb_content.append(":...");
-					}else{
-						String content = postAbstract.getContent().substring(0, num);
-						sb_content.append(":"+content+"...");
-						num = 0;
-					}
-				}
 			}
 			spanStr = new SpannableString(sb_content);
 			spanStr.setSpan(new ClickableSpan() {
@@ -136,18 +122,9 @@ public class InitTransmitPostUtil {
 			}
 			return spanStr;
 		}else{
-			if(postAbstract.getContent() != null){
-				if(num > 0 && postAbstract.getContent().length()<= num){		
+			if(postAbstract.getContent() != null){		
 					sb_content.append(postAbstract.getContent());
-					spanStr = new SpannableString(sb_content);
-					num = num - postAbstract.getContent().length();
-				}else{
-					String content = postAbstract.getContent().substring(0, num);
-					sb_content.append(content+"...");
-					spanStr = new SpannableString(sb_content);
-					num = 0;
-				}
-				
+					spanStr = new SpannableString(sb_content);	
 			}	
 			return spanStr;
 		}

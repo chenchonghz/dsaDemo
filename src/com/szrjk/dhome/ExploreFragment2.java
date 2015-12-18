@@ -3,6 +3,7 @@ package com.szrjk.dhome;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.explore.MoreNewsActivity;
+import com.szrjk.explore.MyCircleActivity;
 import com.szrjk.self.more.CaseSharePostActivity;
 import com.szrjk.self.more.ProblemHelpActivity;
 
@@ -79,6 +80,16 @@ public class ExploreFragment2 extends Fragment{
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(context, ProblemHelpActivity.class);
 				intent.putExtra("postType", "ALL");
+				startActivity(intent);
+			}
+		});
+		
+		rl_myCircle.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(context, MyCircleActivity.class);
 				startActivity(intent);
 			}
 		});

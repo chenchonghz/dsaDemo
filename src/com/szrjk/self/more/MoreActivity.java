@@ -1,8 +1,5 @@
 package com.szrjk.self.more;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -12,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -31,8 +27,10 @@ import com.szrjk.entity.UserInfo;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.message.MessageListActivity;
 import com.szrjk.self.FriendActivity;
-import com.szrjk.self.more.album.AlbumGalleryActivity;
 import com.szrjk.util.ImageLoaderUtil;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 @ContentView(R.layout.activity_more)
@@ -303,7 +301,7 @@ public class MoreActivity extends BaseActivity
 	}
 	@OnClick(R.id.rl_get_like)
 	public void getLikeClick(View view){
-		Intent intent=new Intent(instance,AlbumGalleryActivity.class);
+		Intent intent=new Intent(instance,MineGetLikeActivity.class);
 		startActivity(intent);
 	}
 	

@@ -40,6 +40,7 @@ import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.NewType;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
+import com.szrjk.indicator.TabPageIndicator;
 import com.szrjk.widget.AddNewsTypePopup2;
 import com.szrjk.widget.ColumnHorizontalScrollView;
 import com.szrjk.widget.HeaderView;

@@ -236,11 +236,11 @@ public class PostDetailFowardActivity extends BaseActivity
 
 						PostDetail postDetail = JSONObject.parseObject(listOut.getString("postDetail"),PostDetail.class);
 						//不知为啥，下面几个都没set进去
-						postDetail.setpUserName(listOut.getJSONObject("postDetail").getString("pUserName"));
-						postDetail.setpContent(listOut.getJSONObject("postDetail").getString("pContent"));
-						postDetail.setpIsDelete(listOut.getJSONObject("postDetail").getString("pIsDelete"));
-						postDetail.setpUserSeqId(listOut.getJSONObject("postDetail").getString("pUserSeqId"));
-						postDetail.setSrcIsDelete(listOut.getJSONObject("postDetail").getString("srcIsDelete"));
+//						postDetail.setpUserName(listOut.getJSONObject("postDetail").getString("pUserName"));
+//						postDetail.setpContent(listOut.getJSONObject("postDetail").getString("pContent"));
+//						postDetail.setpIsDelete(listOut.getJSONObject("postDetail").getString("pIsDelete"));
+//						postDetail.setpUserSeqId(listOut.getJSONObject("postDetail").getString("pUserSeqId"));
+//						postDetail.setSrcIsDelete(listOut.getJSONObject("postDetail").getString("srcIsDelete"));
 
 
 						ordinaryPostDetail.setPostDetail(postDetail);
@@ -276,7 +276,7 @@ public class PostDetailFowardActivity extends BaseActivity
 								}
 								ordinaryPostDetail.setMineLike(islike);
 							}
-						},ordinaryPostDetail.isMineLike(),ordinaryPostDetail.getPostDetail().getPostLevel(),ordinaryPostDetail.getPostDetail().getSrcPostId(),0);
+						},ordinaryPostDetail.isMineLike(),ordinaryPostDetail.getPostDetail().getPostAbstractList().get(0).getPostLevel(),ordinaryPostDetail.getPostDetail().getPostAbstractList().get(ordinaryPostDetail.getPostDetail().getPostAbstractList().size()-1).getPostAbstract().getPostId(),0);
 
 
 						Message message = new Message();

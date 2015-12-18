@@ -383,8 +383,6 @@ public class CaseDetailActivity extends BaseActivity {
 										if (islike) {
 											if (postDetaillviewLayout.getLikeList()!=null) {
 												postDetaillviewLayout.getLikeList().clear();
-											}else {
-												postDetaillviewLayout.getLikeList().clear();
 											}
 											postDetaillviewLayout.addLike();
 											ToastUtils.showMessage(
@@ -394,8 +392,6 @@ public class CaseDetailActivity extends BaseActivity {
 											postDetailBottomOperLayout.getBtn_laud().setClickable(false);
 										} else {
 											if (postDetaillviewLayout.getLikeList()!=null) {
-												postDetaillviewLayout.getLikeList().clear();
-											}else {
 												postDetaillviewLayout.getLikeList().clear();
 											}
 											postDetaillviewLayout.minusLike();

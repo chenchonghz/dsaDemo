@@ -247,6 +247,9 @@ public class PostDetailActivity extends BaseActivity {
 										boolean islike = (Boolean) m
 												.get("islike");
 										if (islike) {
+											if (postDetaillviewLayout.getLikeList()!=null) {
+												postDetaillviewLayout.getLikeList().clear();
+											}
 											postDetaillviewLayout.addLike();
 											ToastUtils.showMessage(
 													PostDetailActivity.this,
@@ -254,6 +257,9 @@ public class PostDetailActivity extends BaseActivity {
 											loadPostDetailedData(userSeqId, postId, instance);
 											postDetailBottomOperLayout.getBtn_laud().setClickable(false);
 										} else {
+											if (postDetaillviewLayout.getLikeList()!=null) {
+												postDetaillviewLayout.getLikeList().clear();
+											}
 											postDetaillviewLayout.minusLike();
 											ToastUtils.showMessage(
 													PostDetailActivity.this,

@@ -71,7 +71,7 @@ public class PostDetailViewCommentListLayout extends RelativeLayout {
 	private PostCommentAdapter postCommentAdapter=PostCommentAdapter.getPostCommentAdapter();
 	private View contexView;
 	private PHandler handler = new PHandler();
-	public static int btnId;
+	public static int btnId = 2;
 
 	public PostStatis getPostStatis() {
 		return postStatis;
@@ -130,8 +130,9 @@ public class PostDetailViewCommentListLayout extends RelativeLayout {
 		clickLike(contexView);
 		clickComment(contexView);
 
-		clickCommentTable();
-		
+		if (btnId == 2) {
+			clickCommentTable();
+		}
 		this.context = context;
 	}
 
@@ -153,13 +154,13 @@ public class PostDetailViewCommentListLayout extends RelativeLayout {
 				// }
 				// iSelectImgCallback.selectImgCallback(imgItems,urlArr);
 
-				setData(commentList);
+				setData(context, commentList);
 				break;
 			case DATA_CHARGE_NOTIFY_FORWARD:
-				setData(forwardList);
+				setData(context, forwardList);
 				break;
 			case DATA_CHARGE_NOTIFY_PRAISE:
-				setData(likeList);
+				setData(context, likeList);
 				break;
 			}
 		}
@@ -301,7 +302,7 @@ public class PostDetailViewCommentListLayout extends RelativeLayout {
 	View mFooterView = null;
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private <T> void setData(List<T> postComments) {
+	private <T> void setData(Context context, List<T> postComments) {
 
 		try {
 			if (postComments != null && !postComments.isEmpty()) {

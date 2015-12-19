@@ -1,6 +1,8 @@
 package com.szrjk.entity;
 
-public class PostAbstractList implements Comparable{
+import java.io.Serializable;
+
+public class PostAbstractList implements Comparable,Serializable{
 	
 	private String isDelete;
 	private UserCard userCard;

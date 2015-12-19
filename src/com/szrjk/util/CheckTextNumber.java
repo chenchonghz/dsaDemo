@@ -23,14 +23,14 @@ public class CheckTextNumber {
 			}
 			
 			@Override
-			public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+			public void beforeTextChanged(CharSequence s, int arg1, int arg2,
 					int arg3) {
 			}
 			
 			@Override
 			public void afterTextChanged(Editable s) {
 				
-				int number = num - s.length();
+				int number = 0 + s.length();
 				tv.setText(number + "/" + num);
 
                selectionStart = et.getSelectionStart();

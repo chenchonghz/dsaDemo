@@ -69,6 +69,13 @@ import com.szrjk.index.PostDetailFowardActivity;
 import com.szrjk.index.RepeatActivity;
 import com.szrjk.self.CircleHomepageActivity;
 import com.szrjk.self.SystemUserActivity;
+import com.szrjk.simplifyspan.SimplifySpanBuild;
+import com.szrjk.simplifyspan.other.OnClickableSpanListener;
+import com.szrjk.simplifyspan.other.SpecialGravity;
+import com.szrjk.simplifyspan.unit.SpecialClickableUnit;
+import com.szrjk.simplifyspan.unit.SpecialImageUnit;
+import com.szrjk.simplifyspan.unit.SpecialLabelUnit;
+import com.szrjk.simplifyspan.unit.SpecialTextUnit;
 import com.szrjk.util.BusiUtils;
 import com.szrjk.util.DialogUtil;
 import com.szrjk.util.DisplayTimeUtil;
@@ -193,9 +200,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 	@Override
 	public int getItemViewType(int position) {
 		PostInfo postInfo = postList.get(position);
-		if(postInfo.getSrcPostAbstractCard()!=null){	
-			Log.e("IndexViewAdapter", "刷新后："+postInfo.getSrcPostAbstractCard().getPostType());
-		}
 		if(postInfo.getPostType().equals(Constant.CASE_SHARE)){
 			return 0;
 		}else if(postInfo.getPostType().equals(Constant.PROBLEM_HELP)){
@@ -484,11 +488,10 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					if(isTourist){
 						DialogUtil.showGuestDialog(context, null);
 					}else{
-						IndexFragment.POSITION = position;
 						skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getPostTitle(),
 								userInfo.getUserFaceUrl(),postInfo.getPostId(),
 								userInfo.getUserName(),postInfo.getPostType(),postInfo.getPostLevel()
-								,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM());
+								,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),flag);
 					}
 				}
 			});
@@ -625,11 +628,10 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					if(isTourist){
 						DialogUtil.showGuestDialog(context, null);
 					}else{
-						IndexFragment.POSITION = position;
 						skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getPostTitle(),
 								userInfo.getUserFaceUrl(),postInfo.getPostId(),
 								userInfo.getUserName(),postInfo.getPostType(),postInfo.getPostLevel()
-								,postInfo.getSrcPostId(),position, postOtherInfo.getFORWARD_NUM());
+								,postInfo.getSrcPostId(),position, postOtherInfo.getFORWARD_NUM(),flag);
 					}
 				}
 			});
@@ -793,11 +795,10 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 						if(postInfo.getIsOpen() == 2){
 							ToastUtils.showMessage(context, "私密圈子不可转发！");
 						}else{
-							IndexFragment.POSITION = position;
 							skipToRepeatActivity(userInfo.getUserSeqId(), postInfo.getContent(),
 									userInfo.getUserFaceUrl(), postInfo.getPostId(),
 									userInfo.getUserName(), postInfo.getPostType(),postInfo.getPostLevel()
-									,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM());
+									,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),flag);
 						}
 					}
 				}
@@ -919,13 +920,13 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 									tran_normalPost_Holder.tv_src_post_text.setText("抱歉，此帖子已被作者删除");
 									tran_normalPost_Holder.tv_src_post_text.setTextColor(context.getResources().getColor(R.color.font_cell));
 								}else{	
-									initSrcGroupData(tran_normalPost_Holder.ll_src_group,tran_normalPost_Holder.tv_src_group_name,postInfo);
 									try {
+									initSrcGroupData(tran_normalPost_Holder.ll_src_group,tran_normalPost_Holder.tv_src_group_name,postInfo);
 										initSrcNormalPostData(tran_normalPost_Holder.tv_src_post_text,tran_normalPost_Holder.gv_src_pic,tran_normalPost_Holder.tv_srcTime,postInfo,userCard,position);
+										initSrcNormalPostListner(tran_normalPost_Holder.gv_src_pic,tran_normalPost_Holder.ll_src_normal_post,tran_normalPost_Holder.ll_srcDoctorInfo,tran_normalPost_Holder.tv_src_group_name,position,postInfo,userCard);
 									} catch (Exception e1) {
 										e1.printStackTrace();
 									}
-									initSrcNormalPostListner(tran_normalPost_Holder.gv_src_pic,tran_normalPost_Holder.ll_src_normal_post,tran_normalPost_Holder.ll_srcDoctorInfo,tran_normalPost_Holder.tv_src_group_name,position,postInfo,userCard);
 								}
 							}
 						}, iPullPostListCallback);
@@ -1866,31 +1867,14 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		return spanStr;
 	}
 	
-	private SpannableString getContentText(String content, String userName,
+	private SimplifySpanBuild getContentText(TextView tv_post_text, String content, String userName,
 			final String userSeqId, String userLevel, final String userType,final PostInfo postInfo, final int position) {
-		String name = userName;
-		StringBuffer sb_content = new StringBuffer(name);
-		int start = 0;
-		int end = userName.length();
-		int icon_start = userName.length();
-		int icon_end = userName.length();
-		Bitmap b = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_yellow_v_24);
-		ImageSpan imgSpan = new ImageSpan(context, b, DynamicDrawableSpan.ALIGN_BASELINE);
-		if(userLevel.equals("11")){
-			sb_content.append(" icon");
-			icon_start += 1;
-			icon_end = sb_content.length();
-		}
-		
-		if(content != null){		
-			sb_content.append(":"+content);
-		}
-		Log.e("indexFragmentAdapter", "转发文字："+sb_content.toString());
-		Log.e("indexFragmentAdapter", "开始："+start+"结束："+end);
-		SpannableString spanStr = new SpannableString(sb_content);
-		spanStr.setSpan(new ClickableSpan() {
+		SimplifySpanBuild simplifySpanBuild = new SimplifySpanBuild(context, tv_post_text);
+		simplifySpanBuild.appendSpecialUnit(new SpecialTextUnit(userName, context.getResources().getColor(R.color.link_text_color)).setSpecialClickableUnit(new SpecialClickableUnit(new OnClickableSpanListener() {
+			
 			@Override
-			public void onClick(View widget) {
+			public void onClick(TextView tv, String clickText) {
+				// TODO Auto-generated method stub
 				if(userSeqId.equals(Constant.userInfo.getUserSeqId())){
 					skipToSelfFragment();
 				}else if(userType.equals("1")&&!userSeqId.equals(userId)){
@@ -1901,33 +1885,85 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					}
 				}
 			}
-			@Override
-			public void updateDrawState(TextPaint ds) {
-				super.updateDrawState(ds);
-				ds.setUnderlineText(false);
-			}
-		}, start,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-		
-		spanStr.setSpan(new ClickableSpan() {
-			@Override
-			public void onClick(View widget) {
-				IndexFragment.ISSRCPOST = true;
-				IndexFragment.SRC_POSEID = postInfo.getPostId();
-				skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),postInfo.getUserSeqId(),position);
-			}
-			@Override
-			public void updateDrawState(TextPaint ds) {
-				super.updateDrawState(ds);
-				ds.setUnderlineText(false);
-			}
-		}, icon_end,sb_content.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-		
-		spanStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.link_text_color)), start, end,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-		spanStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.font_titleanduname)), icon_end,sb_content.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-		if(userLevel.equals("11")){	
-			spanStr.setSpan(imgSpan, icon_start, icon_end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		})));
+		if(userLevel.equals("11")){
+		    simplifySpanBuild.appendSpecialUnit(new SpecialTextUnit(" ")).appendSpecialUnit(new SpecialLabelUnit("火", context.getResources().getColor(R.color.transparent), 13, BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_yellow_v_24),40,40).setGravity(SpecialGravity.CENTER))
+		    .appendSpecialUnit(new SpecialTextUnit(" "));
 		}
-		return spanStr;
+		if(content != null){		
+			simplifySpanBuild.appendSpecialUnit(new SpecialTextUnit(":"+content, context.getResources().getColor(R.color.font_titleanduname)).setSpecialClickableUnit(new SpecialClickableUnit(new OnClickableSpanListener() {
+				
+				@Override
+				public void onClick(TextView tv, String clickText) {
+					// TODO Auto-generated method stub
+					IndexFragment.ISSRCPOST = true;
+					IndexFragment.SRC_POSEID = postInfo.getPostId();
+					skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),postInfo.getUserSeqId(),position);
+				}
+			})));
+		}
+		return simplifySpanBuild;
+		
+//		String name = userName;
+//		StringBuffer sb_content = new StringBuffer(name);
+//		int start = 0;
+//		int end = userName.length();
+//		int icon_start = userName.length();
+//		int icon_end = userName.length();
+//		Bitmap b = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_yellow_v_24);
+//		ImageSpan imgSpan = new ImageSpan(context, b, DynamicDrawableSpan.ALIGN_BASELINE);
+//		if(userLevel.equals("11")){
+//			sb_content.append(" icon");
+//			icon_start += 1;
+//			icon_end = sb_content.length();
+//		}
+//		
+//		if(content != null){		
+//			sb_content.append(":"+content);
+//		}
+//		Log.e("indexFragmentAdapter", "转发文字："+sb_content.toString());
+//		Log.e("indexFragmentAdapter", "开始："+start+"结束："+end);
+//		SpannableString spanStr = new SpannableString(sb_content);
+//		spanStr.setSpan(new ClickableSpan() {
+//			@Override
+//			public void onClick(View widget) {
+//				if(userSeqId.equals(Constant.userInfo.getUserSeqId())){
+//					skipToSelfFragment();
+//				}else if(userType.equals("1")&&!userSeqId.equals(userId)){
+//					skipToSystemUserActivity(userSeqId);
+//				}else{
+//					if(!userSeqId.equals(userId)){		
+//						skipToOtherPeopleActivity(userSeqId);
+//					}
+//				}
+//			}
+//			@Override
+//			public void updateDrawState(TextPaint ds) {
+//				super.updateDrawState(ds);
+//				ds.setUnderlineText(false);
+//			}
+//		}, start,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//		
+//		spanStr.setSpan(new ClickableSpan() {
+//			@Override
+//			public void onClick(View widget) {
+//				IndexFragment.ISSRCPOST = true;
+//				IndexFragment.SRC_POSEID = postInfo.getPostId();
+//				skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),postInfo.getUserSeqId(),position);
+//			}
+//			@Override
+//			public void updateDrawState(TextPaint ds) {
+//				super.updateDrawState(ds);
+//				ds.setUnderlineText(false);
+//			}
+//		}, icon_end,sb_content.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//		
+//		spanStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.link_text_color)), start, end,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//		spanStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.font_titleanduname)), icon_end,sb_content.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//		if(userLevel.equals("11")){	
+//			spanStr.setSpan(imgSpan, icon_start, icon_end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//		}
+//		return null;
 	}
 	private SpannableString getTrasmitContent(final UserCard userCard, final PostInfo postAbstract,
 			final int position, final PostInfo postInfo, boolean isTopTransmit) {
@@ -2137,9 +2173,11 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			PostInfo postInfo, UserCard userCard, int position) throws Exception {
 		ll_caseShare.setVisibility(View.VISIBLE);
 		fl_bg.setVisibility(View.VISIBLE);
-		SpannableString contentText = getContentText(null,userCard.getUserName(),userCard.getUserSeqId(),userCard.getUserLevel(),userCard.getUserType(),postInfo,position);
-		tv_srcname.setText(contentText);
-		tv_srcname.setMovementMethod(LinkMovementMethod.getInstance());
+		SimplifySpanBuild simplifySpanBuild = getContentText(tv_srcname,null,userCard.getUserName(),userCard.getUserSeqId(),userCard.getUserLevel(),userCard.getUserType(),postInfo,position);
+		tv_srcname.setText(simplifySpanBuild.build());
+//		SpannableString contentText = getContentText(null,userCard.getUserName(),userCard.getUserSeqId(),userCard.getUserLevel(),userCard.getUserType(),postInfo,position);
+//		tv_srcname.setText(contentText);
+//		tv_srcname.setMovementMethod(LinkMovementMethod.getInstance());
 		if(postInfo.getBackgroundPic().isEmpty()){
 			iv_gray.setVisibility(View.GONE);
 		}
@@ -2353,9 +2391,11 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 	private void initSrcNormalPostData(TextView tv_post_text, GridView gv_pic,
 			TextView tv_time, final PostInfo postInfo, UserCard userCard,int position) throws Exception {
 		if(postInfo.getContent()!=null){
-			SpannableString contentText = getContentText(postInfo.getContent(),userCard.getUserName(),userCard.getUserSeqId(),userCard.getUserLevel(),userCard.getUserType(),postInfo,position);
-			tv_post_text.setText(contentText);
-			tv_post_text.setMovementMethod(LinkMovementMethod.getInstance());
+			SimplifySpanBuild simplifySpanBuild = getContentText(tv_post_text,postInfo.getContent(),userCard.getUserName(),userCard.getUserSeqId(),userCard.getUserLevel(),userCard.getUserType(),postInfo,position);
+			tv_post_text.setText(simplifySpanBuild.build());
+//			SpannableString contentText = getContentText(postInfo.getContent(),userCard.getUserName(),userCard.getUserSeqId(),userCard.getUserLevel(),userCard.getUserType(),postInfo,position);
+//			tv_post_text.setText(contentText);
+//			tv_post_text.setMovementMethod(LinkMovementMethod.getInstance());
 //			tv_post_text.setText(postInfo.getContent());
 		}
 		if(postInfo.getPicList()!=null&&!postInfo.getPicList()[0].isEmpty()){
@@ -2548,7 +2588,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 
 	}
 	protected void skipToRepeatActivity(String userSeqId, String postTitle,
-			String userFaceUrl, String postId, String userName, String postType, String postLevel, String srcPostId, int position, int forward_num) {
+			String userFaceUrl, String postId, String userName, String postType, String postLevel, String srcPostId, int position, int forward_num,int flag) {
 		Intent intent = new Intent(context, RepeatActivity.class);
 		intent.putExtra(Constant.USER_SEQ_ID, userFaceUrl);
 		intent.putExtra(Constant.POST_TEXT, postTitle);
@@ -2560,6 +2600,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		intent.putExtra(Constant.SRC_POST_ID, srcPostId);
 		intent.putExtra(Constant.POSITION, position);
 		intent.putExtra(Constant.FORWARD_NUM, forward_num);
+		intent.putExtra("flag", flag);
 		if(indexFragment != null){
 			indexFragment.startActivityForResult(intent, 200);
 		}else{

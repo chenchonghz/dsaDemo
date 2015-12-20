@@ -119,8 +119,6 @@ public class RepeatActivity extends BaseActivity implements OnClickListener {
 		position = intent.getIntExtra(Constant.POSITION, 0);
 		forward_num = intent.getIntExtra(Constant.FORWARD_NUM, 0);
 		flag = intent.getIntExtra("flag", Constant.UNKNOW_FLAG);
-		Bundle bundle = intent.getBundleExtra("postList");
-		postAbstractLists = (List<PostAbstractList>) bundle.getSerializable("postAbstractLists");
 		// post_level:如果转发原帖，原帖传入的为空，则在此处设为1，如果原帖传入有值，则+1;
 		String level = intent.getStringExtra(Constant.POST_LEVEL);
 		if (level == null) {

@@ -216,6 +216,7 @@ public class UploadPhotoUtils {
 				}
 				//设置返回的图片显示出来
 				ToastUtils.showMessage(context, "正在上传头像...");
+				context.finish();
 				imgUrlCallback.operImgPic(bit);
 				updateFile(bit);
 				ClipActivity.cbitmap = null;//清除静态数据

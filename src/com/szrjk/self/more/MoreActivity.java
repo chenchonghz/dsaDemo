@@ -1,14 +1,17 @@
 package com.szrjk.self.more;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -29,92 +32,87 @@ import com.szrjk.message.MessageListActivity;
 import com.szrjk.self.FriendActivity;
 import com.szrjk.util.ImageLoaderUtil;
 
-import java.util.HashMap;
-import java.util.Map;
-
-
 @ContentView(R.layout.activity_more)
-public class MoreActivity extends BaseActivity
-{
-	
+public class MoreActivity extends BaseActivity {
+
 	private static final int CHANGE_PORTRAIT_SUCCESS = 0;
 
-	//个人信息
+	// 个人信息
 	@ViewInject(R.id.rl_home)
 	private RelativeLayout rl_home;
-	
+
 	@ViewInject(R.id.tv_name)
 	private TextView tv_name;
-	
+
 	@ViewInject(R.id.iv_hportrait)
 	private ImageView iv_hportrait;
-	
+
 	@ViewInject(R.id.ll_friend)
 	private LinearLayout ll_friend;
-	
+
 	@ViewInject(R.id.tv_friend)
 	private TextView tv_friend;
-	
+
 	@ViewInject(R.id.ll_attention)
 	private LinearLayout ll_attention;
-	
+
 	@ViewInject(R.id.tv_attention)
 	private TextView tv_attention;
-	
+
 	@ViewInject(R.id.ll_fans)
 	private LinearLayout ll_fans;
-	
+
 	@ViewInject(R.id.tv_fans)
 	private TextView tv_fans;
-	
+
 	@ViewInject(R.id.rl_letter)
 	private RelativeLayout rl_letter;
-	
+
 	@ViewInject(R.id.rl_photo)
 	private RelativeLayout rl_photo;
-	
+
 	@ViewInject(R.id.rl_profile)
 	private RelativeLayout rl_profile;
-	
+
 	@ViewInject(R.id.rl_identification)
 	private RelativeLayout rl_identification;
-	
+
 	@ViewInject(R.id.rl_post)
 	private RelativeLayout rl_post;
-	
+
 	@ViewInject(R.id.tv_postCount)
 	private TextView tv_postCount;
-	
+
 	@ViewInject(R.id.rl_sick)
 	private RelativeLayout rl_sick;
-	
+
 	@ViewInject(R.id.tv_sickCount)
 	private TextView tv_sickCount;
-	
+
 	@ViewInject(R.id.rl_help)
 	private RelativeLayout rl_help;
-	
+
 	@ViewInject(R.id.tv_helpCount)
 	private TextView tv_helpCount;
-	
+
 	@ViewInject(R.id.rl_send_like)
 	private RelativeLayout rl_send_like;
-	
+
 	@ViewInject(R.id.tv_sendLikeCount)
 	private TextView tv_sendLikeCount;
-	
+
 	@ViewInject(R.id.rl_get_like)
 	private RelativeLayout rl_get_like;
-	
+
 	@ViewInject(R.id.tv_getLikeCount)
 	private TextView tv_getLikeCount;
-	
+
 	@ViewInject(R.id.rl_feed_back)
 	private RelativeLayout rl_feed_back;
-	
+
 	@ViewInject(R.id.rl_about)
 	private RelativeLayout rl_about;
-	
+
 	@ViewInject(R.id.rl_seting)
 	private RelativeLayout rl_seting;
 
@@ -123,9 +121,9 @@ public class MoreActivity extends BaseActivity
 	private UserInfo userInfo;
 
 	private Resources resources;
+
 	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		instance = this;
 		ViewUtils.inject(this);
@@ -133,22 +131,25 @@ public class MoreActivity extends BaseActivity
 	}
 
 	private void initLayout() {
-		userInfo=Constant.userInfo;
-		if(userInfo==null)return;
-		resources=getResources();
-		try {
-			ImageLoaderUtil imageLoaderUtil=new ImageLoaderUtil(instance, userInfo.getUserFaceUrl(), iv_hportrait, R.drawable.header, R.drawable.header);
-			imageLoaderUtil.showImage();
-		} catch (Exception e) {
-			Log.e("ImageLoader", e.toString());
-		}
+		userInfo = Constant.userInfo;
+		if (userInfo == null)
+			return;
+		resources = getResources();
+		setPortrait();
 		tv_name.setText(userInfo.getUserName());
 		queryFriendFollowFans();
 		queryMineCount();
 	}
 
-	/**查询好友、关注、粉丝数*/
-	public void queryFriendFollowFans(){
+	private void setPortrait() {
+		ImageLoaderUtil imageLoaderUtil = new ImageLoaderUtil(instance,
+				userInfo.getUserFaceUrl(), iv_hportrait, R.drawable.header,
+				R.drawable.header);
+		imageLoaderUtil.showImage();
+	}
+
+	/** 查询好友、关注、粉丝数 */
+	public void queryFriendFollowFans() {
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("ServiceName", "getUserRelByUserId");
 		Map<String, Object> busiParams = new HashMap<String, Object>();
@@ -160,32 +161,39 @@ public class MoreActivity extends BaseActivity
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
 				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode())) {
-					JSONObject returnObj = jsonObject.getJSONObject("ReturnInfo");
-					//用户好友数
-					Integer userFriendCount = returnObj.getInteger("userFriendCount");
-					//用户的粉丝数
-					Integer followUserCount = returnObj.getInteger("followUserCount");
-					//用户关注的人数
-					Integer userFollowCount = returnObj.getInteger("userFollowCount");
-					tv_friend.setText(userFriendCount+"");
-					tv_attention.setText(userFollowCount+"");
-					tv_fans.setText(followUserCount+"");
+					JSONObject returnObj = jsonObject
+							.getJSONObject("ReturnInfo");
+					// 用户好友数
+					Integer userFriendCount = returnObj
+							.getInteger("userFriendCount");
+					// 用户的粉丝数
+					Integer followUserCount = returnObj
+							.getInteger("followUserCount");
+					// 用户关注的人数
+					Integer userFollowCount = returnObj
+							.getInteger("userFollowCount");
+					tv_friend.setText(userFriendCount + "");
+					tv_attention.setText(userFollowCount + "");
+					tv_fans.setText(followUserCount + "");
 				}
 			}
+
 			@Override
 			public void start() {
 			}
+
 			@Override
 			public void loading(long total, long current, boolean isUploading) {
 			}
+
 			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 			}
 		});
 	}
-	
-	/**查询三大帖子数，赞数*/
-	public void queryMineCount(){
+
+	/** 查询三大帖子数，赞数 */
+	public void queryMineCount() {
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("ServiceName", "queryMinePostCounts");
 		Map<String, Object> busiParams = new HashMap<String, Object>();
@@ -197,148 +205,163 @@ public class MoreActivity extends BaseActivity
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
 				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode())) {
-					JSONObject returnObj = jsonObject.getJSONObject("ReturnInfo");
+					JSONObject returnObj = jsonObject
+							.getJSONObject("ReturnInfo");
 					JSONArray listOut = returnObj.getJSONArray("ListOut");
 					JSONObject object = (JSONObject) listOut.get(0);
-					MineCount mineCount=new MineCount();
+					MineCount mineCount = new MineCount();
 					mineCount.setMineNormal(object.getIntValue("mineNormal"));
 					mineCount.setMineIllcase(object.getIntValue("mineIllcase"));
 					mineCount.setMinePuzzle(object.getIntValue("minePuzzle"));
-					mineCount.setMineSendLike(object.getIntValue("mineSendLike"));
-					mineCount.setMineReceivelike(object.getIntValue("mineReceivelike"));
-					tv_postCount.setText("("+mineCount.getMineNormal()+")");
-					tv_sickCount.setText("("+mineCount.getMineIllcase()+")");
-					tv_helpCount.setText("("+mineCount.getMinePuzzle()+")");
-					tv_sendLikeCount.setText("("+mineCount.getMineSendLike()+")");
-					tv_getLikeCount.setText("("+mineCount.getMineReceivelike()+")");
+					mineCount.setMineSendLike(object
+							.getIntValue("mineSendLike"));
+					mineCount.setMineReceivelike(object
+							.getIntValue("mineReceivelike"));
+					tv_postCount.setText("(" + mineCount.getMineNormal() + ")");
+					tv_sickCount.setText("(" + mineCount.getMineIllcase() + ")");
+					tv_helpCount.setText("(" + mineCount.getMinePuzzle() + ")");
+					tv_sendLikeCount.setText("(" + mineCount.getMineSendLike()
+							+ ")");
+					tv_getLikeCount.setText("("
+							+ mineCount.getMineReceivelike() + ")");
 				}
 			}
+
 			@Override
 			public void start() {
 			}
+
 			@Override
 			public void loading(long total, long current, boolean isUploading) {
 			}
+
 			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 			}
 		});
 	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();
+		setPortrait();
 		queryFriendFollowFans();
 		queryMineCount();
 	}
-	
+
 	@OnClick(R.id.rl_home)
-	public void homeClick(View view){
+	public void homeClick(View view) {
 		finish();
 	}
-	
+
 	@OnClick(R.id.ll_friend)
-	public void friendClick(View view){
-		Intent intent=new Intent(instance,FriendActivity.class);
+	public void friendClick(View view) {
+		Intent intent = new Intent(instance, FriendActivity.class);
 		startActivity(intent);
 	}
-	
+
 	@OnClick(R.id.ll_attention)
-	public void attentionClick(View view){
-		Intent intent=new Intent(instance,MyAttentionActivity.class);
+	public void attentionClick(View view) {
+		Intent intent = new Intent(instance, MyAttentionActivity.class);
 		intent.putExtra(Constant.USER_SEQ_ID, userInfo.getUserSeqId());
 		startActivity(intent);
 	}
 
 	@OnClick(R.id.ll_fans)
-	public void fansClick(View view){
-		Intent intent=new Intent(instance,MyFansActivity.class);
+	public void fansClick(View view) {
+		Intent intent = new Intent(instance, MyFansActivity.class);
 		intent.putExtra(Constant.USER_SEQ_ID, userInfo.getUserSeqId());
 		startActivity(intent);
 	}
-	
+
 	@OnClick(R.id.rl_photo)
-	public void rl_photoClick(View view){
-		Intent intent=new Intent(instance,PhotoAlbumActivity.class);
+	public void rl_photoClick(View view) {
+		Intent intent = new Intent(instance, PhotoAlbumActivity.class);
 		startActivity(intent);
-//		ToastUtils.showMessage(instance, "敬请期待！");
+		// ToastUtils.showMessage(instance, "敬请期待！");
 	}
-	
+
 	@OnClick(R.id.rl_letter)
-	public void letterClick(View view){
-		Intent intent=new Intent(instance,MessageListActivity.class);
+	public void letterClick(View view) {
+		Intent intent = new Intent(instance, MessageListActivity.class);
 		startActivity(intent);
 	}
-	
+
 	@OnClick(R.id.rl_profile)
-	public void profileClick(View view){
-		Intent intent=new Intent(instance,IntroduceActivity.class);
+	public void profileClick(View view) {
+		Intent intent = new Intent(instance, IntroduceActivity.class);
 		intent.putExtra(Constant.USER_SEQ_ID, userInfo.getUserSeqId());
 		startActivity(intent);
 	}
-	
+
 	@OnClick(R.id.rl_identification)
-	public void identificationClick(View view){
-		Intent intent=new Intent(instance,MainAuthenticationActivity.class);
+	public void identificationClick(View view) {
+		Intent intent = new Intent(instance, MainAuthenticationActivity.class);
 		startActivity(intent);
 	}
-	
+
 	@OnClick(R.id.rl_post)
-	public void postClick(View view){
-		Intent intent=new Intent(instance,NormalPostActivity.class);
+	public void postClick(View view) {
+		Intent intent = new Intent(instance, NormalPostActivity.class);
 		intent.putExtra("postType", "MINE");
 		startActivity(intent);
 	}
+
 	@OnClick(R.id.rl_sick)
-	public void sickClick(View view){
-		Intent intent=new Intent(instance,CaseSharePostActivity.class);
+	public void sickClick(View view) {
+		Intent intent = new Intent(instance, CaseSharePostActivity.class);
 		intent.putExtra("postType", "MINE");
 		startActivity(intent);
 	}
+
 	@OnClick(R.id.rl_help)
-	public void helpClick(View view){
-		Intent intent=new Intent(instance,ProblemHelpActivity.class);
+	public void helpClick(View view) {
+		Intent intent = new Intent(instance, ProblemHelpActivity.class);
 		intent.putExtra("postType", "MINE");
 		startActivity(intent);
 	}
+
 	@OnClick(R.id.rl_send_like)
-	public void sendLikeClick(View view){
-		Intent intent=new Intent(instance,MineSendLikeActivity.class);		
+	public void sendLikeClick(View view) {
+		Intent intent = new Intent(instance, MineSendLikeActivity.class);
 		startActivity(intent);
 	}
+
 	@OnClick(R.id.rl_get_like)
-	public void getLikeClick(View view){
-		Intent intent=new Intent(instance,MineGetLikeActivity.class);
+	public void getLikeClick(View view) {
+		Intent intent = new Intent(instance, MineGetLikeActivity.class);
 		startActivity(intent);
 	}
-	
+
 	@OnClick(R.id.rl_feed_back)
-	public void feedBackClick(View view){
-		Intent intent=new Intent(instance,FeedbackActivity.class);
+	public void feedBackClick(View view) {
+		Intent intent = new Intent(instance, FeedbackActivity.class);
 		startActivity(intent);
 	}
+
 	@OnClick(R.id.rl_about)
-	public void aboutClick(View view){
-		Intent intent=new Intent(instance,AboutActivity.class);
+	public void aboutClick(View view) {
+		Intent intent = new Intent(instance, AboutActivity.class);
 		startActivity(intent);
 	}
+
 	@OnClick(R.id.rl_seting)
-	public void setingClick(View view){
-		Intent intent=new Intent(instance,SetingActivity.class);
+	public void setingClick(View view) {
+		Intent intent = new Intent(instance, SetingActivity.class);
 		startActivityForResult(intent, CHANGE_PORTRAIT_SUCCESS);
 	}
-	
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		switch (requestCode) {
 		case CHANGE_PORTRAIT_SUCCESS:
-			if (data==null) {
+			if (data == null) {
 				break;
 			}
-			Bundle bundle=data.getExtras();
+			Bundle bundle = data.getExtras();
 			if (bundle.getBoolean("CHANGE_PORTRAIT_SUCCESS")) {
-				Intent intent=new Intent();
+				Intent intent = new Intent();
 				intent.putExtras(bundle);
 				setResult(CHANGE_PORTRAIT_SUCCESS, intent);
 				finish();

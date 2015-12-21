@@ -106,6 +106,9 @@ public class MoreActivity extends BaseActivity {
 
 	@ViewInject(R.id.tv_getLikeCount)
 	private TextView tv_getLikeCount;
+	
+	@ViewInject(R.id.rl_comment)
+	private RelativeLayout rl_comment;
 
 	@ViewInject(R.id.rl_feed_back)
 	private RelativeLayout rl_feed_back;
@@ -331,6 +334,12 @@ public class MoreActivity extends BaseActivity {
 	public void getLikeClick(View view) {
 		Intent intent = new Intent(instance, MineGetLikeActivity.class);
 		startActivity(intent);
+	}
+	
+	@OnClick(R.id.rl_comment)
+	public void commentClick(View view) {
+//		Intent intent = new Intent(instance, MineGetLikeActivity.class);
+//		startActivity(intent);
 	}
 
 	@OnClick(R.id.rl_feed_back)

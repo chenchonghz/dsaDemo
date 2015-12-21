@@ -878,7 +878,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 								}
 							}
 						}
-						ssBuilder = InitTransmitPostUtil.initTransmitPost(context, ssBuilder, postAbstractLists,new InitSrcPostInterface() {
+						ssBuilder = InitTransmitPostUtil.initTransmitPost(context, ssBuilder, postAbstractLists,140,new InitSrcPostInterface() {
 							
 							@Override
 							public void initSrcPost(Context context, UserCard userCard,
@@ -1142,7 +1142,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 								}
 							}
 						}
-						ssBuilder2 = InitTransmitPostUtil.initTransmitPost(context, ssBuilder2, caseSharePostAbstractLists, new InitSrcPostInterface() {
+						ssBuilder2 = InitTransmitPostUtil.initTransmitPost(context, ssBuilder2, caseSharePostAbstractLists, 140,new InitSrcPostInterface() {
 
 							@Override
 							public void initSrcPost(Context context, UserCard userCard,
@@ -1391,7 +1391,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 								}
 							}
 						}
-						ssBuilder3 = InitTransmitPostUtil.initTransmitPost(context, ssBuilder3, problemHelpPostAbstractLists,new InitSrcPostInterface() {
+						ssBuilder3 = InitTransmitPostUtil.initTransmitPost(context, ssBuilder3, problemHelpPostAbstractLists,140,new InitSrcPostInterface() {
 							@Override
 							public void initSrcPost(Context context, UserCard userCard,
 									PostInfo postInfo, String isDelete) {

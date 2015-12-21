@@ -28,11 +28,13 @@ import android.util.Log;
 import android.view.View;
 
 public class InitTransmitPostUtil {
+	private static int font_num;
 	
 	
 	public static SpannableStringBuilder initTransmitPost(Context context,SpannableStringBuilder ssBuilder,
-			List<PostAbstractList> postAbstractLists,InitSrcPostInterface initSrcPostInterface,IPullPostListCallback iPullPostListCallback){
+			List<PostAbstractList> postAbstractLists,int num,InitSrcPostInterface initSrcPostInterface,IPullPostListCallback iPullPostListCallback){
 		boolean isTopTransmit = false;
+		font_num = num;
 		if(postAbstractLists != null && !postAbstractLists.isEmpty()){
 			for (int i = 0; i < postAbstractLists.size(); i++) {
 				if(postAbstractLists.get(i).getPostLevel().equals("0")){
@@ -148,13 +150,24 @@ public class InitTransmitPostUtil {
 			Bitmap b = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_yellow_v_24);
 			ImageSpan imgSpan = new ImageSpan(context, b, DynamicDrawableSpan.ALIGN_BASELINE);
 			icon_start = sb_content.length();
-			if(userCard.getUserLevel().equals("11")){
-				sb_content.append(" icon");
-				icon_start += 1;
-				icon_end = sb_content.length();
-			}
+//			if(userCard.getUserLevel().equals("11")){
+//				sb_content.append(" icon");
+//				icon_start += 1;
+//				icon_end = sb_content.length();
+//			}
 			if(postAbstract.getContent() != null){
+				if(font_num > 0 && postAbstract.getContent().length()<= font_num){		
 					sb_content.append(":"+postAbstract.getContent());
+					font_num = font_num - postAbstract.getContent().length();
+				}else{
+					if(font_num == 0){
+						sb_content.append(":...");
+					}else{
+						String content = postAbstract.getContent().substring(0, font_num);
+						sb_content.append(":"+content+"...");
+						font_num = 0;
+					}
+				}
 			}
 			spanStr = new SpannableString(sb_content);
 			spanStr.setSpan(new ClickableSpan() {
@@ -179,14 +192,15 @@ public class InitTransmitPostUtil {
 			}, start,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);		
 //			spanStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.font_titleanduname)), icon_end,sb_content.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);	
 //			spanStr.setSpan(new BackgroundColorSpan(context.getResources().get), start, end,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-			if(userCard.getUserLevel().equals("11")){	
-				spanStr.setSpan(imgSpan, icon_start, icon_end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-			}
+//			if(userCard.getUserLevel().equals("11")){	
+//				spanStr.setSpan(imgSpan, icon_start, icon_end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//			}
 			return spanStr;
 		}else{
 			if(postAbstract.getContent() != null){		
 					sb_content.append(postAbstract.getContent());
-					spanStr = new SpannableString(sb_content);	
+					spanStr = new SpannableString(sb_content);
+					font_num = font_num - spanStr.length();
 			}	
 			return spanStr;
 		}

@@ -7,6 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res/com.szrjk.dhome">
     
     <com.szrjk.widget.HeaderView 
+        android:id="@+id/hv_attention"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:htextstr="我的关注">

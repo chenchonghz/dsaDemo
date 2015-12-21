@@ -520,11 +520,13 @@ public class OtherPeopleActivity extends BaseActivity implements OnClickListener
 			
 		case R.id.ll_attention_count:
 			Intent intent_attention = new Intent(instance, MyAttentionActivity.class);
+			intent_attention.putExtra("username", homePageInfo.getUserName());
 			intent_attention.putExtra(Constant.USER_SEQ_ID, objId);
 			startActivity(intent_attention);
 			break;
 		case R.id.ll_fans_count:
 			Intent intent_fans = new Intent(instance, MyFansActivity.class);
+			intent_fans.putExtra("username", homePageInfo.getUserName());
 			intent_fans.putExtra(Constant.USER_SEQ_ID, objId);
 			startActivity(intent_fans);
 			break;

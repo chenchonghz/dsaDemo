@@ -29,10 +29,13 @@ import com.szrjk.entity.UserCard;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
 import com.szrjk.util.ToastUtils;
+import com.szrjk.widget.HeaderView;
+import com.umeng.analytics.h;
 
 @ContentView(R.layout.activity_my_attention)
 public class MyAttentionActivity extends BaseActivity{
-
+	@ViewInject(R.id.hv_attention)
+	private HeaderView hv_attention;
 	@ViewInject(R.id.lv_my_attention)
 	private ListView lv_my_attention;
 
@@ -40,6 +43,7 @@ public class MyAttentionActivity extends BaseActivity{
 	public List<UserCard> followlist;
 	private JSONObject returnObj;
 
+	private String username;
 	private String userSeqId;
 
 	@Override
@@ -63,7 +67,11 @@ public class MyAttentionActivity extends BaseActivity{
 
 	private void intiLayout() {
 		Intent intent=getIntent();
+		username = intent.getStringExtra("username");
 		userSeqId=intent.getStringExtra(Constant.USER_SEQ_ID);
+		if (username!=null) {
+			hv_attention.setHtext(username+"的关注");
+		}
 		getFollows();
 	}
 

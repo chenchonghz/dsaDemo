@@ -3,6 +3,7 @@
               android:orientation="vertical"
               android:id="@+id/ll_normal_post_content"
               android:layout_width="match_parent"
+              android:background="@drawable/pic_transmit_post_bg"
               android:layout_height="match_parent">
     <include
             layout="@layout/view_group"
@@ -39,6 +40,7 @@
             android:id="@+id/rl_post_foward_normal"
             android:layout_width="match_parent"
             android:visibility="gone"
+            android:background="@drawable/pic_transmit_post_bg"
             android:layout_height="wrap_content"
             android:layout_marginTop="-10dp"
             >
@@ -60,7 +62,7 @@
             android:id="@+id/rl_post_foward_case"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/base_bg"
+            android:background="@drawable/pic_transmit_post_bg"
             android:visibility="gone"
             android:paddingBottom="@dimen/margin_top" 
              >

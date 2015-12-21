@@ -41,17 +41,23 @@ public class OtherHomePageInfo implements Serializable{
 		private String mediaType;
 		//职位
 		private String jobTitle;
+		//用户关注数
+		private String focusCount;
+		//用户粉丝数
+		private String followerCount;
 		
 		public OtherHomePageInfo() {
 			super();
 		}
+		
 		public OtherHomePageInfo(String userSeqId, String userName, String sex,
 				String userFaceUrl, String province, String cityCode,
 				String companyName, String deptName, String professionalTitle,
 				String backgroundUrl, String isFriend, String isFollow,
 				String birthdate, String userType, String userLevel,
-				String entrySchoolDate, String educationLevel, String mediaType,
-				String jobTitle) {
+				String entrySchoolDate, String educationLevel,
+				String mediaType, String jobTitle, String focusCount,
+				String followerCount) {
 			super();
 			this.userSeqId = userSeqId;
 			this.userName = userName;
@@ -72,7 +78,26 @@ public class OtherHomePageInfo implements Serializable{
 			this.educationLevel = educationLevel;
 			this.mediaType = mediaType;
 			this.jobTitle = jobTitle;
+			this.focusCount = focusCount;
+			this.followerCount = followerCount;
 		}
+
+		public String getFocusCount() {
+			return focusCount;
+		}
+
+		public void setFocusCount(String focusCount) {
+			this.focusCount = focusCount;
+		}
+
+		public String getFollowerCount() {
+			return followerCount;
+		}
+
+		public void setFollowerCount(String followerCount) {
+			this.followerCount = followerCount;
+		}
+
 		public String getUserSeqId() {
 			return userSeqId;
 		}
@@ -188,19 +213,21 @@ public class OtherHomePageInfo implements Serializable{
 		public void setJobTitle(String jobTitle) {
 			this.jobTitle = jobTitle;
 		}
+
 		@Override
 		public String toString() {
-			return "UserHomePageInfo [userSeqId=" + userSeqId + ", userName="
-					+ userName + ", sex=" + sex + ", userFaceUrl=" + userFaceUrl
-					+ ", province=" + province + ", cityCode=" + cityCode
-					+ ", companyName=" + companyName + ", deptName=" + deptName
-					+ ", professionalTitle=" + professionalTitle
-					+ ", backgroundUrl=" + backgroundUrl + ", isFriend=" + isFriend
-					+ ", isFollow=" + isFollow + ", birthdate=" + birthdate
-					+ ", userType=" + userType + ", userLevel=" + userLevel
-					+ ", entrySchoolDate=" + entrySchoolDate + ", educationLevel="
-					+ educationLevel + ", mediaType=" + mediaType + 
-					", jobTitle="+jobTitle+"]";
+			return "OtherHomePageInfo [userSeqId=" + userSeqId + ", userName="
+					+ userName + ", sex=" + sex + ", userFaceUrl="
+					+ userFaceUrl + ", province=" + province + ", cityCode="
+					+ cityCode + ", companyName=" + companyName + ", deptName="
+					+ deptName + ", professionalTitle=" + professionalTitle
+					+ ", backgroundUrl=" + backgroundUrl + ", isFriend="
+					+ isFriend + ", isFollow=" + isFollow + ", birthdate="
+					+ birthdate + ", userType=" + userType + ", userLevel="
+					+ userLevel + ", entrySchoolDate=" + entrySchoolDate
+					+ ", educationLevel=" + educationLevel + ", mediaType="
+					+ mediaType + ", jobTitle=" + jobTitle + ", focusCount="
+					+ focusCount + ", followerCount=" + followerCount + "]";
 		}
 	
 	

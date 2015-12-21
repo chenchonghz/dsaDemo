@@ -135,18 +135,20 @@ public class SetingActivity extends BaseActivity {
 	
 	@OnClick(R.id.rl_change_hportrait)
 	public void changePortraitClick(View v) {
-		Intent intent = new Intent(instance, ChangePortraitActivity.class);
-		Bundle bundle = new Bundle();
-		// 把图片地址的urlList传递过去
-		bundle.putString("userfaceUrl", userInfo.getUserFaceUrl());
-		intent.putExtras(bundle);
-		startActivityForResult(intent, CHANGE_PORTRAIT_SUCCESS);
+		ToastUtils.showMessage(instance, "等待需求更改");
+//		Intent intent = new Intent(instance, ChangePortraitActivity.class);
+//		Bundle bundle = new Bundle();
+//		// 把图片地址的urlList传递过去
+//		bundle.putString("userfaceUrl", userInfo.getUserFaceUrl());
+//		intent.putExtras(bundle);
+//		startActivityForResult(intent, CHANGE_PORTRAIT_SUCCESS);
 	}
 
 	@OnClick(R.id.rl_change_background)
 	public void changeBackgroundClick(View v) {
-		Intent intent = new Intent(instance, UserBackgroundSelectActivity.class);
-		startActivity(intent);
+		ToastUtils.showMessage(instance, "等待需求更改");
+//		Intent intent = new Intent(instance, UserBackgroundSelectActivity.class);
+//		startActivity(intent);
 	}
 	
 	@OnClick(R.id.rl_change_password)

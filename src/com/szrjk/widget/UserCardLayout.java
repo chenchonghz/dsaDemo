@@ -3,6 +3,7 @@ package com.szrjk.widget;
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.OtherPeopleActivity;
 import com.szrjk.dhome.R;
+import com.szrjk.dhome.SelfActivity;
 import com.szrjk.entity.UserCard;
 import com.szrjk.util.BusiUtils;
 import com.szrjk.util.DialogUtil;
@@ -100,10 +101,17 @@ public class UserCardLayout extends RelativeLayout{
 					DialogUtil.showGuestDialog(getContext(),null);
 				}else if (v.getId()==R.id.rl_usercard&&
 						!Constant.userInfo.getUserSeqId().equals(userCard.getUserSeqId())) {
+					//当名片为他人时，跳转第三人主页
 					Intent intent = new Intent(mContext, OtherPeopleActivity.class);
 					intent.putExtra(Constant.USER_SEQ_ID, userCard.getUserSeqId());
 					mContext.startActivity(intent);
 					Log.i("TAG", userCard.toString());
+				}else if(v.getId()==R.id.rl_usercard&&
+						Constant.userInfo.getUserSeqId().equals(userCard.getUserSeqId())){
+					//当名片为自己时，跳转自己的主页
+					Intent intent = new Intent(mContext, SelfActivity.class);
+					intent.putExtra(Constant.USER_SEQ_ID, userCard.getUserSeqId());
+					mContext.startActivity(intent);
 				}
 
 			}

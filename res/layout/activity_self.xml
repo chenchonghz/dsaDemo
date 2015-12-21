@@ -82,7 +82,7 @@
                     android:id="@+id/tv_self_user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_20dp"
+                    android:layout_marginTop="@dimen/margin_5dp"
                     android:text="@string/self_user_name"
                     android:textColor="@color/white"
                     android:textSize="@dimen/font_size_large" />
@@ -132,7 +132,7 @@
                     android:layout_alignLeft="@id/tv_self_user_name"
                     android:layout_below="@id/rly_hospital_dept"
                     android:layout_marginTop="@dimen/margin_8dp" 
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <LinearLayout
                         android:id="@+id/ll_attention_count"

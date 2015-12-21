@@ -76,9 +76,12 @@ public class SelfActivity extends BaseActivity implements OnClickListener {
 		private ImageView iv_vip; 
 		//医院与科室布局
 		private RelativeLayout rly_hospital_dept;
-		
+		//用户关注数
 		private LinearLayout ll_attention_count;
+		private TextView tv_attention_num;
+		//用户粉丝数
 		private LinearLayout ll_fans_count;
+		private TextView tv_fans_num;
 
 		private SelfChangeBgPopup pop;
 		//用户信息
@@ -140,8 +143,10 @@ public class SelfActivity extends BaseActivity implements OnClickListener {
 		iv_self_avatar= (ImageView) v.findViewById(R.id.iv_self_avatar);
 		iv_vip = (ImageView) v.findViewById(R.id.iv_vip);
 		rly_hospital_dept = (RelativeLayout) v.findViewById(R.id.rly_hospital_dept);
-		ll_attention_count = (LinearLayout)v.findViewById(R.id.ll_attention_count);
-		ll_fans_count = (LinearLayout)v.findViewById(R.id.ll_fans_count);
+		ll_attention_count =(LinearLayout) v.findViewById(R.id.ll_attention_count);
+		ll_fans_count =(LinearLayout) v.findViewById(R.id.ll_fans_count);
+		tv_attention_num = (TextView) v.findViewById(R.id.tv_attention_num);
+		tv_fans_num = (TextView) v.findViewById(R.id.tv_fans_num);
 		lly_hv = (LinearLayout) v.findViewById(R.id.lly_hv);
 		getUserHpInfo(Constant.userInfo.getUserSeqId());
 		initListener();
@@ -447,6 +452,8 @@ public class SelfActivity extends BaseActivity implements OnClickListener {
 		if (userHomePageInfo.getUserLevel().equals("11")) {
 			iv_vip.setVisibility(View.VISIBLE);
 		}
+		tv_attention_num.setText(userHomePageInfo.getFocusCount());
+		tv_fans_num.setText(userHomePageInfo.getFollowerCount());
 		//iv_self_avatar.setImageBitmap(bm);
 	}
 	@Override
@@ -515,6 +522,7 @@ public class SelfActivity extends BaseActivity implements OnClickListener {
 	}
 	private void sendIntroduce() {
 		Intent intent = new Intent(instance, IntroduceActivity.class);
+		intent.putExtra("self", true);
 		intent.putExtra(Constant.USER_SEQ_ID, Constant.userInfo.getUserSeqId());
 		startActivity(intent);
 
@@ -534,5 +542,13 @@ public class SelfActivity extends BaseActivity implements OnClickListener {
 			}
 		}
 	};
-	
+	protected void onNewIntent(Intent intent) {
+		getUserHpInfo(Constant.userInfo.getUserSeqId());
+		try {
+			initViews(userHomePageInfo);
+		} catch (DbException e) {
+			e.printStackTrace();
+		}
+		super.onNewIntent(intent);
+	};
 }

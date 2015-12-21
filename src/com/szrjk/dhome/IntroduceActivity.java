@@ -134,8 +134,10 @@ public class IntroduceActivity extends BaseActivity {
 	@ViewInject(R.id.rl_glo)
 	private RelativeLayout rl_glo;
 	private Dialog progressDialog;
-
-	@Override
+	//是否更改过
+	private boolean ischange = false;
+	//是否从selfactivity过来
+	private boolean fromself = false;
 	protected void onCreate(Bundle savedInstanceState)	{
 		super.onCreate(savedInstanceState);
 		instance = this;
@@ -145,6 +147,7 @@ public class IntroduceActivity extends BaseActivity {
 
 	private void initLayout() {
 		Intent intent = instance.getIntent();
+		fromself = intent.getBooleanExtra("self", false);
 		objID = intent.getStringExtra(Constant.USER_SEQ_ID);
 		userInfo = Constant.userInfo;
 		userId = userInfo.getUserSeqId();
@@ -152,7 +155,6 @@ public class IntroduceActivity extends BaseActivity {
 		//如果是自己。那就可以编辑自己的资料。不是
 		if (userId.equals(objID)) {
 			findUserInfo(userId);
-			
 		}
 		else{
 			findUserInfo(objID);
@@ -341,7 +343,11 @@ public class IntroduceActivity extends BaseActivity {
 		}
 
 	}
-
+	protected void onNewIntent(Intent intent) {
+		ischange = intent.getBooleanExtra("submit", false);
+		findUserInfo(userId);
+		super.onNewIntent(intent);
+	}
 	@OnClick(R.id.iv_self_avatar)
 	public void onSelfAvatar(View v){
 		Intent intent = new Intent(instance,UserAvatarImageChangerActivity.class);
@@ -349,9 +355,29 @@ public class IntroduceActivity extends BaseActivity {
 		intent.putExtra("code", Constant.PICTURE_OTHER_CODE);
 		startActivity(intent);
 	}
+
 	@OnClick(R.id.iv_back)
 	public void onBack(View v){
-		finish();
+		if (ischange&&fromself) {
+			Intent intent = new Intent(this, SelfActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+			startActivity(intent);			
+		}else{
+			finish();
+		}
+	}
+	@Override
+	public void onBackPressed() {
+		if (ischange&&fromself) {
+			Intent intent = new Intent(this, SelfActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+			startActivity(intent);			
+		}else{
+			finish();
+		}
+		super.onBackPressed();
 	}
 	@OnClick(R.id.tv_edit)
 	public void onEditInfo(View v)

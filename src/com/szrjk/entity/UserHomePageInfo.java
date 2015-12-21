@@ -41,16 +41,22 @@ public class UserHomePageInfo implements Serializable{
 	private String mediaType;
 	//职称
 	private String jobTitle;
+	//用户关注数
+	private String focusCount;
+	//用户粉丝数
+	private String followerCount;
+	
 	public UserHomePageInfo() {
 		super();
 	}
+	
 	public UserHomePageInfo(String userSeqId, String userName, String sex,
 			String userFaceUrl, String province, String cityCode,
 			String companyName, String deptName, String professionalTitle,
 			String backgroundUrl, String isFriend, String isFollow,
 			String birthdate, String userType, String userLevel,
 			String entrySchoolDate, String educationLevel, String mediaType,
-			String jobTitle) {
+			String jobTitle, String focusCount, String followerCount) {
 		super();
 		this.userSeqId = userSeqId;
 		this.userName = userName;
@@ -71,8 +77,10 @@ public class UserHomePageInfo implements Serializable{
 		this.educationLevel = educationLevel;
 		this.mediaType = mediaType;
 		this.jobTitle = jobTitle;
-		
+		this.focusCount = focusCount;
+		this.followerCount = followerCount;
 	}
+
 	public String getUserSeqId() {
 		return userSeqId;
 	}
@@ -188,6 +196,23 @@ public class UserHomePageInfo implements Serializable{
 	public void setJobTitle(String jobTitle) {
 		this.jobTitle = jobTitle;
 	}
+
+	public String getFocusCount() {
+		return focusCount;
+	}
+
+	public void setFocusCount(String focusCount) {
+		this.focusCount = focusCount;
+	}
+
+	public String getFollowerCount() {
+		return followerCount;
+	}
+
+	public void setFollowerCount(String followerCount) {
+		this.followerCount = followerCount;
+	}
+
 	@Override
 	public String toString() {
 		return "UserHomePageInfo [userSeqId=" + userSeqId + ", userName="
@@ -200,7 +225,8 @@ public class UserHomePageInfo implements Serializable{
 				+ ", userType=" + userType + ", userLevel=" + userLevel
 				+ ", entrySchoolDate=" + entrySchoolDate + ", educationLevel="
 				+ educationLevel + ", mediaType=" + mediaType + ", jobTitle="
-				+jobTitle+"]";
+				+ jobTitle + ", focusCount=" + focusCount + ", followerCount="
+				+ followerCount + "]";
 	}
 	
 }

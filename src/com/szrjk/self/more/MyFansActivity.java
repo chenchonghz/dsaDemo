@@ -29,10 +29,12 @@ import com.szrjk.entity.UserCard;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
 import com.szrjk.util.ToastUtils;
+import com.szrjk.widget.HeaderView;
 
 @ContentView(R.layout.activity_my_fans)
 public class MyFansActivity extends BaseActivity{
-	
+	@ViewInject(R.id.hv_fans)
+	private HeaderView hv_fans;
 	@ViewInject(R.id.lv_my_fans)
 	private ListView lv_my_fans;
 	
@@ -41,7 +43,7 @@ public class MyFansActivity extends BaseActivity{
 	private JSONObject returnObj;
 
 	private String userSeqId;
-
+	private String username;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -63,7 +65,11 @@ public class MyFansActivity extends BaseActivity{
 
 	private void intiLayout() {
 		Intent intent=getIntent();
+		username = intent.getStringExtra("username");
 		userSeqId=intent.getStringExtra(Constant.USER_SEQ_ID);
+		if (username!=null) {
+			hv_fans.setHtext(username+"的粉丝");
+		}
 		getFans();
 	}
 	

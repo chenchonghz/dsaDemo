@@ -38,7 +38,6 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/header_right_margin"
         android:src="@drawable/icon_dotmore_32"
-        android:visibility="gone"
          />
 
 </RelativeLayout>

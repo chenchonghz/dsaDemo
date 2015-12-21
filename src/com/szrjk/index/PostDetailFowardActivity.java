@@ -115,7 +115,7 @@ public class PostDetailFowardActivity extends BaseActivity
 	{
 		postId = getIntent().getStringExtra(Constant.POST_ID);
 		position=getIntent().getIntExtra("position", 0);
-		userSeqId = getIntent().getStringExtra(Constant.USER_SEQ_ID);
+		userSeqId = Constant.userInfo.getUserSeqId();
 		String ptype = getIntent().getStringExtra("ptype");
 		flag = getIntent().getIntExtra("flag", 0);
 //		staticinit(ptype);
@@ -219,7 +219,7 @@ public class PostDetailFowardActivity extends BaseActivity
 								listOut.getString("userCard"), UserCard.class);
 
 						if (listOut.getJSONObject("postDetail") != null) {
-							PostDetail srcpd = JSON.parseObject(listOut.getJSONObject("postDetail").getString("srcPostAbstractCard"), PostDetail.class);
+							PostDetail srcpd = JSON.parseObject(listOut.getString("postDetail"), PostDetail.class);
 							UserCard srcuc = JSON.parseObject(listOut.getJSONObject("postDetail").getString("srcUserCard"), UserCard.class);
 
 							fowardPostContentLayout.setPostDetail(srcpd);

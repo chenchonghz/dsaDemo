@@ -165,7 +165,7 @@ public class InitTransmitPostUtil {
 //				icon_end = sb_content.length();
 //			}
 			if(postAbstract.getContent() != null){
-				if(font_num > 0 && postAbstract.getContent().length()<= font_num){		
+				if(font_num > 0 && postAbstract.getContent().length()<= font_num){
 					sb_content.append(":"+postAbstract.getContent());
 					font_num = font_num - postAbstract.getContent().length();
 				}else{
@@ -210,7 +210,7 @@ public class InitTransmitPostUtil {
 					sb_content.append(postAbstract.getContent());
 					spanStr = new SpannableString(sb_content);
 					font_num = font_num - spanStr.length();
-			}	
+			}
 			return spanStr;
 		}
 	}

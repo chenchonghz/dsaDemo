@@ -2,6 +2,7 @@ package com.szrjk.widget;
 
 import android.content.Context;
 import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,10 +11,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.R;
+import com.szrjk.entity.IPullPostListCallback;
+import com.szrjk.entity.PostAbstractList;
 import com.szrjk.entity.PostDetail;
 import com.szrjk.entity.UserCard;
+import com.szrjk.util.DCollectionUtils;
 import com.szrjk.util.DisplayTimeUtil;
+import com.szrjk.util.InitTransmitPostUtil;
 import com.szrjk.util.SpannableStringUtils;
+
+import java.util.Collections;
+import java.util.List;
 
 
 /**
@@ -55,26 +63,34 @@ public class NormalForwardPostContent2Layout extends RelativeLayout
 		    final String puserid = postDetail.getpUserSeqId();
 		//时间
 		//填时间
-		String createDate = postDetail.getCreateDate();
+		PostAbstractList postAbstractInfo = PostAbstractList.fetchFirstLevel(postDetail.getPostAbstractList());;
+		String createDate = postAbstractInfo.getPostAbstract().getCreateDate();
 		try {
 			createDate = DisplayTimeUtil.displayTimeString(createDate);
 		} catch (Exception e) {
 			createDate = "XX";
 		}
 		tv_post_detailed_time.setText(createDate);
+		List<PostAbstractList> plist = postDetail.getPostAbstractList();
+		Collections.reverse(plist);
 
-
-			if(pusername!=null&&!pusername.equals("")){
+			ll_case_detail_list.removeAllViews();
+			if(plist!=null&&plist.size()>1){
 				//存在pusername,搞链接
-				String targetstr = postContent+" //"+pusername+":"+pcontent;
-				final String currentuserid = Constant.userInfo.getUserSeqId();
-				int start = postContent.length();
-				int stop = postContent.length()+pusername.length();
-				start+=3;
-				stop+=3;
-				SpannableString postContent1 = SpannableStringUtils.getClickableFaceSpan(context,targetstr,start,stop,puserid,currentuserid);
+//				String targetstr = postContent+" //"+pusername+":"+pcontent;
+//				final String currentuserid = Constant.userInfo.getUserSeqId();
+//				int start = postContent.length();
+//				int stop = postContent.length()+pusername.length();
+//				start+=3;
+//				stop+=3;
+//				SpannableString postContent1 = SpannableStringUtils.getClickableFaceSpan(context,targetstr,start,stop,puserid,currentuserid);
+				SpannableStringBuilder stringBuilder = InitTransmitPostUtil.initTransmitPost(context, new SpannableStringBuilder(), postDetail.getPostAbstractList(), 10000,null, new IPullPostListCallback() {
+					@Override
+					public void skipToSelfFragment() {
 
-				PostDetailCaseView pdcv1 = new PostDetailCaseView(context,title1,postContent1,null);
+					}
+				});
+				PostDetailCaseView pdcv1 = new PostDetailCaseView(context,title1,stringBuilder,null);
 				ll_case_detail_list.addView(pdcv1);
 			}else{
 				ll_case_detail_list.removeAllViews();

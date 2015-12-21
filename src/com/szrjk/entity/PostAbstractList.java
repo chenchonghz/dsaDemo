@@ -1,6 +1,7 @@
 package com.szrjk.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class PostAbstractList implements Comparable,Serializable{
 	
@@ -45,7 +46,28 @@ public class PostAbstractList implements Comparable,Serializable{
 		int otherLevel = Integer.valueOf(postList.getPostLevel());
 		return Integer.valueOf(this.postLevel).compareTo(otherLevel);
 	}
-	
+
+	/**
+	 * ’“‘¥Ã˘
+	 * @param palist
+	 * @return
+	 */
+	public static PostAbstractList fetchFirstLevel(List<PostAbstractList> palist) {
+//		for (int i=0;i<plist.size();i++){
+//			PostAbstractList postAbstractInfo = plist.get(i);
+//			postAbstractInfo.getPostLevel();
+//		}
+		PostAbstractList postAbstractInfo = null;
+		for (int i = 0; i < palist.size(); i++) {
+			postAbstractInfo = palist.get(i);
+			String postLevel = postAbstractInfo.getPostLevel();
+			if ("0".equals(postLevel)) {
+				return postAbstractInfo;
+			}
+		}
+		return null;
+	}
+
 	
 
 }

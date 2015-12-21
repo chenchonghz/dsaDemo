@@ -37,7 +37,7 @@ import com.szrjk.widget.UserCardLayout;
 
 /**
  * 帖子详情中 ，评论等的列表
- * @param <T>
+ * @param
  */
 public class PostCommentAdapter<T> extends BaseAdapter {
 
@@ -107,7 +107,7 @@ public class PostCommentAdapter<T> extends BaseAdapter {
 						@Override
 						public void initSrcPost(Context context, UserCard userCard,
 								PostInfo postInfo, String isDelete) {
-							
+
 						}
 					}, new IPullPostListCallback() {
 						@Override

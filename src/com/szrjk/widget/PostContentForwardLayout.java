@@ -177,11 +177,11 @@ public class PostContentForwardLayout extends RelativeLayout
 	 */
 	@Override
 	public void setBackgroundColor(int colorid){
-		ll_normal_post_content.setBackgroundColor(colorid);
+//		ll_normal_post_content.setBackgroundColor(colorid);
 		rl_post_detailed_doctorinfo.setBackgroundColor(colorid);
 		tv_post_detailed_time.setBackgroundColor(colorid);
 		ll_group.setBackgroundColor(colorid);
-		userCardLayout.setBackgroundColor(colorid);
+//		userCardLayout.setBackgroundColor(colorid);
 
 		if(pdcv1!=null){
 			pdcv1.contentClick( new ICallback() {
@@ -197,7 +197,6 @@ public class PostContentForwardLayout extends RelativeLayout
 				}
 			});
 		}
-
 	}
 
 

@@ -1088,7 +1088,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			});
 			break;
 		case 4:
-
 				Log.e("IndexViewAdapter", "转发病例分享帖子加载数据");
 				if(userList.isEmpty()||postList.isEmpty()||postOtherList.isEmpty()){
 					return convertView;
@@ -1858,7 +1857,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		    simplifySpanBuild.appendSpecialUnit(new SpecialTextUnit(" ")).appendSpecialUnit(new SpecialLabelUnit("火", context.getResources().getColor(R.color.transparent), 13, BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_yellow_v_24),40,40).setGravity(SpecialGravity.CENTER))
 		    .appendSpecialUnit(new SpecialTextUnit(" "));
 		}
-		if(content != null){		
+		if(content != null){
 			simplifySpanBuild.appendSpecialUnit(new SpecialTextUnit(":"+content, context.getResources().getColor(R.color.font_titleanduname)).setSpecialClickableUnit(new SpecialClickableUnit(new OnClickableSpanListener() {
 				
 				@Override

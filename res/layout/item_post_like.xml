@@ -11,7 +11,7 @@
         android:id="@+id/iv_item_post_comment_portrait"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/szrjk_logo" />
 
    <TextView
         android:id="@+id/tv_item_post_comment_name"

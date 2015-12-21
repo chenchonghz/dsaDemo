@@ -47,15 +47,11 @@ public class NormalForwardPostContentLayout extends RelativeLayout
 
 
 	public void setPostDetail(PostDetail postDetail) {
-
 			String title1 = "";
-
 			CharSequence postContent = postDetail.getContent();
-
 		    String pusername = postDetail.getpUserName();
 			String pcontent = postDetail.getpContent();
 		    final String puserid = postDetail.getpUserSeqId();
-
 		//时间
 		//填时间
 		String createDate = postDetail.getCreateDate();

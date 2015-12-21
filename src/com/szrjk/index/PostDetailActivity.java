@@ -262,9 +262,7 @@ public class PostDetailActivity extends BaseActivity {
 												postDetaillviewLayout.getLikeList().clear();
 											}
 											postDetaillviewLayout.minusLike();
-											ToastUtils.showMessage(
-													PostDetailActivity.this,
-													"取消点赞成功!");
+											ToastUtils.showMessage(PostDetailActivity.this,"取消点赞成功!");
 											loadPostDetailedData(userSeqId, postId, instance);
 											postDetailBottomOperLayout.getBtn_laud().setClickable(false);
 										}

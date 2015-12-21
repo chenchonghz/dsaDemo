@@ -1,5 +1,6 @@
 package com.szrjk.entity;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
  * @author Liyi
  * 
  */
-public class PostInfo
+public class PostInfo implements Serializable
 {
 
 	// 用户ID
@@ -68,15 +69,12 @@ public class PostInfo
 	private int isOpen;
 	//转发帖子list
 	private List<PostAbstractList> postAbstractList;
-	
-	
 
-	
-	
-	
+
 	public List<PostAbstractList> getPostAbstractList() {
 		return postAbstractList;
 	}
+
 
 	public void setPostAbstractList(List<PostAbstractList> postAbstractList) {
 		Collections.reverse(postAbstractList);
@@ -201,6 +199,10 @@ public class PostInfo
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public String getPicListstr(){
+		return picList;
 	}
 
 	public String[] getPicList()

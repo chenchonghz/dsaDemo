@@ -34,5 +34,7 @@
     <string name="title_activity_more_news_comments">MoreNewsCommentsActivity</string>
     <string name="title_activity_authentication">AuthenticationActivity</string>
     <string name="title_activity_my_circle">MyCircleActivity</string>
+    <string name="title_activity_more_fragment">MoreFragment</string>
+    <string name="title_activity_self">SelfActivity</string>
 
 </resources>

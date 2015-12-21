@@ -20,7 +20,8 @@ import com.szrjk.self.CircleHomepageActivity;
 import com.szrjk.self.more.NormalPostActivity;
 import com.szrjk.util.ShowDialogUtil;
 import com.szrjk.util.ToastUtils;
-
+import com.szrjk.self.more.CaseSharePostActivity;
+import com.szrjk.self.more.ProblemHelpActivity;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -207,6 +208,21 @@ public class PostListComm {
                                 public void skipToSelfFragment() {
                                 }
                             });
+                    	}else if(activity instanceof CaseSharePostActivity){
+                    		adapter = new IndexListViewAdapter(
+                                    context, activity, userList, postList, postOtherList, userId,ConstantUser.MyCaseShare, new IPullPostListCallback() {
+                                @Override
+                                public void skipToSelfFragment() {
+                                }
+                            });
+                    	}
+                    	else if(activity instanceof ProblemHelpActivity){
+                    		adapter = new IndexListViewAdapter(
+                                    context, activity, userList, postList, postOtherList, userId,ConstantUser.MyProblemHelp, new IPullPostListCallback() {
+                                @Override
+                                public void skipToSelfFragment() {
+                                }
+                            });
                     	}
                     	else{
                     		 adapter = new IndexListViewAdapter(
@@ -261,7 +277,23 @@ public class PostListComm {
                                 public void skipToSelfFragment() {
                                 }
                             });
-                    	}else{
+                    	}else if(activity instanceof CaseSharePostActivity){
+                    		adapter = new IndexListViewAdapter(
+                                    context, activity, userList, postList, postOtherList, userId,ConstantUser.MyCaseShare, new IPullPostListCallback() {
+                                @Override
+                                public void skipToSelfFragment() {
+                                }
+                            });
+                    	}else if(activity instanceof ProblemHelpActivity){
+                    		adapter = new IndexListViewAdapter(
+                                    context, activity, userList, postList, postOtherList, userId,ConstantUser.MyProblemHelp, new IPullPostListCallback() {
+                                @Override
+                                public void skipToSelfFragment() {
+                                }
+                            });
+                    	}
+                    	else
+                    	{
                     		 adapter = new IndexListViewAdapter(
                                      context, activity, userList, postList, postOtherList, userId,Constant.UNKNOW_FLAG, new IPullPostListCallback() {
                                  @Override
@@ -302,6 +334,20 @@ public class PostListComm {
                         	}else if(activity instanceof NormalPostActivity){
                         		adapter = new IndexListViewAdapter(
                                         context, activity, userList, postList, postOtherList, userId,ConstantUser.MyNormalPost, new IPullPostListCallback() {
+                                    @Override
+                                    public void skipToSelfFragment() {
+                                    }
+                                });
+                        	}else if(activity instanceof CaseSharePostActivity){
+                        		adapter = new IndexListViewAdapter(
+                                        context, activity, userList, postList, postOtherList, userId,ConstantUser.MyCaseShare, new IPullPostListCallback() {
+                                    @Override
+                                    public void skipToSelfFragment() {
+                                    }
+                                });
+                        	}else if(activity instanceof ProblemHelpActivity){
+                        		adapter = new IndexListViewAdapter(
+                                        context, activity, userList, postList, postOtherList, userId,ConstantUser.MyProblemHelp, new IPullPostListCallback() {
                                     @Override
                                     public void skipToSelfFragment() {
                                     }

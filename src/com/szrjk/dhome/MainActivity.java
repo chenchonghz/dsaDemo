@@ -42,6 +42,7 @@ import com.szrjk.search.SearchMainActivity;
 import com.szrjk.util.BusiUtils;
 import com.szrjk.util.DialogUtil;
 import com.szrjk.util.SharePerferenceUtil;
+import com.szrjk.util.ToastUtils;
 import com.szrjk.widget.ListPopup;
 import com.szrjk.widget.TabPhotoPopup;
 
@@ -59,7 +60,8 @@ public class MainActivity extends FragmentActivity implements OnClickListener , 
 	//知识库
 	private LibraryFragment libraryFragment;
 	//我
-	private SelfFragment selfFragment;
+//	private SelfFragment selfFragment;
+	private MoreFragment moreFragment;
 	@ViewInject(R.id.iv_search)
 	private ImageView iv_search;
 	@ViewInject(R.id.fl_index)
@@ -110,12 +112,12 @@ public class MainActivity extends FragmentActivity implements OnClickListener , 
 		list.add(indexFragment);
 		list.add(exploreFragment);
 		list.add(libraryFragment);
-		list.add(selfFragment);
+		list.add(moreFragment);
 		ViewUtils.inject(this);
 		initData();
 		initListener();
 		clickIndex();
-		EventBus.getDefault().register(this);
+//		EventBus.getDefault().register(this);
 		getSharedPreference();
 	}
 	public static void finishMain(){
@@ -396,8 +398,8 @@ public class MainActivity extends FragmentActivity implements OnClickListener , 
 
 	private void clickSelf()
 	{
-		if (selfFragment == null) {
-			selfFragment = new SelfFragment();
+		if (moreFragment == null) {
+			moreFragment = new MoreFragment();
 		}
 		FragmentTransaction fragmentTransaction = this
 				.getSupportFragmentManager().beginTransaction();
@@ -405,10 +407,10 @@ public class MainActivity extends FragmentActivity implements OnClickListener , 
 		fragmentTransaction.hide(lastfragment);
 		//如果是第一次点击，添加此fragment，若否，则从隐藏中显示
 		if (selfFirst) {
-			fragmentTransaction.add(R.id.fl_content, selfFragment,"selfFragment");
+			fragmentTransaction.add(R.id.fl_content, moreFragment,"selfFragment");
 			selfFirst = false;
 		}else{
-			fragmentTransaction.show(selfFragment);
+			fragmentTransaction.show(moreFragment);
 		}
 		fragmentTransaction.commit();
 		indexLayout.setSelected(false);
@@ -426,7 +428,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener , 
 
 		selfLayout.setSelected(true);
 		ivSelf.setSelected(true);
-		lastfragment = selfFragment ;
+		lastfragment = moreFragment ;
 
 	}
 
@@ -436,8 +438,8 @@ public class MainActivity extends FragmentActivity implements OnClickListener , 
 	}
 
 	public void skipToSelfFragment(){
-		if (selfFragment==null) {
-			selfFragment = new SelfFragment();
+		if (moreFragment==null) {
+			moreFragment = new MoreFragment();
 		}
 		FragmentTransaction fragmentTransaction = this
 				.getSupportFragmentManager().beginTransaction();
@@ -446,10 +448,10 @@ public class MainActivity extends FragmentActivity implements OnClickListener , 
 		fragmentTransaction.hide(lastfragment);
 		//如果是第一次点击，添加此fragment，若否，则从隐藏中显示
 		if (selfFirst) {
-			fragmentTransaction.add(R.id.fl_content, selfFragment,"selfFragment");
+			fragmentTransaction.add(R.id.fl_content, moreFragment,"selfFragment");
 			selfFirst = false;
 		}else{
-			fragmentTransaction.show(selfFragment);
+			fragmentTransaction.show(moreFragment);
 		}
 		fragmentTransaction.commit();
 		indexLayout.setSelected(false);
@@ -467,7 +469,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener , 
 		tv_explore.setTextColor(Color.BLACK);
 		tv_library.setTextColor(Color.BLACK);
 		tv_index.setTextColor(Color.BLACK);
-		lastfragment = selfFragment;
+		lastfragment = moreFragment;
 		Clickposition =3;
 	}
 
@@ -606,59 +608,61 @@ public class MainActivity extends FragmentActivity implements OnClickListener , 
 		}
 		return true;
 	}
-	public void onEventMainThread(RemindEvent event){
-		SharedPreferences remind = getSharedPreferences("remind", Context.MODE_PRIVATE);
-		Editor editor = remind.edit();
-		editor.putString("UserID", Constant.userInfo.getUserSeqId());
-		switch (event.getRemindMessage()) {
-		//有新消息
-		case 1: selfFragment.iv_remind_message.setVisibility(View.VISIBLE);
-		selfFragment.haveMessage =true;
-		editor.putBoolean("haveMessage", selfFragment.haveMessage);
-		break;
-		case 11:selfFragment.iv_remind_message.setVisibility(View.GONE);
-		selfFragment.haveMessage = false;
-		editor.putBoolean("haveMessage", selfFragment.haveMessage);
-		break;
-		//有新好友
-		case 2:selfFragment.iv_remind_friend.setVisibility(View.VISIBLE);
-		selfFragment.haveFriend =true;
-		editor.putBoolean("haveFirend", selfFragment.haveFriend);
-		break;
-		//好友信息处理完毕
-		case 21:selfFragment.iv_remind_friend.setVisibility(View.GONE);
-		selfFragment.haveFriend = false;
-		editor.putBoolean("haveFirend", selfFragment.haveFriend);
-		break;
-		//有新圈子
-		case 3:selfFragment.iv_remind_circle.setVisibility(View.VISIBLE);
-		selfFragment.haveCircle =true;
-		editor.putBoolean("haveCircle", selfFragment.haveCircle);
-		break;
-		case 31:selfFragment.iv_remind_circle.setVisibility(View.GONE);
-		selfFragment.haveCircle = false;
-		editor.putBoolean("haveCircle", selfFragment.haveCircle);
-		break;
-		case 4:iv_remind_self.setVisibility(View.VISIBLE);break;
-		}
-		if (selfFragment.haveMessage||selfFragment.haveFriend||selfFragment.haveCircle) {
-			iv_remind_self.setVisibility(View.VISIBLE);
-		}else{
-			if (First) {
-				First = false;
-			}else{
-				iv_remind_self.setVisibility(View.GONE);
-			}
-		}
+//	public void onEventMainThread(RemindEvent event){
+//		SharedPreferences remind = getSharedPreferences("remind", Context.MODE_PRIVATE);
+//		Editor editor = remind.edit();
+//		editor.putString("UserID", Constant.userInfo.getUserSeqId());
+//		switch (event.getRemindMessage()) {
+//		//有新消息
+//		case 1: selfFragment.iv_remind_message.setVisibility(View.VISIBLE);
+//		selfFragment.haveMessage =true;
+//		editor.putBoolean("haveMessage", selfFragment.haveMessage);
+//		break;
+//		case 11:selfFragment.iv_remind_message.setVisibility(View.GONE);
+//		selfFragment.haveMessage = false;
+//		editor.putBoolean("haveMessage", selfFragment.haveMessage);
+//		break;
+//		//有新好友
+//		case 2:selfFragment.iv_remind_friend.setVisibility(View.VISIBLE);
+//		selfFragment.haveFriend =true;
+//		editor.putBoolean("haveFirend", selfFragment.haveFriend);
+//		break;
+//		//好友信息处理完毕
+//		case 21:selfFragment.iv_remind_friend.setVisibility(View.GONE);
+//		selfFragment.haveFriend = false;
+//		editor.putBoolean("haveFirend", selfFragment.haveFriend);
+//		break;
+//		//有新圈子
+//		case 3:selfFragment.iv_remind_circle.setVisibility(View.VISIBLE);
+//		selfFragment.haveCircle =true;
+//		editor.putBoolean("haveCircle", selfFragment.haveCircle);
+//		break;
+//		case 31:selfFragment.iv_remind_circle.setVisibility(View.GONE);
+//		selfFragment.haveCircle = false;
+//		editor.putBoolean("haveCircle", selfFragment.haveCircle);
+//		break;
+//		case 4:iv_remind_self.setVisibility(View.VISIBLE);break;
+//		case 9:Log.i("push", "event接受全员推送");
+//			ToastUtils.showMessage(instance, event.getRemindString());break;
+//		}
+//		if (selfFragment.haveMessage||selfFragment.haveFriend||selfFragment.haveCircle) {
+//			iv_remind_self.setVisibility(View.VISIBLE);
+//		}else{
+//			if (First) {
+//				First = false;
+//			}else{
+//				iv_remind_self.setVisibility(View.GONE);
+//			}
+//		}
 		//写入持久化
 //		Log.i("TAG", "state"+":"+selfFragment.haveMessage+"+"+selfFragment.haveFriend
 //				+"+"+selfFragment.haveCircle);
-		editor.commit();
+//		editor.commit();
 		
 //		Log.i("TAG", "remind"+":"+remind.getBoolean("haveMessage", false)+"+"
 //				+remind.getBoolean("haveFirend", false)
 //				+"+"+remind.getBoolean("haveCircle", false));
-	}
+//	}
 	@Override
 	protected void onDestroy() {
 		EventBus.getDefault().unregister(this);

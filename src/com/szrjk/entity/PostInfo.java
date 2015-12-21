@@ -1,5 +1,6 @@
 package com.szrjk.entity;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
  * @author Liyi
  * 
  */
-public class PostInfo
+public class PostInfo implements Serializable
 {
 
 	// 用户ID

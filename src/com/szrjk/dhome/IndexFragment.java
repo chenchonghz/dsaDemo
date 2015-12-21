@@ -63,6 +63,7 @@ public class IndexFragment extends Fragment
 	public static int LIKE_NUM = -1;
 	public static boolean ISLIKE = false;
 	public static boolean ISSRCPOST = false;
+	public static boolean ISDELETE = false;
 	public static String SRC_POSEID = "-1";
 	private Handler handler = new Handler()
 	{

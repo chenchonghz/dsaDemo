@@ -5,6 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+<<<<<<< HEAD
+=======
+import android.os.Bundle;
+>>>>>>> 4bbc2516ec6aed1444e00bcc173b5b7c7aef680d
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.text.SpannableString;
@@ -36,6 +40,15 @@ import com.szrjk.index.PostDetailFowardActivity2;
 import com.szrjk.index.RepeatActivity;
 import com.szrjk.self.CircleHomepageActivity;
 import com.szrjk.self.SystemUserActivity;
+<<<<<<< HEAD
+=======
+import com.szrjk.simplifyspan.SimplifySpanBuild;
+import com.szrjk.simplifyspan.other.OnClickableSpanListener;
+import com.szrjk.simplifyspan.other.SpecialGravity;
+import com.szrjk.simplifyspan.unit.SpecialClickableUnit;
+import com.szrjk.simplifyspan.unit.SpecialLabelUnit;
+import com.szrjk.simplifyspan.unit.SpecialTextUnit;
+>>>>>>> 4bbc2516ec6aed1444e00bcc173b5b7c7aef680d
 import com.szrjk.util.*;
 import com.szrjk.widget.IndexGridView;
 import com.szrjk.widget.IndexGridView.OnTouchInvalidPositionListener;
@@ -161,9 +174,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 	@Override
 	public int getItemViewType(int position) {
 		PostInfo postInfo = postList.get(position);
-		if(postInfo.getSrcPostAbstractCard()!=null){	
-			Log.e("IndexViewAdapter", "刷新后："+postInfo.getSrcPostAbstractCard().getPostType());
-		}
 		if(postInfo.getPostType().equals(Constant.CASE_SHARE)){
 			return 0;
 		}else if(postInfo.getPostType().equals(Constant.PROBLEM_HELP)){
@@ -452,11 +462,10 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					if(isTourist){
 						DialogUtil.showGuestDialog(context, null);
 					}else{
-						IndexFragment.POSITION = position;
 						skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getPostTitle(),
 								userInfo.getUserFaceUrl(),postInfo.getPostId(),
 								userInfo.getUserName(),postInfo.getPostType(),postInfo.getPostLevel()
-								,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM());
+								,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),flag);
 					}
 				}
 			});
@@ -593,11 +602,10 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					if(isTourist){
 						DialogUtil.showGuestDialog(context, null);
 					}else{
-						IndexFragment.POSITION = position;
 						skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getPostTitle(),
 								userInfo.getUserFaceUrl(),postInfo.getPostId(),
 								userInfo.getUserName(),postInfo.getPostType(),postInfo.getPostLevel()
-								,postInfo.getSrcPostId(),position, postOtherInfo.getFORWARD_NUM());
+								,postInfo.getSrcPostId(),position, postOtherInfo.getFORWARD_NUM(),flag);
 					}
 				}
 			});
@@ -761,11 +769,10 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 						if(postInfo.getIsOpen() == 2){
 							ToastUtils.showMessage(context, "私密圈子不可转发！");
 						}else{
-							IndexFragment.POSITION = position;
 							skipToRepeatActivity(userInfo.getUserSeqId(), postInfo.getContent(),
 									userInfo.getUserFaceUrl(), postInfo.getPostId(),
 									userInfo.getUserName(), postInfo.getPostType(),postInfo.getPostLevel()
-									,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM());
+									,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),flag);
 						}
 					}
 				}
@@ -847,16 +854,23 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 				}
 				SrcPostInfo srcPostInfo = postList.get(position).getSrcPostAbstractCard();
 				SrcUserCard srcUserCard = postList.get(position).getSrcUserCard();
+				SpannableStringBuilder ssBuilder = new SpannableStringBuilder();
+				final List<PostAbstractList> postAbstractLists = postInfo.getPostAbstractList();
 				if(postInfo.getPostType().equals(Constant.TRANSMIT_POST2)){	
 					// TODO Auto-generated method stub
 //					boolean isTopTransmit = false;
-					SpannableStringBuilder ssBuilder = new SpannableStringBuilder();
-					List<PostAbstractList> postAbstractLists = postInfo.getPostAbstractList();
 //				Collections.reverse(postAbstractLists);
 					if(postAbstractLists != null && !postAbstractLists.isEmpty()){
 						for(int i = 0;i<postAbstractLists.size();i++){
 							if(postAbstractLists.get(i).getPostLevel().equals("0")){
 								postInfo.setSrcPostId(postAbstractLists.get(i).getPostAbstract().getPostId());
+								SrcUserCard srcUser = new SrcUserCard();
+								SrcPostInfo srcPost = new SrcPostInfo();
+								srcUser.setUserFaceUrl(postAbstractLists.get(i).getUserCard().getUserFaceUrl());
+								srcUser.setUserName(postAbstractLists.get(i).getUserCard().getUserName());
+								srcPost.setContent(postAbstractLists.get(i).getPostAbstract().getContent());
+								postInfo.setSrcUserCard(srcUser);
+								postInfo.setSrcPostAbstractCard(srcPost);
 							}else if(i == 0){
 								postInfo.setPostLevel(postAbstractLists.get(i).getPostLevel());
 								postInfo.setContent(postAbstractLists.get(i).getPostAbstract().getContent());
@@ -870,7 +884,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 								}
 							}
 						}
-						ssBuilder = InitTransmitPostUtil.initTransmitPost(context, ssBuilder, postAbstractLists, 140,new InitSrcPostInterface() {
+						ssBuilder = InitTransmitPostUtil.initTransmitPost(context, ssBuilder, postAbstractLists,new InitSrcPostInterface() {
 							
 							@Override
 							public void initSrcPost(Context context, UserCard userCard,
@@ -880,13 +894,13 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 									tran_normalPost_Holder.tv_src_post_text.setText("抱歉，此帖子已被作者删除");
 									tran_normalPost_Holder.tv_src_post_text.setTextColor(context.getResources().getColor(R.color.font_cell));
 								}else{	
-									initSrcGroupData(tran_normalPost_Holder.ll_src_group,tran_normalPost_Holder.tv_src_group_name,postInfo);
 									try {
+									initSrcGroupData(tran_normalPost_Holder.ll_src_group,tran_normalPost_Holder.tv_src_group_name,postInfo);
 										initSrcNormalPostData(tran_normalPost_Holder.tv_src_post_text,tran_normalPost_Holder.gv_src_pic,tran_normalPost_Holder.tv_srcTime,postInfo,userCard,position);
+										initSrcNormalPostListner(tran_normalPost_Holder.gv_src_pic,tran_normalPost_Holder.ll_src_normal_post,tran_normalPost_Holder.ll_srcDoctorInfo,tran_normalPost_Holder.tv_src_group_name,position,postInfo,userCard);
 									} catch (Exception e1) {
 										e1.printStackTrace();
 									}
-									initSrcNormalPostListner(tran_normalPost_Holder.gv_src_pic,tran_normalPost_Holder.ll_src_normal_post,tran_normalPost_Holder.ll_srcDoctorInfo,tran_normalPost_Holder.tv_src_group_name,position,postInfo,userCard);
 								}
 							}
 						}, iPullPostListCallback);
@@ -962,7 +976,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 						} catch (Exception e1) {
 							e1.printStackTrace();
 						}
-						
 					}
 				}
 //				}else{
@@ -970,17 +983,16 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 //					tran_normalPost_Holder.tv_post_text.setText(content);
 //					tran_normalPost_Holder.tv_post_text.setMovementMethod(LinkMovementMethod.getInstance());
 //				}
-                if(srcPostInfo != null && srcUserCard != null){
-                	initSrcUserData(tran_normalPost_Holder.iv_srcSmallPhoto,tran_normalPost_Holder.tv_srcDoctorName,tran_normalPost_Holder.tv_srcJobTitle,
-                			tran_normalPost_Holder.tv_srcHospital,tran_normalPost_Holder.tv_srcDepartment,tran_normalPost_Holder.iv_src_headphoto_icon,srcUserCard);
-                	initSrcGroupData(tran_normalPost_Holder.ll_src_group,tran_normalPost_Holder.tv_src_group_name,srcPostInfo);
-                }
 				if(postOtherInfo != null && postOtherInfo.getFORWARD_NUM()!=0){
 					tran_normalPost_Holder.tv_transmit.setText(""+postOtherInfo.getFORWARD_NUM());
 				}else{
 					tran_normalPost_Holder.tv_transmit.setText(context.getResources().getString(R.string.transmit_text));
 				}
-				tran_normalPost_Holder.tv_transmit.setTextColor(context.getResources().getColor(R.color.font_disable));
+				if(postInfo.getPostType().equals(Constant.TRANSMIT_POST)){	
+					tran_normalPost_Holder.tv_transmit.setTextColor(context.getResources().getColor(R.color.font_disable));
+				}else{
+					tran_normalPost_Holder.tv_transmit.setTextColor(context.getResources().getColor(R.color.font_cell));
+				}
 				if(postOtherInfo != null && postOtherInfo.getCOMMENT_NUM()!=0){
 					tran_normalPost_Holder.tv_command.setText(""+postOtherInfo.getCOMMENT_NUM());
 				}else{
@@ -1017,7 +1029,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					}
 				}
 			});
-
 			tran_normalPost_Holder.rl_transmit.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -1025,12 +1036,14 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					if(isTourist){
 						DialogUtil.showGuestDialog(context, null);
 					}else{
-						IndexFragment.POSITION = position;
-						skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getContent(),
-								userInfo.getUserFaceUrl(),postInfo.getPostId(),
-								userInfo.getUserName(),postInfo.getPostType(),postInfo.getPostLevel()
-								,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM());
-						ToastUtils.showMessage(context, "多次转发功能正在开发中，敬请期待");
+						if(postInfo.getPostType().equals(Constant.TRANSMIT_POST)){
+							ToastUtils.showMessage(context, "多次转发功能正在开发中，敬请期待");
+						}else{
+							skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getSrcPostAbstractCard().getContent(),
+									postInfo.getSrcUserCard().getUserFaceUrl(),postInfo.getPostId(),
+									postInfo.getSrcUserCard().getUserName(),postInfo.getPostType(),postInfo.getPostLevel()
+									,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),postAbstractLists,userInfo.getUserName(),flag);
+						}		
 					}
 			  }
 			});
@@ -1081,7 +1094,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			});
 			break;
 		case 4:
-			try {
+
 				Log.e("IndexViewAdapter", "转发病例分享帖子加载数据");
 				if(userList.isEmpty()||postList.isEmpty()||postOtherList.isEmpty()){
 					return convertView;
@@ -1107,13 +1120,21 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 				}
 				SrcPostInfo srcPostInfo2 = postList.get(position).getSrcPostAbstractCard();
 				SrcUserCard srcUserCard2 = postList.get(position).getSrcUserCard();
+				SpannableStringBuilder ssBuilder2 = new SpannableStringBuilder();
+				final List<PostAbstractList> caseSharePostAbstractLists = postInfo.getPostAbstractList();
 				if(postInfo.getPostType().equals(Constant.TRANSMIT_POST2)){	
-					SpannableStringBuilder ssBuilder2 = new SpannableStringBuilder();
-					List<PostAbstractList> caseSharePostAbstractLists = postInfo.getPostAbstractList();
 					if(caseSharePostAbstractLists != null && !caseSharePostAbstractLists.isEmpty()){
 						for(int i = 0;i<caseSharePostAbstractLists.size();i++){
 							if(caseSharePostAbstractLists.get(i).getPostLevel().equals("0")){
 								postInfo.setSrcPostId(caseSharePostAbstractLists.get(i).getPostAbstract().getPostId());
+								SrcUserCard srcUser = new SrcUserCard();
+								SrcPostInfo srcPost = new SrcPostInfo();
+								srcUser.setUserFaceUrl(caseSharePostAbstractLists.get(i).getUserCard().getUserFaceUrl());
+								srcUser.setUserName(caseSharePostAbstractLists.get(i).getUserCard().getUserName());
+								srcPost.setContent(caseSharePostAbstractLists.get(i).getPostAbstract().getContent());
+								srcPost.setPostTitle(caseSharePostAbstractLists.get(i).getPostAbstract().getPostTitle());
+								postInfo.setSrcUserCard(srcUser);
+								postInfo.setSrcPostAbstractCard(srcPost);
 							}else if(i == 0){
 								postInfo.setPostLevel(caseSharePostAbstractLists.get(i).getPostLevel());
 								postInfo.setContent(caseSharePostAbstractLists.get(i).getPostAbstract().getContent());
@@ -1127,7 +1148,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 								}
 							}
 						}
-						ssBuilder2 = InitTransmitPostUtil.initTransmitPost(context, ssBuilder2, caseSharePostAbstractLists,140, new InitSrcPostInterface() {
+						ssBuilder2 = InitTransmitPostUtil.initTransmitPost(context, ssBuilder2, caseSharePostAbstractLists, new InitSrcPostInterface() {
 
 							@Override
 							public void initSrcPost(Context context, UserCard userCard,
@@ -1156,16 +1177,25 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 						tran_caseShare_Holder.tv_post_text.setText(postInfo.getContent());
 					}
 					if(postInfo.getCreateDate()!=null){
-						tran_caseShare_Holder.tv_time.setText(DisplayTimeUtil.displayTimeString(postInfo.getCreateDate()));
+						try {
+							tran_caseShare_Holder.tv_time.setText(DisplayTimeUtil.displayTimeString(postInfo.getCreateDate()));
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							Log.e("IndexListViewAdapter", e.toString());
+						}
 					}
 					if(srcPostInfo2 != null && srcUserCard2!=null){
 						if(srcPostInfo2 != null && srcUserCard2!=null){
-							initSrcUserData(tran_caseShare_Holder.iv_srcSmallPhoto,tran_caseShare_Holder.tv_srcDoctorName,tran_caseShare_Holder.tv_srcJobTitle,
-									tran_caseShare_Holder.tv_srcHospital,tran_caseShare_Holder.tv_srcDepartment,tran_caseShare_Holder.iv_src_headphoto_icon,srcUserCard2);		
+							try {
+								initSrcUserData(tran_caseShare_Holder.iv_srcSmallPhoto,tran_caseShare_Holder.tv_srcDoctorName,tran_caseShare_Holder.tv_srcJobTitle,
+										tran_caseShare_Holder.tv_srcHospital,tran_caseShare_Holder.tv_srcDepartment,tran_caseShare_Holder.iv_src_headphoto_icon,srcUserCard2);		
+								initSrcPostInfoData(tran_caseShare_Holder.iv_src_backgroudpic,tran_caseShare_Holder.tv_src_postTitle,
+										tran_caseShare_Holder.tv_src_completeRate,tran_caseShare_Holder.tv_srcTime,tran_caseShare_Holder.iv_gray,tran_caseShare_Holder.tv_srcname,srcPostInfo2,srcUserCard2,position);
+								initSrcPostListner(tran_caseShare_Holder.rl_src_view_post,tran_caseShare_Holder.ll_srcDoctorInfo,position,srcPostInfo2,srcUserCard2);		
+							} catch (Exception e) {
+								Log.e("IndexListViewAdapter", e.toString());
+							}
 						}
-						initSrcPostInfoData(tran_caseShare_Holder.iv_src_backgroudpic,tran_caseShare_Holder.tv_src_postTitle,
-								tran_caseShare_Holder.tv_src_completeRate,tran_caseShare_Holder.tv_srcTime,tran_caseShare_Holder.iv_gray,tran_caseShare_Holder.tv_srcname,srcPostInfo2,srcUserCard2,position);
-						initSrcPostListner(tran_caseShare_Holder.rl_src_view_post,tran_caseShare_Holder.ll_srcDoctorInfo,position,srcPostInfo2,srcUserCard2);
 					}
 				}
 //					for (int i = 0; i < caseSharePostAbstractLists.size(); i++) {
@@ -1214,7 +1244,11 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 				}else{
 					tran_caseShare_Holder.tv_transmit.setText(context.getResources().getString(R.string.transmit_text));
 				}
-				tran_caseShare_Holder.tv_transmit.setTextColor(context.getResources().getColor(R.color.font_disable));
+				if(postInfo.getPostType().equals(Constant.TRANSMIT_POST)){		
+					tran_caseShare_Holder.tv_transmit.setTextColor(context.getResources().getColor(R.color.font_disable));
+				}else{
+					tran_caseShare_Holder.tv_transmit.setTextColor(context.getResources().getColor(R.color.font_cell));
+				}
 				if(postOtherInfo != null &&postOtherInfo.getCOMMENT_NUM()!=0){
 					tran_caseShare_Holder.tv_command.setText(""+postOtherInfo.getCOMMENT_NUM());
 				}else{
@@ -1231,9 +1265,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					tran_caseShare_Holder.iv_like.setImageResource(R.drawable.icon_laud_24);
 				}
 				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 			tran_caseShare_Holder.ll_doctorInfo.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -1253,6 +1284,8 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					}
 				}
 			});
+			
+			
 			tran_caseShare_Holder.rl_transmit.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -1260,12 +1293,15 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					if(isTourist){
 						DialogUtil.showGuestDialog(context, null);
 					}else{
-						IndexFragment.POSITION = position;
-						skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getContent(),
-								userInfo.getUserFaceUrl(),postInfo.getPostId(),
-								userInfo.getUserName(),postInfo.getPostType(),postInfo.getPostLevel()
-								,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM());
-						ToastUtils.showMessage(context, "多次转发功能正在开发中，敬请期待");
+						if(postInfo.getPostType().equals(Constant.TRANSMIT_POST)){
+							ToastUtils.showMessage(context, "多次转发功能正在开发中，敬请期待");
+						}else{
+							IndexFragment.POSITION = position;
+							skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getSrcPostAbstractCard().getPostTitle(),
+									postInfo.getSrcUserCard().getUserFaceUrl(),postInfo.getPostId(),
+									postInfo.getSrcUserCard().getUserName(),postInfo.getPostType(),postInfo.getPostLevel()
+									,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),caseSharePostAbstractLists,userInfo.getUserName(),flag);
+						}				
 					}
 				}
 			});
@@ -1333,13 +1369,21 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 				}
 				SrcPostInfo srcPostInfo3 = postList.get(position).getSrcPostAbstractCard();
 				SrcUserCard srcUserCard3 = postList.get(position).getSrcUserCard();
+				SpannableStringBuilder ssBuilder3 = new SpannableStringBuilder();
+				final List<PostAbstractList> problemHelpPostAbstractLists = postInfo.getPostAbstractList();
 				if(postInfo.getPostType().equals(Constant.TRANSMIT_POST2)){
-					SpannableStringBuilder ssBuilder3 = new SpannableStringBuilder();
-					List<PostAbstractList> problemHelpPostAbstractLists = postInfo.getPostAbstractList();
 					if(problemHelpPostAbstractLists != null && !problemHelpPostAbstractLists.isEmpty()){
 						for(int i = 0;i<problemHelpPostAbstractLists.size();i++){
 							if(problemHelpPostAbstractLists.get(i).getPostLevel().equals("0")){
 								postInfo.setSrcPostId(problemHelpPostAbstractLists.get(i).getPostAbstract().getPostId());
+								SrcUserCard srcUser = new SrcUserCard();
+								SrcPostInfo srcPost = new SrcPostInfo();
+								srcUser.setUserFaceUrl(problemHelpPostAbstractLists.get(i).getUserCard().getUserFaceUrl());
+								srcUser.setUserName(problemHelpPostAbstractLists.get(i).getUserCard().getUserName());
+								srcPost.setContent(problemHelpPostAbstractLists.get(i).getPostAbstract().getContent());
+								srcPost.setPostTitle(problemHelpPostAbstractLists.get(i).getPostAbstract().getPostTitle());
+								postInfo.setSrcUserCard(srcUser);
+								postInfo.setSrcPostAbstractCard(srcPost);
 							}else if(i == 0){
 								postInfo.setPostLevel(problemHelpPostAbstractLists.get(i).getPostLevel());
 								postInfo.setContent(problemHelpPostAbstractLists.get(i).getPostAbstract().getContent());
@@ -1353,7 +1397,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 								}
 							}
 						}
-						ssBuilder3 = InitTransmitPostUtil.initTransmitPost(context, ssBuilder3, problemHelpPostAbstractLists,140, new InitSrcPostInterface() {
+						ssBuilder3 = InitTransmitPostUtil.initTransmitPost(context, ssBuilder3, problemHelpPostAbstractLists,new InitSrcPostInterface() {
 							@Override
 							public void initSrcPost(Context context, UserCard userCard,
 									PostInfo postInfo, String isDelete) {
@@ -1448,7 +1492,11 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 				}else{
 					tran_problemHelp_Holder.tv_transmit.setText(context.getResources().getString(R.string.transmit_text));
 				}
-				tran_problemHelp_Holder.tv_transmit.setTextColor(context.getResources().getColor(R.color.font_disable));
+				if(postInfo.getPostType().equals(Constant.TRANSMIT_POST)){			
+					tran_problemHelp_Holder.tv_transmit.setTextColor(context.getResources().getColor(R.color.font_disable));
+				}else{
+					tran_problemHelp_Holder.tv_transmit.setTextColor(context.getResources().getColor(R.color.font_cell));
+				}
 				if(postOtherInfo != null &&postOtherInfo.getCOMMENT_NUM()!=0){
 					tran_problemHelp_Holder.tv_command.setText(""+postOtherInfo.getCOMMENT_NUM());
 				}else{
@@ -1493,12 +1541,15 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					if(isTourist){
 						DialogUtil.showGuestDialog(context, null);
 					}else{
-						IndexFragment.POSITION = position;
-						skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getContent(),
-						userInfo.getUserFaceUrl(),postInfo.getPostId(),
-						userInfo.getUserName(),postInfo.getPostType(),postInfo.getPostLevel()
-						,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM());
-						ToastUtils.showMessage(context, "多次转发功能正在开发中，敬请期待");
+						if(postInfo.getPostType().equals(Constant.TRANSMIT_POST)){
+							ToastUtils.showMessage(context, "多次转发功能正在开发中，敬请期待");
+						}else{
+							IndexFragment.POSITION = position;
+							skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getSrcPostAbstractCard().getPostTitle(),
+							postInfo.getSrcUserCard().getUserFaceUrl(),postInfo.getPostId(),
+							postInfo.getSrcUserCard().getUserName(),postInfo.getPostType(),postInfo.getPostLevel()
+							,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),problemHelpPostAbstractLists,userInfo.getUserName(),flag);	
+						}		
 					}
 				}
 			});
@@ -1567,6 +1618,34 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 	}
 	
 
+	protected void skipToRepeatActivity(String userSeqId, String content,
+			String userFaceUrl, String postId, String srcUserName,
+			String postType, String postLevel, String srcPostId, int position,
+			int forward_NUM, List<PostAbstractList> postAbstractLists, String userName,int flag) {
+		// TODO Auto-generated method stub
+		Intent intent = new Intent(context, RepeatActivity.class);
+		intent.putExtra(Constant.USER_SEQ_ID, userFaceUrl);
+		intent.putExtra(Constant.POST_TEXT, content);
+		intent.putExtra(Constant.PIC_URL, userFaceUrl);
+		intent.putExtra(Constant.POST_ID, postId);
+		intent.putExtra("srcUserName", srcUserName);
+		intent.putExtra(Constant.POST_TYPE, postType);
+		intent.putExtra(Constant.POST_LEVEL, postLevel);
+		intent.putExtra(Constant.SRC_POST_ID, srcPostId);
+		intent.putExtra(Constant.POSITION, position);
+		intent.putExtra(Constant.FORWARD_NUM, forward_NUM);
+		intent.putExtra(Constant.USER_NAME, userName);
+		Bundle bundle = new Bundle();
+		bundle.putSerializable("postAbstractLists", (Serializable) postAbstractLists);
+		intent.putExtra("postList", bundle);
+		intent.putExtra("flag", flag);
+		if(indexFragment != null){
+			indexFragment.startActivityForResult(intent, 200);
+		}else{
+			mainActivity.startActivityForResult(intent, 200);
+		}
+		
+	}
 	protected void hintCaseShareView(LinearLayout ll_caseShare,
 			FrameLayout fl_bg) {
 		ll_caseShare.setVisibility(View.GONE);
@@ -1762,31 +1841,14 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		return spanStr;
 	}
 	
-	private SpannableString getContentText(String content, String userName,
+	private SimplifySpanBuild getContentText(TextView tv_post_text, String content, String userName,
 			final String userSeqId, String userLevel, final String userType,final PostInfo postInfo, final int position) {
-		String name = userName;
-		StringBuffer sb_content = new StringBuffer(name);
-		int start = 0;
-		int end = userName.length();
-		int icon_start = userName.length();
-		int icon_end = userName.length();
-		Bitmap b = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_yellow_v_24);
-		ImageSpan imgSpan = new ImageSpan(context, b, DynamicDrawableSpan.ALIGN_BASELINE);
-		if(userLevel.equals("11")){
-			sb_content.append(" icon");
-			icon_start += 1;
-			icon_end = sb_content.length();
-		}
-		
-		if(content != null){		
-			sb_content.append(":"+content);
-		}
-		Log.e("indexFragmentAdapter", "转发文字："+sb_content.toString());
-		Log.e("indexFragmentAdapter", "开始："+start+"结束："+end);
-		SpannableString spanStr = new SpannableString(sb_content);
-		spanStr.setSpan(new ClickableSpan() {
+		SimplifySpanBuild simplifySpanBuild = new SimplifySpanBuild(context, tv_post_text);
+		simplifySpanBuild.appendSpecialUnit(new SpecialTextUnit(userName, context.getResources().getColor(R.color.link_text_color)).setSpecialClickableUnit(new SpecialClickableUnit(new OnClickableSpanListener() {
+			
 			@Override
-			public void onClick(View widget) {
+			public void onClick(TextView tv, String clickText) {
+				// TODO Auto-generated method stub
 				if(userSeqId.equals(Constant.userInfo.getUserSeqId())){
 					skipToSelfFragment();
 				}else if(userType.equals("1")&&!userSeqId.equals(userId)){
@@ -1797,33 +1859,85 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					}
 				}
 			}
-			@Override
-			public void updateDrawState(TextPaint ds) {
-				super.updateDrawState(ds);
-				ds.setUnderlineText(false);
-			}
-		}, start,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-		
-		spanStr.setSpan(new ClickableSpan() {
-			@Override
-			public void onClick(View widget) {
-				IndexFragment.ISSRCPOST = true;
-				IndexFragment.SRC_POSEID = postInfo.getPostId();
-				skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),postInfo.getUserSeqId(),position);
-			}
-			@Override
-			public void updateDrawState(TextPaint ds) {
-				super.updateDrawState(ds);
-				ds.setUnderlineText(false);
-			}
-		}, icon_end,sb_content.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-		
-		spanStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.link_text_color)), start, end,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-		spanStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.font_titleanduname)), icon_end,sb_content.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-		if(userLevel.equals("11")){	
-			spanStr.setSpan(imgSpan, icon_start, icon_end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		})));
+		if(userLevel.equals("11")){
+		    simplifySpanBuild.appendSpecialUnit(new SpecialTextUnit(" ")).appendSpecialUnit(new SpecialLabelUnit("火", context.getResources().getColor(R.color.transparent), 13, BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_yellow_v_24),40,40).setGravity(SpecialGravity.CENTER))
+		    .appendSpecialUnit(new SpecialTextUnit(" "));
 		}
-		return spanStr;
+		if(content != null){		
+			simplifySpanBuild.appendSpecialUnit(new SpecialTextUnit(":"+content, context.getResources().getColor(R.color.font_titleanduname)).setSpecialClickableUnit(new SpecialClickableUnit(new OnClickableSpanListener() {
+				
+				@Override
+				public void onClick(TextView tv, String clickText) {
+					// TODO Auto-generated method stub
+					IndexFragment.ISSRCPOST = true;
+					IndexFragment.SRC_POSEID = postInfo.getPostId();
+					skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),postInfo.getUserSeqId(),position);
+				}
+			})));
+		}
+		return simplifySpanBuild;
+		
+//		String name = userName;
+//		StringBuffer sb_content = new StringBuffer(name);
+//		int start = 0;
+//		int end = userName.length();
+//		int icon_start = userName.length();
+//		int icon_end = userName.length();
+//		Bitmap b = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_yellow_v_24);
+//		ImageSpan imgSpan = new ImageSpan(context, b, DynamicDrawableSpan.ALIGN_BASELINE);
+//		if(userLevel.equals("11")){
+//			sb_content.append(" icon");
+//			icon_start += 1;
+//			icon_end = sb_content.length();
+//		}
+//		
+//		if(content != null){		
+//			sb_content.append(":"+content);
+//		}
+//		Log.e("indexFragmentAdapter", "转发文字："+sb_content.toString());
+//		Log.e("indexFragmentAdapter", "开始："+start+"结束："+end);
+//		SpannableString spanStr = new SpannableString(sb_content);
+//		spanStr.setSpan(new ClickableSpan() {
+//			@Override
+//			public void onClick(View widget) {
+//				if(userSeqId.equals(Constant.userInfo.getUserSeqId())){
+//					skipToSelfFragment();
+//				}else if(userType.equals("1")&&!userSeqId.equals(userId)){
+//					skipToSystemUserActivity(userSeqId);
+//				}else{
+//					if(!userSeqId.equals(userId)){		
+//						skipToOtherPeopleActivity(userSeqId);
+//					}
+//				}
+//			}
+//			@Override
+//			public void updateDrawState(TextPaint ds) {
+//				super.updateDrawState(ds);
+//				ds.setUnderlineText(false);
+//			}
+//		}, start,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//		
+//		spanStr.setSpan(new ClickableSpan() {
+//			@Override
+//			public void onClick(View widget) {
+//				IndexFragment.ISSRCPOST = true;
+//				IndexFragment.SRC_POSEID = postInfo.getPostId();
+//				skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),postInfo.getUserSeqId(),position);
+//			}
+//			@Override
+//			public void updateDrawState(TextPaint ds) {
+//				super.updateDrawState(ds);
+//				ds.setUnderlineText(false);
+//			}
+//		}, icon_end,sb_content.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//		
+//		spanStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.link_text_color)), start, end,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//		spanStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.font_titleanduname)), icon_end,sb_content.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//		if(userLevel.equals("11")){	
+//			spanStr.setSpan(imgSpan, icon_start, icon_end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//		}
+//		return null;
 	}
 	private SpannableString getTrasmitContent(final UserCard userCard, final PostInfo postAbstract,
 			final int position, final PostInfo postInfo, boolean isTopTransmit) {
@@ -2033,9 +2147,11 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			PostInfo postInfo, UserCard userCard, int position) throws Exception {
 		ll_caseShare.setVisibility(View.VISIBLE);
 		fl_bg.setVisibility(View.VISIBLE);
-		SpannableString contentText = getContentText(null,userCard.getUserName(),userCard.getUserSeqId(),userCard.getUserLevel(),userCard.getUserType(),postInfo,position);
-		tv_srcname.setText(contentText);
-		tv_srcname.setMovementMethod(LinkMovementMethod.getInstance());
+		SimplifySpanBuild simplifySpanBuild = getContentText(tv_srcname,null,userCard.getUserName(),userCard.getUserSeqId(),userCard.getUserLevel(),userCard.getUserType(),postInfo,position);
+		tv_srcname.setText(simplifySpanBuild.build());
+//		SpannableString contentText = getContentText(null,userCard.getUserName(),userCard.getUserSeqId(),userCard.getUserLevel(),userCard.getUserType(),postInfo,position);
+//		tv_srcname.setText(contentText);
+//		tv_srcname.setMovementMethod(LinkMovementMethod.getInstance());
 		if(postInfo.getBackgroundPic().isEmpty()){
 			iv_gray.setVisibility(View.GONE);
 		}
@@ -2249,9 +2365,11 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 	private void initSrcNormalPostData(TextView tv_post_text, GridView gv_pic,
 			TextView tv_time, final PostInfo postInfo, UserCard userCard,int position) throws Exception {
 		if(postInfo.getContent()!=null){
-			SpannableString contentText = getContentText(postInfo.getContent(),userCard.getUserName(),userCard.getUserSeqId(),userCard.getUserLevel(),userCard.getUserType(),postInfo,position);
-			tv_post_text.setText(contentText);
-			tv_post_text.setMovementMethod(LinkMovementMethod.getInstance());
+			SimplifySpanBuild simplifySpanBuild = getContentText(tv_post_text,postInfo.getContent(),userCard.getUserName(),userCard.getUserSeqId(),userCard.getUserLevel(),userCard.getUserType(),postInfo,position);
+			tv_post_text.setText(simplifySpanBuild.build());
+//			SpannableString contentText = getContentText(postInfo.getContent(),userCard.getUserName(),userCard.getUserSeqId(),userCard.getUserLevel(),userCard.getUserType(),postInfo,position);
+//			tv_post_text.setText(contentText);
+//			tv_post_text.setMovementMethod(LinkMovementMethod.getInstance());
 //			tv_post_text.setText(postInfo.getContent());
 		}
 		if(postInfo.getPicList()!=null&&!postInfo.getPicList()[0].isEmpty()){
@@ -2444,7 +2562,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 
 	}
 	protected void skipToRepeatActivity(String userSeqId, String postTitle,
-			String userFaceUrl, String postId, String userName, String postType, String postLevel, String srcPostId, int position, int forward_num) {
+			String userFaceUrl, String postId, String userName, String postType, String postLevel, String srcPostId, int position, int forward_num,int flag) {
 		Intent intent = new Intent(context, RepeatActivity.class);
 		intent.putExtra(Constant.USER_SEQ_ID, userFaceUrl);
 		intent.putExtra(Constant.POST_TEXT, postTitle);
@@ -2456,6 +2574,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		intent.putExtra(Constant.SRC_POST_ID, srcPostId);
 		intent.putExtra(Constant.POSITION, position);
 		intent.putExtra(Constant.FORWARD_NUM, forward_num);
+		intent.putExtra("flag", flag);
 		if(indexFragment != null){
 			indexFragment.startActivityForResult(intent, 200);
 		}else{

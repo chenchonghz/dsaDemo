@@ -125,14 +125,11 @@ public class ChangePortraitActivity extends BaseActivity {
 		}
 	}
 
-	private int flag = 0;
-
 	private String userfaceUrl;
 
 	@OnClick(R.id.btn_change_portrait)
 	public void changePortraitClick(View view) {
 		try {
-			//		if (flag == 0) {
 			uploadPhotoUtils = new UploadPhotoUtils(instance, true);
 			uploadPhotoUtils.popubphoto(iv_portrait, new IImgUrlCallback() {
 				@Override
@@ -140,19 +137,14 @@ public class ChangePortraitActivity extends BaseActivity {
 					userfaceUrl = imgurl;
 					changePortrait();
 					// Log.i("新的头像地址", coterieFaceUrl);
+					finish();
 				}
 
 				@Override
 				public void operImgPic(Bitmap bitmap) {
-					iv_portrait.setImageBitmap(bitmap);
+//					iv_portrait.setImageBitmap(bitmap);
 				}
 			});
-
-			//		}
-			//		if (flag == 1) {
-
-			//		}
-			//		flag++;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -178,7 +170,7 @@ public class ChangePortraitActivity extends BaseActivity {
 				setResult(CHANGE_PORTRAIT_SUCCESS, intent);
 //				ToastUtils.showMessage(instance, "更改头像成功！");
 				userInfo.setUserFaceUrl(userfaceUrl);
-				finish();
+//				finish();
 			}
 
 			@Override

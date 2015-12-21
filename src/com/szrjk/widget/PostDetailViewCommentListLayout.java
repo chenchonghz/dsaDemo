@@ -68,7 +68,8 @@ public class PostDetailViewCommentListLayout extends RelativeLayout {
 	private RelativeLayout rl_laud;
 
 	private PostStatis postStatis;
-	private PostCommentAdapter postCommentAdapter=PostCommentAdapter.getPostCommentAdapter();
+	private PostCommentAdapter postCommentAdapter = PostCommentAdapter
+			.getPostCommentAdapter();
 	private View contexView;
 	private PHandler handler = new PHandler();
 	public static int btnId = 2;
@@ -309,8 +310,7 @@ public class PostDetailViewCommentListLayout extends RelativeLayout {
 				tv_commentNone.setVisibility(View.GONE);
 				lv_comment.setVisibility(View.VISIBLE);
 				// Log.e(TAG, DjsonUtils.bean2Json(postComments));
-				postCommentAdapter.setData(context,
-						postComments, tabId, false);
+				postCommentAdapter.setData(context, postComments, tabId, false);
 				if (postComments.size() > 5) {
 					if (lv_comment.getFooterViewsCount() == 0) {
 						LayoutInflater layoutInflater = (LayoutInflater) context
@@ -352,6 +352,7 @@ public class PostDetailViewCommentListLayout extends RelativeLayout {
 					tv_commentNone.setText(getResources().getString(
 							R.string.post_detailed_tv_likenone));
 				}
+
 			}
 
 		} catch (Exception e) {

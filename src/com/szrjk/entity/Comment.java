@@ -26,4 +26,11 @@ public class Comment  {
 	public void setCommentInfo(CommentInfo commentInfo) {
 		this.commentInfo = commentInfo;
 	}
+	@Override
+	public String toString() {
+		return "Comment [userCard=" + userCard + ", commentInfo=" + commentInfo
+				+ "]";
+	}
+	
+	
 }

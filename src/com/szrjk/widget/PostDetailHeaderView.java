@@ -145,7 +145,7 @@ public class PostDetailHeaderView extends RelativeLayout {
 				ToastUtils.showMessage(context, errorObj.getErrorMessage());
 				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode())) {
 					// ToastUtils.showMessage(context, "删除成功");
-					((Activity) context).onKeyDown(KeyEvent.KEYCODE_BACK, null);
+					((Activity) context).onKeyDown(KeyEvent.KEYCODE_BACK, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_BACK));
 					((Activity) context).finish();
 				}
 			}

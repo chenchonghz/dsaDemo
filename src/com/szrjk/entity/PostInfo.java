@@ -69,15 +69,12 @@ public class PostInfo implements Serializable
 	private int isOpen;
 	//转发帖子list
 	private List<PostAbstractList> postAbstractList;
-	
-	
 
-	
-	
-	
+
 	public List<PostAbstractList> getPostAbstractList() {
 		return postAbstractList;
 	}
+
 
 	public void setPostAbstractList(List<PostAbstractList> postAbstractList) {
 		Collections.reverse(postAbstractList);
@@ -202,6 +199,10 @@ public class PostInfo implements Serializable
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public String getPicListstr(){
+		return picList;
 	}
 
 	public String[] getPicList()

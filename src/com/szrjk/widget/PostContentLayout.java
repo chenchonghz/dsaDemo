@@ -77,6 +77,10 @@ public class PostContentLayout extends RelativeLayout
 
 	TextView tv_group_name;
 
+	public void setUserCard(UserCard userCard) {
+		userCardLayout.setUser(userCard);
+	}
+
 	public void setPostDetail(PostDetail postDetail) {
 
 		String postType = postDetail.getPostType();
@@ -165,10 +169,6 @@ public class PostContentLayout extends RelativeLayout
 			createDate = "XX";
 		}
 		tv_post_detailed_time.setText(createDate);
-	}
-
-	public void setUserCard(UserCard userCard) {
-		userCardLayout.setUser(userCard);
 	}
 
 

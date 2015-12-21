@@ -1035,8 +1035,8 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 						}else{
 							skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getSrcPostAbstractCard().getContent(),
 									postInfo.getSrcUserCard().getUserFaceUrl(),postInfo.getPostId(),
-									postInfo.getSrcUserCard().getUserName(),postInfo.getPostType(),postInfo.getPostLevel()
-									,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),postAbstractLists,userInfo.getUserName(),flag);
+									postInfo.getPostType(),postInfo.getPostLevel()
+									,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),postAbstractLists,postInfo.getSrcUserCard().getUserName(),flag);
 						}		
 					}
 			  }
@@ -1289,11 +1289,10 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 						if(postInfo.getPostType().equals(Constant.TRANSMIT_POST)){
 							ToastUtils.showMessage(context, "多次转发功能正在开发中，敬请期待");
 						}else{
-							IndexFragment.POSITION = position;
 							skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getSrcPostAbstractCard().getPostTitle(),
 									postInfo.getSrcUserCard().getUserFaceUrl(),postInfo.getPostId(),
-									postInfo.getSrcUserCard().getUserName(),postInfo.getPostType(),postInfo.getPostLevel()
-									,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),caseSharePostAbstractLists,userInfo.getUserName(),flag);
+									postInfo.getPostType(),postInfo.getPostLevel()
+									,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),caseSharePostAbstractLists,postInfo.getSrcUserCard().getUserName(),flag);
 						}				
 					}
 				}
@@ -1537,11 +1536,10 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 						if(postInfo.getPostType().equals(Constant.TRANSMIT_POST)){
 							ToastUtils.showMessage(context, "多次转发功能正在开发中，敬请期待");
 						}else{
-							IndexFragment.POSITION = position;
 							skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getSrcPostAbstractCard().getPostTitle(),
 							postInfo.getSrcUserCard().getUserFaceUrl(),postInfo.getPostId(),
-							postInfo.getSrcUserCard().getUserName(),postInfo.getPostType(),postInfo.getPostLevel()
-							,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),problemHelpPostAbstractLists,userInfo.getUserName(),flag);	
+							postInfo.getPostType(),postInfo.getPostLevel()
+							,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),problemHelpPostAbstractLists,postInfo.getSrcUserCard().getUserName(),flag);	
 						}		
 					}
 				}
@@ -1612,7 +1610,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 	
 
 	protected void skipToRepeatActivity(String userSeqId, String content,
-			String userFaceUrl, String postId, String srcUserName,
+			String userFaceUrl, String postId,
 			String postType, String postLevel, String srcPostId, int position,
 			int forward_NUM, List<PostAbstractList> postAbstractLists, String userName,int flag) {
 		// TODO Auto-generated method stub
@@ -1621,7 +1619,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		intent.putExtra(Constant.POST_TEXT, content);
 		intent.putExtra(Constant.PIC_URL, userFaceUrl);
 		intent.putExtra(Constant.POST_ID, postId);
-		intent.putExtra("srcUserName", srcUserName);
 		intent.putExtra(Constant.POST_TYPE, postType);
 		intent.putExtra(Constant.POST_LEVEL, postLevel);
 		intent.putExtra(Constant.SRC_POST_ID, srcPostId);

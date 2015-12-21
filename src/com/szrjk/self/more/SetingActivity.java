@@ -241,7 +241,7 @@ public class SetingActivity extends BaseActivity {
 		startActivity(intent);
 		 //关闭界面
 		instance.finish();
-		MoreActivity.instance.finish();
+//		MoreActivity.instance.finish();
 		MainActivity.instance.finish();
 	}
 

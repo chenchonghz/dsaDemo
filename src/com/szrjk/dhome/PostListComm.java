@@ -186,8 +186,7 @@ public class PostListComm {
                                      context, activity, userList, postList, postOtherList, userId,Constant.CIRCLE_FLAG,new IPullPostListCallback() {
                                  @Override
                                  public void skipToSelfFragment() {
-                                	 Intent intent = new Intent(context, MainActivity.class);
-                                     intent.putExtra("isSkipToSelf", true);
+                                	 Intent intent = new Intent(context, SelfActivity.class);
                                      context.startActivity(intent);
                                  }
                              });
@@ -196,8 +195,7 @@ public class PostListComm {
                                 context, activity, userList, postList, postOtherList, userId,Constant.OTHER_FLAG, new IPullPostListCallback() {
                             @Override
                             public void skipToSelfFragment() {
-                                Intent intent = new Intent(context, MainActivity.class);
-                                intent.putExtra("isSkipToSelf", true);
+                            	Intent intent = new Intent(context, SelfActivity.class);
                                 context.startActivity(intent);
                             }
                         });
@@ -255,8 +253,7 @@ public class PostListComm {
                                     context, activity, userList, postList, postOtherList, userId,Constant.CIRCLE_FLAG,new IPullPostListCallback() {
                                 @Override
                                 public void skipToSelfFragment() {
-                                	Intent intent = new Intent(context, MainActivity.class);
-                                    intent.putExtra("isSkipToSelf", true);
+                                	Intent intent = new Intent(context, SelfActivity.class);
                                     context.startActivity(intent);
                                 }
                             });
@@ -265,8 +262,7 @@ public class PostListComm {
                                 context, activity, userList, postList, postOtherList, userId,Constant.OTHER_FLAG, new IPullPostListCallback() {
                             @Override
                             public void skipToSelfFragment() {
-                                Intent intent = new Intent(context, MainActivity.class);
-                                intent.putExtra("isSkipToSelf", true);
+                            	Intent intent = new Intent(context, SelfActivity.class);
                                 context.startActivity(intent);
                             }
                         });
@@ -316,8 +312,7 @@ public class PostListComm {
                                       context, activity, userList, postList, postOtherList, userId,Constant.CIRCLE_FLAG,new IPullPostListCallback() {
                                   @Override
                                   public void skipToSelfFragment() {
-                                	  Intent intent = new Intent(context, MainActivity.class);
-                                      intent.putExtra("isSkipToSelf", true);
+                                	  Intent intent = new Intent(context, SelfActivity.class);
                                       context.startActivity(intent);
                                   }
                               });
@@ -326,8 +321,7 @@ public class PostListComm {
                                     context, activity, userList, postList, postOtherList, userId, Constant.OTHER_FLAG,new IPullPostListCallback() {
                                 @Override
                                 public void skipToSelfFragment() {
-                                    Intent intent = new Intent(context, MainActivity.class);
-                                    intent.putExtra("isSkipToSelf", true);
+                                	Intent intent = new Intent(context, SelfActivity.class);
                                     context.startActivity(intent);
                                 }
                             });

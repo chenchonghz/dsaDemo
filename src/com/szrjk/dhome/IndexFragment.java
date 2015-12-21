@@ -8,6 +8,7 @@ import java.util.Map;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -78,7 +79,8 @@ public class IndexFragment extends Fragment
 								context, mainActivity,IndexFragment.this,userList, postList, postOtherList,userId, Constant.INDEX_FLAG,new IPullPostListCallback() {
 							@Override
 							public void skipToSelfFragment() {
-								mainActivity.skipToSelfFragment();
+								Intent intent = new Intent(context, SelfActivity.class);
+								context.startActivity(intent);
 							}
 						});
 						lv_postlist.setAdapter(adapter);

@@ -239,7 +239,6 @@ public class NormalPostActivity extends BaseActivity {
 	
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		if(postListComm != null){		
 			if(POSITION != -1){
 				if(ISDELETE){

@@ -200,7 +200,7 @@
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="1px"
-                android:background="@color/line_scrap" />
+                android:background="@color/base_bg" />
 
             <RelativeLayout
                 android:id="@+id/rl_photo"
@@ -233,7 +233,7 @@
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="1px"
-                android:background="@color/line_scrap" />
+                android:background="@color/base_bg" />
 
             <RelativeLayout
                 android:id="@+id/rl_profile"
@@ -266,7 +266,7 @@
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="1px"
-                android:background="@color/line_scrap" />
+                android:background="@color/base_bg" />
             <RelativeLayout
                 android:id="@+id/rl_identification"
                 style="@style/PopButton"
@@ -343,7 +343,7 @@
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="1px"
-                android:background="@color/line_scrap" />
+                android:background="@color/base_bg" />
 
             <RelativeLayout
                 android:id="@+id/rl_sick"
@@ -387,7 +387,7 @@
              <View
                 android:layout_width="fill_parent"
                 android:layout_height="1px"
-                android:background="@color/line_scrap" />
+                android:background="@color/base_bg" />
             <RelativeLayout
                 android:id="@+id/rl_help"
                 style="@style/PopButton"
@@ -476,7 +476,7 @@
              <View
                 android:layout_width="fill_parent"
                 android:layout_height="1px"
-                android:background="@color/line_scrap" />
+                android:background="@color/base_bg" />
             <RelativeLayout
                 android:id="@+id/rl_get_like"
                 style="@style/PopButton"
@@ -510,6 +510,39 @@
                     android:textColor="@color/font_disable"
                     android:textSize="@dimen/font_size_small"
                     />
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/icon_arrow" />
+            </RelativeLayout>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="@color/base_bg" />
+            <RelativeLayout
+                android:id="@+id/rl_comment"
+                style="@style/PopButton"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/tab_height"
+                android:padding="@dimen/more_padding" >
+
+                <ImageView
+                    android:id="@+id/iv_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_setfeedback" />
+
+                <TextView
+                    android:id="@+id/tv_comment"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/more_margin_left"
+                    android:layout_toRightOf="@+id/iv_comment"
+                    android:text="@string/more_comment"
+                    style="@style/BigText"
+                     />
                 <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

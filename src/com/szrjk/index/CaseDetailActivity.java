@@ -97,10 +97,6 @@ public class CaseDetailActivity extends BaseActivity {
 
 	CaseDetail caseDetail;
 
-	public String getPostId() {
-		return postId;
-	}
-
 	/** 发帖人名片 */
 	public void setUserCard(UserCard userCard) {
 		userCardLayout.setUser(userCard);
@@ -160,6 +156,7 @@ public class CaseDetailActivity extends BaseActivity {
 		userSeqId = Constant.userInfo.getUserSeqId();
 		// String ptype = getIntent().getStringExtra("ptype");
 		flag = getIntent().getIntExtra("flag", 0);
+		pdhv_headerview.fillData(postId, postUserSeqId);
 		pdhv_headerview.showDotmore();
 		loadPostDetailedData(userSeqId, postId, instance);
 	}
@@ -270,6 +267,10 @@ public class CaseDetailActivity extends BaseActivity {
 			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 				dialog.dismiss();
+				if (jobj.getString("ReturnCode").equals("0006")&&jobj.getString("ErrorMessage").equals("[queryPostForwardListByPostId]查询帖子信息异常")) {
+					ToastUtils.showMessage(instance, "该帖子已被删除！");
+					instance.finish();
+				}
 			}
 
 			@Override
@@ -529,9 +530,5 @@ public class CaseDetailActivity extends BaseActivity {
 									.toString() + ","
 							+ postDetailBottomOperLayout.isIslike());
 		}
-	}
-
-	public String getPostUserSeqId() {
-		return postUserSeqId;
 	}
 }

@@ -19,6 +19,7 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.config.Constant;
+import com.szrjk.config.ConstantUser;
 import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.IndexFragment;
 import com.szrjk.dhome.R;
@@ -32,6 +33,7 @@ import com.szrjk.entity.PostDetail;
 import com.szrjk.entity.PostStatis;
 import com.szrjk.entity.UserCard;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
+import com.szrjk.self.more.NormalPostActivity;
 import com.szrjk.util.ToastUtils;
 import com.szrjk.widget.PostContentLayout;
 import com.szrjk.widget.PostDetailBottomOperLayout;
@@ -94,10 +96,6 @@ public class PostDetailActivity extends BaseActivity {
 		initLayout();
 	}
 
-	public String getPostId() {
-		return postId;
-	}
-
 	private void initLayout() {
 		postId = getIntent().getStringExtra(Constant.POST_ID);
 		position = getIntent().getIntExtra("position", 0);
@@ -105,6 +103,7 @@ public class PostDetailActivity extends BaseActivity {
 		userSeqId = Constant.userInfo.getUserSeqId();
 		String ptype = getIntent().getStringExtra("ptype");
 		flag = getIntent().getIntExtra("flag", 0);
+		pdhv_headerview.fillData(postId, postUserSeqId);
 		pdhv_headerview.showDotmore();
 		loadPostDetailedData(userSeqId, postId, instance);
 	}
@@ -154,6 +153,10 @@ public class PostDetailActivity extends BaseActivity {
 
 			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
+				if (jobj.getString("ReturnCode").equals("0006")&&jobj.getString("ErrorMessage").equals("[queryPostForwardListByPostId]查询帖子信息异常")) {
+					ToastUtils.showMessage(instance, "该帖子已被删除！");
+					instance.finish();
+				}
 			}
 
 			@Override
@@ -356,9 +359,9 @@ public class PostDetailActivity extends BaseActivity {
 									.toString() + ","
 							+ postDetailBottomOperLayout.isIslike());
 		}
-	}
-
-	public String getPostUserSeqId() {
-		return postUserSeqId;
+		if (flag==ConstantUser.MyNormalPost) {
+			NormalPostActivity.ISDELETE=isDelete;
+			NormalPostActivity.POSITION=position;
+		}
 	}
 }

@@ -10,6 +10,7 @@ import com.szrjk.dhome.IndexGalleryActivity;
 import com.szrjk.index.CaseDetailActivity;
 import com.szrjk.index.PostDetailActivity;
 import com.szrjk.index.PostDetailFowardActivity;
+import com.szrjk.index.PostDetailFowardActivity2;
 
 public class OperContextClick implements IContextClickOper,Serializable{
 	
@@ -37,26 +38,32 @@ public class OperContextClick implements IContextClickOper,Serializable{
 		switch (postType) {
 		case 101:
 			intent = new Intent(context, PostDetailActivity.class);
+			intent.putExtra(Constant.USER_SEQ_ID, Constant.userInfo.getUserSeqId());
 			intent.putExtra(Constant.POST_ID, postId);
 			break;
 		case 102:
 			intent = new Intent(context, CaseDetailActivity.class);
+			intent.putExtra(Constant.USER_SEQ_ID, Constant.userInfo.getUserSeqId());
 			intent.putExtra(Constant.POST_ID, postId);
 			break;
 		case 103:
 			intent = new Intent(context, CaseDetailActivity.class);
+			intent.putExtra(Constant.USER_SEQ_ID, Constant.userInfo.getUserSeqId());
 			intent.putExtra(Constant.POST_ID, postId);
 			break;
 		case 104:
 			intent = new Intent(context, PostDetailActivity.class);
+			intent.putExtra(Constant.USER_SEQ_ID, Constant.userInfo.getUserSeqId());
 			intent.putExtra(Constant.POST_ID, postId);
 			break;
 		case 202:
-			intent = new Intent(context, PostDetailFowardActivity.class);
+			intent = new Intent(context, PostDetailFowardActivity2.class);
+			intent.putExtra(Constant.USER_SEQ_ID, Constant.userInfo.getUserSeqId());
 			intent.putExtra(Constant.POST_ID, postId);
 			break;
 		case 204:
-			intent = new Intent(context, PostDetailFowardActivity.class);
+			intent = new Intent(context, PostDetailFowardActivity2.class);
+			intent.putExtra(Constant.USER_SEQ_ID, Constant.userInfo.getUserSeqId());
 			intent.putExtra(Constant.POST_ID, postId);
 			break;
 		}

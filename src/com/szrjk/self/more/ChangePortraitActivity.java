@@ -60,7 +60,6 @@ public class ChangePortraitActivity extends BaseActivity {
 	private RelativeLayout rl_img;
 	private int rl_img_height;
 	private byte[] clipBitmap;
-	private UserInfo userInfo2;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -77,14 +76,6 @@ public class ChangePortraitActivity extends BaseActivity {
 		// 过得包裹图片的高度、再获得屏幕的宽度、再计算放在中间
 		getRelaHeight();
 		userInfo = Constant.userInfo;
-		userInfo2 = userInfo;
-		// 获得屏幕的宽度/给裁剪时候用
-		// DisplayMetrics dm = new DisplayMetrics();
-		// // //取得窗口属性
-		// getWindowManager().getDefaultDisplay().getMetrics(dm);
-		// // //窗口的宽度
-		// // Constant.screenWidth = dm.widthPixels;
-		// Log.i("swcropimage",dm.widthPixels +"");
 	}
 
 	private void initImageView() {
@@ -93,7 +84,6 @@ public class ChangePortraitActivity extends BaseActivity {
 		// 获取屏幕信息
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		int screenWidth = dm.widthPixels;
-		// int screenHeigh = dm.heightPixels;
 		Log.i("screenWidth", screenWidth + "");
 		// Log.i("screenHeigh", screenHeigh+"");
 		// int screenWidth=getWindowManager().getDefaultDisplay().getWidth();
@@ -137,9 +127,7 @@ public class ChangePortraitActivity extends BaseActivity {
 					userfaceUrl = imgurl;
 					changePortrait();
 					// Log.i("新的头像地址", coterieFaceUrl);
-					finish();
 				}
-
 				@Override
 				public void operImgPic(Bitmap bitmap) {
 //					iv_portrait.setImageBitmap(bitmap);
@@ -170,7 +158,6 @@ public class ChangePortraitActivity extends BaseActivity {
 				setResult(CHANGE_PORTRAIT_SUCCESS, intent);
 //				ToastUtils.showMessage(instance, "更改头像成功！");
 				userInfo.setUserFaceUrl(userfaceUrl);
-//				finish();
 			}
 
 			@Override

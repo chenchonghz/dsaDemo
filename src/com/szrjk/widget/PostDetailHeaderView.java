@@ -43,6 +43,7 @@ public class PostDetailHeaderView extends RelativeLayout {
 	private LinearLayout ll_dotmore;
 	private Context context;
 	private String postId;
+	private String postUserSeqId;
 
 	public TextView gettv_text() {
 		return tv_text;
@@ -123,7 +124,6 @@ public class PostDetailHeaderView extends RelativeLayout {
 					@Override
 					public void itemClickFunc(PopupWindow sendWindow) {
 						sendWindow.dismiss();
-						postId = getPostId();
 						deletePost();
 					}
 				});
@@ -135,7 +135,7 @@ public class PostDetailHeaderView extends RelativeLayout {
 	}
 
 	public void showDotmore(){
-		if (getPostUserSeqId().equals(Constant.userInfo.getUserSeqId())) {
+		if (postUserSeqId.equals(Constant.userInfo.getUserSeqId())) {
 			ll_dotmore.setVisibility(View.VISIBLE);
 		}
 	}
@@ -180,36 +180,11 @@ public class PostDetailHeaderView extends RelativeLayout {
 		});
 	}
 
-	public String getPostUserSeqId(){
-		if (context instanceof CaseDetailActivity) {
-			return ((CaseDetailActivity) context).getPostUserSeqId();
-		}
-		if (context instanceof PostDetailActivity) {
-			return ((PostDetailActivity) context).getPostUserSeqId();
-		}
-		if (context instanceof PostDetailFowardActivity) {
-			return ((PostDetailFowardActivity) context).getPostUserSeqId();
-		}
-		if (context instanceof PostDetailFowardActivity2) {
-			return ((PostDetailFowardActivity2) context).getPostUserSeqId();
-		}
-		return null;
+	public void fillData(String postId,String postUserSeqId){
+		this.postId=postId;
+		this.postUserSeqId=postUserSeqId;
 	}
-	public String getPostId() {
-		if (context instanceof CaseDetailActivity) {
-			return ((CaseDetailActivity) context).getPostId();
-		}
-		if (context instanceof PostDetailActivity) {
-			return ((PostDetailActivity) context).getPostId();
-		}
-		if (context instanceof PostDetailFowardActivity) {
-			return ((PostDetailFowardActivity) context).getPostId();
-		}
-		if (context instanceof PostDetailFowardActivity2) {
-			return ((PostDetailFowardActivity2) context).getPostId();
-		}
-		return null;
-	}
+	
 	public void setDelete() {
 		if (context instanceof CaseDetailActivity) {
 			((CaseDetailActivity) context).setDelete(true);

@@ -94,10 +94,6 @@ public class PostDetailActivity extends BaseActivity {
 		initLayout();
 	}
 
-	public String getPostId() {
-		return postId;
-	}
-
 	private void initLayout() {
 		postId = getIntent().getStringExtra(Constant.POST_ID);
 		position = getIntent().getIntExtra("position", 0);
@@ -105,6 +101,7 @@ public class PostDetailActivity extends BaseActivity {
 		userSeqId = Constant.userInfo.getUserSeqId();
 		String ptype = getIntent().getStringExtra("ptype");
 		flag = getIntent().getIntExtra("flag", 0);
+		pdhv_headerview.fillData(postId, postUserSeqId);
 		pdhv_headerview.showDotmore();
 		loadPostDetailedData(userSeqId, postId, instance);
 	}
@@ -356,9 +353,5 @@ public class PostDetailActivity extends BaseActivity {
 									.toString() + ","
 							+ postDetailBottomOperLayout.isIslike());
 		}
-	}
-
-	public String getPostUserSeqId() {
-		return postUserSeqId;
 	}
 }

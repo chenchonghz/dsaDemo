@@ -225,6 +225,13 @@ public class MoreActivity extends BaseActivity
 		});
 	}
 	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		queryFriendFollowFans();
+		queryMineCount();
+	}
+	
 	@OnClick(R.id.rl_home)
 	public void homeClick(View view){
 		finish();

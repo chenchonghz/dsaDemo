@@ -1,9 +1,15 @@
 package com.szrjk.self.more;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import android.app.Dialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -17,16 +23,14 @@ import com.szrjk.dhome.IPostListCallback;
 import com.szrjk.dhome.PostListComm;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.ErrorInfo;
+import com.szrjk.entity.PostInfo;
 import com.szrjk.entity.PostList;
+import com.szrjk.entity.PostOtherImformationInfo;
+import com.szrjk.entity.UserCard;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
 import com.szrjk.pull.PullToRefreshListView;
 import com.szrjk.util.ShowDialogUtil;
-
-import android.app.Dialog;
-import android.content.Intent;
-import android.os.Bundle;
-import android.widget.Toast;
 
 @ContentView(R.layout.activity_normal_post)
 public class NormalPostActivity extends BaseActivity {
@@ -39,6 +43,8 @@ public class NormalPostActivity extends BaseActivity {
 	private static final String LOADING_POST = "正在加载帖子";
 	private PostListComm postListComm;
 	private String type;
+	public static int POSITION = -1;
+	public static boolean ISDELETE = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -229,6 +235,30 @@ public class NormalPostActivity extends BaseActivity {
 				}
 			}
 		});
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		if(postListComm != null){		
+			if(POSITION != -1){
+				if(ISDELETE){
+					ArrayList<PostInfo> postList = postListComm.getPostList();
+					ArrayList<UserCard> userList = postListComm.getUserList();
+					ArrayList<PostOtherImformationInfo> postOtherList = postListComm.getPostOtherList();
+					postList.remove(POSITION);
+					userList.remove(POSITION);
+					postOtherList.remove(POSITION);
+					postListComm.setPostList(postList);
+					postListComm.setUserList(userList);
+					postListComm.setPostOtherList(postOtherList);
+					postListComm.updateData();
+					POSITION = -1;
+					ISDELETE = false;					
+				}
+			}
+		}
+		super.onResume();
 	}
 
 }

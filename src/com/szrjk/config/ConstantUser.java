@@ -8,5 +8,8 @@ public class ConstantUser
 	public static UserInfo getUserInfo(){
 		return Constant.userInfo;
 	}
+	public static final int MyNormalPost = 7;
+	public static final int MyCaseShare = 8;
+	public static final int MyProblemHelp = 9;
 	
 }

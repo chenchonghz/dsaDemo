@@ -9,7 +9,7 @@ import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.widget.ListView;
-
+import com.szrjk.config.ConstantUser;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.adapter.IndexListViewAdapter;
 import com.szrjk.config.Constant;
@@ -17,6 +17,7 @@ import com.szrjk.entity.*;
 import com.szrjk.pull.PullToRefreshBase;
 import com.szrjk.pull.PullToRefreshListView;
 import com.szrjk.self.CircleHomepageActivity;
+import com.szrjk.self.more.NormalPostActivity;
 import com.szrjk.util.ShowDialogUtil;
 import com.szrjk.util.ToastUtils;
 
@@ -51,7 +52,31 @@ public class PostListComm {
     private IPostListCallback iPostListCallback;
 
 
-    public void  destroy(){
+    
+    public void updateData(){
+    	if(adapter != null){
+    		adapter.notifyDataSetChanged();
+    	}
+    }
+    
+    public ArrayList<UserCard> getUserList() {
+		return userList;
+	}
+
+	public void setUserList(ArrayList<UserCard> userList) {
+		this.userList = userList;
+	}
+
+	public ArrayList<PostInfo> getPostList() {
+		return postList;
+	}
+
+	public void setPostList(ArrayList<PostInfo> postList) {
+		this.postList = postList;
+	}
+	
+
+	public void  destroy(){
         activity = null;
         userList = null;
         postList = null;
@@ -175,7 +200,15 @@ public class PostListComm {
                                 context.startActivity(intent);
                             }
                         });
-                    	}else{
+                    	}else if(activity instanceof NormalPostActivity){
+                    		adapter = new IndexListViewAdapter(
+                                    context, activity, userList, postList, postOtherList, userId,ConstantUser.MyNormalPost, new IPullPostListCallback() {
+                                @Override
+                                public void skipToSelfFragment() {
+                                }
+                            });
+                    	}
+                    	else{
                     		 adapter = new IndexListViewAdapter(
                                      context, activity, userList, postList, postOtherList, userId,Constant.UNKNOW_FLAG, new IPullPostListCallback() {
                                  @Override
@@ -221,6 +254,13 @@ public class PostListComm {
                                 context.startActivity(intent);
                             }
                         });
+                    	}else if(activity instanceof NormalPostActivity){
+                    		adapter = new IndexListViewAdapter(
+                                    context, activity, userList, postList, postOtherList, userId,ConstantUser.MyNormalPost, new IPullPostListCallback() {
+                                @Override
+                                public void skipToSelfFragment() {
+                                }
+                            });
                     	}else{
                     		 adapter = new IndexListViewAdapter(
                                      context, activity, userList, postList, postOtherList, userId,Constant.UNKNOW_FLAG, new IPullPostListCallback() {
@@ -259,7 +299,15 @@ public class PostListComm {
                                     context.startActivity(intent);
                                 }
                             });
-                        	}else{
+                        	}else if(activity instanceof NormalPostActivity){
+                        		adapter = new IndexListViewAdapter(
+                                        context, activity, userList, postList, postOtherList, userId,ConstantUser.MyNormalPost, new IPullPostListCallback() {
+                                    @Override
+                                    public void skipToSelfFragment() {
+                                    }
+                                });
+                        	}
+                     	else{
                         		 adapter = new IndexListViewAdapter(
                                          context, activity, userList, postList, postOtherList, userId,Constant.UNKNOW_FLAG, new IPullPostListCallback() {
                                      @Override

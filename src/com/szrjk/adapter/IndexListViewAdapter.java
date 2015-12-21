@@ -1048,7 +1048,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 //					if(isTourist){
 //						DialogUtil.showGuestDialog(context, null);
 //					}else{					
-						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),postInfo.getUserSeqId(),position);
+						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),userInfo.getUserSeqId(),position);
 //					}
 				}
 			});
@@ -1059,7 +1059,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 //					if(isTourist){
 //						DialogUtil.showGuestDialog(context, null);
 //					}else{
-						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),postInfo.getUserSeqId(),position);		
+						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),userInfo.getUserSeqId(),position);		
 //					}
 				}
 			});
@@ -1306,7 +1306,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 //					if(isTourist){
 //						DialogUtil.showGuestDialog(context, null);
 //					}else{	
-						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),postInfo.getUserSeqId(),position);
+						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),userInfo.getUserSeqId(),position);
 //					}
 				}
 			});
@@ -1317,7 +1317,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 //					if(isTourist){
 //						DialogUtil.showGuestDialog(context, null);
 //					}else{			
-						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),postInfo.getUserSeqId(),position);		
+						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),userInfo.getUserSeqId(),position);		
 //					}
 				}
 			});
@@ -1554,7 +1554,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 //					if(isTourist){
 //						DialogUtil.showGuestDialog(context, null);
 //					}else{				
-						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),postInfo.getUserSeqId(),position);
+						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),userInfo.getUserSeqId(),position);
 //					}
 				}
 			});
@@ -1566,7 +1566,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 //						DialogUtil.showGuestDialog(context, null);
 //					}else{
 					try {	
-						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),postInfo.getUserSeqId(),position);		
+						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),userInfo.getUserSeqId(),position);		
 					} catch (Exception e) {
 					    Log.e("IndexListViewAdapter", e.toString());	
 					}

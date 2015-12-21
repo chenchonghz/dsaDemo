@@ -22,15 +22,15 @@ public class DHomePushService extends UmengBaseIntentService
 		String message = intent.getStringExtra(BaseConstants.MESSAGE_BODY);
 		try
 		{
-			Log.i("message", message);
+			Log.i("push", "推送消息"+message);
 			UMessage msg = new UMessage(new JSONObject(message));
-			Log.i("msg", message.toString());
-			Log.i("msg.custom", msg.custom);
+			Log.i("push", message.toString());
+			Log.i("push", msg.custom);
 			String s = msg.custom;
-			Log.i("s", s);
+			Log.i("push", s);
 			MsgItem messageItem =JSON.parseObject(s, MsgItem.class);
 
-			Log.e("messageItem", JSON.toJSONString(messageItem));
+			Log.e("push", JSON.toJSONString(messageItem));
 			//{"message":"用户申请加入圈子","id":3,"declaringClass":"com.szjk.dhome.type.PushMessageType","alert":"用户申请加入圈子"}
 			//{"message":"用户加关注","id":1,"declaringClass":"com.szjk.dhome.type.PushMessageType","alert":"用户加关注"}//
 
@@ -38,6 +38,7 @@ public class DHomePushService extends UmengBaseIntentService
 
 //			int type = messageItem.getType();
 			int type =messageItem.getId();
+			Log.i("push", "推送类型"+type);
 			switch (type)
 			{
 				case 0://
@@ -77,6 +78,12 @@ public class DHomePushService extends UmengBaseIntentService
 					break;
 				case 10://
 //					setMsgTips(Constant.INVITE_MSG);
+					break;
+			    //全员推送
+				case 11:
+					Log.i("push", "接收全员推送");
+					Log.i("push", messageItem.getMessage());
+					EventBus.getDefault().post(new RemindEvent(9,messageItem.getMessage()));
 					break;
 			}
 

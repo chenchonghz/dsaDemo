@@ -220,7 +220,7 @@ public class SendPostActivity extends BaseActivity {
 			tv_send.setClickable(false);
 			switch (v.getId()) {
 			case R.id.tv_send:
-				content = et_content.getText().toString();
+				content = et_content.getText().toString().trim();
 				if (content == null || content.length() == 0) {
 					showToast(instance, "内容不能空！", 0);
 					tv_send.setClickable(true);

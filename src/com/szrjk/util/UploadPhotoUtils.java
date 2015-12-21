@@ -21,6 +21,7 @@ import com.szrjk.dhome.R;
 import com.szrjk.entity.IImgUrlCallback;
 import com.szrjk.entity.PhotoType;
 import com.szrjk.http.InterfaceComm;
+import com.szrjk.self.more.ChangePortraitActivity;
 import com.szrjk.util.clip.ClipActivity;
 import com.szrjk.util.gallery.MainGalleryActivity;
 import com.szrjk.widget.AddPhotoPopup;
@@ -216,7 +217,9 @@ public class UploadPhotoUtils {
 				}
 				//设置返回的图片显示出来
 				ToastUtils.showMessage(context, "正在上传头像...");
-				context.finish();
+				if (context instanceof ChangePortraitActivity) {
+					context.finish();
+				}
 				imgUrlCallback.operImgPic(bit);
 				updateFile(bit);
 				ClipActivity.cbitmap = null;//清除静态数据

@@ -534,5 +534,13 @@ public class SelfActivity extends BaseActivity implements OnClickListener {
 			}
 		}
 	};
-	
+	protected void onNewIntent(Intent intent) {
+		getUserHpInfo(Constant.userInfo.getUserSeqId());
+		try {
+			initViews(userHomePageInfo);
+		} catch (DbException e) {
+			e.printStackTrace();
+		}
+		super.onNewIntent(intent);
+	};
 }

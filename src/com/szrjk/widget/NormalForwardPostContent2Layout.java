@@ -84,7 +84,7 @@ public class NormalForwardPostContent2Layout extends RelativeLayout
 //				start+=3;
 //				stop+=3;
 //				SpannableString postContent1 = SpannableStringUtils.getClickableFaceSpan(context,targetstr,start,stop,puserid,currentuserid);
-				SpannableStringBuilder stringBuilder = InitTransmitPostUtil.initTransmitPost(context, new SpannableStringBuilder(), postDetail.getPostAbstractList(), null, new IPullPostListCallback() {
+				SpannableStringBuilder stringBuilder = InitTransmitPostUtil.initTransmitPost(context, new SpannableStringBuilder(), postDetail.getPostAbstractList(), 10000,null, new IPullPostListCallback() {
 					@Override
 					public void skipToSelfFragment() {
 

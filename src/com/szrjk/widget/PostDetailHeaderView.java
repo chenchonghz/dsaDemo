@@ -22,6 +22,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lidroid.xutils.exception.HttpException;
 import com.szrjk.config.Constant;
+import com.szrjk.dhome.IndexFragment;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.IPopupItemCallback;
@@ -31,6 +32,7 @@ import com.szrjk.http.DHttpService;
 import com.szrjk.index.CaseDetailActivity;
 import com.szrjk.index.PostDetailActivity;
 import com.szrjk.index.PostDetailFowardActivity;
+import com.szrjk.index.PostDetailFowardActivity2;
 import com.szrjk.util.ToastUtils;
 
 public class PostDetailHeaderView extends RelativeLayout {
@@ -38,7 +40,7 @@ public class PostDetailHeaderView extends RelativeLayout {
 	private TextView tv_text;
 	private LinearLayout lly_hv;
 	private ImageView iv_back;
-	private ImageView iv_dotmore;
+	private LinearLayout ll_dotmore;
 	private Context context;
 	private String postId;
 
@@ -66,12 +68,12 @@ public class PostDetailHeaderView extends RelativeLayout {
 		this.iv_back = iv_back;
 	}
 
-	public ImageView getIv_dotmore() {
-		return iv_dotmore;
+	public LinearLayout getLl_dotmore() {
+		return ll_dotmore;
 	}
 
-	public void setIv_dotmore(ImageView iv_dotmore) {
-		this.iv_dotmore = iv_dotmore;
+	public void setLl_dotmore(LinearLayout ll_dotmore) {
+		this.ll_dotmore = ll_dotmore;
 	}
 
 	public PostDetailHeaderView(Context context) {
@@ -86,7 +88,7 @@ public class PostDetailHeaderView extends RelativeLayout {
 		inflater.inflate(R.layout.postdetail_headerview, this);
 		tv_text = (TextView) findViewById(R.id.tv_header);
 		iv_back = (ImageView) findViewById(R.id.iv_back);
-		iv_dotmore = (ImageView) findViewById(R.id.iv_dotmore);
+		ll_dotmore = (LinearLayout) findViewById(R.id.ll_dotmore);
 		lly_hv = (LinearLayout) findViewById(R.id.lly_hv);
 
 		TypedArray a = getContext().obtainStyledAttributes(attrs,
@@ -97,11 +99,13 @@ public class PostDetailHeaderView extends RelativeLayout {
 		lly_hv.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				((Activity) context).onKeyDown(KeyEvent.KEYCODE_BACK,new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_BACK));
+				((Activity) context).onKeyDown(KeyEvent.KEYCODE_BACK,
+						new KeyEvent(KeyEvent.ACTION_DOWN,
+								KeyEvent.KEYCODE_BACK));
 				((Activity) context).finish();
 			}
 		});
-		iv_dotmore.setOnClickListener(new OnClickListener() {
+		ll_dotmore.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				// DeletePostPopup deletePostPopup = new
@@ -130,6 +134,13 @@ public class PostDetailHeaderView extends RelativeLayout {
 		});
 	}
 
+
+	public void showDotmore(){
+		if (getPostUserSeqId().equals(Constant.userInfo.getUserSeqId())) {
+			ll_dotmore.setVisibility(View.VISIBLE);
+		}
+	}
+	
 	private void deletePost() {
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("ServiceName", "deletePostById");
@@ -145,7 +156,10 @@ public class PostDetailHeaderView extends RelativeLayout {
 				ToastUtils.showMessage(context, errorObj.getErrorMessage());
 				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode())) {
 					// ToastUtils.showMessage(context, "删除成功");
-					((Activity) context).onKeyDown(KeyEvent.KEYCODE_BACK, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_BACK));
+					setDelete();
+					((Activity) context).onKeyDown(KeyEvent.KEYCODE_BACK,
+							new KeyEvent(KeyEvent.ACTION_DOWN,
+									KeyEvent.KEYCODE_BACK));
 					((Activity) context).finish();
 				}
 			}
@@ -167,6 +181,23 @@ public class PostDetailHeaderView extends RelativeLayout {
 		});
 	}
 
+	public String getPostUserSeqId(){
+		if (context instanceof CaseDetailActivity) {
+			return ((CaseDetailActivity) context).getPostUserSeqId();
+		}
+		if (context instanceof PostDetailActivity) {
+			return ((PostDetailActivity) context).getPostUserSeqId();
+		}
+//		if (context instanceof PostDetailFowardActivity) {
+//			return ((PostDetailFowardActivity) context).getPostUserSeqId();
+//		}
+//		if (context instanceof PostDetailFowardActivity2) {
+//			return ((PostDetailFowardActivity2) context).getPostUserSeqId();
+//		}
+		return null;
+	}
+
+
 	public String getPostId() {
 		if (context instanceof CaseDetailActivity) {
 			return ((CaseDetailActivity) context).getPostId();
@@ -177,6 +208,23 @@ public class PostDetailHeaderView extends RelativeLayout {
 		if (context instanceof PostDetailFowardActivity) {
 			return ((PostDetailFowardActivity) context).getPostId();
 		}
+		if (context instanceof PostDetailFowardActivity2) {
+			return ((PostDetailFowardActivity2) context).getPostId();
+		}
 		return null;
+	}
+	public void setDelete() {
+		if (context instanceof CaseDetailActivity) {
+			((CaseDetailActivity) context).setDelete(true);
+		}
+		if (context instanceof PostDetailActivity) {
+			((PostDetailActivity) context).setDelete(true);
+		}
+//		if (context instanceof PostDetailFowardActivity) {
+//			((PostDetailFowardActivity) context).setDelete(true);
+//		}
+//		if (context instanceof PostDetailFowardActivity2) {
+//			((PostDetailFowardActivity2) context).setDelete(true);
+//		}
 	}
 }

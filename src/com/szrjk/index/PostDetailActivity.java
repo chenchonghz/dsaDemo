@@ -35,10 +35,15 @@ import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.util.ToastUtils;
 import com.szrjk.widget.PostContentLayout;
 import com.szrjk.widget.PostDetailBottomOperLayout;
+import com.szrjk.widget.PostDetailHeaderView;
 import com.szrjk.widget.PostDetailViewCommentListLayout;
 
 @ContentView(R.layout.activity_post1_detail)
 public class PostDetailActivity extends BaseActivity {
+
+	// 头布局
+	@ViewInject(R.id.pdhv_headerview)
+	private PostDetailHeaderView pdhv_headerview;
 
 	// 底层布局
 	@ViewInject(R.id.rl_case_detail_base)
@@ -56,6 +61,7 @@ public class PostDetailActivity extends BaseActivity {
 	private String postId;
 	private String userSeqId;
 	private int flag;
+	private boolean isDelete = false;
 
 	@ViewInject(R.id.npcl_post)
 	PostContentLayout postContentLayout;
@@ -78,6 +84,8 @@ public class PostDetailActivity extends BaseActivity {
 
 	private int position;
 
+	private String postUserSeqId;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -87,19 +95,17 @@ public class PostDetailActivity extends BaseActivity {
 	}
 
 	public String getPostId() {
-		if (postDetail2 != null) {
-			return postDetail2.getPostDetail().getPostId();
-		}
-		return null;
+		return postId;
 	}
 
 	private void initLayout() {
 		postId = getIntent().getStringExtra(Constant.POST_ID);
 		position = getIntent().getIntExtra("position", 0);
-		// userSeqId = getIntent().getStringExtra(Constant.USER_SEQ_ID);
+		postUserSeqId = getIntent().getStringExtra(Constant.USER_SEQ_ID);
 		userSeqId = Constant.userInfo.getUserSeqId();
 		String ptype = getIntent().getStringExtra("ptype");
 		flag = getIntent().getIntExtra("flag", 0);
+		pdhv_headerview.showDotmore();
 		loadPostDetailedData(userSeqId, postId, instance);
 	}
 
@@ -169,8 +175,7 @@ public class PostDetailActivity extends BaseActivity {
 											listOut.getString("forwardList"),
 											Forward.class);
 							postDetail1.setForwardList(forwardList);
-							postDetaillviewLayout.setForwardList(forwardList
-									);
+							postDetaillviewLayout.setForwardList(forwardList);
 						}
 						if (listOut.getString("commentList") != null
 								&& !listOut.getString("commentList").equals("")) {
@@ -197,8 +202,7 @@ public class PostDetailActivity extends BaseActivity {
 							// 层次太深，抽出来
 
 							postDetail1.setCommentList(commentList);
-							postDetaillviewLayout.setCommentList(commentList
-									);
+							postDetaillviewLayout.setCommentList(commentList);
 						}
 						if (listOut.getString("likeList") != null
 								&& !listOut.getString("likeList").equals("")) {
@@ -248,23 +252,35 @@ public class PostDetailActivity extends BaseActivity {
 										boolean islike = (Boolean) m
 												.get("islike");
 										if (islike) {
-											if (postDetaillviewLayout.getLikeList()!=null) {
-												postDetaillviewLayout.getLikeList().clear();
+											if (postDetaillviewLayout
+													.getLikeList() != null) {
+												postDetaillviewLayout
+														.getLikeList().clear();
 											}
 											postDetaillviewLayout.addLike();
 											ToastUtils.showMessage(
 													PostDetailActivity.this,
 													"点赞成功!");
-											loadPostDetailedData(userSeqId, postId, instance);
-											postDetailBottomOperLayout.getBtn_laud().setClickable(false);
+											loadPostDetailedData(userSeqId,
+													postId, instance);
+											postDetailBottomOperLayout
+													.getBtn_laud()
+													.setClickable(false);
 										} else {
-											if (postDetaillviewLayout.getLikeList()!=null) {
-												postDetaillviewLayout.getLikeList().clear();
+											if (postDetaillviewLayout
+													.getLikeList() != null) {
+												postDetaillviewLayout
+														.getLikeList().clear();
 											}
 											postDetaillviewLayout.minusLike();
-											ToastUtils.showMessage(PostDetailActivity.this,"取消点赞成功!");
-											loadPostDetailedData(userSeqId, postId, instance);
-											postDetailBottomOperLayout.getBtn_laud().setClickable(false);
+											ToastUtils.showMessage(
+													PostDetailActivity.this,
+													"取消点赞成功!");
+											loadPostDetailedData(userSeqId,
+													postId, instance);
+											postDetailBottomOperLayout
+													.getBtn_laud()
+													.setClickable(false);
 										}
 										postDetail1.setMineLike(islike);
 									}
@@ -285,13 +301,20 @@ public class PostDetailActivity extends BaseActivity {
 			}
 		});
 	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();
 		loadPostDetailedData(userSeqId, postId, instance);
 	}
 
+	public boolean isDelete() {
+		return isDelete;
+	}
+
+	public void setDelete(boolean isDelete) {
+		this.isDelete = isDelete;
+	}
 
 	@Override
 	protected void onDestroy() {
@@ -309,25 +332,33 @@ public class PostDetailActivity extends BaseActivity {
 
 	private void notifyIndexFramentSetDataSetChange() {
 
-		if(flag == Constant.INDEX_FLAG){
-			IndexFragment.POSITION=position;
-			IndexFragment.FORWARD_NUM= Integer.parseInt(postDetaillviewLayout
+		if (flag == Constant.INDEX_FLAG) {
+			IndexFragment.POSITION = position;
+			IndexFragment.FORWARD_NUM = Integer.parseInt(postDetaillviewLayout
 					.getTv_transmitCount().getText().toString());
-			IndexFragment.COMMEND_NUM=Integer.parseInt(postDetaillviewLayout
+			IndexFragment.COMMEND_NUM = Integer.parseInt(postDetaillviewLayout
 					.getTv_commentCoumt().getText().toString());
-			IndexFragment.LIKE_NUM=Integer.parseInt(postDetaillviewLayout.getTv_laudCount()
-					.getText().toString());
-			IndexFragment.ISLIKE=postDetailBottomOperLayout.isIslike();
+			IndexFragment.LIKE_NUM = Integer.parseInt(postDetaillviewLayout
+					.getTv_laudCount().getText().toString());
+			IndexFragment.ISLIKE = postDetailBottomOperLayout.isIslike();
+			IndexFragment.ISDELETE = isDelete;
 
-			android.util.Log.i("data", position
-					+ ","
-					+ postDetaillviewLayout.getTv_transmitCount().getText()
-							.toString()
-					+ ","
-					+ postDetaillviewLayout.getTv_commentCoumt().getText()
-							.toString() + ","
-					+ postDetaillviewLayout.getTv_laudCount().getText().toString()
-					+ "," + postDetailBottomOperLayout.isIslike());
-		}	
+			android.util.Log.i("data",
+					position
+							+ ","
+							+ postDetaillviewLayout.getTv_transmitCount()
+									.getText().toString()
+							+ ","
+							+ postDetaillviewLayout.getTv_commentCoumt()
+									.getText().toString()
+							+ ","
+							+ postDetaillviewLayout.getTv_laudCount().getText()
+									.toString() + ","
+							+ postDetailBottomOperLayout.isIslike());
+		}
+	}
+
+	public String getPostUserSeqId() {
+		return postUserSeqId;
 	}
 }

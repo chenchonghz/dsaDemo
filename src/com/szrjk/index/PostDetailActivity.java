@@ -19,6 +19,7 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.config.Constant;
+import com.szrjk.config.ConstantUser;
 import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.IndexFragment;
 import com.szrjk.dhome.R;
@@ -32,6 +33,7 @@ import com.szrjk.entity.PostDetail;
 import com.szrjk.entity.PostStatis;
 import com.szrjk.entity.UserCard;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
+import com.szrjk.self.more.NormalPostActivity;
 import com.szrjk.util.ToastUtils;
 import com.szrjk.widget.PostContentLayout;
 import com.szrjk.widget.PostDetailBottomOperLayout;
@@ -356,6 +358,10 @@ public class PostDetailActivity extends BaseActivity {
 							+ postDetaillviewLayout.getTv_laudCount().getText()
 									.toString() + ","
 							+ postDetailBottomOperLayout.isIslike());
+		}
+		if (flag==ConstantUser.MyNormalPost) {
+			NormalPostActivity.ISDELETE=isDelete;
+			NormalPostActivity.POSITION=position;
 		}
 	}
 }

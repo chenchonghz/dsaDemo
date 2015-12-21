@@ -44,9 +44,7 @@ public class NormalForwardPostContent2Layout extends RelativeLayout
 
 	private UserCardLayout userCardLayout;
 
-	/****/
 	private RelativeLayout rl_post_normal;
-
 
 	private LinearLayout ll_normal_post_content;
 
@@ -63,7 +61,7 @@ public class NormalForwardPostContent2Layout extends RelativeLayout
 		    final String puserid = postDetail.getpUserSeqId();
 		//时间
 		//填时间
-		PostAbstractList postAbstractInfo = PostAbstractList.fetchFirstLevel(postDetail.getPostAbstractList());;
+		PostAbstractList postAbstractInfo = PostAbstractList.fetchFirstLevel(postDetail.getPostAbstractList());
 		String createDate = postAbstractInfo.getPostAbstract().getCreateDate();
 		try {
 			createDate = DisplayTimeUtil.displayTimeString(createDate);
@@ -73,9 +71,8 @@ public class NormalForwardPostContent2Layout extends RelativeLayout
 		tv_post_detailed_time.setText(createDate);
 		List<PostAbstractList> plist = postDetail.getPostAbstractList();
 		Collections.reverse(plist);
-
-			ll_case_detail_list.removeAllViews();
-			if(plist!=null&&plist.size()>1){
+		ll_case_detail_list.removeAllViews();
+		if(plist!=null&&plist.size()>1){
 				//存在pusername,搞链接
 //				String targetstr = postContent+" //"+pusername+":"+pcontent;
 //				final String currentuserid = Constant.userInfo.getUserSeqId();
@@ -92,12 +89,11 @@ public class NormalForwardPostContent2Layout extends RelativeLayout
 				});
 				PostDetailCaseView pdcv1 = new PostDetailCaseView(context,title1,stringBuilder,null);
 				ll_case_detail_list.addView(pdcv1);
-			}else{
+		}else{
 				ll_case_detail_list.removeAllViews();
 				PostDetailCaseView pdcv1 = new PostDetailCaseView(context,title1,postContent,null);
 				ll_case_detail_list.addView(pdcv1);
-			}
-
+		}
 	}
 
 	public void setUserCard(UserCard userCard) {

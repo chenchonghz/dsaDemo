@@ -19,7 +19,7 @@ public class Constant
 	public static String USER_SEQ_ID = "UserSeqId";
 	// 鐢ㄦ埛瀵嗙爜
 	public static String USER_PWD = "UserPwd";
-	// 璁颁綇淇濆瓨瀵嗙爜鐘舵��
+	// 璁颁綇淇濆瓨瀵嗙爜鐘舵
 	public static String USER_REMEMBER = "UserRemember";
 	// 鐢ㄦ埛鐧诲綍鐘舵��
 	public static final String LOGIN_STATE = "LoginState";
@@ -27,11 +27,11 @@ public class Constant
 	public static final String PRIVATEKEY = "szrjk2015";
 	// 寮�鍙戠幆澧�
 
-//	public static String RQEUEST_URL = "http://192.168.1.71:8888/qry";
-	//澶栫綉鐜
-//	public static  String RQEUEST_URL = "http://120.236.165.150:8888/qry";
+	public static String RQEUEST_URL = "http://192.168.1.71:8888/qry";
+	//外网测试
+//	public static  String RQEUEST_URL = "http://120.236.165.150:8888/qry";  
 //	 娴嬭瘯鐜
-	 public static String RQEUEST_URL = "http://192.168.1.82:8888/qry";
+//	 public static String RQEUEST_URL = "http://192.168.1.82:8888/qry";
 	//UAT鐜
 //	public static String RQEUEST_URL = "http://112.74.109.173:8888/qry";
 //	public static String RQEUEST_URL = "http://120.25.134.160:1127/qry";

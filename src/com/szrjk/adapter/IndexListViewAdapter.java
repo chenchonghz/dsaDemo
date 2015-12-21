@@ -1,20 +1,12 @@
 package com.szrjk.adapter;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.opengl.Visibility;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -29,54 +21,31 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-
+import android.widget.*;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lidroid.xutils.exception.HttpException;
 import com.szrjk.config.Constant;
-import com.szrjk.dhome.IndexFragment;
-import com.szrjk.dhome.IndexGalleryActivity;
-import com.szrjk.dhome.OtherPeopleActivity;
-import com.szrjk.dhome.R;
-import com.szrjk.dhome.ShowBigPicActivity;
-import com.szrjk.entity.CustomLinkMovementMethod;
-import com.szrjk.entity.ErrorInfo;
-import com.szrjk.entity.IPhotoClickOper;
-import com.szrjk.entity.IPullPostListCallback;
-import com.szrjk.entity.InitSrcPostInterface;
-import com.szrjk.entity.PostAbstractList;
-import com.szrjk.entity.PostInfo;
-import com.szrjk.entity.PostOtherImformationInfo;
-import com.szrjk.entity.RecommendUserList;
-import com.szrjk.entity.SrcPostInfo;
-import com.szrjk.entity.SrcUserCard;
-import com.szrjk.entity.UserCard;
+import com.szrjk.dhome.*;
+import com.szrjk.entity.*;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
 import com.szrjk.index.CaseDetailActivity;
 import com.szrjk.index.PostDetailActivity;
-import com.szrjk.index.PostDetailFowardActivity;
+import com.szrjk.index.PostDetailFowardActivity2;
 import com.szrjk.index.RepeatActivity;
 import com.szrjk.self.CircleHomepageActivity;
 import com.szrjk.self.SystemUserActivity;
-import com.szrjk.util.BusiUtils;
-import com.szrjk.util.DialogUtil;
-import com.szrjk.util.DisplayTimeUtil;
-import com.szrjk.util.ImageLoaderUtil;
-import com.szrjk.util.InitTransmitPostUtil;
-import com.szrjk.util.ToastUtils;
+import com.szrjk.util.*;
 import com.szrjk.widget.IndexGridView;
-import com.szrjk.widget.TransmitTextView;
 import com.szrjk.widget.IndexGridView.OnTouchInvalidPositionListener;
+import com.szrjk.widget.TransmitTextView;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 	private Context context;
@@ -2461,7 +2430,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					mainActivity.startActivityForResult(intent, 100);
 				}
 			}else if(postType.equals(Constant.TRANSMIT_POST)||postType.equals(Constant.TRANSMIT_POST2)){
-				Intent intent = new Intent(context, PostDetailFowardActivity.class);
+				Intent intent = new Intent(context, PostDetailFowardActivity2.class);
 				intent.putExtra(Constant.POST_ID, postId);
 				intent.putExtra(Constant.USER_SEQ_ID, userSeqId);
 				intent.putExtra("position", position);

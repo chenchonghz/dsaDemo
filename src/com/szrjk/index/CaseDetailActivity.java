@@ -489,6 +489,7 @@ public class CaseDetailActivity extends BaseActivity {
 			IndexFragment.LIKE_NUM=Integer.parseInt(postDetaillviewLayout.getTv_laudCount()
 					.getText().toString());
 			IndexFragment.ISLIKE=postDetailBottomOperLayout.isIslike();
+			
 
 			android.util.Log.i("data", position
 					+ ","

@@ -295,10 +295,11 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 					circleInfo = JSON.parseObject(returnObj.getString("ListOut"), CircleInfo.class);
 					setdata();
 
-				}else if(errorObj.getReturnCode().equals("0006")){
-					ToastUtils.showMessage(instance, "错误圈子");
-					instance.finish();
 				}
+//				else if(errorObj.getReturnCode().equals("0006")&& errorObj.getErrorMessage().equals("圈子["+circleId+"]不存在！")){
+//					ToastUtils.showMessage(instance, "错误圈子");
+//					instance.finish();
+//				}
 				if (dialog.isShowing())
 				{
 					dialog.dismiss();
@@ -318,6 +319,16 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 
 			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
+				JSONObject errorInfo = jobj;
+				String returnCode = (String) errorInfo.get("ReturnCode");
+				String returnMessage = (String)errorInfo.get("ErrorMessage");
+				if(returnCode.equals("0006")&&returnMessage.equals("圈子["+circleId+"]不存在！")){
+					ToastUtils.showMessage(instance, "抱歉，圈子已解散");
+					finish();
+				}
+				Log.e("CircleHomePage", "错误码："+returnCode);
+					
+				
 				dialog.dismiss();
 			}
 		});

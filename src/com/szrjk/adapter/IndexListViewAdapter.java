@@ -889,7 +889,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 									tran_normalPost_Holder.tv_src_post_text.setTextColor(context.getResources().getColor(R.color.font_cell));
 								}else{	
 									try {
-									initSrcGroupData(tran_normalPost_Holder.ll_src_group,tran_normalPost_Holder.tv_src_group_name,postInfo);
+										initSrcGroupData(tran_normalPost_Holder.ll_src_group,tran_normalPost_Holder.tv_src_group_name,postInfo);
 										initSrcNormalPostData(tran_normalPost_Holder.tv_src_post_text,tran_normalPost_Holder.gv_src_pic,tran_normalPost_Holder.tv_srcTime,postInfo,userCard,position);
 										initSrcNormalPostListner(tran_normalPost_Holder.gv_src_pic,tran_normalPost_Holder.ll_src_normal_post,tran_normalPost_Holder.ll_srcDoctorInfo,tran_normalPost_Holder.tv_src_group_name,position,postInfo,userCard);
 									} catch (Exception e1) {

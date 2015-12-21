@@ -28,9 +28,18 @@ import android.util.Log;
 import android.view.View;
 
 public class InitTransmitPostUtil {
+
 	private static int font_num;
 	
-	
+	/**
+	 * 业务util
+	 * @param context
+	 * @param ssBuilder new 一个就行,等于一个空字符串
+	 * @param postAbstractLists 列表
+	 * @param initSrcPostInterface
+	 * @param iPullPostListCallback
+	 * @return
+	 */
 	public static SpannableStringBuilder initTransmitPost(Context context,SpannableStringBuilder ssBuilder,
 			List<PostAbstractList> postAbstractLists,int num,InitSrcPostInterface initSrcPostInterface,IPullPostListCallback iPullPostListCallback){
 		boolean isTopTransmit = false;
@@ -41,7 +50,7 @@ public class InitTransmitPostUtil {
 					UserCard userCard = postAbstractLists.get(i).getUserCard();
 					PostInfo postInfo = postAbstractLists.get(i).getPostAbstract();
 					String isDelete = postAbstractLists.get(i).getIsDelete();
-					if(userCard != null && postInfo != null){
+					if(userCard != null && postInfo != null&&initSrcPostInterface!=null){
 						initSrcPostInterface.initSrcPost(context, userCard, postInfo,isDelete);
 					}
 				}else if(postAbstractLists.get(i).getPostLevel().equals(String.valueOf(postAbstractLists.size()-1))){

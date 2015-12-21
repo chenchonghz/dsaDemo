@@ -1,11 +1,14 @@
 package com.szrjk.index;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -28,10 +31,12 @@ import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.IndexFragment;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.ErrorInfo;
+import com.szrjk.entity.PostAbstractList;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
 import com.szrjk.util.CheckTextNumber;
 import com.szrjk.util.ImageLoaderUtil;
+import com.szrjk.util.InitTransmitPostUtil;
 
 //转发界面
 @ContentView(R.layout.activity_repeat)
@@ -65,8 +70,12 @@ public class RepeatActivity extends BaseActivity implements OnClickListener {
 	private String post_id;
 	private String post_level;
 	private String user_name;
+	private String srcuser_name;
 	private String post_type;
 	private String src_post_id;
+	private List<PostAbstractList> postAbstractLists;
+	private SpannableStringBuilder ssBuilder = new SpannableStringBuilder();
+	private int flag;
 	private int position;
 	private int forward_num;
 	private Dialog dialog;
@@ -104,10 +113,12 @@ public class RepeatActivity extends BaseActivity implements OnClickListener {
 		user_seq_id = intent.getStringExtra(Constant.USER_SEQ_ID);
 		post_id = intent.getStringExtra(Constant.POST_ID);
 		user_name = intent.getStringExtra(Constant.USER_NAME);
+		srcuser_name = intent.getStringExtra("srcUserName");
 		post_type = intent.getStringExtra(Constant.POST_TYPE);
 		src_post_id = intent.getStringExtra(Constant.SRC_POST_ID);
 		position = intent.getIntExtra(Constant.POSITION, 0);
 		forward_num = intent.getIntExtra(Constant.FORWARD_NUM, 0);
+		flag = intent.getIntExtra("flag", Constant.UNKNOW_FLAG);
 		// post_level:如果转发原帖，原帖传入的为空，则在此处设为1，如果原帖传入有值，则+1;
 		String level = intent.getStringExtra(Constant.POST_LEVEL);
 		if (level == null) {
@@ -130,8 +141,9 @@ public class RepeatActivity extends BaseActivity implements OnClickListener {
 			// TODO Auto-generated catch block
 			Log.e("ImageLoader", e.toString());
 		}
-		tv_name_repeat.setText(user_name);
+		tv_name_repeat.setText(srcuser_name);
 		tv_text_repeat.setText(note_text);
+
 	}
 
 	private void initListener() {
@@ -184,10 +196,10 @@ public class RepeatActivity extends BaseActivity implements OnClickListener {
 		// 转发发送逻辑
 		case R.id.tv_repeat_send:
 			// 获取转发发送文字并intent发送，跳转回上一界面，并结束此界面
-			repeat_text = etRepeat.getText().toString().trim();
-			if (TextUtils.isEmpty(repeat_text)) {
-				repeat_text = "转发";
-			}
+				repeat_text = etRepeat.getText().toString().trim();
+				if (TextUtils.isEmpty(repeat_text)) {
+					repeat_text = "转发";
+				}	
 			// //转发帖子请求
 			sendRepeat();
 			break;
@@ -228,7 +240,10 @@ public class RepeatActivity extends BaseActivity implements OnClickListener {
 //					intent.putExtra(Constant.POSITION, position);
 //					intent.putExtra(Constant.FORWARD_NUM, forward_num + 1);
 //					setResult(Constant.FORWARD_RESULTCODE, intent);
-					IndexFragment.FORWARD_NUM = forward_num+1;
+					if(flag == Constant.INDEX_FLAG){
+						IndexFragment.POSITION = position;	
+						IndexFragment.FORWARD_NUM = forward_num+1;
+					}
 					finish();
 				} else {
 					Toast.makeText(RepeatActivity.this, "转发失败",

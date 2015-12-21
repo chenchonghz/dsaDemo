@@ -22,18 +22,17 @@ import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.style.ClickableSpan;
 import android.text.style.DynamicDrawableSpan;
+import android.text.style.ForegroundColorSpan;
 import android.text.style.ImageSpan;
 import android.util.Log;
 import android.view.View;
 
 public class InitTransmitPostUtil {
 	
-	private static int num;
 	
 	public static SpannableStringBuilder initTransmitPost(Context context,SpannableStringBuilder ssBuilder,
-			List<PostAbstractList> postAbstractLists,int string_num,InitSrcPostInterface initSrcPostInterface,IPullPostListCallback iPullPostListCallback){
+			List<PostAbstractList> postAbstractLists,InitSrcPostInterface initSrcPostInterface,IPullPostListCallback iPullPostListCallback){
 		boolean isTopTransmit = false;
-		num = string_num;
 		if(postAbstractLists != null && !postAbstractLists.isEmpty()){
 			for (int i = 0; i < postAbstractLists.size(); i++) {
 				if(postAbstractLists.get(i).getPostLevel().equals("0")){
@@ -70,7 +69,68 @@ public class InitTransmitPostUtil {
 		}
 		return ssBuilder;		
 	}
+	
+	public static SpannableStringBuilder showTransmitPost(Context context,SpannableStringBuilder ssBuilder,
+			List<PostAbstractList> postAbstractLists){
+		if(postAbstractLists != null && !postAbstractLists.isEmpty()){
+			for (int i = 0; i < postAbstractLists.size(); i++) {
+				if(!postAbstractLists.get(i).getPostLevel().equals("0")){
+					UserCard userCard = postAbstractLists.get(i).getUserCard();
+					PostInfo postInfo = postAbstractLists.get(i).getPostAbstract();
+					SpannableString t_content = getTransmitContent2(context, userCard, postInfo);
+					if(t_content != null){		
+						ssBuilder.append(t_content);
+					}else{
+						ssBuilder.append("");
+					}
+				}
+			}
+		}
+		return ssBuilder;
+	}
 
+	private static SpannableString getTransmitContent2(final Context context, final UserCard userCard,
+			PostInfo postAbstract){
+		StringBuffer sb_content = new StringBuffer("");
+		int start = 0;
+		int end = 0;
+		int icon_start = 0;
+		int icon_end = 0;
+		SpannableString spanStr = null;
+		String name = userCard.getUserName();
+		sb_content.append("//"+name);
+		start = 2;
+		end = sb_content.length();		
+		Bitmap b = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_yellow_v_24);
+		ImageSpan imgSpan = new ImageSpan(context, b, DynamicDrawableSpan.ALIGN_BASELINE);
+		icon_start = sb_content.length();
+		if(userCard.getUserLevel().equals("11")){
+			sb_content.append(" icon");
+			icon_start += 1;
+			icon_end = sb_content.length();
+		}
+		if(postAbstract.getContent() != null){
+				sb_content.append(":"+postAbstract.getContent());
+		}
+		spanStr = new SpannableString(sb_content);
+		spanStr.setSpan(new ClickableSpan() {
+			@Override
+			public void onClick(View widget) {
+				
+			}
+			@Override
+			public void updateDrawState(TextPaint ds) {
+				super.updateDrawState(ds);
+				ds.setUnderlineText(false);
+				ds.setColor(context.getResources().getColor(R.color.link_text_color));
+			}
+		}, start,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);	
+//		spanStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.link_text_color)), start,end,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		if(userCard.getUserLevel().equals("11")){	
+			spanStr.setSpan(imgSpan, icon_start, icon_end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		}
+		return spanStr;
+	}
 	private static SpannableString getTrasmitContent(final Context context, final UserCard userCard,
 			PostInfo postAbstract, boolean isTopTransmit, final IPullPostListCallback iPullPostListCallback) {
 		// TODO Auto-generated method stub
@@ -81,7 +141,6 @@ public class InitTransmitPostUtil {
 		int icon_end = 0;
 		SpannableString spanStr = null;
 		if(isTopTransmit == false){
-			Log.e("InitTransmit", "剩余字数："+num);
 			String name = userCard.getUserName();
 			sb_content.append("//"+name);
 			start = 2;
@@ -95,18 +154,7 @@ public class InitTransmitPostUtil {
 				icon_end = sb_content.length();
 			}
 			if(postAbstract.getContent() != null){
-				if(num > 0 && postAbstract.getContent().length() <= num){
 					sb_content.append(":"+postAbstract.getContent());
-					num = num - postAbstract.getContent().length();
-				}else{
-					if(num == 0){
-						sb_content.append(":...");
-					}else{
-						String content = postAbstract.getContent().substring(0, num);
-						sb_content.append(":"+content+"...");
-						num = 0;
-					}
-				}
 			}
 			spanStr = new SpannableString(sb_content);
 			spanStr.setSpan(new ClickableSpan() {
@@ -136,18 +184,9 @@ public class InitTransmitPostUtil {
 			}
 			return spanStr;
 		}else{
-			if(postAbstract.getContent() != null){
-				if(num > 0 && postAbstract.getContent().length()<= num){		
+			if(postAbstract.getContent() != null){		
 					sb_content.append(postAbstract.getContent());
-					spanStr = new SpannableString(sb_content);
-					num = num - postAbstract.getContent().length();
-				}else{
-					String content = postAbstract.getContent().substring(0, num);
-					sb_content.append(content+"...");
-					spanStr = new SpannableString(sb_content);
-					num = 0;
-				}
-				
+					spanStr = new SpannableString(sb_content);	
 			}	
 			return spanStr;
 		}

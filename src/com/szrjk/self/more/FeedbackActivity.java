@@ -8,6 +8,7 @@ import java.util.Map;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -51,6 +52,12 @@ import com.szrjk.util.ToastUtils;
 import com.szrjk.widget.IndexGridView;
 import com.szrjk.widget.PostSendPopup;
 import com.szrjk.widget.UpdateProgressBar;
+
+/**
+ * 已经反馈
+ * @author ldr
+ * 最后修改：
+ */
 
 @ContentView(R.layout.activity_feedback)
 public class FeedbackActivity extends BaseActivity {
@@ -240,23 +247,21 @@ public class FeedbackActivity extends BaseActivity {
 		}
 	}
 	//
-	// 发送帖子
+	// 发送反馈
 	private void send() {
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("ServiceName", "sendSuggestionMessage");
 		Map<String, Object> busiParams = new HashMap<String, Object>();
-
 		if (urlList.size() > 0) {
-
 			StringBuffer stringBuffer = new StringBuffer();
 			for (int i = 0; i < urlList.size(); i++) {
 				stringBuffer.append(urlList.get(i));
 				stringBuffer.append("|");
 			}
 			String st = stringBuffer.toString();
-			ls = st.substring(0,st.length() - 1);
+			ls = st.substring(0,st.length() - 1);//剪去|
 		}
-//		busiParams.put("picList", ls);
+		busiParams.put("picUrl", ls);
 		String userSeqId = userInfo.getUserSeqId();
 		UserCard userCard=new UserCard();
 		userCard.setUserName(userInfo.getUserName());
@@ -283,19 +288,9 @@ public class FeedbackActivity extends BaseActivity {
 		paramMap.put("BusiParams", busiParams);
 		httpPost(paramMap, new AbstractDhomeRequestCallBack() {
 			@Override
-			public void start() {
-//				dialog.setCancelable(false);
-//				dialog.show();
-//				tv_send.setClickable(false);
-			}
-
+			public void start() {			}
 			@Override
-			public void loading(long total, long current, boolean isUploading) {
-
-				Log.i("total", total+"");
-				Log.i("current", current+"");
-				Log.i("isUploading", isUploading+"");
-			}
+			public void loading(long total, long current, boolean isUploading) {		}
 
 			@Override
 			public void failure(HttpException exception, JSONObject jsonObject) {
@@ -313,15 +308,13 @@ public class FeedbackActivity extends BaseActivity {
 			public void success(JSONObject jsonObject) {
 				dialog.dismiss();
 				tv_send.setClickable(true);
-				ErrorInfo errorObj = JSON.parseObject(
-						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
+				ErrorInfo errorObj = JSON.parseObject(jsonObject.getString("ErrorInfo"), ErrorInfo.class);
 				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode())) {
 					showToast(instance, "提交成功!", Toast.LENGTH_SHORT);
 					gridAdapter.returnImageInfo().clear();
 					finish();
 				} else {
 					//检查ErrorMessage里面的提示
-
 					Log.i("message", errorObj.getErrorMessage());
 					if (errorObj.getErrorMessage().contains("Incorrect string value")) {
 						showToast(instance, "目前不支持表情发送", 0);
@@ -331,8 +324,7 @@ public class FeedbackActivity extends BaseActivity {
 			}
 		});
 	}
-	//
-	//
+	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode != RESULT_OK) {
@@ -360,13 +352,6 @@ public class FeedbackActivity extends BaseActivity {
 		//			gv_case_list.setVisibility(View.GONE);
 		//		}
 	}
-	// 创建Runnable对象
-	Runnable runnable = new Runnable() {
-		@Override
-		public void run() {
-			handler.postDelayed(runnable, 10);
-		}
-	};
 
 	//点击图片增加
 	@OnClick(R.id.tv_addimg)
@@ -382,7 +367,6 @@ public class FeedbackActivity extends BaseActivity {
 			}	
 			callSelectImg();
 			break;
-
 		}
 	}
 
@@ -395,6 +379,7 @@ public class FeedbackActivity extends BaseActivity {
 		finish();
 
 	}
+	//关闭键盘
 	private void closeKeyboard(){
 		if(imm.isActive()&&getCurrentFocus()!=null){
 			if (getCurrentFocus().getWindowToken()!=null) {
@@ -429,4 +414,26 @@ public class FeedbackActivity extends BaseActivity {
 			return false;
 		}
 	};
+	
+	/**
+	 * 这里的3个重写方法：由于打开了拍照，低ram的手机会回收发帖这个Activity。
+	 * 当回收之后，会执行onCreate方法里面的检查草稿方法。导致把草稿恢复覆盖当前编辑的内容
+	 * @param newConfig
+	 */
+	@Override
+	public void onConfigurationChanged(Configuration newConfig)
+	{
+		Log.i("onConfigurationChanged", "onConfigurationChanged");
+		super.onConfigurationChanged(newConfig);
+	}
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		Log.i("onRestoreInstanceState", "onRestoreInstanceState");
+		super.onRestoreInstanceState(savedInstanceState);
+	}
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		Log.i("onSaveInstanceState", "onSaveInstanceState");
+		super.onSaveInstanceState(outState);
+	}
 }

@@ -515,6 +515,7 @@ public class SelfActivity extends BaseActivity implements OnClickListener {
 	}
 	private void sendIntroduce() {
 		Intent intent = new Intent(instance, IntroduceActivity.class);
+		intent.putExtra("self", true);
 		intent.putExtra(Constant.USER_SEQ_ID, Constant.userInfo.getUserSeqId());
 		startActivity(intent);
 

@@ -193,11 +193,11 @@ public class PostDetailHeaderView extends RelativeLayout {
 		if (context instanceof PostDetailActivity) {
 			((PostDetailActivity) context).setDelete(true);
 		}
-		if (context instanceof PostDetailFowardActivity) {
-			((PostDetailFowardActivity) context).setDelete(true);
-		}
-		if (context instanceof PostDetailFowardActivity2) {
-			((PostDetailFowardActivity2) context).setDelete(true);
-		}
+//		if (context instanceof PostDetailFowardActivity) {
+//			((PostDetailFowardActivity) context).setDelete(true);
+//		}
+//		if (context instanceof PostDetailFowardActivity2) {
+//			((PostDetailFowardActivity2) context).setDelete(true);
+//		}
 	}
 }

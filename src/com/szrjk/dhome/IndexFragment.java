@@ -782,23 +782,31 @@ public class IndexFragment extends Fragment
 		// TODO Auto-generated method stub
 		super.onResume();
 		if(adapter != null){
-			if(POSITION != -1 && ISSRCPOST == false){
-				if(FORWARD_NUM != -1){
-					postOtherList.get(POSITION).setFORWARD_NUM(Integer.valueOf(FORWARD_NUM));
+			if(POSITION != -1){
+				if(!ISSRCPOST){
+					if(FORWARD_NUM != -1){
+						postOtherList.get(POSITION).setFORWARD_NUM(Integer.valueOf(FORWARD_NUM));
+					}
+					if(COMMEND_NUM != -1){
+						postOtherList.get(POSITION).setCOMMENT_NUM(Integer.valueOf(COMMEND_NUM));
+					}
+				    if(LIKE_NUM != -1){
+				    	postOtherList.get(POSITION).setLIKE_NUM(Integer.valueOf(LIKE_NUM));
+				    }
+				    postOtherList.get(POSITION).setMineLike(ISLIKE);
+				    if(ISDELETE){
+				    	userList.remove(POSITION);
+				    	postList.remove(POSITION);
+				    	postOtherList.remove(POSITION);
+				    }
+				    adapter.notifyDataSetChanged();
+				    POSITION = -1;
+				    FORWARD_NUM = -1;
+				    COMMEND_NUM = -1;
+				    LIKE_NUM = -1;
+				    ISLIKE = false;
+				    ISDELETE = false;
 				}
-				if(COMMEND_NUM != -1){
-					postOtherList.get(POSITION).setCOMMENT_NUM(Integer.valueOf(COMMEND_NUM));
-				}
-			    if(LIKE_NUM != -1){
-			    	postOtherList.get(POSITION).setLIKE_NUM(Integer.valueOf(LIKE_NUM));
-			    }
-			    postOtherList.get(POSITION).setMineLike(ISLIKE);
-			    adapter.notifyDataSetChanged();
-			    POSITION = -1;
-			    FORWARD_NUM = -1;
-			    COMMEND_NUM = -1;
-			    LIKE_NUM = -1;
-			    ISLIKE = false;
 			}
 			ISSRCPOST = false;
 		}

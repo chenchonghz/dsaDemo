@@ -42,31 +42,21 @@ public class PostContentForwardLayout extends RelativeLayout
 	/****界面****/
 	private LinearLayout ll_case_detail_list;
 
-	private UserCardLayout userCardLayout;
+//	private UserCardLayout userCardLayout;
 
 	/**普通贴子的 转发layout**/
 	private RelativeLayout rl_post_foward_normal;
 
 
 	private LinearLayout ll_normal_post_content;
-
-	private RelativeLayout rl_post_detailed_doctorinfo;
-
-	private TextView tv_post_detailed_time;
-
+//	private RelativeLayout rl_post_detailed_doctorinfo;
+//	private TextView tv_post_detailed_time;
 	private LinearLayout ll_post_content_left;
-
-
 	/***以下为转发时，case 类型的样式***/
-
 	private RelativeLayout rl_post_foward_case;
-
 	private ImageView iv_casepic;
-
 	private TextView tv_posttitle;
-
 	private TextView tv_caseshare;
-
 	private TextView tv_completerate;
 
 	PostDetailCaseView pdcv1;
@@ -77,7 +67,7 @@ public class PostContentForwardLayout extends RelativeLayout
 	TextView tv_group_name;
 
 	public void setUserCard(UserCard userCard) {
-		userCardLayout.setUser(userCard);
+//		userCardLayout.setUser(userCard);
 	}
 
 	public void setPostDetail(PostAbstractList postAbstractInfo) {
@@ -161,13 +151,13 @@ public class PostContentForwardLayout extends RelativeLayout
 		}
 
 		//填时间
-		String createDate = postAbstractInfo.getPostAbstract().getCreateDate();
-		try {
-			createDate = DisplayTimeUtil.displayTimeString(createDate);
-		} catch (Exception e) {
-			createDate = "XX";
-		}
-		tv_post_detailed_time.setText(createDate);
+//		String createDate = postAbstractInfo.getPostAbstract().getCreateDate();
+//		try {
+//			createDate = DisplayTimeUtil.displayTimeString(createDate);
+//		} catch (Exception e) {
+//			createDate = "XX";
+//		}
+//		tv_post_detailed_time.setText(createDate);
 	}
 
 
@@ -178,8 +168,8 @@ public class PostContentForwardLayout extends RelativeLayout
 	@Override
 	public void setBackgroundColor(int colorid){
 //		ll_normal_post_content.setBackgroundColor(colorid);
-		rl_post_detailed_doctorinfo.setBackgroundColor(colorid);
-		tv_post_detailed_time.setBackgroundColor(colorid);
+//		rl_post_detailed_doctorinfo.setBackgroundColor(colorid);
+//		tv_post_detailed_time.setBackgroundColor(colorid);
 		ll_group.setBackgroundColor(colorid);
 //		userCardLayout.setBackgroundColor(colorid);
 
@@ -214,10 +204,10 @@ public class PostContentForwardLayout extends RelativeLayout
 		View contextView = inflater.inflate(R.layout.layout_post_forward_content, this);
 
 		ll_case_detail_list = (LinearLayout) contextView.findViewById(R.id.ll_case_detail_list);
-		userCardLayout = (UserCardLayout) contextView.findViewById(R.id.ucl_post);
+//		userCardLayout = (UserCardLayout) contextView.findViewById(R.id.ucl_post);
 		ll_normal_post_content = (LinearLayout) contextView.findViewById(R.id.ll_normal_post_content);
-		rl_post_detailed_doctorinfo = (RelativeLayout) contextView.findViewById(R.id.rl_post_detailed_doctorinfo);
-		tv_post_detailed_time = (TextView) contextView.findViewById(R.id.tv_post_detailed_time);
+//		rl_post_detailed_doctorinfo = (RelativeLayout) contextView.findViewById(R.id.rl_post_detailed_doctorinfo);
+//		tv_post_detailed_time = (TextView) contextView.findViewById(R.id.tv_post_detailed_time);
 
 		rl_post_foward_normal = (RelativeLayout) contextView.findViewById(R.id.rl_post_foward_normal);
 		rl_post_foward_case = (RelativeLayout) contextView.findViewById(R.id.rl_post_foward_case);

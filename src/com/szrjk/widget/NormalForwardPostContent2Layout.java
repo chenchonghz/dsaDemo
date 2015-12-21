@@ -47,7 +47,6 @@ public class NormalForwardPostContent2Layout extends RelativeLayout
 	/****/
 	private RelativeLayout rl_post_normal;
 
-
 	private LinearLayout ll_normal_post_content;
 
 	private RelativeLayout rl_post_detailed_doctorinfo;
@@ -97,7 +96,6 @@ public class NormalForwardPostContent2Layout extends RelativeLayout
 				PostDetailCaseView pdcv1 = new PostDetailCaseView(context,title1,postContent,null);
 				ll_case_detail_list.addView(pdcv1);
 			}
-
 	}
 
 	public void setUserCard(UserCard userCard) {

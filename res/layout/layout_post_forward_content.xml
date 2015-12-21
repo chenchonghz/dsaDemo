@@ -9,7 +9,7 @@
             layout="@layout/view_group"
             />
 
-    <RelativeLayout
+   <!-- <RelativeLayout
             android:id="@+id/rl_post_detailed_doctorinfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
                 android:layout_marginTop="@dimen/margin_top_small"
                 android:textColor="@color/font_cell"
                 android:textSize="@dimen/font_size_msmall" />
-    </RelativeLayout>
+    </RelativeLayout>-->
 
 
     <RelativeLayout
@@ -66,6 +66,7 @@
             android:visibility="gone"
             android:paddingBottom="@dimen/margin_top" 
              >
+        <TextView android:layout_width="match_parent" android:layout_height="match_parent" android:text="邓国明 "/>
         <ImageView
                 android:id="@+id/iv_casepic"
                 android:layout_width="fill_parent"

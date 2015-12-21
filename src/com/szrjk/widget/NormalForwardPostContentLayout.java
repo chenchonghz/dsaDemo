@@ -18,6 +18,7 @@ import com.szrjk.util.SpannableStringUtils;
 
 /**
  * 转发内容样式（包括名片) XXX//XXX:XXXX
+ * 针对203的帖子
  */
 public class NormalForwardPostContentLayout extends RelativeLayout
 {

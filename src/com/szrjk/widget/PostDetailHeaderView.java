@@ -134,6 +134,7 @@ public class PostDetailHeaderView extends RelativeLayout {
 		});
 	}
 
+
 	public void showDotmore(){
 		if (postUserSeqId.equals(Constant.userInfo.getUserSeqId())) {
 			ll_dotmore.setVisibility(View.VISIBLE);
@@ -184,7 +185,7 @@ public class PostDetailHeaderView extends RelativeLayout {
 		this.postId=postId;
 		this.postUserSeqId=postUserSeqId;
 	}
-	
+
 	public void setDelete() {
 		if (context instanceof CaseDetailActivity) {
 			((CaseDetailActivity) context).setDelete(true);

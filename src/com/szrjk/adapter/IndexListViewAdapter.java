@@ -907,7 +907,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 								}
 							}
 						}
-						ssBuilder = InitTransmitPostUtil.initTransmitPost(context, ssBuilder, postAbstractLists,new InitSrcPostInterface() {
+						ssBuilder = InitTransmitPostUtil.initTransmitPost(context, ssBuilder, postAbstractLists,140,new InitSrcPostInterface() {
 							
 							@Override
 							public void initSrcPost(Context context, UserCard userCard,
@@ -918,7 +918,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 									tran_normalPost_Holder.tv_src_post_text.setTextColor(context.getResources().getColor(R.color.font_cell));
 								}else{	
 									try {
-									initSrcGroupData(tran_normalPost_Holder.ll_src_group,tran_normalPost_Holder.tv_src_group_name,postInfo);
+										initSrcGroupData(tran_normalPost_Holder.ll_src_group,tran_normalPost_Holder.tv_src_group_name,postInfo);
 										initSrcNormalPostData(tran_normalPost_Holder.tv_src_post_text,tran_normalPost_Holder.gv_src_pic,tran_normalPost_Holder.tv_srcTime,postInfo,userCard,position);
 										initSrcNormalPostListner(tran_normalPost_Holder.gv_src_pic,tran_normalPost_Holder.ll_src_normal_post,tran_normalPost_Holder.ll_srcDoctorInfo,tran_normalPost_Holder.tv_src_group_name,position,postInfo,userCard);
 									} catch (Exception e1) {
@@ -1077,7 +1077,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 //					if(isTourist){
 //						DialogUtil.showGuestDialog(context, null);
 //					}else{					
-						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),postInfo.getUserSeqId(),position);
+						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),userInfo.getUserSeqId(),position);
 //					}
 				}
 			});
@@ -1088,7 +1088,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 //					if(isTourist){
 //						DialogUtil.showGuestDialog(context, null);
 //					}else{
-						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),postInfo.getUserSeqId(),position);		
+						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),userInfo.getUserSeqId(),position);		
 //					}
 				}
 			});
@@ -1117,7 +1117,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			});
 			break;
 		case 4:
-
 				Log.e("IndexViewAdapter", "转发病例分享帖子加载数据");
 				if(userList.isEmpty()||postList.isEmpty()||postOtherList.isEmpty()){
 					return convertView;
@@ -1171,7 +1170,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 								}
 							}
 						}
-						ssBuilder2 = InitTransmitPostUtil.initTransmitPost(context, ssBuilder2, caseSharePostAbstractLists, new InitSrcPostInterface() {
+						ssBuilder2 = InitTransmitPostUtil.initTransmitPost(context, ssBuilder2, caseSharePostAbstractLists, 140,new InitSrcPostInterface() {
 
 							@Override
 							public void initSrcPost(Context context, UserCard userCard,
@@ -1335,7 +1334,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 //					if(isTourist){
 //						DialogUtil.showGuestDialog(context, null);
 //					}else{	
-						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),postInfo.getUserSeqId(),position);
+						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),userInfo.getUserSeqId(),position);
 //					}
 				}
 			});
@@ -1346,7 +1345,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 //					if(isTourist){
 //						DialogUtil.showGuestDialog(context, null);
 //					}else{			
-						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),postInfo.getUserSeqId(),position);		
+						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),userInfo.getUserSeqId(),position);		
 //					}
 				}
 			});
@@ -1420,7 +1419,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 								}
 							}
 						}
-						ssBuilder3 = InitTransmitPostUtil.initTransmitPost(context, ssBuilder3, problemHelpPostAbstractLists,new InitSrcPostInterface() {
+						ssBuilder3 = InitTransmitPostUtil.initTransmitPost(context, ssBuilder3, problemHelpPostAbstractLists,140,new InitSrcPostInterface() {
 							@Override
 							public void initSrcPost(Context context, UserCard userCard,
 									PostInfo postInfo, String isDelete) {
@@ -1583,7 +1582,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 //					if(isTourist){
 //						DialogUtil.showGuestDialog(context, null);
 //					}else{				
-						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),postInfo.getUserSeqId(),position);
+						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),userInfo.getUserSeqId(),position);
 //					}
 				}
 			});
@@ -1595,7 +1594,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 //						DialogUtil.showGuestDialog(context, null);
 //					}else{
 					try {	
-						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),postInfo.getUserSeqId(),position);		
+						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),userInfo.getUserSeqId(),position);		
 					} catch (Exception e) {
 					    Log.e("IndexListViewAdapter", e.toString());	
 					}
@@ -1887,7 +1886,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		    simplifySpanBuild.appendSpecialUnit(new SpecialTextUnit(" ")).appendSpecialUnit(new SpecialLabelUnit("火", context.getResources().getColor(R.color.transparent), 13, BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_yellow_v_24),40,40).setGravity(SpecialGravity.CENTER))
 		    .appendSpecialUnit(new SpecialTextUnit(" "));
 		}
-		if(content != null){		
+		if(content != null){
 			simplifySpanBuild.appendSpecialUnit(new SpecialTextUnit(":"+content, context.getResources().getColor(R.color.font_titleanduname)).setSpecialClickableUnit(new SpecialClickableUnit(new OnClickableSpanListener() {
 				
 				@Override

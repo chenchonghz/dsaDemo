@@ -36,7 +36,7 @@ import com.szrjk.entity.PostStatis;
 import com.szrjk.entity.UserCard;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.util.ToastUtils;
-import com.szrjk.widget.NormalForwardPostContentLayout;
+import com.szrjk.widget.NormalForwardPostContent2Layout;
 import com.szrjk.widget.PostContentForwardLayout;
 import com.szrjk.widget.PostDetailBottomOperLayout;
 import com.szrjk.widget.PostDetailHeaderView;
@@ -70,7 +70,7 @@ public class PostDetailFowardActivity2 extends BaseActivity {
 
 	/*** 转发的样式 ***/
 	@ViewInject(R.id.pfncl_post)
-	NormalForwardPostContentLayout pfncl_post;
+	NormalForwardPostContent2Layout pfncl_post;
 
 	/*** 原贴的样式 ***/
 	@ViewInject(R.id.npcl_postForward)

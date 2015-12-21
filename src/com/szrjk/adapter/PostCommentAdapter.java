@@ -103,7 +103,7 @@ public class PostCommentAdapter<T> extends BaseAdapter {
 					
 					List<PostAbstractList> postAbstractLists = forward.getForwardInfo().getPostAbstractList();
 
-					SpannableStringBuilder content = InitTransmitPostUtil.initTransmitPost(context, new SpannableStringBuilder(), postAbstractLists,new InitSrcPostInterface() {
+					SpannableStringBuilder content = InitTransmitPostUtil.initTransmitPost(context, new SpannableStringBuilder(), postAbstractLists,140,new InitSrcPostInterface() {
 						@Override
 						public void initSrcPost(Context context, UserCard userCard,
 								PostInfo postInfo, String isDelete) {

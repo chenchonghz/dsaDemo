@@ -878,7 +878,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 								}
 							}
 						}
-						ssBuilder = InitTransmitPostUtil.initTransmitPost(context, ssBuilder, postAbstractLists,new InitSrcPostInterface() {
+						ssBuilder = InitTransmitPostUtil.initTransmitPost(context, ssBuilder, postAbstractLists,140,new InitSrcPostInterface() {
 							
 							@Override
 							public void initSrcPost(Context context, UserCard userCard,
@@ -1048,7 +1048,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 //					if(isTourist){
 //						DialogUtil.showGuestDialog(context, null);
 //					}else{					
-						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),postInfo.getUserSeqId(),position);
+						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),userInfo.getUserSeqId(),position);
 //					}
 				}
 			});
@@ -1059,7 +1059,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 //					if(isTourist){
 //						DialogUtil.showGuestDialog(context, null);
 //					}else{
-						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),postInfo.getUserSeqId(),position);		
+						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),userInfo.getUserSeqId(),position);		
 //					}
 				}
 			});
@@ -1142,7 +1142,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 								}
 							}
 						}
-						ssBuilder2 = InitTransmitPostUtil.initTransmitPost(context, ssBuilder2, caseSharePostAbstractLists, new InitSrcPostInterface() {
+						ssBuilder2 = InitTransmitPostUtil.initTransmitPost(context, ssBuilder2, caseSharePostAbstractLists, 140,new InitSrcPostInterface() {
 
 							@Override
 							public void initSrcPost(Context context, UserCard userCard,
@@ -1306,7 +1306,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 //					if(isTourist){
 //						DialogUtil.showGuestDialog(context, null);
 //					}else{	
-						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),postInfo.getUserSeqId(),position);
+						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),userInfo.getUserSeqId(),position);
 //					}
 				}
 			});
@@ -1317,7 +1317,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 //					if(isTourist){
 //						DialogUtil.showGuestDialog(context, null);
 //					}else{			
-						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),postInfo.getUserSeqId(),position);		
+						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),userInfo.getUserSeqId(),position);		
 //					}
 				}
 			});
@@ -1391,7 +1391,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 								}
 							}
 						}
-						ssBuilder3 = InitTransmitPostUtil.initTransmitPost(context, ssBuilder3, problemHelpPostAbstractLists,new InitSrcPostInterface() {
+						ssBuilder3 = InitTransmitPostUtil.initTransmitPost(context, ssBuilder3, problemHelpPostAbstractLists,140,new InitSrcPostInterface() {
 							@Override
 							public void initSrcPost(Context context, UserCard userCard,
 									PostInfo postInfo, String isDelete) {
@@ -1554,7 +1554,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 //					if(isTourist){
 //						DialogUtil.showGuestDialog(context, null);
 //					}else{				
-						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),postInfo.getUserSeqId(),position);
+						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),userInfo.getUserSeqId(),position);
 //					}
 				}
 			});
@@ -1566,7 +1566,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 //						DialogUtil.showGuestDialog(context, null);
 //					}else{
 					try {	
-						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),postInfo.getUserSeqId(),position);		
+						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),userInfo.getUserSeqId(),position);		
 					} catch (Exception e) {
 					    Log.e("IndexListViewAdapter", e.toString());	
 					}

@@ -54,7 +54,7 @@ public class PostDetailFowardActivity2 extends BaseActivity
 
 	/***转发的样式***/
 	@ViewInject(R.id.pfncl_post)
-	NormalForwardPostContentLayout pfncl_post;
+	NormalForwardPostContent2Layout pfncl_post;
 
 
 	/***原贴的样式***/

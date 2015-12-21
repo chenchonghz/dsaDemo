@@ -32,13 +32,13 @@
                 android:layout_height="@dimen/padding"
                 android:background="@color/base_bg" />
 
-            <com.szrjk.widget.NormalForwardPostContentLayout
+            <com.szrjk.widget.NormalForwardPostContent2Layout
                 android:id="@+id/pfncl_post"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_post_detailed_interval1"
                 android:paddingBottom="@dimen/view_post_padding_5" >
-            </com.szrjk.widget.NormalForwardPostContentLayout>
+            </com.szrjk.widget.NormalForwardPostContent2Layout>
 
             <com.szrjk.widget.PostContentForwardLayout
                 android:id="@+id/npcl_postForward"

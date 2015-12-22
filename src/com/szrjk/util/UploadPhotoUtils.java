@@ -2,6 +2,7 @@ package com.szrjk.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -21,6 +22,8 @@ import com.szrjk.dhome.R;
 import com.szrjk.entity.IImgUrlCallback;
 import com.szrjk.entity.PhotoType;
 import com.szrjk.http.InterfaceComm;
+import com.szrjk.self.more.album.AlbumGalleryActivity;
+import com.szrjk.self.more.album.CropPictureActivity;
 import com.szrjk.util.clip.ClipActivity;
 import com.szrjk.util.gallery.MainGalleryActivity;
 import com.szrjk.widget.AddPhotoPopup;
@@ -105,6 +108,7 @@ public class UploadPhotoUtils {
 			//回收
 			imageUploadUtil = null;
 			ClipActivity.cbitmap = null;
+			CropPictureActivity.bp = null;
 			file.delete();
 			Log.i("", "回收资源");
 		}
@@ -128,13 +132,16 @@ public class UploadPhotoUtils {
 				//跳转截图
 				if (isClip) {
 //					Intent intent = new Intent(context,CropImageActivity.class);
-					Intent intent = new Intent(context,ClipActivity.class);
+//					Intent intent = new Intent(context,ClipActivity.class);
+					Intent intent = new Intent(context,CropPictureActivity.class);
 					if (file == null) {
 						Log.i("file", "file 临时保存图片对象空"); 
 						Toast.makeText(context, "储存失败，请再试试", 0).show();
 						return;
 					}else{
-						intent.putExtra("camear", file.getAbsolutePath());
+//						intent.putExtra("camear", file.getAbsolutePath());
+						intent.putExtra("IMAGEPATH", file.getAbsolutePath());
+						
 						context.startActivityForResult(intent, IMAGE_CROP);
 					}
 				}else{
@@ -190,9 +197,13 @@ public class UploadPhotoUtils {
 				}
 				//跳转截图
 				if (isClip) {
+					//前面2种
 //					Intent intentPhoto = new Intent(context,CropImageActivity.class);
-					Intent intentPhoto = new Intent(context,ClipActivity.class);
-					intentPhoto.putExtra("camear", picturePath);
+//					Intent intentPhoto = new Intent(context,ClipActivity.class);
+//					intentPhoto.putExtra("camear", picturePath);
+					
+					Intent intentPhoto = new Intent(context,CropPictureActivity.class);
+					intentPhoto.putExtra("IMAGEPATH", picturePath);
 					context.startActivityForResult(intentPhoto, IMAGE_CROP);
 				}else{
 //					Bitmap b= BitmapFactory.decodeFile(picturePath);
@@ -208,7 +219,8 @@ public class UploadPhotoUtils {
 				//            	Bitmap bit = (Bitmap)c.get("cropbitmap");
 				//图像过大时候，不能用bundle传输
 //				Bitmap bit = CropImageActivity.bp;
-				Bitmap bit = ClipActivity.cbitmap;
+//				Bitmap bit = ClipActivity.cbitmap;
+				Bitmap bit = CropPictureActivity.bp;
 				if (bit == null) {
 					System.err.println("Bitmap is null ----------------");
 					ToastUtils.showMessage(context, "操作有误，裁剪失败");
@@ -218,7 +230,8 @@ public class UploadPhotoUtils {
 				ToastUtils.showMessage(context, "正在上传头像...");
 				imgUrlCallback.operImgPic(bit);
 				updateFile(bit);
-				ClipActivity.cbitmap = null;//清除静态数据
+//				ClipActivity.cbitmap = null;//清除静态数据
+				CropPictureActivity.bp = null;
 				break;
 
 			}
@@ -275,7 +288,8 @@ public class UploadPhotoUtils {
 		try {
 //			Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 //			context.startActivityForResult(i, PHOTO_PICKED_WITH_DATA);
-			Intent intent = new Intent(context,MainGalleryActivity.class);
+//			Intent intent = new Intent(context,MainGalleryActivity.class);
+			Intent intent = new Intent(context,AlbumGalleryActivity.class);
 			intent.putExtra("num", 1);
 			context.startActivityForResult(intent, PHOTO_PICKED_WITH_DATA);
 		} catch (Exception e) {

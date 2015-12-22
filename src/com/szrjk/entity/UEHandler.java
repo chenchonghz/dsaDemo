@@ -98,14 +98,14 @@ public class UEHandler implements Thread.UncaughtExceptionHandler {
             SharePerferenceUtil perferenceUtil = SharePerferenceUtil.getInstance(softApp, Constant.APP_INFO);
             perferenceUtil.setStringValue(Constant.ERRORMSG, info);
             //自动重新启动app 进入登录界面
-            Intent intent = new Intent(); 
-            intent.setClassName("com.szrjk.dhome", "com.szrjk.dhome.SplashActivity");
-            PendingIntent restartIntent = PendingIntent.getActivity(softApp, -1, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
-            AlarmManager am = (AlarmManager) softApp.getSystemService(Context.ALARM_SERVICE);
-            am.set(AlarmManager.RTC,  System.currentTimeMillis(), restartIntent);
-//            write2ErrorLog(fileErrorLog, info);
-//            // kill App Progress
-            android.os.Process.killProcess(android.os.Process.myPid());
+//            Intent intent = new Intent(); 
+//            intent.setClassName("com.szrjk.dhome", "com.szrjk.dhome.SplashActivity");
+//            PendingIntent restartIntent = PendingIntent.getActivity(softApp, -1, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
+//            AlarmManager am = (AlarmManager) softApp.getSystemService(Context.ALARM_SERVICE);
+//            am.set(AlarmManager.RTC,  System.currentTimeMillis(), restartIntent);
+////            write2ErrorLog(fileErrorLog, info);
+////            // kill App Progress
+//            android.os.Process.killProcess(android.os.Process.myPid());
         }
     }
 

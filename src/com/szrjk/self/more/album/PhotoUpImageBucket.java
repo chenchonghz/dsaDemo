@@ -33,5 +33,11 @@ public class PhotoUpImageBucket implements Serializable,Comparable<PhotoUpImageB
 	public int compareTo(PhotoUpImageBucket another) {
 		return this.getBucketName().compareTo(another.getBucketName());
 	}
+	@Override
+	public String toString() {
+		return "PhotoUpImageBucket [count=" + count + ", bucketName="
+				+ bucketName + ", imageList=" + imageList + "]";
+	}
 
+	
 }

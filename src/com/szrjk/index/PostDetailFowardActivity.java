@@ -271,6 +271,9 @@ public class PostDetailFowardActivity extends BaseActivity {
 								.fetchFirstLevel(ordinaryPostDetail
 										.getPostDetail().getPostAbstractList());
 						String postText = pp.getPostAbstract().getContent();
+						if (postText==null||postText.isEmpty()) {
+							postText=pp.getPostAbstract().getPostTitle();
+						}
 						String faceurl = ordinaryPostDetail.getUserCard()
 								.getUserFaceUrl();
 						String postType = ordinaryPostDetail.getPostType() + "";

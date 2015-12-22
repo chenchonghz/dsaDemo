@@ -1,5 +1,6 @@
 package com.szrjk.dhome;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -14,9 +15,12 @@ import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.config.Constant;
 import com.szrjk.entity.ErrorInfo;
+import com.szrjk.entity.PostInfo;
 import com.szrjk.entity.PostList;
+import com.szrjk.entity.PostOtherImformationInfo;
 import com.szrjk.entity.RemindEvent;
 import com.szrjk.entity.TCity;
+import com.szrjk.entity.UserCard;
 import com.szrjk.entity.UserHomePageInfo;
 import com.szrjk.entity.UserInfo;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
@@ -35,7 +39,6 @@ import com.szrjk.util.ToastUtils;
 import com.szrjk.widget.SelfChangeBgPopup;
 
 import de.greenrobot.event.EventBus;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.Dialog;
@@ -76,9 +79,12 @@ public class SelfActivity extends BaseActivity implements OnClickListener {
 		private ImageView iv_vip; 
 		//医院与科室布局
 		private RelativeLayout rly_hospital_dept;
-		
+		//用户关注数
 		private LinearLayout ll_attention_count;
+		private TextView tv_attention_num;
+		//用户粉丝数
 		private LinearLayout ll_fans_count;
+		private TextView tv_fans_num;
 
 		private SelfChangeBgPopup pop;
 		//用户信息
@@ -97,6 +103,8 @@ public class SelfActivity extends BaseActivity implements OnClickListener {
 		private Dialog dialog;
 		private SelfActivity instance;
 		private UserInfo userInfo;
+		public static int POSITION;
+		public static boolean ISDELETE;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -140,8 +148,10 @@ public class SelfActivity extends BaseActivity implements OnClickListener {
 		iv_self_avatar= (ImageView) v.findViewById(R.id.iv_self_avatar);
 		iv_vip = (ImageView) v.findViewById(R.id.iv_vip);
 		rly_hospital_dept = (RelativeLayout) v.findViewById(R.id.rly_hospital_dept);
-		ll_attention_count = (LinearLayout)v.findViewById(R.id.ll_attention_count);
-		ll_fans_count = (LinearLayout)v.findViewById(R.id.ll_fans_count);
+		ll_attention_count =(LinearLayout) v.findViewById(R.id.ll_attention_count);
+		ll_fans_count =(LinearLayout) v.findViewById(R.id.ll_fans_count);
+		tv_attention_num = (TextView) v.findViewById(R.id.tv_attention_num);
+		tv_fans_num = (TextView) v.findViewById(R.id.tv_fans_num);
 		lly_hv = (LinearLayout) v.findViewById(R.id.lly_hv);
 		getUserHpInfo(Constant.userInfo.getUserSeqId());
 		initListener();
@@ -447,6 +457,8 @@ public class SelfActivity extends BaseActivity implements OnClickListener {
 		if (userHomePageInfo.getUserLevel().equals("11")) {
 			iv_vip.setVisibility(View.VISIBLE);
 		}
+		tv_attention_num.setText(userHomePageInfo.getFocusCount());
+		tv_fans_num.setText(userHomePageInfo.getFollowerCount());
 		//iv_self_avatar.setImageBitmap(bm);
 	}
 	@Override
@@ -515,6 +527,7 @@ public class SelfActivity extends BaseActivity implements OnClickListener {
 	}
 	private void sendIntroduce() {
 		Intent intent = new Intent(instance, IntroduceActivity.class);
+		intent.putExtra("self", true);
 		intent.putExtra(Constant.USER_SEQ_ID, Constant.userInfo.getUserSeqId());
 		startActivity(intent);
 
@@ -534,5 +547,37 @@ public class SelfActivity extends BaseActivity implements OnClickListener {
 			}
 		}
 	};
+	protected void onNewIntent(Intent intent) {
+		getUserHpInfo(Constant.userInfo.getUserSeqId());
+		try {
+			initViews(userHomePageInfo);
+		} catch (DbException e) {
+			e.printStackTrace();
+		}
+		super.onNewIntent(intent);
+	};
+
+	@Override
+	protected void onResume() {
+		if(postListComm != null){		
+			if(POSITION != -1){
+				if(ISDELETE){
+					ArrayList<PostInfo> postList = postListComm.getPostList();
+					ArrayList<UserCard> userList = postListComm.getUserList();
+					ArrayList<PostOtherImformationInfo> postOtherList = postListComm.getPostOtherList();
+					postList.remove(POSITION);
+					userList.remove(POSITION);
+					postOtherList.remove(POSITION);
+					postListComm.setPostList(postList);
+					postListComm.setUserList(userList);
+					postListComm.setPostOtherList(postOtherList);
+					postListComm.updateData();
+					POSITION = -1;
+					ISDELETE = false;					
+				}
+			}
+		}
+		super.onResume();
+	}
 	
 }

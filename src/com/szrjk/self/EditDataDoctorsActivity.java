@@ -13,6 +13,7 @@ import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.szrjk.config.Constant;
+import com.szrjk.dhome.IntroduceActivity;
 import com.szrjk.dhome.MainActivity;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.ErrorInfo;
@@ -356,7 +357,8 @@ public class EditDataDoctorsActivity extends Activity {
 						jsonObject.getString("ErrorInfo"),ErrorInfo.class);
 				if(Constant.REQUESTCODE.equals(errorObj.getReturnCode())){
 					Toast.makeText(instance, "修改成功", Toast.LENGTH_SHORT).show();
-					Intent intent = new Intent(instance, MainActivity.class);
+					Intent intent = new Intent(instance, IntroduceActivity.class);
+					intent.putExtra("submit", true);
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 					startActivity(intent);

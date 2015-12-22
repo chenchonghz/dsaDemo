@@ -17,6 +17,7 @@ import com.szrjk.config.Constant;
 import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.MainActivity;
 import com.szrjk.dhome.R;
+import com.szrjk.dhome.SelfActivity;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.util.ImageLoaderUtil;
@@ -157,7 +158,7 @@ public class UserBackgroundShower extends BaseActivity implements OnClickListene
 	}
 	private void sendChangebg() {
 		
-		Intent intent = new Intent(this, MainActivity.class);
+		Intent intent = new Intent(this, SelfActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		//		intent.putExtra("bg", url);

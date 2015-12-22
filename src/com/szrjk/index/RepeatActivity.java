@@ -113,7 +113,7 @@ public class RepeatActivity extends BaseActivity implements OnClickListener {
 		user_seq_id = intent.getStringExtra(Constant.USER_SEQ_ID);
 		post_id = intent.getStringExtra(Constant.POST_ID);
 		user_name = intent.getStringExtra(Constant.USER_NAME);
-		srcuser_name = intent.getStringExtra("srcUserName");
+//		srcuser_name = intent.getStringExtra("srcUserName");
 		post_type = intent.getStringExtra(Constant.POST_TYPE);
 		src_post_id = intent.getStringExtra(Constant.SRC_POST_ID);
 		position = intent.getIntExtra(Constant.POSITION, 0);
@@ -138,7 +138,6 @@ public class RepeatActivity extends BaseActivity implements OnClickListener {
 					R.drawable.icon_headfailed);
 			imageLoaderUtil.showImage();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			Log.e("ImageLoader", e.toString());
 		}
 		tv_name_repeat.setText(user_name);

@@ -24,6 +24,7 @@ import com.szrjk.entity.CircleInfo;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.PostInfo;
 import com.szrjk.entity.PostList;
+import com.szrjk.entity.PostOtherImformationInfo;
 import com.szrjk.entity.UserCard;
 import com.szrjk.explore.MyCircleActivity;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
@@ -90,6 +91,9 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 	private PostListComm postListComm;
 	private String objId;
 	private String circleId;
+	public static int POSITION;
+	public static boolean ISDELETE;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)	{
 		super.onCreate(savedInstanceState);
@@ -677,5 +681,28 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 		}
 	}
 
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		if(postListComm != null){
+			if(POSITION != -1){
+				if(ISDELETE){
+					ArrayList<PostInfo> postList = postListComm.getPostList();
+					ArrayList<UserCard> userList = postListComm.getUserList();
+					ArrayList<PostOtherImformationInfo> postOtherList = postListComm.getPostOtherList();
+					postList.remove(POSITION);
+					userList.remove(POSITION);
+					postOtherList.remove(POSITION);
+					postListComm.setPostList(postList);
+					postListComm.setUserList(userList);
+					postListComm.setPostOtherList(postOtherList);
+					postListComm.updateData();
+					POSITION = -1;
+					ISDELETE = false;					
+				}
+			}
+		}
+		super.onResume();
+	}
 
 }

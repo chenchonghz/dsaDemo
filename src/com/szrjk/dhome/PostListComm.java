@@ -186,8 +186,7 @@ public class PostListComm {
                                      context, activity, userList, postList, postOtherList, userId,Constant.CIRCLE_FLAG,new IPullPostListCallback() {
                                  @Override
                                  public void skipToSelfFragment() {
-                                	 Intent intent = new Intent(context, MainActivity.class);
-                                     intent.putExtra("isSkipToSelf", true);
+                                	 Intent intent = new Intent(context, SelfActivity.class);
                                      context.startActivity(intent);
                                  }
                              });
@@ -196,8 +195,7 @@ public class PostListComm {
                                 context, activity, userList, postList, postOtherList, userId,Constant.OTHER_FLAG, new IPullPostListCallback() {
                             @Override
                             public void skipToSelfFragment() {
-                                Intent intent = new Intent(context, MainActivity.class);
-                                intent.putExtra("isSkipToSelf", true);
+                            	Intent intent = new Intent(context, SelfActivity.class);
                                 context.startActivity(intent);
                             }
                         });
@@ -219,6 +217,20 @@ public class PostListComm {
                     	else if(activity instanceof ProblemHelpActivity){
                     		adapter = new IndexListViewAdapter(
                                     context, activity, userList, postList, postOtherList, userId,ConstantUser.MyProblemHelp, new IPullPostListCallback() {
+                                @Override
+                                public void skipToSelfFragment() {
+                                }
+                            });
+                    	}else if(activity instanceof SelfActivity){
+                    		adapter = new IndexListViewAdapter(
+                                    context, activity, userList, postList, postOtherList, userId,Constant.SELF_FLAG, new IPullPostListCallback() {
+                                @Override
+                                public void skipToSelfFragment() {
+                                }
+                            });
+                    	}else if(activity instanceof CircleHomepageActivity){
+                    		adapter = new IndexListViewAdapter(
+                                    context, activity, userList, postList, postOtherList, userId,Constant.CIRCLE_FLAG, new IPullPostListCallback() {
                                 @Override
                                 public void skipToSelfFragment() {
                                 }
@@ -255,8 +267,7 @@ public class PostListComm {
                                     context, activity, userList, postList, postOtherList, userId,Constant.CIRCLE_FLAG,new IPullPostListCallback() {
                                 @Override
                                 public void skipToSelfFragment() {
-                                	Intent intent = new Intent(context, MainActivity.class);
-                                    intent.putExtra("isSkipToSelf", true);
+                                	Intent intent = new Intent(context, SelfActivity.class);
                                     context.startActivity(intent);
                                 }
                             });
@@ -265,8 +276,7 @@ public class PostListComm {
                                 context, activity, userList, postList, postOtherList, userId,Constant.OTHER_FLAG, new IPullPostListCallback() {
                             @Override
                             public void skipToSelfFragment() {
-                                Intent intent = new Intent(context, MainActivity.class);
-                                intent.putExtra("isSkipToSelf", true);
+                            	Intent intent = new Intent(context, SelfActivity.class);
                                 context.startActivity(intent);
                             }
                         });
@@ -287,6 +297,20 @@ public class PostListComm {
                     	}else if(activity instanceof ProblemHelpActivity){
                     		adapter = new IndexListViewAdapter(
                                     context, activity, userList, postList, postOtherList, userId,ConstantUser.MyProblemHelp, new IPullPostListCallback() {
+                                @Override
+                                public void skipToSelfFragment() {
+                                }
+                            });
+                    	}else if(activity instanceof SelfActivity){
+                    		adapter = new IndexListViewAdapter(
+                                    context, activity, userList, postList, postOtherList, userId,Constant.SELF_FLAG, new IPullPostListCallback() {
+                                @Override
+                                public void skipToSelfFragment() {
+                                }
+                            });
+                    	}else if(activity instanceof CircleHomepageActivity){
+                    		adapter = new IndexListViewAdapter(
+                                    context, activity, userList, postList, postOtherList, userId,Constant.CIRCLE_FLAG, new IPullPostListCallback() {
                                 @Override
                                 public void skipToSelfFragment() {
                                 }
@@ -316,8 +340,7 @@ public class PostListComm {
                                       context, activity, userList, postList, postOtherList, userId,Constant.CIRCLE_FLAG,new IPullPostListCallback() {
                                   @Override
                                   public void skipToSelfFragment() {
-                                	  Intent intent = new Intent(context, MainActivity.class);
-                                      intent.putExtra("isSkipToSelf", true);
+                                	  Intent intent = new Intent(context, SelfActivity.class);
                                       context.startActivity(intent);
                                   }
                               });
@@ -326,8 +349,7 @@ public class PostListComm {
                                     context, activity, userList, postList, postOtherList, userId, Constant.OTHER_FLAG,new IPullPostListCallback() {
                                 @Override
                                 public void skipToSelfFragment() {
-                                    Intent intent = new Intent(context, MainActivity.class);
-                                    intent.putExtra("isSkipToSelf", true);
+                                	Intent intent = new Intent(context, SelfActivity.class);
                                     context.startActivity(intent);
                                 }
                             });
@@ -348,6 +370,20 @@ public class PostListComm {
                         	}else if(activity instanceof ProblemHelpActivity){
                         		adapter = new IndexListViewAdapter(
                                         context, activity, userList, postList, postOtherList, userId,ConstantUser.MyProblemHelp, new IPullPostListCallback() {
+                                    @Override
+                                    public void skipToSelfFragment() {
+                                    }
+                                });
+                        	}else if(activity instanceof SelfActivity){
+                        		adapter = new IndexListViewAdapter(
+                                        context, activity, userList, postList, postOtherList, userId,Constant.SELF_FLAG, new IPullPostListCallback() {
+                                    @Override
+                                    public void skipToSelfFragment() {
+                                    }
+                                });
+                        	}else if(activity instanceof CircleHomepageActivity){
+                        		adapter = new IndexListViewAdapter(
+                                        context, activity, userList, postList, postOtherList, userId,Constant.CIRCLE_FLAG, new IPullPostListCallback() {
                                     @Override
                                     public void skipToSelfFragment() {
                                     }

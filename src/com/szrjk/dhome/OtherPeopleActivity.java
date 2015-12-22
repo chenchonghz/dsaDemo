@@ -80,10 +80,12 @@ public class OtherPeopleActivity extends BaseActivity implements OnClickListener
 	private FrameLayout fl_friend;//好友
 
 	private FrameLayout fl_focus;//关注
-	
+	//关注数
 	private LinearLayout ll_attention_count;
-	
+	private TextView tv_attention_num;
+	//粉丝数
 	private LinearLayout ll_fans_count;
+	private TextView tv_fans_num;
 
 	private ImageView iv_back;
 
@@ -147,6 +149,14 @@ public class OtherPeopleActivity extends BaseActivity implements OnClickListener
 		findHeaderViewId(v);
 		findUserInfo();
 	}
+	
+	
+
+	public String getObjId() {
+		return objId;
+	}
+
+
 
 	protected void doMoreGetPosts(String userId2, String basePostId,
 			boolean isNew, String beginNum, String endNum) {
@@ -216,6 +226,8 @@ public class OtherPeopleActivity extends BaseActivity implements OnClickListener
 		iv_vip = (ImageView) v.findViewById(R.id.iv_vip);
 		ll_attention_count = (LinearLayout)v.findViewById(R.id.ll_attention_count);
 		ll_fans_count = (LinearLayout)v.findViewById(R.id.ll_fans_count);
+		tv_attention_num = (TextView) v.findViewById(R.id.tv_attention_num);
+		tv_fans_num = (TextView) v.findViewById(R.id.tv_fans_num);
 		iv_back.setOnClickListener(this);
 		fl_focus.setOnClickListener(this);
 		fl_friend.setOnClickListener(this);
@@ -465,6 +477,8 @@ public class OtherPeopleActivity extends BaseActivity implements OnClickListener
 			iv_focus.setImageResource(R.drawable.icon_canclefocus);
 			tv_focus.setText(R.string.canclefocus);
 		}
+		tv_attention_num.setText(homePageInfo.getFocusCount());
+		tv_fans_num.setText(homePageInfo.getFollowerCount());
 	}
 	@Override
 	public void onClick(View v) {
@@ -514,11 +528,13 @@ public class OtherPeopleActivity extends BaseActivity implements OnClickListener
 			
 		case R.id.ll_attention_count:
 			Intent intent_attention = new Intent(instance, MyAttentionActivity.class);
+			intent_attention.putExtra("username", homePageInfo.getUserName());
 			intent_attention.putExtra(Constant.USER_SEQ_ID, objId);
 			startActivity(intent_attention);
 			break;
 		case R.id.ll_fans_count:
 			Intent intent_fans = new Intent(instance, MyFansActivity.class);
+			intent_fans.putExtra("username", homePageInfo.getUserName());
 			intent_fans.putExtra(Constant.USER_SEQ_ID, objId);
 			startActivity(intent_fans);
 			break;

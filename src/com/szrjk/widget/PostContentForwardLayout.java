@@ -12,7 +12,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.R;
+import com.szrjk.dhome.SelfActivity;
 import com.szrjk.entity.ICallback;
+import com.szrjk.entity.IPullPostListCallback;
 import com.szrjk.entity.PostAbstractList;
 import com.szrjk.entity.PostDetail;
 import com.szrjk.entity.UserCard;
@@ -22,6 +24,7 @@ import com.szrjk.self.CircleHomepageActivity;
 import com.szrjk.simplifyspan.SimplifySpanBuild;
 import com.szrjk.util.DisplayTimeUtil;
 import com.szrjk.util.ImageLoaderUtil;
+import com.szrjk.util.UserNameJumpUtil;
 
 import java.util.Map;
 
@@ -115,9 +118,17 @@ public class PostContentForwardLayout extends RelativeLayout
 			//病例分享
 			rl_post_foward_case.setVisibility(View.VISIBLE);
 			String postUserName = postAbstractInfo.getUserCard().getUserName();
-			tv_uname.setText(postUserName);
-//			SimplifySpanBuild simplifySpanBuild = getContentText(tv_post_text,postInfo.getContent(),userCard.getUserName(),userCard.getUserSeqId(),userCard.getUserLevel(),userCard.getUserType(),postInfo,position);
-//			tv_uname.setText(simplifySpanBuild.build());
+			String userLevel = postAbstractInfo.getUserCard().getUserLevel();
+			String userType = postAbstractInfo.getUserCard().getUserType();
+			
+			SimplifySpanBuild simplifySpanBuild = UserNameJumpUtil.getContentText(context, tv_uname, null, postUserName, userSeqId, userLevel, userType, postAbstractInfo.getPostAbstract(), 0, new IPullPostListCallback() {
+				@Override
+				public void skipToSelfFragment() {
+					Intent intent=new Intent(context, SelfActivity.class);
+					context.startActivity(intent);
+				}
+			});
+			tv_uname.setText(simplifySpanBuild.build());
 			String picurl = postAbstractInfo.getPostAbstract().getBackgroundPic();
 			String posttitle = postAbstractInfo.getPostAbstract().getPostTitle();
 			final String caseShare = postType.equals(Constant.CASE_SHARE)?"病例分享":"疑难求助";

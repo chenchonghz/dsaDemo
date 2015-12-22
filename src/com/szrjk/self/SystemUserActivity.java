@@ -432,5 +432,8 @@ public class SystemUserActivity extends BaseActivity implements OnClickListener 
 		}
 	}
 
+	public String getObjId() {
+		return objId;
+	}
 }
 

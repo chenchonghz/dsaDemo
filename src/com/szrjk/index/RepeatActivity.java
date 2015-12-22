@@ -141,7 +141,7 @@ public class RepeatActivity extends BaseActivity implements OnClickListener {
 			// TODO Auto-generated catch block
 			Log.e("ImageLoader", e.toString());
 		}
-		tv_name_repeat.setText(srcuser_name);
+		tv_name_repeat.setText(user_name);
 		tv_text_repeat.setText(note_text);
 
 	}

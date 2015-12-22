@@ -1,5 +1,6 @@
 package com.szrjk.dhome;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -14,9 +15,12 @@ import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.config.Constant;
 import com.szrjk.entity.ErrorInfo;
+import com.szrjk.entity.PostInfo;
 import com.szrjk.entity.PostList;
+import com.szrjk.entity.PostOtherImformationInfo;
 import com.szrjk.entity.RemindEvent;
 import com.szrjk.entity.TCity;
+import com.szrjk.entity.UserCard;
 import com.szrjk.entity.UserHomePageInfo;
 import com.szrjk.entity.UserInfo;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
@@ -35,7 +39,6 @@ import com.szrjk.util.ToastUtils;
 import com.szrjk.widget.SelfChangeBgPopup;
 
 import de.greenrobot.event.EventBus;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.Dialog;
@@ -97,6 +100,8 @@ public class SelfActivity extends BaseActivity implements OnClickListener {
 		private Dialog dialog;
 		private SelfActivity instance;
 		private UserInfo userInfo;
+		public static int POSITION;
+		public static boolean ISDELETE;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -534,5 +539,28 @@ public class SelfActivity extends BaseActivity implements OnClickListener {
 			}
 		}
 	};
+	
+	@Override
+	protected void onResume() {
+		if(postListComm != null){		
+			if(POSITION != -1){
+				if(ISDELETE){
+					ArrayList<PostInfo> postList = postListComm.getPostList();
+					ArrayList<UserCard> userList = postListComm.getUserList();
+					ArrayList<PostOtherImformationInfo> postOtherList = postListComm.getPostOtherList();
+					postList.remove(POSITION);
+					userList.remove(POSITION);
+					postOtherList.remove(POSITION);
+					postListComm.setPostList(postList);
+					postListComm.setUserList(userList);
+					postListComm.setPostOtherList(postOtherList);
+					postListComm.updateData();
+					POSITION = -1;
+					ISDELETE = false;					
+				}
+			}
+		}
+		super.onResume();
+	}
 	
 }

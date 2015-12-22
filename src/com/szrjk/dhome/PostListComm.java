@@ -221,6 +221,20 @@ public class PostListComm {
                                 public void skipToSelfFragment() {
                                 }
                             });
+                    	}else if(activity instanceof SelfActivity){
+                    		adapter = new IndexListViewAdapter(
+                                    context, activity, userList, postList, postOtherList, userId,Constant.SELF_FLAG, new IPullPostListCallback() {
+                                @Override
+                                public void skipToSelfFragment() {
+                                }
+                            });
+                    	}else if(activity instanceof CircleHomepageActivity){
+                    		adapter = new IndexListViewAdapter(
+                                    context, activity, userList, postList, postOtherList, userId,Constant.CIRCLE_FLAG, new IPullPostListCallback() {
+                                @Override
+                                public void skipToSelfFragment() {
+                                }
+                            });
                     	}
                     	else{
                     		 adapter = new IndexListViewAdapter(
@@ -287,6 +301,20 @@ public class PostListComm {
                                 public void skipToSelfFragment() {
                                 }
                             });
+                    	}else if(activity instanceof SelfActivity){
+                    		adapter = new IndexListViewAdapter(
+                                    context, activity, userList, postList, postOtherList, userId,Constant.SELF_FLAG, new IPullPostListCallback() {
+                                @Override
+                                public void skipToSelfFragment() {
+                                }
+                            });
+                    	}else if(activity instanceof CircleHomepageActivity){
+                    		adapter = new IndexListViewAdapter(
+                                    context, activity, userList, postList, postOtherList, userId,Constant.CIRCLE_FLAG, new IPullPostListCallback() {
+                                @Override
+                                public void skipToSelfFragment() {
+                                }
+                            });
                     	}
                     	else
                     	{
@@ -342,6 +370,20 @@ public class PostListComm {
                         	}else if(activity instanceof ProblemHelpActivity){
                         		adapter = new IndexListViewAdapter(
                                         context, activity, userList, postList, postOtherList, userId,ConstantUser.MyProblemHelp, new IPullPostListCallback() {
+                                    @Override
+                                    public void skipToSelfFragment() {
+                                    }
+                                });
+                        	}else if(activity instanceof SelfActivity){
+                        		adapter = new IndexListViewAdapter(
+                                        context, activity, userList, postList, postOtherList, userId,Constant.SELF_FLAG, new IPullPostListCallback() {
+                                    @Override
+                                    public void skipToSelfFragment() {
+                                    }
+                                });
+                        	}else if(activity instanceof CircleHomepageActivity){
+                        		adapter = new IndexListViewAdapter(
+                                        context, activity, userList, postList, postOtherList, userId,Constant.CIRCLE_FLAG, new IPullPostListCallback() {
                                     @Override
                                     public void skipToSelfFragment() {
                                     }

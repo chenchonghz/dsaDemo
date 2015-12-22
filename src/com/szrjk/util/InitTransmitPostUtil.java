@@ -187,9 +187,18 @@ public class InitTransmitPostUtil {
 					}else if(userCard.getUserType().equals("1")&&!userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())){
 						skipToSystemUserActivity(context,userCard.getUserSeqId());
 					}else{
-						if(!userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())){		
-							skipToOtherPeopleActivity(context,userCard.getUserSeqId());
+
+						if(!userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())&&!(context instanceof OtherPeopleActivity)){
+									skipToOtherPeopleActivity(context,userCard.getUserSeqId());				
+						}else if(context instanceof OtherPeopleActivity){
+							String objId = ((OtherPeopleActivity) context).getObjId();
+							if(objId != null){							
+								if(!userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())&&!userCard.getUserSeqId().equals(objId)){
+									skipToOtherPeopleActivity(context,userCard.getUserSeqId());
+								}
+							}
 						}
+						
 					}
 				}
 				@Override

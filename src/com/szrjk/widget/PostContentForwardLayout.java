@@ -90,7 +90,7 @@ public class PostContentForwardLayout extends RelativeLayout
 			String postContent = postAbstractInfo.getPostAbstract().getContent();
 			String caseUrl = postAbstractInfo.getPostAbstract().getPicListstr();
 
-			pdcv1 = new PostDetailCaseView(context, title1, postContent, caseUrl);
+			pdcv1 = new PostDetailCaseView(context, title1, postAbstractInfo, postContent, caseUrl);
 			ll_case_detail_list.addView(pdcv1);
 
 		}else if(postType.equals(Constant.CIRCLE_POST)){

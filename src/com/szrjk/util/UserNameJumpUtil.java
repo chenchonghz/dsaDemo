@@ -29,6 +29,7 @@ public class UserNameJumpUtil {
 				tv_post_text);
 		simplifySpanBuild.appendSpecialUnit(new SpecialTextUnit(userName,
 				context.getResources().getColor(R.color.link_text_color))
+				.setSpecialTextBackgroundColor(context.getResources().getColor(R.color.base_bg))
 				.setSpecialClickableUnit(new SpecialClickableUnit(
 						new OnClickableSpanListener() {
 							@Override

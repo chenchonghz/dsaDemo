@@ -99,11 +99,13 @@ public class PostContentForwardLayout extends RelativeLayout
 			String postContent = postAbstractInfo.getPostAbstract().getContent();
 			String caseUrl = postAbstractInfo.getPostAbstract().getPicListstr();
 
-			pdcv1 = new PostDetailCaseView(context, title1, postContent, caseUrl);
+			pdcv1 = new PostDetailCaseView(context, title1, postAbstractInfo, postContent, caseUrl);
 			ll_case_detail_list.addView(pdcv1);
 
 			ll_group.setVisibility(View.VISIBLE);
 			tv_group_name.setText(postAbstractInfo.getPostAbstract().getCoterieName());
+			tv_group_name.setBackgroundColor(context.getResources().getColor(R.color.base_bg));
+			
 			//点击圈子 名称的跳转
 			final String coterieid = postAbstractInfo.getPostAbstract().getCoterieId();
 			tv_group_name.setOnClickListener(new OnClickListener() {

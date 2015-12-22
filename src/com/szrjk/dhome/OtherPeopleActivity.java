@@ -147,6 +147,14 @@ public class OtherPeopleActivity extends BaseActivity implements OnClickListener
 		findHeaderViewId(v);
 		findUserInfo();
 	}
+	
+	
+
+	public String getObjId() {
+		return objId;
+	}
+
+
 
 	protected void doMoreGetPosts(String userId2, String basePostId,
 			boolean isNew, String beginNum, String endNum) {

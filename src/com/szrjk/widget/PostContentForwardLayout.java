@@ -19,6 +19,7 @@ import com.szrjk.entity.UserCard;
 import com.szrjk.index.CaseDetailActivity;
 import com.szrjk.index.PostDetailActivity;
 import com.szrjk.self.CircleHomepageActivity;
+import com.szrjk.simplifyspan.SimplifySpanBuild;
 import com.szrjk.util.DisplayTimeUtil;
 import com.szrjk.util.ImageLoaderUtil;
 
@@ -54,6 +55,7 @@ public class PostContentForwardLayout extends RelativeLayout
 	private LinearLayout ll_post_content_left;
 	/***以下为转发时，case 类型的样式***/
 	private RelativeLayout rl_post_foward_case;
+	private TextView tv_uname;
 	private ImageView iv_casepic;
 	private TextView tv_posttitle;
 	private TextView tv_caseshare;
@@ -112,6 +114,10 @@ public class PostContentForwardLayout extends RelativeLayout
 		}else{
 			//病例分享
 			rl_post_foward_case.setVisibility(View.VISIBLE);
+			String postUserName = postAbstractInfo.getUserCard().getUserName();
+			tv_uname.setText(postUserName);
+//			SimplifySpanBuild simplifySpanBuild = getContentText(tv_post_text,postInfo.getContent(),userCard.getUserName(),userCard.getUserSeqId(),userCard.getUserLevel(),userCard.getUserType(),postInfo,position);
+//			tv_uname.setText(simplifySpanBuild.build());
 			String picurl = postAbstractInfo.getPostAbstract().getBackgroundPic();
 			String posttitle = postAbstractInfo.getPostAbstract().getPostTitle();
 			final String caseShare = postType.equals(Constant.CASE_SHARE)?"病例分享":"疑难求助";
@@ -213,6 +219,7 @@ public class PostContentForwardLayout extends RelativeLayout
 		rl_post_foward_case = (RelativeLayout) contextView.findViewById(R.id.rl_post_foward_case);
 
 
+		tv_uname = (TextView) contextView.findViewById(R.id.tv_uname);
 		iv_casepic = (ImageView) contextView.findViewById(R.id.iv_casepic);
 		tv_posttitle = (TextView) contextView.findViewById(R.id.tv_posttitle);
 		tv_caseshare = (TextView) contextView.findViewById(R.id.tv_caseshare);

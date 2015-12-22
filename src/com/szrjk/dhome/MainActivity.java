@@ -473,23 +473,21 @@ public class MainActivity extends FragmentActivity implements OnClickListener , 
 		Clickposition =3;
 	}
 
-
-	@Override
-	protected void onNewIntent(Intent intent) {
-		//		String url =intent.getStringExtra("bg");
-		//		BitmapUtils bitmapUtils = new BitmapUtils(this);
-		//		bitmapUtils.display(getSupportFragmentManager().findFragmentByTag("selfFragment")
-		//				.getView().findViewById(R.id.iv_self_user_background), url);
-		SelfFragment selffragment = (SelfFragment) getSupportFragmentManager().findFragmentByTag("selfFragment");
-		selffragment.getUserHpInfo(Constant.userInfo.getUserSeqId());
-		try {
-			selffragment.initViews(selffragment.userHomePageInfo);
-		} catch (DbException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		super.onNewIntent(intent);
-	}
+//	protected void onNewIntent(Intent intent) {
+//		//		String url =intent.getStringExtra("bg");
+//		//		BitmapUtils bitmapUtils = new BitmapUtils(this);
+//		//		bitmapUtils.display(getSupportFragmentManager().findFragmentByTag("selfFragment")
+//		//				.getView().findViewById(R.id.iv_self_user_background), url);
+//		SelfFragment selffragment = (SelfFragment) getSupportFragmentManager().findFragmentByTag("selfFragment");
+//		selffragment.getUserHpInfo(Constant.userInfo.getUserSeqId());
+//		try {
+//			selffragment.initViews(selffragment.userHomePageInfo);
+//		} catch (DbException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		super.onNewIntent(intent);
+//	}
 	class TimeCount extends CountDownTimer
 	{
 		public TimeCount(long millisInFuture, long countDownInterval)

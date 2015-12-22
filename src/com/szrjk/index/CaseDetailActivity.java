@@ -9,6 +9,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.NotificationCompat.CarExtender;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -25,6 +26,7 @@ import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.adapter.PostCommentAdapter;
 import com.szrjk.config.Constant;
+import com.szrjk.config.ConstantUser;
 import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.IndexFragment;
 import com.szrjk.dhome.R;
@@ -38,6 +40,8 @@ import com.szrjk.entity.Like;
 import com.szrjk.entity.PostStatis;
 import com.szrjk.entity.UserCard;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
+import com.szrjk.self.more.CaseSharePostActivity;
+import com.szrjk.self.more.ProblemHelpActivity;
 import com.szrjk.util.DisplayTimeUtil;
 import com.szrjk.util.ToastUtils;
 import com.szrjk.widget.DeptButton;
@@ -529,6 +533,14 @@ public class CaseDetailActivity extends BaseActivity {
 							+ postDetaillviewLayout.getTv_laudCount().getText()
 									.toString() + ","
 							+ postDetailBottomOperLayout.isIslike());
+		}
+		if (flag==ConstantUser.MyCaseShare) {
+			CaseSharePostActivity.ISDELETE=isDelete;
+			CaseSharePostActivity.POSITION=position;
+		}
+		if (flag==ConstantUser.MyProblemHelp) {
+			ProblemHelpActivity.ISDELETE=isDelete;
+			ProblemHelpActivity.POSITION=position;
 		}
 	}
 }

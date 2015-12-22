@@ -1,9 +1,12 @@
 package com.szrjk.http;
 
 import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.szrjk.util.MD5Util;
+import com.szrjk.util.MD5Util2;
 import org.apache.http.entity.StringEntity;
 
 import android.util.Log;
@@ -20,6 +23,8 @@ import com.szrjk.config.Constant;
 public class DHttpService
 {
 
+	private final static String  key = "abt80[Auj~2%6JV!jY~^c,_81qg>AWSh]$1jtpWwilK4L9OwDxPJn~Be.sLN8c3G";
+
 	public static void httpPost(HashMap<String, Object> hashMap,
 			AbstractDhomeRequestCallBack abstractDhomeRequestCallBack)
 	{
@@ -29,6 +34,23 @@ public class DHttpService
 
 		RequestParams params = new RequestParams();
 		String reqJson = JSON.toJSONString(hashMap);
+
+
+		String htext = reqJson+key;
+		//生成摘要
+		try {
+			//http://blog.csdn.net/jerryvon/article/details/22602811
+//			byte[] resultBytes = MD5Util.eccrypt(htext);
+//			String htextecrypt = MD5Util.hexString(resultBytes);
+//			params.setHeader("messageDigest",htextecrypt);
+//			String aa  = MD5Encode(msg);
+			params.setHeader("messageDigest", MD5Util2.MD5Encode(reqJson.trim()));
+		} catch (Exception e) {
+			Log.e("error","",e);
+//			e.printStackTrace();
+		}
+
+
 		Log.e("HttpPost", "提交报文---->" + reqJson);
 		try
 		{

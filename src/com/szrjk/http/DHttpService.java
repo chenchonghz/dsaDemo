@@ -6,6 +6,7 @@ import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.szrjk.config.Constant;
+import com.szrjk.util.DjsonUtils;
 import com.szrjk.util.MessageDigestUtil;
 import com.szrjk.util.base64.Base64Util;
 import org.apache.http.entity.StringEntity;
@@ -47,17 +48,18 @@ public class DHttpService
 //			reqJson = ;
 //			reqJson = MessageDigestUtil.doEncode(reqJson);
 //			reqJson = Base64Util.encode(reqJson);
-////			reqJson = MessageDigestUtil.doEncode(reqJson);
-//			params.setHeader("messageDigest", MessageDigestUtil.MD5Encode(reqJson));
+//			reqJson = MessageDigestUtil.doEncode(reqJson);
+			params.setHeader("messageDigest", MessageDigestUtil.MD5Encode(reqJson));
 
 //			String sss = MessageDigestUtil.doDecode(reqJson);
 		} catch (Exception e) {
 			Log.e("error","",e);
 //			e.printStackTrace();
 		}
-		params.setHeader("num", gss.trim().getBytes().length+"");
+//		params.setHeader("num", gss.trim().getBytes().length+"");
+//		params.setHeader("bytes", DjsonUtils.bean2Json(gss.trim().getBytes()));
 
-		Log.e("HttpPost", "提交报文---->" + reqJson);
+		Log.e("HttpPost", "提交报文---->" + gss);
 		try
 		{
 			params.setBodyEntity(new StringEntity(gss,"utf8"));

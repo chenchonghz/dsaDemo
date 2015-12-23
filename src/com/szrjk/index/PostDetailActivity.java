@@ -155,10 +155,11 @@ public class PostDetailActivity extends BaseActivity {
 
 			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
-				if (jobj.getString("ReturnCode").equals("0006")&&jobj.getString("ErrorMessage").equals("[queryPostForwardListByPostId]查询帖子信息异常")) {
-					ToastUtils.showMessage(instance, "该帖子已被删除！");
-					instance.finish();
-				}
+//				if (jobj.getString("ReturnCode").equals("0006")&&jobj.getString("ErrorMessage").equals("[queryPostForwardListByPostId]查询帖子信息异常")) {
+//
+//					instance.finish();
+//				}
+				ToastUtils.showMessage(instance, jobj.getString("ErrorMessage"));
 			}
 
 			@Override

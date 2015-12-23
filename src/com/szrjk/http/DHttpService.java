@@ -49,6 +49,9 @@ public class DHttpService
 			reqJson = Base64Util.encode(reqJson);
 //			reqJson = MessageDigestUtil.doEncode(reqJson);
 			params.setHeader("messageDigest", MessageDigestUtil.MD5Encode(reqJson));
+//			reqJson = Base64Util.encode(reqJson);
+////			reqJson = MessageDigestUtil.doEncode(reqJson);
+//			params.setHeader("messageDigest", MessageDigestUtil.MD5Encode(reqJson));
 
 //			String sss = MessageDigestUtil.doDecode(reqJson);
 		} catch (Exception e) {

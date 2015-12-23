@@ -1,6 +1,5 @@
 package com.szrjk.util;
 
-
 import com.szrjk.util.base64.Base64Util;
 
 import javax.crypto.Cipher;
@@ -11,12 +10,13 @@ import java.security.Key;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+
 /**
  * MD5生成代码处理 
  * http://blog.csdn.net/jerryvon/article/details/22602811
  **/
 
-public class MessafeDigest {
+public class MessageDigestUtil {
 
 	private final static String  MD5key = "abt80[Auj~2%6JV!jY~^c,_81qg>AWSh]$1jtpWwilK4L9OwDxPJn~Be.sLN8c3G"; //32位
 	
@@ -82,7 +82,7 @@ public class MessafeDigest {
  		IvParameterSpec ips = new IvParameterSpec(iv.getBytes());
  		cipher.init(Cipher.ENCRYPT_MODE, deskey, ips);
  		byte[] encryptData = cipher.doFinal(plainText.getBytes(encoding));
- 		return Base64.encode(encryptData);
+ 		return Base64Util.encode(new String(encryptData));
  	}
 
  	/**
@@ -96,7 +96,8 @@ public class MessafeDigest {
  		Cipher cipher = Cipher.getInstance("desede/CBC/PKCS5Padding");
  		IvParameterSpec ips = new IvParameterSpec(iv.getBytes());
  		cipher.init(Cipher.DECRYPT_MODE, deskey, ips);
- 		byte[] decryptData = cipher.doFinal(Base64.decode(encryptText));
+ 		String sText = Base64Util.decode(encryptText);
+ 		byte[] decryptData = cipher.doFinal(sText.getBytes());
  		return new String(decryptData, encoding);
  	}
     
@@ -132,12 +133,6 @@ public class MessafeDigest {
 //		System.out.println("4.afte MD5=" + sRtnValue);
 //		return sRtnValue;
 //  }
-    
-
-    
-
- 	
-    
  	//-----------------------------------------------------------------------------
  	//   报文压缩/解压
  	// http://www.cnblogs.com/gengaixue/archive/2013/09/04/3300658.html

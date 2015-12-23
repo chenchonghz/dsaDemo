@@ -9,6 +9,7 @@ import java.util.Map;
 import com.szrjk.util.MD5Util;
 import com.szrjk.util.MD5Util2;
 import com.szrjk.util.MessafeDigest;
+import com.szrjk.util.MessageDigestUtil;
 import com.szrjk.util.base64.Base64Util;
 import org.apache.http.entity.StringEntity;
 
@@ -40,6 +41,7 @@ public class DHttpService
 		String reqJson = JSON.toJSONString(hashMap);
 
 
+
 //		String htext = reqJson+key;
 		//生成摘要
 		try {
@@ -49,7 +51,10 @@ public class DHttpService
 //			params.setHeader("messageDigest",htextecrypt);
 //			String aa  = MD5Encode(msg);
 //			reqJson = ;
-			params.setHeader("messageDigest", MessafeDigest.Encode(Base64Util.encode(reqJson)));
+//			reqJson = MessageDigestUtil.doEncode(reqJson);
+//			params.setHeader("messageDigest", MessageDigestUtil.MD5Encode(reqJson));
+//			params.setHeader("num", reqJson.getBytes().length+"");
+//			String sss = MessageDigestUtil.doDecode(reqJson);
 		} catch (Exception e) {
 			Log.e("error","",e);
 //			e.printStackTrace();

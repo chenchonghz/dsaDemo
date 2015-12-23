@@ -1,12 +1,15 @@
 package com.szrjk.http;
 
 import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.szrjk.util.MD5Util;
 import com.szrjk.util.MD5Util2;
+import com.szrjk.util.MessafeDigest;
+import com.szrjk.util.base64.Base64Util;
 import org.apache.http.entity.StringEntity;
 
 import android.util.Log;
@@ -31,12 +34,13 @@ public class DHttpService
 		//公共参数处理,
 		Map BusiParams = (Map) hashMap.get("BusiParams");
 		BusiParams.put("deviceType","1");//设备类型 1:安卓 2:IOS 3:web
+		BusiParams.put("fuck","法克雪特");//设备类型 1:安卓 2:IOS 3:web
 
 		RequestParams params = new RequestParams();
 		String reqJson = JSON.toJSONString(hashMap);
 
 
-		String htext = reqJson+key;
+//		String htext = reqJson+key;
 		//生成摘要
 		try {
 			//http://blog.csdn.net/jerryvon/article/details/22602811
@@ -44,7 +48,8 @@ public class DHttpService
 //			String htextecrypt = MD5Util.hexString(resultBytes);
 //			params.setHeader("messageDigest",htextecrypt);
 //			String aa  = MD5Encode(msg);
-			params.setHeader("messageDigest", MD5Util2.MD5Encode(reqJson.trim()));
+//			reqJson = ;
+			params.setHeader("messageDigest", MessafeDigest.Encode(Base64Util.encode(reqJson)));
 		} catch (Exception e) {
 			Log.e("error","",e);
 //			e.printStackTrace();

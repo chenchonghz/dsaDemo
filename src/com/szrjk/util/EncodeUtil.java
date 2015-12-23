@@ -14,7 +14,7 @@ import java.security.NoSuchAlgorithmException;
 * 该代码仅供学习和研究支付宝接口使用，只是提供一个
 * */
 
-public class MD5Util2 {
+public class EncodeUtil {
 
 	private final static String  key = "abt80[Auj~2%6JV!jY~^c,_81qg>AWSh]$1jtpWwilK4L9OwDxPJn~Be.sLN8c3G";
 	

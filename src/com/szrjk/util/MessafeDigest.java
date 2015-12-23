@@ -1,25 +1,21 @@
 package com.szrjk.util;
 
-import com.szrjk.util.base64.Base64Util;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/** 
-* ¹¦ÄÜ£ºÖ§¸¶±¦MD5Ç©Ãû´¦ÀíºËĞÄÎÄ¼ş£¬²»ĞèÒªĞŞ¸Ä
-* °æ±¾£º3.3
-* ĞŞ¸ÄÈÕÆÚ£º2012-08-17
-* ËµÃ÷£º
-* ÒÔÏÂ´úÂëÖ»ÊÇÎªÁË·½±ãÉÌ»§²âÊÔ¶øÌá¹©µÄÑùÀı´úÂë£¬ÉÌ»§¿ÉÒÔ¸ù¾İ×Ô¼ºÍøÕ¾µÄĞèÒª£¬°´ÕÕ¼¼ÊõÎÄµµ±àĞ´,²¢·ÇÒ»¶¨ÒªÊ¹ÓÃ¸Ã´úÂë¡£
-* ¸Ã´úÂë½ö¹©Ñ§Ï°ºÍÑĞ¾¿Ö§¸¶±¦½Ó¿ÚÊ¹ÓÃ£¬Ö»ÊÇÌá¹©Ò»¸ö
+
+/**
+ * MD5ç”Ÿæˆä»£ç å¤„ç† 
+ * //http://blog.csdn.net/jerryvon/article/details/22602811
+ * 
 * */
 
-public class MD5Util2 {
+public class MessafeDigest {
 
-	private final static String  key = "abt80[Auj~2%6JV!jY~^c,_81qg>AWSh]$1jtpWwilK4L9OwDxPJn~Be.sLN8c3G";
+//	private final static String  key = "abt80[Auj~2%6JV!jY~^c,_81qg>AWSh]$1jtpWwilK4L9OwDxPJn~Be.sLN8c3G";
 	
 	
-	//byte×Ö½Ú×ª»»³É16½øÖÆµÄ×Ö·û´®MD5Utils.hexString
+	//byteå­—èŠ‚è½¬æ¢æˆ16è¿›åˆ¶çš„å­—ç¬¦ä¸²MD5Utils.hexString
 	private static String hexString(byte[] bytes){
         StringBuffer hexValue = new StringBuffer();
 
@@ -35,38 +31,44 @@ public class MD5Util2 {
     private static byte[] eccrypt(String info) throws NoSuchAlgorithmException{
         MessageDigest md5 = MessageDigest.getInstance("MD5");
         byte[] srcBytes = info.getBytes();
-        //Ê¹ÓÃsrcBytes¸üĞÂÕªÒª
+        //ä½¿ç”¨srcBytesæ›´æ–°æ‘˜è¦
         md5.update(srcBytes);
-        //Íê³É¹şÏ£¼ÆËã£¬µÃµ½result
+        //å®Œæˆå“ˆå¸Œè®¡ç®—ï¼Œå¾—åˆ°result
         byte[] resultBytes = md5.digest();
         return resultBytes;
     }
     
-    public static String MD5Encode(String info) throws Exception {
-    	String text = info + key;
-        text = Base64Util.encode(text);
-		byte[] resultBytes = eccrypt(text);
-		String sRtnValue = hexString(resultBytes);
-		return  sRtnValue;
+    /**
+     * å…ˆBASE64è½¬ç -->å†MD5è½¬ç 
+     * @param info
+     * @return
+     * @throws Exception
+     */
+    public static String Encode(String info)throws Exception{
+//        info = new String(info.toString().getBytes("UTF-8"));
+//    	String text = info + key;
+        byte[] resultBytes = eccrypt(info);
+        String sRtnValue = hexString(resultBytes);
+        return  sRtnValue;
     }
 	
-    //http://blog.csdn.net/jerryvon/article/details/22602811
-	public static void main(String args[]) throws Exception{
-		String msg = "12345°¢ÈøµÂ»Æ½ğ°¢ÈøµÂ6789"+key;  
-		byte[] resultBytes = eccrypt(msg);  
-		System.out.println("ÃÜÎÄÊÇ£º" + hexString(resultBytes));  
-		System.out.println("Ã÷ÎÄÊÇ£º" + msg);  
-		String ss = MD5Encode(msg);
-		System.out.println("miÊÇ£º" + ss);
-		
-	}
+    
+//	public static void main(String args[]) throws Exception{
+//		String msg = "{\"BusiParams\":{\"content\":\"çš„\",\"deviceType\":\"1\",\"userSeqId\":\"1000000206\"},\"ServiceName\":\"sendNormalPost\"}";
+//		byte[] resultBytes = eccrypt(msg);
+//		System.out.println("å¯†æ–‡æ˜¯ï¼š" + hexString(resultBytes));
+//		System.out.println("æ˜æ–‡æ˜¯ï¼š" + msg);
+//		String ss = Encode(msg);
+//		System.out.println("miæ˜¯ï¼š" + ss);
+//
+//	}
 	
 //    /**
-//     * Ç©Ãû×Ö·û´®
-//     * @param text ĞèÒªÇ©ÃûµÄ×Ö·û´®
-//     * @param key ÃÜÔ¿
-//     * @param input_charset ±àÂë¸ñÊ½
-//     * @return Ç©Ãû½á¹û
+//     * ç­¾åå­—ç¬¦ä¸²
+//     * @param text éœ€è¦ç­¾åçš„å­—ç¬¦ä¸²
+//     * @param key å¯†é’¥
+//     * @param input_charset ç¼–ç æ ¼å¼
+//     * @return ç­¾åç»“æœ
 //     */
 //    public static String sign(String text) {
 //    	text = text + key;
@@ -87,16 +89,16 @@ public class MD5Util2 {
 //        try {
 //            return content.getBytes(charset);
 //        } catch (UnsupportedEncodingException e) {
-//            throw new RuntimeException("MD5Ç©Ãû¹ı³ÌÖĞ³öÏÖ´íÎó,Ö¸¶¨µÄ±àÂë¼¯²»¶Ô,ÄúÄ¿Ç°Ö¸¶¨µÄ±àÂë¼¯ÊÇ:" + charset);
+//            throw new RuntimeException("MD5ç­¾åè¿‡ç¨‹ä¸­å‡ºç°é”™è¯¯,æŒ‡å®šçš„ç¼–ç é›†ä¸å¯¹,æ‚¨ç›®å‰æŒ‡å®šçš„ç¼–ç é›†æ˜¯:" + charset);
 //        }
 //    }
 	
 //    /**
-//     * Ç©Ãû×Ö·û´®
-//     * @param text ĞèÒªÇ©ÃûµÄ×Ö·û´®
-//     * @param key ÃÜÔ¿
-//     * @param input_charset ±àÂë¸ñÊ½
-//     * @return Ç©Ãû½á¹û
+//     * ç­¾åå­—ç¬¦ä¸²
+//     * @param text éœ€è¦ç­¾åçš„å­—ç¬¦ä¸²
+//     * @param key å¯†é’¥
+//     * @param input_charset ç¼–ç æ ¼å¼
+//     * @return ç­¾åç»“æœ
 //     */
 //    public static String sign(String text, String key, String input_charset) {
 //    	text = text + key;
@@ -104,12 +106,12 @@ public class MD5Util2 {
 //    }
     
     /**
-     * Ç©Ãû×Ö·û´®
-     * @param text ĞèÒªÇ©ÃûµÄ×Ö·û´®
-     * @param sign Ç©Ãû½á¹û
-     * @param key ÃÜÔ¿
-     * @param input_charset ±àÂë¸ñÊ½
-     * @return Ç©Ãû½á¹û
+     * ç­¾åå­—ç¬¦ä¸²
+     * @param text éœ€è¦ç­¾åçš„å­—ç¬¦ä¸²
+     * @param sign ç­¾åç»“æœ
+     * @param key å¯†é’¥
+     * @param input_charset ç¼–ç æ ¼å¼
+     * @return ç­¾åç»“æœ
      */
 //    public static boolean verify(String text, String sign, String key, String input_charset) {
 //    	String mysign  = sign(text, key, input_charset);

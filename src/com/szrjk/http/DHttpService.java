@@ -6,9 +6,7 @@ import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.szrjk.config.Constant;
-import com.szrjk.util.DjsonUtils;
 import com.szrjk.util.MessageDigestUtil;
-import com.szrjk.util.base64.Base64Util;
 import org.apache.http.entity.StringEntity;
 
 import java.io.UnsupportedEncodingException;

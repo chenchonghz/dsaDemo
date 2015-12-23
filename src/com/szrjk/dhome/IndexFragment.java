@@ -93,7 +93,8 @@ public class IndexFragment extends Fragment
 							context, mainActivity,userList, postList, postOtherList,userId,Constant.INDEX_FLAG, new IPullPostListCallback() {
 						@Override
 						public void skipToSelfFragment() {
-							mainActivity.skipToSelfFragment();
+							Intent intent = new Intent(context, SelfActivity.class);
+							context.startActivity(intent);
 						}
 					});
 					lv_postlist.setAdapter(adapter);

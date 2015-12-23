@@ -1,24 +1,18 @@
 package com.szrjk.http;
 
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
-import java.util.Map;
-
-import com.szrjk.util.MD5Util;
-import com.szrjk.util.MD5Util2;
-import com.szrjk.util.MessageDigestUtil;
-import com.szrjk.util.base64.Base64Util;
-import org.apache.http.entity.StringEntity;
-
 import android.util.Log;
-
 import com.alibaba.fastjson.JSON;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.szrjk.config.Constant;
+import com.szrjk.util.MessageDigestUtil;
+import com.szrjk.util.base64.Base64Util;
+import org.apache.http.entity.StringEntity;
+
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * denggm on 2015/10/20.

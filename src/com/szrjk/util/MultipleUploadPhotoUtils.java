@@ -42,13 +42,16 @@ import com.szrjk.entity.PhotoBucket;
 import com.szrjk.entity.PhotoType;
 import com.szrjk.entity.PopupItem;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
+import com.szrjk.self.more.album.AlbumGalleryActivity;
+import com.szrjk.self.more.album.AlbumGalleryAdapter;
 import com.szrjk.util.gallery.MainGalleryActivity;
 import com.szrjk.widget.ListPopup;
 
 /**
  * 选择多张
  * denggm on 2015/10/28.
- * DHome
+ * 
+ * 最后修改时间 
  */
 public class MultipleUploadPhotoUtils {
 
@@ -95,7 +98,6 @@ public class MultipleUploadPhotoUtils {
 	 */
 	private Uri mOutPutFileUri;
 	private File file;
-	
 	private void doTakePicture() throws IOException {
 		//        Intent intent = new Intent();
 		////        intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -123,7 +125,8 @@ public class MultipleUploadPhotoUtils {
 	private void doTakePhoto() {
 		Intent intent = new Intent();
 //		intent.setClass(context, AlbumActivity.class);
-		intent.setClass(context, MainGalleryActivity.class);
+//		intent.setClass(context, MainGalleryActivity.class);
+		intent.setClass(context, AlbumGalleryActivity.class);
 //		Bundle bundle = new Bundle();
 //		bundle.putInt(Constant.IMGNUM, maxNum);
 		intent.putExtra("num", maxNum);

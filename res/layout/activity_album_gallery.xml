@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/base_bg2" >
+    android:background="@color/base_bg" >
 
     <RelativeLayout
         android:id="@+id/hv_album_gallery"
@@ -33,7 +33,7 @@
                 android:layout_gravity="center_vertical"
                 android:text="相册"
                 android:textColor="@color/white"
-                android:textSize="@dimen/font_size_large" />
+                android:textSize="@dimen/font_size_middle" />
         </LinearLayout>
 
         <TextView
@@ -46,13 +46,13 @@
             android:textSize="@dimen/font_size_large" />
         
         <TextView 
-            android:id="@+id/tv_cancel"
+            android:id="@+id/tv_comp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
-            android:text="取消"
+            android:text="完成"
             android:textSize="@dimen/font_size_middle"
             android:textColor="@color/base_bg2"/>
     </RelativeLayout>
@@ -61,17 +61,15 @@
         android:id="@+id/gv_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
         android:layout_below="@+id/hv_album_gallery"
         android:gravity="center"
-        android:horizontalSpacing="5dp"
+        android:horizontalSpacing="2dp"
         android:numColumns="3"
         android:scrollbars="none"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="5dp" />
+        android:verticalSpacing="2dp" />
 
     <TextView
         android:id="@+id/tv_album"
@@ -79,6 +77,8 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="@string/no_photo"
+        android:visibility="gone"
         android:textColor="@color/black" />
 
+    
 </RelativeLayout>

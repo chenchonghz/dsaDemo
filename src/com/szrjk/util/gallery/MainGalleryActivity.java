@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.provider.MediaStore.Images.Media;
 import android.provider.MediaStore.MediaColumns;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -41,6 +42,8 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.R;
+import com.szrjk.self.more.album.PhotoUpAlbumHelper;
+import com.szrjk.self.more.album.PhotoUpImageItem;
 import com.szrjk.util.gallery.ListImageDirPopupWindow.OnImageDirSelected;
 /**
  * 
@@ -94,11 +97,11 @@ public class MainGalleryActivity extends BaseActivity implements OnImageDirSelec
 		public void handleMessage(android.os.Message msg)
 		{
 
-				progressDialog.dismiss();
-				// 为View绑定数据
-				data2View();
-				// 初始化展示文件夹的popupWindw
-				initListDirPopupWindw();
+			progressDialog.dismiss();
+			// 为View绑定数据
+			data2View();
+			// 初始化展示文件夹的popupWindw
+			initListDirPopupWindw();
 		}
 	};
 
@@ -158,7 +161,7 @@ public class MainGalleryActivity extends BaseActivity implements OnImageDirSelec
 	private ImageButton ib_back;
 
 	private Dialog progressDialog;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -169,14 +172,16 @@ public class MainGalleryActivity extends BaseActivity implements OnImageDirSelec
 		getWindowManager().getDefaultDisplay().getMetrics(outMetrics);
 		mScreenHeight = outMetrics.heightPixels;
 		//固定一下图片个数9
-//		num = 9;
+		//		num = 9;
 		num = this.getIntent().getIntExtra("num", 0);
 		progressDialog = createDialog(this, "正在加载...");
 		initView();
 		getImages();
-		
+
 		getViewHeight();
 	}
+	
+	
 
 	/**
 	 * 利用ContentProvider扫描手机中的图片，此方法在运行在子线程中 完成图片的扫描，最终获得jpg最多的那个文件夹
@@ -190,7 +195,7 @@ public class MainGalleryActivity extends BaseActivity implements OnImageDirSelec
 			return;
 		}
 		// 显示进度条
-//		mProgressDialog = ProgressDialog.show(this, null, "正在加载...");
+		//		mProgressDialog = ProgressDialog.show(this, null, "正在加载...");
 		progressDialog.show();
 		new Thread(new Runnable()
 		{
@@ -211,58 +216,70 @@ public class MainGalleryActivity extends BaseActivity implements OnImageDirSelec
 								new String[] { "image/jpeg", "image/png" },
 								MediaColumns.DATE_MODIFIED);
 
+				int photoPathIndex = mCursor.getColumnIndexOrThrow(Media.DATA);
+
 				Log.i("TAG", mCursor.getCount() + "");
 				while (mCursor.moveToNext())
 				{
 					// 获取图片的路径
-					String path = mCursor.getString(mCursor
-							.getColumnIndex(MediaColumns.DATA));
+					//					String path = mCursor.getString(mCursor	.getColumnIndex(MediaColumns.DATA));
 
-					//					Log.i("TAG", path);
-					// 拿到第一张图片的路径
-					if (firstImage == null)
-						firstImage = path;
-					// 获取该图片的父路径名
-					File parentFile = new File(path).getParentFile();
-					if (parentFile == null)
-						continue;
-					String dirPath = parentFile.getAbsolutePath();
-					ImageFloder imageFloder = null;
-					// 利用一个HashSet防止多次扫描同一个文件夹（不加这个判断，图片多起来还是相当恐怖的~~）
-					if (mDirPaths.contains(dirPath))
-					{
-						continue;
-					} else
-					{
-						mDirPaths.add(dirPath);
-						// 初始化imageFloder
-						imageFloder = new ImageFloder();
-						imageFloder.setDir(dirPath);
-						imageFloder.setFirstImagePath(path);
-					}
-					//这里跟诡异，部分图片会有问题
-					if(parentFile.list()==null)continue;
-					int picSize = parentFile.list(new FilenameFilter()
-					{
-						@Override
-						public boolean accept(File dir, String filename)
+					if (mCursor.getString(photoPathIndex)
+							.substring(
+									mCursor.getString(photoPathIndex).lastIndexOf("/") + 1,
+									mCursor.getString(photoPathIndex).lastIndexOf("."))
+									.replaceAll(" ", "").length() <= 0) {
+						Log.i(TAG, "出现了异常图片的地址："+ mCursor.getString(photoPathIndex));
+
+					}else{
+						// 获取图片的路径
+						String path = mCursor.getString(photoPathIndex);
+
+						// 拿到第一张图片的路径
+						if (firstImage == null)
+							firstImage = path;
+						// 获取该图片的父路径名
+						File parentFile = new File(path).getParentFile();
+						if (parentFile == null)
+							continue;
+						String dirPath = parentFile.getAbsolutePath();
+						ImageFloder imageFloder = null;
+						// 利用一个HashSet防止多次扫描同一个文件夹（不加这个判断，图片多起来还是相当恐怖的~~）
+						if (mDirPaths.contains(dirPath))
 						{
-							if (filename.endsWith(".jpg")
-									|| filename.endsWith(".png")
-									|| filename.endsWith(".jpeg"))
-								return true;
-							return false;
+							continue;
+						} else
+						{
+							mDirPaths.add(dirPath);
+							// 初始化imageFloder
+							imageFloder = new ImageFloder();
+							imageFloder.setDir(dirPath);
+							imageFloder.setFirstImagePath(path);
 						}
-					}).length;
-					totalCount += picSize;
+						//这里跟诡异，部分图片会有问题
+						if(parentFile.list()==null)continue;
+						int picSize = parentFile.list(new FilenameFilter()
+						{
+							@Override
+							public boolean accept(File dir, String filename)
+							{
+								if (filename.endsWith(".jpg")
+										|| filename.endsWith(".png")
+										|| filename.endsWith(".jpeg"))
+									return true;
+								return false;
+							}
+						}).length;
+						totalCount += picSize;
 
-					imageFloder.setCount(picSize);
-					mImageFloders.add(imageFloder);
+						imageFloder.setCount(picSize);
+						mImageFloders.add(imageFloder);
 
-					if (picSize > mPicsSize)
-					{
-						mPicsSize = picSize;
-						mImgDir = parentFile;
+						if (picSize > mPicsSize)
+						{
+							mPicsSize = picSize;
+							mImgDir = parentFile;
+						}
 					}
 				}
 				mCursor.close();
@@ -325,8 +342,8 @@ public class MainGalleryActivity extends BaseActivity implements OnImageDirSelec
 			{
 				mListImageDirPopupWindow.setAnimationStyle(R.style.anim_popup_dir);
 				//由于showAsDropDown，sdk 17以上可以正常使用，16未测试，但是低的有异常
-//				mListImageDirPopupWindow.showAsDropDown(mBottomLy, 0, 0);
-//				Log.i("px", ""+px);						基于点击的控件     位置                                     x偏移 y偏移，0底部，++往上
+				//				mListImageDirPopupWindow.showAsDropDown(mBottomLy, 0, 0);
+				//				Log.i("px", ""+px);						基于点击的控件     位置                                     x偏移 y偏移，0底部，++往上
 				mListImageDirPopupWindow.showAtLocation(mBottomLy, Gravity.BOTTOM, 0, px);
 
 				// 设置背景颜色变暗
@@ -366,7 +383,7 @@ public class MainGalleryActivity extends BaseActivity implements OnImageDirSelec
 				return false;
 			}
 		});
-//		System.out.println(Arrays.toString(t));
+		//		System.out.println(Arrays.toString(t));
 		/**
 		 * 可以看到文件夹的路径和图片的路径分开保存，极大的减少了内存的消耗；
 		 */
@@ -426,5 +443,5 @@ public class MainGalleryActivity extends BaseActivity implements OnImageDirSelec
 			}    
 		});
 	}
-	
+
 }

@@ -443,7 +443,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					public void onClick(View v) {
 //					if(isTourist){
 //						DialogUtil.showGuestDialog(context, null);
-//					}else{
+//					}else{		
 						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),postInfo.getUserSeqId(),position);
 //					}
 					}
@@ -470,7 +470,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					public void onClick(View v) {
 //					if(isTourist){
 //						DialogUtil.showGuestDialog(context, null);
-//					}else{
+//					}else{	
 						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),postInfo.getUserSeqId(),position);
 //					}
 					}
@@ -583,7 +583,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					public void onClick(View v) {
 //					if(isTourist){
 //						DialogUtil.showGuestDialog(context, null);
-//					}else{
+//					}else{						
 						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),postInfo.getUserSeqId(),position);
 //					}
 					}
@@ -777,7 +777,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					public void onClick(View v) {
 //					if(isTourist){
 //						DialogUtil.showGuestDialog(context, null);
-//					}else{
+//					}else{			
 						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),postInfo.getUserSeqId(),position);
 //					}
 					}
@@ -788,7 +788,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					public void onClick(View v) {
 //					if(isTourist){
 //						DialogUtil.showGuestDialog(context, null);
-//					}else{
+//					}else{				
 						skipToPostDetail(postInfo.getPostType(), postInfo.getPostId(), postInfo.getUserSeqId(),position);
 //					}
 					}
@@ -915,7 +915,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 //									e1.printStackTrace();
 //								}
 //								initSrcNormalPostListner(tran_normalPost_Holder.gv_src_pic,tran_normalPost_Holder.ll_src_normal_post,tran_normalPost_Holder.ll_srcDoctorInfo,tran_normalPost_Holder.tv_src_group_name,position,postAbstractLists.get(i).getPostAbstract(),postAbstractLists.get(i).getUserCard());
-//							}
+//							}			
 //						}else if(postAbstractLists.get(i).getPostLevel().equals(String.valueOf(postAbstractLists.size()-1))){
 //							String content = postAbstractLists.get(i).getPostAbstract().getContent();
 //							String createDate = postAbstractLists.get(i).getPostAbstract().getCreateDate();
@@ -1035,8 +1035,8 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 							}else{
 								skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getSrcPostAbstractCard().getContent(),
 										postInfo.getSrcUserCard().getUserFaceUrl(),postInfo.getPostId(),
-										postInfo.getSrcUserCard().getUserName(),postInfo.getPostType(),postInfo.getPostLevel()
-										,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),postAbstractLists,userInfo.getUserName(),flag);
+										postInfo.getPostType(),postInfo.getPostLevel()
+										,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),postAbstractLists,postInfo.getSrcUserCard().getUserName(),flag);
 							}
 						}
 					}
@@ -1047,7 +1047,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					public void onClick(View v) {
 //					if(isTourist){
 //						DialogUtil.showGuestDialog(context, null);
-//					}else{
+//					}else{					
 						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),userInfo.getUserSeqId(),position);
 //					}
 					}
@@ -1064,14 +1064,14 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					}
 				});
 //			tran_normalPost_Holder.ll_transmit_content.setOnClickListener(new OnClickListener() {
-//
+//				
 //				@Override
 //				public void onClick(View v) {
 //					// TODO Auto-generated method stub
 //					if(isTourist){
 //						DialogUtil.showGuestDialog(context, null);
-//					}else{
-//						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),userInfo.getUserSeqId(),position);
+//					}else{						
+//						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),userInfo.getUserSeqId(),position);		
 //					}
 //				}
 //			});
@@ -1088,7 +1088,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 				});
 				break;
 			case 4:
-
 				Log.e("IndexViewAdapter", "转发病例分享帖子加载数据");
 				if(userList.isEmpty()||postList.isEmpty()||postOtherList.isEmpty()){
 					return convertView;
@@ -1197,15 +1196,15 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 //							if(caseSharePostAbstractLists.get(i).getUserCard()!=null && caseSharePostAbstractLists.get(i).getPostAbstract()!=null){
 ////								initSrcUserData(tran_caseShare_Holder.iv_srcSmallPhoto,tran_caseShare_Holder.tv_srcDoctorName,tran_caseShare_Holder.tv_srcJobTitle,
 ////										tran_caseShare_Holder.tv_srcHospital,tran_caseShare_Holder.tv_srcDepartment,tran_caseShare_Holder.iv_src_headphoto_icon,caseSharePostAbstractLists.get(i).getUserCard());
-//								try {
+//								try {									
 //									initSrcPostInfoData(tran_caseShare_Holder.iv_src_backgroudpic,tran_caseShare_Holder.tv_src_postTitle,
 //											tran_caseShare_Holder.tv_src_completeRate,tran_caseShare_Holder.tv_srcTime,tran_caseShare_Holder.iv_gray,tran_caseShare_Holder.tv_srcname,caseSharePostAbstractLists.get(i).getPostAbstract(),caseSharePostAbstractLists.get(i).getUserCard(),position);
-//
+//									
 //								} catch (Exception e1) {
 //									e1.printStackTrace();
 //								}
 //								initSrcPostListner(tran_caseShare_Holder.rl_src_view_post,tran_caseShare_Holder.ll_srcDoctorInfo,position,caseSharePostAbstractLists.get(i).getPostAbstract(),caseSharePostAbstractLists.get(i).getUserCard());
-//							}
+//							}			
 //						}
 //						if(caseSharePostAbstractLists.get(i).getPostLevel().equals(String.valueOf(caseSharePostAbstractLists.size()-1))){
 //							String content = caseSharePostAbstractLists.get(i).getPostAbstract().getContent();
@@ -1290,11 +1289,10 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 							if(postInfo.getPostType().equals(Constant.TRANSMIT_POST)){
 								ToastUtils.showMessage(context, "多次转发功能正在开发中，敬请期待");
 							}else{
-								IndexFragment.POSITION = position;
 								skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getSrcPostAbstractCard().getPostTitle(),
 										postInfo.getSrcUserCard().getUserFaceUrl(),postInfo.getPostId(),
-										postInfo.getSrcUserCard().getUserName(),postInfo.getPostType(),postInfo.getPostLevel()
-										,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),caseSharePostAbstractLists,userInfo.getUserName(),flag);
+										postInfo.getPostType(),postInfo.getPostLevel()
+										,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),caseSharePostAbstractLists,postInfo.getSrcUserCard().getUserName(),flag);
 							}
 						}
 					}
@@ -1305,7 +1303,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					public void onClick(View v) {
 //					if(isTourist){
 //						DialogUtil.showGuestDialog(context, null);
-//					}else{
+//					}else{	
 						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),userInfo.getUserSeqId(),position);
 //					}
 					}
@@ -1316,7 +1314,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					public void onClick(View v) {
 //					if(isTourist){
 //						DialogUtil.showGuestDialog(context, null);
-//					}else{
+//					}else{			
 						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),userInfo.getUserSeqId(),position);
 //					}
 					}
@@ -1453,7 +1451,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 //									e.printStackTrace();
 //								}
 //								initSrcPostListner(tran_problemHelp_Holder.rl_src_view_post,tran_problemHelp_Holder.ll_srcDoctorInfo,position,problemHelpPostAbstractLists.get(i).getPostAbstract(),problemHelpPostAbstractLists.get(i).getUserCard());
-//							}
+//							}			
 //						}
 //						if(problemHelpPostAbstractLists.get(i).getPostLevel().equals(String.valueOf(problemHelpPostAbstractLists.size()-1))){
 //							String content = problemHelpPostAbstractLists.get(i).getPostAbstract().getContent();
@@ -1538,11 +1536,10 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 							if(postInfo.getPostType().equals(Constant.TRANSMIT_POST)){
 								ToastUtils.showMessage(context, "多次转发功能正在开发中，敬请期待");
 							}else{
-								IndexFragment.POSITION = position;
 								skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getSrcPostAbstractCard().getPostTitle(),
 										postInfo.getSrcUserCard().getUserFaceUrl(),postInfo.getPostId(),
-										postInfo.getSrcUserCard().getUserName(),postInfo.getPostType(),postInfo.getPostLevel()
-										,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),problemHelpPostAbstractLists,userInfo.getUserName(),flag);
+										postInfo.getPostType(),postInfo.getPostLevel()
+										,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),problemHelpPostAbstractLists,postInfo.getSrcUserCard().getUserName(),flag);
 							}
 						}
 					}
@@ -1553,7 +1550,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					public void onClick(View v) {
 //					if(isTourist){
 //						DialogUtil.showGuestDialog(context, null);
-//					}else{
+//					}else{				
 						skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),userInfo.getUserSeqId(),position);
 //					}
 					}
@@ -1598,7 +1595,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 				Log.e("IndexListViewAdapter", "最后的userId："+lastUserId);
 				notifyDataSetChanged();
 //			recommend_user_Holder.bt_change.setOnClickListener(new OnClickListener() {
-//
+//				
 //				@Override
 //				public void onClick(View v) {
 //					getNewRecommendUser(position,postInfo);
@@ -1613,7 +1610,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 
 
 	protected void skipToRepeatActivity(String userSeqId, String content,
-										String userFaceUrl, String postId, String srcUserName,
+										String userFaceUrl, String postId,
 										String postType, String postLevel, String srcPostId, int position,
 										int forward_NUM, List<PostAbstractList> postAbstractLists, String userName,int flag) {
 		// TODO Auto-generated method stub
@@ -1622,7 +1619,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		intent.putExtra(Constant.POST_TEXT, content);
 		intent.putExtra(Constant.PIC_URL, userFaceUrl);
 		intent.putExtra(Constant.POST_ID, postId);
-		intent.putExtra("srcUserName", srcUserName);
 		intent.putExtra(Constant.POST_TYPE, postType);
 		intent.putExtra(Constant.POST_LEVEL, postLevel);
 		intent.putExtra(Constant.SRC_POST_ID, srcPostId);
@@ -1885,8 +1881,8 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 //			icon_start += 1;
 //			icon_end = sb_content.length();
 //		}
-//
-//		if(content != null){
+//		
+//		if(content != null){		
 //			sb_content.append(":"+content);
 //		}
 //		Log.e("indexFragmentAdapter", "转发文字："+sb_content.toString());
@@ -1900,7 +1896,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 //				}else if(userType.equals("1")&&!userSeqId.equals(userId)){
 //					skipToSystemUserActivity(userSeqId);
 //				}else{
-//					if(!userSeqId.equals(userId)){
+//					if(!userSeqId.equals(userId)){		
 //						skipToOtherPeopleActivity(userSeqId);
 //					}
 //				}
@@ -1911,7 +1907,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 //				ds.setUnderlineText(false);
 //			}
 //		}, start,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//
+//		
 //		spanStr.setSpan(new ClickableSpan() {
 //			@Override
 //			public void onClick(View widget) {
@@ -1925,10 +1921,10 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 //				ds.setUnderlineText(false);
 //			}
 //		}, icon_end,sb_content.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//
+//		
 //		spanStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.link_text_color)), start, end,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 //		spanStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.font_titleanduname)), icon_end,sb_content.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//		if(userLevel.equals("11")){
+//		if(userLevel.equals("11")){	
 //			spanStr.setSpan(imgSpan, icon_start, icon_end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 //		}
 //		return null;

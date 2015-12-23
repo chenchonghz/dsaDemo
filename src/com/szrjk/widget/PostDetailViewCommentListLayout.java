@@ -132,7 +132,8 @@ public class PostDetailViewCommentListLayout extends RelativeLayout {
 		clickComment(contexView);
 
 		if (btnId == 2) {
-			clickCommentTable();
+//			clickCommentTable();
+			rl_comment.performClick();
 		}
 		this.context = context;
 	}

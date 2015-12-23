@@ -152,13 +152,9 @@ public class PostDetailFowardActivity2 extends BaseActivity {
 			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 				dialog.dismiss();
-<<<<<<< HEAD
-				if (jobj.getString("ReturnCode").equals("0006") && jobj.getString("ErrorMessage").equals("[queryPostForwardListByPostId]查询帖子信息异常")) {
-=======
 				if (jobj.getString("ReturnCode").equals("0006")
 						&& jobj.getString("ErrorMessage").equals(
 								"[queryPostForwardListByPostId]查询帖子信息异常")) {
->>>>>>> af5cfc778c734b88ac6eeea3184b6c93047b525f
 					ToastUtils.showMessage(instance, "该帖子已被删除！");
 					instance.finish();
 				}
@@ -282,15 +278,6 @@ public class PostDetailFowardActivity2 extends BaseActivity {
 								.getBooleanValue("isMineLike"));
 
 						// 设置入activity,用于转发等入参
-<<<<<<< HEAD
-						String username = ordinaryPostDetail.getUserCard()
-								.getUserName();
-//						String postText =
-//								.getContent();
-						PostAbstractList pp = PostAbstractList.fetchFirstLevel(ordinaryPostDetail.getPostDetail().getPostAbstractList());
-						String postText =pp.getPostAbstract().getContent();
-
-=======
 						String username = ordinaryPostDetail.getPostDetail()
 								.getPostAbstractList().get(0).getUserCard()
 								.getUserName();
@@ -302,7 +289,6 @@ public class PostDetailFowardActivity2 extends BaseActivity {
 						if (postText==null||postText.isEmpty()) {
 							postText=pp.getPostAbstract().getPostTitle();
 						}
->>>>>>> af5cfc778c734b88ac6eeea3184b6c93047b525f
 						String faceurl = ordinaryPostDetail.getUserCard()
 								.getUserFaceUrl();
 						String postType = ordinaryPostDetail.getPostType() + "";

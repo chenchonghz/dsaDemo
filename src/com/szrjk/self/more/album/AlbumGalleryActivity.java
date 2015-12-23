@@ -143,7 +143,7 @@ public class AlbumGalleryActivity extends BaseActivity {
 			@Override
 			public void onClick(View arg0) {
 				PictureListPopup popup = new PictureListPopup(instance, ll_backtoalbum, contentList,mHandler);
-				popup.showAtLocation(ll_backtoalbum, Gravity.BOTTOM, 0, 0);
+				popup.showAtLocation(ll_backtoalbum, Gravity.LEFT, 0, 0);
 			}
 		});
 	}

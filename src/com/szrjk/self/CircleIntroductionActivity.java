@@ -31,6 +31,7 @@ import com.szrjk.adapter.CoterieMemberPortraitGridAdapter;
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.R;
+import com.szrjk.entity.CircleInfo;
 import com.szrjk.entity.Coterie;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.UserCard;
@@ -63,6 +64,10 @@ public class CircleIntroductionActivity extends BaseActivity {
 	@ViewInject(R.id.tv_memberCount)
 	private TextView tv_memberCount;
 
+	@ViewInject(R.id.tv_type)
+	private TextView tv_type;
+	@ViewInject(R.id.tv_dept)
+	private TextView tv_dept;
 	@ViewInject(R.id.tv_isOpen)
 	private TextView tv_isOpen;
 
@@ -150,7 +155,19 @@ public class CircleIntroductionActivity extends BaseActivity {
 		} catch (ParseException e) {
 			Log.e(this.getPackageName(), "", e);
 		}
-
+		tv_type.setText(coterie.getCoterieType().equals("1")?"个人":"组织/机构");
+		if (coterie.getPropList().get(0).getPropertyId().equals("")) {
+			tv_dept.setText("");
+		}else{
+			switch (Integer.valueOf(coterie.getPropList().get(0).getPropertyId())) {
+			case 10:tv_dept.setText("内科");break;
+			case 11:tv_dept.setText("外科");break;
+			case 12:tv_dept.setText("妇科");break;
+			case 13:tv_dept.setText("儿科");break;
+			case 14:tv_dept.setText("更多");break;
+		}
+		}
+		
 		// Log.i("createDate", createDate);
 		tv_createDate.setText("本圈创建于" + createDate);
 		tv_memberCount.setText(coterie.getMemberCount() + "人");
@@ -165,13 +182,13 @@ public class CircleIntroductionActivity extends BaseActivity {
 		coterieMemberPortraitGridAdapter = new CoterieMemberPortraitGridAdapter(
 				instance, coterieFaceUrls);
 		gv_coterieFace.setAdapter(coterieMemberPortraitGridAdapter);
-		tv_isOpen.setText(coterie.getIsOpen().equals("Yes") ? "公开" : "私密");
+		tv_isOpen.setText(coterie.getIsOpen().equals("1") ? "公开" : "私密");
 		tv_coterieDesc.setText(coterie.getCoterieDesc());
 	}
 
 	private void loadCoterieData(String coterieId) {
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("ServiceName", "queryCoterieById");
+		paramMap.put("ServiceName", "getCoterieInfoById");
 		Map<String, Object> busiParams = new HashMap<String, Object>();
 		busiParams.put("coterieId", coterieId);
 		busiParams.put("memberLimitCount", "5");// 用于获取成员图片
@@ -187,36 +204,39 @@ public class CircleIntroductionActivity extends BaseActivity {
 					JSONObject returnObj = jsonObject
 							.getJSONObject("ReturnInfo");
 					JSONObject listOut = returnObj.getJSONObject("ListOut");
-					String coterieDesc = listOut.getString("coterieDesc");
-					String coterieName = listOut.getString("coterieName");
-					String coterieFaceUrl = listOut.getString("coterieFaceUrl");
-					String coterieId = listOut.getString("coterieId");
-					String createDate = listOut.getString("createDate");
-					String memberCount = listOut.getString("memberCount");
-					String memberType = listOut.getString("memberType");
-					String isOpen = listOut.getString("isOpen");
-					JSONArray memberCardList = listOut
-							.getJSONArray("memberCardList");
-					List<UserCard> members = new ArrayList<UserCard>();
-					if (memberCardList != null && !memberCardList.isEmpty()) {
-						for (int i = 0; i < memberCardList.size(); i++) {
-							UserCard userCard = JSON.parseObject(
-									memberCardList.getString(i), UserCard.class);
-							members.add(userCard);
-						}
-					}
-					Coterie coterie1 = new Coterie();
-					coterie1.setCoterieDesc(coterieDesc);
-					coterie1.setCoterieFaceUrl(coterieFaceUrl);
-					coterie1.setCoterieId(coterieId);
-					coterie1.setCoterieName(coterieName);
-					coterie1.setCreateDate(createDate);
-					coterie1.setIsOpen(isOpen);
-					coterie1.setMemberCount(memberCount);
-					coterie1.setMemberType(memberType);
-					coterie1.setMemberCardList(members);
+//					String coterieDesc = listOut.getString("coterieDesc");
+//					String coterieName = listOut.getString("coterieName");
+//					String coterieLevel = listOut.getString("coterieLevel");
+//					String coterieFaceUrl = listOut.getString("coterieFaceUrl");
+//					String coterieId = listOut.getString("coterieId");
+//					String createDate = listOut.getString("createDate");
+//					String memberCount = listOut.getString("memberCount");
+//					String memberType = listOut.getString("memberType");
+//					String isOpen = listOut.getString("isOpen");
+//					JSONArray memberCardList = listOut
+//							.getJSONArray("memberCardList");
+//					List<UserCard> members = new ArrayList<UserCard>();
+//					if (memberCardList != null && !memberCardList.isEmpty()) {
+//						for (int i = 0; i < memberCardList.size(); i++) {
+//							UserCard userCard = JSON.parseObject(
+//									memberCardList.getString(i), UserCard.class);
+//							members.add(userCard);
+//						}
+//					}
+//					Coterie coterie1 = new Coterie();
+//					coterie1.setCoterieDesc(coterieDesc);
+//					coterie1.setCoterieFaceUrl(coterieFaceUrl);
+//					coterie1.setCoterieId(coterieId);
+//					coterie1.setCoterieName(coterieName);
+//					coterie1.setCreateDate(createDate);
+//					coterie1.setIsOpen(isOpen);
+//					coterie1.setMemberCount(memberCount);
+//					coterie1.setMemberType(memberType);
+//					coterie1.setMemberCardList(members);
 					// Log.i("coterie", coterie1.toString());
-
+					Coterie coterie1=JSON.parseObject(
+							returnObj.getString("ListOut"), Coterie.class);
+					Log.i("TAG", coterie1.toString());
 					Message message = new Message();
 					message.what = GET_COTERIE_SUCCESS;
 					message.obj = coterie1;

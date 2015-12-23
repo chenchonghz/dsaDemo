@@ -547,6 +547,7 @@ public class SelfActivity extends BaseActivity implements OnClickListener {
 			}
 		}
 	};
+	
 	protected void onNewIntent(Intent intent) {
 		getUserHpInfo(Constant.userInfo.getUserSeqId());
 		try {
@@ -579,5 +580,4 @@ public class SelfActivity extends BaseActivity implements OnClickListener {
 		}
 		super.onResume();
 	}
-	
 }

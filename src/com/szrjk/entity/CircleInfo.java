@@ -1,6 +1,7 @@
 package com.szrjk.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class CircleInfo implements Serializable{
 	//{"coterieDesc":"用于测试4","coterieName":"测试4",
@@ -10,29 +11,39 @@ public class CircleInfo implements Serializable{
 	private String coterieDesc;//圈子描述
 	private String coterieName;//圈子名
 	private String objUserSeqId;//用户id
+	private String coterieLevel;//圈子等级（新添加）
+	private String coterieType;//圈子类型,1个人，2组织（新添加）
 	private String memberType; //用户类型 1.成员 2.管理员 3.创建人（群主）
 	private String coterieFaceUrl;//圈子头像地址
 	private String coterieId;//圈子id
 	private String isOpen;//是否公开  公开"YES"  不公开"NO"
 	private String memberCount;
 	private String isMember;
-	public CircleInfo() {
-		super();
+	private List<CircleType> propList;//圈子科室
+	public String getCoterieLevel() {
+		return coterieLevel;
 	}
-	public CircleInfo(String coterieDesc, String coterieName,
-			String objUserSeqId, String memberType, String coterieFaceUrl,
-			String coterieId, String isOpen, String memberCount, String isMember) {
-		super();
-		this.coterieDesc = coterieDesc;
-		this.coterieName = coterieName;
-		this.objUserSeqId = objUserSeqId;
-		this.memberType = memberType;
-		this.coterieFaceUrl = coterieFaceUrl;
-		this.coterieId = coterieId;
-		this.isOpen = isOpen;
-		this.memberCount = memberCount;
-		this.isMember = isMember;
+
+	public void setCoterieLevel(String coterieLevel) {
+		this.coterieLevel = coterieLevel;
 	}
+
+	public String getCoterieType() {
+		return coterieType;
+	}
+
+	public void setCoterieType(String coterieType) {
+		this.coterieType = coterieType;
+	}
+
+	public List<CircleType> getPropList() {
+		return propList;
+	}
+
+	public void setPropList(List<CircleType> propList) {
+		this.propList = propList;
+	}
+
 	public String getCoterieDesc() {
 		return coterieDesc;
 	}
@@ -87,14 +98,17 @@ public class CircleInfo implements Serializable{
 	public void setIsMember(String isMember) {
 		this.isMember = isMember;
 	}
+
 	@Override
 	public String toString() {
 		return "CircleInfo [coterieDesc=" + coterieDesc + ", coterieName="
 				+ coterieName + ", objUserSeqId=" + objUserSeqId
-				+ ", memberType=" + memberType + ", coterieFaceUrl="
-				+ coterieFaceUrl + ", coterieId=" + coterieId + ", isOpen="
-				+ isOpen + ", memberCount=" + memberCount + ", isMember="
-				+ isMember + "]";
+				+ ", coterieLevel=" + coterieLevel + ", coterieType="
+				+ coterieType + ", memberType=" + memberType
+				+ ", coterieFaceUrl=" + coterieFaceUrl + ", coterieId="
+				+ coterieId + ", isOpen=" + isOpen + ", memberCount="
+				+ memberCount + ", isMember=" + isMember + ", propList="
+				+ propList + "]";
 	}
 	
 }

@@ -170,7 +170,7 @@ public class CoterieMemberActivity extends BaseActivity{
 	
 	private void loadCoterieData(String coterieId,int memberCount) {
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("ServiceName", "getMemberListByCoterieId");
+		paramMap.put("ServiceName", "getCoterieMemberListById");
 		Map<String, Object> busiParams = new HashMap<String, Object>();
 		busiParams.put("coterieId", coterieId);
 		busiParams.put("baseUserId", "0");

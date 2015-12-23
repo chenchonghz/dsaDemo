@@ -35,6 +35,7 @@ public class AboutActivity extends BaseActivity{
 			@Override
 			public void onClick(View view) {
 				Intent intent=new Intent(AboutActivity.this,AlbumGalleryActivity.class);
+				intent.putExtra("num", 9);
 				startActivity(intent);
 			}
 		});

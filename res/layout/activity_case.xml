@@ -81,7 +81,7 @@
                 android:background="@color/white"
                 android:orientation="vertical" >
 
-                <EditText
+                <com.szrjk.widget.ContainsEmojiEditText
                     android:id="@+id/et_title"
                     android:layout_width="fill_parent"
                     android:layout_height="@dimen/send_edit_title_height"
@@ -218,7 +218,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical" >
 
-                    <EditText
+                    <com.szrjk.widget.ContainsEmojiEditText
                         android:id="@+id/et_case"
                         android:layout_width="fill_parent"
                         android:layout_height="@dimen/send_edit_height"
@@ -268,7 +268,7 @@
                     android:orientation="vertical"
                     android:visibility="gone" >
 
-                    <EditText
+                    <com.szrjk.widget.ContainsEmojiEditText
                         android:id="@+id/et_check"
                         android:layout_width="fill_parent"
                         android:layout_height="@dimen/send_edit_height"
@@ -318,7 +318,7 @@
                     android:orientation="vertical"
                     android:visibility="gone" >
 
-                    <EditText
+                    <com.szrjk.widget.ContainsEmojiEditText
                         android:id="@+id/et_treat"
                         android:layout_width="fill_parent"
                         android:layout_height="@dimen/send_edit_height"
@@ -368,7 +368,7 @@
                     android:orientation="vertical"
                     android:visibility="gone" >
 
-                    <EditText
+                    <com.szrjk.widget.ContainsEmojiEditText
                         android:id="@+id/et_visit"
                         android:layout_width="fill_parent"
                         android:layout_height="@dimen/send_edit_height"

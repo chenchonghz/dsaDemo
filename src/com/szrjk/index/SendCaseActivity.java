@@ -289,11 +289,11 @@ public class SendCaseActivity extends BaseActivity {
 	// 校验表单输入
 	private boolean checkInput() {
 		Result result = fireEye.test();
-		title = et_title.getText().toString();
-		strCase = et_case.getText().toString();
-		strCheck = et_check.getText().toString();
-		strTreat = et_treat.getText().toString();
-		strVisit = et_visit.getText().toString();
+		title = et_title.getText().toString().trim();
+		strCase = et_case.getText().toString().trim();
+		strCheck = et_check.getText().toString().trim();
+		strTreat = et_treat.getText().toString().trim();
+		strVisit = et_visit.getText().toString().trim();
 
 		if (title == null || title.length() == 0) {
 			showToast(instance, "标题不能空!", 0);

@@ -985,10 +985,10 @@ public class SendPuzzleActivity extends BaseActivity {
 		}
 	}
 	private void getEditTextString()	{
-		title = et_title.getText().toString();
-		strCase = et_case.getText().toString();
-		strCheck = et_check.getText().toString();
-		strTreat = et_treat.getText().toString();
+		title = et_title.getText().toString().trim();
+		strCase = et_case.getText().toString().trim();
+		strCheck = et_check.getText().toString().trim();
+		strTreat = et_treat.getText().toString().trim();
 	}
 	//保存内容
 	private void saveContent(){

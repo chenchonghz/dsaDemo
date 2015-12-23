@@ -58,6 +58,7 @@ public class CropPictureActivity extends Activity {
 
 	private Bitmap bitmap;
 
+	public static Bitmap bp;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -82,13 +83,16 @@ public class CropPictureActivity extends Activity {
 			@Override
 			public void onClick(View view) {
 				Bitmap clipBitmap = pv_crop_picture.clip();
-				Intent intent = new Intent(CropPictureActivity.this,
-						ChangePortraitActivity.class);
-				ByteArrayOutputStream baos = new ByteArrayOutputStream();
-				clipBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-				byte[] datas = baos.toByteArray();
-				intent.putExtra("CLIPBITMAP", datas);
-				startActivity(intent);
+				bp = clipBitmap;
+				setResult(RESULT_OK);
+				finish();
+//				Intent intent = new Intent(CropPictureActivity.this,
+//						ChangePortraitActivity.class);
+//				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//				clipBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//				byte[] datas = baos.toByteArray();
+//				intent.putExtra("CLIPBITMAP", datas);
+//				startActivity(intent);
 			}
 		});
 	}

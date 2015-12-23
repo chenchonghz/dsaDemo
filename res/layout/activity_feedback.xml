@@ -84,7 +84,7 @@
                         android:progress="0"
                         android:visibility="gone" />
 
-                    <EditText
+                    <com.szrjk.widget.ContainsEmojiEditText
                         android:id="@+id/et_content"
                         android:layout_width="fill_parent"
                         android:layout_height="320dp"

@@ -35,8 +35,9 @@ public class AlbumsActivity extends BaseActivity {
         loadData();//加载数据
         onItemClick();//设置相册点击事件
     }
+    private int num ;
     private void init(){
-    	
+    	num =  this.getIntent().getIntExtra("num", 0);
     	photoUpImageBucket.setBucketName("最近照片");
     	photoUpImageBucket.setCount(count);
     	ArrayList<PhotoUpImageItem> imageList = new ArrayList<PhotoUpImageItem>();
@@ -44,6 +45,7 @@ public class AlbumsActivity extends BaseActivity {
     	photoUpImageItem.setImagePath(recentphoto);
     	imageList.add(0, photoUpImageItem);
     	photoUpImageBucket.setImageList(imageList);
+    	
         listView = (ListView) findViewById(R.id.lv_albums);
         tv_cancel=(TextView)findViewById(R.id.tv_cancel);
         adapter = new AlbumsAdapter(AlbumsActivity.this);
@@ -59,9 +61,9 @@ public class AlbumsActivity extends BaseActivity {
             public void getAlbumList(List<PhotoUpImageBucket> list) {
             	Collections.sort(list);
             	AlbumsActivity.this.list = list;
-            	if (photoUpImageBucket!=null) {
-            		list.add(0, photoUpImageBucket);
-				}
+//            	if (photoUpImageBucket!=null) {
+//            		list.add(0, photoUpImageBucket);
+//				}
                 adapter.setArrayList(list);
                 adapter.notifyDataSetChanged();//更新视图
             }
@@ -76,11 +78,13 @@ public class AlbumsActivity extends BaseActivity {
                     int position, long id) {
             	if (position==0) {
 					Intent intent=new Intent(AlbumsActivity.this, AlbumGalleryActivity.class);
+					intent.putExtra("num", num);
 					startActivity(intent);
 					finish();
 				}else {
 					Intent intent = new Intent(AlbumsActivity.this,AlbumItemActivity.class);
 					intent.putExtra("imagelist", list.get(position));
+					intent.putExtra("num", num);
 					startActivity(intent);
 					finish();
 				}
@@ -90,6 +94,7 @@ public class AlbumsActivity extends BaseActivity {
 			@Override
 			public void onClick(View view) {
 				finish();
+				AlbumGalleryAdapter.mSelectedImage.clear();
 			}
 		});
     }

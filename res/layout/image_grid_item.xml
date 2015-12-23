@@ -22,6 +22,6 @@
         android:layout_marginRight="1dp"
         android:layout_marginTop="1dp"
         android:background="@null"
-        android:src="@drawable/icon_addpic_02_36" />
+        android:src="@drawable/icon_addpic_01_36" />
 
 </com.szrjk.widget.SquareLayout>

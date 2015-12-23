@@ -122,6 +122,7 @@ public class PhotoUpAlbumHelper extends AsyncTask<Object, Object, Object> {
 					String _id = cur.getString(photoIDIndex);
 					String path = cur.getString(photoPathIndex);
 					String bucketName = cur.getString(bucketDisplayNameIndex);
+					Log.i("name:--", bucketName);
 					String bucketId = cur.getString(bucketIdIndex);
 					PhotoUpImageBucket bucket = bucketList.get(bucketId);
 					// 这里完成图片归并到响应的相册里去

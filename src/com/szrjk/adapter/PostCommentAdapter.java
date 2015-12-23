@@ -19,6 +19,7 @@ import com.szrjk.config.Constant;
 import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.CommentActivity;
 import com.szrjk.dhome.R;
+import com.szrjk.dhome.SelfActivity;
 import com.szrjk.entity.Comment;
 import com.szrjk.entity.Forward;
 import com.szrjk.entity.IPullPostListCallback;
@@ -112,10 +113,12 @@ public class PostCommentAdapter<T> extends BaseAdapter {
 					}, new IPullPostListCallback() {
 						@Override
 						public void skipToSelfFragment() {
-							
+							Intent intent=new Intent(context, SelfActivity.class);
+							context.startActivity(intent);
 						}
 					});
 					holder.tv_content.setText(content);
+					holder.tv_content.setMovementMethod(LinkMovementMethod.getInstance());//开始响应点击事件
 					holder.tv_time.setText(DisplayTimeUtil.displayTimeString(forward.getForwardInfo().getPostAbstractList().get(0).getPostAbstract().getCreateDate()));
 			}
 		//评论

@@ -68,7 +68,18 @@ public class CreateCircleActivity extends BaseActivity {
 	@ViewInject(R.id.tv_number)
 	private TextView tv_number;
 	private int length;
-	
+	@ViewInject(R.id.tv_nothing)
+	private TextView tv_nothing;
+	@ViewInject(R.id.tv_1)
+	private TextView tv_neike;
+	@ViewInject(R.id.tv_2)
+	private TextView tv_waike;
+	@ViewInject(R.id.tv_3)
+	private TextView tv_fuke;
+	@ViewInject(R.id.tv_4)
+	private TextView tv_erke;
+	@ViewInject(R.id.tv_5)
+	private TextView tv_more;
 	@ViewInject(R.id.rb_public)
 	private RadioButton rb_public;
 	
@@ -96,6 +107,7 @@ public class CreateCircleActivity extends BaseActivity {
 		imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		
 	}
+
 
 	private void editCoterie(Coterie coterie) {
 		tv_coterieTitle.setText("编辑资料");
@@ -163,6 +175,12 @@ public class CreateCircleActivity extends BaseActivity {
 	@OnClick(R.id.iv_back)
 	public void backClick(View view){
 		finish();
+	}
+	//科室选择类型
+	@OnClick(R.id.tv_nothing)
+	public void choosenothing(View view){
+		tv_nothing.setTextColor(instance.getResources().getColor(R.color.header_bg));
+		tv_nothing.setBackground(instance.getResources().getDrawable(R.drawable.flow_dept_selector));
 	}
 	
 	@OnClick(R.id.tv_complete)

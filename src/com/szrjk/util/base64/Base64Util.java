@@ -1,6 +1,5 @@
 package com.szrjk.util.base64;
 
-import android.util.Log;
 import org.apache.commons.codec.binary.Base64;
 
 public class Base64Util {

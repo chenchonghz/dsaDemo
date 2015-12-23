@@ -8,7 +8,6 @@ import java.util.Map;
 
 import com.szrjk.util.MD5Util;
 import com.szrjk.util.MD5Util2;
-import com.szrjk.util.MessafeDigest;
 import com.szrjk.util.MessageDigestUtil;
 import com.szrjk.util.base64.Base64Util;
 import org.apache.http.entity.StringEntity;
@@ -39,6 +38,7 @@ public class DHttpService
 
 		RequestParams params = new RequestParams();
 		String reqJson = JSON.toJSONString(hashMap);
+		String gss = reqJson;
 
 
 
@@ -52,19 +52,21 @@ public class DHttpService
 //			String aa  = MD5Encode(msg);
 //			reqJson = ;
 //			reqJson = MessageDigestUtil.doEncode(reqJson);
-//			params.setHeader("messageDigest", MessageDigestUtil.MD5Encode(reqJson));
-//			params.setHeader("num", reqJson.getBytes().length+"");
+			reqJson = Base64Util.encode(reqJson);
+//			reqJson = MessageDigestUtil.doEncode(reqJson);
+			params.setHeader("messageDigest", MessageDigestUtil.MD5Encode(reqJson));
+
 //			String sss = MessageDigestUtil.doDecode(reqJson);
 		} catch (Exception e) {
 			Log.e("error","",e);
 //			e.printStackTrace();
 		}
-
+		params.setHeader("num", gss.trim().getBytes().length+"");
 
 		Log.e("HttpPost", "提交报文---->" + reqJson);
 		try
 		{
-			params.setBodyEntity(new StringEntity(reqJson, "utf-8"));
+			params.setBodyEntity(new StringEntity(gss,"utf8"));
 		}
 		catch (UnsupportedEncodingException e)
 		{

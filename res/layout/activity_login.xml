@@ -28,42 +28,56 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dip"
                 android:orientation="vertical"
-                android:paddingLeft="40dip"
-                android:paddingRight="40dip" >
+                android:paddingLeft="@dimen/base_padding_left"
+                android:paddingRight="@dimen/base_padding_right" >
 
-                <EditText
-                    android:id="@+id/et_name"
-                    android:layout_width="fill_parent"
-                    android:layout_height="40dip"
-                    android:background="@drawable/edit_shape"
-                    android:hint="手机号码"
-                    android:inputType="number"
-                    android:maxLength="11"
-                    android:paddingLeft="10dip"
-                    android:paddingRight="10dip"
-                    android:singleLine="true"
-                    android:textColor="#676767"
-                    android:textSize="14sp" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_shape" >
 
-                <EditText
-                    android:id="@+id/et_pwd"
-                    android:layout_width="fill_parent"
-                    android:layout_height="40dip"
-                    android:layout_marginTop="20dip"
-                    android:background="@drawable/edit_shape"
-                    android:hint="密码"
-                    android:inputType="textPassword"
-                    android:paddingLeft="10dip"
-                    android:paddingRight="10dip"
-                    android:singleLine="true"
-                    android:textColor="#676767"
-                    android:textSize="14sp" />
+                    <EditText
+                        android:id="@+id/et_name"
+                        android:layout_width="fill_parent"
+                        android:layout_height="40dip"
+                        android:background="@null"
+                        android:drawableLeft="@drawable/icon_circle"
+                        android:hint="手机号码"
+                        android:inputType="number"
+                        android:maxLength="11"
+                        android:paddingLeft="5dip"
+                        android:paddingRight="10dip"
+                        android:singleLine="true"
+                        android:textColor="#676767"
+                        android:textSize="14sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.1dp"
+                        android:layout_below="@id/et_name"
+                        android:background="#b5b5b5" />
+
+                    <EditText
+                        android:id="@+id/et_pwd"
+                        android:layout_width="fill_parent"
+                        android:layout_height="40dip"
+                        android:layout_below="@id/et_name"
+                        android:background="@null"
+                        android:drawableLeft="@drawable/icon_circle"
+                        android:hint="密码"
+                        android:inputType="textPassword"
+                        android:paddingLeft="5dip"
+                        android:paddingRight="10dip"
+                        android:singleLine="true"
+                        android:textColor="#676767"
+                        android:textSize="14sp" />
+                </RelativeLayout>
             </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dip"
+                android:layout_marginTop="12dip"
                 android:paddingLeft="40dip"
                 android:paddingRight="40dip" >
 
@@ -85,7 +99,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:text="忘记密码"
-                    android:textColor="@drawable/textcolor_bluegray"
+                    android:textColor="#b5b5b5"
                     android:textSize="14sp" >
                 </TextView>
             </RelativeLayout>
@@ -93,31 +107,63 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dip"
-                android:layout_marginRight="40dip"
-                android:layout_marginTop="15dip"
+                android:layout_marginLeft="@dimen/base_padding_left"
+                android:layout_marginRight="@dimen/base_padding_right"
+                android:layout_marginTop="12dip"
                 android:orientation="horizontal" >
-
-                <Button
-                    android:id="@+id/btnReg"
-                    android:layout_width="0dip"
-                    android:layout_height="40dip"
-                    android:layout_weight="1"
-                    android:background="@drawable/lg_btn_shape"
-                    android:text="注册"
-                    android:textColor="@color/white"
-                    android:textSize="14sp" />
 
                 <Button
                     android:id="@+id/btnLogin"
                     android:layout_width="0dip"
                     android:layout_height="40dip"
-                    android:layout_marginLeft="20dip"
                     android:layout_weight="1"
                     android:background="@drawable/rg_btn_shape"
                     android:text="登录"
                     android:textColor="@color/white"
                     android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/base_padding_left"
+                android:layout_marginRight="@dimen/base_padding_right"
+                android:layout_marginTop="12dip"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/btnguest"
+                    android:layout_width="0dip"
+                    android:layout_height="40dip"
+                    android:layout_weight="1"
+                    android:background="@drawable/rg_btn_guest"
+                    android:text="随便逛逛 》"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dip"
+                android:layout_marginRight="40dip"
+                android:layout_marginTop="12dip"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="还没有账号，点击这里"
+                    android:textColor="#b5b5b5"
+                    android:textSize="14sp"/>
+                <TextView
+                    android:id="@+id/btnReg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="注册"
+                    android:textColor="#f47264"
+                    android:textSize="14sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -188,28 +234,19 @@
                     android:src="@drawable/iconwx"
                     android:visibility="gone" />
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/tv_url"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:textSize="@dimen/font_size_middle"
-                android:visibility="visible" />
         </LinearLayout>
     </ScrollView>
 
     <TextView
-        android:id="@+id/tv_guest"
+        android:id="@+id/tv_url"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dip"
-        android:layout_marginBottom="20dip"
         android:layout_alignParentBottom="true"
-        android:text="随便逛逛>>"
-        android:textColor="@drawable/textcolor_grayblue"
-        android:textSize="@dimen/font_size_middle" />
+        android:layout_marginBottom="20dip"
+        android:layout_marginLeft="40dip"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/font_size_middle"
+        android:visibility="visible" />
 
 </RelativeLayout>

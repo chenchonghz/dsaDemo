@@ -1,24 +1,18 @@
 package com.szrjk.http;
 
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
-import java.util.Map;
-
-import com.szrjk.util.MD5Util;
-import com.szrjk.util.MD5Util2;
-import com.szrjk.util.MessafeDigest;
-import com.szrjk.util.base64.Base64Util;
-import org.apache.http.entity.StringEntity;
-
 import android.util.Log;
-
 import com.alibaba.fastjson.JSON;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.szrjk.config.Constant;
+import com.szrjk.util.MessageDigestUtil;
+import com.szrjk.util.base64.Base64Util;
+import org.apache.http.entity.StringEntity;
+
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * denggm on 2015/10/20.
@@ -38,6 +32,8 @@ public class DHttpService
 
 		RequestParams params = new RequestParams();
 		String reqJson = JSON.toJSONString(hashMap);
+		String gss = reqJson;
+
 
 
 //		String htext = reqJson+key;
@@ -49,17 +45,22 @@ public class DHttpService
 //			params.setHeader("messageDigest",htextecrypt);
 //			String aa  = MD5Encode(msg);
 //			reqJson = ;
-			params.setHeader("messageDigest", MessafeDigest.Encode(Base64Util.encode(reqJson)));
+//			reqJson = MessageDigestUtil.doEncode(reqJson);
+			reqJson = Base64Util.encode(reqJson);
+//			reqJson = MessageDigestUtil.doEncode(reqJson);
+			params.setHeader("messageDigest", MessageDigestUtil.MD5Encode(reqJson));
+
+//			String sss = MessageDigestUtil.doDecode(reqJson);
 		} catch (Exception e) {
 			Log.e("error","",e);
 //			e.printStackTrace();
 		}
-
+		params.setHeader("num", gss.trim().getBytes().length+"");
 
 		Log.e("HttpPost", "提交报文---->" + reqJson);
 		try
 		{
-			params.setBodyEntity(new StringEntity(reqJson, "utf-8"));
+			params.setBodyEntity(new StringEntity(gss,"utf8"));
 		}
 		catch (UnsupportedEncodingException e)
 		{

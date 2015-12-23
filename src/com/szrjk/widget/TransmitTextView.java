@@ -1,6 +1,12 @@
 package com.szrjk.widget;
 
+import java.util.Arrays;
+
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Paint.FontMetrics;
+import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.TextView;
@@ -38,6 +44,7 @@ public class TransmitTextView extends TextView{
 		linkHit = false;
 		return super.onTouchEvent(event);
 	}
-
+	
+	
 	
 }

@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.*;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lidroid.xutils.exception.HttpException;
@@ -46,6 +47,7 @@ import com.szrjk.simplifyspan.unit.SpecialTextUnit;
 import com.szrjk.util.*;
 import com.szrjk.widget.IndexGridView;
 import com.szrjk.widget.IndexGridView.OnTouchInvalidPositionListener;
+import com.szrjk.widget.MTextView;
 import com.szrjk.widget.TransmitTextView;
 
 import java.io.Serializable;
@@ -267,6 +269,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 				initSrcGroupView(convertView,tran_normalPost_Holder);
 				initSrcDoctorInfoView(convertView, tran_normalPost_Holder);
 				tran_normalPost_Holder.tv_src_post_text = (TextView)convertView.findViewById(R.id.tv_src_post_text);
+				tran_normalPost_Holder.tv_src_text = (TextView)convertView.findViewById(R.id.tv_src_text);
 				tran_normalPost_Holder.ll_src_normal_post = (LinearLayout)convertView.findViewById(R.id.view_src_normal_post);
 				tran_normalPost_Holder.gv_src_pic= (IndexGridView)convertView.findViewById(R.id.gv_src_pic);
 				convertView.setTag(R.id.tag_transmit_normalpost, tran_normalPost_Holder);
@@ -851,7 +854,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 				SpannableStringBuilder ssBuilder = new SpannableStringBuilder();
 				final List<PostAbstractList> postAbstractLists = postInfo.getPostAbstractList();
 				if(postInfo.getPostType().equals(Constant.TRANSMIT_POST2)){	
-					// TODO Auto-generated method stub
 //					boolean isTopTransmit = false;
 //				Collections.reverse(postAbstractLists);
 					if(postAbstractLists != null && !postAbstractLists.isEmpty()){
@@ -866,6 +868,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 								postInfo.setSrcUserCard(srcUser);
 								postInfo.setSrcPostAbstractCard(srcPost);
 							}else if(i == 0){
+								SrcUserCard srcUser = new SrcUserCard();
 								postInfo.setPostLevel(postAbstractLists.get(i).getPostLevel());
 								postInfo.setContent(postAbstractLists.get(i).getPostAbstract().getContent());
 								String createDate = postAbstractLists.get(i).getPostAbstract().getCreateDate();
@@ -883,14 +886,18 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 							@Override
 							public void initSrcPost(Context context, UserCard userCard,
 									PostInfo postInfo, String isDelete) {
-								// TODO Auto-generated method stub
 								if(isDelete != null && isDelete.equals("true")){
 									tran_normalPost_Holder.tv_src_post_text.setText("抱歉，此帖子已被作者删除");
 									tran_normalPost_Holder.tv_src_post_text.setTextColor(context.getResources().getColor(R.color.font_cell));
+									if(tran_normalPost_Holder.gv_src_pic.getVisibility() == View.VISIBLE){
+										tran_normalPost_Holder.gv_src_pic.setVisibility(View.GONE);
+									}
+									tran_normalPost_Holder.tv_src_text.setVisibility(View.GONE);
+//									tran_normalPost_Holder.tv_src_text.setVisibility(View.GONE);
 								}else{	
 									try {
 										initSrcGroupData(tran_normalPost_Holder.ll_src_group,tran_normalPost_Holder.tv_src_group_name,postInfo);
-										initSrcNormalPostData(tran_normalPost_Holder.tv_src_post_text,tran_normalPost_Holder.gv_src_pic,tran_normalPost_Holder.tv_srcTime,postInfo,userCard,position);
+										initSrcNormalPostData(tran_normalPost_Holder.tv_src_post_text,tran_normalPost_Holder.tv_src_text,tran_normalPost_Holder.gv_src_pic,tran_normalPost_Holder.tv_srcTime,postInfo,userCard,position);
 										initSrcNormalPostListner(tran_normalPost_Holder.gv_src_pic,tran_normalPost_Holder.ll_src_normal_post,tran_normalPost_Holder.ll_srcDoctorInfo,tran_normalPost_Holder.tv_src_group_name,position,postInfo,userCard);
 									} catch (Exception e1) {
 										e1.printStackTrace();
@@ -901,53 +908,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 						
 				}
 					
-//					for (int i = 0; i < postAbstractLists.size(); i++) {
-//						if(postAbstractLists.get(i).getPostLevel().equals("0")){
-//							if(postAbstractLists.get(i).getUserCard()!=null && postAbstractLists.get(i).getPostAbstract()!=null){
-////								initSrcUserData(tran_normalPost_Holder.iv_srcSmallPhoto,tran_normalPost_Holder.tv_srcDoctorName,tran_normalPost_Holder.tv_srcJobTitle,
-////										tran_normalPost_Holder.tv_srcHospital,tran_normalPost_Holder.tv_srcDepartment,tran_normalPost_Holder.iv_src_headphoto_icon,postAbstractLists.get(i).getUserCard());
-////								t_srcPostId = postAbstractLists.get(i).getPostAbstract().getPostId();
-//								postInfo.setSrcPostId(postAbstractLists.get(i).getPostAbstract().getPostId());
-//								initSrcGroupData(tran_normalPost_Holder.ll_src_group,tran_normalPost_Holder.tv_src_group_name,postAbstractLists.get(i).getPostAbstract());
-//								try {
-//									initSrcNormalPostData(tran_normalPost_Holder.tv_src_post_text,tran_normalPost_Holder.gv_src_pic,tran_normalPost_Holder.tv_srcTime,postAbstractLists.get(i).getPostAbstract(),postAbstractLists.get(i).getUserCard(),position);
-//								} catch (Exception e1) {
-//									e1.printStackTrace();
-//								}
-//								initSrcNormalPostListner(tran_normalPost_Holder.gv_src_pic,tran_normalPost_Holder.ll_src_normal_post,tran_normalPost_Holder.ll_srcDoctorInfo,tran_normalPost_Holder.tv_src_group_name,position,postAbstractLists.get(i).getPostAbstract(),postAbstractLists.get(i).getUserCard());
-//							}			
-//						}else if(postAbstractLists.get(i).getPostLevel().equals(String.valueOf(postAbstractLists.size()-1))){
-//							String content = postAbstractLists.get(i).getPostAbstract().getContent();
-//							String createDate = postAbstractLists.get(i).getPostAbstract().getCreateDate();
-////							t_postLevel = postAbstractLists.get(i).getPostLevel();
-//							postInfo.setPostLevel(postAbstractLists.get(i).getPostLevel());
-//							isTopTransmit = true;
-//							if(content != null){
-////								t_postContent = content;
-//								postInfo.setContent(content);
-//								SpannableString t_content = getTrasmitContent(postAbstractLists.get(i).getUserCard(),postAbstractLists.get(i).getPostAbstract(),position,postInfo,isTopTransmit);
-//								ssBuilder.append(t_content);
-////								tran_normalPost_Holder.tv_post_text.setText(t_content);
-////								tran_normalPost_Holder.tv_post_text.setMovementMethod(LinkMovementMethod.getInstance());
-//							}else{
-//								postInfo.setContent("");
-//								tran_normalPost_Holder.tv_post_text.setText("");
-//							}
-//							if(createDate != null){
-//								try {
-//									tran_normalPost_Holder.tv_time.setText(DisplayTimeUtil.displayTimeString(createDate));
-//								} catch (Exception e) {
-//									e.printStackTrace();
-//								}
-//							}else{
-//								tran_normalPost_Holder.tv_time.setText("");
-//							}
-//						}else{
-//							isTopTransmit = false;
-//							SpannableString t_content = getTrasmitContent(postAbstractLists.get(i).getUserCard(),postAbstractLists.get(i).getPostAbstract(),position,postInfo,isTopTransmit);
-//							ssBuilder.append(t_content);
-//						}
-//					}
 					tran_normalPost_Holder.tv_post_text.setText(ssBuilder);
 					tran_normalPost_Holder.tv_post_text.setMovementMethod(CustomLinkMovementMethod.getInstance());
 					
@@ -972,11 +932,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 						}
 					}
 				}
-//				}else{
-//					SpannableString content = getContentText(postInfo.getContent(),postInfo.getPContent(),postInfo.getPUserName(),postInfo.getPUserSeqId());
-//					tran_normalPost_Holder.tv_post_text.setText(content);
-//					tran_normalPost_Holder.tv_post_text.setMovementMethod(LinkMovementMethod.getInstance());
-//				}
+
 				if(postOtherInfo != null && postOtherInfo.getFORWARD_NUM()!=0){
 					tran_normalPost_Holder.tv_transmit.setText(""+postOtherInfo.getFORWARD_NUM());
 				}else{
@@ -1067,7 +1023,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 //				
 //				@Override
 //				public void onClick(View v) {
-//					// TODO Auto-generated method stub
 //					if(isTourist){
 //						DialogUtil.showGuestDialog(context, null);
 //					}else{						
@@ -1082,7 +1037,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					if(isTourist){
 						DialogUtil.showGuestDialog(context, null);
 					}else{			
-						clickLike(position,like4,postInfo.getUserSeqId(),postInfo.getPostId(),postOtherInfo.isMineLike());
+						clickLike(position,like4,userInfo.getUserSeqId(),postInfo.getPostId(),postOtherInfo.isMineLike());
 					}
 				}
 			});
@@ -1146,7 +1101,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 							@Override
 							public void initSrcPost(Context context, UserCard userCard,
 									PostInfo postInfo, String isDelete) {
-								// TODO Auto-generated method stub
 								if(isDelete != null && isDelete.equals("true")){
 									hintCaseShareView(tran_caseShare_Holder.ll_caseShare,tran_caseShare_Holder.fl_bg);
 									tran_caseShare_Holder.tv_srcname.setText("抱歉，此帖子已被作者删除");
@@ -1173,7 +1127,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 						try {
 							tran_caseShare_Holder.tv_time.setText(DisplayTimeUtil.displayTimeString(postInfo.getCreateDate()));
 						} catch (Exception e) {
-							// TODO Auto-generated catch block
 							Log.e("IndexListViewAdapter", e.toString());
 						}
 					}
@@ -1191,46 +1144,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 						}
 					}
 				}
-//					for (int i = 0; i < caseSharePostAbstractLists.size(); i++) {
-//						if(caseSharePostAbstractLists.get(i).getPostLevel().equals("0")){
-//							if(caseSharePostAbstractLists.get(i).getUserCard()!=null && caseSharePostAbstractLists.get(i).getPostAbstract()!=null){
-////								initSrcUserData(tran_caseShare_Holder.iv_srcSmallPhoto,tran_caseShare_Holder.tv_srcDoctorName,tran_caseShare_Holder.tv_srcJobTitle,
-////										tran_caseShare_Holder.tv_srcHospital,tran_caseShare_Holder.tv_srcDepartment,tran_caseShare_Holder.iv_src_headphoto_icon,caseSharePostAbstractLists.get(i).getUserCard());
-//								try {									
-//									initSrcPostInfoData(tran_caseShare_Holder.iv_src_backgroudpic,tran_caseShare_Holder.tv_src_postTitle,
-//											tran_caseShare_Holder.tv_src_completeRate,tran_caseShare_Holder.tv_srcTime,tran_caseShare_Holder.iv_gray,tran_caseShare_Holder.tv_srcname,caseSharePostAbstractLists.get(i).getPostAbstract(),caseSharePostAbstractLists.get(i).getUserCard(),position);
-//									
-//								} catch (Exception e1) {
-//									e1.printStackTrace();
-//								}
-//								initSrcPostListner(tran_caseShare_Holder.rl_src_view_post,tran_caseShare_Holder.ll_srcDoctorInfo,position,caseSharePostAbstractLists.get(i).getPostAbstract(),caseSharePostAbstractLists.get(i).getUserCard());
-//							}			
-//						}
-//						if(caseSharePostAbstractLists.get(i).getPostLevel().equals(String.valueOf(caseSharePostAbstractLists.size()-1))){
-//							String content = caseSharePostAbstractLists.get(i).getPostAbstract().getContent();
-//							String createDate = caseSharePostAbstractLists.get(i).getPostAbstract().getCreateDate();
-//							if(content != null){
-//								tran_caseShare_Holder.tv_post_text.setText(content);
-//							}
-//							if(createDate != null){
-//								try {
-//									tran_caseShare_Holder.tv_time.setText(DisplayTimeUtil.displayTimeString(createDate));
-//								} catch (Exception e) {
-//									e.printStackTrace();
-//								}
-//							}
-//						}
-//					}
-//				}
-
-//				if(postInfo.getPostLevel()!=null && postInfo.getPostLevel().equals("1")){
-				
-//				}else{
-//					SpannableString content = getContentText(postInfo.getContent(),postInfo.getPContent(),postInfo.getPUserName(),postInfo.getPUserSeqId());
-//					tran_caseShare_Holder.tv_post_text.setText(content);
-//					tran_caseShare_Holder.tv_post_text.setMovementMethod(LinkMovementMethod.getInstance());
-//				}
-
 				
 				if(postOtherInfo != null &&postOtherInfo.getFORWARD_NUM()!=0){
 					tran_caseShare_Holder.tv_transmit.setText(""+postOtherInfo.getFORWARD_NUM());
@@ -1326,7 +1239,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					if(isTourist){
 						DialogUtil.showGuestDialog(context, null);
 					}else{	
-						clickLike(position,like5,postInfo.getUserSeqId(),postInfo.getPostId(),postOtherInfo.isMineLike());
+						clickLike(position,like5,userInfo.getUserSeqId(),postInfo.getPostId(),postOtherInfo.isMineLike());
 					}
 				}
 			});
@@ -1393,7 +1306,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 							@Override
 							public void initSrcPost(Context context, UserCard userCard,
 									PostInfo postInfo, String isDelete) {
-								// TODO Auto-generated method stub
 								if(isDelete != null && isDelete.equals("true")){
 									hintCaseShareView(tran_problemHelp_Holder.ll_problemHelp,tran_problemHelp_Holder.fl_bg);
 									tran_problemHelp_Holder.tv_srcname.setText("抱歉，此帖子已被作者删除");
@@ -1439,46 +1351,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 						
 					}
 				}
-//					for (int i = 0; i < problemHelpPostAbstractLists.size(); i++) {
-//						if(problemHelpPostAbstractLists.get(i).getPostLevel().equals("0")){
-//							if(problemHelpPostAbstractLists.get(i).getUserCard()!=null && problemHelpPostAbstractLists.get(i).getPostAbstract()!=null){
-////								initSrcUserData(tran_problemHelp_Holder.iv_srcSmallPhoto, tran_problemHelp_Holder.tv_srcDoctorName, tran_problemHelp_Holder.tv_srcJobTitle,
-////										tran_problemHelp_Holder.tv_srcHospital, tran_problemHelp_Holder.tv_srcDepartment,tran_problemHelp_Holder.iv_src_headphoto_icon,problemHelpPostAbstractLists.get(i).getUserCard());
-//								try {
-//									initSrcPostInfoData(tran_problemHelp_Holder.iv_src_backgroudpic,tran_problemHelp_Holder.tv_src_postTitle,
-//											tran_problemHelp_Holder.tv_src_completeRate,tran_problemHelp_Holder.tv_srcTime,tran_problemHelp_Holder.iv_gray,tran_problemHelp_Holder.tv_srcname,problemHelpPostAbstractLists.get(i).getPostAbstract(),problemHelpPostAbstractLists.get(i).getUserCard(),position);
-//								} catch (Exception e) {
-//									e.printStackTrace();
-//								}
-//								initSrcPostListner(tran_problemHelp_Holder.rl_src_view_post,tran_problemHelp_Holder.ll_srcDoctorInfo,position,problemHelpPostAbstractLists.get(i).getPostAbstract(),problemHelpPostAbstractLists.get(i).getUserCard());
-//							}			
-//						}
-//						if(problemHelpPostAbstractLists.get(i).getPostLevel().equals(String.valueOf(problemHelpPostAbstractLists.size()-1))){
-//							String content = problemHelpPostAbstractLists.get(i).getPostAbstract().getContent();
-//							String createDate = problemHelpPostAbstractLists.get(i).getPostAbstract().getCreateDate();
-//							if(content != null){
-//								tran_problemHelp_Holder.tv_post_text.setText(content);
-//							}
-//							if(createDate != null){
-//								try {
-//									tran_problemHelp_Holder.tv_time.setText(DisplayTimeUtil.displayTimeString(createDate));
-//								} catch (Exception e) {
-//									e.printStackTrace();
-//								}
-//							}
-//						}
-//					}
-
-				
-//				if(postInfo.getPostLevel()!=null && postInfo.getPostLevel().equals("1")){
-				
-//				}else{
-//					SpannableString content = getContentText(postInfo.getContent(),postInfo.getPContent(),postInfo.getPUserName(),postInfo.getPUserSeqId());
-//					tran_problemHelp_Holder.tv_post_text.setText(content);
-//					tran_problemHelp_Holder.tv_post_text.setMovementMethod(LinkMovementMethod.getInstance());
-//				}
-				
-				
+							
 				if(postOtherInfo != null &&postOtherInfo.getFORWARD_NUM()!=0){
 					tran_problemHelp_Holder.tv_transmit.setText(""+postOtherInfo.getFORWARD_NUM());
 				}else{
@@ -1577,7 +1450,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					if(isTourist){
 						DialogUtil.showGuestDialog(context, null);
 					}else{						
-						clickLike(position,like6,postInfo.getUserSeqId(),postInfo.getPostId(),postOtherInfo.isMineLike());
+						clickLike(position,like6,userInfo.getUserSeqId(),postInfo.getPostId(),postOtherInfo.isMineLike());
 					}
 				}
 			});
@@ -1609,11 +1482,71 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 	}
 	
 
+	protected void initSrcNormalPostListner(TextView tv_src_post_text,
+			IndexGridView gv_src_pic, LinearLayout ll_src_normal_post,
+			LinearLayout ll_srcDoctorInfo, TextView tv_src_group_name,
+			final int position, final PostInfo postInfo, final UserCard userCard) {
+		// TODO Auto-generated method stub
+		tv_src_post_text.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())){
+					skipToSelfFragment();
+				}else if(userCard.getUserType().equals("1")&&!userCard.getUserSeqId().equals(userId)){
+					skipToSystemUserActivity(userCard.getUserSeqId());
+				}else{
+					if(!userCard.getUserSeqId().equals(userId)){		
+						skipToOtherPeopleActivity(userCard.getUserSeqId());
+					}
+				}
+			}
+		});
+		gv_src_pic.setOnTouchInvalidPositionListener(new OnTouchInvalidPositionListener() {
+
+			@Override
+			public boolean onTouchInvalidPosition(int motionEvent) {
+				return false;
+			}
+		});
+
+		ll_src_normal_post.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),postInfo.getUserSeqId(),position);		
+			}
+		});
+		ll_srcDoctorInfo.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if(userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())){
+					skipToSelfFragment();
+				}else if(userCard.getUserType().equals("1")&&!userCard.getUserSeqId().equals(userId)){
+					skipToSystemUserActivity(userCard.getUserSeqId());
+				}else{
+					if(!userCard.getUserSeqId().equals(userId)){	
+						skipToOtherPeopleActivity(userCard.getUserSeqId());
+					}
+				}
+			}
+		});
+		tv_src_group_name.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(context, CircleHomepageActivity.class);
+				intent.putExtra(CircleHomepageActivity.intent_param_circle_id, postInfo.getCoterieId());
+				context.startActivity(intent);
+			}
+		});
+	}
 	protected void skipToRepeatActivity(String userSeqId, String content,
 			String userFaceUrl, String postId,
 			String postType, String postLevel, String srcPostId, int position,
 			int forward_NUM, List<PostAbstractList> postAbstractLists, String userName,int flag) {
-		// TODO Auto-generated method stub
 		Intent intent = new Intent(context, RepeatActivity.class);
 		intent.putExtra(Constant.USER_SEQ_ID, userFaceUrl);
 		intent.putExtra(Constant.POST_TEXT, content);
@@ -1782,12 +1715,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			icon_start += 1;
 			icon_end = sb_content.length();
 		}
-		
-		if(content != null){		
-			sb_content.append(":"+content);
-		}
-		Log.e("indexFragmentAdapter", "转发文字："+sb_content.toString());
-		Log.e("indexFragmentAdapter", "开始："+start+"结束："+end);
 		SpannableString spanStr = new SpannableString(sb_content);
 		spanStr.setSpan(new ClickableSpan() {
 			@Override
@@ -1808,21 +1735,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 				ds.setUnderlineText(false);
 			}
 		}, start,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-		
-		spanStr.setSpan(new ClickableSpan() {
-			@Override
-			public void onClick(View widget) {
-				IndexFragment.ISSRCPOST = true;
-				IndexFragment.SRC_POSEID = srcPostInfo.getPostId();
-				skipToPostDetail(srcPostInfo.getPostType(),srcPostInfo.getPostId(),srcPostInfo.getUserSeqId(),position);
-			}
-			@Override
-			public void updateDrawState(TextPaint ds) {
-				super.updateDrawState(ds);
-				ds.setUnderlineText(false);
-			}
-		}, icon_end,sb_content.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-		
 		spanStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.link_text_color)), start, end,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		spanStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.font_titleanduname)), icon_end,sb_content.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		if(userLevel.equals("11")){	
@@ -1851,11 +1763,15 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			}
 		})));
 		if(userLevel.equals("11")){
-		    simplifySpanBuild.appendSpecialUnit(new SpecialTextUnit(" ")).appendSpecialUnit(new SpecialLabelUnit("火", context.getResources().getColor(R.color.transparent), 13, BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_yellow_v_24),40,40).setGravity(SpecialGravity.CENTER))
+		    int px = DisplaySizeUtil.dip2px(context, 13);
+		    simplifySpanBuild.appendSpecialUnit(new SpecialTextUnit(" ")).appendSpecialUnit(new SpecialLabelUnit("火", context.getResources().getColor(R.color.transparent), 13, BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_yellow_v_24),px,px).setGravity(SpecialGravity.CENTER))
 		    .appendSpecialUnit(new SpecialTextUnit(" "));
 		}
+		if(postInfo.getPostType().equals(Constant.NORMAL_POST)||postInfo.getPostType().equals(Constant.CIRCLE_POST)){
+			simplifySpanBuild.appendSpecialUnit(new SpecialTextUnit(":"));
+		}
 		if(content != null){
-			simplifySpanBuild.appendSpecialUnit(new SpecialTextUnit(":"+content, context.getResources().getColor(R.color.font_titleanduname)).setSpecialClickableUnit(new SpecialClickableUnit(new OnClickableSpanListener() {
+			simplifySpanBuild.appendSpecialUnit(new SpecialTextUnit(content, context.getResources().getColor(R.color.font_titleanduname)).setSpecialClickableUnit(new SpecialClickableUnit(new OnClickableSpanListener() {
 				
 				@Override
 				public void onClick(TextView tv, String clickText) {
@@ -1867,67 +1783,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			})));
 		}
 		return simplifySpanBuild;
-		
-//		String name = userName;
-//		StringBuffer sb_content = new StringBuffer(name);
-//		int start = 0;
-//		int end = userName.length();
-//		int icon_start = userName.length();
-//		int icon_end = userName.length();
-//		Bitmap b = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_yellow_v_24);
-//		ImageSpan imgSpan = new ImageSpan(context, b, DynamicDrawableSpan.ALIGN_BASELINE);
-//		if(userLevel.equals("11")){
-//			sb_content.append(" icon");
-//			icon_start += 1;
-//			icon_end = sb_content.length();
-//		}
-//		
-//		if(content != null){		
-//			sb_content.append(":"+content);
-//		}
-//		Log.e("indexFragmentAdapter", "转发文字："+sb_content.toString());
-//		Log.e("indexFragmentAdapter", "开始："+start+"结束："+end);
-//		SpannableString spanStr = new SpannableString(sb_content);
-//		spanStr.setSpan(new ClickableSpan() {
-//			@Override
-//			public void onClick(View widget) {
-//				if(userSeqId.equals(Constant.userInfo.getUserSeqId())){
-//					skipToSelfFragment();
-//				}else if(userType.equals("1")&&!userSeqId.equals(userId)){
-//					skipToSystemUserActivity(userSeqId);
-//				}else{
-//					if(!userSeqId.equals(userId)){		
-//						skipToOtherPeopleActivity(userSeqId);
-//					}
-//				}
-//			}
-//			@Override
-//			public void updateDrawState(TextPaint ds) {
-//				super.updateDrawState(ds);
-//				ds.setUnderlineText(false);
-//			}
-//		}, start,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//		
-//		spanStr.setSpan(new ClickableSpan() {
-//			@Override
-//			public void onClick(View widget) {
-//				IndexFragment.ISSRCPOST = true;
-//				IndexFragment.SRC_POSEID = postInfo.getPostId();
-//				skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),postInfo.getUserSeqId(),position);
-//			}
-//			@Override
-//			public void updateDrawState(TextPaint ds) {
-//				super.updateDrawState(ds);
-//				ds.setUnderlineText(false);
-//			}
-//		}, icon_end,sb_content.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//		
-//		spanStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.link_text_color)), start, end,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//		spanStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.font_titleanduname)), icon_end,sb_content.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//		if(userLevel.equals("11")){	
-//			spanStr.setSpan(imgSpan, icon_start, icon_end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//		}
-//		return null;
 	}
 	private SpannableString getTrasmitContent(final UserCard userCard, final PostInfo postAbstract,
 			final int position, final PostInfo postInfo, boolean isTopTransmit) {
@@ -2352,14 +2207,23 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			tv_time.setText(DisplayTimeUtil.displayTimeString(srcPostInfo.getCreateDate()));
 		}
 	}
-	private void initSrcNormalPostData(TextView tv_post_text, GridView gv_pic,
+	private void initSrcNormalPostData(TextView tv_src_name, TextView tv_src_text, GridView gv_pic,
 			TextView tv_time, final PostInfo postInfo, UserCard userCard,int position) throws Exception {
 		if(postInfo.getContent()!=null){
-			SimplifySpanBuild simplifySpanBuild = getContentText(tv_post_text,postInfo.getContent(),userCard.getUserName(),userCard.getUserSeqId(),userCard.getUserLevel(),userCard.getUserType(),postInfo,position);
-			tv_post_text.setText(simplifySpanBuild.build());
-//			SpannableString contentText = getContentText(postInfo.getContent(),userCard.getUserName(),userCard.getUserSeqId(),userCard.getUserLevel(),userCard.getUserType(),postInfo,position);
-//			tv_post_text.setText(contentText);
-//			tv_post_text.setMovementMethod(LinkMovementMethod.getInstance());
+			tv_src_text.setVisibility(View.VISIBLE);
+//			tv_src_text.setVisibility(View.GONE);
+//			SimplifySpanBuild simplifySpanBuild = getContentText(tv_post_text,postInfo.getContent(),userCard.getUserName(),userCard.getUserSeqId(),userCard.getUserLevel(),userCard.getUserType(),postInfo,position);
+//			tv_post_text.setText(simplifySpanBuild.build());
+//			tv_post_text.setText("叫兽：aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+			SpannableString content = getSrcContent(postInfo.getContent(),userCard.getUserName(),userCard.getUserSeqId(),userCard.getUserLevel(),userCard.getUserType(),postInfo,position);
+			tv_src_text.setText(content);
+			tv_src_text.setMovementMethod(LinkMovementMethod.getInstance());
+//			SpannableString name = getName(userCard.getUserName(),userCard.getUserSeqId(),userCard.getUserLevel(),userCard.getUserType(),postInfo,position);
+//			tv_src_name.setText(name);
+//			tv_src_name.setMovementMethod(LinkMovementMethod.getInstance());
+			SimplifySpanBuild simplifySpanBuild = getContentText(tv_src_name,null,userCard.getUserName(),userCard.getUserSeqId(),userCard.getUserLevel(),userCard.getUserType(),postInfo,position);
+			tv_src_name.setText(simplifySpanBuild.build());
+
 //			tv_post_text.setText(postInfo.getContent());
 		}
 		if(postInfo.getPicList()!=null&&!postInfo.getPicList()[0].isEmpty()){
@@ -2395,6 +2259,103 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		}
 	}
 	
+	private SpannableString getSrcContent(String content, String userName,
+			final String userSeqId, String userLevel, final String userType,
+			final PostInfo postInfo, final int position) {
+		// TODO Auto-generated method stub
+		String name = userName;
+		StringBuffer sb_content = new StringBuffer(name+":");
+		int start = 0;
+		int end = sb_content.length();
+		if(userLevel.equals("11")){
+			sb_content.append("      ");
+		}
+		int content_start = sb_content.length();
+		sb_content.append(content);
+		int content_end = sb_content.length();
+		SpannableString spanStr = new SpannableString(sb_content);
+		spanStr.setSpan(new ClickableSpan() {
+			@Override
+			public void onClick(View widget) {
+				if(userSeqId.equals(Constant.userInfo.getUserSeqId())){
+					skipToSelfFragment();
+				}else if(userType.equals("1")&&!userSeqId.equals(userId)){
+					skipToSystemUserActivity(userSeqId);
+				}else{
+					if(!userSeqId.equals(userId)){		
+						skipToOtherPeopleActivity(userSeqId);
+					}
+				}	
+			}
+			@Override
+			public void updateDrawState(TextPaint ds) {
+				super.updateDrawState(ds);
+				ds.setUnderlineText(false);
+				ds.setColor(context.getResources().getColor(R.color.transparent));
+			}
+		}, start,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//		spanStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.transparent)), start, end,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		spanStr.setSpan(new ClickableSpan() {
+			@Override
+			public void onClick(View widget) {
+				IndexFragment.ISSRCPOST = true;
+				IndexFragment.SRC_POSEID = postInfo.getPostId();
+				skipToPostDetail(postInfo.getPostType(),postInfo.getPostId(),userSeqId,position);
+			}
+			@Override
+			public void updateDrawState(TextPaint ds) {
+				super.updateDrawState(ds);
+				ds.setUnderlineText(false);
+				ds.setColor(context.getResources().getColor(R.color.font_titleanduname));
+			}
+		}, content_start,content_end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		
+		return spanStr;
+	}
+	private SpannableString getName(String userName, final String userSeqId,
+			String userLevel, final String userType, PostInfo postInfo, int position) {
+		// TODO Auto-generated method stub
+		String name = userName;
+		StringBuffer sb_content = new StringBuffer(name);
+		int start = 0;
+		int end = userName.length();
+		int icon_start = userName.length();
+		int icon_end = userName.length();
+		Bitmap b = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_yellow_v_24);
+		ImageSpan imgSpan = new ImageSpan(context, b, ImageSpan.ALIGN_BASELINE);
+//		if(userLevel.equals("11")){
+			sb_content.append(" icon");
+			icon_start += 1;
+			icon_end = sb_content.length();
+//		}
+		sb_content.append(":");
+		SpannableString spanStr = new SpannableString(sb_content);
+//		spanStr.setSpan(new ClickableSpan() {
+//			@Override
+//			public void onClick(View widget) {
+//				if(userSeqId.equals(Constant.userInfo.getUserSeqId())){
+//					skipToSelfFragment();
+//				}else if(userType.equals("1")&&!userSeqId.equals(userId)){
+//					skipToSystemUserActivity(userSeqId);
+//				}else{
+//					if(!userSeqId.equals(userId)){		
+//						skipToOtherPeopleActivity(userSeqId);
+//					}
+//				}
+//			}
+//			@Override
+//			public void updateDrawState(TextPaint ds) {
+//				super.updateDrawState(ds);
+//				ds.setUnderlineText(false);
+//				ds.setColor(context.getResources().getColor(R.color.link_text_color));
+//			}
+//		}, start,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		spanStr.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.link_text_color)), start, end,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//		if(userLevel.equals("11")){	
+			spanStr.setSpan(imgSpan, icon_start, icon_end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//		}
+		return spanStr;
+	}
 	/**
 	 * 初始化被转发帖子用户信息
 	 * @param iv_smallPhoto
@@ -2886,7 +2847,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("ServiceName", "sendPostLike");
 		Map<String, Object> busiParams = new HashMap<String, Object>();
-		busiParams.put("userId", userId);
+		busiParams.put("userId", Constant.userInfo.getUserSeqId());
 		busiParams.put("srcUserId", srcUserId);
 		busiParams.put("srcPostId", srcPostId);
 		paramMap.put("BusiParams", busiParams);
@@ -2991,7 +2952,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		ImageView iv_smallPhoto,iv_srcSmallPhoto,iv_like,iv_headphoto_icon,iv_src_headphoto_icon;
 		TextView tv_doctorName,tv_srcDoctorName,tv_jobTitle,tv_srcJobTitle,tv_hospital,tv_srcHospital,tv_time,tv_srcTime,
 		tv_department,tv_srcDepartment,tv_transmit,tv_command,tv_like,
-		tv_src_post_text,tv_src_group_name;
+		tv_src_group_name,tv_src_post_text,tv_src_text;
 		LinearLayout ll_doctorInfo,ll_srcDoctorInfo,ll_src_normal_post,ll_src_group,ll_transmit_content;
 		RelativeLayout rl_transmit,rl_command,rl_like;
 		IndexGridView gv_src_pic;

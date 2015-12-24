@@ -47,7 +47,7 @@ public class CircleRequestFragment extends Fragment {
 
 	private void getRequests() {
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("ServiceName", "queryCoterieInvitations");
+		paramMap.put("ServiceName", "getCoterieInvitations");
 		Map<String, Object> busiParams = new HashMap<String, Object>();
 		busiParams.put("userSeqId",Constant.userInfo.getUserSeqId());
 		busiParams.put("invitationType", "");

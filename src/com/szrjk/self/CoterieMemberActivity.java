@@ -33,6 +33,7 @@ import com.szrjk.config.Constant;
 import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.OtherPeopleActivity;
 import com.szrjk.dhome.R;
+import com.szrjk.dhome.SelfActivity;
 import com.szrjk.entity.Coterie;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.UserCard;
@@ -136,6 +137,8 @@ public class CoterieMemberActivity extends BaseActivity{
 				switch (view.getId()) {
 				case R.id.ucl_usercardlayout:
 					if (Constant.userInfo.getUserSeqId().equals(creator.getUserSeqId())){
+						Intent intent = new Intent(instance, SelfActivity.class);
+						startActivity(intent);
 						break;
 					}
 					Intent intent = new Intent(instance, OtherPeopleActivity.class);
@@ -156,7 +159,8 @@ public class CoterieMemberActivity extends BaseActivity{
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				if (Constant.userInfo.getUserSeqId().equals(memberCardList.get(arg2).getUserSeqId())){
-					
+					Intent intent = new Intent(instance, SelfActivity.class);
+					startActivity(intent);
 				}else{
 					Intent intent = new Intent(instance, OtherPeopleActivity.class);
 					intent.putExtra(Constant.USER_SEQ_ID,memberCardList.get(arg2).getUserSeqId());
@@ -170,7 +174,7 @@ public class CoterieMemberActivity extends BaseActivity{
 	
 	private void loadCoterieData(String coterieId,int memberCount) {
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("ServiceName", "getMemberListByCoterieId");
+		paramMap.put("ServiceName", "getCoterieMemberListById");
 		Map<String, Object> busiParams = new HashMap<String, Object>();
 		busiParams.put("coterieId", coterieId);
 		busiParams.put("baseUserId", "0");

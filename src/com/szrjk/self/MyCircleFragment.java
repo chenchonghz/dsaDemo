@@ -125,7 +125,7 @@ public class MyCircleFragment extends Fragment {
 	//请求用户的圈子报文
 	public void getCircles() {
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("ServiceName", "queryUserRelativeCoterie");
+		paramMap.put("ServiceName", "getCoterieInfosByUser");
 		Map<String, Object> busiParams = new HashMap<String, Object>();
 		busiParams.put("userSeqId",Constant.userInfo.getUserSeqId());
 		busiParams.put("beginNum",Integer.valueOf(0));

@@ -120,6 +120,7 @@ public class MyCircleActivity extends BaseActivity {
 				CircleInfo circleInfo = myCirclelist.get(position);
 				Intent intent = new Intent(instance, CircleHomepageActivity.class);
 				intent.putExtra("circle", circleInfo);
+				intent.putExtra("fromlist", true);
 				startActivity(intent);
 			}
 		});

@@ -401,19 +401,25 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 						e.printStackTrace();
 					}
 				}
-				if(postOtherInfo.getCOMMENT_NUM()!=0){
-					caseShare_Holder.tv_command.setText(String.valueOf(postOtherInfo.getCOMMENT_NUM()));
+				if(postOtherInfo != null){	
+					if(postOtherInfo.getCOMMENT_NUM()!=0){
+						caseShare_Holder.tv_command.setText(String.valueOf(postOtherInfo.getCOMMENT_NUM()));
+					}else{
+						caseShare_Holder.tv_command.setText(context.getResources().getString(R.string.command_text));
+					}
+					if(postOtherInfo.getFORWARD_NUM()!=0){
+						caseShare_Holder.tv_transmit.setText(""+postOtherInfo.getFORWARD_NUM());
+					}else{
+						caseShare_Holder.tv_transmit.setText(context.getResources().getString(R.string.transmit_text));
+					}
+					if(postOtherInfo.getLIKE_NUM()!=0){
+						caseShare_Holder.tv_like.setText(""+postOtherInfo.getLIKE_NUM());	
+					}else{
+						caseShare_Holder.tv_like.setText(context.getResources().getString(R.string.like_text));
+					}
 				}else{
 					caseShare_Holder.tv_command.setText(context.getResources().getString(R.string.command_text));
-				}
-				if(postOtherInfo.getFORWARD_NUM()!=0){
-					caseShare_Holder.tv_transmit.setText(""+postOtherInfo.getFORWARD_NUM());
-				}else{
 					caseShare_Holder.tv_transmit.setText(context.getResources().getString(R.string.transmit_text));
-				}
-				if(postOtherInfo.getLIKE_NUM()!=0){
-					caseShare_Holder.tv_like.setText(""+postOtherInfo.getLIKE_NUM());	
-				}else{
 					caseShare_Holder.tv_like.setText(context.getResources().getString(R.string.like_text));
 				}
 				if(isLike){

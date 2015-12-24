@@ -145,7 +145,7 @@ public class CreateCircleActivity extends BaseActivity implements OnClickListene
 		tv_nothing.setTextColor(instance.getResources().getColor(R.color.font_tabletitle));
 		tv_nothing.setBackground(instance.getResources().getDrawable(R.drawable.flow_text_selector));
 		if (coterie.getPropList().get(0).getPropertyId().equals("")) {
-			select(tv_nothing);dept_id="";
+			select(tv_nothing);dept_id=null;
 		}else{
 			switch (Integer.valueOf(coterie.getPropList().get(0).getPropertyId())) {
 			case 10:select(tv_neike);dept_id="10";break;
@@ -262,9 +262,13 @@ public class CreateCircleActivity extends BaseActivity implements OnClickListene
 	
 	private void maintainCoterie(String operateType,String userSeqId, String coterieId,String coterieFaceUrl2,
 			String coterieName, String coterieDesc, String isOpen,String coterieType) {
-		CircleType property = new CircleType("1", dept_id);
 		List<CircleType> propList = new ArrayList<CircleType>();
-		propList.add(property);
+		if (dept_id==null) {
+			propList = null;
+		}else{
+			CircleType property = new CircleType("1", dept_id);
+			propList.add(property);
+		}
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("ServiceName", "maintainCoterieInfo");
 		Map<String, Object> busiParams = new HashMap<String, Object>();
@@ -286,11 +290,14 @@ public class CreateCircleActivity extends BaseActivity implements OnClickListene
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
 				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode())) {
-					Coterie coterie1= JSON.parseObject(jsonObject.getString("ReturnInfo"), Coterie.class);
+					JSONObject returnObj = jsonObject
+							.getJSONObject("ReturnInfo");
+//					Coterie coterie1= JSON.parseObject(jsonObject.getString("ReturnInfo"), Coterie.class);
+					String coterieId = returnObj.getString("coterieId");
 					if (tv_complete.getText().toString().equals("完成")) {
 						Toast.makeText(instance, "创建圈子成功！", Toast.LENGTH_LONG).show();
 						Intent intent=new Intent(instance, CircleInviteFirendActivity.class);
-						intent.putExtra(Constant.CIRCLE, coterie1.getCoterieId());
+						intent.putExtra(Constant.CIRCLE, coterieId);
 						intent.putExtra("Create", "YES");
 						startActivity(intent);
 						finish();
@@ -299,7 +306,7 @@ public class CreateCircleActivity extends BaseActivity implements OnClickListene
 						Toast.makeText(instance, "编辑资料成功！", Toast.LENGTH_LONG).show();
 						setResult(EDIT_DATA_SUCCESS);
 						Intent intent=new Intent(instance, CircleIntroductionActivity.class);
-						intent.putExtra(Constant.CIRCLE, coterie1.getCoterieId());
+						intent.putExtra(Constant.CIRCLE, coterieId);
 						startActivity(intent);
 						finish();
 					}
@@ -370,7 +377,7 @@ public class CreateCircleActivity extends BaseActivity implements OnClickListene
 	}
 	private int dept_view_id = R.id.tv_nothing;
 	private String dept_name = "无";
-	private String dept_id="";
+	private String dept_id=null;
 	@Override
 	//科室选择（单选模式）
 	public void onClick(View view) {
@@ -388,7 +395,7 @@ public class CreateCircleActivity extends BaseActivity implements OnClickListene
 			}
 			//更改选中色
 			switch (view.getId()) {
-			case R.id.tv_nothing:select(tv_nothing);dept_id="";break;
+			case R.id.tv_nothing:select(tv_nothing);dept_id=null;break;
 			case R.id.tv_1:select(tv_neike);dept_id="10";break;
 			case R.id.tv_2:select(tv_waike);dept_id="11";break;
 			case R.id.tv_3:select(tv_fuke);dept_id="12";break;

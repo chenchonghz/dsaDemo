@@ -32,6 +32,7 @@ import com.szrjk.http.DHttpService;
 import com.szrjk.pull.PullToRefreshBase;
 import com.szrjk.pull.PullToRefreshBase.OnRefreshListener;
 import com.szrjk.pull.PullToRefreshListView;
+import com.szrjk.util.DisplaySizeUtil;
 import com.szrjk.util.ShowDialogUtil;
 import com.szrjk.util.ToastUtils;
 

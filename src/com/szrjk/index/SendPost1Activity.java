@@ -577,7 +577,7 @@ public class SendPost1Activity extends BaseActivity {
 		if(imm.isActive()&&getCurrentFocus()!=null){
 			if (getCurrentFocus().getWindowToken()!=null) {
 				imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-			}             
+			}
 		}
 	}
 	private ArrayList<String> getIdList(){

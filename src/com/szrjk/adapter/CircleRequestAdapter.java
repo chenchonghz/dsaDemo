@@ -288,7 +288,7 @@ public class CircleRequestAdapter extends BaseAdapter {
 
 		private void sendAgree() {
 			HashMap<String, Object> paramMap = new HashMap<String, Object>();
-			paramMap.put("ServiceName", "handleCoterieInvitation");
+			paramMap.put("ServiceName", "dealCoterieInvitation");
 			Map<String, Object> busiParams = new HashMap<String, Object>();
 			busiParams.put("userSeqId",list.get(position).getUserSeqId());//目标用户ID是上一层传过来
 			busiParams.put("invitationId", list.get(position).getInvitationId());
@@ -326,7 +326,7 @@ public class CircleRequestAdapter extends BaseAdapter {
 		}
 		private void sendIgnore() {
 			HashMap<String, Object> paramMap = new HashMap<String, Object>();
-			paramMap.put("ServiceName", "handleCoterieInvitation");
+			paramMap.put("ServiceName", "dealCoterieInvitation");
 			Map<String, Object> busiParams = new HashMap<String, Object>();
 			busiParams.put("userSeqId",list.get(position).getUserSeqId());//目标用户ID是上一层传过来
 			busiParams.put("invitationId", list.get(position).getInvitationId());
@@ -365,7 +365,7 @@ public class CircleRequestAdapter extends BaseAdapter {
 	}
 	public void getcircle(int position) {
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("ServiceName", "queryCoterieById");
+		paramMap.put("ServiceName", "getCoterieInfoById");
 		Map<String, Object> busiParams = new HashMap<String, Object>();
 		busiParams.put("coterieId",list.get(position).getCoterieId());//目标用户ID是上一层传过来
 		busiParams.put("userSeqId", list.get(position).getUserSeqId());

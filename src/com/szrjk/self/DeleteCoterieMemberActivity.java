@@ -186,7 +186,7 @@ private OnClickListener itemsOnClick=new OnClickListener() {
 	
 	private void deleteCoterieMember() {
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("ServiceName", "removeUserFromCoterie");
+		paramMap.put("ServiceName", "removeUsersFromCoterie");
 		Map<String, Object> busiParams = new HashMap<String, Object>();
 		busiParams.put("coterieId", coterie.getCoterieId());
 		busiParams.put("userSeqId", userInfo.getUserSeqId());

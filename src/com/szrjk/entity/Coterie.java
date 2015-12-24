@@ -14,6 +14,9 @@ public class Coterie implements Serializable{
 	private String createDate;
 	private String memberCount;
 	private String isOpen;
+	private String coterieLevel;
+	private String coterieType;
+	private List<CircleType> propList;//圈子科室
 	private String isMember;//是否是该群内成员
 	private String memberType;//查询者在圈内的身份0：非圈内成员	1：普通成员	3：群主
 	private List<UserCard> memberCardList;
@@ -22,19 +25,61 @@ public class Coterie implements Serializable{
 		super();
 	}
 
+
 	public Coterie(String coterieDesc, String coterieName,
-			String coterieFaceUrl, String coterieId, String createDate,
-			String memberCount, String isOpen, List<UserCard> memberCardList) {
+			String coterieFaceUrl, String coterieId, String creatorId,
+			UserCard creator, String createDate, String memberCount,
+			String isOpen, String coterieLevel, String coterieType,
+			List<CircleType> propList, String isMember, String memberType,
+			List<UserCard> memberCardList) {
 		super();
 		this.coterieDesc = coterieDesc;
 		this.coterieName = coterieName;
 		this.coterieFaceUrl = coterieFaceUrl;
 		this.coterieId = coterieId;
+		this.creatorId = creatorId;
+		this.creator = creator;
 		this.createDate = createDate;
 		this.memberCount = memberCount;
 		this.isOpen = isOpen;
+		this.coterieLevel = coterieLevel;
+		this.coterieType = coterieType;
+		this.propList = propList;
+		this.isMember = isMember;
+		this.memberType = memberType;
 		this.memberCardList = memberCardList;
 	}
+
+
+	public String getCoterieLevel() {
+		return coterieLevel;
+	}
+
+
+	public void setCoterieLevel(String coterieLevel) {
+		this.coterieLevel = coterieLevel;
+	}
+
+
+	public String getCoterieType() {
+		return coterieType;
+	}
+
+
+	public void setCoterieType(String coterieType) {
+		this.coterieType = coterieType;
+	}
+
+
+	public List<CircleType> getPropList() {
+		return propList;
+	}
+
+
+	public void setPropList(List<CircleType> propList) {
+		this.propList = propList;
+	}
+
 
 	public String getCoterieDesc() {
 		return coterieDesc;
@@ -134,6 +179,7 @@ public class Coterie implements Serializable{
 		this.memberCardList = memberCardList;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Coterie [coterieDesc=" + coterieDesc + ", coterieName="
@@ -141,9 +187,12 @@ public class Coterie implements Serializable{
 				+ ", coterieId=" + coterieId + ", creatorId=" + creatorId
 				+ ", creator=" + creator + ", createDate=" + createDate
 				+ ", memberCount=" + memberCount + ", isOpen=" + isOpen
-				+ ", isMember=" + isMember + ", memberType=" + memberType
-				+ ", memberCardList=" + memberCardList + "]";
+				+ ", coterieLevel=" + coterieLevel + ", coterieType="
+				+ coterieType + ", propList=" + propList + ", isMember="
+				+ isMember + ", memberType=" + memberType + ", memberCardList="
+				+ memberCardList + "]";
 	}
+
 
 	
 	

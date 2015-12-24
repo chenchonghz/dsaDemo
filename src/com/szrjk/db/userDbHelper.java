@@ -53,7 +53,7 @@ public class userDbHelper {
         }
 
         // 下面测试 /data/data/com.test.db/databases/ 下的数据库是否能正常工作
-        SQLiteDatabase database = SQLiteDatabase.openOrCreateDatabase(DB_PATH + DB_NAME, null);
+//        SQLiteDatabase database = SQLiteDatabase.openOrCreateDatabase(DB_PATH + DB_NAME, null);
 //        Cursor cursor = database.rawQuery("select * from TMessage", null);
 //
 //        if (cursor.getCount() > 0) {

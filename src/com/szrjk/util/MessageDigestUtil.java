@@ -51,7 +51,7 @@ public class MessageDigestUtil {
      * 3. ±®ŒƒΩ‚√‹
     **/
 	public static String MD5Encode(String plainText) throws Exception {
-		String subString = plainText.substring(0,15);
+		String subString = plainText;
 		subString = subString + MD5key;
 		String info = Base64Util.encode(subString);
 		byte[] resultBytes = MD5eccrypt(info);

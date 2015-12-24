@@ -43,8 +43,6 @@ import com.szrjk.entity.PhotoType;
 import com.szrjk.entity.PopupItem;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.self.more.album.AlbumGalleryActivity;
-import com.szrjk.self.more.album.AlbumGalleryAdapter;
-import com.szrjk.util.gallery.MainGalleryActivity;
 import com.szrjk.widget.ListPopup;
 
 /**
@@ -209,13 +207,23 @@ public class MultipleUploadPhotoUtils {
 				//上传所有照片
 				urlArr = new String[imgItems.size()];
 				Log.i("imgItems.size", ""+imgItems.size());
+				
+				//先生成图片
+				for (int i = 0; i < urlArr.length; i++) {
+					String userSeqId = Constant.userInfo!=null?Constant.userInfo.getUserSeqId():"0";
+					urlArr[i] = MultipleImageUploadUtil.createPathName(userSeqId, PhotoType.Feed);
+				}
+				//先回调，更新UI
+				iSelectImgCallback.selectImgCallback(imgItems,urlArr);
 				for (int i=0;i<imgItems.size();i++){
 					ImageItem postItems = imgItems.get(i);
 					Bitmap bbb = postItems.getBitmap();
-					String url =  updateFile(bbb);
-					urlArr[i] = url;
+//					String url =  
+					updateFile(bbb,urlArr[i]);
+//					urlArr[i] = url;
 				}
-				iSelectImgCallback.selectImgCallback(imgItems,urlArr);
+				//目前没做失败处理 
+				//iSelectImgCallback.selectImgCallback(imgItems,urlArr);
 				break;
 			}
 		}
@@ -225,11 +233,14 @@ public class MultipleUploadPhotoUtils {
 
 
 	// 上传图片
-	private String updateFile(Bitmap bitmap) {
+	private String updateFile(Bitmap bitmap,String preurl) {
 		ByteArrayOutputStream baos = BitMapUtil.comp(bitmap);
 		byte[] imgData = baos.toByteArray();
-
-		String url = context.uploadPhoto(imgData, PhotoType.Feed, new SaveCallback() {
+//		ImageUploadUtil util = new ImageUploadUtil();
+		MultipleImageUploadUtil util = new MultipleImageUploadUtil();
+		String url = util.uploadPhoto(context, imgData, preurl, PhotoType.Feed,new SaveCallback() {
+//				(context,imgData,url PhotoType.Feed, new SaveCallback() {
+//		String url = context.uploadPhoto(imgData, PhotoType.Feed, new SaveCallback() {
 			@Override
 			public void onProgress(String arg0, int pro, int total) {
 			}

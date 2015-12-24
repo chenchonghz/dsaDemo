@@ -36,8 +36,11 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_margin="5dp"
+        android:layout_height="1px"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="2.5dp"
+        android:layout_marginRight="2.5dp"
+        android:layout_marginTop="5dp"
         android:background="#808080" />
 
     <LinearLayout
@@ -69,8 +72,11 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_margin="5dp"
+        android:layout_height="1px"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="2.5dp"
+        android:layout_marginRight="2.5dp"
+        android:layout_marginTop="5dp"
         android:background="#808080" />
 
     <LinearLayout

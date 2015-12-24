@@ -38,6 +38,7 @@ public class DHomeApplication extends Application
 	public static List<Activity> activityList =new ArrayList<Activity>();
 	
 	public static SelfActivity selfActivity;
+	public static MainActivity mainActivity;
 
 	public void finishRegisterActivity(){
 		for (Activity activity : activityList) {

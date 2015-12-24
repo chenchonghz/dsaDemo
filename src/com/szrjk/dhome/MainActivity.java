@@ -114,6 +114,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener , 
 		list.add(libraryFragment);
 		list.add(moreFragment);
 		ViewUtils.inject(this);
+		DHomeApplication.mainActivity=this;
 		initData();
 		initListener();
 		clickIndex();
@@ -396,7 +397,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener , 
 
 	}
 
-	private void clickSelf()
+	public void clickSelf()
 	{
 		if (moreFragment == null) {
 			moreFragment = new MoreFragment();
@@ -411,9 +412,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener , 
 			selfFirst = false;
 		}else{
 			fragmentTransaction.show(moreFragment);
-			moreFragment.setPortrait();
-			moreFragment.queryFriendFollowFans();
-			moreFragment.queryMineCount();
+			setDataChange();
 		}
 		fragmentTransaction.commit();
 		indexLayout.setSelected(false);
@@ -433,6 +432,13 @@ public class MainActivity extends FragmentActivity implements OnClickListener , 
 		ivSelf.setSelected(true);
 		lastfragment = moreFragment ;
 
+	}
+	public void setDataChange() {
+		if (moreFragment!=null) {
+			moreFragment.setPortrait();
+			moreFragment.queryFriendFollowFans();
+			moreFragment.queryMineCount();
+		}
 	}
 
 	public static MainActivity getMainActivity(){

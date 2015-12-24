@@ -73,12 +73,17 @@ public class PostDetailActivity extends BaseActivity {
 	private OrdinaryPostDetail postDetail2;
 	private static final int LOAD_CASEDETAIL_SUCCESS = 0;
 
+	private PostStatis postStatis;
+	private UserCard userCard;
 	private Handler handler = new Handler() {
+
+
 		@Override
 		public void handleMessage(Message msg) {
 			if (msg.what == LOAD_CASEDETAIL_SUCCESS) {
 				postDetail2 = (OrdinaryPostDetail) msg.obj;
-				UserCard userCard = postDetail2.getUserCard();
+				postStatis=postDetail2.getPostStatis();
+				userCard = postDetail2.getUserCard();
 				postContentLayout.setUserCard(userCard);
 				setCaseData();
 				postDetailBottomOperLayout.getBtn_laud().setClickable(true);
@@ -89,6 +94,8 @@ public class PostDetailActivity extends BaseActivity {
 	private int position;
 
 	private String postUserSeqId;
+
+	private boolean isFirstIn=true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -311,7 +318,11 @@ public class PostDetailActivity extends BaseActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		loadPostDetailedData(userSeqId, postId, instance);
+		if (!isFirstIn) {
+			loadPostDetailedData(userSeqId, postId, instance);
+		}else{
+			isFirstIn = false;
+		}
 	}
 
 	public boolean isDelete() {
@@ -348,6 +359,11 @@ public class PostDetailActivity extends BaseActivity {
 					.getTv_laudCount().getText().toString());
 			IndexFragment.ISLIKE = postDetailBottomOperLayout.isIslike();
 			IndexFragment.ISDELETE = isDelete;
+			if (userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())) {
+				if (postStatis!=null) {
+					IndexFragment.READ_NUM=postStatis.getREAD_NUM()+1;
+				}
+			}
 
 			android.util.Log.i("data",
 					position
@@ -369,6 +385,11 @@ public class PostDetailActivity extends BaseActivity {
 		if (flag==Constant.SELF_FLAG) {
 			SelfActivity.ISDELETE=isDelete;
 			SelfActivity.POSITION=position;
+			if (userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())) {
+				if (postStatis!=null) {
+					SelfActivity.READ_NUM=postStatis.getREAD_NUM()+1;
+				}
+			}
 		}
 		if (flag==Constant.CIRCLE_FLAG) {
 			CircleHomepageActivity.ISDELETE=isDelete;

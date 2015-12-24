@@ -108,14 +108,17 @@ public class CaseDetailActivity extends BaseActivity {
 	}
 
 	private static final int LOAD_CASEDETAIL_SUCCESS = 0;
+	private UserCard userCard;
 	private Handler handler = new Handler() {
+
 		@Override
 		public void handleMessage(Message msg) {
 			if (msg.what == LOAD_CASEDETAIL_SUCCESS) {
 
 				caseDetail = (CaseDetail) msg.obj;
-				UserCard userCard = caseDetail.getUserCard();
+				userCard = caseDetail.getUserCard();
 				setUserCard(userCard);
+				postStatis=caseDetail.getPostStatis();
 				setCaseData();
 				postDetailBottomOperLayout.getBtn_laud().setClickable(true);
 			}
@@ -128,6 +131,7 @@ public class CaseDetailActivity extends BaseActivity {
 	private int flag;
 	private boolean isDelete = false;
 	private String postUserSeqId;
+	private boolean isFirstIn=true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -448,10 +452,23 @@ public class CaseDetailActivity extends BaseActivity {
 				.getDrawable(R.drawable.flow_dept_selector));
 	}
 
+	
+	public boolean isFirstIn() {
+		return isFirstIn;
+	}
+
+	public void setFirstIn(boolean isFirstIn) {
+		this.isFirstIn = isFirstIn;
+	}
+
 	@Override
 	protected void onResume() {
 		super.onResume();
-		loadPostDetailedData(userSeqId, postId, instance);
+		if (!isFirstIn) {
+			loadPostDetailedData(userSeqId, postId, instance);
+		}else{
+			isFirstIn = false;
+		}
 	}
 
 	// @Override
@@ -521,6 +538,11 @@ public class CaseDetailActivity extends BaseActivity {
 					.getTv_laudCount().getText().toString());
 			IndexFragment.ISLIKE = postDetailBottomOperLayout.isIslike();
 			IndexFragment.ISDELETE = isDelete;
+			if (userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())) {
+				if (postStatis!=null) {
+					IndexFragment.READ_NUM=postStatis.getREAD_NUM()+1;
+				}
+			}
 
 			android.util.Log.i("data",
 					position
@@ -546,6 +568,11 @@ public class CaseDetailActivity extends BaseActivity {
 		if (flag==Constant.SELF_FLAG) {
 			SelfActivity.ISDELETE=isDelete;
 			SelfActivity.POSITION=position;
+			if (userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())) {
+				if (postStatis!=null) {
+					SelfActivity.READ_NUM=postStatis.getREAD_NUM()+1;
+				}
+			}
 		}
 	}
 }

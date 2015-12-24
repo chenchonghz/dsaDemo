@@ -172,9 +172,8 @@ public class MoreFragment extends Fragment{
 		if(userInfo==null)return;
 		resources=getResources();
 		try {
-			Log.i("head", userInfo.getUserFaceUrl());
-			ImageLoaderUtil imageLoaderUtil=new ImageLoaderUtil(instance, userInfo.getUserFaceUrl(), iv_hportrait, R.drawable.header, R.drawable.header);
-			imageLoaderUtil.showImage();
+//			Log.i("head", userInfo.getUserFaceUrl());
+			setPortrait();
 		} catch (Exception e) {
 			Log.e("ImageLoader", e.toString());
 		}
@@ -182,6 +181,10 @@ public class MoreFragment extends Fragment{
 		queryFriendFollowFans();
 		queryMineCount();
 		
+	}
+	public void setPortrait() {
+		ImageLoaderUtil imageLoaderUtil=new ImageLoaderUtil(instance, userInfo.getUserFaceUrl(), iv_hportrait, R.drawable.header, R.drawable.header);
+		imageLoaderUtil.showImage();
 	}
 	/**查询好友、关注、粉丝数*/
 	public void queryFriendFollowFans(){

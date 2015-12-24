@@ -36,6 +36,8 @@ public class DHomeApplication extends Application
 	private RegisterInfo registerInfo;
 
 	public static List<Activity> activityList =new ArrayList<Activity>();
+	
+	public static SelfActivity selfActivity;
 
 	public void finishRegisterActivity(){
 		for (Activity activity : activityList) {

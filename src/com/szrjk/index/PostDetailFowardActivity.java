@@ -22,6 +22,7 @@ import com.szrjk.config.Constant;
 import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.IndexFragment;
 import com.szrjk.dhome.R;
+import com.szrjk.dhome.SelfActivity;
 import com.szrjk.entity.Comment;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.Forward;
@@ -76,12 +77,17 @@ public class PostDetailFowardActivity extends BaseActivity {
 	private OrdinaryPostDetail opostDetail;
 	private static final int LOAD_CASEDETAIL_SUCCESS = 0;
 
+	private UserCard userCard;
+	private PostStatis postStatis;
 	private Handler handler = new Handler() {
+
+
 		@Override
 		public void handleMessage(Message msg) {
 			if (msg.what == LOAD_CASEDETAIL_SUCCESS) {
 				opostDetail = (OrdinaryPostDetail) msg.obj;
-				UserCard userCard = opostDetail.getUserCard();
+				userCard = opostDetail.getUserCard();
+				postStatis=opostDetail.getPostStatis();
 				setCaseData();
 				postDetailBottomOperLayout.getBtn_laud().setClickable(true);
 			}
@@ -91,6 +97,8 @@ public class PostDetailFowardActivity extends BaseActivity {
 	private int position;
 
 	private String postUserSeqId;
+
+	private boolean isFirstIn=true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -359,7 +367,11 @@ public class PostDetailFowardActivity extends BaseActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		loadPostDetailedData(userSeqId, postId, instance);
+		if (!isFirstIn) {
+			loadPostDetailedData(userSeqId, postId, instance);
+		}else{
+			isFirstIn = false;
+		}
 	}
 
 	public boolean isDelete() {
@@ -407,6 +419,11 @@ public class PostDetailFowardActivity extends BaseActivity {
 					.getTv_laudCount().getText().toString());
 			IndexFragment.ISLIKE = postDetailBottomOperLayout.isIslike();
 			IndexFragment.ISDELETE = isDelete;
+			if (userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())) {
+				if (postStatis!=null) {
+					IndexFragment.READ_NUM=postStatis.getREAD_NUM()+1;
+				}
+			}
 
 			android.util.Log.i("data",
 					position
@@ -420,6 +437,14 @@ public class PostDetailFowardActivity extends BaseActivity {
 							+ postDetaillviewLayout.getTv_laudCount().getText()
 									.toString() + ","
 							+ postDetailBottomOperLayout.isIslike());
+		}
+		if (flag==Constant.SELF_FLAG) {
+			if (userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())) {
+				if (postStatis!=null) {
+					Log.i("num", postStatis.getREAD_NUM()+1+"");
+					SelfActivity.READ_NUM=postStatis.getREAD_NUM()+1;
+				}
+			}
 		}
 	}
 }

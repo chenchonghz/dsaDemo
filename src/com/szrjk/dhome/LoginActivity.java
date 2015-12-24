@@ -43,11 +43,11 @@ public class LoginActivity extends BaseActivity implements OnClickListener
 	@ViewInject(R.id.tv_forget)
 	private TextView tv_forget;
 
-	@ViewInject(R.id.tv_guest)
-	private TextView tv_guest;
+	@ViewInject(R.id.btnguest)
+	private Button tv_guest;
 
 	@ViewInject(R.id.btnReg)
-	private Button btn_rg;
+	private TextView btn_rg;
 	@ViewInject(R.id.btnLogin)
 	private Button btn_lg;
 	@ViewInject(R.id.iv_wx)
@@ -197,7 +197,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener
 //				listdialog.setCanceledOnTouchOutside(true);
 //				listdialog.show();
 				break;
-			case R.id.tv_guest:
+			case R.id.btnguest:
 				guestLogin();
 				break;
 		}

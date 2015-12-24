@@ -119,7 +119,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		}
 		this.flag = flag;
 		isTourist = BusiUtils.isguest(context);
-		Log.e("IndexListViewAdapter", "是否游客："+isTourist);
 		hander.sendEmptyMessageDelayed(0, 60000);
 
 	}
@@ -1757,13 +1756,17 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			@Override
 			public void onClick(TextView tv, String clickText) {
 				// TODO Auto-generated method stub
-				if(userSeqId.equals(Constant.userInfo.getUserSeqId())){
-					skipToSelfFragment();
-				}else if(userType.equals("1")&&!userSeqId.equals(userId)){
-					skipToSystemUserActivity(userSeqId);
-				}else{
-					if(!userSeqId.equals(userId)){		
-						skipToOtherPeopleActivity(userSeqId);
+				if(isTourist){
+					DialogUtil.showGuestDialog(context, null);
+				}else{			
+					if(userSeqId.equals(Constant.userInfo.getUserSeqId())){
+						skipToSelfFragment();
+					}else if(userType.equals("1")&&!userSeqId.equals(userId)){
+						skipToSystemUserActivity(userSeqId);
+					}else{
+						if(!userSeqId.equals(userId)){		
+							skipToOtherPeopleActivity(userSeqId);
+						}
 					}
 				}
 			}
@@ -1901,13 +1904,17 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			
 			@Override
 			public void onClick(View v) {
-				if(postInfo.getUserSeqId().equals(Constant.userInfo.getUserSeqId())){
-					skipToSelfFragment();
-				}else if(userCard.getUserType().equals("1")&&!userCard.getUserSeqId().equals(userId)){
-					skipToSystemUserActivity(userCard.getUserSeqId());
-				}else{
-					if(!userCard.getUserSeqId().equals(userId)){	
-						skipToOtherPeopleActivity(userCard.getUserSeqId());
+				if(isTourist){
+					DialogUtil.showGuestDialog(context, null);
+				}else{				
+					if(postInfo.getUserSeqId().equals(Constant.userInfo.getUserSeqId())){
+						skipToSelfFragment();
+					}else if(userCard.getUserType().equals("1")&&!userCard.getUserSeqId().equals(userId)){
+						skipToSystemUserActivity(userCard.getUserSeqId());
+					}else{
+						if(!userCard.getUserSeqId().equals(userId)){	
+							skipToOtherPeopleActivity(userCard.getUserSeqId());
+						}
 					}
 				}
 			}
@@ -2149,9 +2156,13 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(context, CircleHomepageActivity.class);
-				intent.putExtra(CircleHomepageActivity.intent_param_circle_id, postInfo.getCoterieId());
-				context.startActivity(intent);
+				if(isTourist){
+					DialogUtil.showGuestDialog(context, null);
+				}else{		
+					Intent intent = new Intent(context, CircleHomepageActivity.class);
+					intent.putExtra(CircleHomepageActivity.intent_param_circle_id, postInfo.getCoterieId());
+					context.startActivity(intent);
+				}
 			}
 		});
 	}
@@ -2283,15 +2294,19 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		spanStr.setSpan(new ClickableSpan() {
 			@Override
 			public void onClick(View widget) {
-				if(userSeqId.equals(Constant.userInfo.getUserSeqId())){
-					skipToSelfFragment();
-				}else if(userType.equals("1")&&!userSeqId.equals(userId)){
-					skipToSystemUserActivity(userSeqId);
-				}else{
-					if(!userSeqId.equals(userId)){		
-						skipToOtherPeopleActivity(userSeqId);
-					}
-				}	
+				if(isTourist){
+					DialogUtil.showGuestDialog(context, null);
+				}else{				
+					if(userSeqId.equals(Constant.userInfo.getUserSeqId())){
+						skipToSelfFragment();
+					}else if(userType.equals("1")&&!userSeqId.equals(userId)){
+						skipToSystemUserActivity(userSeqId);
+					}else{
+						if(!userSeqId.equals(userId)){		
+							skipToOtherPeopleActivity(userSeqId);
+						}
+					}	
+				}
 			}
 			@Override
 			public void updateDrawState(TextPaint ds) {

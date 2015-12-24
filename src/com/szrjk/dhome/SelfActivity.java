@@ -108,6 +108,7 @@ public class SelfActivity extends BaseActivity implements OnClickListener {
 		private UserInfo userInfo;
 		public static int POSITION;
 		public static boolean ISDELETE;
+		public static int READ_NUM = -1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -565,6 +566,12 @@ public class SelfActivity extends BaseActivity implements OnClickListener {
 	protected void onResume() {
 		if(postListComm != null){		
 			if(POSITION != -1){
+				if(READ_NUM != -1){
+					ArrayList<PostOtherImformationInfo> postOtherList = postListComm.getPostOtherList();
+					postOtherList.get(POSITION).setREAD_NUM(READ_NUM);
+					postListComm.setPostOtherList(postOtherList);
+					READ_NUM = -1;
+				}
 				if(ISDELETE){
 					ArrayList<PostInfo> postList = postListComm.getPostList();
 					ArrayList<UserCard> userList = postListComm.getUserList();
@@ -575,11 +582,12 @@ public class SelfActivity extends BaseActivity implements OnClickListener {
 					postListComm.setPostList(postList);
 					postListComm.setUserList(userList);
 					postListComm.setPostOtherList(postOtherList);
-					postListComm.updateData();
-					POSITION = -1;
-					ISDELETE = false;					
+					ISDELETE = false;							
 				}
+				postListComm.updateData();
+				POSITION = -1;
 			}
+			
 		}
 		new Thread(){
 			public void run() {

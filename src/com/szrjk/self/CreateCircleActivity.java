@@ -144,7 +144,7 @@ public class CreateCircleActivity extends BaseActivity implements OnClickListene
 		
 		tv_nothing.setTextColor(instance.getResources().getColor(R.color.font_tabletitle));
 		tv_nothing.setBackground(instance.getResources().getDrawable(R.drawable.flow_text_selector));
-		if (coterie.getPropList().get(0).getPropertyId().equals("")) {
+		if (coterie.getPropList().size()==0) {
 			select(tv_nothing);dept_id=null;
 		}else{
 			switch (Integer.valueOf(coterie.getPropList().get(0).getPropertyId())) {

@@ -584,7 +584,11 @@ public class SelfActivity extends BaseActivity implements OnClickListener {
 			public void run() {
 				try {
 					Thread.sleep(3000);
-					getUserHpInfo(ConstantUser.getUserInfo().getUserSeqId());
+					runOnUiThread(new Runnable() {
+						public void run() {
+							getUserHpInfo(ConstantUser.getUserInfo().getUserSeqId());
+						}
+					});
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

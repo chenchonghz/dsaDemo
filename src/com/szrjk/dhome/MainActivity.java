@@ -62,8 +62,8 @@ public class MainActivity extends FragmentActivity implements OnClickListener , 
 	//我
 //	private SelfFragment selfFragment;
 	private MoreFragment moreFragment;
-	@ViewInject(R.id.iv_search)
-	private ImageView iv_search;
+//	@ViewInject(R.id.iv_search)
+//	private ImageView iv_search;
 	@ViewInject(R.id.fl_index)
 	private FrameLayout indexLayout;
 	@ViewInject(R.id.fl_explore)
@@ -162,7 +162,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener , 
 		selfLayout.setOnClickListener(this);
 		ivActionBg.setOnClickListener(this);
 		ivAction.setOnClickListener(this);
-		iv_search.setOnClickListener(this);
+//		iv_search.setOnClickListener(this);
 		indexLayout.setOnTouchListener(this);
 
 	}

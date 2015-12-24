@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="160dp"
+    android:layout_height="145dp"
+    android:background="@drawable/pic_bg_01"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/margin_10dp"
+    android:paddingTop="@dimen/margin_15dp" >
+
+    <LinearLayout
+        android:id="@+id/ll_creatcoterie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginRight="@dimen/margin_10dp"
+        android:background="@drawable/bg_popup_mainactivityheaderview"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding_micro" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_found_30" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:text="创建圈子"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_large" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="5dp"
+        android:background="#808080" />
+
+    <LinearLayout
+        android:id="@+id/ll_caseshare"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginRight="@dimen/margin_10dp"
+        android:background="@drawable/bg_popup_mainactivityheaderview"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding_micro" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_sickcase_30" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:text="病例分享"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_large" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="5dp"
+        android:background="#808080" />
+
+    <LinearLayout
+        android:id="@+id/ll_puzzlehelp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginRight="@dimen/margin_10dp"
+        android:background="@drawable/bg_popup_mainactivityheaderview"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding_micro" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_sickhelp_30" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:text="疑难求助"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_large" />
+    </LinearLayout>
+
+</LinearLayout>

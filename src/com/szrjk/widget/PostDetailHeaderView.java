@@ -86,7 +86,7 @@ public class PostDetailHeaderView extends RelativeLayout {
 		this.context = context;
 		LayoutInflater inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		inflater.inflate(R.layout.postdetail_headerview, this);
+		inflater.inflate(R.layout.headerview_postdetail, this);
 		tv_text = (TextView) findViewById(R.id.tv_header);
 		iv_back = (ImageView) findViewById(R.id.iv_back);
 		ll_dotmore = (LinearLayout) findViewById(R.id.ll_dotmore);

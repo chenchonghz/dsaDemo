@@ -156,8 +156,8 @@ public class CircleIntroductionActivity extends BaseActivity {
 			Log.e(this.getPackageName(), "", e);
 		}
 		tv_type.setText(coterie.getCoterieType().equals("1")?"个人":"组织/机构");
-		if (coterie.getPropList().get(0).getPropertyId().equals("")) {
-			tv_dept.setText("");
+		if (coterie.getPropList().size()==0) {
+			tv_dept.setText("无");
 		}else{
 			switch (Integer.valueOf(coterie.getPropList().get(0).getPropertyId())) {
 			case 10:tv_dept.setText("内科");break;

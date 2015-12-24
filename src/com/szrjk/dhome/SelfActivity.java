@@ -113,6 +113,7 @@ public class SelfActivity extends BaseActivity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ViewUtils.inject(this);
+		DHomeApplication.selfActivity=this;
 		instance = this;
 		dialog = createDialog(this, "加载中...");
 		lv_postlist = mPullRefreshListView.getRefreshableView(); // 获得listView对象
@@ -581,20 +582,20 @@ public class SelfActivity extends BaseActivity implements OnClickListener {
 				}
 			}
 		}
-		new Thread(){
-			public void run() {
-				try {
-					Thread.sleep(3000);
-					runOnUiThread(new Runnable() {
-						public void run() {
-							getUserHpInfo(ConstantUser.getUserInfo().getUserSeqId());
-						}
-					});
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			};
-		}.start();
+//		new Thread(){
+//			public void run() {
+//				try {
+//					Thread.sleep(3000);
+//					runOnUiThread(new Runnable() {
+//						public void run() {
+//							getUserHpInfo(ConstantUser.getUserInfo().getUserSeqId());
+//						}
+//					});
+//				} catch (InterruptedException e) {
+//					e.printStackTrace();
+//				}
+//			};
+//		}.start();
 		super.onResume();
 	}
 }

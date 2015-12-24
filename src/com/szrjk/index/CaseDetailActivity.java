@@ -128,6 +128,7 @@ public class CaseDetailActivity extends BaseActivity {
 	private int flag;
 	private boolean isDelete = false;
 	private String postUserSeqId;
+	private boolean isFirstIn=true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -448,10 +449,23 @@ public class CaseDetailActivity extends BaseActivity {
 				.getDrawable(R.drawable.flow_dept_selector));
 	}
 
+	
+	public boolean isFirstIn() {
+		return isFirstIn;
+	}
+
+	public void setFirstIn(boolean isFirstIn) {
+		this.isFirstIn = isFirstIn;
+	}
+
 	@Override
 	protected void onResume() {
 		super.onResume();
-		loadPostDetailedData(userSeqId, postId, instance);
+		if (!isFirstIn) {
+			loadPostDetailedData(userSeqId, postId, instance);
+		}else{
+			isFirstIn = false;
+		}
 	}
 
 	// @Override

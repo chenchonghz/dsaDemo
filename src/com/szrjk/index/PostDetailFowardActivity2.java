@@ -89,6 +89,8 @@ public class PostDetailFowardActivity2 extends BaseActivity {
 
 	private int position;
 
+	private boolean isFirstIn=true;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -374,7 +376,11 @@ public class PostDetailFowardActivity2 extends BaseActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		loadPostDetailedData(userSeqId, postId, instance);
+		if (!isFirstIn) {
+			loadPostDetailedData(userSeqId, postId, instance);
+		}else{
+			isFirstIn = false;
+		}
 	}
 
 	@Override

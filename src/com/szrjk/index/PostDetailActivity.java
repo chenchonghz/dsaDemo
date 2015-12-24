@@ -90,6 +90,8 @@ public class PostDetailActivity extends BaseActivity {
 
 	private String postUserSeqId;
 
+	private boolean isFirstIn=true;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -311,7 +313,11 @@ public class PostDetailActivity extends BaseActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		loadPostDetailedData(userSeqId, postId, instance);
+		if (!isFirstIn) {
+			loadPostDetailedData(userSeqId, postId, instance);
+		}else{
+			isFirstIn = false;
+		}
 	}
 
 	public boolean isDelete() {

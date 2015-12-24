@@ -411,6 +411,9 @@ public class MainActivity extends FragmentActivity implements OnClickListener , 
 			selfFirst = false;
 		}else{
 			fragmentTransaction.show(moreFragment);
+			moreFragment.setPortrait();
+			moreFragment.queryFriendFollowFans();
+			moreFragment.queryMineCount();
 		}
 		fragmentTransaction.commit();
 		indexLayout.setSelected(false);

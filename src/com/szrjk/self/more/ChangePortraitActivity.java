@@ -153,12 +153,12 @@ public class ChangePortraitActivity extends BaseActivity {
 			@Override
 			public void success(JSONObject jsonObject) {
 				Intent intent = new Intent();
-				Bundle bundle = new Bundle();
-				bundle.putBoolean("CHANGE_PORTRAIT_SUCCESS", true);
-				intent.putExtras(bundle);
-				setResult(CHANGE_PORTRAIT_SUCCESS, intent);
+				intent.setAction("CHANGE_PORTRAIT_SUCCESS");
+				intent.putExtra("CHANGE_PORTRAIT_SUCCESS", true);
+				intent.putExtra("userfaceUrl", userfaceUrl);
+				instance.sendBroadcast(intent);
 //				ToastUtils.showMessage(instance, "更改头像成功！");
-				userInfo.setUserFaceUrl(userfaceUrl);
+//				userInfo.setUserFaceUrl(userfaceUrl);
 			}
 
 			@Override

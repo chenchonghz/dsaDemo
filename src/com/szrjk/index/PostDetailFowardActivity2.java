@@ -24,6 +24,7 @@ import com.szrjk.config.ConstantUser;
 import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.IndexFragment;
 import com.szrjk.dhome.R;
+import com.szrjk.dhome.SelfActivity;
 import com.szrjk.entity.Comment;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.Forward;
@@ -75,12 +76,16 @@ public class PostDetailFowardActivity2 extends BaseActivity {
 	private OrdinaryPostDetail opostDetail;
 	private static final int LOAD_CASEDETAIL_SUCCESS = 0;
 
+	private UserCard userCard;
+	private PostStatis postStatis;
 	private Handler handler = new Handler() {
+
 		@Override
 		public void handleMessage(Message msg) {
 			if (msg.what == LOAD_CASEDETAIL_SUCCESS) {
 				opostDetail = (OrdinaryPostDetail) msg.obj;
-				UserCard userCard = opostDetail.getUserCard();
+				userCard = opostDetail.getUserCard();
+				postStatis = opostDetail.getPostStatis();
 				setCaseData();
 				postDetailBottomOperLayout.getBtn_laud().setClickable(true);
 			}
@@ -89,7 +94,7 @@ public class PostDetailFowardActivity2 extends BaseActivity {
 
 	private int position;
 
-	private boolean isFirstIn=true;
+	private boolean isFirstIn = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -288,8 +293,8 @@ public class PostDetailFowardActivity2 extends BaseActivity {
 								.fetchFirstLevel(ordinaryPostDetail
 										.getPostDetail().getPostAbstractList());
 						String postText = pp.getPostAbstract().getContent();
-						if (postText==null||postText.isEmpty()) {
-							postText=pp.getPostAbstract().getPostTitle();
+						if (postText == null || postText.isEmpty()) {
+							postText = pp.getPostAbstract().getPostTitle();
 						}
 						String faceurl = ordinaryPostDetail.getUserCard()
 								.getUserFaceUrl();
@@ -378,7 +383,7 @@ public class PostDetailFowardActivity2 extends BaseActivity {
 		super.onResume();
 		if (!isFirstIn) {
 			loadPostDetailedData(userSeqId, postId, instance);
-		}else{
+		} else {
 			isFirstIn = false;
 		}
 	}
@@ -419,6 +424,12 @@ public class PostDetailFowardActivity2 extends BaseActivity {
 			IndexFragment.LIKE_NUM = Integer.parseInt(postDetaillviewLayout
 					.getTv_laudCount().getText().toString());
 			IndexFragment.ISLIKE = postDetailBottomOperLayout.isIslike();
+			if (userCard.getUserSeqId()
+					.equals(Constant.userInfo.getUserSeqId())) {
+				if (postStatis != null) {
+					IndexFragment.READ_NUM = postStatis.getREAD_NUM()+1;
+				}
+			}
 
 			Log.i("data",
 					position
@@ -432,6 +443,14 @@ public class PostDetailFowardActivity2 extends BaseActivity {
 							+ postDetaillviewLayout.getTv_laudCount().getText()
 									.toString() + ","
 							+ postDetailBottomOperLayout.isIslike());
+		}
+		if (flag==Constant.SELF_FLAG) {
+			if (userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())) {
+				if (postStatis!=null) {
+					Log.i("num", postStatis.getREAD_NUM()+1+"");
+					SelfActivity.READ_NUM=postStatis.getREAD_NUM()+1;
+				}
+			}
 		}
 	}
 }

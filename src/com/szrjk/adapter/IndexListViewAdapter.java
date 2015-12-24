@@ -119,7 +119,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		}
 		this.flag = flag;
 		isTourist = BusiUtils.isguest(context);
-		Log.e("IndexListViewAdapter", "是否游客："+isTourist);
 		hander.sendEmptyMessageDelayed(0, 60000);
 
 	}
@@ -401,6 +400,11 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 						e.printStackTrace();
 					}
 				}
+				if(userInfo.getUserSeqId().equals(Constant.userInfo.getUserSeqId())){
+					caseShare_Holder.rl_readNum.setVisibility(View.VISIBLE);
+				}else{
+					caseShare_Holder.rl_readNum.setVisibility(View.GONE);
+				}
 				if(postOtherInfo != null){	
 					if(postOtherInfo.getCOMMENT_NUM()!=0){
 						caseShare_Holder.tv_command.setText(String.valueOf(postOtherInfo.getCOMMENT_NUM()));
@@ -417,10 +421,12 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					}else{
 						caseShare_Holder.tv_like.setText(context.getResources().getString(R.string.like_text));
 					}
+					caseShare_Holder.tv_readNum.setText(String.valueOf(postOtherInfo.getREAD_NUM()));
 				}else{
 					caseShare_Holder.tv_command.setText(context.getResources().getString(R.string.command_text));
 					caseShare_Holder.tv_transmit.setText(context.getResources().getString(R.string.transmit_text));
 					caseShare_Holder.tv_like.setText(context.getResources().getString(R.string.like_text));
+					caseShare_Holder.tv_readNum.setText("0");
 				}
 				if(isLike){
 					caseShare_Holder.iv_like.setImageResource(R.drawable.icon_laud_active_24);
@@ -547,6 +553,11 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 						e.printStackTrace();
 					}
 				}
+				if(userInfo.getUserSeqId().equals(Constant.userInfo.getUserSeqId())){
+					problemHelp_Holder.rl_readNum.setVisibility(View.VISIBLE);
+				}else{
+					problemHelp_Holder.rl_readNum.setVisibility(View.GONE);
+				}
 				if(postOtherInfo!=null&&postOtherInfo.getCOMMENT_NUM()!=0){
 					problemHelp_Holder.tv_command.setText(""+String.valueOf(postOtherInfo.getCOMMENT_NUM()));
 				}else{
@@ -561,6 +572,11 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					problemHelp_Holder.tv_like.setText(""+postOtherInfo.getLIKE_NUM());	
 				}else{
 					problemHelp_Holder.tv_like.setText(context.getResources().getString(R.string.like_text));
+				}
+				if(postOtherInfo!= null){
+					problemHelp_Holder.tv_readNum.setText(String.valueOf(postOtherInfo.getREAD_NUM()));
+				}else{
+					problemHelp_Holder.tv_readNum.setText("0");
 				}
 				if(isLike){
 					problemHelp_Holder.iv_like.setImageResource(R.drawable.icon_laud_active_24);
@@ -681,6 +697,11 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 						e.printStackTrace();
 					}
 				}
+				if(userInfo.getUserSeqId().equals(Constant.userInfo.getUserSeqId())){
+					normalPost_Holder.rl_readNum.setVisibility(View.VISIBLE);
+				}else{
+					normalPost_Holder.rl_readNum.setVisibility(View.GONE);
+				}
 				if(postOtherInfo!=null&&postOtherInfo.getCOMMENT_NUM()!=0){
 					normalPost_Holder.tv_command.setText(""+postOtherInfo.getCOMMENT_NUM());
 				}else{
@@ -695,6 +716,11 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					normalPost_Holder.tv_like.setText(""+postOtherInfo.getLIKE_NUM());	
 				}else{
 					normalPost_Holder.tv_like.setText(context.getResources().getString(R.string.like_text));
+				}
+				if(postOtherInfo!=null){
+					normalPost_Holder.tv_readNum.setText(String.valueOf(postOtherInfo.getREAD_NUM()));
+				}else{
+					normalPost_Holder.tv_readNum.setText("0");
 				}
 				if(postInfo.getPicList()!=null&&!postInfo.getPicList()[0].isEmpty()){
 					int screenWidth = getWindowsWidth();
@@ -938,6 +964,16 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 						}
 					}
 				}
+				if(userInfo.getUserSeqId().equals(Constant.userInfo.getUserSeqId())){
+					tran_normalPost_Holder.rl_readNum.setVisibility(View.VISIBLE);
+				}else{
+					tran_normalPost_Holder.rl_readNum.setVisibility(View.GONE);
+				}
+				if(postOtherInfo!=null){
+					tran_normalPost_Holder.tv_readNum.setText(String.valueOf(postOtherInfo.getREAD_NUM()));
+				}else{
+					tran_normalPost_Holder.tv_readNum.setText("0");
+				}
 
 				if(postOtherInfo != null && postOtherInfo.getFORWARD_NUM()!=0){
 					tran_normalPost_Holder.tv_transmit.setText(""+postOtherInfo.getFORWARD_NUM());
@@ -1150,7 +1186,16 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 						}
 					}
 				}
-				
+				if(userInfo.getUserSeqId().equals(Constant.userInfo.getUserSeqId())){
+					tran_caseShare_Holder.rl_readNum.setVisibility(View.VISIBLE);
+				}else{
+					tran_caseShare_Holder.rl_readNum.setVisibility(View.GONE);
+				}
+				if(postOtherInfo != null){
+					tran_caseShare_Holder.tv_readNum.setText(String.valueOf(postOtherInfo.getREAD_NUM()));
+				}else{
+					tran_caseShare_Holder.tv_readNum.setText("0");
+				}
 				if(postOtherInfo != null &&postOtherInfo.getFORWARD_NUM()!=0){
 					tran_caseShare_Holder.tv_transmit.setText(""+postOtherInfo.getFORWARD_NUM());
 				}else{
@@ -1357,7 +1402,16 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 						
 					}
 				}
-							
+				if(userInfo.getUserSeqId().equals(Constant.userInfo.getUserSeqId())){
+					tran_problemHelp_Holder.rl_readNum.setVisibility(View.VISIBLE);
+				}else{
+					tran_problemHelp_Holder.rl_readNum.setVisibility(View.GONE);
+				}
+				if(postOtherInfo!=null){
+					tran_problemHelp_Holder.tv_readNum.setText(String.valueOf(postOtherInfo.getREAD_NUM()));
+				}else{
+					tran_problemHelp_Holder.tv_readNum.setText("0");
+				}
 				if(postOtherInfo != null &&postOtherInfo.getFORWARD_NUM()!=0){
 					tran_problemHelp_Holder.tv_transmit.setText(""+postOtherInfo.getFORWARD_NUM());
 				}else{
@@ -1757,13 +1811,17 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			@Override
 			public void onClick(TextView tv, String clickText) {
 				// TODO Auto-generated method stub
-				if(userSeqId.equals(Constant.userInfo.getUserSeqId())){
-					skipToSelfFragment();
-				}else if(userType.equals("1")&&!userSeqId.equals(userId)){
-					skipToSystemUserActivity(userSeqId);
-				}else{
-					if(!userSeqId.equals(userId)){		
-						skipToOtherPeopleActivity(userSeqId);
+				if(isTourist){
+					DialogUtil.showGuestDialog(context, null);
+				}else{			
+					if(userSeqId.equals(Constant.userInfo.getUserSeqId())){
+						skipToSelfFragment();
+					}else if(userType.equals("1")&&!userSeqId.equals(userId)){
+						skipToSystemUserActivity(userSeqId);
+					}else{
+						if(!userSeqId.equals(userId)){		
+							skipToOtherPeopleActivity(userSeqId);
+						}
 					}
 				}
 			}
@@ -1901,13 +1959,17 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			
 			@Override
 			public void onClick(View v) {
-				if(postInfo.getUserSeqId().equals(Constant.userInfo.getUserSeqId())){
-					skipToSelfFragment();
-				}else if(userCard.getUserType().equals("1")&&!userCard.getUserSeqId().equals(userId)){
-					skipToSystemUserActivity(userCard.getUserSeqId());
-				}else{
-					if(!userCard.getUserSeqId().equals(userId)){	
-						skipToOtherPeopleActivity(userCard.getUserSeqId());
+				if(isTourist){
+					DialogUtil.showGuestDialog(context, null);
+				}else{				
+					if(postInfo.getUserSeqId().equals(Constant.userInfo.getUserSeqId())){
+						skipToSelfFragment();
+					}else if(userCard.getUserType().equals("1")&&!userCard.getUserSeqId().equals(userId)){
+						skipToSystemUserActivity(userCard.getUserSeqId());
+					}else{
+						if(!userCard.getUserSeqId().equals(userId)){	
+							skipToOtherPeopleActivity(userCard.getUserSeqId());
+						}
 					}
 				}
 			}
@@ -2149,9 +2211,13 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(context, CircleHomepageActivity.class);
-				intent.putExtra(CircleHomepageActivity.intent_param_circle_id, postInfo.getCoterieId());
-				context.startActivity(intent);
+				if(isTourist){
+					DialogUtil.showGuestDialog(context, null);
+				}else{		
+					Intent intent = new Intent(context, CircleHomepageActivity.class);
+					intent.putExtra(CircleHomepageActivity.intent_param_circle_id, postInfo.getCoterieId());
+					context.startActivity(intent);
+				}
 			}
 		});
 	}
@@ -2283,15 +2349,19 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		spanStr.setSpan(new ClickableSpan() {
 			@Override
 			public void onClick(View widget) {
-				if(userSeqId.equals(Constant.userInfo.getUserSeqId())){
-					skipToSelfFragment();
-				}else if(userType.equals("1")&&!userSeqId.equals(userId)){
-					skipToSystemUserActivity(userSeqId);
-				}else{
-					if(!userSeqId.equals(userId)){		
-						skipToOtherPeopleActivity(userSeqId);
-					}
-				}	
+				if(isTourist){
+					DialogUtil.showGuestDialog(context, null);
+				}else{				
+					if(userSeqId.equals(Constant.userInfo.getUserSeqId())){
+						skipToSelfFragment();
+					}else if(userType.equals("1")&&!userSeqId.equals(userId)){
+						skipToSystemUserActivity(userSeqId);
+					}else{
+						if(!userSeqId.equals(userId)){		
+							skipToOtherPeopleActivity(userSeqId);
+						}
+					}	
+				}
 			}
 			@Override
 			public void updateDrawState(TextPaint ds) {
@@ -2662,6 +2732,8 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		tran_problemHelp_Holder.tv_time = (TextView)convertView.findViewById(R.id.tv_posttime);
 		tran_problemHelp_Holder.ll_doctorInfo = (LinearLayout)convertView.findViewById(R.id.view_doctorinfo);
 		tran_problemHelp_Holder.iv_headphoto_icon = (ImageView)convertView.findViewById(R.id.iv_yellow_icon);
+		tran_problemHelp_Holder.rl_readNum = (RelativeLayout)convertView.findViewById(R.id.rl_readNum);
+		tran_problemHelp_Holder.tv_readNum = (TextView)convertView.findViewById(R.id.tv_readNum);
 	}
 	/**
 	 * 初始化显示医生信息的view(postType:202  srcPostType:101)
@@ -2677,6 +2749,8 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		tran_caseShare_Holder.tv_time = (TextView)convertView.findViewById(R.id.tv_posttime);
 		tran_caseShare_Holder.ll_doctorInfo = (LinearLayout)convertView.findViewById(R.id.view_doctorinfo);
 		tran_caseShare_Holder.iv_headphoto_icon = (ImageView)convertView.findViewById(R.id.iv_yellow_icon);
+		tran_caseShare_Holder.rl_readNum = (RelativeLayout)convertView.findViewById(R.id.rl_readNum);
+		tran_caseShare_Holder.tv_readNum = (TextView)convertView.findViewById(R.id.tv_readNum);
 	}
 	/**
 	 * 初始化显示医生信息的view(postType:202  srcPostType:101)
@@ -2692,6 +2766,8 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		tran_normalpost_Holder.tv_time = (TextView)convertView.findViewById(R.id.tv_posttime);
 		tran_normalpost_Holder.ll_doctorInfo = (LinearLayout)convertView.findViewById(R.id.view_doctorinfo);
 		tran_normalpost_Holder.iv_headphoto_icon = (ImageView)convertView.findViewById(R.id.iv_yellow_icon);
+		tran_normalpost_Holder.rl_readNum = (RelativeLayout)convertView.findViewById(R.id.rl_readNum);
+		tran_normalpost_Holder.tv_readNum = (TextView)convertView.findViewById(R.id.tv_readNum);
 	}
 	/**
 	 * 初始化显示医生信息的view(postType:102)
@@ -2707,6 +2783,8 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		normalPost_Holder.tv_time = (TextView)convertView.findViewById(R.id.tv_posttime);
 		normalPost_Holder.ll_doctorInfo = (LinearLayout)convertView.findViewById(R.id.view_doctorinfo);
 		normalPost_Holder.iv_headphoto_icon = (ImageView)convertView.findViewById(R.id.iv_yellow_icon);
+		normalPost_Holder.rl_readNum = (RelativeLayout)convertView.findViewById(R.id.rl_readNum);
+		normalPost_Holder.tv_readNum = (TextView)convertView.findViewById(R.id.tv_readNum);
 	}
 	/**
 	 * 初始化帖子内容的view(postType:102)
@@ -2819,6 +2897,8 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		problemHelp_Holder.tv_time = (TextView)convertView.findViewById(R.id.tv_posttime);
 		problemHelp_Holder.ll_doctorInfo = (LinearLayout)convertView.findViewById(R.id.view_doctorinfo);
 		problemHelp_Holder.iv_headphoto_icon = (ImageView)convertView.findViewById(R.id.iv_yellow_icon);
+		problemHelp_Holder.rl_readNum = (RelativeLayout)convertView.findViewById(R.id.rl_readNum);
+		problemHelp_Holder.tv_readNum = (TextView)convertView.findViewById(R.id.tv_readNum);
 	}
 	/**
 	 * 初始化显示医生信息的view(postType:103)
@@ -2834,6 +2914,8 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		caseShare_Holder.tv_time = (TextView)convertView.findViewById(R.id.tv_posttime);
 		caseShare_Holder.ll_doctorInfo = (LinearLayout)convertView.findViewById(R.id.view_doctorinfo);
 		caseShare_Holder.iv_headphoto_icon = (ImageView)convertView.findViewById(R.id.iv_yellow_icon);
+		caseShare_Holder.rl_readNum = (RelativeLayout)convertView.findViewById(R.id.rl_readNum);
+		caseShare_Holder.tv_readNum = (TextView)convertView.findViewById(R.id.tv_readNum);
 	}
 
 
@@ -2920,8 +3002,8 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 	class ViewHolder{
 		ImageView iv_smallPhoto,iv_backgroudpic,iv_like,iv_headphoto_icon,iv_gray;
 		TextView tv_doctorName,tv_jobTitle,tv_hospital,tv_time,tv_department,
-		tv_transmit,tv_command,tv_like,tv_postTitle,tv_completeRate;
-		RelativeLayout rl_transmit,rl_command,rl_like,rl_view_post;
+		tv_transmit,tv_command,tv_like,tv_postTitle,tv_completeRate,tv_readNum;
+		RelativeLayout rl_transmit,rl_command,rl_like,rl_view_post,rl_readNum;
 		LinearLayout ll_doctorInfo,ll_caseshare_post;
 	}
 	/**
@@ -2931,9 +3013,9 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 	 */
 	class ViewHolder2{
 		ImageView iv_smallPhoto,iv_backgroudpic,iv_like,iv_headphoto_icon,iv_gray;
-		TextView tv_doctorName,tv_jobTitle,tv_hospital,tv_time,tv_department,
+		TextView tv_doctorName,tv_jobTitle,tv_hospital,tv_time,tv_department,tv_readNum,
 		tv_transmit,tv_command,tv_like,tv_postTitle,tv_completeRate;
-		RelativeLayout rl_transmit,rl_command,rl_like,rl_view_post;
+		RelativeLayout rl_transmit,rl_command,rl_like,rl_view_post,rl_readNum;
 		LinearLayout ll_doctorInfo;
 	}
 	/**
@@ -2944,8 +3026,8 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 	class ViewHolder3{
 		ImageView iv_smallPhoto,iv_like,iv_headphoto_icon,iv_gray;
 		TextView tv_doctorName,tv_jobTitle,tv_hospital,tv_time,tv_department,
-		tv_transmit,tv_command,tv_like,tv_post_text,tv_group_name;
-		RelativeLayout rl_transmit,rl_command,rl_like;
+		tv_transmit,tv_command,tv_like,tv_post_text,tv_group_name,tv_readNum;
+		RelativeLayout rl_transmit,rl_command,rl_like,rl_readNum;
 		IndexGridView gv_pic;
 		LinearLayout ll_doctorInfo,ll_view_normal_post,ll_group,ll_normal_post;
 	}
@@ -2958,9 +3040,9 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		ImageView iv_smallPhoto,iv_srcSmallPhoto,iv_like,iv_headphoto_icon,iv_src_headphoto_icon;
 		TextView tv_doctorName,tv_srcDoctorName,tv_jobTitle,tv_srcJobTitle,tv_hospital,tv_srcHospital,tv_time,tv_srcTime,
 		tv_department,tv_srcDepartment,tv_transmit,tv_command,tv_like,
-		tv_src_group_name,tv_src_post_text,tv_src_text;
+		tv_src_group_name,tv_src_post_text,tv_src_text,tv_readNum;
 		LinearLayout ll_doctorInfo,ll_srcDoctorInfo,ll_src_normal_post,ll_src_group,ll_transmit_content;
-		RelativeLayout rl_transmit,rl_command,rl_like;
+		RelativeLayout rl_transmit,rl_command,rl_like,rl_readNum;
 		IndexGridView gv_src_pic;
 		TransmitTextView tv_post_text;
 	}
@@ -2972,10 +3054,10 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 	class ViewHolder5{
 		ImageView iv_smallPhoto,iv_srcSmallPhoto,iv_like,iv_src_backgroudpic,iv_headphoto_icon,iv_src_headphoto_icon,iv_gray;
 		TextView tv_doctorName,tv_srcDoctorName,tv_jobTitle,tv_srcJobTitle,tv_hospital,tv_srcHospital,tv_time,tv_srcTime,
-		tv_department,tv_srcDepartment,tv_transmit,tv_command,tv_like,
+		tv_department,tv_srcDepartment,tv_transmit,tv_command,tv_like,tv_readNum,
 		tv_src_postTitle,tv_src_completeRate,tv_srcname;
 		LinearLayout ll_doctorInfo,ll_srcDoctorInfo,ll_caseShare;
-		RelativeLayout rl_transmit,rl_command,rl_like,rl_src_view_post;
+		RelativeLayout rl_transmit,rl_command,rl_like,rl_src_view_post,rl_readNum;
 		TransmitTextView tv_post_text;
 		FrameLayout fl_bg;
 	}
@@ -2987,10 +3069,10 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 	class ViewHolder6{
 		ImageView iv_smallPhoto,iv_srcSmallPhoto,iv_like,iv_src_backgroudpic,iv_headphoto_icon,iv_src_headphoto_icon,iv_gray;
 		TextView tv_doctorName,tv_srcDoctorName,tv_jobTitle,tv_srcJobTitle,tv_hospital,tv_srcHospital,tv_time,tv_srcTime,
-		tv_department,tv_srcDepartment,tv_transmit,tv_command,tv_like,
+		tv_department,tv_srcDepartment,tv_transmit,tv_command,tv_like,tv_readNum,
 		tv_src_postTitle,tv_src_completeRate,tv_srcname;
 		LinearLayout ll_doctorInfo,ll_srcDoctorInfo,ll_problemHelp;
-		RelativeLayout rl_transmit,rl_command,rl_like,rl_src_view_post;
+		RelativeLayout rl_transmit,rl_command,rl_like,rl_src_view_post,rl_readNum;
 		TransmitTextView tv_post_text;
 		FrameLayout fl_bg;
 	}

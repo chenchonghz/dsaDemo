@@ -90,7 +90,7 @@
             android:textSize="@dimen/font_size_msmall"
             android:textColor="@color/font_cell"/>
         <RelativeLayout
-            android:id="@+id/ll_check_num"
+            android:id="@+id/rl_readNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/pic_readnum_bg"
@@ -102,7 +102,7 @@
             android:visibility="gone"
             android:layout_alignBottom="@+id/iv_smallphoto">
             <TextView 
-                android:id="@+id/tv_check_num"
+                android:id="@+id/tv_readNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"

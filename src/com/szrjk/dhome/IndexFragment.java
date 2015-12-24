@@ -63,6 +63,7 @@ public class IndexFragment extends Fragment
 	public static int FORWARD_NUM = -1;
 	public static int COMMEND_NUM = -1;
 	public static int LIKE_NUM = -1;
+	public static int READ_NUM = -1;
 	public static boolean ISLIKE = false;
 	public static boolean ISSRCPOST = false;
 	public static boolean ISDELETE = false;
@@ -797,6 +798,9 @@ public class IndexFragment extends Fragment
 				    if(LIKE_NUM != -1){
 				    	postOtherList.get(POSITION).setLIKE_NUM(Integer.valueOf(LIKE_NUM));
 				    }
+				    if(READ_NUM != -1){
+				    	postOtherList.get(POSITION).setREAD_NUM(Integer.valueOf(READ_NUM));
+				    }
 				    postOtherList.get(POSITION).setMineLike(ISLIKE);
 				    if(ISDELETE){
 				    	userList.remove(POSITION);
@@ -808,6 +812,7 @@ public class IndexFragment extends Fragment
 				    FORWARD_NUM = -1;
 				    COMMEND_NUM = -1;
 				    LIKE_NUM = -1;
+				    READ_NUM = -1;
 				    ISLIKE = false;
 				    ISDELETE = false;
 				}

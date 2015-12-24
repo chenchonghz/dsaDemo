@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:text="@string/circle_name"
             android:textColor="@color/font_titleanduname"
-            android:textSize="@dimen/font_size_small" />
+            android:textSize="@dimen/font_size_middle" />
 
         <RelativeLayout
             android:id="@+id/rly_circle_num"
@@ -36,7 +36,7 @@
             android:layout_alignLeft="@id/tv_circle_name"
             android:layout_marginTop="7dp"
             android:layout_below="@id/tv_circle_name"
-            android:background="@drawable/pic_peoplenum_bg20"
+            android:background="@drawable/pic_peoplenum_bg16"
             android:gravity="center" >
 
             <ImageView
@@ -63,7 +63,7 @@
             android:layout_alignTop="@id/rly_circle_num"
             android:layout_marginLeft="@dimen/margin_5dp"
             android:layout_toRightOf="@id/rly_circle_num"
-            android:background="@drawable/pic_individual_bg20"
+            android:background="@drawable/pic_individual_bg16"
             android:gravity="center"
             android:paddingLeft="5dip"
             android:paddingRight="5dip" >

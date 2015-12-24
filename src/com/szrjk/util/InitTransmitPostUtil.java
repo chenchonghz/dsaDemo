@@ -150,6 +150,7 @@ public class InitTransmitPostUtil {
 		int end = 0;
 		int icon_start = 0;
 		int icon_end = 0;
+		final boolean isTourist = BusiUtils.isguest(context);
 		SpannableString spanStr = null;
 		if(isTopTransmit == false){
 			String name = userCard.getUserName();
@@ -182,30 +183,34 @@ public class InitTransmitPostUtil {
 			spanStr.setSpan(new ClickableSpan() {
 				@Override
 				public void onClick(View widget) {
-					if(userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())){
-						skipToSelfFragment(iPullPostListCallback);
-					}else if((userCard.getUserType().equals("1")&&!userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId()))&&!(context instanceof SystemUserActivity)){
-						skipToSystemUserActivity(context,userCard.getUserSeqId());
-					}else if(context instanceof SystemUserActivity){
-						String objId = ((SystemUserActivity) context).getObjId();
-						if(objId != null){
-							if(!userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())&&!userCard.getUserSeqId().equals(objId)){
-								skipToSystemUserActivity(context,userCard.getUserSeqId());
-							}
-						}
-					}else{
-
-						if(!userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())&&!(context instanceof OtherPeopleActivity)){
-									skipToOtherPeopleActivity(context,userCard.getUserSeqId());				
-						}else if(context instanceof OtherPeopleActivity){
-							String objId = ((OtherPeopleActivity) context).getObjId();
-							if(objId != null){							
+					if(isTourist){
+						DialogUtil.showGuestDialog(context, null);
+					}else{		
+						if(userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())){
+							skipToSelfFragment(iPullPostListCallback);
+						}else if((userCard.getUserType().equals("1")&&!userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId()))&&!(context instanceof SystemUserActivity)){
+							skipToSystemUserActivity(context,userCard.getUserSeqId());
+						}else if(context instanceof SystemUserActivity){
+							String objId = ((SystemUserActivity) context).getObjId();
+							if(objId != null){
 								if(!userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())&&!userCard.getUserSeqId().equals(objId)){
-									skipToOtherPeopleActivity(context,userCard.getUserSeqId());
+									skipToSystemUserActivity(context,userCard.getUserSeqId());
 								}
 							}
+						}else{
+							
+							if(!userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())&&!(context instanceof OtherPeopleActivity)){
+								skipToOtherPeopleActivity(context,userCard.getUserSeqId());				
+							}else if(context instanceof OtherPeopleActivity){
+								String objId = ((OtherPeopleActivity) context).getObjId();
+								if(objId != null){							
+									if(!userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())&&!userCard.getUserSeqId().equals(objId)){
+										skipToOtherPeopleActivity(context,userCard.getUserSeqId());
+									}
+								}
+							}
+							
 						}
-						
 					}
 				}
 				@Override

@@ -7,6 +7,7 @@ import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.szrjk.config.Constant;
 import com.szrjk.util.MessageDigestUtil;
+import com.szrjk.util.base64.Base64Util;
 import org.apache.http.entity.StringEntity;
 
 import java.io.UnsupportedEncodingException;
@@ -27,7 +28,7 @@ public class DHttpService
 		//公共参数处理,
 		Map BusiParams = (Map) hashMap.get("BusiParams");
 		BusiParams.put("deviceType","1");//设备类型 1:安卓 2:IOS 3:web
-		BusiParams.put("fuck","法克雪特");//设备类型 1:安卓 2:IOS 3:web
+//		BusiParams.put("fuck","法克雪特");//设备类型 1:安卓 2:IOS 3:web
 
 		RequestParams params = new RequestParams();
 		String reqJson = JSON.toJSONString(hashMap);
@@ -44,12 +45,6 @@ public class DHttpService
 //			params.setHeader("messageDigest",htextecrypt);
 //			String aa  = MD5Encode(msg);
 //			reqJson = ;
-//			reqJson = MessageDigestUtil.doEncode(reqJson);
-			reqJson = Base64Util.encode(reqJson);
-//			reqJson = MessageDigestUtil.doEncode(reqJson);
-			params.setHeader("messageDigest", MessageDigestUtil.MD5Encode(reqJson));
-//			reqJson = Base64Util.encode(reqJson);
-//			reqJson = MessageDigestUtil.doEncode(reqJson);
 			params.setHeader("messageDigest", MessageDigestUtil.MD5Encode(reqJson));
 
 //			String sss = MessageDigestUtil.doDecode(reqJson);

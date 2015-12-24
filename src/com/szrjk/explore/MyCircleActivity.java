@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -156,7 +157,7 @@ public class MyCircleActivity extends BaseActivity {
 	private void getMyCircle() {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("ServiceName", "queryUserRelativeCoterie");
+		paramMap.put("ServiceName", "getCoterieInfosByUser");
 		Map<String, Object> busiParams = new HashMap<String, Object>();
 		busiParams.put("userSeqId",Constant.userInfo.getUserSeqId());
 		busiParams.put("beginNum",Integer.valueOf(0));
@@ -178,6 +179,7 @@ public class MyCircleActivity extends BaseActivity {
 					}else{
 						myCirclelist=JSON.parseArray(
 								returnObj.getString("coterieList"), CircleInfo.class);
+						Log.i("TAg", myCirclelist.toString());
 						if(myCirclelist != null && !myCirclelist.isEmpty()){					
 							handler.sendEmptyMessage(HAVE_MY_CIRCLE);
 						}else{
@@ -209,7 +211,7 @@ public class MyCircleActivity extends BaseActivity {
 	private void getHotCircle() {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("ServiceName", "getHotCoterie");
+		paramMap.put("ServiceName", "getHotCoteries");
 		Map<String, Object> busiParams = new HashMap<String, Object>();
 		busiParams.put("userSeqId",Constant.userInfo.getUserSeqId());
 		busiParams.put("beginNum",Integer.valueOf(0));

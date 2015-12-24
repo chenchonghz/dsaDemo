@@ -281,7 +281,7 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 
 	private void getCoterieById() {
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("ServiceName", "queryCoterieById");
+		paramMap.put("ServiceName", "getCoterieInfoById");
 		Map<String, Object> busiParams = new HashMap<String, Object>();
 		busiParams.put("userSeqId", Constant.userInfo.getUserSeqId());
 		busiParams.put("coterieId",circleId);
@@ -522,7 +522,7 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 
 	private void JoinCircle() {
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("ServiceName", "userRequestIntoCoterie");
+		paramMap.put("ServiceName", "userReqIntoCoterie");
 		Map<String, Object> busiParams = new HashMap<String, Object>();
 		busiParams.put("userSeqId",Constant.userInfo.getUserSeqId());
 		busiParams.put("coterieId",circleId);
@@ -580,7 +580,7 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 	//解散圈子
 	protected void dissolvecircle() {
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("ServiceName", "maintainCoterie");
+		paramMap.put("ServiceName", "maintainCoterieInfo");
 		Map<String, Object> busiParams = new HashMap<String, Object>();
 		busiParams.put("operateType", "D");
 		Map<String, Object> coterieInfo = new HashMap<String, Object>();
@@ -627,7 +627,7 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 		List<String> list = new ArrayList<String>();
 		list.add(Constant.userInfo.getUserSeqId());
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("ServiceName", "removeUserFromCoterie");
+		paramMap.put("ServiceName", "removeUsersFromCoterie");
 		Map<String, Object> busiParams = new HashMap<String, Object>();
 		busiParams.put("userSeqId", Constant.userInfo.getUserSeqId());		
 		busiParams.put("objUserSeqIds", list);

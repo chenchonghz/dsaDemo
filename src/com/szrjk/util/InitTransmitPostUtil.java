@@ -184,8 +184,15 @@ public class InitTransmitPostUtil {
 				public void onClick(View widget) {
 					if(userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())){
 						skipToSelfFragment(iPullPostListCallback);
-					}else if(userCard.getUserType().equals("1")&&!userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())){
+					}else if((userCard.getUserType().equals("1")&&!userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId()))&&!(context instanceof SystemUserActivity)){
 						skipToSystemUserActivity(context,userCard.getUserSeqId());
+					}else if(context instanceof SystemUserActivity){
+						String objId = ((SystemUserActivity) context).getObjId();
+						if(objId != null){
+							if(!userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())&&!userCard.getUserSeqId().equals(objId)){
+								skipToSystemUserActivity(context,userCard.getUserSeqId());
+							}
+						}
 					}else{
 
 						if(!userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())&&!(context instanceof OtherPeopleActivity)){

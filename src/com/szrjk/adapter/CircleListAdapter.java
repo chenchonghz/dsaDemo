@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class CircleListAdapter extends BaseAdapter{
@@ -59,7 +60,8 @@ public class CircleListAdapter extends BaseAdapter{
 				viewHolder.iv_circle = (ImageView) convertview.findViewById(R.id.iv_circle);
 				viewHolder.tv_circle_name = (TextView) convertview.findViewById(R.id.tv_circle_name);
 				viewHolder.tv_circle_num = (TextView) convertview.findViewById(R.id.tv_circle_num);
-				viewHolder.lly_item = (LinearLayout) convertview.findViewById(R.id.lly_item_circle);
+				viewHolder.lly_item = (RelativeLayout) convertview.findViewById(R.id.lly_item_circle);
+				viewHolder.tv_circle_type = (TextView) convertview.findViewById(R.id.tv_circle_type);
 				convertview.setTag(viewHolder);
 		}else{
 			viewHolder = (ViewHolder) convertview.getTag();
@@ -75,6 +77,7 @@ public class CircleListAdapter extends BaseAdapter{
 		}
 		viewHolder.tv_circle_name.setText(list.get(position).getCoterieName());	
 		viewHolder.tv_circle_num.setText(list.get(position).getMemberCount());	
+		viewHolder.tv_circle_type.setText(list.get(position).getCoterieType().equals("1")?"个人":"组织/机构");
 //		viewHolder.lly_item.setOnTouchListener(new touchListenr(position, viewHolder));
 		return convertview;
 	}
@@ -83,7 +86,8 @@ public class CircleListAdapter extends BaseAdapter{
 		private ImageView iv_circle;
 		private TextView tv_circle_name;
 		private TextView tv_circle_num;
-		private LinearLayout lly_item;
+		private RelativeLayout lly_item;
+		private TextView tv_circle_type;
 	}
 
 //	class touchListenr implements OnTouchListener{

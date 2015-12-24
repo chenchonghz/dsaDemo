@@ -1,6 +1,8 @@
 package com.szrjk.self;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import android.content.Context;
@@ -11,6 +13,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -30,8 +33,10 @@ import com.szrjk.config.Constant;
 import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.Coterie;
+import com.szrjk.entity.DeptEntity;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.IImgUrlCallback;
+import com.szrjk.entity.CircleType;
 import com.szrjk.entity.UserInfo;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.util.ImageLoaderUtil;
@@ -39,7 +44,7 @@ import com.szrjk.util.ToastUtils;
 import com.szrjk.util.UploadPhotoUtils;
 
 @ContentView(R.layout.activity_create_circle)
-public class CreateCircleActivity extends BaseActivity {
+public class CreateCircleActivity extends BaseActivity implements OnClickListener{
 
 	protected static final int EDIT_DATA_SUCCESS = 2;
 
@@ -80,6 +85,12 @@ public class CreateCircleActivity extends BaseActivity {
 	private TextView tv_erke;
 	@ViewInject(R.id.tv_5)
 	private TextView tv_more;
+	
+	@ViewInject(R.id.rb_single)
+	private RadioButton rb_single;
+	@ViewInject(R.id.rb_group)
+	private RadioButton rb_group;
+	
 	@ViewInject(R.id.rb_public)
 	private RadioButton rb_public;
 	
@@ -120,12 +131,30 @@ public class CreateCircleActivity extends BaseActivity {
 		et_coterieName.setText(coterie.getCoterieName());
 		et_coterieDesc.setText(coterie.getCoterieDesc());
 		String isOpen=coterie.getIsOpen();
-		if (isOpen.equals("Yes")) {
+		if (isOpen.equals("1")) {
 			rb_public.setChecked(true);
 		}else {
 			rb_private.setChecked(true);
 		}
+		if (coterie.getCoterieType().equals("1")) {
+			rb_single.setChecked(true);
+		}else {
+			rb_group.setChecked(true);
+		}
 		
+		tv_nothing.setTextColor(instance.getResources().getColor(R.color.font_tabletitle));
+		tv_nothing.setBackground(instance.getResources().getDrawable(R.drawable.flow_text_selector));
+		if (coterie.getPropList().get(0).getPropertyId().equals("")) {
+			select(tv_nothing);dept_id="";
+		}else{
+			switch (Integer.valueOf(coterie.getPropList().get(0).getPropertyId())) {
+			case 10:select(tv_neike);dept_id="10";break;
+			case 11:select(tv_waike);dept_id="11";break;
+			case 12:select(tv_fuke);dept_id="12";break;
+			case 13:select(tv_erke);dept_id="13";break;
+			case 14:select(tv_more);dept_id="14";break;
+		}
+		}
 	}
 
 	private void initLayout() {
@@ -133,7 +162,12 @@ public class CreateCircleActivity extends BaseActivity {
 		findUserFace();
 		et_coterieName.addTextChangedListener(yTextWatcher);
 		et_coterieDesc.addTextChangedListener(mTextWatcher);
-		
+		tv_nothing.setOnClickListener(this);
+		tv_neike.setOnClickListener(this);
+		tv_waike.setOnClickListener(this);
+		tv_erke.setOnClickListener(this);
+		tv_fuke.setOnClickListener(this);
+		tv_more.setOnClickListener(this);
 	}
 
 	TextWatcher yTextWatcher = new TextWatcher() {  
@@ -177,11 +211,11 @@ public class CreateCircleActivity extends BaseActivity {
 		finish();
 	}
 	//科室选择类型
-	@OnClick(R.id.tv_nothing)
-	public void choosenothing(View view){
-		tv_nothing.setTextColor(instance.getResources().getColor(R.color.header_bg));
-		tv_nothing.setBackground(instance.getResources().getDrawable(R.drawable.flow_dept_selector));
-	}
+//	@OnClick(R.id.tv_nothing)
+//	public void choosenothing(View view){
+//		tv_nothing.setTextColor(instance.getResources().getColor(R.color.header_bg));
+//		tv_nothing.setBackground(instance.getResources().getDrawable(R.drawable.flow_dept_selector));
+//	}
 	
 	@OnClick(R.id.tv_complete)
 	public void completeClick(View view){
@@ -189,11 +223,20 @@ public class CreateCircleActivity extends BaseActivity {
 		String coterieName = et_coterieName.getText().toString();
 		String coterieDesc = et_coterieDesc.getText().toString();
 		String isOpen=null;
+		String coterieType = null;
+		//圈子类型,1个人,2机构/组织
+		if (rb_single.isChecked()) {
+			coterieType = "1";
+		}
+		if (rb_group.isChecked()) {
+			coterieType = "2";
+		}
+		//圈子是否开放，1开放，2不开放
 		if (rb_public.isChecked()) {
-			isOpen="Yes";
+			isOpen="1";
 		}
 		if (rb_private.isChecked()) {
-			isOpen="No";
+			isOpen="2";
 		}
 		if (coterieName.equals("")) {
 			ToastUtils.showMessage(instance, "请输入圈子名称！");
@@ -210,17 +253,20 @@ public class CreateCircleActivity extends BaseActivity {
 			return;
 		}
 		if (tv_complete.getText().toString().equals("完成")) {
-			maintainCoterie("A",userSeqId,"",coterieFaceUrl,coterieName,coterieDesc,isOpen);
+			maintainCoterie("A",userSeqId,"",coterieFaceUrl,coterieName,coterieDesc,isOpen,coterieType);
 		}
 		if (tv_complete.getText().toString().equals("确定")) {
-			maintainCoterie("U", userSeqId, coterie.getCoterieId(), coterieFaceUrl, coterieName, coterieDesc, isOpen);
+			maintainCoterie("U", userSeqId, coterie.getCoterieId(), coterieFaceUrl, coterieName, coterieDesc, isOpen,coterieType);
 		}
 	}
 	
 	private void maintainCoterie(String operateType,String userSeqId, String coterieId,String coterieFaceUrl2,
-			String coterieName, String coterieDesc, String isOpen) {
+			String coterieName, String coterieDesc, String isOpen,String coterieType) {
+		CircleType property = new CircleType("1", dept_id);
+		List<CircleType> propList = new ArrayList<CircleType>();
+		propList.add(property);
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("ServiceName", "maintainCoterie");
+		paramMap.put("ServiceName", "maintainCoterieInfo");
 		Map<String, Object> busiParams = new HashMap<String, Object>();
 		busiParams.put("operateType", operateType);
 		Map<String, Object> coterieInfo = new HashMap<String, Object>();
@@ -230,6 +276,8 @@ public class CreateCircleActivity extends BaseActivity {
 		coterieInfo.put("coterieDesc", coterieDesc);
 		coterieInfo.put("coterieFaceUrl", coterieFaceUrl);
 		coterieInfo.put("isOpen", isOpen);
+		coterieInfo.put("coterieType", coterieType);
+		coterieInfo.put("propList", propList);
 		busiParams.put("coterieInfo", coterieInfo);
 		paramMap.put("BusiParams", busiParams);
 		httpPost(paramMap, new AbstractDhomeRequestCallBack() {
@@ -319,5 +367,52 @@ public class CreateCircleActivity extends BaseActivity {
 				imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 			}
 		}
+	}
+	private int dept_view_id = R.id.tv_nothing;
+	private String dept_name = "无";
+	private String dept_id="";
+	@Override
+	//科室选择（单选模式）
+	public void onClick(View view) {
+		if (view.getId()==dept_view_id) {
+			Log.i("dept", dept_name);
+		}else{
+			//第一次判断更改至非选中色
+			switch (dept_view_id) {
+			case R.id.tv_nothing:unselect(tv_nothing);break;
+			case R.id.tv_1:unselect(tv_neike);break;
+			case R.id.tv_2:unselect(tv_waike);break;
+			case R.id.tv_3:unselect(tv_fuke);break;
+			case R.id.tv_4:unselect(tv_erke);break;
+			case R.id.tv_5:unselect(tv_more);break;
+			}
+			//更改选中色
+			switch (view.getId()) {
+			case R.id.tv_nothing:select(tv_nothing);dept_id="";break;
+			case R.id.tv_1:select(tv_neike);dept_id="10";break;
+			case R.id.tv_2:select(tv_waike);dept_id="11";break;
+			case R.id.tv_3:select(tv_fuke);dept_id="12";break;
+			case R.id.tv_4:select(tv_erke);dept_id="13";break;
+			case R.id.tv_5:select(tv_more);dept_id="14";break;
+			}
+			
+		}
+		
+	}
+
+
+	private void select(TextView tv) {
+		tv.setTextColor(instance.getResources().getColor(R.color.header_bg));
+		tv.setBackground(instance.getResources().getDrawable(R.drawable.flow_dept_selector));
+		dept_view_id = tv.getId();
+		dept_name = tv.getText().toString();
+		Log.i("dept", dept_view_id+dept_name);
+		
+	}
+
+
+	private void unselect(TextView tv) {
+		tv.setTextColor(instance.getResources().getColor(R.color.font_tabletitle));
+		tv.setBackground(instance.getResources().getDrawable(R.drawable.flow_text_selector));
 	}
 }

@@ -188,7 +188,7 @@ public class CircleInviteFirendActivity extends FragmentActivity implements OnCl
 	private void invite() {
 
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("ServiceName", "inviteUserIntoCoterie");
+		paramMap.put("ServiceName", "inviteUsersIntoCoterie");
 		Map<String, Object> busiParams = new HashMap<String, Object>();
 		busiParams.put("userSeqId",Constant.userInfo.getUserSeqId());
 		busiParams.put("coterieId",circleID);

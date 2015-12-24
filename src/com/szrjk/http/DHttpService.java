@@ -45,6 +45,9 @@ public class DHttpService
 //			String aa  = MD5Encode(msg);
 //			reqJson = ;
 //			reqJson = MessageDigestUtil.doEncode(reqJson);
+			reqJson = Base64Util.encode(reqJson);
+//			reqJson = MessageDigestUtil.doEncode(reqJson);
+			params.setHeader("messageDigest", MessageDigestUtil.MD5Encode(reqJson));
 //			reqJson = Base64Util.encode(reqJson);
 //			reqJson = MessageDigestUtil.doEncode(reqJson);
 			params.setHeader("messageDigest", MessageDigestUtil.MD5Encode(reqJson));

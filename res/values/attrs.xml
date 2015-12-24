@@ -81,5 +81,9 @@
     <declare-styleable name="PostDetailHeaderView">
         <attr name="text" format="string" />
     </declare-styleable>
+    
+    <declare-styleable name="MainActivityHeaderView">
+        <attr name="mtext" format="string" />
+    </declare-styleable>
 
 </resources>

@@ -445,9 +445,9 @@ public class PostDetailFowardActivity2 extends BaseActivity {
 							+ postDetailBottomOperLayout.isIslike());
 		}
 		if (flag==Constant.SELF_FLAG) {
-			if (userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())) {
+			SelfActivity.POSITION = position;
+			if (userCard!=null&&userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())) {
 				if (postStatis!=null) {
-					Log.i("num", postStatis.getREAD_NUM()+1+"");
 					SelfActivity.READ_NUM=postStatis.getREAD_NUM()+1;
 				}
 			}

@@ -23,6 +23,7 @@ import com.szrjk.config.ConstantUser;
 import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.IndexFragment;
 import com.szrjk.dhome.R;
+import com.szrjk.dhome.SelfActivity;
 import com.szrjk.entity.Comment;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.Forward;
@@ -33,6 +34,7 @@ import com.szrjk.entity.PostDetail;
 import com.szrjk.entity.PostStatis;
 import com.szrjk.entity.UserCard;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
+import com.szrjk.self.CircleHomepageActivity;
 import com.szrjk.self.more.NormalPostActivity;
 import com.szrjk.util.ToastUtils;
 import com.szrjk.widget.PostContentLayout;
@@ -153,10 +155,11 @@ public class PostDetailActivity extends BaseActivity {
 
 			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
-				if (jobj.getString("ReturnCode").equals("0006")&&jobj.getString("ErrorMessage").equals("[queryPostForwardListByPostId]查询帖子信息异常")) {
-					ToastUtils.showMessage(instance, "该帖子已被删除！");
-					instance.finish();
-				}
+//				if (jobj.getString("ReturnCode").equals("0006")&&jobj.getString("ErrorMessage").equals("[queryPostForwardListByPostId]查询帖子信息异常")) {
+//
+//					instance.finish();
+//				}
+				ToastUtils.showMessage(instance, jobj.getString("ErrorMessage"));
 			}
 
 			@Override
@@ -362,6 +365,14 @@ public class PostDetailActivity extends BaseActivity {
 		if (flag==ConstantUser.MyNormalPost) {
 			NormalPostActivity.ISDELETE=isDelete;
 			NormalPostActivity.POSITION=position;
+		}
+		if (flag==Constant.SELF_FLAG) {
+			SelfActivity.ISDELETE=isDelete;
+			SelfActivity.POSITION=position;
+		}
+		if (flag==Constant.CIRCLE_FLAG) {
+			CircleHomepageActivity.ISDELETE=isDelete;
+			CircleHomepageActivity.POSITION=position;
 		}
 	}
 }

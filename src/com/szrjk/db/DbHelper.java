@@ -61,23 +61,23 @@ public class DbHelper extends SQLiteOpenHelper {
             }
         }
         // 下面测试 /data/data/com.test.db/databases/ 下的数据库是否能正常工作
-        SQLiteDatabase database = SQLiteDatabase.openOrCreateDatabase(DB_PATH + DB_NAME, null);
-        Cursor cursor = database.rawQuery("select * from TCITY", null);
-
-        if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            try {
-                // 解决中文乱码问题
-                byte test[] = cursor.getBlob(0);
-                String strtest = new String(test, "utf-8").trim();
-
-                // 看输出的信息是否正确
-                System.out.println(strtest);
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-        }
-        cursor.close();
+//        SQLiteDatabase database = SQLiteDatabase.openOrCreateDatabase(DB_PATH + DB_NAME, null);
+//        Cursor cursor = database.rawQuery("select * from TCITY", null);
+//
+//        if (cursor.getCount() > 0) {
+//            cursor.moveToFirst();
+//            try {
+//                // 解决中文乱码问题
+//                byte test[] = cursor.getBlob(0);
+//                String strtest = new String(test, "utf-8").trim();
+//
+//                // 看输出的信息是否正确
+//                System.out.println(strtest);
+//            } catch (UnsupportedEncodingException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        cursor.close();
     }
 
 	@Override

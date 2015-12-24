@@ -32,6 +32,7 @@ import com.szrjk.http.DHttpService;
 import com.szrjk.pull.PullToRefreshBase;
 import com.szrjk.pull.PullToRefreshBase.OnRefreshListener;
 import com.szrjk.pull.PullToRefreshListView;
+import com.szrjk.util.DisplaySizeUtil;
 import com.szrjk.util.ShowDialogUtil;
 import com.szrjk.util.ToastUtils;
 
@@ -93,7 +94,8 @@ public class IndexFragment extends Fragment
 							context, mainActivity,userList, postList, postOtherList,userId,Constant.INDEX_FLAG, new IPullPostListCallback() {
 						@Override
 						public void skipToSelfFragment() {
-							mainActivity.skipToSelfFragment();
+							Intent intent = new Intent(context, SelfActivity.class);
+							context.startActivity(intent);
 						}
 					});
 					lv_postlist.setAdapter(adapter);

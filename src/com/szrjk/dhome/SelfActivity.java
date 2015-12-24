@@ -1,5 +1,6 @@
 package com.szrjk.dhome;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -14,6 +15,7 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.config.Constant;
+import com.szrjk.config.ConstantUser;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.PostInfo;
 import com.szrjk.entity.PostList;
@@ -40,6 +42,7 @@ import com.szrjk.widget.SelfChangeBgPopup;
 
 import de.greenrobot.event.EventBus;
 import android.os.Bundle;
+import android.os.Handler;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -578,6 +581,16 @@ public class SelfActivity extends BaseActivity implements OnClickListener {
 				}
 			}
 		}
+		new Thread(){
+			public void run() {
+				try {
+					Thread.sleep(3000);
+					getUserHpInfo(ConstantUser.getUserInfo().getUserSeqId());
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			};
+		}.start();
 		super.onResume();
 	}
 }

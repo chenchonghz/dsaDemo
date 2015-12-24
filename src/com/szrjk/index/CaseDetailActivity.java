@@ -30,6 +30,7 @@ import com.szrjk.config.ConstantUser;
 import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.IndexFragment;
 import com.szrjk.dhome.R;
+import com.szrjk.dhome.SelfActivity;
 import com.szrjk.entity.CaseDetail;
 import com.szrjk.entity.CasePostDetail;
 import com.szrjk.entity.Comment;
@@ -541,6 +542,10 @@ public class CaseDetailActivity extends BaseActivity {
 		if (flag==ConstantUser.MyProblemHelp) {
 			ProblemHelpActivity.ISDELETE=isDelete;
 			ProblemHelpActivity.POSITION=position;
+		}
+		if (flag==Constant.SELF_FLAG) {
+			SelfActivity.ISDELETE=isDelete;
+			SelfActivity.POSITION=position;
 		}
 	}
 }

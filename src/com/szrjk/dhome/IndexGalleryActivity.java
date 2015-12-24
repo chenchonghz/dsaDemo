@@ -60,7 +60,7 @@ public class IndexGalleryActivity extends Activity
 	private IndexGalleryActivity instance;
 	private String contextText;
 	private OperContextClick operContextClick;
-	private String postId;
+	private String[] postIdList;
 	private int postType;
 
 
@@ -76,7 +76,7 @@ public class IndexGalleryActivity extends Activity
 		bundle = intent.getExtras();
 		imgs = intent.getStringArrayExtra("imgs");
 		id = intent.getIntExtra("position", 0);
-		postId=intent.getStringExtra("postId");
+		postIdList=intent.getStringArrayExtra("postIdList");
 		postType=intent.getIntExtra("postType",0);
 		contextText = intent.getStringExtra("contextText");
 		operContextClick = (OperContextClick) intent.getSerializableExtra("operInterface");
@@ -118,7 +118,7 @@ public class IndexGalleryActivity extends Activity
 	}
 
 	public String getPostId(){
-		return postId;
+		return postIdList[id];
 	}
 	public int getPostType(){
 		return postType;

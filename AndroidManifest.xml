@@ -827,6 +827,12 @@
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
         </activity>
+        <activity
+            android:name="com.szrjk.explore.FriendRequestActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/Theme.dhome"
+            android:windowSoftInputMode="adjustNothing" >
+        </activity>
     </application>
 
 </manifest>

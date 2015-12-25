@@ -568,6 +568,7 @@ public class SelfActivity extends BaseActivity implements OnClickListener {
 		if(postListComm != null){		
 			if(POSITION != -1){
 				if(READ_NUM != -1){
+					Log.e("SelfActivity", "阅读量："+READ_NUM);
 					ArrayList<PostOtherImformationInfo> postOtherList = postListComm.getPostOtherList();
 					postOtherList.get(POSITION).setREAD_NUM(READ_NUM);
 					postListComm.setPostOtherList(postOtherList);

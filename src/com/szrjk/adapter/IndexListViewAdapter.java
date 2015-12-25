@@ -471,10 +471,14 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					if(isTourist){
 						DialogUtil.showGuestDialog(context, null);
 					}else{
-						skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getPostTitle(),
-								userInfo.getUserFaceUrl(),postInfo.getPostId(),
-								userInfo.getUserName(),postInfo.getPostType(),postInfo.getPostLevel()
-								,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),flag);
+						if(userInfo != null && postInfo != null && postOtherInfo!= null){
+							skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getPostTitle(),
+									userInfo.getUserFaceUrl(),postInfo.getPostId(),
+									userInfo.getUserName(),postInfo.getPostType(),postInfo.getPostLevel()
+									,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),flag);
+						}else{
+							ToastUtils.showMessage(context, "抱歉，数据异常，无法转发，请提意见反馈");
+						}
 					}
 				}
 			});
@@ -497,8 +501,12 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 				public void onClick(View v) {
 					if(isTourist){
 						DialogUtil.showGuestDialog(context, null);
-					}else{			
-						clickLike(position,like,postInfo.getUserSeqId(),postInfo.getPostId(),postOtherInfo.isMineLike());
+					}else{
+						if(userInfo != null && postInfo != null && postOtherInfo!= null){		
+							clickLike(position,like,postInfo.getUserSeqId(),postInfo.getPostId(),postOtherInfo.isMineLike());
+						}else{
+							ToastUtils.showMessage(context, "抱歉，数据异常，无法点赞，请提交意见反馈");
+						}
 					}
 				}
 			});
@@ -621,10 +629,14 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					if(isTourist){
 						DialogUtil.showGuestDialog(context, null);
 					}else{
-						skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getPostTitle(),
-								userInfo.getUserFaceUrl(),postInfo.getPostId(),
-								userInfo.getUserName(),postInfo.getPostType(),postInfo.getPostLevel()
-								,postInfo.getSrcPostId(),position, postOtherInfo.getFORWARD_NUM(),flag);
+						if(userInfo != null && postInfo != null && postOtherInfo!= null){	
+							skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getPostTitle(),
+									userInfo.getUserFaceUrl(),postInfo.getPostId(),
+									userInfo.getUserName(),postInfo.getPostType(),postInfo.getPostLevel()
+									,postInfo.getSrcPostId(),position, postOtherInfo.getFORWARD_NUM(),flag);
+						}else{
+							ToastUtils.showMessage(context, "抱歉，数据异常，无法转发，请提交意见反馈");
+						}
 					}
 				}
 			});
@@ -647,8 +659,12 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 				public void onClick(View v) {
 					if(isTourist){
 						DialogUtil.showGuestDialog(context, null);
-					}else{	
-						clickLike(position,like2,postInfo.getUserSeqId(),postInfo.getPostId(),postOtherInfo.isMineLike());
+					}else{
+						if(userInfo != null && postInfo != null && postOtherInfo!= null){
+							clickLike(position,like2,postInfo.getUserSeqId(),postInfo.getPostId(),postOtherInfo.isMineLike());
+						}else{
+							ToastUtils.showMessage(context, "抱歉，数据异常，无法点赞，请提交意见反馈");
+						}
 					}
 				}
 			});
@@ -798,10 +814,14 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 						if(postInfo.getIsOpen() == 2){
 							ToastUtils.showMessage(context, "私密圈子不可转发！");
 						}else{
-							skipToRepeatActivity(userInfo.getUserSeqId(), postInfo.getContent(),
-									userInfo.getUserFaceUrl(), postInfo.getPostId(),
-									userInfo.getUserName(), postInfo.getPostType(),postInfo.getPostLevel()
-									,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),flag);
+							if(userInfo != null && postInfo != null && postOtherInfo!= null){		
+								skipToRepeatActivity(userInfo.getUserSeqId(), postInfo.getContent(),
+										userInfo.getUserFaceUrl(), postInfo.getPostId(),
+										userInfo.getUserName(), postInfo.getPostType(),postInfo.getPostLevel()
+										,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),flag);
+							}else{
+								ToastUtils.showMessage(context, "抱歉，数据异常，无法转发，请提交意见反馈");
+							}
 						}
 					}
 				}
@@ -842,8 +862,13 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 				public void onClick(View v) {
 					if(isTourist){
 						DialogUtil.showGuestDialog(context, null);
-					}else{	
-						clickLike(position,like3,postInfo.getUserSeqId(),postInfo.getPostId(),postOtherInfo.isMineLike());
+					}else{
+						if(userInfo != null && postInfo != null && postOtherInfo!= null){
+							clickLike(position,like3,postInfo.getUserSeqId(),postInfo.getPostId(),postOtherInfo.isMineLike());
+						}else{
+							ToastUtils.showMessage(context, "抱歉，数据异常，无法点赞，请提交意见反馈");
+						}
+						
 					}
 				}
 			});
@@ -1031,10 +1056,14 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 						if(postInfo.getPostType().equals(Constant.TRANSMIT_POST)){
 							ToastUtils.showMessage(context, "多次转发功能正在开发中，敬请期待");
 						}else{
-							skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getSrcPostAbstractCard().getContent(),
-									postInfo.getSrcUserCard().getUserFaceUrl(),postInfo.getPostId(),
-									postInfo.getPostType(),postInfo.getPostLevel()
-									,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),postAbstractLists,postInfo.getSrcUserCard().getUserName(),flag);
+							if(userInfo != null && postInfo != null && postOtherInfo!= null){		
+								skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getSrcPostAbstractCard().getContent(),
+										postInfo.getSrcUserCard().getUserFaceUrl(),postInfo.getPostId(),
+										postInfo.getPostType(),postInfo.getPostLevel()
+										,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),postAbstractLists,postInfo.getSrcUserCard().getUserName(),flag);
+							}else{
+								ToastUtils.showMessage(context, "抱歉，数据异常，无法转发，请提交意见反馈");
+							}
 						}		
 					}
 			  }
@@ -1078,8 +1107,13 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 				public void onClick(View v) {
 					if(isTourist){
 						DialogUtil.showGuestDialog(context, null);
-					}else{			
-						clickLike(position,like4,userInfo.getUserSeqId(),postInfo.getPostId(),postOtherInfo.isMineLike());
+					}else{
+						if(userInfo != null && postInfo != null && postOtherInfo!= null){
+							clickLike(position,like4,userInfo.getUserSeqId(),postInfo.getPostId(),postOtherInfo.isMineLike());
+						}else{
+							ToastUtils.showMessage(context, "抱歉，数据异常，无法转发，请提交意见反馈");
+						}
+						
 					}
 				}
 			});
@@ -1253,10 +1287,14 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 						if(postInfo.getPostType().equals(Constant.TRANSMIT_POST)){
 							ToastUtils.showMessage(context, "多次转发功能正在开发中，敬请期待");
 						}else{
-							skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getSrcPostAbstractCard().getPostTitle(),
-									postInfo.getSrcUserCard().getUserFaceUrl(),postInfo.getPostId(),
-									postInfo.getPostType(),postInfo.getPostLevel()
-									,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),caseSharePostAbstractLists,postInfo.getSrcUserCard().getUserName(),flag);
+							if(userInfo != null && postInfo != null && postOtherInfo!= null){	
+								skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getSrcPostAbstractCard().getPostTitle(),
+										postInfo.getSrcUserCard().getUserFaceUrl(),postInfo.getPostId(),
+										postInfo.getPostType(),postInfo.getPostLevel()
+										,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),caseSharePostAbstractLists,postInfo.getSrcUserCard().getUserName(),flag);
+							}else{
+								ToastUtils.showMessage(context, "抱歉，数据异常，无法转发，请提交意见反馈");
+							}
 						}				
 					}
 				}
@@ -1289,8 +1327,12 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 				public void onClick(View v) {
 					if(isTourist){
 						DialogUtil.showGuestDialog(context, null);
-					}else{	
-						clickLike(position,like5,userInfo.getUserSeqId(),postInfo.getPostId(),postOtherInfo.isMineLike());
+					}else{
+						if(userInfo != null && postInfo != null && postOtherInfo!= null){			
+							clickLike(position,like5,userInfo.getUserSeqId(),postInfo.getPostId(),postOtherInfo.isMineLike());
+						}else{
+							ToastUtils.showMessage(context, "抱歉，数据异常，无法点赞，请提交意见反馈");
+						}
 					}
 				}
 			});
@@ -1469,10 +1511,14 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 						if(postInfo.getPostType().equals(Constant.TRANSMIT_POST)){
 							ToastUtils.showMessage(context, "多次转发功能正在开发中，敬请期待");
 						}else{
-							skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getSrcPostAbstractCard().getPostTitle(),
-							postInfo.getSrcUserCard().getUserFaceUrl(),postInfo.getPostId(),
-							postInfo.getPostType(),postInfo.getPostLevel()
-							,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),problemHelpPostAbstractLists,postInfo.getSrcUserCard().getUserName(),flag);	
+							if(userInfo != null && postInfo != null && postOtherInfo!= null){
+								skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getSrcPostAbstractCard().getPostTitle(),
+										postInfo.getSrcUserCard().getUserFaceUrl(),postInfo.getPostId(),
+										postInfo.getPostType(),postInfo.getPostLevel()
+										,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),problemHelpPostAbstractLists,postInfo.getSrcUserCard().getUserName(),flag);	
+							}else{
+								ToastUtils.showMessage(context, "抱歉，数据异常，无法转发，请提交意见反馈");
+							}
 						}		
 					}
 				}
@@ -1509,8 +1555,12 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 				public void onClick(View v) {
 					if(isTourist){
 						DialogUtil.showGuestDialog(context, null);
-					}else{						
-						clickLike(position,like6,userInfo.getUserSeqId(),postInfo.getPostId(),postOtherInfo.isMineLike());
+					}else{
+						if(userInfo != null && postInfo != null && postOtherInfo != null){	
+							clickLike(position,like6,userInfo.getUserSeqId(),postInfo.getPostId(),postOtherInfo.isMineLike());
+						}else{
+							ToastUtils.showMessage(context, "抱歉，数据异常，无法点赞，请提交意见反馈");
+						}
 					}
 				}
 			});

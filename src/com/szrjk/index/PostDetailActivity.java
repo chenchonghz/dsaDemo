@@ -385,7 +385,7 @@ public class PostDetailActivity extends BaseActivity {
 		if (flag==Constant.SELF_FLAG) {
 			SelfActivity.ISDELETE=isDelete;
 			SelfActivity.POSITION=position;
-			if (userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())) {
+			if (userCard != null && userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())) {
 				if (postStatis!=null) {
 					SelfActivity.READ_NUM=postStatis.getREAD_NUM()+1;
 				}

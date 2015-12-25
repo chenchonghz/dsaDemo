@@ -22,7 +22,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lidroid.xutils.exception.HttpException;
 import com.szrjk.config.Constant;
-import com.szrjk.dhome.IndexFragment;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.IPopupItemCallback;
@@ -193,11 +192,11 @@ public class PostDetailHeaderView extends RelativeLayout {
 		if (context instanceof PostDetailActivity) {
 			((PostDetailActivity) context).setDelete(true);
 		}
-//		if (context instanceof PostDetailFowardActivity) {
-//			((PostDetailFowardActivity) context).setDelete(true);
-//		}
-//		if (context instanceof PostDetailFowardActivity2) {
-//			((PostDetailFowardActivity2) context).setDelete(true);
-//		}
+		if (context instanceof PostDetailFowardActivity) {
+			((PostDetailFowardActivity) context).setDelete(true);
+		}
+		if (context instanceof PostDetailFowardActivity2) {
+			((PostDetailFowardActivity2) context).setDelete(true);
+		}
 	}
 }

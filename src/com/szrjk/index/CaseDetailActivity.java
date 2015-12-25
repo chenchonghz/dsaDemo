@@ -9,7 +9,6 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.NotificationCompat.CarExtender;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -118,7 +117,7 @@ public class CaseDetailActivity extends BaseActivity {
 				caseDetail = (CaseDetail) msg.obj;
 				userCard = caseDetail.getUserCard();
 				setUserCard(userCard);
-				postStatis=caseDetail.getPostStatis();
+				postStatis = caseDetail.getPostStatis();
 				setCaseData();
 				postDetailBottomOperLayout.getBtn_laud().setClickable(true);
 			}
@@ -131,7 +130,7 @@ public class CaseDetailActivity extends BaseActivity {
 	private int flag;
 	private boolean isDelete = false;
 	private String postUserSeqId;
-	private boolean isFirstIn=true;
+	private boolean isFirstIn = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -276,10 +275,8 @@ public class CaseDetailActivity extends BaseActivity {
 			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 				dialog.dismiss();
-				if (jobj.getString("ReturnCode").equals("0006")&&jobj.getString("ErrorMessage").equals("[queryPostForwardListByPostId]查询帖子信息异常")) {
-					ToastUtils.showMessage(instance, "该帖子已被删除！");
-					instance.finish();
-				}
+				ToastUtils.showMessage(instance, jobj.getString("ErrorMessage"));
+				instance.finish();
 			}
 
 			@Override
@@ -452,7 +449,6 @@ public class CaseDetailActivity extends BaseActivity {
 				.getDrawable(R.drawable.flow_dept_selector));
 	}
 
-	
 	public boolean isFirstIn() {
 		return isFirstIn;
 	}
@@ -466,7 +462,7 @@ public class CaseDetailActivity extends BaseActivity {
 		super.onResume();
 		if (!isFirstIn) {
 			loadPostDetailedData(userSeqId, postId, instance);
-		}else{
+		} else {
 			isFirstIn = false;
 		}
 	}
@@ -516,18 +512,6 @@ public class CaseDetailActivity extends BaseActivity {
 	}
 
 	private void notifyIndexFramentSetDataSetChange() {
-		// Intent intent = new Intent();
-		// Bundle bundle = new Bundle();
-		// bundle.putInt("position", position);
-		// bundle.putString("transmitCount", postDetaillviewLayout
-		// .getTv_transmitCount().getText().toString());
-		// bundle.putString("commentCoumt", postDetaillviewLayout
-		// .getTv_commentCoumt().getText().toString());
-		// bundle.putString("laudCount", postDetaillviewLayout.getTv_laudCount()
-		// .getText().toString());
-		// bundle.putBoolean("isLike", postDetailBottomOperLayout.isIslike());
-		// intent.putExtras(bundle);
-		// setResult(Constant.NOTIFY_DATA_SET_CHANGE, intent);
 		if (flag == Constant.INDEX_FLAG) {
 			IndexFragment.POSITION = position;
 			IndexFragment.FORWARD_NUM = Integer.parseInt(postDetaillviewLayout
@@ -538,39 +522,30 @@ public class CaseDetailActivity extends BaseActivity {
 					.getTv_laudCount().getText().toString());
 			IndexFragment.ISLIKE = postDetailBottomOperLayout.isIslike();
 			IndexFragment.ISDELETE = isDelete;
-			if (userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())) {
-				if (postStatis!=null) {
-					IndexFragment.READ_NUM=postStatis.getREAD_NUM()+1;
+			if (userCard != null
+					&& userCard.getUserSeqId().equals(
+							Constant.userInfo.getUserSeqId())) {
+				if (postStatis != null) {
+					IndexFragment.READ_NUM = postStatis.getREAD_NUM() + 1;
 				}
 			}
-
-			android.util.Log.i("data",
-					position
-							+ ","
-							+ postDetaillviewLayout.getTv_transmitCount()
-									.getText().toString()
-							+ ","
-							+ postDetaillviewLayout.getTv_commentCoumt()
-									.getText().toString()
-							+ ","
-							+ postDetaillviewLayout.getTv_laudCount().getText()
-									.toString() + ","
-							+ postDetailBottomOperLayout.isIslike());
 		}
-		if (flag==ConstantUser.MyCaseShare) {
-			CaseSharePostActivity.ISDELETE=isDelete;
-			CaseSharePostActivity.POSITION=position;
+		if (flag == ConstantUser.MyCaseShare) {
+			CaseSharePostActivity.ISDELETE = isDelete;
+			CaseSharePostActivity.POSITION = position;
 		}
-		if (flag==ConstantUser.MyProblemHelp) {
-			ProblemHelpActivity.ISDELETE=isDelete;
-			ProblemHelpActivity.POSITION=position;
+		if (flag == ConstantUser.MyProblemHelp) {
+			ProblemHelpActivity.ISDELETE = isDelete;
+			ProblemHelpActivity.POSITION = position;
 		}
-		if (flag==Constant.SELF_FLAG) {
-			SelfActivity.ISDELETE=isDelete;
-			SelfActivity.POSITION=position;
-			if (userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())) {
-				if (postStatis!=null) {
-					SelfActivity.READ_NUM=postStatis.getREAD_NUM()+1;
+		if (flag == Constant.SELF_FLAG) {
+			SelfActivity.ISDELETE = isDelete;
+			SelfActivity.POSITION = position;
+			if (userCard != null
+					&& userCard.getUserSeqId().equals(
+							Constant.userInfo.getUserSeqId())) {
+				if (postStatis != null) {
+					SelfActivity.READ_NUM = postStatis.getREAD_NUM() + 1;
 				}
 			}
 		}

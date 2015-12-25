@@ -36,5 +36,6 @@
     <string name="title_activity_my_circle">MyCircleActivity</string>
     <string name="title_activity_more_fragment">MoreFragment</string>
     <string name="title_activity_self">SelfActivity</string>
+    <string name="title_activity_chat_settings">ChatSettingsActivity</string>
 
 </resources>

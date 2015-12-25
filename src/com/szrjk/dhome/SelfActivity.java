@@ -365,7 +365,7 @@ public class SelfActivity extends BaseActivity implements OnClickListener {
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
 			@Override
 			public void success(JSONObject jsonObject) {
-				dialog.dismiss();
+//				dialog.dismiss();
 				ErrorInfo errorObj  =JSON.parseObject(
 						jsonObject.getString("ErrorInfo"),ErrorInfo.class);
 				if(Constant.REQUESTCODE.equals(errorObj.getReturnCode())){
@@ -385,7 +385,8 @@ public class SelfActivity extends BaseActivity implements OnClickListener {
 
 			}
 			@Override
-			public void start() {dialog.show();
+			public void start() {
+//				dialog.show();
 			}
 
 			@Override
@@ -394,7 +395,7 @@ public class SelfActivity extends BaseActivity implements OnClickListener {
 			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
 				try {
-					dialog.dismiss();
+//					dialog.dismiss();
 					ToastUtils.showMessage(mContext, "获取失败");
 				} catch (Exception e) {
 					Log.i("TAG", "网络错误");

@@ -472,7 +472,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 						DialogUtil.showGuestDialog(context, null);
 					}else{
 						if(userInfo != null && postInfo != null && postOtherInfo!= null){
-							skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getPostTitle(),
+							skipToRepeatActivity(userInfo.getUserLevel(),userInfo.getUserSeqId(),postInfo.getPostTitle(),
 									userInfo.getUserFaceUrl(),postInfo.getPostId(),
 									userInfo.getUserName(),postInfo.getPostType(),postInfo.getPostLevel()
 									,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),flag);
@@ -630,7 +630,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 						DialogUtil.showGuestDialog(context, null);
 					}else{
 						if(userInfo != null && postInfo != null && postOtherInfo!= null){	
-							skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getPostTitle(),
+							skipToRepeatActivity(userInfo.getUserLevel(),userInfo.getUserSeqId(),postInfo.getPostTitle(),
 									userInfo.getUserFaceUrl(),postInfo.getPostId(),
 									userInfo.getUserName(),postInfo.getPostType(),postInfo.getPostLevel()
 									,postInfo.getSrcPostId(),position, postOtherInfo.getFORWARD_NUM(),flag);
@@ -815,7 +815,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 							ToastUtils.showMessage(context, "私密圈子不可转发！");
 						}else{
 							if(userInfo != null && postInfo != null && postOtherInfo!= null){		
-								skipToRepeatActivity(userInfo.getUserSeqId(), postInfo.getContent(),
+								skipToRepeatActivity(userInfo.getUserLevel(),userInfo.getUserSeqId(), postInfo.getContent(),
 										userInfo.getUserFaceUrl(), postInfo.getPostId(),
 										userInfo.getUserName(), postInfo.getPostType(),postInfo.getPostLevel()
 										,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),flag);
@@ -921,6 +921,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 								SrcPostInfo srcPost = new SrcPostInfo();
 								srcUser.setUserFaceUrl(postAbstractLists.get(i).getUserCard().getUserFaceUrl());
 								srcUser.setUserName(postAbstractLists.get(i).getUserCard().getUserName());
+								srcUser.setUserLevel(postAbstractLists.get(i).getUserCard().getUserLevel());
 								srcPost.setContent(postAbstractLists.get(i).getPostAbstract().getContent());
 								postInfo.setSrcUserCard(srcUser);
 								postInfo.setSrcPostAbstractCard(srcPost);
@@ -1057,7 +1058,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 							ToastUtils.showMessage(context, "多次转发功能正在开发中，敬请期待");
 						}else{
 							if(userInfo != null && postInfo != null && postOtherInfo!= null){		
-								skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getSrcPostAbstractCard().getContent(),
+								skipToRepeatActivity(postInfo.getSrcUserCard().getUserLevel(),userInfo.getUserSeqId(),postInfo.getSrcPostAbstractCard().getContent(),
 										postInfo.getSrcUserCard().getUserFaceUrl(),postInfo.getPostId(),
 										postInfo.getPostType(),postInfo.getPostLevel()
 										,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),postAbstractLists,postInfo.getSrcUserCard().getUserName(),flag);
@@ -1155,6 +1156,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 								SrcPostInfo srcPost = new SrcPostInfo();
 								srcUser.setUserFaceUrl(caseSharePostAbstractLists.get(i).getUserCard().getUserFaceUrl());
 								srcUser.setUserName(caseSharePostAbstractLists.get(i).getUserCard().getUserName());
+								srcUser.setUserLevel(caseSharePostAbstractLists.get(i).getUserCard().getUserLevel());
 								srcPost.setContent(caseSharePostAbstractLists.get(i).getPostAbstract().getContent());
 								srcPost.setPostTitle(caseSharePostAbstractLists.get(i).getPostAbstract().getPostTitle());
 								postInfo.setSrcUserCard(srcUser);
@@ -1288,7 +1290,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 							ToastUtils.showMessage(context, "多次转发功能正在开发中，敬请期待");
 						}else{
 							if(userInfo != null && postInfo != null && postOtherInfo!= null){	
-								skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getSrcPostAbstractCard().getPostTitle(),
+								skipToRepeatActivity(postInfo.getSrcUserCard().getUserLevel(),userInfo.getUserSeqId(),postInfo.getSrcPostAbstractCard().getPostTitle(),
 										postInfo.getSrcUserCard().getUserFaceUrl(),postInfo.getPostId(),
 										postInfo.getPostType(),postInfo.getPostLevel()
 										,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),caseSharePostAbstractLists,postInfo.getSrcUserCard().getUserName(),flag);
@@ -1378,6 +1380,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 								SrcPostInfo srcPost = new SrcPostInfo();
 								srcUser.setUserFaceUrl(problemHelpPostAbstractLists.get(i).getUserCard().getUserFaceUrl());
 								srcUser.setUserName(problemHelpPostAbstractLists.get(i).getUserCard().getUserName());
+								srcUser.setUserLevel(problemHelpPostAbstractLists.get(i).getUserCard().getUserLevel());
 								srcPost.setContent(problemHelpPostAbstractLists.get(i).getPostAbstract().getContent());
 								srcPost.setPostTitle(problemHelpPostAbstractLists.get(i).getPostAbstract().getPostTitle());
 								postInfo.setSrcUserCard(srcUser);
@@ -1512,7 +1515,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 							ToastUtils.showMessage(context, "多次转发功能正在开发中，敬请期待");
 						}else{
 							if(userInfo != null && postInfo != null && postOtherInfo!= null){
-								skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getSrcPostAbstractCard().getPostTitle(),
+								skipToRepeatActivity(postInfo.getSrcUserCard().getUserLevel(),userInfo.getUserSeqId(),postInfo.getSrcPostAbstractCard().getPostTitle(),
 										postInfo.getSrcUserCard().getUserFaceUrl(),postInfo.getPostId(),
 										postInfo.getPostType(),postInfo.getPostLevel()
 										,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),problemHelpPostAbstractLists,postInfo.getSrcUserCard().getUserName(),flag);	
@@ -1653,7 +1656,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			}
 		});
 	}
-	protected void skipToRepeatActivity(String userSeqId, String content,
+	protected void skipToRepeatActivity(String srcUserLevle,String userSeqId, String content,
 			String userFaceUrl, String postId,
 			String postType, String postLevel, String srcPostId, int position,
 			int forward_NUM, List<PostAbstractList> postAbstractLists, String userName,int flag) {
@@ -1668,6 +1671,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		intent.putExtra(Constant.POSITION, position);
 		intent.putExtra(Constant.FORWARD_NUM, forward_NUM);
 		intent.putExtra(Constant.USER_NAME, userName);
+		intent.putExtra("userLevel", srcUserLevle);
 		Bundle bundle = new Bundle();
 		bundle.putSerializable("postAbstractLists", (Serializable) postAbstractLists);
 		intent.putExtra("postList", bundle);
@@ -2638,7 +2642,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			}
 
 	}
-	protected void skipToRepeatActivity(String userSeqId, String postTitle,
+	protected void skipToRepeatActivity(String userLevel,String userSeqId, String postTitle,
 			String userFaceUrl, String postId, String userName, String postType, String postLevel, String srcPostId, int position, int forward_num,int flag) {
 		Intent intent = new Intent(context, RepeatActivity.class);
 		intent.putExtra(Constant.USER_SEQ_ID, userFaceUrl);
@@ -2651,6 +2655,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		intent.putExtra(Constant.SRC_POST_ID, srcPostId);
 		intent.putExtra(Constant.POSITION, position);
 		intent.putExtra(Constant.FORWARD_NUM, forward_num);
+		intent.putExtra("userLevel", userLevel);
 		intent.putExtra("flag", flag);
 		if(indexFragment != null){
 			indexFragment.startActivityForResult(intent, 200);

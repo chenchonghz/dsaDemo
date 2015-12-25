@@ -812,16 +812,21 @@
             android:name="com.szrjk.dhome.SelfActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.dhome"
-            android:windowSoftInputMode="adjustNothing">
+            android:windowSoftInputMode="adjustNothing" >
         </activity>
-        <receiver 
-            android:name="com.szrjk.receiver.ChangePortraitBroadcastReceiver"
-            >
-            <intent-filter android:priority="1000">
-                <action android:name="CHANGE_PORTRAIT_SUCCESS" />
 
+        <receiver android:name="com.szrjk.receiver.ChangePortraitBroadcastReceiver" >
+            <intent-filter android:priority="1000" >
+                <action android:name="CHANGE_PORTRAIT_SUCCESS" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name="com.szrjk.message.ChatSettingsActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/Theme.dhome"
+            android:windowSoftInputMode="adjustNothing" >
+        </activity>
     </application>
 
 </manifest>

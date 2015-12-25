@@ -1,4 +1,7 @@
-package com.szrjk.dhome;
+package com.szrjk.explore;
+
+import com.szrjk.dhome.R;
+import com.szrjk.dhome.R.layout;
 
 import android.os.Bundle;
 import android.app.Activity;

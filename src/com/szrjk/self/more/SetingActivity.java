@@ -37,6 +37,7 @@ import com.szrjk.dhome.SelfActivity;
 import com.szrjk.entity.IPopupItemCallback;
 import com.szrjk.entity.PopupItem;
 import com.szrjk.entity.UserInfo;
+import com.szrjk.explore.FriendRequestActivity;
 import com.szrjk.self.UserBackgroundSelectActivity;
 import com.szrjk.util.FileUtils;
 import com.szrjk.util.ToastUtils;
@@ -178,6 +179,8 @@ public class SetingActivity extends BaseActivity {
 	@OnClick(R.id.rl_change_background)
 	public void changeBackgroundClick(View v) {
 		ToastUtils.showMessage(instance, "等待需求更改");
+		Intent intent = new Intent(instance, FriendRequestActivity.class);
+				startActivity(intent);
 		//		Intent intent = new Intent(instance, UserBackgroundSelectActivity.class);
 		//		startActivity(intent);
 	}

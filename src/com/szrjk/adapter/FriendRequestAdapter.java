@@ -8,16 +8,21 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lidroid.xutils.exception.HttpException;
 import com.szrjk.config.Constant;
+import com.szrjk.dhome.OtherPeopleActivity;
 import com.szrjk.dhome.R;
+import com.szrjk.dhome.SelfActivity;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.RequestList;
 import com.szrjk.entity.UserCard;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
+import com.szrjk.util.BusiUtils;
+import com.szrjk.util.DialogUtil;
 import com.szrjk.util.DisplayTimeUtil;
 import com.szrjk.util.ToastUtils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -93,15 +98,15 @@ public class FriendRequestAdapter extends BaseAdapter {
 			viewHolder.usercard = (com.szrjk.widget.UserCardLayout) convertview.findViewById(R.id.request_usercard);
 			viewHolder.tv_date = (TextView) convertview.findViewById(R.id.tv_request_date);
 			viewHolder.btn_agree = (Button) convertview.findViewById(R.id.bt_request);
-			viewHolder.btn_ignore = (Button) convertview.findViewById(R.id.bt_ignore);
 			convertview.setTag(viewHolder);
 		}else{
 			viewHolder = (ViewHolder) convertview.getTag();
 		}
 		viewHolder.usercard.setContext(mContext);
-		UserCard userCard = list.get(position).getUserCard();
+		final UserCard userCard = list.get(position).getUserCard();
 		viewHolder.usercard.setUser(userCard);
 		viewHolder.usercard.changeline(userCard);
+		viewHolder.usercard.closeClick();
 		if (userCard.getCompanyName().length()+userCard.getDeptName().length()>18) {
 			RelativeLayout.LayoutParams layoutParams = 
 					new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, 
@@ -113,26 +118,12 @@ public class FriendRequestAdapter extends BaseAdapter {
 		switch (type) {
 		case TYPE_AGREE:
 			viewHolder.btn_agree.setOnClickListener(new requestBtnListener(viewHolder,position));
-			viewHolder.btn_agree.setOnLongClickListener(new requestBtnLongListener(viewHolder, position));
-			break;
-		case TYPE_INGORE:
-			viewHolder.btn_agree.setVisibility(View.GONE);
-			viewHolder.btn_ignore.setVisibility(View.VISIBLE);
-			viewHolder.btn_ignore.setOnClickListener(new requestBtnListener(viewHolder,position));
+//			viewHolder.btn_agree.setOnLongClickListener(new requestBtnLongListener(viewHolder, position));
 			break;
 		case TYPE_AGREED:
 			viewHolder.btn_agree.setBackgroundResource(R.drawable.icon_request2);
 			viewHolder.btn_agree.setText("已同意");
 			viewHolder.btn_agree.setClickable(false);
-			viewHolder.btn_ignore.setClickable(false);
-			break;
-		case TYPE_INGORED:
-			viewHolder.btn_agree.setVisibility(View.GONE);
-			viewHolder.btn_ignore.setVisibility(View.VISIBLE);
-			viewHolder.btn_ignore.setBackgroundResource(R.drawable.icon_request2);
-			viewHolder.btn_ignore.setText("已忽略");
-			viewHolder.btn_agree.setClickable(false);
-			viewHolder.btn_ignore.setClickable(false);
 			break;
 		}
 		try {
@@ -146,7 +137,6 @@ public class FriendRequestAdapter extends BaseAdapter {
 		private com.szrjk.widget.UserCardLayout usercard;
 		private TextView tv_date;
 		private Button btn_agree;
-		private Button btn_ignore;
 
 	}
 	class requestBtnLongListener implements OnLongClickListener{

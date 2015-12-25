@@ -6,12 +6,14 @@ import java.util.List;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.lidroid.xutils.BitmapUtils;
 import com.szrjk.dhome.R;
 import com.szrjk.util.ImageItem;
 
@@ -33,7 +35,14 @@ public class PhotoGridAdapter extends BaseAdapter
 	public void setImageList(List<ImageItem> ilist){
 		items = ilist;
 	}
-
+	public void addStringUrl(ArrayList<String> ll){
+		items = new ArrayList<ImageItem>();
+		for (int i = 0; i < ll.size(); i++) {
+			ImageItem it = new ImageItem();
+			it.setAbsPaht(ll.get(i));
+			items.add(it);
+		}
+	}
 
 	
 	public List<ImageItem> returnImageInfo(){
@@ -121,8 +130,15 @@ public class PhotoGridAdapter extends BaseAdapter
 		}
 		else
 		{
-			holder.imageView.setImageBitmap(items.get(position).getBitmap());
-		}
+//			holder.imageView.setImageBitmap(items.get(position).getBitmap());
+//			ImageLoaderUtil util = new ImageLoaderUtil(context, items.get(position).getAbsPaht(),
+//					holder.imageView, R.drawable.pic_downloadfailed_bg, R.drawable.pic_downloadfailed_bg);
+			//Log.i("适配器图片", items.get(position).getAbsPaht());
+//			util.showImage();
+//			BitmapUtils.create(context).display(holder.imageView, "/sdcard/test.jpg"); 
+			BitmapUtils bitmapUtils = new BitmapUtils(context);
+			bitmapUtils.display(holder.imageView, items.get(position).getAbsPaht());
+		}		
 
 		return convertView;
 	}

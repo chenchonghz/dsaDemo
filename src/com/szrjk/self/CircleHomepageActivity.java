@@ -93,6 +93,7 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 	private String circleId;
 	public static int POSITION;
 	public static boolean ISDELETE;
+	private boolean fromCircleList = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)	{
@@ -103,6 +104,7 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 		//		initData();
 		//		String basePostId = "0";
 		objId = instance.getIntent().getStringExtra(Constant.USER_SEQ_ID);
+		
 		dialog = ShowDialogUtil.createDialog(this, LOADING_POST);
 		//请求数据
 		//获得intent数据
@@ -271,6 +273,7 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 	private void getData() {
 		Intent intent = getIntent();
 		circleInfo = (CircleInfo) intent.getSerializableExtra(Constant.CIRCLE);
+		fromCircleList = intent.getBooleanExtra("fromlist", false);
 		circleId =  intent.getStringExtra(intent_param_circle_id);
 		if (circleInfo==null) {
 			getCoterieById();
@@ -292,6 +295,7 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
+				ToastUtils.showMessage(instance, errorObj.getErrorMessage());
 				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode()))
 				{
 					JSONObject returnObj = jsonObject
@@ -326,7 +330,7 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 				JSONObject errorInfo = jobj;
 				String returnCode = (String) errorInfo.get("ReturnCode");
 				String returnMessage = (String)errorInfo.get("ErrorMessage");
-				if(returnCode.equals("0006")&&returnMessage.equals("圈子["+circleId+"]不存在！")){
+				if(returnCode.equals("0006")&&returnMessage.equals("圈子不存在!")){
 					ToastUtils.showMessage(instance, "抱歉，圈子已解散");
 					finish();
 				}
@@ -599,10 +603,14 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
 				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode())) {
 					Toast.makeText(instance, "解散成功", Toast.LENGTH_SHORT).show();
-					Intent intent = new Intent(instance, MyCircleActivity.class);
-					intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(intent);
+					if (fromCircleList) {
+						Intent intent = new Intent(instance, MyCircleActivity.class);
+						intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+						intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						startActivity(intent);
+					}else{
+						finish();
+					}
 				}
 			}
 
@@ -640,10 +648,14 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
 				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode())) {
 					Toast.makeText(instance, "退出成功", Toast.LENGTH_SHORT).show();
-					Intent intent = new Intent(instance, MyCircleActivity.class);
-					intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(intent);
+					if (fromCircleList) {
+						Intent intent = new Intent(instance, MyCircleActivity.class);
+						intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+						intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						startActivity(intent);
+					}else{
+						finish();
+					}
 				}	
 			}
 

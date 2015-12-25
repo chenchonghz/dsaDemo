@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -87,8 +86,8 @@ public class MainActivityHeaderView extends RelativeLayout implements
 				}
 			});
 //			addPopup.showAsDropDown(iv_add, -50, 5);
-			Log.i("dp", px2dip(15)+"");//10
-			Log.i("dp", px2dip(95)+"");//63
+//			Log.i("dp", px2dip(15)+"");//10
+//			Log.i("dp", px2dip(95)+"");//63
 			addPopup.showAtLocation(rl_headerview_mainactivity, Gravity.RIGHT|Gravity.TOP, dip2px(8), dip2px(63));
 			break;
 		}

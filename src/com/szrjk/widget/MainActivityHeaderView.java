@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -85,9 +86,27 @@ public class MainActivityHeaderView extends RelativeLayout implements
 					}
 				}
 			});
-//			addPopup.showAsDropDown(iv_add, 80, 5);
-			addPopup.showAtLocation(rl_headerview_mainactivity, Gravity.RIGHT|Gravity.TOP, 15, 95);
+//			addPopup.showAsDropDown(iv_add, -50, 5);
+			Log.i("dp", px2dip(15)+"");//10
+			Log.i("dp", px2dip(95)+"");//63
+			addPopup.showAtLocation(rl_headerview_mainactivity, Gravity.RIGHT|Gravity.TOP, dip2px(8), dip2px(63));
 			break;
 		}
 	}
+	
+	/** 
+     * 根据手机的分辨率从 dp 的单位 转成为 px(像素) 
+     */  
+    public int dip2px(float dpValue) {  
+        final float scale = context.getResources().getDisplayMetrics().density;  
+        return (int) (dpValue * scale + 0.5f);  
+    }  
+  
+    /** 
+     * 根据手机的分辨率从 px(像素) 的单位 转成为 dp 
+     */  
+    public int px2dip(float pxValue) {  
+        final float scale = context.getResources().getDisplayMetrics().density;  
+        return (int) (pxValue / scale + 0.5f);  
+    }  
 }

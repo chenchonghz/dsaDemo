@@ -13,6 +13,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lidroid.xutils.exception.HttpException;
 import com.szrjk.config.Constant;
+import com.szrjk.config.ConstantUser;
 import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.CommentActivity;
 import com.szrjk.dhome.R;
@@ -55,11 +56,12 @@ public class PostDetailBottomOperLayout extends RelativeLayout
 	private String postText ;
 	private String faceurl ;
 	private String username ;
+	private String userLevel ;
 	private String postType ;
 	private ICallback iCallback;
 	private boolean islike;
 
-	private String level;
+	private String postLevel;
 	private String srcPostId;
 
 
@@ -75,16 +77,17 @@ public class PostDetailBottomOperLayout extends RelativeLayout
 	 * @param postType
 	 * @param laudCallback
 	 */
-	public void initData(String postId,String userSeqId,String postText,String faceurl,String username,String postType,ICallback laudCallback,boolean islike,String level,String srcPostId,int isOpen){
+	public void initData(String postId,String userSeqId,String postText,String faceurl,String username,String userLevel,String postType,ICallback laudCallback,boolean islike,String postLevel,String srcPostId,int isOpen){
 		this.postId = postId;
 		this.userSeqId = userSeqId;
 		this.postText = postText;
 		this.faceurl = faceurl;
 		this.username = username;
+		this.userLevel=userLevel;
 		this.postType = postType;
 		this.iCallback = laudCallback;
 		this.islike = islike;
-		this.level = level;
+		this.postLevel = postLevel;
 		this.srcPostId = srcPostId;
 		changeLaud(islike);
 
@@ -195,8 +198,9 @@ public class PostDetailBottomOperLayout extends RelativeLayout
 		intent.putExtra(Constant.POST_TEXT, postText);
 		intent.putExtra(Constant.PIC_URL, faceurl);
 		intent.putExtra(Constant.USER_NAME, username);
+		intent.putExtra(ConstantUser.USERLEVEL, userLevel);
 		intent.putExtra(Constant.POST_TYPE, postType);
-		intent.putExtra(Constant.POST_LEVEL, level);
+		intent.putExtra(Constant.POST_LEVEL, postLevel);
 		intent.putExtra(Constant.SRC_POST_ID, srcPostId);
 //		context.startActivity(intent);
 		context.startActivityForResult(intent, PostDetailBottomOperLayout.TO_TRANSMIT);

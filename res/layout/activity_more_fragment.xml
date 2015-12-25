@@ -27,16 +27,27 @@
                     android:id="@+id/rl_home"
                     style="@style/PopButton"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/more_padding" >
+                    android:layout_height="wrap_content" >
 
                     <ImageView
                         android:id="@+id/iv_hportrait"
                         android:layout_width="@dimen/avatar_size_middle"
                         android:layout_height="@dimen/avatar_size_middle"
                         android:layout_centerVertical="true"
+                        android:layout_margin="@dimen/margin_10dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/header" />
+
+                    <ImageView
+                        android:id="@+id/iv_vip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/iv_hportrait"
+                        android:layout_marginBottom="-5dp"
+                        android:layout_marginLeft="-25dp"
+                        android:layout_toRightOf="@id/iv_hportrait"
+                        android:src="@drawable/icon_yellow_v_32"
+                        android:visibility="gone" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -48,14 +59,14 @@
                         <TextView
                             android:id="@+id/tv_name"
                             style="@style/BigText"
-                            android:layout_marginLeft="@dimen/more_margin_left"
+                            android:layout_marginLeft="@dimen/margin_5dp"
                             android:gravity="left"
                             android:text="" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/more_margin_left"
+                            android:layout_marginLeft="@dimen/margin_5dp"
                             android:layout_marginTop="5dp"
                             android:text="@string/more_home"
                             android:textColor="@color/font_cell"
@@ -67,6 +78,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/margin_10dp"
                         android:src="@drawable/icon_arrow" />
                 </RelativeLayout>
 

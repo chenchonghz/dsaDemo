@@ -27,6 +27,7 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.config.Constant;
+import com.szrjk.config.ConstantUser;
 import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.IndexFragment;
 import com.szrjk.dhome.R;
@@ -52,6 +53,8 @@ public class RepeatActivity extends BaseActivity implements OnClickListener {
 	private EditText etRepeat;
 	@ViewInject(R.id.iv_avatar_repeat)
 	private ImageView iv_avatar_repeat;
+	@ViewInject(R.id.iv_vip)
+	private ImageView iv_vip;
 	@ViewInject(R.id.tv_Id_repeat)
 	private TextView tv_name_repeat;
 	@ViewInject(R.id.tv_text_repeat)
@@ -79,6 +82,7 @@ public class RepeatActivity extends BaseActivity implements OnClickListener {
 	private int position;
 	private int forward_num;
 	private Dialog dialog;
+	private String user_level;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +117,7 @@ public class RepeatActivity extends BaseActivity implements OnClickListener {
 		user_seq_id = intent.getStringExtra(Constant.USER_SEQ_ID);
 		post_id = intent.getStringExtra(Constant.POST_ID);
 		user_name = intent.getStringExtra(Constant.USER_NAME);
+		user_level=intent.getStringExtra(ConstantUser.USERLEVEL);
 //		srcuser_name = intent.getStringExtra("srcUserName");
 		post_type = intent.getStringExtra(Constant.POST_TYPE);
 		src_post_id = intent.getStringExtra(Constant.SRC_POST_ID);
@@ -137,6 +142,9 @@ public class RepeatActivity extends BaseActivity implements OnClickListener {
 					iv_avatar_repeat, R.drawable.icon_headfailed,
 					R.drawable.icon_headfailed);
 			imageLoaderUtil.showImage();
+			if (user_level!=null&&user_level.equals("11")) {
+				iv_vip.setVisibility(View.VISIBLE);
+			}
 		} catch (Exception e) {
 			Log.e("ImageLoader", e.toString());
 		}

@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
@@ -49,7 +51,7 @@ import com.szrjk.widget.ListPopup;
  * 选择多张
  * denggm on 2015/10/28.
  * 
- * 最后修改时间 
+ * 最后修改时间 2015-12-24 11:07:20
  */
 public class MultipleUploadPhotoUtils {
 
@@ -115,8 +117,6 @@ public class MultipleUploadPhotoUtils {
 		context.startActivityForResult(intent, CAMERA_WITH_DATA);
 	}
 
-
-
 	/**
 	 * 相册选择多张
 	 */
@@ -161,6 +161,10 @@ public class MultipleUploadPhotoUtils {
 			//循环里面，获得bm的大小。然后大于500的压缩到少于100k，然后放回去item。add入list
 //			Bundle bundle =  data.getExtras();
 //			Parcelable[] imgitemArr = bundle.getParcelableArray(Constant.IMGLIST);
+			if (data == null) {
+				ToastUtils.showMessage(context, "异常");
+				return;
+			}
 			arr = data.getStringArrayExtra("arr");
 			for (int i=0;i<arr.length;i++){
 //				ImageItem item = (ImageItem) imgitemArr[i];
@@ -168,17 +172,17 @@ public class MultipleUploadPhotoUtils {
 				item.setAbsPaht(arr[i]);
 //				Bitmap tempbp = item.getBitmap();
 //				if(tempbp==null)continue;//把null的给过滤掉
-				Bitmap tempbp = BitmapFactory.decodeFile(arr[i]);
-				int tempsize = BitmapCompressImage.getBitmapSize(tempbp)/ 1024;
-				
-//				Log.i("size", getBitmapSize(tempbp)/ 1024 +"");
-				if (tempsize > 500) {
-//					Bitmap bm = comp(tempbp);
-					Bitmap bm = BitmapCompressImage.comp(tempbp);
-					item.setBitmap(bm);
-					System.out.println(tempsize);
-					System.out.println("大于500kb压缩图片了");
-				}
+//				Bitmap tempbp = BitmapFactory.decodeFile(arr[i]);
+//				int tempsize = BitmapCompressImage.getBitmapSize(tempbp)/ 1024;
+//				
+////				Log.i("size", getBitmapSize(tempbp)/ 1024 +"");
+//				if (tempsize > 500) {
+////					Bitmap bm = comp(tempbp);
+//					Bitmap bm = BitmapCompressImage.comp(tempbp);
+//					item.setBitmap(bm);
+//					System.out.println(tempsize);
+//					System.out.println("大于500kb压缩图片了");
+//				}
 				
 				imgItems.add(item);
 			}
@@ -211,15 +215,18 @@ public class MultipleUploadPhotoUtils {
 				//先生成图片
 				for (int i = 0; i < urlArr.length; i++) {
 					String userSeqId = Constant.userInfo!=null?Constant.userInfo.getUserSeqId():"0";
-					urlArr[i] = MultipleImageUploadUtil.createPathName(userSeqId, PhotoType.Feed);
+					urlArr[i] = ImageAsynTaskUpload.createPathName(userSeqId, PhotoType.Feed);
 				}
+				Log.i("拼接后的图片---", Arrays.toString(urlArr));
 				//先回调，更新UI
 				iSelectImgCallback.selectImgCallback(imgItems,urlArr);
+				
+				
 				for (int i=0;i<imgItems.size();i++){
 					ImageItem postItems = imgItems.get(i);
-					Bitmap bbb = postItems.getBitmap();
+					new CompAsynTask().execute(postItems.getAbsPaht(),urlArr[i]);
+//					Bitmap bbb = postItems.getBitmap();
 //					String url =  
-					updateFile(bbb,urlArr[i]);
 //					urlArr[i] = url;
 				}
 				//目前没做失败处理 
@@ -228,7 +235,28 @@ public class MultipleUploadPhotoUtils {
 			}
 		}
 	}
+	class CompAsynTask extends AsyncTask<String, Void, Bitmap> {
+		private String up ;
+		@Override
+		protected Bitmap doInBackground(String... params) {
+			String p = params[0];//图片绝对地址
+			this.up = params[1]; //服务器图片的保存地址
+			Bitmap tempbp = BitmapFactory.decodeFile(p);
+			int tempsize = BitmapCompressImage.getBitmapSize(tempbp)/ 1024;
 
+			//		Log.i("size", getBitmapSize(tempbp)/ 1024 +"");
+			//			Bitmap bm = comp(tempbp);
+			Bitmap bm = BitmapCompressImage.comp(tempbp);
+			return bm;
+		}
+
+		@Override
+		protected void onPostExecute(Bitmap result) {
+			//压缩完之后，上传图片
+			Log.i("正在上传图片：", up);
+			updateFile(result, up);
+		}
+	}
 
 
 
@@ -237,7 +265,7 @@ public class MultipleUploadPhotoUtils {
 		ByteArrayOutputStream baos = BitMapUtil.comp(bitmap);
 		byte[] imgData = baos.toByteArray();
 //		ImageUploadUtil util = new ImageUploadUtil();
-		MultipleImageUploadUtil util = new MultipleImageUploadUtil();
+		ImageAsynTaskUpload util = new ImageAsynTaskUpload();
 		String url = util.uploadPhoto(context, imgData, preurl, PhotoType.Feed,new SaveCallback() {
 //				(context,imgData,url PhotoType.Feed, new SaveCallback() {
 //		String url = context.uploadPhoto(imgData, PhotoType.Feed, new SaveCallback() {

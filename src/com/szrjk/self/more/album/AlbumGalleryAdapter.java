@@ -107,6 +107,7 @@ public class AlbumGalleryAdapter extends BaseAdapter {
 			viewHolder.iv_view.setTag(item.getImagePath());
 			cache.displayBmp(mContext, viewHolder.iv_view, item.thumbnailPath,
 					item.getImagePath(), callback);
+//			Log.i("item.thumbnailPath", item.thumbnailPath);
 		}
 		viewHolder.iv_view.setColorFilter(null);
 		//设置ImageView的点击事件

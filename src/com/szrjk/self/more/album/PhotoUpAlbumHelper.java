@@ -72,10 +72,13 @@ public class PhotoUpAlbumHelper extends AsyncTask<Object, Object, Object> {
 			int image_id;
 			String image_path;
 			int image_idColumn = cur.getColumnIndex(Thumbnails.IMAGE_ID);
+//			int image_idColumn = cur.getColumnIndex(Thumbnails._ID);
 			int dataColumn = cur.getColumnIndex(Thumbnails.DATA);
 			do {
 				image_id = cur.getInt(image_idColumn);
 				image_path = cur.getString(dataColumn);
+				Log.i("image_id", ""+image_id);
+				Log.i("缩略图", image_path);
 				thumbnailList.put("" + image_id, image_path);
 			} while (cur.moveToNext());
 		}
@@ -120,9 +123,10 @@ public class PhotoUpAlbumHelper extends AsyncTask<Object, Object, Object> {
 							+ cur.getString(photoPathIndex));
 				} else {
 					String _id = cur.getString(photoIDIndex);
+					Log.e("获取_id", ""+_id);
 					String path = cur.getString(photoPathIndex);
 					String bucketName = cur.getString(bucketDisplayNameIndex);
-					Log.i("name:--", bucketName);
+//					Log.i("name:--", bucketName);
 					String bucketId = cur.getString(bucketIdIndex);
 					PhotoUpImageBucket bucket = bucketList.get(bucketId);
 					// 这里完成图片归并到响应的相册里去
@@ -135,9 +139,28 @@ public class PhotoUpAlbumHelper extends AsyncTask<Object, Object, Object> {
 					bucket.count++;
 					PhotoUpImageItem imageItem = new PhotoUpImageItem();
 					imageItem.setImageId(_id);
+					//图片 的绝对路径
 					imageItem.setImagePath(path);
+					//设置缩略图的路径
 					imageItem.setThumbnailPath(thumbnailList.get(_id));
+					//Log.i("map", thumbnailList.get(_id));
 					bucket.imageList.add(imageItem);
+					
+					
+////					Thumbnails._ID, Thumbnails.IMAGE_ID,
+////					Thumbnails.DATA 
+//					//条件
+//					String[] pr = {Thumbnails.IMAGE_ID + "=" + _id};
+//					Cursor ct = Thumbnails.queryMiniThumbnails(cr,Thumbnails.EXTERNAL_CONTENT_URI, Thumbnails.MINI_KIND,
+//							pr);
+//					if (ct.moveToFirst()) {
+//						int dataC = cur.getColumnIndex(Thumbnails.DATA);
+//						do {
+//							String tp = cur.getString(dataC);
+//							Log.i("缩略", tp);
+//						} while (cur.moveToNext());
+//					}
+//					ct.close();
 				}
 			} while (cur.moveToNext());
 		}

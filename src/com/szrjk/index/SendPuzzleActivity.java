@@ -77,7 +77,6 @@ public class SendPuzzleActivity extends BaseActivity {
 	// 标题
 	@ViewInject(R.id.et_title)
 	private EditText et_title;
-	private int titleCount = 30;
 	// 标题字数提示
 	@ViewInject(R.id.tv_title)
 	private TextView tv_title;
@@ -127,19 +126,12 @@ public class SendPuzzleActivity extends BaseActivity {
 	private String title, strCase, strCheck, strTreat, deptIds, deptValues;
 	private UserInfo userInfo;
 	private int completeRate = 0;
-	private int updateIvType = 1;
 	private static final int CAMERA_WITH_DATA = 3022;
 	private static final int PHOTO_PICKED_WITH_DATA = 3021;
-	private static final int DATA_CHARGE_NOTIFY = 1000;
 	private static final int GALLERY_RESULT_TYPE3 = 2003;
-	// 弹出框
-	private AddPhotoPopup menuWindow;
-	// 弹出框
-	private PostSendPopup sendWindow;
 	// 进度条
 	@ViewInject(R.id.pb_loading)
 	private UpdateProgressBar pb_loading;
-	private Handler handler;
 	// 相册容器
 	@ViewInject(R.id.gv_case_list)
 	private IndexGridView gv_case_list;
@@ -186,6 +178,9 @@ public class SendPuzzleActivity extends BaseActivity {
 	private MultipleUploadPhotoUtils multipleUploadPhotoUtils2;
 	private MultipleUploadPhotoUtils multipleUploadPhotoUtils3;
 
+	private ArrayList<String> absList1= new ArrayList<String>();
+	private ArrayList<String> absList2= new ArrayList<String>();
+	private ArrayList<String> absList3= new ArrayList<String>();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -565,6 +560,9 @@ public class SendPuzzleActivity extends BaseActivity {
 									urlList1.add(OssUpdateImgUtil.feedPicFilterUrl
 											+ urlarr[i]);
 								}
+								for (int j = 0; j < imgList.size(); j++) {
+									absList1.add(imgList.get(j).getAbsPaht());
+								}
 								Log.i("图片地址", urlList1.toString());
 								multipleUploadPhotoUtils1 = null;
 							}
@@ -576,7 +574,8 @@ public class SendPuzzleActivity extends BaseActivity {
 				bundle.putInt("id", num);
 				//把图片地址的urlList传递过去
 				bundle.putStringArrayList("urllist", urlList1);
-				GalleryActivity.filltmpitems(gridAdapter.returnImageInfo());
+				bundle.putStringArrayList("absList", absList1);
+//				GalleryActivity.filltmpitems(gridAdapter.returnImageInfo());
 				intent.putExtras(bundle);
 				startActivityForResult(intent, GALLERY_RESULT_TYPE1);
 			}
@@ -607,6 +606,9 @@ public class SendPuzzleActivity extends BaseActivity {
 									urlList2.add(OssUpdateImgUtil.feedPicFilterUrl
 											+ urlarr[i]);
 								}
+								for (int j = 0; j < imgList.size(); j++) {
+									absList2.add(imgList.get(j).getAbsPaht());
+								}
 								Log.i("图片地址2", urlList2.toString());
 								multipleUploadPhotoUtils2 = null;
 							}
@@ -618,7 +620,8 @@ public class SendPuzzleActivity extends BaseActivity {
 				bundle.putInt("id", num);
 				//把图片地址的urlList传递过去
 				bundle.putStringArrayList("urllist", urlList2);
-				GalleryActivity.filltmpitems(checkAdapter.returnImageInfo());
+				bundle.putStringArrayList("absList", absList2);
+//				GalleryActivity.filltmpitems(checkAdapter.returnImageInfo());
 				intent.putExtras(bundle);
 				startActivityForResult(intent, GALLERY_RESULT_TYPE2);
 			}
@@ -649,6 +652,9 @@ public class SendPuzzleActivity extends BaseActivity {
 									urlList3.add(OssUpdateImgUtil.feedPicFilterUrl
 											+ urlarr[i]);
 								}
+								for (int j = 0; j < imgList.size(); j++) {
+									absList3.add(imgList.get(j).getAbsPaht());
+								}
 								Log.i("图片地址2", urlList3.toString());
 								multipleUploadPhotoUtils3 = null;
 							}
@@ -660,7 +666,8 @@ public class SendPuzzleActivity extends BaseActivity {
 				bundle.putInt("id", num);
 				//把图片地址的urlList传递过去
 				bundle.putStringArrayList("urllist", urlList3);
-				GalleryActivity.filltmpitems(treatAdapter.returnImageInfo());
+				bundle.putStringArrayList("absList", absList3);
+//				GalleryActivity.filltmpitems(treatAdapter.returnImageInfo());
 				intent.putExtras(bundle);
 				startActivityForResult(intent, GALLERY_RESULT_TYPE3);
 			}
@@ -750,7 +757,9 @@ public class SendPuzzleActivity extends BaseActivity {
 					//ArrayList<String>
 					urlList1 = data.getStringArrayListExtra("urllist");
 					Log.i("urlList1", urlList1.toString());
-					gridAdapter.setImageList(GalleryActivity.gettmpitems());
+//					gridAdapter.setImageList(GalleryActivity.gettmpitems());
+					absList1 = data.getStringArrayListExtra("absList");
+					gridAdapter.addStringUrl(absList1);
 					gridAdapter.notifyDataSetChanged();
 				}
 				break;
@@ -760,7 +769,9 @@ public class SendPuzzleActivity extends BaseActivity {
 					//ArrayList<String>
 					urlList2 = data.getStringArrayListExtra("urllist");
 					Log.i("urlList2", urlList2.toString());
-					checkAdapter.setImageList(GalleryActivity.gettmpitems());
+//					checkAdapter.setImageList(GalleryActivity.gettmpitems());
+					absList2 = data.getStringArrayListExtra("absList");
+					gridAdapter.addStringUrl(absList2);
 					checkAdapter.notifyDataSetChanged();
 				}
 				break;
@@ -770,7 +781,9 @@ public class SendPuzzleActivity extends BaseActivity {
 					//ArrayList<String>
 					urlList3 = data.getStringArrayListExtra("urllist");
 					Log.i("urlList3", urlList3.toString());
-					treatAdapter.setImageList(GalleryActivity.gettmpitems());
+//					treatAdapter.setImageList(GalleryActivity.gettmpitems());
+					absList3 = data.getStringArrayListExtra("absList");
+					gridAdapter.addStringUrl(absList3);
 					treatAdapter.notifyDataSetChanged();
 				}
 				break;

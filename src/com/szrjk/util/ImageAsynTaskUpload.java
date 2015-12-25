@@ -3,6 +3,7 @@ package com.szrjk.util;
 import java.io.File;
 import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
+import java.util.Random;
 
 import android.content.Context;
 
@@ -10,7 +11,7 @@ import com.alibaba.sdk.android.oss.callback.SaveCallback;
 import com.szrjk.config.Constant;
 import com.szrjk.entity.PhotoType;
 
-public class MultipleImageUploadUtil {
+public class ImageAsynTaskUpload {
 	private SharePerferenceUtil perferenceUtil;
 	private Context context;
 	/**
@@ -98,7 +99,8 @@ public class MultipleImageUploadUtil {
 //			String fileName = MD5Util.MD5Encode(data);
 //			sb.append(MD5Util.MD5Encode16bit(fileName
 			sb.append(MD5Util.MD5Encode16bit(System.currentTimeMillis() + userSeqId));
-			sb.append(".jpg");
+			String str = getRandomCharAndNumr(4);
+			sb.append(str + ".jpg");
 		}
 		catch (NoSuchAlgorithmException e)
 		{
@@ -106,4 +108,25 @@ public class MultipleImageUploadUtil {
 		}
 		return sb.toString();
 	}
+	/** 
+	 * 获取随机字母数字组合 
+	 *  
+	 * @param length 
+	 *            字符串长度 
+	 * @return 
+	 */  
+	public static String getRandomCharAndNumr(Integer length) {  
+	    String str = "";  
+	    Random random = new Random();  
+	    for (int i = 0; i < length; i++) {  
+	        boolean b = random.nextBoolean();  
+	        if (b) { // 字符串  
+	            // int choice = random.nextBoolean() ? 65 : 97; 取得65大写字母还是97小写字母  
+	            str += (char) (65 + random.nextInt(26));// 取得大写字母  
+	        } else { // 数字  
+	            str += String.valueOf(random.nextInt(10));  
+	        }  
+	    }  
+	    return str;  
+	}  
 }

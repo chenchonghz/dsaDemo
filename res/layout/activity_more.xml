@@ -533,7 +533,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/icon_setfeedback" />
+                    android:src="@drawable/icon_setting_comment" />
 
                 <TextView
                     android:id="@+id/tv_comment"

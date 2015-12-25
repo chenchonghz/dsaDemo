@@ -140,6 +140,7 @@ public class SendPostActivity extends BaseActivity {
 
 	}
 
+	private ArrayList<String> absList= new ArrayList<String>();
 	/**
 	 * 调用拍照
 	 */
@@ -161,14 +162,17 @@ public class SendPostActivity extends BaseActivity {
 							gridAdapter.addImageList(imgList);
 							gridAdapter.notifyDataSetChanged();
 							for (int i = 0; i < urlarr.length; i++) {
-								urlList.add(OssUpdateImgUtil.feedPicFilterUrl
-										+ urlarr[i]);
+								urlList.add(OssUpdateImgUtil.feedPicFilterUrl + urlarr[i]);
 							}
 							Log.i("图片地址", urlList.toString());
 							if (urlList.isEmpty()) {
 								gv_case_list.setVisibility(View.GONE);
 							} else {
 								gv_case_list.setVisibility(View.VISIBLE);
+							}
+							//获得图片的绝对地址
+							for (int j = 0; j < imgList.size(); j++) {
+								absList.add(imgList.get(j).getAbsPaht());
 							}
 							multipleUploadPhotoUtils = null;
 						}
@@ -195,7 +199,8 @@ public class SendPostActivity extends BaseActivity {
 				bundle.putInt("id", num);
 				//把图片地址的urlList传递过去
 				bundle.putStringArrayList("urllist", urlList);
-				GalleryActivity.filltmpitems(gridAdapter.returnImageInfo());
+				bundle.putStringArrayList("absList", absList);
+				//GalleryActivity.filltmpitems(gridAdapter.returnImageInfo());
 				intent.putExtras(bundle);
 				startActivityForResult(intent, GALLERY_RESULT_TYPE);
 			}
@@ -332,20 +337,20 @@ public class SendPostActivity extends BaseActivity {
 			}
 			switch (requestCode) {
 			case PHOTO_PICKED_WITH_DATA:
-				multipleUploadPhotoUtils.operResult(requestCode, resultCode,
-						data);
+				multipleUploadPhotoUtils.operResult(requestCode, resultCode,data);
 				break;
 
 			case CAMERA_WITH_DATA:
-				multipleUploadPhotoUtils.operResult(requestCode, resultCode,
-						data);
+				multipleUploadPhotoUtils.operResult(requestCode, resultCode,data);
 				break;
 			case GALLERY_RESULT_TYPE:
 				//同步图片地址list
 				if (data != null) {
 					//ArrayList<String>
 					urlList = data.getStringArrayListExtra("urllist");
-					gridAdapter.setImageList(GalleryActivity.gettmpitems());
+					absList = data.getStringArrayListExtra("absList");
+//					gridAdapter.setImageList(GalleryActivity.gettmpitems());
+					gridAdapter.addStringUrl(absList);
 					gridAdapter.notifyDataSetChanged();
 				}
 				break;

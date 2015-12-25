@@ -147,7 +147,7 @@ public class FeedbackActivity extends BaseActivity {
 	 */
 	//地址集合
 	private ArrayList<String> urlList = new ArrayList<String>();
-
+	private ArrayList<String> absList= new ArrayList<String>();
 	public void callSelectImg(){
 
 		int maxNum = 9-gridAdapter.returnImageInfo().size();
@@ -170,6 +170,9 @@ public class FeedbackActivity extends BaseActivity {
 				//				}else{
 				//					gv_case_list.setVisibility(View.VISIBLE);
 				//				}
+				for (int j = 0; j < imgList.size(); j++) {
+					absList.add(imgList.get(j).getAbsPaht());
+				}
 				multipleUploadPhotoUtils = null;
 			}
 		});
@@ -190,7 +193,8 @@ public class FeedbackActivity extends BaseActivity {
 			bundle.putInt("id", num);
 			//把图片地址的urlList传递过去
 			bundle.putStringArrayList("urllist", urlList);
-			GalleryActivity.filltmpitems(gridAdapter.returnImageInfo());
+			bundle.putStringArrayList("absList", absList);
+//			GalleryActivity.filltmpitems(gridAdapter.returnImageInfo());
 			intent.putExtras(bundle);
 			startActivityForResult(intent, GALLERY_RESULT_TYPE);
 		}
@@ -343,7 +347,9 @@ public class FeedbackActivity extends BaseActivity {
 			if (data != null) {
 				//ArrayList<String>
 				urlList = data.getStringArrayListExtra("urllist");
-				gridAdapter.setImageList(GalleryActivity.gettmpitems());
+//				gridAdapter.setImageList(GalleryActivity.gettmpitems());
+				absList = data.getStringArrayListExtra("absList");
+				gridAdapter.addStringUrl(absList);
 				gridAdapter.notifyDataSetChanged();
 			}
 			break;

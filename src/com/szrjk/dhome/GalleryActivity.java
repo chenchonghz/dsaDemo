@@ -8,17 +8,22 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
+import com.szrjk.util.BitmapCompressImage;
 import com.szrjk.util.ImageItem;
+import com.szrjk.util.ImageLoaderUtil;
 import com.szrjk.zoom.PhotoView;
 import com.szrjk.zoom.ViewPagerFixed;
 
@@ -32,7 +37,7 @@ public class GalleryActivity extends Activity
 	@ViewInject(R.id.btn_send)
 	private Button btn_send;
 	@ViewInject(R.id.btn_del)
-	private Button btn_del;
+	private ImageButton btn_del;
 	// 当前的位置
 	private int location = 0;
 
@@ -56,22 +61,23 @@ public class GalleryActivity extends Activity
 	//	private ArrayList<String> imglist_pu_check;
 
 
-	private static List<ImageItem> tmpitems;
+	//private static List<ImageItem> tmpitems;
 
 
-	List<ImageItem> iitems;
+	public static List<ImageItem> iitems;
 	ArrayList<String> urllist;
 	private ArrayList<View> listViews ;
 	private int maxnum;
 	private int id;//刚进来的时候，要显示点击的那张，并像是*/* 有3个地方改变；1、监听器滑动;2、del；3、开始
+	private ArrayList<String> absList;
 
 	/**由于 intend 不能传输大量的数据（>1M),这里用静态来做 临时的 items**/
-	public static void filltmpitems(List<ImageItem> tmpitems1){
-		tmpitems = tmpitems1;
-	}
-
+//	public static void filltmpitems(List<ImageItem> tmpitems1){
+//		tmpitems = tmpitems1;
+//	}
+//
 	public static List<ImageItem> gettmpitems(){
-		return tmpitems;
+		return iitems;
 	}
 
 
@@ -106,19 +112,21 @@ public class GalleryActivity extends Activity
 		//			System.out.println("-------------------------------");
 		//		}
 
-		ArrayList<String> urllist = bundle.getStringArrayList("urllist");
+		urllist = bundle.getStringArrayList("urllist");
+		absList = bundle.getStringArrayList("absList");
+		
 		//		List<ImageItem> iitems  =  bundle.getParcelableArrayList("imagelist");
-		this.urllist = urllist;
-		this.iitems = tmpitems;
-		tmpitems = null;
+//		this.iitems = tmpitems;
+//		tmpitems = null;
 		maxnum = urllist.size();
 
-		isShowOkBt();
+		
 		//		ACTIVITY = bundle.getInt(Constant.ACTIVITYENUM);
 
 		// 为发送按钮设置文字
 		vp_pager.setOnPageChangeListener(pageChangeListener);
 		fillData();
+		isShowOkBt();
 		adapter = new MyPageAdapter(listViews);
 		vp_pager.setAdapter(adapter);
 		int margin = resources.getDimensionPixelOffset(R.dimen.album_margin);
@@ -133,10 +141,34 @@ public class GalleryActivity extends Activity
 	// 填充数据
 	private void fillData()
 	{
-		for (int i = 0; i < iitems.size(); i++)
-		{
-			initListViews(iitems.get(i).getBitmap());
+		
+//		iitems = new ArrayList<ImageItem>();
+//		for (int i = 0; i < absList.size(); i++)
+//		{
+////			initListViews(iitems.get(i).getBitmap()); 
+//			//根据路径，获取对应的图片
+//			Bitmap b = BitmapCompressImage.getimage(absList.get(i));
+//			//构造显示的view
+//			initListViews(b); 
+//			ImageItem item = new ImageItem();
+//			item.setAbsPaht(absList.get(i));
+//			iitems.add(item);
+//		}
+		listViews = new ArrayList<View>();
+		for (int i = 0; i < absList.size(); i++) {
+			PhotoView iv = new PhotoView(this);
+			try {
+//				ImageLoaderUtil loader = new ImageLoaderUtil(this, absList.get(i), iv, R.drawable.pic_downloadfailed_bg,
+//						R.drawable.pic_downloadfailed_bg);
+//				loader.showImage();
+				BitmapUtils bitmapUtils = new BitmapUtils(instance);
+				bitmapUtils.display(iv, absList.get(i));
+			} catch (Exception e) {
+				Log.e("ImageLoader", e.toString());
+			}
+			listViews.add(iv);
 		}
+		
 	}
 
 	private OnPageChangeListener pageChangeListener = new OnPageChangeListener()
@@ -176,138 +208,17 @@ public class GalleryActivity extends Activity
 	@OnClick(R.id.btn_del)
 	public void delClick(View v)
 	{
-		//当剩余一个的时候，没有移除imgURL。返回的时候出现剩余一张图片地址的情况！
-		//		if (listViews.size() == 1)
-		//		{
-		//			if (ACTIVITY == ActivityEnum.SeedPostActivity.value())
-		//			{
-		//				iitems.clear();
-		//				PhotoConstant.postCount = 0;
-		//
-		//
-		//				System.out.println("删除下标："+location);
-		//				//没删除一张图片，就对比一次list
-		//				imglist.remove(location);
-		//				System.out.println("剩余的图片"+imglist.toString());
-		//
-		//
-		//				strFinish = resources.getString(R.string.finish);
-		//				btn_send.setText(strFinish + "("
-		//						+ iitems.size() + "/"
-		//						+ Constant.maxCount + ")");
-		//				Intent intent = new Intent("data.broadcast.action");
-		//				//发广播通知预览图库界面更新（被勾选的）猜测、
-		//				sendBroadcast(intent);
-		//
-		//				Intent ipost = new Intent();
-		//				Bundle b = new Bundle();
-		//				b.putStringArrayList("newImageUrl", imglist);
-		//
-		//				ipost.putExtras(b);
-		//				setResult(RESULT_OK, ipost);
-		//
-		//
-		////				setResult(RESULT_OK);
-		//				finish();
-		//			}
-		//			else if (ACTIVITY == ActivityEnum.SeedCaseActivity1.value())
-		//			{
-		//				PhotoConstant.caseItems.clear();
-		//				PhotoConstant.caseCount = 0;
-		//				strFinish = resources.getString(R.string.finish);
-		//				btn_send.setText(strFinish + "("
-		//						+ PhotoConstant.caseItems.size() + "/"
-		//						+ Constant.maxCount + ")");
-		//				Intent intent = new Intent("data.broadcast.action");
-		//				sendBroadcast(intent);
-		//				setResult(RESULT_OK);
-		//				finish();
-		//			}
-		//			else if (ACTIVITY == ActivityEnum.SeedCaseActivity2.value())
-		//			{
-		//				PhotoConstant.checkItems.clear();
-		//				PhotoConstant.checkCount = 0;
-		//				strFinish = resources.getString(R.string.finish);
-		//				btn_send.setText(strFinish + "("
-		//						+ PhotoConstant.checkItems.size() + "/"
-		//						+ Constant.maxCount + ")");
-		//				Intent intent = new Intent("data.broadcast.action");
-		//				sendBroadcast(intent);
-		//				setResult(RESULT_OK);
-		//				finish();
-		//			}
-		//			else if (ACTIVITY == ActivityEnum.SeedCaseActivity3.value())
-		//			{
-		//				PhotoConstant.treatItems.clear();
-		//				PhotoConstant.treatCount = 0;
-		//				strFinish = resources.getString(R.string.finish);
-		//				btn_send.setText(strFinish + "("
-		//						+ PhotoConstant.treatItems.size() + "/"
-		//						+ Constant.maxCount + ")");
-		//				Intent intent = new Intent("data.broadcast.action");
-		//				sendBroadcast(intent);
-		//				setResult(RESULT_OK);
-		//				finish();
-		//			}
-		//			else if (ACTIVITY == ActivityEnum.SeedCaseActivity4.value())
-		//			{
-		//				PhotoConstant.visitItems.clear();
-		//				PhotoConstant.visitCount = 0;
-		//				strFinish = resources.getString(R.string.finish);
-		//				btn_send.setText(strFinish + "("
-		//						+ PhotoConstant.visitItems.size() + "/"
-		//						+ Constant.maxCount + ")");
-		//				Intent intent = new Intent("data.broadcast.action");
-		//				sendBroadcast(intent);
-		//				setResult(RESULT_OK);
-		//				finish();
-		//			}
-		//			else if (ACTIVITY == ActivityEnum.SeedPuzzleActivity1.value())
-		//			{
-		//				PhotoConstant.puzzleCases.clear();
-		//				PhotoConstant.puzzleCaseCount = 0;
-		//				strFinish = resources.getString(R.string.finish);
-		//				btn_send.setText(strFinish + "("
-		//						+ PhotoConstant.puzzleCases.size() + "/"
-		//						+ Constant.maxCount + ")");
-		//				Intent intent = new Intent("data.broadcast.action");
-		//				sendBroadcast(intent);
-		//				setResult(RESULT_OK);
-		//				finish();
-		//			}
-		//			else if (ACTIVITY == ActivityEnum.SeedPuzzleActivity2.value())
-		//			{
-		//				PhotoConstant.puzzleChecks.clear();
-		//				PhotoConstant.puzzleCheckCount = 0;
-		//				strFinish = resources.getString(R.string.finish);
-		//				btn_send.setText(strFinish + "("
-		//						+ PhotoConstant.puzzleChecks.size() + "/"
-		//						+ Constant.maxCount + ")");
-		//				Intent intent = new Intent("data.broadcast.action");
-		//				sendBroadcast(intent);
-		//				setResult(RESULT_OK);
-		//				finish();
-		//			}
-		//		}
-		//		else
-		//		{
-		//			if (ACTIVITY == ActivityEnum.SeedPostActivity.value())
-		//			{
-		iitems.remove(location);
-		urllist.remove(location);
-		//				PhotoConstant.postCount--;
-
 		
-
+//		iitems.remove(location);
+		urllist.remove(location);
+		absList.remove(location);
 		System.out.println("删除下标："+location);
 		//没删除一张图片，就对比一次list
 		//				iitems.remove(location);
 		//				System.out.println("剩余的图片"+imglist.toString());
-
-
 		vp_pager.removeAllViews();
 		listViews.remove(location);
-		if (iitems.size() == 0){
+		if (absList.size() == 0){
 			listViews.clear();
 			jumpBackActivity();
 			return;
@@ -316,90 +227,6 @@ public class GalleryActivity extends Activity
 
 		tv_number.setText(  location+1	+ "/" + listViews.size() );
 		adapter.notifyDataSetChanged();
-		//			}
-		//			else if (ACTIVITY == ActivityEnum.SeedCaseActivity1.value())
-		//			{
-		//				PhotoConstant.caseItems.remove(location);
-		//				PhotoConstant.caseCount--;
-		//				vp_pager.removeAllViews();
-		//				listViews.remove(location);
-		//				adapter.setListViews(listViews);
-		//				strFinish = resources.getString(R.string.finish);
-		//				btn_send.setText(strFinish + "("
-		//						+ PhotoConstant.caseItems.size() + "/"
-		//						+ Constant.maxCount + ")");
-		//			}
-		//			else if (ACTIVITY == ActivityEnum.SeedCaseActivity2.value())
-		//			{
-		//				PhotoConstant.checkItems.remove(location);
-		//				PhotoConstant.checkCount--;
-		//				vp_pager.removeAllViews();
-		//				listViews.remove(location);
-		//				adapter.setListViews(listViews);
-		//				strFinish = resources.getString(R.string.finish);
-		//				btn_send.setText(strFinish + "("
-		//						+ PhotoConstant.checkItems.size() + "/"
-		//						+ Constant.maxCount + ")");
-		//			}
-		//			else if (ACTIVITY == ActivityEnum.SeedCaseActivity3.value())
-		//			{
-		//				PhotoConstant.treatItems.remove(location);
-		//				PhotoConstant.treatCount--;
-		//				vp_pager.removeAllViews();
-		//				listViews.remove(location);
-		//				adapter.setListViews(listViews);
-		//				strFinish = resources.getString(R.string.finish);
-		//				btn_send.setText(strFinish + "("
-		//						+ PhotoConstant.treatItems.size() + "/"
-		//						+ Constant.maxCount + ")");
-		//			}
-		//			else if (ACTIVITY == ActivityEnum.SeedCaseActivity4.value())
-		//			{
-		//				PhotoConstant.visitItems.remove(location);
-		//				PhotoConstant.visitCount--;
-		//				vp_pager.removeAllViews();
-		//				listViews.remove(location);
-		//				adapter.setListViews(listViews);
-		//				strFinish = resources.getString(R.string.finish);
-		//				btn_send.setText(strFinish + "("
-		//						+ PhotoConstant.visitItems.size() + "/"
-		//						+ Constant.maxCount + ")");
-		//			}
-		//			else if (ACTIVITY == ActivityEnum.SeedPuzzleActivity1.value())
-		//			{
-		//				PhotoConstant.puzzleCases.remove(location);
-		//				PhotoConstant.puzzleCaseCount--;
-		//				vp_pager.removeAllViews();
-		//				listViews.remove(location);
-		//
-		//				//没删除一张图片，就对比一次list
-		//				imglist.remove(location);
-		//				System.out.println("剩余的图片"+imglist.toString());
-		//
-		//				adapter.setListViews(listViews);
-		//				strFinish = resources.getString(R.string.finish);
-		//				btn_send.setText(strFinish + "("
-		//						+ PhotoConstant.puzzleCases.size() + "/"
-		//						+ Constant.maxCount + ")");
-		//			}
-		//			else if (ACTIVITY == ActivityEnum.SeedPuzzleActivity2.value())
-		//			{
-		//				PhotoConstant.puzzleChecks.remove(location);
-		//				PhotoConstant.puzzleCheckCount--;
-		//				vp_pager.removeAllViews();
-		//				listViews.remove(location);
-		//
-		//				//没删除一张图片，就对比一次list
-		//				imglist.remove(location);
-		//				System.out.println("剩余的图片"+imglist.toString());
-		//
-		//				adapter.setListViews(listViews);
-		//				strFinish = resources.getString(R.string.finish);
-		//				btn_send.setText(strFinish + "("
-		//						+ PhotoConstant.puzzleChecks.size() + "/"
-		//						+ Constant.maxCount + ")");
-		//			}
-		//		}
 	}
 
 	@OnClick(R.id.ib_back)
@@ -421,42 +248,22 @@ public class GalleryActivity extends Activity
 		Intent ipost = new Intent();
 		Bundle b = new Bundle();
 		b.putStringArrayList("urllist", urllist);
-		tmpitems = iitems;
+		b.putStringArrayList("absList", absList);
+		
+//		tmpitems = iitems;
 		ipost.putExtras(b);
 		setResult(RESULT_OK, ipost);
 		finish();
-		//		}
-		//		if (ACTIVITY == ActivityEnum.SeedCaseActivity1.value()
-		//				|| ACTIVITY == ActivityEnum.SeedCaseActivity2.value()
-		//				|| ACTIVITY == ActivityEnum.SeedCaseActivity3.value()
-		//				|| ACTIVITY == ActivityEnum.SeedCaseActivity4.value())
-		//		{
-		//			intent.setClass(instance, SendCaseActivity.class);
-		//			startActivity(intent);
-		//		}
-		//		if (ACTIVITY == ActivityEnum.SeedPuzzleActivity1.value()
-		//				|| ACTIVITY == ActivityEnum.SeedPuzzleActivity2.value())
-		//		{
-		//			//			intent.setClass(instance, SendPuzzleActivity.class);
-		//			//			startActivity(intent);
-		//			Intent ipost = new Intent();
-		//			Bundle b = new Bundle();
-		//			b.putStringArrayList("newImageUrl", imglist);
-		//
-		//			ipost.putExtras(b);
-		//			setResult(RESULT_OK, ipost);
-		//			finish();
-		//		}
-		//		finish();
+		
 	}
 
 
 	public void isShowOkBt()
 	{
-		if (iitems.size() > 0)
+		if (absList.size() > 0)
 		{
 			strFinish = resources.getString(R.string.finish);
-			btn_send.setText(strFinish + "(" + iitems.size()
+			btn_send.setText(strFinish + "(" + absList.size()
 					+ "/" + maxnum + ")");
 			btn_send.setPressed(true);
 			btn_send.setClickable(true);
@@ -468,8 +275,8 @@ public class GalleryActivity extends Activity
 			btn_send.setClickable(false);
 			btn_send.setTextColor(Color.parseColor("#E1E0DE"));
 		}
-		if (iitems.size() > 0 ) {
-			tv_number.setText(  id	+ "/" + iitems.size() );
+		if (absList.size() > 0 ) {
+			tv_number.setText(  id	+ "/" + absList.size() );
 		}
 	}
 
@@ -481,16 +288,7 @@ public class GalleryActivity extends Activity
 		jumpBackActivity();
 		return false;
 	}
-	//	@Override
-	//	public boolean onKeyDown(int keyCode, KeyEvent event)
-	//	{
-	//
-	//		if (keyCode == KeyEvent.KEYCODE_BACK)
-	//		{
-	//			jumpBackActivity();
-	//		}
-	//		return true;
-	//	}
+
 
 	class MyPageAdapter extends PagerAdapter
 	{

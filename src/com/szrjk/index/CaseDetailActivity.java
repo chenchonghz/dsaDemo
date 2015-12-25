@@ -361,6 +361,7 @@ public class CaseDetailActivity extends BaseActivity {
 						// 设置入activity,用于转发等入参
 						String username = caseDetail1.getUserCard()
 								.getUserName();
+						String userlevel=caseDetail1.getUserCard().getUserLevel();
 						String postText = caseDetail1.getPostDetail()
 								.getPostTitle();
 						String faceurl = caseDetail1.getUserCard()
@@ -386,6 +387,7 @@ public class CaseDetailActivity extends BaseActivity {
 								postText,
 								faceurl,
 								username,
+								userlevel,
 								postType,
 								new ICallback() {
 									@Override

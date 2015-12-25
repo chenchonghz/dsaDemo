@@ -12,7 +12,7 @@ public class ConstantUser
 	public static final int MyCaseShare = 8;
 	public static final int MyProblemHelp = 9;
 
-
-
+	/**用户等级*/
+	public static final String USERLEVEL="USERLEVEL";
 
 }

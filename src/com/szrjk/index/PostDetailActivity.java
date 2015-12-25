@@ -249,6 +249,7 @@ public class PostDetailActivity extends BaseActivity {
 						// 设置入activity,用于转发等入参
 						String username = postDetail1.getUserCard()
 								.getUserName();
+						String userlevel=postDetail1.getUserCard().getUserLevel();
 						String postText = postDetail1.getPostDetail()
 								.getContent();
 						String faceurl = postDetail1.getUserCard()
@@ -262,6 +263,7 @@ public class PostDetailActivity extends BaseActivity {
 								postText,
 								faceurl,
 								username,
+								userlevel,
 								postType,
 								new ICallback() {
 									@Override

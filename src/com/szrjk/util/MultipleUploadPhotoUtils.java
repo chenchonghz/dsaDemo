@@ -277,6 +277,9 @@ public class MultipleUploadPhotoUtils {
 				//                handler.removeCallbacks(runnable);
 				//                sb.append(OssUpdateImgUtil.feedPicFilterUrl + imageUrl + "|");
 				// 处理图片
+				//上传失败？如果突然断网，就会停止所以异步的上传，
+				Log.i("上传发帖图片失败", ossException.toString());
+				ToastUtils.showMessage(context, "上传发帖图片失败");
 				new DealPhoto(imageUrl).start();
 			}
 

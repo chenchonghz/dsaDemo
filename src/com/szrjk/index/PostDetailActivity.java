@@ -77,12 +77,11 @@ public class PostDetailActivity extends BaseActivity {
 	private UserCard userCard;
 	private Handler handler = new Handler() {
 
-
 		@Override
 		public void handleMessage(Message msg) {
 			if (msg.what == LOAD_CASEDETAIL_SUCCESS) {
 				postDetail2 = (OrdinaryPostDetail) msg.obj;
-				postStatis=postDetail2.getPostStatis();
+				postStatis = postDetail2.getPostStatis();
 				userCard = postDetail2.getUserCard();
 				postContentLayout.setUserCard(userCard);
 				setCaseData();
@@ -95,7 +94,7 @@ public class PostDetailActivity extends BaseActivity {
 
 	private String postUserSeqId;
 
-	private boolean isFirstIn=true;
+	private boolean isFirstIn = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -153,7 +152,7 @@ public class PostDetailActivity extends BaseActivity {
 		httpPost(paramMap, new AbstractDhomeRequestCallBack() {
 			@Override
 			public void start() {
-
+				dialog.show();
 			}
 
 			@Override
@@ -162,16 +161,21 @@ public class PostDetailActivity extends BaseActivity {
 
 			@Override
 			public void failure(HttpException exception, JSONObject jobj) {
-//				if (jobj.getString("ReturnCode").equals("0006")&&jobj.getString("ErrorMessage").equals("[queryPostForwardListByPostId]查询帖子信息异常")) {
-//
-//					instance.finish();
-//				}
+				// if
+				// (jobj.getString("ReturnCode").equals("0006")&&jobj.getString("ErrorMessage").equals("[queryPostForwardListByPostId]查询帖子信息异常"))
+				// {
+				//
+				// instance.finish();
+				// }
+				dialog.dismiss();
 				ToastUtils.showMessage(instance, jobj.getString("ErrorMessage"));
+				instance.finish();
 			}
 
 			@Override
 			public void success(JSONObject jsonObject) {
 				try {
+					dialog.dismiss();
 					ErrorInfo errorObj = JSON.parseObject(
 							jsonObject.getString("ErrorInfo"), ErrorInfo.class);
 					if (Constant.REQUESTCODE.equals(errorObj.getReturnCode())) {
@@ -320,7 +324,7 @@ public class PostDetailActivity extends BaseActivity {
 		super.onResume();
 		if (!isFirstIn) {
 			loadPostDetailedData(userSeqId, postId, instance);
-		}else{
+		} else {
 			isFirstIn = false;
 		}
 	}
@@ -359,41 +363,32 @@ public class PostDetailActivity extends BaseActivity {
 					.getTv_laudCount().getText().toString());
 			IndexFragment.ISLIKE = postDetailBottomOperLayout.isIslike();
 			IndexFragment.ISDELETE = isDelete;
-			if (userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())) {
-				if (postStatis!=null) {
-					IndexFragment.READ_NUM=postStatis.getREAD_NUM()+1;
-				}
-			}
-
-			android.util.Log.i("data",
-					position
-							+ ","
-							+ postDetaillviewLayout.getTv_transmitCount()
-									.getText().toString()
-							+ ","
-							+ postDetaillviewLayout.getTv_commentCoumt()
-									.getText().toString()
-							+ ","
-							+ postDetaillviewLayout.getTv_laudCount().getText()
-									.toString() + ","
-							+ postDetailBottomOperLayout.isIslike());
-		}
-		if (flag==ConstantUser.MyNormalPost) {
-			NormalPostActivity.ISDELETE=isDelete;
-			NormalPostActivity.POSITION=position;
-		}
-		if (flag==Constant.SELF_FLAG) {
-			SelfActivity.ISDELETE=isDelete;
-			SelfActivity.POSITION=position;
-			if (userCard != null && userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())) {
-				if (postStatis!=null) {
-					SelfActivity.READ_NUM=postStatis.getREAD_NUM()+1;
+			if (userCard != null
+					&& userCard.getUserSeqId().equals(
+							Constant.userInfo.getUserSeqId())) {
+				if (postStatis != null) {
+					IndexFragment.READ_NUM = postStatis.getREAD_NUM() + 1;
 				}
 			}
 		}
-		if (flag==Constant.CIRCLE_FLAG) {
-			CircleHomepageActivity.ISDELETE=isDelete;
-			CircleHomepageActivity.POSITION=position;
+		if (flag == ConstantUser.MyNormalPost) {
+			NormalPostActivity.ISDELETE = isDelete;
+			NormalPostActivity.POSITION = position;
+		}
+		if (flag == Constant.SELF_FLAG) {
+			SelfActivity.ISDELETE = isDelete;
+			SelfActivity.POSITION = position;
+			if (userCard != null
+					&& userCard.getUserSeqId().equals(
+							Constant.userInfo.getUserSeqId())) {
+				if (postStatis != null) {
+					SelfActivity.READ_NUM = postStatis.getREAD_NUM() + 1;
+				}
+			}
+		}
+		if (flag == Constant.CIRCLE_FLAG) {
+			CircleHomepageActivity.ISDELETE = isDelete;
+			CircleHomepageActivity.POSITION = position;
 		}
 	}
 }

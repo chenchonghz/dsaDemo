@@ -62,6 +62,7 @@ public class PostDetailFowardActivity2 extends BaseActivity {
 	private String postId;
 	private String userSeqId;
 	private int flag;
+	private boolean isDelete = false;
 
 	/*** 转发的样式 ***/
 	@ViewInject(R.id.pfncl_post)
@@ -388,6 +389,14 @@ public class PostDetailFowardActivity2 extends BaseActivity {
 		}
 	}
 
+	public boolean isDelete() {
+		return isDelete;
+	}
+
+	public void setDelete(boolean isDelete) {
+		this.isDelete = isDelete;
+	}
+
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
@@ -403,18 +412,6 @@ public class PostDetailFowardActivity2 extends BaseActivity {
 	}
 
 	private void notifyIndexFramentSetDataSetChange() {
-		// Intent intent = new Intent();
-		// Bundle bundle = new Bundle();
-		// bundle.putInt("position", position);
-		// bundle.putString("transmitCount", postDetaillviewLayout
-		// .getTv_transmitCount().getText().toString());
-		// bundle.putString("commentCoumt", postDetaillviewLayout
-		// .getTv_commentCoumt().getText().toString());
-		// bundle.putString("laudCount", postDetaillviewLayout.getTv_laudCount()
-		// .getText().toString());
-		// bundle.putBoolean("isLike", postDetailBottomOperLayout.isIslike());
-		// intent.putExtras(bundle);
-		// setResult(Constant.NOTIFY_DATA_SET_CHANGE, intent);
 		if (flag == Constant.INDEX_FLAG) {
 			IndexFragment.POSITION = position;
 			IndexFragment.FORWARD_NUM = Integer.parseInt(postDetaillviewLayout
@@ -424,31 +421,22 @@ public class PostDetailFowardActivity2 extends BaseActivity {
 			IndexFragment.LIKE_NUM = Integer.parseInt(postDetaillviewLayout
 					.getTv_laudCount().getText().toString());
 			IndexFragment.ISLIKE = postDetailBottomOperLayout.isIslike();
-			if (userCard.getUserSeqId()
-					.equals(Constant.userInfo.getUserSeqId())) {
+			IndexFragment.ISDELETE = isDelete;
+			if (userCard != null
+					&& userCard.getUserSeqId().equals(
+							Constant.userInfo.getUserSeqId())) {
 				if (postStatis != null) {
-					IndexFragment.READ_NUM = postStatis.getREAD_NUM()+1;
+					IndexFragment.READ_NUM = postStatis.getREAD_NUM() + 1;
 				}
 			}
-
-			Log.i("data",
-					position
-							+ ","
-							+ postDetaillviewLayout.getTv_transmitCount()
-									.getText().toString()
-							+ ","
-							+ postDetaillviewLayout.getTv_commentCoumt()
-									.getText().toString()
-							+ ","
-							+ postDetaillviewLayout.getTv_laudCount().getText()
-									.toString() + ","
-							+ postDetailBottomOperLayout.isIslike());
 		}
-		if (flag==Constant.SELF_FLAG) {
-			SelfActivity.POSITION = position;
-			if (userCard!=null&&userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())) {
-				if (postStatis!=null) {
-					SelfActivity.READ_NUM=postStatis.getREAD_NUM()+1;
+		if (flag == Constant.SELF_FLAG) {
+			if (userCard != null
+					&& userCard.getUserSeqId().equals(
+							Constant.userInfo.getUserSeqId())) {
+				if (postStatis != null) {
+					// Log.i("num", postStatis.getREAD_NUM()+1+"");
+					SelfActivity.READ_NUM = postStatis.getREAD_NUM() + 1;
 				}
 			}
 		}

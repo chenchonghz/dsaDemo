@@ -55,13 +55,15 @@ public class PhotoAlbumGalleryActivity extends BaseActivity {
 			switch (msg.what) {
 			case GET_PHOTO_ALBUM_LIST_SUCCESS:
 				photoAlbumList = (ArrayList<PhotoAlbum2>) msg.obj;
+				fillPostIdList();
 				setAdapter();
 				break;
 			}
-		};
+		}
 	};
 
 	private String[] picsList;
+	private String[] postIdList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +93,19 @@ public class PhotoAlbumGalleryActivity extends BaseActivity {
 		}
 	}
 
+	private void fillPostIdList() {
+		if (photoAlbumList != null && !photoAlbumList.isEmpty()) {
+			postIdList = new String[photoAlbumList.size()];
+		}
+		for (int i = 0; i < photoAlbumList.size(); i++) {
+			PhotoAlbum2 photoAlbum2 = photoAlbumList.get(i);
+			String postId = photoAlbum2.getPostId();
+			if (postId != null && !postId.isEmpty()) {
+				postIdList[i] = postId;
+			}
+		}
+	};
+
 	private void setAdapter() {
 		if (photoAlbumList != null && !photoAlbumList.isEmpty()) {
 			picsList = new String[photoAlbumList.size()];
@@ -110,7 +125,7 @@ public class PhotoAlbumGalleryActivity extends BaseActivity {
 		// "http://dd-face.digi123.cn/201511/80426ba27eef6380.jpg",
 		// "http://dd-face.digi123.cn/201511/80426ba27eef6380.jpg",
 		// "http://dd-face.digi123.cn/201511/80426ba27eef6380.jpg" };
-//		Log.i("picsList", Arrays.toString(picsList));
+		// Log.i("picsList", Arrays.toString(picsList));
 		PhotoAlbumGridViewAdapter photoAlbumGridViewAdapter = new PhotoAlbumGridViewAdapter(
 				instance, picsList, new IPhotoClickOper() {
 
@@ -123,8 +138,7 @@ public class PhotoAlbumGalleryActivity extends BaseActivity {
 						intent.putExtra("title", (position + 1) + "/"
 								+ picsList.length);
 						intent.putExtra("needOper", false);
-						intent.putExtra("postId", photoAlbumList.get(position)
-								.getPostId());
+						intent.putExtra("postIdList", postIdList);
 						intent.putExtra("postType", photoAlbumList
 								.get(position).getPostType());
 						intent.putExtra("contextText", "查看原帖");

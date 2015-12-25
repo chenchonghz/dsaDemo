@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -28,6 +27,7 @@ public class MainActivityHeaderView extends RelativeLayout implements
 	private ImageView iv_linklist;
 	private ImageView iv_search;
 	private ImageView iv_add;
+	private RelativeLayout rl_headerview_mainactivity;
 
 	public MainActivityHeaderView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -35,6 +35,7 @@ public class MainActivityHeaderView extends RelativeLayout implements
 		LayoutInflater inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		inflater.inflate(R.layout.headerview_mainactivity, this);
+		rl_headerview_mainactivity=(RelativeLayout)findViewById(R.id.rl_headerview_mainactivity);
 		tv_digital_doctor = (TextView) findViewById(R.id.tv_digital_doctor);
 		iv_linklist = (ImageView) findViewById(R.id.iv_linklist);
 		iv_search = (ImageView) findViewById(R.id.iv_search);
@@ -85,7 +86,7 @@ public class MainActivityHeaderView extends RelativeLayout implements
 				}
 			});
 //			addPopup.showAsDropDown(iv_add, 80, 5);
-			addPopup.showAtLocation(iv_add, Gravity.RIGHT|Gravity.TOP, 15, 95);
+			addPopup.showAtLocation(rl_headerview_mainactivity, Gravity.RIGHT|Gravity.TOP, 15, 95);
 			break;
 		}
 	}

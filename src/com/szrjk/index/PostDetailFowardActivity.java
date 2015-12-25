@@ -397,18 +397,6 @@ public class PostDetailFowardActivity extends BaseActivity {
 	}
 
 	private void notifyIndexFramentSetDataSetChange() {
-		// Intent intent = new Intent();
-		// Bundle bundle = new Bundle();
-		// bundle.putInt("position", position);
-		// bundle.putString("transmitCount", postDetaillviewLayout
-		// .getTv_transmitCount().getText().toString());
-		// bundle.putString("commentCoumt", postDetaillviewLayout
-		// .getTv_commentCoumt().getText().toString());
-		// bundle.putString("laudCount", postDetaillviewLayout.getTv_laudCount()
-		// .getText().toString());
-		// bundle.putBoolean("isLike", postDetailBottomOperLayout.isIslike());
-		// intent.putExtras(bundle);
-		// setResult(Constant.NOTIFY_DATA_SET_CHANGE, intent);
 		if (flag == Constant.INDEX_FLAG) {
 			IndexFragment.POSITION = position;
 			IndexFragment.FORWARD_NUM = Integer.parseInt(postDetaillviewLayout
@@ -419,29 +407,16 @@ public class PostDetailFowardActivity extends BaseActivity {
 					.getTv_laudCount().getText().toString());
 			IndexFragment.ISLIKE = postDetailBottomOperLayout.isIslike();
 			IndexFragment.ISDELETE = isDelete;
-			if (userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())) {
+			if (userCard!=null&&userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())) {
 				if (postStatis!=null) {
 					IndexFragment.READ_NUM=postStatis.getREAD_NUM()+1;
 				}
 			}
-
-			android.util.Log.i("data",
-					position
-							+ ","
-							+ postDetaillviewLayout.getTv_transmitCount()
-									.getText().toString()
-							+ ","
-							+ postDetaillviewLayout.getTv_commentCoumt()
-									.getText().toString()
-							+ ","
-							+ postDetaillviewLayout.getTv_laudCount().getText()
-									.toString() + ","
-							+ postDetailBottomOperLayout.isIslike());
 		}
 		if (flag==Constant.SELF_FLAG) {
-			if (userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())) {
+			if (userCard!=null&&userCard.getUserSeqId().equals(Constant.userInfo.getUserSeqId())) {
 				if (postStatis!=null) {
-					Log.i("num", postStatis.getREAD_NUM()+1+"");
+//					Log.i("num", postStatis.getREAD_NUM()+1+"");
 					SelfActivity.READ_NUM=postStatis.getREAD_NUM()+1;
 				}
 			}

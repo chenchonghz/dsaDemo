@@ -552,7 +552,12 @@ public class SelfActivity extends BaseActivity implements OnClickListener {
 			}
 		}
 	};
-	
+	protected void onDestroy() {
+		if (dialog!=null) {
+			dialog.dismiss();
+		}
+		super.onDestroy();
+	};
 	protected void onNewIntent(Intent intent) {
 		getUserHpInfo(Constant.userInfo.getUserSeqId());
 		try {
@@ -607,4 +612,5 @@ public class SelfActivity extends BaseActivity implements OnClickListener {
 //		}.start();
 		super.onResume();
 	}
+	
 }

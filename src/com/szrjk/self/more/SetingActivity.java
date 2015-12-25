@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -30,6 +33,7 @@ import com.szrjk.dhome.LoginActivity;
 import com.szrjk.dhome.LoginHelper;
 import com.szrjk.dhome.MainActivity;
 import com.szrjk.dhome.R;
+import com.szrjk.dhome.SelfActivity;
 import com.szrjk.entity.IPopupItemCallback;
 import com.szrjk.entity.PopupItem;
 import com.szrjk.entity.UserInfo;
@@ -62,7 +66,7 @@ public class SetingActivity extends BaseActivity {
 
 	@ViewInject(R.id.rl_clear_cache)
 	private RelativeLayout rl_clear_cache;
-	
+
 	@ViewInject(R.id.tv_cacheSize)
 	private TextView tv_cacheSize;
 
@@ -77,7 +81,7 @@ public class SetingActivity extends BaseActivity {
 	private SetingActivity instance;
 
 	private UserInfo userInfo;
-	
+
 	private File cacheDir=null;
 
 	private TextSizePopup textSizePopup;
@@ -124,7 +128,7 @@ public class SetingActivity extends BaseActivity {
 	public String getCache() {
 		String cache=null;
 		try {
-			
+
 			double cacheSize=DataCleanManager.getFolderSize(getCacheDir())+DataCleanManager.getFolderSize(getFilesDir())+DataCleanManager.getFolderSize(new File(FileUtils.SDPATH))+DataCleanManager.getFolderSize(cacheDir);
 			cache = DataCleanManager.getFormatSize(cacheSize);
 		} catch (Exception e) {
@@ -132,31 +136,58 @@ public class SetingActivity extends BaseActivity {
 		}
 		return cache;
 	}
-	
+
 	@OnClick(R.id.rl_change_hportrait)
 	public void changePortraitClick(View v) {
 		ToastUtils.showMessage(instance, "等待需求更改");
-//		Intent intent = new Intent(instance, ChangePortraitActivity.class);
-//		Bundle bundle = new Bundle();
-//		// 把图片地址的urlList传递过去
-//		bundle.putString("userfaceUrl", userInfo.getUserFaceUrl());
-//		intent.putExtras(bundle);
-//		startActivityForResult(intent, CHANGE_PORTRAIT_SUCCESS);
+		send();
+		//		Intent intent = new Intent(instance, ChangePortraitActivity.class);
+		//		Bundle bundle = new Bundle();
+		//		// 把图片地址的urlList传递过去
+		//		bundle.putString("userfaceUrl", userInfo.getUserFaceUrl());
+		//		intent.putExtras(bundle);
+		//		startActivityForResult(intent, CHANGE_PORTRAIT_SUCCESS);
+	}
+
+	private void send() {
+		//1.得到NotificationManager  
+		NotificationManager nm=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE); 
+		//设置通知栏跳转目标
+		Intent intent = new Intent(this, SelfActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		PendingIntent pi= PendingIntent.getActivity(this, 0, intent, 0);  
+		//用builder设置Notification
+		Notification n = new Notification.Builder(instance)
+		.setContentTitle("国明周五请吃饭")
+		.setContentText("周五下班走起")
+		.setSmallIcon(R.drawable.icon_messages)
+		.build();
+		n.contentIntent = pi;
+		//此条将通知放在”正在进行“栏，否则在通知栏
+//		n.flags =Notification.FLAG_ONGOING_EVENT;
+		//单击通知，通知消失
+		n.flags |= Notification.FLAG_AUTO_CANCEL;
+		//通知声音
+		n.defaults = Notification.DEFAULT_SOUND;   
+		//启用通知
+		nm.notify(1, n); 
+
+
 	}
 
 	@OnClick(R.id.rl_change_background)
 	public void changeBackgroundClick(View v) {
 		ToastUtils.showMessage(instance, "等待需求更改");
-//		Intent intent = new Intent(instance, UserBackgroundSelectActivity.class);
-//		startActivity(intent);
+		//		Intent intent = new Intent(instance, UserBackgroundSelectActivity.class);
+		//		startActivity(intent);
 	}
-	
+
 	@OnClick(R.id.rl_change_password)
 	public void changePasswordClick(View v) {
 		Intent intent = new Intent(instance, ChangePasswordActivity.class);
 		startActivity(intent);
 	}
-	
+
 	@OnClick(R.id.rl_change_phonenumber)
 	public void changePhoneNumClick(View v) {
 		Intent intent = new Intent(instance, AuthenticationActivity.class);
@@ -181,9 +212,9 @@ public class SetingActivity extends BaseActivity {
 
 	@OnClick(R.id.rl_text_size)
 	public void textSizeClick(View v) {
-//		textSizePopup = new TextSizePopup(instance, itemsOnClick);
-//		textSizePopup.showAtLocation(ll_seting, Gravity.BOTTOM
-//				| Gravity.CENTER_HORIZONTAL, 0, 0);
+		//		textSizePopup = new TextSizePopup(instance, itemsOnClick);
+		//		textSizePopup.showAtLocation(ll_seting, Gravity.BOTTOM
+		//				| Gravity.CENTER_HORIZONTAL, 0, 0);
 		showPoP(ll_seting);
 	}
 
@@ -192,20 +223,20 @@ public class SetingActivity extends BaseActivity {
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.tv_large:
-				
+
 				//系统的
-//				 Intent intent = new Intent("/");
-//				 ComponentName cn = new ComponentName("com.android.settings",
-//				 "com.android.settings.Display");
-//				 intent.setComponent(cn);
-//				 startActivityForResult(intent, 1);
+				//				 Intent intent = new Intent("/");
+				//				 ComponentName cn = new ComponentName("com.android.settings",
+				//				 "com.android.settings.Display");
+				//				 intent.setComponent(cn);
+				//				 startActivityForResult(intent, 1);
 				break;
 			case R.id.tv_medium:
-				
+
 				textSizePopup.dismiss();
 				break;
 			case R.id.tv_small:
-				
+
 				textSizePopup.dismiss();
 				break;
 			case R.id.tv_logout:
@@ -220,54 +251,54 @@ public class SetingActivity extends BaseActivity {
 
 	@OnClick(R.id.rl_log_out)
 	public void logOutClick(View v) {
-//		LogoutPopup logoutPopup = new LogoutPopup(instance, itemsOnClick);
-//		logoutPopup.showAtLocation(ll_seting, Gravity.BOTTOM
-//				| Gravity.CENTER_HORIZONTAL, 0, 0);
+		//		LogoutPopup logoutPopup = new LogoutPopup(instance, itemsOnClick);
+		//		logoutPopup.showAtLocation(ll_seting, Gravity.BOTTOM
+		//				| Gravity.CENTER_HORIZONTAL, 0, 0);
 		showPoExit(ll_seting);
 	}
 
 	private void jumpLoginActivity() {
-//		SharePerferenceUtil perferenceUtil = SharePerferenceUtil.getInstance(instance,
-//				Constant.USER_INFO);
+		//		SharePerferenceUtil perferenceUtil = SharePerferenceUtil.getInstance(instance,
+		//				Constant.USER_INFO);
 		//注销用户信息和登陆状态
-//		perferenceUtil.setBooleanValue(Constant.LOGIN_STATE, false);
-//		Constant.userInfo = null;//登出
-//
-//		//取消推送信息
-//		final PushAgent pushAgent = PushAgent.getInstance(SetingActivity.this);
-//		pushAgent.disable();
+		//		perferenceUtil.setBooleanValue(Constant.LOGIN_STATE, false);
+		//		Constant.userInfo = null;//登出
+		//
+		//		//取消推送信息
+		//		final PushAgent pushAgent = PushAgent.getInstance(SetingActivity.this);
+		//		pushAgent.disable();
 		LoginHelper.Logout(instance);
 		Intent intent = new Intent();
 		//跳到登陆界面
 		intent.setClass(instance, LoginActivity.class);
 		startActivity(intent);
-		 //关闭界面
+		//关闭界面
 		instance.finish();
-//		MoreActivity.instance.finish();
+		//		MoreActivity.instance.finish();
 		MainActivity.instance.finish();
 	}
 
 
-	
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		switch (requestCode) {
-			case CHANGE_PORTRAIT_SUCCESS:
-				if (data==null) {
-					break;
-				}
-				Bundle bundle=data.getExtras();
-				if (bundle.getBoolean("CHANGE_PORTRAIT_SUCCESS")) {
-					Intent intent=new Intent();
-					intent.putExtras(bundle);
-					setResult(CHANGE_PORTRAIT_SUCCESS,intent);
-					instance.finish();
-				}
+		case CHANGE_PORTRAIT_SUCCESS:
+			if (data==null) {
 				break;
-			case CHANGE_PHONE_SUCCESS:
-				tv_phoneNumber.setText(userInfo.getPhone());
-				break;
+			}
+			Bundle bundle=data.getExtras();
+			if (bundle.getBoolean("CHANGE_PORTRAIT_SUCCESS")) {
+				Intent intent=new Intent();
+				intent.putExtras(bundle);
+				setResult(CHANGE_PORTRAIT_SUCCESS,intent);
+				instance.finish();
+			}
+			break;
+		case CHANGE_PHONE_SUCCESS:
+			tv_phoneNumber.setText(userInfo.getPhone());
+			break;
 		}
 	}
 
@@ -276,7 +307,7 @@ public class SetingActivity extends BaseActivity {
 	public void changeTextSize(String size){
 		//实例化SharedPreferences对象（第一步） 
 		SharedPreferences mySharedPreferences= getSharedPreferences("text_size", 
-		Context.MODE_PRIVATE); 
+				Context.MODE_PRIVATE); 
 		//实例化SharedPreferences.Editor对象（第二步） 
 		SharedPreferences.Editor editor = mySharedPreferences.edit(); 
 		//用putString的方法保存数据 
@@ -290,7 +321,7 @@ public class SetingActivity extends BaseActivity {
 
 	/**显示sendWindow**/
 	private void showPoP(View v){
-//		sendWindow = new PostSendPopup(instance, sendPostClick);
+		//		sendWindow = new PostSendPopup(instance, sendPostClick);
 
 		List<PopupItem> pilist = new ArrayList<PopupItem>();
 		PopupItem pi1 = new PopupItem();
@@ -302,7 +333,7 @@ public class SetingActivity extends BaseActivity {
 				sendWindow.dismiss();
 				tv_size.setText("大");
 				changeTextSize("large");
-				
+
 			}
 		});
 		PopupItem pi2 = new PopupItem();
@@ -323,7 +354,7 @@ public class SetingActivity extends BaseActivity {
 			@Override
 			public void itemClickFunc(PopupWindow sendWindow) {
 				sendWindow.dismiss();
-				
+
 				tv_size.setText("小");
 				changeTextSize("small");
 			}
@@ -335,7 +366,7 @@ public class SetingActivity extends BaseActivity {
 	}
 	/**显示sendWindow**/
 	private void showPoExit(View v){
-//		sendWindow = new PostSendPopup(instance, sendPostClick);
+		//		sendWindow = new PostSendPopup(instance, sendPostClick);
 
 		List<PopupItem> pilist = new ArrayList<PopupItem>();
 		PopupItem pi1 = new PopupItem();

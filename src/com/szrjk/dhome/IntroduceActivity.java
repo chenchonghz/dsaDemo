@@ -155,6 +155,7 @@ public class IntroduceActivity extends BaseActivity {
 		//如果是自己。那就可以编辑自己的资料。不是
 		if (userId.equals(objID)) {
 			findUserInfo(userId);
+			tv_edit.setVisibility(View.VISIBLE);
 		}
 		else{
 			findUserInfo(objID);
@@ -213,7 +214,6 @@ public class IntroduceActivity extends BaseActivity {
 
 	protected void updateUI() {
 		rl_glo.setVisibility(View.VISIBLE);
-		tv_edit.setVisibility(View.VISIBLE);
 		String type = homePageInfo.getUserType();
 		Integer t = Integer.valueOf(type);
 		System.out.println(t+"");

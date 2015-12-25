@@ -827,6 +827,10 @@
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
         </activity>
+        <activity
+            android:name="com.szrjk.dhome.AddressBookActivity"
+            android:label="@string/title_activity_address_book" >
+        </activity>
     </application>
 
 </manifest>

@@ -166,6 +166,7 @@ public class AlbumGalleryActivity extends BaseActivity {
 			@Override
 			public void getAlbumList(List<PhotoUpImageBucket> list) {
 				contentList = list;
+				Log.i("contentList", contentList.toString());
 				progressDialog.cancel();
 				init();
 				viewAdapter.notifyDataSetChanged();//更新视图

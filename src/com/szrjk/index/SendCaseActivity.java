@@ -64,7 +64,11 @@ import com.szrjk.widget.FlowDeptLayout;
 import com.szrjk.widget.IndexGridView;
 import com.szrjk.widget.ListPopup;
 import com.szrjk.widget.UpdateProgressBar;
-
+/**
+ * 
+ * @author ldr
+ * 最后修改：2015-12-24 23:00:48
+ */
 @ContentView(R.layout.activity_case)
 public class SendCaseActivity extends BaseActivity {
 	// 标题
@@ -613,7 +617,7 @@ public class SendCaseActivity extends BaseActivity {
 			e.printStackTrace();
 		}
 	}
-
+	private ArrayList<String> absList1= new ArrayList<String>();
 	@OnItemClick(R.id.gv_case_list)
 	public void caseItemClick(AdapterView<?> adapterView, View view, int num,
 			long position) {
@@ -638,6 +642,9 @@ public class SendCaseActivity extends BaseActivity {
 											+ urlarr[i]);
 								}
 								Log.i("图片地址", urlList1.toString());
+								for (int j = 0; j < imgList.size(); j++) {
+									absList1.add(imgList.get(j).getAbsPaht());
+								}
 								multipleUploadPhotoUtils1 = null;
 							}
 						});
@@ -648,7 +655,8 @@ public class SendCaseActivity extends BaseActivity {
 				bundle.putInt("id", num);
 				// 把图片地址的urlList传递过去
 				bundle.putStringArrayList("urllist", urlList1);
-				GalleryActivity.filltmpitems(gridAdapter.returnImageInfo());
+				bundle.putStringArrayList("absList", absList1);
+//				GalleryActivity.filltmpitems(gridAdapter.returnImageInfo());
 				intent.putExtras(bundle);
 				startActivityForResult(intent, GALLERY_RESULT_TYPE1);
 			}
@@ -656,7 +664,7 @@ public class SendCaseActivity extends BaseActivity {
 			e.printStackTrace();
 		}
 	}
-
+	private ArrayList<String> absList2= new ArrayList<String>();
 	@OnItemClick(R.id.gv_check_list)
 	public void checkItemClick(AdapterView<?> adapterView, View view, int num,
 			long position) {
@@ -679,6 +687,9 @@ public class SendCaseActivity extends BaseActivity {
 									urlList2.add(OssUpdateImgUtil.feedPicFilterUrl
 											+ urlarr[i]);
 								}
+								for (int j = 0; j < imgList.size(); j++) {
+									absList2.add(imgList.get(j).getAbsPaht());
+								}
 								Log.i("图片地址2", urlList2.toString());
 								multipleUploadPhotoUtils2 = null;
 							}
@@ -690,7 +701,8 @@ public class SendCaseActivity extends BaseActivity {
 				bundle.putInt("id", num);
 				// 把图片地址的urlList传递过去
 				bundle.putStringArrayList("urllist", urlList2);
-				GalleryActivity.filltmpitems(checkAdapter.returnImageInfo());
+				bundle.putStringArrayList("absList", absList2);
+//				GalleryActivity.filltmpitems(checkAdapter.returnImageInfo());
 				intent.putExtras(bundle);
 				startActivityForResult(intent, GALLERY_RESULT_TYPE2);
 			}
@@ -698,7 +710,7 @@ public class SendCaseActivity extends BaseActivity {
 			e.printStackTrace();
 		}
 	}
-
+	private ArrayList<String> absList3= new ArrayList<String>();
 	@OnItemClick(R.id.gv_treat_list)
 	public void treatItemClick(AdapterView<?> adapterView, View view, int num,
 			long position) {
@@ -721,6 +733,9 @@ public class SendCaseActivity extends BaseActivity {
 									urlList3.add(OssUpdateImgUtil.feedPicFilterUrl
 											+ urlarr[i]);
 								}
+								for (int j = 0; j < imgList.size(); j++) {
+									absList3.add(imgList.get(j).getAbsPaht());
+								}
 								Log.i("图片地址2", urlList3.toString());
 								multipleUploadPhotoUtils3 = null;
 							}
@@ -732,7 +747,8 @@ public class SendCaseActivity extends BaseActivity {
 				bundle.putInt("id", num);
 				// 把图片地址的urlList传递过去
 				bundle.putStringArrayList("urllist", urlList3);
-				GalleryActivity.filltmpitems(treatAdapter.returnImageInfo());
+				bundle.putStringArrayList("absList", absList3);
+//				GalleryActivity.filltmpitems(treatAdapter.returnImageInfo());
 				intent.putExtras(bundle);
 				startActivityForResult(intent, GALLERY_RESULT_TYPE3);
 			}
@@ -740,7 +756,7 @@ public class SendCaseActivity extends BaseActivity {
 			e.printStackTrace();
 		}
 	}
-
+	private ArrayList<String> absList4 = new ArrayList<String>();
 	@OnItemClick(R.id.gv_visit_list)
 	public void visitItemClick(AdapterView<?> adapterView, View view, int num,
 			long position) {
@@ -763,6 +779,9 @@ public class SendCaseActivity extends BaseActivity {
 									urlList4.add(OssUpdateImgUtil.feedPicFilterUrl
 											+ urlarr[i]);
 								}
+								for (int j = 0; j < imgList.size(); j++) {
+									absList4.add(imgList.get(j).getAbsPaht());
+								}
 								Log.i("图片地址2", urlList4.toString());
 								multipleUploadPhotoUtils4 = null;
 							}
@@ -774,7 +793,8 @@ public class SendCaseActivity extends BaseActivity {
 				bundle.putInt("id", num);
 				// 把图片地址的urlList传递过去
 				bundle.putStringArrayList("urllist", urlList4);
-				GalleryActivity.filltmpitems(visitAdapter.returnImageInfo());
+				bundle.putStringArrayList("absList", absList4);
+//				GalleryActivity.filltmpitems(visitAdapter.returnImageInfo());
 				intent.putExtras(bundle);
 				startActivityForResult(intent, GALLERY_RESULT_TYPE4);
 			}
@@ -873,7 +893,9 @@ public class SendCaseActivity extends BaseActivity {
 				if (data != null) {
 					// ArrayList<String>
 					urlList1 = data.getStringArrayListExtra("urllist");
-					gridAdapter.setImageList(GalleryActivity.gettmpitems());
+					absList1 = data.getStringArrayListExtra("absList");
+					gridAdapter.addStringUrl(absList1);
+//					gridAdapter.setImageList(GalleryActivity.gettmpitems());
 					gridAdapter.notifyDataSetChanged();
 				}
 				break;
@@ -882,7 +904,9 @@ public class SendCaseActivity extends BaseActivity {
 				if (data != null) {
 					// ArrayList<String>
 					urlList2 = data.getStringArrayListExtra("urllist");
-					checkAdapter.setImageList(GalleryActivity.gettmpitems());
+//					checkAdapter.setImageList(GalleryActivity.gettmpitems());
+					absList2 = data.getStringArrayListExtra("absList");
+					gridAdapter.addStringUrl(absList2);
 					checkAdapter.notifyDataSetChanged();
 				}
 				break;
@@ -891,7 +915,9 @@ public class SendCaseActivity extends BaseActivity {
 				if (data != null) {
 					// ArrayList<String>
 					urlList3 = data.getStringArrayListExtra("urllist");
-					treatAdapter.setImageList(GalleryActivity.gettmpitems());
+//					treatAdapter.setImageList(GalleryActivity.gettmpitems());
+					absList3 = data.getStringArrayListExtra("absList");
+					gridAdapter.addStringUrl(absList3);
 					treatAdapter.notifyDataSetChanged();
 				}
 				break;
@@ -900,7 +926,9 @@ public class SendCaseActivity extends BaseActivity {
 				if (data != null) {
 					// ArrayList<String>
 					urlList4 = data.getStringArrayListExtra("urllist");
-					visitAdapter.setImageList(GalleryActivity.gettmpitems());
+//					visitAdapter.setImageList(GalleryActivity.gettmpitems());
+					absList4 = data.getStringArrayListExtra("absList");
+					gridAdapter.addStringUrl(absList4);
 					visitAdapter.notifyDataSetChanged();
 				}
 				break;

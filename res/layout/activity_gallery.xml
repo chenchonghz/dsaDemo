@@ -7,36 +7,48 @@
     <RelativeLayout
         android:id="@+id/rl_header"
         android:layout_width="fill_parent"
-        android:layout_height="@dimen/edit_input_height"
+        android:layout_height="45dp"
         android:background="@color/black" >
-        <ImageButton 
-            android:id="@+id/ib_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_back_32"
-            android:background="@null"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/send_header_margin"
-            />
 
-        <TextView 
+        <LinearLayout
+            android:layout_width="40dp"
+            android:layout_height="match_parent" >
+
+            <ImageButton
+                android:id="@+id/ib_back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:paddingLeft="@dimen/send_header_margin"
+                android:paddingRight="@dimen/send_header_margin"
+                android:src="@drawable/icon_back_32" />
+        </LinearLayout>
+
+        <TextView
             android:id="@+id/tv_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textSize="@dimen/font_size_large"
             android:background="@null"
-            />
-        <Button
-            android:id="@+id/btn_del"
+            android:textSize="@dimen/font_size_large" />
+
+        <LinearLayout
             android:layout_width="wrap_content"
-            
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/icon_canclepic_32"
-             />
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true" >
+
+            <ImageButton
+                android:id="@+id/btn_del"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:background="@null"
+                android:src="@drawable/icon_canclepic_32"
+                android:paddingRight="18dp"
+                android:paddingLeft="18dp"
+                 />
+        </LinearLayout>
     </RelativeLayout>
 
     <RelativeLayout
@@ -44,8 +56,8 @@
         android:layout_width="fill_parent"
         android:layout_height="@dimen/edit_input_height"
         android:layout_alignParentBottom="true"
-        android:visibility="gone"
-        android:background="@drawable/album_bottom_bar" >
+        android:background="@drawable/album_bottom_bar"
+        android:visibility="gone" >
 
         <Button
             android:id="@+id/btn_send"

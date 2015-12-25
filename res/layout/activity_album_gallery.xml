@@ -47,12 +47,15 @@
         
         <TextView 
             android:id="@+id/tv_comp"
+            style="@style/SendButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
             android:text="完成"
+            android:gravity="center"
+            android:paddingLeft="@dimen/send_header_margin"
+            android:paddingRight="@dimen/send_header_margin"
             android:textSize="@dimen/font_size_middle"
             android:textColor="@color/base_bg2"/>
     </RelativeLayout>

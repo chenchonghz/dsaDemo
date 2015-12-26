@@ -25,6 +25,8 @@ public class HeaderView extends RelativeLayout
 	private ImageView btn_image;
 	//headerview右侧文字按钮对象
 	private TextView btn_text;
+	//headerview左侧文字按钮对象
+	private TextView btn_back;
 	
 	
 	public ImageView getBtnBack()
@@ -49,7 +51,7 @@ public class HeaderView extends RelativeLayout
 		lly_image = (LinearLayout) findViewById(R.id.lly_Image);
 		btn_image = (ImageView) findViewById(R.id.btn_Image);
 		btn_text = (TextView) findViewById(R.id.btn_text);
-
+		btn_back = (TextView) findViewById(R.id.btn_back);
 		TypedArray a = getContext().obtainStyledAttributes(attrs,
 				R.styleable.HeaderView);
 		String htextstr = a.getString(R.styleable.HeaderView_htextstr);
@@ -100,5 +102,12 @@ public class HeaderView extends RelativeLayout
 		btn_text.setVisibility(View.VISIBLE);
 		btn_text.setText(text);
 		btn_text.setOnClickListener(onClickListener);
+	}
+	//显示headerview左侧文字按钮对象，并设置其显示文字与点击逻辑，并且隐藏原图标按钮
+	public void showBackBtn(String text,OnClickListener onClickListener){
+		lly_hv.setVisibility(View.GONE);
+		btn_back.setVisibility(View.VISIBLE);
+		btn_back.setText(text);
+		btn_back.setOnClickListener(onClickListener);
 	}
 }

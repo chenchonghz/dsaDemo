@@ -6,16 +6,19 @@ import java.util.List;
 import java.util.Map;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
@@ -29,11 +32,11 @@ import com.szrjk.config.Constant;
 import com.szrjk.entity.AddressCard;
 import com.szrjk.entity.AddressListEntity;
 import com.szrjk.entity.ErrorInfo;
+import com.szrjk.explore.MyCircleActivity;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.sortlistview.AddressBookPinyinComparator;
 import com.szrjk.sortlistview.CharacterParser;
 import com.szrjk.sortlistview.ClearEditText;
-import com.szrjk.sortlistview.PinyinComparator;
 import com.szrjk.sortlistview.SideBar;
 import com.szrjk.sortlistview.SideBar.OnTouchingLetterChangedListener;
 import com.szrjk.util.ToastUtils;
@@ -100,6 +103,13 @@ public class AddressBookActivity extends BaseActivity {
 		sortListView = (ListView) findViewById(R.id.country_lvcountry);
 		//加载头部
 		View header = View.inflate(instance, R.layout.address_book_header, null);
+		RelativeLayout rl = (RelativeLayout) header.findViewById(R.id.rl_addressbook_header);
+		rl.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(instance,MyCircleActivity.class));
+			}
+		});
 		sortListView.addHeaderView(header);
 		
 		//item点击事件

@@ -51,7 +51,7 @@ public class HeaderView extends RelativeLayout
 		lly_image = (LinearLayout) findViewById(R.id.lly_Image);
 		btn_image = (ImageView) findViewById(R.id.btn_Image);
 		btn_text = (TextView) findViewById(R.id.btn_text);
-		btn_back = (TextView) findViewById(R.id.btn_back);
+		btn_back = (TextView) findViewById(R.id.btn_tv_back);
 		TypedArray a = getContext().obtainStyledAttributes(attrs,
 				R.styleable.HeaderView);
 		String htextstr = a.getString(R.styleable.HeaderView_htextstr);
@@ -94,9 +94,14 @@ public class HeaderView extends RelativeLayout
 	public LinearLayout getImageBtn(){
 		return lly_image;
 	}
+	//获得headerview左侧文字按钮布局对象
 	public TextView getTextBtn(){
 		return btn_text;
 	}
+	//获得headerview左侧文字按钮布局对象
+		public TextView getBackBtn(){
+			return btn_back;
+		}
 	//显示headerview右侧文字按钮对象，并设置其显示文字与点击逻辑
 	public void showTextBtn(String text,OnClickListener onClickListener){
 		btn_text.setVisibility(View.VISIBLE);

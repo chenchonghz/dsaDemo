@@ -5,12 +5,12 @@
     android:layout_height="match_parent"
     android:background="@color/base_bg" >
 
-    <com.szrjk.widget.PostDetailHeaderView
-        android:id="@+id/pdhv_headerview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        headerattr:text="@string/post_detailed_header" >
-    </com.szrjk.widget.PostDetailHeaderView>
+    <com.szrjk.widget.HeaderView
+            android:id="@+id/pdhv_headerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            headerattr:text="@string/post_detailed_header"
+            />
 
     <ScrollView
         android:id="@+id/sv_case_detail_casecontent"

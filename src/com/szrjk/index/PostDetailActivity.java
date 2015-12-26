@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.alibaba.fastjson.JSON;
@@ -37,17 +38,17 @@ import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.self.CircleHomepageActivity;
 import com.szrjk.self.more.NormalPostActivity;
 import com.szrjk.util.ToastUtils;
-import com.szrjk.widget.PostContentLayout;
-import com.szrjk.widget.PostDetailBottomOperLayout;
-import com.szrjk.widget.PostDetailHeaderView;
-import com.szrjk.widget.PostDetailViewCommentListLayout;
+import com.szrjk.widget.*;
 
 @ContentView(R.layout.activity_post1_detail)
 public class PostDetailActivity extends BaseActivity {
 
 	// 头布局
+//	@ViewInject(R.id.pdhv_headerview)
+//	private PostDetailHeaderView pdhv_headerview;
+
 	@ViewInject(R.id.pdhv_headerview)
-	private PostDetailHeaderView pdhv_headerview;
+	private HeaderView pdhv_headerview;
 
 	// 底层布局
 	@ViewInject(R.id.rl_case_detail_base)
@@ -111,8 +112,18 @@ public class PostDetailActivity extends BaseActivity {
 		userSeqId = Constant.userInfo.getUserSeqId();
 		String ptype = getIntent().getStringExtra("ptype");
 		flag = getIntent().getIntExtra("flag", 0);
-		pdhv_headerview.fillData(postId, postUserSeqId);
-		pdhv_headerview.showDotmore();
+
+		if (postUserSeqId.equals(Constant.userInfo.getUserSeqId())) {
+			pdhv_headerview.showImageLLy(R.drawable.icon_dotmore_44,new View.OnClickListener() {
+				public void onClick(View arg0) {
+					ToastUtils.showMessage(instance, "222222222");
+				}
+			});
+		}
+//		pdhv_headerview.fillData(postId, postUserSeqId);
+//		pdhv_headerview.showDotmore();
+
+
 		loadPostDetailedData(userSeqId, postId, instance);
 	}
 

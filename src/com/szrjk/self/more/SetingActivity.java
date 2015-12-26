@@ -41,6 +41,7 @@ import com.szrjk.entity.UserInfo;
 import com.szrjk.explore.FriendRequestActivity;
 import com.szrjk.self.UserBackgroundSelectActivity;
 import com.szrjk.util.FileUtils;
+import com.szrjk.util.NotificationUtil;
 import com.szrjk.util.ToastUtils;
 import com.szrjk.widget.ListPopup;
 import com.szrjk.widget.TextSizePopup;
@@ -144,7 +145,7 @@ public class SetingActivity extends BaseActivity {
 		ToastUtils.showMessage(instance, "等待需求更改");
 		Intent intent = new Intent(instance, CircleRequestActivity.class);
 		startActivity(intent);
-//		send();
+		send();
 		//		Intent intent = new Intent(instance, ChangePortraitActivity.class);
 		//		Bundle bundle = new Bundle();
 		//		// 把图片地址的urlList传递过去
@@ -154,27 +155,29 @@ public class SetingActivity extends BaseActivity {
 	}
 
 	private void send() {
-		//1.得到NotificationManager  
-		NotificationManager nm=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE); 
-		//设置通知栏跳转目标
-		Intent intent = new Intent(this, SelfActivity.class);
-		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		PendingIntent pi= PendingIntent.getActivity(this, 0, intent, 0);  
-		//用builder设置Notification
-		Notification n = new Notification.Builder(instance)
-		.setContentTitle("国明周五请吃饭")
-		.setContentText("周五下班走起")
-		.setSmallIcon(R.drawable.icon_messages)
-		.build();
-		n.contentIntent = pi;
-		//此条将通知放在”正在进行“栏，否则在通知栏
-//		n.flags =Notification.FLAG_ONGOING_EVENT;
-		//单击通知，通知消失
-		n.flags |= Notification.FLAG_AUTO_CANCEL;
-		//通知声音
-		n.defaults = Notification.DEFAULT_SOUND;   
-		//启用通知
-		nm.notify(1, n); 
+		NotificationUtil.showNotification(instance, SelfActivity.class,
+				"下班吃饭","5点半走人",R.drawable.icon_choose1, true, true, true);
+//		//1.得到NotificationManager  
+//		NotificationManager nm=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE); 
+//		//设置通知栏跳转目标
+//		Intent intent = new Intent(this, SelfActivity.class);
+//		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//		PendingIntent pi= PendingIntent.getActivity(this, 0, intent, 0);  
+//		//用builder设置Notification
+//		Notification n = new Notification.Builder(instance)
+//		.setContentTitle("国明周五请吃饭")
+//		.setContentText("周五下班走起")
+//		.setSmallIcon(R.drawable.icon_messages)
+//		.build();
+//		n.contentIntent = pi;
+//		//此条将通知放在”正在进行“栏，否则在通知栏
+////		n.flags =Notification.FLAG_ONGOING_EVENT;
+//		//单击通知，通知消失
+//		n.flags |= Notification.FLAG_AUTO_CANCEL;
+//		//通知声音
+//		n.defaults = Notification.DEFAULT_SOUND;   
+//		//启用通知
+//		nm.notify(1, n); 
 
 
 	}

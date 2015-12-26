@@ -94,9 +94,14 @@ public class HeaderView extends RelativeLayout
 	public LinearLayout getImageBtn(){
 		return lly_image;
 	}
+	//获得headerview左侧文字按钮布局对象
 	public TextView getTextBtn(){
 		return btn_text;
 	}
+	//获得headerview左侧文字按钮布局对象
+		public TextView getBackBtn(){
+			return btn_back;
+		}
 	//显示headerview右侧文字按钮对象，并设置其显示文字与点击逻辑
 	public void showTextBtn(String text,OnClickListener onClickListener){
 		btn_text.setVisibility(View.VISIBLE);

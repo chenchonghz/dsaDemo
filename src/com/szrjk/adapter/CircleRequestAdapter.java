@@ -120,7 +120,6 @@ public class CircleRequestAdapter extends BaseAdapter {
 			viewHolder.usercard = (UserCardLayout) convertview.findViewById(R.id.request_usercard);
 			viewHolder.tv_date = (TextView) convertview.findViewById(R.id.tv_request_date);
 			viewHolder.btn_agree = (Button) convertview.findViewById(R.id.bt_request);
-			viewHolder.btn_ignore = (Button) convertview.findViewById(R.id.bt_ignore);
 			viewHolder.tv_invitationType = (TextView) convertview.findViewById(R.id.tv_invitationType);
 			viewHolder.tv_circle_name = (TextView) convertview.findViewById(R.id.tv_circle_name);
 			viewHolder.rly_fromCircle = (RelativeLayout) convertview.findViewById(R.id.rly_fromcircle);
@@ -176,24 +175,10 @@ public class CircleRequestAdapter extends BaseAdapter {
 			viewHolder.btn_agree.setOnClickListener(new requestBtnListener(viewHolder,position));
 			viewHolder.btn_agree.setOnLongClickListener(new requestBtnLongListener(viewHolder, position));
 			break;
-		case TYPE_INGORE:
-			viewHolder.btn_agree.setVisibility(View.GONE);
-			viewHolder.btn_ignore.setVisibility(View.VISIBLE);
-			viewHolder.btn_ignore.setOnClickListener(new requestBtnListener(viewHolder,position));
-			break;
 		case TYPE_AGREED:
 			viewHolder.btn_agree.setBackgroundResource(R.drawable.icon_request2);
 			viewHolder.btn_agree.setText("已同意");
 			viewHolder.btn_agree.setClickable(false);
-			viewHolder.btn_ignore.setClickable(false);
-			break;
-		case TYPE_INGORED:
-			viewHolder.btn_agree.setVisibility(View.GONE);
-			viewHolder.btn_ignore.setVisibility(View.VISIBLE);
-			viewHolder.btn_ignore.setBackgroundResource(R.drawable.icon_request2);
-			viewHolder.btn_ignore.setText("已忽略");
-			viewHolder.btn_agree.setClickable(false);
-			viewHolder.btn_ignore.setClickable(false);
 			break;
 		}
 		return convertview;
@@ -202,7 +187,6 @@ public class CircleRequestAdapter extends BaseAdapter {
 		private com.szrjk.widget.UserCardLayout usercard;
 		private TextView tv_date;
 		private Button btn_agree;
-		private Button btn_ignore;
 		private TextView tv_invitationType;
 		private TextView tv_circle_name;
 		private RelativeLayout rly_fromCircle;
@@ -254,17 +238,6 @@ public class CircleRequestAdapter extends BaseAdapter {
 				//					checkRequset();
 				//					isAgree =1;
 				//				}
-				break;
-			case R.id.bt_ignore:
-				//				if (isIgnore==0) {
-				viewHolder.btn_ignore.setBackgroundResource(R.drawable.icon_request2);
-				viewHolder.btn_ignore.setText("已忽略");
-				sendIgnore();
-				//					isSelected.put(list.get(position).getCoterieId(), true);
-				//					checkRequset();
-				//					isIgnore =1;
-				//				}
-
 				break;
 			case R.id.rly_fromcircle:
 				getcircle(position);

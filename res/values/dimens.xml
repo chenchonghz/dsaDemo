@@ -17,7 +17,7 @@
     <dimen name="search_padding_left">14dip</dimen>
     <dimen name="search_padding_right">14dip</dimen>
     <dimen name="header_height">45dip</dimen>
-    <dimen name="header_left_margin">12dip</dimen>
+    <dimen name="header_left_margin">15dip</dimen>
     <dimen name="header_right_margin">15dip</dimen>
     <dimen name="base_padding_left">33dip</dimen>
     <dimen name="base_padding_left_small">20dip</dimen>

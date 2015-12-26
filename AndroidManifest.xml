@@ -833,6 +833,12 @@
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
         </activity>
+        <activity
+            android:name="com.szrjk.dhome.CircleRequestActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/Theme.dhome"
+            android:windowSoftInputMode="adjustNothing" >
+        </activity>
     </application>
 
 </manifest>

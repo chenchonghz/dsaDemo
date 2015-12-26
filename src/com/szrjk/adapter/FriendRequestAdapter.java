@@ -203,16 +203,16 @@ public class FriendRequestAdapter extends BaseAdapter {
 //					isAgree =1;
 //				}
 				break;
-			case R.id.bt_ignore:
+//			case R.id.bt_ignore:
 //				if (isIgnore==0) {
-					sendIgnore();
+//					sendIgnore();
 //					viewHolder.btn_ignore.setBackgroundResource(R.drawable.icon_request2);
 //					viewHolder.btn_ignore.setText("已忽略");
 //					isSelected.put(list.get(position).getUserCard().getUserSeqId(), true);
 //					checkRequset();
 //					isIgnore =1;
 //				}
-				break;
+//				break;
 			}
 
 		}

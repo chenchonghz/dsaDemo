@@ -64,11 +64,8 @@ public class FriendRequestActivity extends BaseActivity {
 		hv_friend_req.showExtraLLy();
 		hv_friend_req.setExtraIcon(R.drawable.icon_messageset_40);
 		hv_friend_req.setExtraOnclick(new OnClickListener() {
-			
-			@Override
 			public void onClick(View arg0) {
 				ToastUtils.showMessage(instance, "国明请吃饭");
-				
 			}
 		});
 		RequestState = new HashMap<String, Integer>();

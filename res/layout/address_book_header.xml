@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/white" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/iv_addressbook_circle"
+            android:text="我的圈子 "
+            android:textColor="#333333"
+            android:layout_marginLeft="@dimen/send_header_margin"
+            android:textSize="@dimen/font_size_middle" />
+
+        <ImageView
+            android:id="@+id/iv_addressbook_circle"
+            android:layout_width="@dimen/avatar_doctor_small_width"
+            android:layout_height="@dimen/avatar_doctor_small_height"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/send_header_margin"
+            android:src="@drawable/icon_addpic" />
+
+        <View 
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="#d9d9d9"
+            android:layout_alignParentBottom="true"
+            />
+    </RelativeLayout>
+
+</LinearLayout>

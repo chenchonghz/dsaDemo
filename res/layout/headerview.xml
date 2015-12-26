@@ -22,17 +22,17 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/lly_extra"
+        android:id="@+id/lly_Image"
         style="@style/SendButton"
         android:layout_width="@dimen/header_height"
         android:layout_height="@dimen/header_height"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:background="@drawable/button_pop_selector" 
-        android:visibility="gone">
+        android:background="@drawable/button_pop_selector"
+        android:visibility="gone" >
 
         <ImageView
-            android:id="@+id/btn_extra"
+            android:id="@+id/btn_Image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -48,6 +48,20 @@
         android:text="@string/forget_header"
         android:textColor="@color/black"
         android:textSize="@dimen/font_size_large" />
+
+    <TextView
+        android:id="@+id/btn_text"
+        android:layout_width="60dip"
+        android:layout_height="@dimen/header_height"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/button_pop_selector"
+        android:gravity="center"
+        android:onClick="onClick"
+        android:text="@string/post_send"
+        android:textColor="@color/black"
+        android:textSize="@dimen/font_size_middle" 
+        android:visibility="gone"/>
 
     <View
         android:layout_width="match_parent"

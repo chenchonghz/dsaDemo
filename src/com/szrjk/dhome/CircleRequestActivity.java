@@ -50,9 +50,7 @@ public class CircleRequestActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		instance = this;
 		ViewUtils.inject(instance);
-		hv_circle_request.showExtraLLy();
-		hv_circle_request.setExtraIcon(R.drawable.icon_messageset_40);
-		hv_circle_request.setExtraOnclick(new OnClickListener() {
+		hv_circle_request.showImageLLy(R.drawable.icon_messageset_40,new OnClickListener() {
 			public void onClick(View arg0) {
 				ToastUtils.showMessage(instance, "国明请吃饭");
 			}

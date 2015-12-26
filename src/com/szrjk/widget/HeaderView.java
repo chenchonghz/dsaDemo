@@ -15,12 +15,17 @@ import com.szrjk.dhome.R;
 
 public class HeaderView extends RelativeLayout
 {
-
+	//headerview标题文字
 	private TextView htext;
+	//headerview左侧返回键布局对象
 	private LinearLayout lly_hv;
 	private ImageView btnBack;
-	private LinearLayout lly_extra;
-	private ImageView btn_extra;
+	//headerview右侧图标按钮布局对象
+	private LinearLayout lly_image;
+	private ImageView btn_image;
+	//headerview右侧文字按钮对象
+	private TextView btn_text;
+	
 	
 	public ImageView getBtnBack()
 	{
@@ -41,8 +46,9 @@ public class HeaderView extends RelativeLayout
 		htext = (TextView) findViewById(R.id.headerview_text_id);
 		btnBack = (ImageView) findViewById(R.id.btn_back);
 		lly_hv =(LinearLayout) findViewById(R.id.lly_hv);
-		lly_extra = (LinearLayout) findViewById(R.id.lly_extra);
-		btn_extra = (ImageView) findViewById(R.id.btn_extra);
+		lly_image = (LinearLayout) findViewById(R.id.lly_Image);
+		btn_image = (ImageView) findViewById(R.id.btn_Image);
+		btn_text = (TextView) findViewById(R.id.btn_text);
 
 		TypedArray a = getContext().obtainStyledAttributes(attrs,
 				R.styleable.HeaderView);
@@ -58,28 +64,41 @@ public class HeaderView extends RelativeLayout
 			}
 		});
 	}
-
+	//获得headerview的标题文字对象
 	public TextView getHtext()
 	{
 		return htext;
 	}
+	//设置headerview的标题文字
 	public TextView setHtext(String s){
 		htext.setText(s);
 		return htext;
 	}
+	//获得headerview左侧返回键布局对象
 	public LinearLayout getLLy(){
 		return lly_hv;
 	}
-	public void showExtraLLy(){
-		lly_extra.setVisibility(View.VISIBLE);
+	//设置headerview左侧返回键布局对象的按键逻辑
+	public void setBtnBackOnClick(OnClickListener onClickListener){
+		lly_hv.setOnClickListener(onClickListener);
 	}
-	public void setExtraIcon(int resId){
-		btn_extra.setImageResource(resId);
+	//显示headerview右侧图标按钮布局对象，并设置其显示图片与点击逻辑
+	public void showImageLLy(int resId,OnClickListener onClickListener){
+		lly_image.setVisibility(View.VISIBLE);
+		btn_image.setImageResource(resId);
+		lly_image.setOnClickListener(onClickListener);
 	}
-	public LinearLayout getExtra(){
-		return lly_extra;
+	//获得headerview左侧图标按钮布局对象
+	public LinearLayout getImageBtn(){
+		return lly_image;
 	}
-	public void setExtraOnclick(OnClickListener onClickListener){
-		lly_extra.setOnClickListener(onClickListener);
+	public TextView getTextBtn(){
+		return btn_text;
+	}
+	//显示headerview右侧文字按钮对象，并设置其显示文字与点击逻辑
+	public void showTextBtn(String text,OnClickListener onClickListener){
+		btn_text.setVisibility(View.VISIBLE);
+		btn_text.setText(text);
+		btn_text.setOnClickListener(onClickListener);
 	}
 }

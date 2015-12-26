@@ -61,9 +61,7 @@ public class FriendRequestActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		instance = this;
 		ViewUtils.inject(instance);
-		hv_friend_req.showExtraLLy();
-		hv_friend_req.setExtraIcon(R.drawable.icon_messageset_40);
-		hv_friend_req.setExtraOnclick(new OnClickListener() {
+		hv_friend_req.showImageLLy(R.drawable.icon_messageset_40,new OnClickListener() {
 			public void onClick(View arg0) {
 				ToastUtils.showMessage(instance, "国明请吃饭");
 			}

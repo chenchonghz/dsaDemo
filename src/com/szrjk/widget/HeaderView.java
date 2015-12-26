@@ -51,7 +51,7 @@ public class HeaderView extends RelativeLayout
 		lly_image = (LinearLayout) findViewById(R.id.lly_Image);
 		btn_image = (ImageView) findViewById(R.id.btn_Image);
 		btn_text = (TextView) findViewById(R.id.btn_text);
-		btn_back = (TextView) findViewById(R.id.btn_back);
+		btn_back = (TextView) findViewById(R.id.btn_tv_back);
 		TypedArray a = getContext().obtainStyledAttributes(attrs,
 				R.styleable.HeaderView);
 		String htextstr = a.getString(R.styleable.HeaderView_htextstr);

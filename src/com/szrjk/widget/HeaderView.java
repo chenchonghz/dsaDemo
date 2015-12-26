@@ -19,7 +19,9 @@ public class HeaderView extends RelativeLayout
 	private TextView htext;
 	private LinearLayout lly_hv;
 	private ImageView btnBack;
-
+	private LinearLayout lly_extra;
+	private ImageView btn_extra;
+	
 	public ImageView getBtnBack()
 	{
 		return btnBack;
@@ -39,6 +41,8 @@ public class HeaderView extends RelativeLayout
 		htext = (TextView) findViewById(R.id.headerview_text_id);
 		btnBack = (ImageView) findViewById(R.id.btn_back);
 		lly_hv =(LinearLayout) findViewById(R.id.lly_hv);
+		lly_extra = (LinearLayout) findViewById(R.id.lly_extra);
+		btn_extra = (ImageView) findViewById(R.id.btn_extra);
 
 		TypedArray a = getContext().obtainStyledAttributes(attrs,
 				R.styleable.HeaderView);
@@ -65,5 +69,17 @@ public class HeaderView extends RelativeLayout
 	}
 	public LinearLayout getLLy(){
 		return lly_hv;
+	}
+	public void showExtraLLy(){
+		lly_extra.setVisibility(View.VISIBLE);
+	}
+	public void setExtraIcon(int resId){
+		btn_extra.setImageResource(resId);
+	}
+	public LinearLayout getExtra(){
+		return lly_extra;
+	}
+	public void setExtraOnclick(OnClickListener onClickListener){
+		lly_extra.setOnClickListener(onClickListener);
 	}
 }

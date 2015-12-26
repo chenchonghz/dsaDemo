@@ -15,19 +15,21 @@
         android:layout_marginLeft="@dimen/margin_10dp" />
 
     <TextView
-        android:id="@+id/tv_request_date"
+        android:id="@+id/tv_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/request_usercard"
         android:layout_marginLeft="60dp"
-        android:layout_marginTop="-8dp"
-        android:text="@string/rightnow"
+        android:layout_marginTop="-10dp"
+        android:text="请求加你为好友"
         android:textColor="@color/font_cell"
         android:textSize="@dimen/font_size_xsmall" />
-	<View 
-	    android:layout_width="match_parent"
-	    android:layout_height="5dp"
-	    android:layout_below="@id/tv_request_date"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_below="@id/tv_request_date" />
+
     <Button
         android:id="@+id/bt_request"
         android:layout_width="55dp"
@@ -41,17 +43,16 @@
         android:textSize="@dimen/font_size_msmall"
         android:visibility="visible" />
 
-    <Button
-        android:id="@+id/bt_ignore"
-        android:layout_width="55dp"
-        android:layout_height="30dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/margin_10dp"
-        android:layout_marginTop="@dimen/margin_15dp"
-        android:background="@drawable/icon_request3"
-        android:text="@string/request_ignore"
-        android:textColor="@color/white"
-        android:textSize="@dimen/font_size_msmall"
-        android:visibility="gone" />
+    <TextView
+        android:id="@+id/tv_request_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/tv_text"
+        android:layout_alignRight="@id/bt_request"
+        android:layout_marginRight="1dp"
+        android:text="@string/rightnow"
+        android:textColor="@color/font_cell"
+        android:textSize="@dimen/font_size_xsmall" />
+
 
 </RelativeLayout>

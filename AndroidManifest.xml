@@ -831,6 +831,12 @@
             android:name="com.szrjk.dhome.AddressBookActivity"
             android:label="@string/title_activity_address_book" >
         </activity>
+        <activity
+            android:name="com.szrjk.explore.FriendRequestActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/Theme.dhome"
+            android:windowSoftInputMode="adjustNothing" >
+        </activity>
     </application>
 
 </manifest>

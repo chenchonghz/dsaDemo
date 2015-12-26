@@ -38,14 +38,14 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true" >
 
-    <ImageView
-        android:id="@+id/iv_dotmore"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_gravity="center"
-        android:scaleType="centerCrop"
-        android:src="@drawable/icon_dotmore_44"
-         />
+        <ImageView
+            android:id="@+id/iv_dotmore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_dotmore_44"
+             />
 	</LinearLayout>
 </RelativeLayout>

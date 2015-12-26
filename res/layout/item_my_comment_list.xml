@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/ll_firstLayer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:minHeight="60dp" >
+
+            <com.szrjk.widget.UserCardLayout
+                android:id="@+id/ucl_userCardLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+            </com.szrjk.widget.UserCardLayout>
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/margin_10dp"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:gravity="center"
+                android:text="12月23日"
+                android:textColor="@color/font_cell"
+                android:textSize="@dimen/font_size_xsmall" />
+
+            <Button
+                android:id="@+id/btn_reply"
+                android:layout_width="30dp"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/tv_time"
+                android:layout_marginRight="@dimen/margin_10dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/base_bg"
+                android:gravity="center"
+                android:text="回复"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_small" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_commentcontent1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_20dp"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:text="回复张杰"
+            android:textColor="@color/font_cell"
+            android:textSize="@dimen/font_size_middle" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_secondLayer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/base_bg2"
+        android:orientation="vertical"
+         >
+
+        <TextView
+            android:id="@+id/tv_commentcontent2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_20dp"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:text="张杰回复陈洁仪"
+            android:textColor="@color/font_cell"
+            android:textSize="@dimen/font_size_middle" />
+
+        <LinearLayout
+            android:id="@+id/ll_postInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/base_bg2"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/iv_portrait"
+                android:layout_width="@dimen/image_portrait"
+                android:layout_height="@dimen/image_portrait"
+                android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/pic_wall_bg02" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/image_portrait"
+                android:background="@color/base_bg2"
+                android:layout_marginBottom="@dimen/margin_10dp"
+                    android:layout_marginTop="@dimen/margin_10dp"
+                    android:layout_marginLeft="-10dp"
+                    android:orientation="vertical"
+                 >
+
+                
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
+                        android:text="张杰"
+                        android:textColor="@color/font_cell"
+                        android:textSize="@dimen/font_size_middle" />
+
+                    <TextView
+                        android:id="@+id/tv_postcontent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_10dp"
+                        android:text="张杰假两件积分垃圾 就拉法基 u；就； 家具；安静；安静；安静 辣椒粉安静；安家费；安静；安静；安静；安静aa级；安家费；安静 ；安静；安家费阿拉法辣椒粉啦就阿拉基aa级垃圾；阿拉基"
+                        android:textColor="@color/font_cell"
+                        android:textSize="@dimen/font_size_middle" />
+               
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

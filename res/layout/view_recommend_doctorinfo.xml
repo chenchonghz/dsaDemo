@@ -8,6 +8,7 @@
         android:id="@+id/rl_userinfo" 
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        style="@style/IndexButton"
         android:paddingLeft="@dimen/view_doctorInfo_padding"
         android:paddingRight="@dimen/view_doctorInfo_padding"
         android:paddingTop="@dimen/view_doctorInfo_padding"

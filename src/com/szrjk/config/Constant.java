@@ -74,6 +74,7 @@ public class Constant
 	public static final String DATE_POST = "105"; // 鏃ョ▼甯栧瓙
 	public static final String TRANSMIT_POST = "202";//杞彂甯栧瓙
 	public static final String RECOMMEND_USER = "106";//鎺ㄨ崘鐢ㄦ埛
+	public static final String RECOMMEND_INFO = "107";
 	public static final String TRANSMIT_POST2 = "204";//杞彂甯栧瓙
 	
 	//璧勮鍒嗙被

@@ -5,33 +5,12 @@
     android:background="@color/base_bg"
     android:orientation="vertical" >
     
-    <com.szrjk.pull.PullToRefreshScrollView
-        android:id="@+id/sl_explore" 
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/view_post_margin_10"
-        >
-        <LinearLayout 
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/base_bg"
-            android:orientation="vertical"
-            >
-
-            <com.szrjk.widget.InnerListView
-                android:id="@+id/lv_messages"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:divider="@color/line_list"
-                android:dividerHeight="@dimen/line_height"
-                 >
-                
-            </com.szrjk.widget.InnerListView>
-
-            
-        </LinearLayout>
-    
-    </com.szrjk.pull.PullToRefreshScrollView>
+   <com.yydcdut.sdlv.SlideAndDragListView
+       android:id="@+id/lv_messages"
+       android:layout_width="fill_parent"
+       android:layout_height="fill_parent"
+       android:divider="@color/line_list"
+       android:dividerHeight="0.5dip">
+   </com.yydcdut.sdlv.SlideAndDragListView>
 
 </LinearLayout>

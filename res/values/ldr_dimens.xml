@@ -19,6 +19,7 @@
     <dimen name="send_grid_height">400dp</dimen>
     <dimen name="send_edit_height">185dp</dimen>
     <dimen name="send_edit_title_height">80dp</dimen>
-    
+    <dimen name="index_bar_view_margin">12dp</dimen>
+    <dimen name="index_bar_view_text_size">10sp</dimen>
     
 </resources>

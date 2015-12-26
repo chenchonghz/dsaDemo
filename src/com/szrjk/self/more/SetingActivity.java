@@ -29,6 +29,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.BaseActivity;
+import com.szrjk.dhome.CircleRequestActivity;
 import com.szrjk.dhome.LoginActivity;
 import com.szrjk.dhome.LoginHelper;
 import com.szrjk.dhome.MainActivity;
@@ -37,6 +38,7 @@ import com.szrjk.dhome.SelfActivity;
 import com.szrjk.entity.IPopupItemCallback;
 import com.szrjk.entity.PopupItem;
 import com.szrjk.entity.UserInfo;
+import com.szrjk.explore.FriendRequestActivity;
 import com.szrjk.self.UserBackgroundSelectActivity;
 import com.szrjk.util.FileUtils;
 import com.szrjk.util.ToastUtils;
@@ -140,7 +142,9 @@ public class SetingActivity extends BaseActivity {
 	@OnClick(R.id.rl_change_hportrait)
 	public void changePortraitClick(View v) {
 		ToastUtils.showMessage(instance, "等待需求更改");
-		send();
+		Intent intent = new Intent(instance, CircleRequestActivity.class);
+		startActivity(intent);
+//		send();
 		//		Intent intent = new Intent(instance, ChangePortraitActivity.class);
 		//		Bundle bundle = new Bundle();
 		//		// 把图片地址的urlList传递过去
@@ -178,6 +182,8 @@ public class SetingActivity extends BaseActivity {
 	@OnClick(R.id.rl_change_background)
 	public void changeBackgroundClick(View v) {
 		ToastUtils.showMessage(instance, "等待需求更改");
+		Intent intent = new Intent(instance, FriendRequestActivity.class);
+				startActivity(intent);
 		//		Intent intent = new Intent(instance, UserBackgroundSelectActivity.class);
 		//		startActivity(intent);
 	}

@@ -260,7 +260,11 @@ public class DiseasesListActivity extends BaseActivity {
 
 		for(int i=0; i<SourceDateList.size(); i++){
 			LibraryEntity sortModel = SourceDateList.get(i);
-			sortModel.setName(date[i]);
+			System.out.println();
+			Log.i("列表里面的模型的名字", sortModel.getName());
+			Log.i("String [] date", date[i]);
+			System.out.println();
+			//sortModel.setName(date[i]);
 			//汉字转换成拼音
 			String pinyin = characterParser.getSelling(date[i]);
 			String sortString = pinyin.substring(0, 1).toUpperCase();

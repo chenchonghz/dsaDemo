@@ -8,4 +8,5 @@
     <drawable name="index_pressed">#F8F9FB</drawable>
     <color name="pop_pressed">#f0f1f5</color>
     <color name="rz_title">#293133</color>
+    <color name="color_black">#000000</color>
 </resources>

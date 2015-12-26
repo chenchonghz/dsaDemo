@@ -11,7 +11,20 @@ public class PopupItem {
     private IPopupItemCallback iPopupItemCallback;
  
     private int color;
-    public String getItemname() {
+    
+    
+    public PopupItem() {
+		super();
+	}
+
+	public PopupItem(String itemname,int color,IPopupItemCallback iPopupItemCallback) {
+		super();
+		this.itemname = itemname;
+		this.iPopupItemCallback = iPopupItemCallback;
+		this.color = color;
+	}
+
+	public String getItemname() {
         return itemname;
     }
 

@@ -64,6 +64,7 @@ public class UserNameJumpUtil {
 							}
 						})));
 		if (userLevel.equals("11")) {
+			int px = DisplaySizeUtil.dip2px(context, 13);
 			simplifySpanBuild
 					.appendSpecialUnit(new SpecialTextUnit(" "))
 					.appendSpecialUnit(
@@ -71,8 +72,8 @@ public class UserNameJumpUtil {
 									.getColor(R.color.transparent), 13,
 									BitmapFactory.decodeResource(
 											context.getResources(),
-											R.drawable.icon_yellow_v_24), 40,
-									40).setGravity(SpecialGravity.CENTER))
+											R.drawable.icon_yellow_v_24), px,
+									px).setGravity(SpecialGravity.CENTER))
 					.appendSpecialUnit(new SpecialTextUnit(" "));
 		}
 		if (content != null) {

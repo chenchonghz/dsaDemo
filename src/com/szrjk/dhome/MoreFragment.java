@@ -55,6 +55,9 @@ public class MoreFragment extends Fragment {
 
 	@ViewInject(R.id.iv_hportrait)
 	private ImageView iv_hportrait;
+	
+	@ViewInject(R.id.iv_vip)
+	private ImageView iv_vip;
 
 	@ViewInject(R.id.ll_friend)
 	private LinearLayout ll_friend;
@@ -166,6 +169,9 @@ public class MoreFragment extends Fragment {
 				userInfo.getUserFaceUrl(), iv_hportrait, R.drawable.header,
 				R.drawable.header);
 		imageLoaderUtil.showImage();
+		if (userInfo.getUserLevel().equals("11")) {
+			iv_vip.setVisibility(View.VISIBLE);
+		}
 	}
 
 	/** 查询好友、关注、粉丝数 */

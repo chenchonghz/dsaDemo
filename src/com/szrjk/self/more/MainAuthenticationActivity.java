@@ -40,6 +40,7 @@ import com.szrjk.entity.IPopupItemCallback;
 import com.szrjk.entity.PicItemEntity;
 import com.szrjk.entity.PopupItem;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
+import com.szrjk.message.ChatSettingsActivity;
 import com.szrjk.util.ImageLoaderUtil;
 import com.szrjk.widget.ListPopup;
 
@@ -166,6 +167,7 @@ public class MainAuthenticationActivity extends BaseActivity implements OnClickL
 			TextView textView = (TextView) v.findViewById(R.id.tv_type);
 			TextView tv_time = (TextView) v.findViewById(R.id.tv_time);
 			ImageView imageView = (ImageView) v.findViewById(R.id.iv_authemtications);
+			Button bt_new = (Button) v.findViewById(R.id.bt_new);
 //			textView.setText("证件"+String.valueOf(index+1));
 			CeriItemEntity data = cerData.get(index);
 			textView.setText(data.getCertName());
@@ -181,6 +183,13 @@ public class MainAuthenticationActivity extends BaseActivity implements OnClickL
 					intent.putExtras(bundle);
 					intent.putExtra("imgs", imgageArr);
 					startActivity(intent);
+				}
+			});
+			bt_new.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					startActivity(new Intent(instance,ChatSettingsActivity.class));
+					
 				}
 			});
 			return v;

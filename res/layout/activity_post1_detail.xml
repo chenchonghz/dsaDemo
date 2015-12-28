@@ -6,10 +6,10 @@
     android:background="@color/base_bg" >
 
     <com.szrjk.widget.PostDetailHeaderView
-        android:id="@+id/pdhv_headerview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        headerattr:text="@string/post_detailed_header" >
+            android:id="@+id/pdhv_headerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            headerattr:text="@string/post_detailed_header" >
     </com.szrjk.widget.PostDetailHeaderView>
 
     <ScrollView

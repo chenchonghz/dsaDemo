@@ -289,7 +289,7 @@ public class PostDetailFowardActivity2 extends BaseActivity {
 						String username = ordinaryPostDetail.getPostDetail()
 								.getPostAbstractList().get(0).getUserCard()
 								.getUserName();
-
+						String userlevel=ordinaryPostDetail.getUserCard().getUserLevel();
 						PostAbstractList pp = PostAbstractList
 								.fetchFirstLevel(ordinaryPostDetail
 										.getPostDetail().getPostAbstractList());
@@ -312,6 +312,7 @@ public class PostDetailFowardActivity2 extends BaseActivity {
 								postText,
 								faceurl,
 								username,
+								userlevel,
 								postType,
 								new ICallback() {
 									@Override

@@ -27,6 +27,7 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.config.Constant;
+import com.szrjk.config.ConstantUser;
 import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.IndexFragment;
 import com.szrjk.dhome.R;
@@ -37,21 +38,26 @@ import com.szrjk.http.DHttpService;
 import com.szrjk.util.CheckTextNumber;
 import com.szrjk.util.ImageLoaderUtil;
 import com.szrjk.util.InitTransmitPostUtil;
+import com.szrjk.widget.HeaderView;
 
 //转发界面
 @ContentView(R.layout.activity_repeat)
 public class RepeatActivity extends BaseActivity implements OnClickListener {
 	private RepeatActivity instance;
-	@ViewInject(R.id.lly_back)
-	private LinearLayout lly_back;
-	@ViewInject(R.id.btn_back)
-	private Button btback;
-	@ViewInject(R.id.tv_repeat_send)
-	private TextView tvSendRepeat;
+	@ViewInject(R.id.hv_repeat)
+	private HeaderView hv_repeat;
+//	@ViewInject(R.id.lly_back)
+//	private LinearLayout lly_back;
+//	@ViewInject(R.id.btn_back)
+//	private Button btback;
+//	@ViewInject(R.id.tv_repeat_send)
+//	private TextView tvSendRepeat;
 	@ViewInject(R.id.et_repeat)
 	private EditText etRepeat;
 	@ViewInject(R.id.iv_avatar_repeat)
 	private ImageView iv_avatar_repeat;
+	@ViewInject(R.id.iv_vip)
+	private ImageView iv_vip;
 	@ViewInject(R.id.tv_Id_repeat)
 	private TextView tv_name_repeat;
 	@ViewInject(R.id.tv_text_repeat)
@@ -79,6 +85,7 @@ public class RepeatActivity extends BaseActivity implements OnClickListener {
 	private int position;
 	private int forward_num;
 	private Dialog dialog;
+	private String user_level;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +120,7 @@ public class RepeatActivity extends BaseActivity implements OnClickListener {
 		user_seq_id = intent.getStringExtra(Constant.USER_SEQ_ID);
 		post_id = intent.getStringExtra(Constant.POST_ID);
 		user_name = intent.getStringExtra(Constant.USER_NAME);
+		user_level=intent.getStringExtra(ConstantUser.USERLEVEL);
 //		srcuser_name = intent.getStringExtra("srcUserName");
 		post_type = intent.getStringExtra(Constant.POST_TYPE);
 		src_post_id = intent.getStringExtra(Constant.SRC_POST_ID);
@@ -137,16 +145,27 @@ public class RepeatActivity extends BaseActivity implements OnClickListener {
 					iv_avatar_repeat, R.drawable.icon_headfailed,
 					R.drawable.icon_headfailed);
 			imageLoaderUtil.showImage();
+			if (user_level!=null&&user_level.equals("11")) {
+				iv_vip.setVisibility(View.VISIBLE);
+			}
 		} catch (Exception e) {
 			Log.e("ImageLoader", e.toString());
 		}
 		tv_name_repeat.setText(user_name);
 		tv_text_repeat.setText(note_text);
-
+		hv_repeat.showTextBtn("发布", new OnClickListener() {
+			public void onClick(View arg0) {
+				repeat_text = etRepeat.getText().toString().trim();
+				if (TextUtils.isEmpty(repeat_text)) {
+					repeat_text = "转发";
+				}	
+				sendRepeat();
+			}
+		});
 	}
 
 	private void initListener() {
-		tvSendRepeat.setOnClickListener(this);
+//		tvSendRepeat.setOnClickListener(this);
 		// 转发文字输入框的字数监听
 		CheckTextNumber.setEditTextChangeListener(etRepeat, tv_repeat_num_all, 140);
 //		etRepeat.addTextChangedListener(new TextWatcher() {
@@ -178,7 +197,7 @@ public class RepeatActivity extends BaseActivity implements OnClickListener {
 //				}
 //			}
 //		});
-		lly_back.setOnClickListener(instance);
+//		lly_back.setOnClickListener(instance);
 	}
 
 	@Override
@@ -193,15 +212,15 @@ public class RepeatActivity extends BaseActivity implements OnClickListener {
 			instance.finish();
 			break;
 		// 转发发送逻辑
-		case R.id.tv_repeat_send:
-			// 获取转发发送文字并intent发送，跳转回上一界面，并结束此界面
-				repeat_text = etRepeat.getText().toString().trim();
-				if (TextUtils.isEmpty(repeat_text)) {
-					repeat_text = "转发";
-				}	
-			// //转发帖子请求
-			sendRepeat();
-			break;
+//		case R.id.tv_repeat_send:
+//			// 获取转发发送文字并intent发送，跳转回上一界面，并结束此界面
+//				repeat_text = etRepeat.getText().toString().trim();
+//				if (TextUtils.isEmpty(repeat_text)) {
+//					repeat_text = "转发";
+//				}	
+//			// //转发帖子请求
+//			sendRepeat();
+//			break;
 		}
 
 	}
@@ -229,7 +248,7 @@ public class RepeatActivity extends BaseActivity implements OnClickListener {
 			@Override
 			public void success(JSONObject jsonObject) {
 				dialog.dismiss();
-				tvSendRepeat.setClickable(true);
+				hv_repeat.getTextBtn().setClickable(true);
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
 				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode())) {
@@ -255,7 +274,7 @@ public class RepeatActivity extends BaseActivity implements OnClickListener {
 			public void start() {
 				dialog.show();
 				dialog.setCancelable(false);
-				tvSendRepeat.setClickable(false);
+				hv_repeat.getTextBtn().setClickable(false);
 			
 			}
 
@@ -271,7 +290,7 @@ public class RepeatActivity extends BaseActivity implements OnClickListener {
 						@Override
 						public void run() {
 							dialog.dismiss();
-							tvSendRepeat.setClickable(true);
+							hv_repeat.getTextBtn().setClickable(true);
 							showToast(instance, "目前不支持表情发送", 0);
 						}
 					});
@@ -280,7 +299,7 @@ public class RepeatActivity extends BaseActivity implements OnClickListener {
 						@Override
 						public void run() {
 							dialog.dismiss();
-							tvSendRepeat.setClickable(true);
+							hv_repeat.getTextBtn().setClickable(true);
 							showToast(instance, "转发失败，再试试呗", 0);
 						}
 					});

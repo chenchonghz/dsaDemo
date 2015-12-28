@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:headerattr="http://schemas.android.com/apk/res/com.szrjk.dhome"
     android:id="@+id/lly_post"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -6,8 +7,14 @@
     android:gravity="bottom"
     android:orientation="vertical" >
 
+    <com.szrjk.widget.HeaderView
+        android:id="@+id/hv_post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        headerattr:htextstr="发帖" />
 
-     <RelativeLayout
+    <!--
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/header_height"
         android:background="@color/search_bg" >
@@ -54,7 +61,8 @@
             android:text="@string/post_send"
             android:textColor="@color/white"
             android:textSize="@dimen/font_size_middle" />
-    </RelativeLayout> 
+    </RelativeLayout>
+    -->
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -101,9 +109,9 @@
                         android:inputType="textMultiLine"
                         android:lineSpacingExtra="6dp"
                         android:maxHeight="270dp"
+                        android:maxLength="800"
                         android:minHeight="120dp"
                         android:minLines="10"
-                        android:maxLength="800"
                         android:paddingLeft="@dimen/send_edittext_padding_left"
                         android:paddingRight="@dimen/send_edittext_padding_right"
                         android:paddingTop="@dimen/send_edittext_paddingtop"
@@ -146,18 +154,18 @@
             android:id="@+id/tv_content"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
             android:background="@color/white"
             android:gravity="right"
             android:paddingRight="12dip"
             android:text="@string/content_post_length"
             android:textColor="@color/font_cell"
-            android:layout_marginBottom="2dp"
             android:textSize="@dimen/font_size_xsmall" />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:background="@color/base_bg"
-            android:layout_height="50dp" >
+            android:layout_height="50dp"
+            android:background="@color/base_bg" >
 
             <View
                 android:layout_width="match_parent"

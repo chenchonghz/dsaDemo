@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
@@ -60,6 +61,7 @@ import com.szrjk.util.ToastUtils;
 import com.szrjk.widget.AddPhotoPopup;
 import com.szrjk.widget.DeptButton;
 import com.szrjk.widget.FlowDeptLayout;
+import com.szrjk.widget.HeaderView;
 import com.szrjk.widget.IndexGridView;
 import com.szrjk.widget.ListPopup;
 import com.szrjk.widget.PostSendPopup;
@@ -88,8 +90,8 @@ public class SendPuzzleActivity extends BaseActivity {
 	private final static int GALLERY_RESULT_TYPE1 = 2001;
 	private final static int GALLERY_RESULT_TYPE2 = 2002;
 	// 发送
-	@ViewInject(R.id.tv_send)
-	private TextView tv_send;
+	@ViewInject(R.id.hv_puzz)
+	private HeaderView hv_puzz;
 
 	// 取消
 	@ViewInject(R.id.lly_cancel)
@@ -181,6 +183,8 @@ public class SendPuzzleActivity extends BaseActivity {
 	private ArrayList<String> absList1= new ArrayList<String>();
 	private ArrayList<String> absList2= new ArrayList<String>();
 	private ArrayList<String> absList3= new ArrayList<String>();
+
+	private TextView hv_sub;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -231,50 +235,49 @@ public class SendPuzzleActivity extends BaseActivity {
 			et_treat.setOnTouchListener(et_ls);
 			//		instance.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 			//检查是否之前有草稿
+
+			hv_puzz.setBtnBackOnClick(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					try {
+						closeKeyboard();
+						if (checkSave()) {
+							shareUtil.setBooleanValue(Constant.ISAVEPUZZ, false);
+							finish();
+						} else {
+							showPop();
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
+
+			//点击提交
+			hv_sub = hv_puzz.getTextBtn();
+			hv_puzz.showTextBtn("发布", new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					try {
+						closeKeyboard();
+						hv_sub.setClickable(false);
+						if (checkInput()) {
+							//				dialog.setCancelable(false);
+							dialog.show();
+							send();
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
+
 			checkSaveContent();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	// 点击取消的时候响应
-	@OnClick(R.id.lly_cancel)
-	public void cancelClick(View v) {
-		try {
-			//		showToast(instance, "草稿功能后续开发", 0);
-			closeKeyboard();
-			if (checkSave()) {
-				shareUtil.setBooleanValue(Constant.ISAVEPUZZ, false);
-				finish();
-			} else {
-				showPop();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-
-
-	// 发布：发布前校验数据。发布--
-	@OnClick(R.id.tv_send)
-	public void sendClick(View v) {
-		try {
-			closeKeyboard();
-			tv_send.setClickable(false);
-			switch (v.getId()) {
-			case R.id.tv_send:
-				if (checkInput()) {
-					//				dialog.setCancelable(false);
-					dialog.show();
-					send();
-				}
-				break;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	// 校验表单输入
 	private boolean checkInput() {
@@ -282,12 +285,12 @@ public class SendPuzzleActivity extends BaseActivity {
 		getEditTextString();
 		if (title == null || title.length() == 0) {
 			showToast(instance, "标题不能空！", 0);
-			tv_send.setClickable(true);
+			hv_sub.setClickable(true);
 			return false;
 		}
 		if (deptIds == null) {
 			showToast(instance, "请选择科室！", 0);
-			tv_send.setClickable(true);
+			hv_sub.setClickable(true);
 			return false;
 		}
 
@@ -343,7 +346,7 @@ public class SendPuzzleActivity extends BaseActivity {
 					public void run() {
 						dialog.dismiss();
 						showToast(instance, "发帖失败、再试试呗", 0);
-						tv_send.setClickable(true);
+						hv_sub.setClickable(true);
 						if (err.contains("Incorrect string value")) {
 							showToast(instance, "目前不支持表情发送", 0);
 						}
@@ -354,7 +357,7 @@ public class SendPuzzleActivity extends BaseActivity {
 			@Override
 			public void success(JSONObject jsonObject) {
 				dialog.dismiss();
-				tv_send.setClickable(true);
+				hv_sub.setClickable(true);
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
 
@@ -371,7 +374,7 @@ public class SendPuzzleActivity extends BaseActivity {
 					if (errorObj.getErrorMessage().contains("Incorrect string value")) {
 						showToast(instance, "目前不支持表情发送", 0);
 						dialog.dismiss();
-						tv_send.setClickable(true);
+						hv_sub.setClickable(true);
 					}
 				}
 			}
@@ -575,7 +578,7 @@ public class SendPuzzleActivity extends BaseActivity {
 				//把图片地址的urlList传递过去
 				bundle.putStringArrayList("urllist", urlList1);
 				bundle.putStringArrayList("absList", absList1);
-//				GalleryActivity.filltmpitems(gridAdapter.returnImageInfo());
+				//				GalleryActivity.filltmpitems(gridAdapter.returnImageInfo());
 				intent.putExtras(bundle);
 				startActivityForResult(intent, GALLERY_RESULT_TYPE1);
 			}
@@ -621,7 +624,7 @@ public class SendPuzzleActivity extends BaseActivity {
 				//把图片地址的urlList传递过去
 				bundle.putStringArrayList("urllist", urlList2);
 				bundle.putStringArrayList("absList", absList2);
-//				GalleryActivity.filltmpitems(checkAdapter.returnImageInfo());
+				//				GalleryActivity.filltmpitems(checkAdapter.returnImageInfo());
 				intent.putExtras(bundle);
 				startActivityForResult(intent, GALLERY_RESULT_TYPE2);
 			}
@@ -667,7 +670,7 @@ public class SendPuzzleActivity extends BaseActivity {
 				//把图片地址的urlList传递过去
 				bundle.putStringArrayList("urllist", urlList3);
 				bundle.putStringArrayList("absList", absList3);
-//				GalleryActivity.filltmpitems(treatAdapter.returnImageInfo());
+				//				GalleryActivity.filltmpitems(treatAdapter.returnImageInfo());
 				intent.putExtras(bundle);
 				startActivityForResult(intent, GALLERY_RESULT_TYPE3);
 			}
@@ -757,7 +760,7 @@ public class SendPuzzleActivity extends BaseActivity {
 					//ArrayList<String>
 					urlList1 = data.getStringArrayListExtra("urllist");
 					Log.i("urlList1", urlList1.toString());
-//					gridAdapter.setImageList(GalleryActivity.gettmpitems());
+					//					gridAdapter.setImageList(GalleryActivity.gettmpitems());
 					absList1 = data.getStringArrayListExtra("absList");
 					gridAdapter.addStringUrl(absList1);
 					gridAdapter.notifyDataSetChanged();
@@ -769,7 +772,7 @@ public class SendPuzzleActivity extends BaseActivity {
 					//ArrayList<String>
 					urlList2 = data.getStringArrayListExtra("urllist");
 					Log.i("urlList2", urlList2.toString());
-//					checkAdapter.setImageList(GalleryActivity.gettmpitems());
+					//					checkAdapter.setImageList(GalleryActivity.gettmpitems());
 					absList2 = data.getStringArrayListExtra("absList");
 					gridAdapter.addStringUrl(absList2);
 					checkAdapter.notifyDataSetChanged();
@@ -781,7 +784,7 @@ public class SendPuzzleActivity extends BaseActivity {
 					//ArrayList<String>
 					urlList3 = data.getStringArrayListExtra("urllist");
 					Log.i("urlList3", urlList3.toString());
-//					treatAdapter.setImageList(GalleryActivity.gettmpitems());
+					//					treatAdapter.setImageList(GalleryActivity.gettmpitems());
 					absList3 = data.getStringArrayListExtra("absList");
 					gridAdapter.addStringUrl(absList3);
 					treatAdapter.notifyDataSetChanged();

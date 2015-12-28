@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
@@ -61,6 +62,7 @@ import com.szrjk.util.SharePerferenceUtil;
 import com.szrjk.util.ToastUtils;
 import com.szrjk.widget.DeptButton;
 import com.szrjk.widget.FlowDeptLayout;
+import com.szrjk.widget.HeaderView;
 import com.szrjk.widget.IndexGridView;
 import com.szrjk.widget.ListPopup;
 import com.szrjk.widget.UpdateProgressBar;
@@ -82,8 +84,8 @@ public class SendCaseActivity extends BaseActivity {
 	private LinearLayout lly_dept;
 	private SendCaseActivity instance;
 	private final static int SEL_DEPT_CODE = 100;
-	@ViewInject(R.id.tv_send)
-	private TextView tv_send;
+	@ViewInject(R.id.hv_case)
+	private HeaderView hv_case;
 	// 取消
 	@ViewInject(R.id.lly_cancel)
 	private LinearLayout lly_cancel;
@@ -185,7 +187,7 @@ public class SendCaseActivity extends BaseActivity {
 	// 相册适配器
 	private PhotoGridAdapter visitAdapter;
 	private InputMethodManager imm;
-	
+
 	private String ls1;//图片通过“|”合并后的str
 	private String ls2;
 	private String ls3;
@@ -207,6 +209,8 @@ public class SendCaseActivity extends BaseActivity {
 	private String[] img3;
 	private String[] img4;
 	private Resources res;
+	private TextView hv_cancle;
+	private TextView hv_sub;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -267,27 +271,43 @@ public class SendCaseActivity extends BaseActivity {
 		et_visit.setOnTouchListener(et_ls);
 
 		// instance.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-
-	}
-
-	@OnClick(R.id.tv_send)
-	public void sendClick(View v) {
-		try {
-			closeKeyboard();
-			tv_send.setClickable(false);
-			switch (v.getId()) {
-			case R.id.tv_send:
-
-				if (checkInput()) {
-					//				dialog.setCancelable(false);
-					dialog.show();
-					send();
+		//点击取消按钮
+		hv_case.setBtnBackOnClick(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				try {
+					closeKeyboard();
+					if (checkSave()) {
+						shareUtil.setBooleanValue(Constant.ISAVECASE, false);
+						finish();
+					}else{
+						showPoP();
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-				break;
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		});
+
+		//点击提交
+		hv_sub = hv_case.getTextBtn();
+		hv_case.showTextBtn("发布", new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				try {
+					closeKeyboard();
+					hv_sub.setClickable(false);
+					if (checkInput()) {
+						//				dialog.setCancelable(false);
+						dialog.show();
+						send();
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+
 	}
 
 	// 校验表单输入
@@ -301,13 +321,13 @@ public class SendCaseActivity extends BaseActivity {
 
 		if (title == null || title.length() == 0) {
 			showToast(instance, "标题不能空!", 0);
-			tv_send.setClickable(true);
+			hv_sub.setClickable(true);
 			return false;
 		}
 
 		if (deptIds == null) {
 			showToast(instance, "科室不能空！", 0);
-			tv_send.setClickable(true);
+			hv_sub.setClickable(true);
 			return false;
 		}
 
@@ -373,7 +393,7 @@ public class SendCaseActivity extends BaseActivity {
 					public void run() {
 						dialog.dismiss();
 						showToast(instance, "发帖失败、再试试呗", 0);
-						tv_send.setClickable(true);
+						hv_sub.setClickable(true);
 						if (err.contains("Incorrect string value")) {
 							showToast(instance, "目前不支持表情发送", 0);
 						}
@@ -384,7 +404,7 @@ public class SendCaseActivity extends BaseActivity {
 			@Override
 			public void success(JSONObject jsonObject) {
 				dialog.dismiss();
-				tv_send.setClickable(true);
+				hv_sub.setClickable(true);
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
 
@@ -400,7 +420,7 @@ public class SendCaseActivity extends BaseActivity {
 					if (errorObj.getErrorMessage().contains(
 							"Incorrect string value")) {
 						showToast(instance, "目前不支持表情发送", 0);
-						tv_send.setClickable(true);
+						hv_sub.setClickable(true);
 					}
 				}
 			}
@@ -656,7 +676,7 @@ public class SendCaseActivity extends BaseActivity {
 				// 把图片地址的urlList传递过去
 				bundle.putStringArrayList("urllist", urlList1);
 				bundle.putStringArrayList("absList", absList1);
-//				GalleryActivity.filltmpitems(gridAdapter.returnImageInfo());
+				//				GalleryActivity.filltmpitems(gridAdapter.returnImageInfo());
 				intent.putExtras(bundle);
 				startActivityForResult(intent, GALLERY_RESULT_TYPE1);
 			}
@@ -702,7 +722,7 @@ public class SendCaseActivity extends BaseActivity {
 				// 把图片地址的urlList传递过去
 				bundle.putStringArrayList("urllist", urlList2);
 				bundle.putStringArrayList("absList", absList2);
-//				GalleryActivity.filltmpitems(checkAdapter.returnImageInfo());
+				//				GalleryActivity.filltmpitems(checkAdapter.returnImageInfo());
 				intent.putExtras(bundle);
 				startActivityForResult(intent, GALLERY_RESULT_TYPE2);
 			}
@@ -748,7 +768,7 @@ public class SendCaseActivity extends BaseActivity {
 				// 把图片地址的urlList传递过去
 				bundle.putStringArrayList("urllist", urlList3);
 				bundle.putStringArrayList("absList", absList3);
-//				GalleryActivity.filltmpitems(treatAdapter.returnImageInfo());
+				//				GalleryActivity.filltmpitems(treatAdapter.returnImageInfo());
 				intent.putExtras(bundle);
 				startActivityForResult(intent, GALLERY_RESULT_TYPE3);
 			}
@@ -794,7 +814,7 @@ public class SendCaseActivity extends BaseActivity {
 				// 把图片地址的urlList传递过去
 				bundle.putStringArrayList("urllist", urlList4);
 				bundle.putStringArrayList("absList", absList4);
-//				GalleryActivity.filltmpitems(visitAdapter.returnImageInfo());
+				//				GalleryActivity.filltmpitems(visitAdapter.returnImageInfo());
 				intent.putExtras(bundle);
 				startActivityForResult(intent, GALLERY_RESULT_TYPE4);
 			}
@@ -895,7 +915,7 @@ public class SendCaseActivity extends BaseActivity {
 					urlList1 = data.getStringArrayListExtra("urllist");
 					absList1 = data.getStringArrayListExtra("absList");
 					gridAdapter.addStringUrl(absList1);
-//					gridAdapter.setImageList(GalleryActivity.gettmpitems());
+					//					gridAdapter.setImageList(GalleryActivity.gettmpitems());
 					gridAdapter.notifyDataSetChanged();
 				}
 				break;
@@ -904,7 +924,7 @@ public class SendCaseActivity extends BaseActivity {
 				if (data != null) {
 					// ArrayList<String>
 					urlList2 = data.getStringArrayListExtra("urllist");
-//					checkAdapter.setImageList(GalleryActivity.gettmpitems());
+					//					checkAdapter.setImageList(GalleryActivity.gettmpitems());
 					absList2 = data.getStringArrayListExtra("absList");
 					gridAdapter.addStringUrl(absList2);
 					checkAdapter.notifyDataSetChanged();
@@ -915,7 +935,7 @@ public class SendCaseActivity extends BaseActivity {
 				if (data != null) {
 					// ArrayList<String>
 					urlList3 = data.getStringArrayListExtra("urllist");
-//					treatAdapter.setImageList(GalleryActivity.gettmpitems());
+					//					treatAdapter.setImageList(GalleryActivity.gettmpitems());
 					absList3 = data.getStringArrayListExtra("absList");
 					gridAdapter.addStringUrl(absList3);
 					treatAdapter.notifyDataSetChanged();
@@ -926,7 +946,7 @@ public class SendCaseActivity extends BaseActivity {
 				if (data != null) {
 					// ArrayList<String>
 					urlList4 = data.getStringArrayListExtra("urllist");
-//					visitAdapter.setImageList(GalleryActivity.gettmpitems());
+					//					visitAdapter.setImageList(GalleryActivity.gettmpitems());
 					absList4 = data.getStringArrayListExtra("absList");
 					gridAdapter.addStringUrl(absList4);
 					visitAdapter.notifyDataSetChanged();
@@ -968,21 +988,6 @@ public class SendCaseActivity extends BaseActivity {
 	}
 
 
-	@OnClick(R.id.lly_cancel)
-	public void cancelClick(View v) {
-		try {
-			closeKeyboard();
-		if (checkSave()) {
-			shareUtil.setBooleanValue(Constant.ISAVECASE, false);
-			finish();
-		}else{
-			showPoP();
-		}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	@Override
 	public void onBackPressed() {
@@ -1031,7 +1036,7 @@ public class SendCaseActivity extends BaseActivity {
 			return false;
 		}
 	};
-	
+
 	//点击取消按钮的时候，检查是否有内容输入
 	private boolean checkSave() {
 		checkImageList();
@@ -1119,6 +1124,7 @@ public class SendCaseActivity extends BaseActivity {
 		pi2.setiPopupItemCallback(new IPopupItemCallback() {
 			@Override
 			public void itemClickFunc(PopupWindow sendWindow) {
+				shareUtil.setBooleanValue(Constant.ISAVECASE, false);
 				instance.finish();
 			}
 		});

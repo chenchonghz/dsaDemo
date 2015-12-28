@@ -29,7 +29,9 @@ import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.NewsEntity;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
+import com.szrjk.pull.PullToRefreshBase;
 import com.szrjk.pull.PullToRefreshListView;
+import com.szrjk.pull.PullToRefreshBase.OnRefreshListener;
 import com.szrjk.util.ShowDialogUtil;
 import com.szrjk.util.ToastUtils;
 
@@ -39,10 +41,12 @@ public class NewsFragment extends Fragment{
 	private ExploreMoreNewsListAdapter adapter;
 	private Dialog dialog;
 	private Context context;
-	private static final String LOADING_POST = "正在加载帖子";
+	private static final String LOADING_POST = "正在加载资讯";
 	private ArrayList<NewsEntity> newsList;
+	private ArrayList<NewsEntity> moreNewsList;
 	private int beginNum = 1;
 	private int endNum = 20;
+	private boolean isFirstIn = true;
 	private Handler handler = new Handler(){
 		@Override
 		public void handleMessage(android.os.Message msg) {
@@ -51,6 +55,9 @@ public class NewsFragment extends Fragment{
 						// TODO Auto-generated method stub
 						adapter = new ExploreMoreNewsListAdapter(context, newsList);
 						lv_news.setAdapter(adapter);		
+				break;
+			case Constant.HAVE_NEW_POST_BY_REFRESH:
+				adapter.notifyDataSetChanged();
 				break;
 			}
 		};
@@ -82,6 +89,23 @@ public class NewsFragment extends Fragment{
 
 	private void initListner() {
 		// TODO Auto-generated method stub
+		lv_news.setOnRefreshListener(new OnRefreshListener<ListView>() {
+
+			@Override
+			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+				// TODO Auto-generated method stub
+				//下拉刷新
+				if (lv_news.isHeaderShown()) {
+					beginNum = 1;
+					endNum = 20;
+					getRefreshNews();
+				}
+				//上拉刷新
+				if (lv_news.isFooterShown()) {
+					getMoreNews();
+				}
+			}
+		});
 		lv_news.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -96,6 +120,7 @@ public class NewsFragment extends Fragment{
 				context.startActivity(intent);
 			}
 		});
+		
 	}
 	
 	
@@ -148,10 +173,12 @@ public class NewsFragment extends Fragment{
 							.getJSONObject("ReturnInfo");
 					newsList = (ArrayList<NewsEntity>) JSON.parseArray(returnObj.getString("ListOut"), NewsEntity.class);
                     if(newsList == null || newsList.isEmpty()){
-                    	
+
                     }else{
                     	Log.e("Explore", newsList.toString());
                     	handler.sendEmptyMessage(Constant.HAVE_NEW_POST);
+                    	endNum += 20;
+                    	beginNum += 20;
                     }
 				}
 					
@@ -179,5 +206,136 @@ public class NewsFragment extends Fragment{
 				}
 			}
 		});
+	}
+	
+	private void getRefreshNews() {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("ServiceName", "queryInfoAbstracts");
+		Map<String, Object> busiParams = new HashMap<String, Object>();
+		busiParams.put("typeId", title_id);
+		busiParams.put("baseLev", "0");
+		busiParams.put("beginNum", String.valueOf(beginNum));
+		busiParams.put("endNum", String.valueOf(endNum));
+		paramMap.put("BusiParams", busiParams);
+		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			
+			@Override
+			public void success(JSONObject jsonObject) {
+				// TODO Auto-generated method stub
+				if(lv_news.isRefreshing()){
+					lv_news.onRefreshComplete();
+				}
+				ErrorInfo errorObj = JSON.parseObject(
+						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
+				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode()))
+				{
+					JSONObject returnObj = jsonObject
+							.getJSONObject("ReturnInfo");
+					newsList = (ArrayList<NewsEntity>) JSON.parseArray(returnObj.getString("ListOut"), NewsEntity.class);
+                    if(newsList == null || newsList.isEmpty()){
+
+                    }else{
+                    	Log.e("Explore", newsList.toString());
+                    	beginNum += 20;
+                    	endNum += 20;
+                    	handler.sendEmptyMessage(Constant.HAVE_NEW_POST);
+                    }
+				}
+					
+			}
+			
+			@Override
+			public void start() {
+				// TODO Auto-generated method stub
+			}
+			
+			@Override
+			public void loading(long total, long current, boolean isUploading) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void failure(HttpException exception, JSONObject jobj) {
+				// TODO Auto-generated method stub
+				if (lv_news.isRefreshing())
+				{
+					lv_news.onRefreshComplete();
+				}
+				
+				ToastUtils.showMessage(context, "服务器返回数据失败，请检查网络");
+			}
+		});
+	}
+	
+	private void getMoreNews() {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("ServiceName", "queryInfoAbstracts");
+		Map<String, Object> busiParams = new HashMap<String, Object>();
+		busiParams.put("typeId", title_id);
+		busiParams.put("baseLev", "0");
+		busiParams.put("beginNum", String.valueOf(beginNum));
+		busiParams.put("endNum", String.valueOf(endNum));
+		paramMap.put("BusiParams", busiParams);
+		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			
+			@Override
+			public void success(JSONObject jsonObject) {
+				// TODO Auto-generated method stub
+				if(lv_news.isRefreshing()){
+					lv_news.onRefreshComplete();
+				}
+				ErrorInfo errorObj = JSON.parseObject(
+						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
+				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode()))
+				{
+					JSONObject returnObj = jsonObject
+							.getJSONObject("ReturnInfo");
+					moreNewsList = (ArrayList<NewsEntity>) JSON.parseArray(returnObj.getString("ListOut"), NewsEntity.class);
+                    if(moreNewsList == null || moreNewsList.isEmpty()){
+                         ToastUtils.showMessage(context, "没有更多关于此标签的资讯了");
+                    }else{
+                    	Log.e("Explore", newsList.toString());
+                    	beginNum += 20;
+                    	endNum += 20;
+                    	newsList.addAll(moreNewsList);
+                    	handler.sendEmptyMessage(Constant.HAVE_NEW_POST_BY_REFRESH);
+                    	
+                    }
+				}
+					
+			}
+			
+			@Override
+			public void start() {
+				// TODO Auto-generated method stub
+			}
+			
+			@Override
+			public void loading(long total, long current, boolean isUploading) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void failure(HttpException exception, JSONObject jobj) {
+				// TODO Auto-generated method stub
+				if (lv_news.isRefreshing())
+				{
+					lv_news.onRefreshComplete();
+				}
+				ToastUtils.showMessage(context, "服务器返回数据失败，请检查网络");
+			}
+		});
+	}
+
+	@Override
+	public void onStop() {
+		// TODO Auto-generated method stub
+		beginNum = 1;
+		endNum = 20;
+		super.onStop();
 	}
 }

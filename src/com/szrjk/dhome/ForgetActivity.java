@@ -116,12 +116,12 @@ public class ForgetActivity extends BaseActivity
 		{
 			captcha = RandomUtil.generateCode();
 			sendCode();
-//			ToastUtils.showMessage(instance, captcha);
+			//			ToastUtils.showMessage(instance, captcha);
 			time = new TimeCount(60000, 1000);// 构造CountDownTimer对象
 			time.start();
 		}
 	}
-	
+
 	@OnClick(R.id.iv_password_hiddenorshow)
 	public void pwdshow(View v){
 		if (pwdishidden) {
@@ -154,12 +154,12 @@ public class ForgetActivity extends BaseActivity
 		fireEye.add(et_phone,
 				StaticPattern.Required.setMessage("手机号码不可为空"),
 				StaticPattern.Mobile);
-		Result result = fireEye.test();
+		final Result result = fireEye.test();
 		if (!result.passed) {
 			return;
 		}
-		
-		
+
+
 		/*if(TextUtils.isEmpty(et_pwd.getText().toString())){
 			et_pwd.setError("密码不能为空");
 			return;
@@ -184,21 +184,67 @@ public class ForgetActivity extends BaseActivity
 		code = et_code.getText().toString();
 		pwd = et_pwd.getText().toString();
 		re_pwd = et_repwd.getText().toString();
-		if (result.passed&&code.equals(captcha)&&pwd.equals(re_pwd))
-		{
-			resetPwd();
-		}else if(!code.equals(captcha)){
-			ToastUtils.showMessage(instance, "验证码错误");
-			et_code.setText("");
-			//et_code.setError("验证码错误");
-		}else if(!pwd.equals(re_pwd)){
-			ToastUtils.showMessage(instance, "两次密码不一致");
-			//et_repwd.setError("两次密码不一致");
-			et_pwd.setText("");
-			et_repwd.setText("");
-		}
-		
-		
+		//接口认证验证码
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("ServiceName", "checkVerificationCode");
+		Map<String, Object> busiParams = new HashMap<String, Object>();
+		busiParams.put("authAccount", phone);
+		busiParams.put("captcha", code);
+		paramMap.put("BusiParams", busiParams);
+		httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			public void success(JSONObject jsonObject) {
+				ErrorInfo errorObj = JSON.parseObject(
+						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
+				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode())){
+					if (result.passed&&pwd.equals(re_pwd))
+					{
+						resetPwd();
+					}else if(!pwd.equals(re_pwd)){
+						ToastUtils.showMessage(instance, "两次密码不一致");
+						dialog.dismiss();
+						//et_repwd.setError("两次密码不一致");
+						et_pwd.setText("");
+						et_repwd.setText("");
+					}
+				}else if(errorObj.getReturnCode().equals("0001")){
+					ToastUtils.showMessage(instance, "验证码输入错误");
+				}
+			}
+
+			@Override
+			public void start() {
+				dialog.show();
+
+			}
+
+			@Override
+			public void loading(long total, long current, boolean isUploading) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void failure(HttpException exception, JSONObject jobj) {
+				ToastUtils.showMessage(instance, "验证码错误");
+				et_code.setText("");
+				dialog.dismiss();
+			}
+		});
+		//		if (result.passed&&code.equals(captcha)&&pwd.equals(re_pwd))
+		//		{
+		//			resetPwd();
+		//		}else if(!code.equals(captcha)){
+		//			ToastUtils.showMessage(instance, "验证码错误");
+		//			et_code.setText("");
+		//			//et_code.setError("验证码错误");
+		//		}else if(!pwd.equals(re_pwd)){
+		//			ToastUtils.showMessage(instance, "两次密码不一致");
+		//			//et_repwd.setError("两次密码不一致");
+		//			et_pwd.setText("");
+		//			et_repwd.setText("");
+		//		}
+
+
 	}
 
 	/**
@@ -206,7 +252,7 @@ public class ForgetActivity extends BaseActivity
 	 */
 	private void resetPwd()
 	{
-		
+
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("ServiceName", "resetUserPwd");
 		Map<String, Object> busiParams = new HashMap<String, Object>();
@@ -233,7 +279,7 @@ public class ForgetActivity extends BaseActivity
 			@Override
 			public void success(JSONObject jsonObject)
 			{
-				
+
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
 				ToastUtils.showMessage(instance, errorObj.getErrorMessage());
@@ -280,11 +326,12 @@ public class ForgetActivity extends BaseActivity
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("ServiceName", "thirdPartyAuth");
 		Map<String, Object> busiParams = new HashMap<String, Object>();
-		busiParams.put("captcha", captcha);
+		//		busiParams.put("captcha", captcha);
 		busiParams.put("authAccount", phone);
+		busiParams.put("deviceId", "123");
 		busiParams.put("busiType", "2");
 		paramMap.put("BusiParams", busiParams);
-		final Dialog dialog = createDialog(this, "发送中，请稍候...");
+		//		final Dialog dialog = createDialog(this, "发送中，请稍候...");
 		httpPost(paramMap, new AbstractDhomeRequestCallBack()
 		{
 
@@ -292,10 +339,12 @@ public class ForgetActivity extends BaseActivity
 			public void success(JSONObject jsonObject)
 			{
 				dialog.dismiss();
-				JSONObject errorObj = jsonObject.getJSONObject("ErrorInfo");
+				ErrorInfo errorObj = JSON.parseObject(
+						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
 				Log.i("TAG", errorObj.toString());
-				if (Constant.REQUESTCODE.equals(errorObj.get("ReturnCode")))
+				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode()))
 				{
+					ToastUtils.showMessage(instance, ""+ errorObj.getErrorMessage());
 					fireEye.add(et_pwd, ValuePattern.MinValue.setValue(6));
 					fireEye.add(et_repwd, ValuePattern.MinValue.setValue(6));
 					fireEye.add(et_code, ValuePattern.MinValue.setValue(6));
@@ -315,16 +364,16 @@ public class ForgetActivity extends BaseActivity
 							new PasswordValidation()));
 					textValidator.execute();
 				}
-//				else if(error.equals(errorObj.get("ReturnCode"))){
-//					ToastUtils.showMessage(instance, "此用户不存在，请重新输入");
-//					time.onFinish();
-//				}
+				//				else if(error.equals(errorObj.get("ReturnCode"))){
+				//					ToastUtils.showMessage(instance, "此用户不存在，请重新输入");
+				//					time.onFinish();
+				//				}
 			}
 
 			@Override
 			public void start()
 			{
-				dialog.show();
+				//				dialog.show();
 			}
 
 			@Override
@@ -340,8 +389,8 @@ public class ForgetActivity extends BaseActivity
 				String errorObj = jsonObject.getString("ErrorInfo");//这是string
 				if (null != errorObj)
 				{
-//					showToast(instance, errorObj.getString("ErrorMessage"),
-//							Toast.LENGTH_SHORT);
+					//					showToast(instance, errorObj.getString("ErrorMessage"),
+					//							Toast.LENGTH_SHORT);
 					ToastUtils.showMessage(instance, errorObj);
 					time.onFinish();
 				}

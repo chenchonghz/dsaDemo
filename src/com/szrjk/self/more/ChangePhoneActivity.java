@@ -210,8 +210,9 @@ public class ChangePhoneActivity extends BaseActivity implements OnClickListener
 			HashMap<String, Object> paramMap = new HashMap<String, Object>();
 			paramMap.put("ServiceName", "thirdPartyAuth");
 			Map<String, Object> busiParams = new HashMap<String, Object>();
-			busiParams.put("captcha", tmpvcode);
+//			busiParams.put("captcha", tmpvcode);
 			busiParams.put("authAccount", phone);
+			busiParams.put("deviceId", "123");
 			busiParams.put("busiType", "1");
 			paramMap.put("BusiParams", busiParams);
 
@@ -265,30 +266,69 @@ public class ChangePhoneActivity extends BaseActivity implements OnClickListener
 			
 			// 验证码校验TODO
 			String filledvcode = et_vcode.getText().toString();// 用户填的验证码
-			long now = new Date().getTime();
-			if (tmpvcode == null || tmpvcode.isEmpty())
-			{
-				// 验证码失效
-				Toast.makeText(getApplicationContext(), "请先填写号码后发送验证码!",
-						Toast.LENGTH_SHORT).show();
-				return;
-			}
-			else if (now - tmpvcodetime > 120000)
-			{
-				Toast.makeText(getApplicationContext(), "验证码过期!",
-						Toast.LENGTH_SHORT).show();
-				return;
-			}
-			else if (!tmpvcode.equals(filledvcode))
-			{
-				Toast.makeText(getApplicationContext(), "验证码错误!",
-						Toast.LENGTH_SHORT).show();
-				return;
-			}
+			HashMap<String, Object> paramMap = new HashMap<String, Object>();
+			paramMap.put("ServiceName", "checkVerificationCode");
+			Map<String, Object> busiParams = new HashMap<String, Object>();
+			busiParams.put("authAccount", phone);
+			busiParams.put("captcha",filledvcode);
+			paramMap.put("BusiParams", busiParams);
+			httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+				
+				@Override
+				public void success(JSONObject jsonObject) {
+					ErrorInfo errorObj = JSON.parseObject(
+							jsonObject.getString("ErrorInfo"), ErrorInfo.class);
+					if (Constant.REQUESTCODE.equals(errorObj.getReturnCode())){
+					changePhone();
+					}else if(errorObj.getReturnCode().equals("0001")){
+						ToastUtils.showMessage(instance, "验证码输入错误");
+					}
+				}
+				
+				@Override
+				public void start() {
+					dialog.show();
+					
+				}
+				
+				@Override
+				public void loading(long total, long current, boolean isUploading) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void failure(HttpException exception, JSONObject jobj) {
+					ToastUtils.showMessage(instance, "验证码错误");
+					et_vcode.setText("");
+					dialog.dismiss();
+					
+				}
+			});
+//			long now = new Date().getTime();
+//			if (tmpvcode == null || tmpvcode.isEmpty())
+//			{
+//				// 验证码失效
+//				Toast.makeText(getApplicationContext(), "请先填写号码后发送验证码!",
+//						Toast.LENGTH_SHORT).show();
+//				return;
+//			}
+//			else if (now - tmpvcodetime > 120000)
+//			{
+//				Toast.makeText(getApplicationContext(), "验证码过期!",
+//						Toast.LENGTH_SHORT).show();
+//				return;
+//			}
+//			else if (!tmpvcode.equals(filledvcode))
+//			{
+//				Toast.makeText(getApplicationContext(), "验证码错误!",
+//						Toast.LENGTH_SHORT).show();
+//				return;
+//			}
 //			Toast.makeText(getApplicationContext(), "验证码成功!", Toast.LENGTH_SHORT)
 //					.show();
 
-			changePhone();
+//			changePhone();
 
 
 		}
@@ -304,6 +344,7 @@ public class ChangePhoneActivity extends BaseActivity implements OnClickListener
 			httpPost(paramMap, new AbstractDhomeRequestCallBack() {
 				@Override
 				public void success(JSONObject jsonObject) {
+					dialog.dismiss();
 					ErrorInfo errorObj = JSON.parseObject(
 							jsonObject.getString("ErrorInfo"), ErrorInfo.class);
 					if (Constant.REQUESTCODE.equals(errorObj.getReturnCode())){
@@ -322,6 +363,8 @@ public class ChangePhoneActivity extends BaseActivity implements OnClickListener
 				}
 				@Override
 				public void failure(HttpException exception, JSONObject jobj) {
+					dialog.dismiss();
+					ToastUtils.showMessage(instance, "该号码已被注册");
 				}
 			});
 		}

@@ -1,5 +1,6 @@
 package com.szrjk.adapter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,13 +21,18 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lidroid.xutils.exception.HttpException;
+import com.szrjk.adapter.IndexListViewAdapter.ViewHolder8;
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.OtherPeopleActivity;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.ErrorInfo;
+import com.szrjk.entity.RecommendContent;
+import com.szrjk.entity.RecommendInfo;
 import com.szrjk.entity.UserCard;
+import com.szrjk.entity.UserInfo;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
+import com.szrjk.self.CircleHomepageActivity;
 import com.szrjk.util.BusiUtils;
 import com.szrjk.util.DialogUtil;
 import com.szrjk.util.ImageLoaderUtil;
@@ -91,18 +97,18 @@ public class RecommendListAdapter extends BaseAdapter{
 		}else{
 			iv_head_icon.setVisibility(View.GONE);
 		}
-		boolean isFocus = recommendUser.isFocus();
-		if(isFocus){
-			Drawable drawableTop = context.getResources().getDrawable(R.drawable.icon_adfocus_gray);
-			bt_attention.setCompoundDrawablesWithIntrinsicBounds(null, drawableTop, null, null);
-			bt_attention.setText("已关注");
-			bt_attention.setTextColor(context.getResources().getColor(R.color.font_cell));
-		}else{
-			Drawable drawableTop = context.getResources().getDrawable(R.drawable.icon_adfocus);
-			bt_attention.setCompoundDrawablesWithIntrinsicBounds(null, drawableTop, null, null);
-			bt_attention.setText("未关注");
-			bt_attention.setTextColor(context.getResources().getColor(R.color.btn_text_red));
-		}
+//		boolean isFocus = recommendUser.isFocus();
+//		if(isFocus){
+//			Drawable drawableTop = context.getResources().getDrawable(R.drawable.icon_adfocus_gray);
+//			bt_attention.setCompoundDrawablesWithIntrinsicBounds(null, drawableTop, null, null);
+//			bt_attention.setText("已关汿);
+//			bt_attention.setTextColor(context.getResources().getColor(R.color.font_cell));
+//		}else{
+//			Drawable drawableTop = context.getResources().getDrawable(R.drawable.icon_adfocus);
+//			bt_attention.setCompoundDrawablesWithIntrinsicBounds(null, drawableTop, null, null);
+//			bt_attention.setText("未关汿);
+//			bt_attention.setTextColor(context.getResources().getColor(R.color.btn_text_red));
+//		}
 		rl_userInfo.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -128,39 +134,40 @@ public class RecommendListAdapter extends BaseAdapter{
 		return convertView;
 	}
 
-	protected void addAttention(final UserCard recommendUser, final Button bt_attention) {
-		// TODO Auto-generated method stub
-
-		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("ServiceName", "dealUserFocus");
-		Map<String,Object> busiParam = new HashMap<String, Object>();
-		busiParam.put("userSeqId", Constant.userInfo.getUserSeqId());//当前用户ID  可以用userInfo = Constant.userInfo;userId=userInfo.getUserSeqId();
-		busiParam.put("objUserSeqId", recommendUser.getUserSeqId());//这个是目标用户ID
-		busiParam.put("operateType", "A");//是不是加关注
-		paramMap.put("BusiParams", busiParam);
-		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
-			@Override
-			public void start() {
-			}
-			@Override
-			public void loading(long total, long current, boolean isUploading) {
-			}
-			@Override
-			public void failure(HttpException exception, JSONObject jobj) {
-				ToastUtils.showMessage(context, "关注失败，请检查网络");
-			}
-			@Override
-			public void success(JSONObject jsonObject) {
-				ErrorInfo errorObj  =JSON.parseObject(jsonObject.getString("ErrorInfo"),ErrorInfo.class);
-				if(Constant.REQUESTCODE.equals(errorObj.getReturnCode())){
-					recommendUser.setFocus(true);
-					notifyDataSetChanged();
-				}
-			}
-		});
+//	protected void addAttention(final UserCard recommendUser, final Button bt_attention) {
+//		// TODO Auto-generated method stub
+//
+//		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+//		paramMap.put("ServiceName", "dealUserFocus");
+//		Map<String,Object> busiParam = new HashMap<String, Object>();
+//		busiParam.put("userSeqId", Constant.userInfo.getUserSeqId());//当前用户ID  可以用userInfo = Constant.userInfo;userId=userInfo.getUserSeqId();
+//		busiParam.put("objUserSeqId", recommendUser.getUserSeqId());//这个是目标用户ID
+//		busiParam.put("operateType", "A");//是不是加关注
+//		paramMap.put("BusiParams", busiParam);
+//		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+//			@Override
+//			public void start() {
+//			}
+//			@Override
+//			public void loading(long total, long current, boolean isUploading) {
+//			}
+//			@Override
+//			public void failure(HttpException exception, JSONObject jobj) {
+//				ToastUtils.showMessage(context, "关注失败，请桿¥网络");
+//			}
+//			@Override
+//			public void success(JSONObject jsonObject) {
+//				ErrorInfo errorObj  =JSON.parseObject(jsonObject.getString("ErrorInfo"),ErrorInfo.class);
+//				if(Constant.REQUESTCODE.equals(errorObj.getReturnCode())){
+//					recommendUser.setFocus(true);
+//					notifyDataSetChanged();
+//				}
+//			}
+//		});
 
 	
-	}
-
-
+	
 }
+
+
+

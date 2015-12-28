@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_recommend_circle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    style="@style/IndexButton"
     android:paddingBottom="@dimen/view_doctorInfo_padding"
     android:paddingLeft="@dimen/view_doctorInfo_padding"
     android:paddingRight="@dimen/view_doctorInfo_padding"
@@ -18,15 +19,6 @@
         android:layout_width="@dimen/avatar_doctor_small_width"
         android:layout_height="@dimen/avatar_doctor_small_height"
         />
-    <ImageView
-            android:id="@+id/iv_yellow_icon" 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_yellow_v_24"
-            android:visibility="gone"
-            android:layout_marginLeft="28dp"
-            android:layout_marginTop="28dp"
-            /> 
     </RelativeLayout>
     <TextView 
         android:id="@+id/tv_circleName"
@@ -47,7 +39,7 @@
     <RelativeLayout
         android:id="@+id/rl_people_num" 
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="15dp"
         android:layout_below="@id/tv_circleName"
         android:layout_toRightOf="@id/rl_smallphoto"
         android:layout_alignLeft="@id/tv_circleName"
@@ -67,8 +59,6 @@
         android:id="@+id/tv_people_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1000"
-        android:paddingRight="@dimen/view_post_padding_2"
         android:textColor="@color/white"
         android:textSize="@dimen/font_size_xsmall"
         android:singleLine="true"
@@ -78,13 +68,13 @@
     <TextView 
         android:id="@+id/tv_circle_type"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="15dp"
         android:background="@drawable/pic_circle_type"
+        android:paddingLeft="@dimen/view_post_padding_2"
+        android:paddingRight="@dimen/view_post_padding_2"
         android:layout_toRightOf="@id/rl_people_num"
         android:layout_below="@id/tv_circleName"
         android:layout_marginLeft="3dp"
-        android:padding="@dimen/view_post_padding_2"
-        android:text="个人"
         android:textColor="@color/white"
         android:singleLine="true"
         android:ellipsize="end"

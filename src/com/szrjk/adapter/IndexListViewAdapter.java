@@ -67,6 +67,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 	private ArrayList<UserCard> recommendUserList;
 	private ListView recommendListView;
 	private RecommendListAdapter recommend_adapter;
+	private RecommendListAdapter2 recommend_adapter2;
 	private String userId;
 	private Boolean isLike = false;
 	private ImageLoaderUtil imageloader;
@@ -181,7 +182,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			return 4;
 		}else if(postInfo.getPostType().equals(Constant.TRANSMIT_POST)&&postInfo.getSrcPostAbstractCard().getPostType().equals(Constant.PROBLEM_HELP)){
 			return 5;
-		}else if(postInfo.getPostType().equals(Constant.RECOMMEND_USER)){
+		}else if(postInfo.getPostType().equals(Constant.RECOMMEND_USER)||postInfo.getPostType().equals(Constant.RECOMMEND_INFO)){
 			return 6;
 		}else if(postInfo.getPostType().equals(Constant.TRANSMIT_POST2)){
 			List<PostAbstractList> postAbList = postInfo.getPostAbstractList();
@@ -300,7 +301,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 				Log.e("IndexViewAdapter", "推荐好友加载布局");
 				recommend_user_Holder = new ViewHolder7();
 				recommend_user_Holder.lv_recommend_doctor = (ListView)convertView.findViewById(R.id.lv_recommend_doctor);
-				recommend_user_Holder.bt_change = (Button)convertView.findViewById(R.id.bt_change);
+//				recommend_user_Holder.bt_change = (Button)convertView.findViewById(R.id.bt_change);
 				recommendListView = recommend_user_Holder.lv_recommend_doctor;
 				convertView.setTag(R.id.tag_recommend_user, recommend_user_Holder);
 				break;
@@ -472,7 +473,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 						DialogUtil.showGuestDialog(context, null);
 					}else{
 						if(userInfo != null && postInfo != null && postOtherInfo!= null){
-							skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getPostTitle(),
+							skipToRepeatActivity(userInfo.getUserLevel(),userInfo.getUserSeqId(),postInfo.getPostTitle(),
 									userInfo.getUserFaceUrl(),postInfo.getPostId(),
 									userInfo.getUserName(),postInfo.getPostType(),postInfo.getPostLevel()
 									,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),flag);
@@ -630,7 +631,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 						DialogUtil.showGuestDialog(context, null);
 					}else{
 						if(userInfo != null && postInfo != null && postOtherInfo!= null){	
-							skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getPostTitle(),
+							skipToRepeatActivity(userInfo.getUserLevel(),userInfo.getUserSeqId(),postInfo.getPostTitle(),
 									userInfo.getUserFaceUrl(),postInfo.getPostId(),
 									userInfo.getUserName(),postInfo.getPostType(),postInfo.getPostLevel()
 									,postInfo.getSrcPostId(),position, postOtherInfo.getFORWARD_NUM(),flag);
@@ -815,7 +816,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 							ToastUtils.showMessage(context, "私密圈子不可转发！");
 						}else{
 							if(userInfo != null && postInfo != null && postOtherInfo!= null){		
-								skipToRepeatActivity(userInfo.getUserSeqId(), postInfo.getContent(),
+								skipToRepeatActivity(userInfo.getUserLevel(),userInfo.getUserSeqId(), postInfo.getContent(),
 										userInfo.getUserFaceUrl(), postInfo.getPostId(),
 										userInfo.getUserName(), postInfo.getPostType(),postInfo.getPostLevel()
 										,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),flag);
@@ -921,6 +922,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 								SrcPostInfo srcPost = new SrcPostInfo();
 								srcUser.setUserFaceUrl(postAbstractLists.get(i).getUserCard().getUserFaceUrl());
 								srcUser.setUserName(postAbstractLists.get(i).getUserCard().getUserName());
+								srcUser.setUserLevel(postAbstractLists.get(i).getUserCard().getUserLevel());
 								srcPost.setContent(postAbstractLists.get(i).getPostAbstract().getContent());
 								postInfo.setSrcUserCard(srcUser);
 								postInfo.setSrcPostAbstractCard(srcPost);
@@ -1057,7 +1059,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 							ToastUtils.showMessage(context, "多次转发功能正在开发中，敬请期待");
 						}else{
 							if(userInfo != null && postInfo != null && postOtherInfo!= null){		
-								skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getSrcPostAbstractCard().getContent(),
+								skipToRepeatActivity(postInfo.getSrcUserCard().getUserLevel(),userInfo.getUserSeqId(),postInfo.getSrcPostAbstractCard().getContent(),
 										postInfo.getSrcUserCard().getUserFaceUrl(),postInfo.getPostId(),
 										postInfo.getPostType(),postInfo.getPostLevel()
 										,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),postAbstractLists,postInfo.getSrcUserCard().getUserName(),flag);
@@ -1155,6 +1157,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 								SrcPostInfo srcPost = new SrcPostInfo();
 								srcUser.setUserFaceUrl(caseSharePostAbstractLists.get(i).getUserCard().getUserFaceUrl());
 								srcUser.setUserName(caseSharePostAbstractLists.get(i).getUserCard().getUserName());
+								srcUser.setUserLevel(caseSharePostAbstractLists.get(i).getUserCard().getUserLevel());
 								srcPost.setContent(caseSharePostAbstractLists.get(i).getPostAbstract().getContent());
 								srcPost.setPostTitle(caseSharePostAbstractLists.get(i).getPostAbstract().getPostTitle());
 								postInfo.setSrcUserCard(srcUser);
@@ -1288,7 +1291,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 							ToastUtils.showMessage(context, "多次转发功能正在开发中，敬请期待");
 						}else{
 							if(userInfo != null && postInfo != null && postOtherInfo!= null){	
-								skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getSrcPostAbstractCard().getPostTitle(),
+								skipToRepeatActivity(postInfo.getSrcUserCard().getUserLevel(),userInfo.getUserSeqId(),postInfo.getSrcPostAbstractCard().getPostTitle(),
 										postInfo.getSrcUserCard().getUserFaceUrl(),postInfo.getPostId(),
 										postInfo.getPostType(),postInfo.getPostLevel()
 										,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),caseSharePostAbstractLists,postInfo.getSrcUserCard().getUserName(),flag);
@@ -1378,6 +1381,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 								SrcPostInfo srcPost = new SrcPostInfo();
 								srcUser.setUserFaceUrl(problemHelpPostAbstractLists.get(i).getUserCard().getUserFaceUrl());
 								srcUser.setUserName(problemHelpPostAbstractLists.get(i).getUserCard().getUserName());
+								srcUser.setUserLevel(problemHelpPostAbstractLists.get(i).getUserCard().getUserLevel());
 								srcPost.setContent(problemHelpPostAbstractLists.get(i).getPostAbstract().getContent());
 								srcPost.setPostTitle(problemHelpPostAbstractLists.get(i).getPostAbstract().getPostTitle());
 								postInfo.setSrcUserCard(srcUser);
@@ -1512,7 +1516,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 							ToastUtils.showMessage(context, "多次转发功能正在开发中，敬请期待");
 						}else{
 							if(userInfo != null && postInfo != null && postOtherInfo!= null){
-								skipToRepeatActivity(userInfo.getUserSeqId(),postInfo.getSrcPostAbstractCard().getPostTitle(),
+								skipToRepeatActivity(postInfo.getSrcUserCard().getUserLevel(),userInfo.getUserSeqId(),postInfo.getSrcPostAbstractCard().getPostTitle(),
 										postInfo.getSrcUserCard().getUserFaceUrl(),postInfo.getPostId(),
 										postInfo.getPostType(),postInfo.getPostLevel()
 										,postInfo.getSrcPostId(),position,postOtherInfo.getFORWARD_NUM(),problemHelpPostAbstractLists,postInfo.getSrcUserCard().getUserName(),flag);	
@@ -1566,17 +1570,13 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			});
 			break;
 		case 6:
-			Log.e("IndexViewAdapter", "好友推荐加载数据");
-			Log.e("IndexViewAdapter", "好友推荐列表:"+postInfo.getRecommendUser().toString());
-			recommend_adapter = new RecommendListAdapter(context, postInfo.getRecommendUser());
-			recommend_user_Holder.lv_recommend_doctor.setAdapter(recommend_adapter);
-			if(postInfo.getRecommendUser()!=null && !postInfo.getRecommendUser().isEmpty()){	
-				lastUserId = postInfo.getRecommendUser().get(postInfo.getRecommendUser().size()-1).getUserSeqId();
+			if(postInfo.getPostType().equals(Constant.RECOMMEND_INFO)){
+				recommend_adapter2 = new RecommendListAdapter2(context, postInfo.getRecommendInfo());
+				recommend_user_Holder.lv_recommend_doctor.setAdapter(recommend_adapter2);
 			}else{
-				lastUserId = "0";
+				recommend_adapter = new RecommendListAdapter(context, postInfo.getRecommendUser());
+				recommend_user_Holder.lv_recommend_doctor.setAdapter(recommend_adapter);
 			}
-			Log.e("IndexListViewAdapter", "最后的userId："+lastUserId);
-			notifyDataSetChanged();
 //			recommend_user_Holder.bt_change.setOnClickListener(new OnClickListener() {
 //				
 //				@Override
@@ -1653,7 +1653,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			}
 		});
 	}
-	protected void skipToRepeatActivity(String userSeqId, String content,
+	protected void skipToRepeatActivity(String srcUserLevle,String userSeqId, String content,
 			String userFaceUrl, String postId,
 			String postType, String postLevel, String srcPostId, int position,
 			int forward_NUM, List<PostAbstractList> postAbstractLists, String userName,int flag) {
@@ -1668,6 +1668,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		intent.putExtra(Constant.POSITION, position);
 		intent.putExtra(Constant.FORWARD_NUM, forward_NUM);
 		intent.putExtra(Constant.USER_NAME, userName);
+		intent.putExtra("userLevel", srcUserLevle);
 		Bundle bundle = new Bundle();
 		bundle.putSerializable("postAbstractLists", (Serializable) postAbstractLists);
 		intent.putExtra("postList", bundle);
@@ -1728,62 +1729,62 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		tran_normalPost_Holder.ll_src_group = (LinearLayout)convertView.findViewById(R.id.ll_src_group);
 		tran_normalPost_Holder.tv_src_group_name = (TextView)convertView.findViewById(R.id.tv_src_group_name);
 	}
-	protected void getNewRecommendUser(int position, final PostInfo postInfo) {
-		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("ServiceName", "queryRecommendUsers");
-		Map<String, Object> busiParams = new HashMap<String, Object>();
-		busiParams.put("userSeqId", userId);
-		busiParams.put("baseObjUserId", lastUserId);
-		busiParams.put("isNew", String.valueOf(false));
-		busiParams.put("beginNum", Constant.USER_BEGIN_NUM);
-		busiParams.put("endNum", Constant.USER_END_NUM);
-		paramMap.put("BusiParams", busiParams);
-		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
-			
-			@Override
-			public void success(JSONObject jsonObject) {
-				recommendUserList = new ArrayList<UserCard>();
-				ErrorInfo errorObj = JSON.parseObject(
-						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
-				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode()))
-				{
-					
-					JSONObject returnObj = jsonObject
-							.getJSONObject("ReturnInfo");
-					List<RecommendUserList> userLists = JSON.parseArray(
-							returnObj.getString("ListOut"), RecommendUserList.class);
-					for (RecommendUserList userList : userLists) {
-						UserCard recommendUser = userList.getUserCard();
-						recommendUserList.add(recommendUser);
-					}
-					if(!recommendUserList.isEmpty()&&recommendUserList != null){
-						postInfo.setRecommendUser(recommendUserList);
-						notifyDataSetChanged();
-						Log.e("IndexFragmentAdapter", "新一批推荐用户："+postInfo.getRecommendUser().toString());
-						lastUserId = postInfo.getRecommendUser().get(recommendUserList.size()-1).getUserSeqId();
-					}else{
-						ToastUtils.showMessage(context, "没有推荐用户了");
-					}
-				}else{
-					ToastUtils.showMessage(context, "获取失败，请检查网络");
-				}
-			}
-			
-			@Override
-			public void start() {
-			}
-
-			@Override
-			public void loading(long total, long current, boolean isUploading) {	
-			}
-
-			@Override
-			public void failure(HttpException exception, JSONObject jobj) {
-				ToastUtils.showMessage(context, "更换失败，请检查网络");
-			
-			}
-		});
-	}
+//	protected void getNewRecommendUser(int position, final PostInfo postInfo) {
+//		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+//		paramMap.put("ServiceName", "queryRecommendUsers");
+//		Map<String, Object> busiParams = new HashMap<String, Object>();
+//		busiParams.put("userSeqId", userId);
+//		busiParams.put("baseObjUserId", lastUserId);
+//		busiParams.put("isNew", String.valueOf(false));
+//		busiParams.put("beginNum", Constant.USER_BEGIN_NUM);
+//		busiParams.put("endNum", Constant.USER_END_NUM);
+//		paramMap.put("BusiParams", busiParams);
+//		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+//			
+//			@Override
+//			public void success(JSONObject jsonObject) {
+//				recommendUserList = new ArrayList<UserCard>();
+//				ErrorInfo errorObj = JSON.parseObject(
+//						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
+//				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode()))
+//				{
+//					
+//					JSONObject returnObj = jsonObject
+//							.getJSONObject("ReturnInfo");
+//					List<RecommendUserList> userLists = JSON.parseArray(
+//							returnObj.getString("ListOut"), RecommendUserList.class);
+//					for (RecommendUserList userList : userLists) {
+//						UserCard recommendUser = userList.getUserCard();
+//						recommendUserList.add(recommendUser);
+//					}
+//					if(!recommendUserList.isEmpty()&&recommendUserList != null){
+//						postInfo.setRecommendUser(recommendUserList);
+//						notifyDataSetChanged();
+//						Log.e("IndexFragmentAdapter", "新一批推荐用户："+postInfo.getRecommendUser().toString());
+//						lastUserId = postInfo.getRecommendUser().get(recommendUserList.size()-1).getUserSeqId();
+//					}else{
+//						ToastUtils.showMessage(context, "没有推荐用户了");
+//					}
+//				}else{
+//					ToastUtils.showMessage(context, "获取失败，请检查网络");
+//				}
+//			}
+//			
+//			@Override
+//			public void start() {
+//			}
+//
+//			@Override
+//			public void loading(long total, long current, boolean isUploading) {	
+//			}
+//
+//			@Override
+//			public void failure(HttpException exception, JSONObject jobj) {
+//				ToastUtils.showMessage(context, "更换失败，请检查网络");
+//			
+//			}
+//		});
+//	}
 
 	/**
 	 * 设置头像认证标记的显示
@@ -2638,7 +2639,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			}
 
 	}
-	protected void skipToRepeatActivity(String userSeqId, String postTitle,
+	protected void skipToRepeatActivity(String userLevel,String userSeqId, String postTitle,
 			String userFaceUrl, String postId, String userName, String postType, String postLevel, String srcPostId, int position, int forward_num,int flag) {
 		Intent intent = new Intent(context, RepeatActivity.class);
 		intent.putExtra(Constant.USER_SEQ_ID, userFaceUrl);
@@ -2651,6 +2652,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		intent.putExtra(Constant.SRC_POST_ID, srcPostId);
 		intent.putExtra(Constant.POSITION, position);
 		intent.putExtra(Constant.FORWARD_NUM, forward_num);
+		intent.putExtra("userLevel", userLevel);
 		intent.putExtra("flag", flag);
 		if(indexFragment != null){
 			indexFragment.startActivityForResult(intent, 200);

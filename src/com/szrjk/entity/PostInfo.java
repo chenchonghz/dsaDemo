@@ -59,7 +59,9 @@ public class PostInfo implements Serializable
 	private String srcIsDelete;
 	//中间层postId
 	private String pPostId;
-	//推荐好友列表
+	//推荐新版
+	private List<RecommendInfo> recommendInfo;
+	//推荐旧版
 	private List<UserCard> recommendUser;
 	//圈子名字
 	private String coterieName;
@@ -69,6 +71,18 @@ public class PostInfo implements Serializable
 	private int isOpen;
 	//转发帖子list
 	private List<PostAbstractList> postAbstractList;
+
+
+	
+	
+	public List<UserCard> getRecommendUser() {
+		return recommendUser;
+	}
+
+
+	public void setRecommendUser(List<UserCard> recommendUser) {
+		this.recommendUser = recommendUser;
+	}
 
 
 	public List<PostAbstractList> getPostAbstractList() {
@@ -105,13 +119,17 @@ public class PostInfo implements Serializable
 		this.coterieId = coterieId;
 	}
 
-	public List<UserCard> getRecommendUser() {
-		return recommendUser;
+	
+
+	public List<RecommendInfo> getRecommendInfo() {
+		return recommendInfo;
 	}
 
-	public void setRecommendUser(List<UserCard> recommendUser) {
-		this.recommendUser = recommendUser;
+
+	public void setRecommendInfo(List<RecommendInfo> recommendInfo) {
+		this.recommendInfo = recommendInfo;
 	}
+
 
 	public String getPPostId() {
 		return pPostId;
@@ -306,6 +324,7 @@ public class PostInfo implements Serializable
 		this.completeRate = completeRate;
 	}
 
+
 	@Override
 	public String toString() {
 		return "PostInfo [userSeqId=" + userSeqId + ", backgroundPic="
@@ -320,10 +339,16 @@ public class PostInfo implements Serializable
 				+ ", postLevel=" + postLevel + ", srcPostId=" + srcPostId
 				+ ", pContent=" + pContent + ", pIsDelete=" + pIsDelete
 				+ ", srcIsDelete=" + srcIsDelete + ", pPostId=" + pPostId
-				+ ", recommendUser=" + recommendUser + ", coterieName="
-				+ coterieName + ", coterieId=" + coterieId + ", isOpen="
-				+ isOpen + ", postAbstractList=" + postAbstractList + "]";
+				+ ", recommendInfo=" + recommendInfo + ", recommendUser="
+				+ recommendUser + ", coterieName=" + coterieName
+				+ ", coterieId=" + coterieId + ", isOpen=" + isOpen
+				+ ", postAbstractList=" + postAbstractList + "]";
 	}
+
+
+	
+
+	
 
 
 	

@@ -40,4 +40,6 @@
     <dimen name="view_doctorInfo_paddingLeft">10dp</dimen>
     <dimen name="view_doctorInfo_paddingRight">10dp</dimen>
     <dimen name="view_command_marginTop">10dp</dimen>
+    <dimen name="view_listMenu_height">70dp</dimen>
+    <dimen name="view_listMenu_btn_width">60dp</dimen>
 </resources>

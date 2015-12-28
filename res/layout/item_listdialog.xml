@@ -9,7 +9,7 @@
         android:layout_marginLeft="@dimen/margin_20dp"
         android:gravity="center_vertical"
         android:textColor="@color/font_jobtitle"
-        android:textSize="@dimen/font_size_large"/>
+        android:textSize="@dimen/font_size_middle"/>
     <View 
         android:layout_width="match_parent"
         android:layout_height="0.1dp"

@@ -53,83 +53,94 @@
             android:id="@+id/tv_commentcontent1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_20dp"
             android:layout_marginLeft="@dimen/margin_10dp"
-            android:layout_marginTop="@dimen/margin_10dp"
             android:text="回复张杰"
             android:textColor="@color/font_cell"
             android:textSize="@dimen/font_size_middle" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/ll_secondLayer"
+    <RelativeLayout
+        android:id="@+id/rl_secondLayer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/base_bg2"
-        android:orientation="vertical"
-         >
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:background="@color/base_bg" >
 
         <TextView
             android:id="@+id/tv_commentcontent2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_20dp"
-            android:layout_marginTop="@dimen/margin_10dp"
+            android:layout_marginBottom="@dimen/margin_10dp"
             android:layout_marginLeft="@dimen/margin_10dp"
             android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_marginTop="@dimen/margin_10dp"
             android:text="张杰回复陈洁仪"
             android:textColor="@color/font_cell"
             android:textSize="@dimen/font_size_middle" />
 
-        <LinearLayout
-            android:id="@+id/ll_postInfo"
+        <RelativeLayout
+            android:id="@+id/rl_postInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/base_bg2"
-            android:orientation="horizontal" >
+            android:layout_below="@+id/tv_commentcontent2" >
 
             <ImageView
                 android:id="@+id/iv_portrait"
-                android:layout_width="@dimen/image_portrait"
-                android:layout_height="@dimen/image_portrait"
+                android:layout_width="@dimen/avatar_size_middle"
+                android:layout_height="@dimen/avatar_size_middle"
                 android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/pic_wall_bg02" />
+                android:src="@drawable/header" />
 
-            <LinearLayout
+            <RelativeLayout
+                android:id="@+id/rl_postContent"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/image_portrait"
-                android:background="@color/base_bg2"
-                android:layout_marginBottom="@dimen/margin_10dp"
-                    android:layout_marginTop="@dimen/margin_10dp"
-                    android:layout_marginLeft="-10dp"
-                    android:orientation="vertical"
-                 >
+                android:layout_height="80dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@id/iv_portrait"
+                android:background="@color/base_bg2" >
 
-                
-                    <TextView
-                        android:id="@+id/tv_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                android:layout_marginTop="8dp"
-                        android:text="张杰"
-                        android:textColor="@color/font_cell"
-                        android:textSize="@dimen/font_size_middle" />
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/repeat_Id"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_middle" />
 
-                    <TextView
-                        android:id="@+id/tv_postcontent"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_10dp"
-                        android:text="张杰假两件积分垃圾 就拉法基 u；就； 家具；安静；安静；安静 辣椒粉安静；安家费；安静；安静；安静；安静aa级；安家费；安静 ；安静；安家费阿拉法辣椒粉啦就阿拉基aa级垃圾；阿拉基"
-                        android:textColor="@color/font_cell"
-                        android:textSize="@dimen/font_size_middle" />
-               
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_postcontent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_name"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="@dimen/margin_5dp"
+                    android:layout_marginTop="@dimen/margin_5dp"
+                    android:ellipsize="end"
+                    android:lineSpacingExtra="3dp"
+                    android:lines="2"
+                    android:text="@string/repeat_text"
+                    android:textColor="@color/font_cell"
+                    android:textSize="@dimen/font_size_msmall" />
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/iv_vip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/iv_portrait"
+                android:layout_toRightOf="@id/iv_portrait"
+                android:layout_marginBottom="-5dp"
+                android:layout_marginLeft="-15dp"
+                android:layout_toLeftOf="@+id/rl_postContent"
+                android:layout_marginRight="-15dp"
+                android:src="@drawable/icon_yellow_v_32"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
 
 </LinearLayout>

@@ -233,17 +233,9 @@ public class MyCommentListActivity extends BaseActivity {
 	}
 
 	protected void setAdapter(final ArrayList<MyPostComments> myPostCommentsList) {
-		new Thread() {
-			public void run() {
-				myCommentListAdapter = new MyCommentListAdapter(instance,
-						myPostCommentsList);
-				runOnUiThread(new Runnable() {
-					public void run() {
-						lv_myPostComments.setAdapter(myCommentListAdapter);
-					}
-				});
-			};
-		}.start();
+		myCommentListAdapter = new MyCommentListAdapter(instance,
+				myPostCommentsList);
+		lv_myPostComments.setAdapter(myCommentListAdapter);
 	}
 
 	private void initListener() {

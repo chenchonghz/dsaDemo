@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.szrjk.dhome.AddressBookActivity;
 import com.szrjk.dhome.R;
 import com.szrjk.search.SearchMainActivity;
 import com.szrjk.self.CreateCircleActivity;
@@ -56,11 +57,12 @@ public class MainActivityHeaderView extends RelativeLayout implements
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.iv_linklist:
-
+			Intent intent1=new Intent(context, AddressBookActivity.class);
+			context.startActivity(intent1);
 			break;
 		case R.id.iv_search:
-			Intent intent=new Intent(context, SearchMainActivity.class);
-			context.startActivity(intent);
+			Intent intent2=new Intent(context, SearchMainActivity.class);
+			context.startActivity(intent2);
 			break;
 		case R.id.iv_add:
 			AddPopup addPopup=new AddPopup((Activity)context, new OnClickListener() {

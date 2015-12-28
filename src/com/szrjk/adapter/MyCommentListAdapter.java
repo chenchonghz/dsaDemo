@@ -5,6 +5,8 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.text.SpannableString;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,13 +32,17 @@ import com.szrjk.index.PostDetailActivity;
 import com.szrjk.index.PostDetailFowardActivity2;
 import com.szrjk.util.DisplayTimeUtil;
 import com.szrjk.util.ImageLoaderUtil;
+import com.szrjk.util.SpannableStringUtils;
 import com.szrjk.widget.UserCardLayout;
 
 public class MyCommentListAdapter extends BaseAdapter {
 	private Context context;
 	private List<MyPostComments> myPostCommentsList;
 	private LayoutInflater inflater;
-	private static int TYPE=1;
+	private PostInfo abstractInfo;
+	private static final int TAG_IV_VIP = 1;
+	private static final int TAG_RL_POSTCONTENT = 2;
+	private static final int TAG_BTN_REPLY = 3;
 
 	public MyCommentListAdapter(Context context,
 			List<MyPostComments> myPostCommentsList) {
@@ -94,14 +100,20 @@ public class MyCommentListAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		MyPostComments myPostComments = myPostCommentsList.get(position);
-		List<PostAbstractList> postAbstractList = myPostComments.getAbstractInfo().getPostAbstractList();
-		final PostInfo abstractInfo;
-		if (postAbstractList!=null&&!postAbstractList.isEmpty()) {
-			abstractInfo=postAbstractList.get(postAbstractList.size()-1).getPostAbstract();
-		}else{
+		List<PostAbstractList> postAbstractList = myPostComments
+				.getAbstractInfo().getPostAbstractList();
+		if (postAbstractList != null && !postAbstractList.isEmpty()) {
+			for (int i = 0; i < postAbstractList.size(); i++) {
+				if (postAbstractList.get(i).getPostAbstract().getPostId().equals(myPostComments.getAbstractInfo().getPostId())) {
+					abstractInfo = postAbstractList.get(i)
+							.getPostAbstract();
+					break;
+				}
+			}
+		} else {
 			abstractInfo = myPostComments.getAbstractInfo();
 		}
-		UserCard userCard = myPostComments.getUserCard();
+		final UserCard userCard = myPostComments.getUserCard();
 		final UserCard userCard_FirstLayer = myPostComments
 				.getUserCard_FirstLayer();
 		UserCard userCard_SecondLayer = myPostComments
@@ -110,8 +122,69 @@ public class MyCommentListAdapter extends BaseAdapter {
 				.getCommentInfo_FirstLayer();
 		CommentInfo commentInfo_SecondLayer = myPostComments
 				.getCommentInfo_SecondLayer();
-		if (commentInfo_SecondLayer == null
-				|| commentInfo_SecondLayer.equals("")) {
+
+		if (commentInfo_SecondLayer != null
+				&&!commentInfo_SecondLayer.equals("")) {
+			String puserid = userCard_SecondLayer
+					.getUserSeqId();
+			String currentuserid = Constant.userInfo.getUserSeqId();
+			String targetstr = "回复"
+					+ userCard_SecondLayer.getUserName() + ":"
+					+ commentInfo_FirstLayer.getContent();
+			int start = 2;
+			int stop = start + userCard_SecondLayer.getUserName().length();
+			CharSequence postContent = SpannableStringUtils
+					.getClickableFaceSpan(context, targetstr, start, stop,
+							puserid, currentuserid);
+			holder.tv_commentcontent1.setText(postContent);
+			// 设置该句使文本的超连接起作用
+			holder.tv_commentcontent1.setMovementMethod(LinkMovementMethod
+					.getInstance());
+			
+			if (commentInfo_SecondLayer.getpUserCard() == null||commentInfo_SecondLayer.getpUserCard().equals("")) {
+				//直接评论
+				String puserid1 = userCard_SecondLayer
+						.getUserSeqId();
+				String currentuserid1 = Constant.userInfo.getUserSeqId();
+				String targetstr1 = userCard_SecondLayer
+						.getUserName()
+						+ ":"
+						+ commentInfo_SecondLayer.getContent();
+				int start1 = 0;
+				int stop1 = start1 + userCard_SecondLayer.getUserName().length();
+				CharSequence postContent1 = SpannableStringUtils
+						.getClickableFaceSpan(context, targetstr1, start1, stop1,
+								puserid1, currentuserid1);
+				holder.tv_commentcontent2.setText(postContent1);
+			} else {
+				//评论的评论
+				String puserid1 = userCard_SecondLayer
+						.getUserSeqId();
+				String puserid2 = commentInfo_SecondLayer.getpUserCard()
+						.getUserSeqId();
+				String currentuserid1 = Constant.userInfo.getUserSeqId();
+				String targetstr1 = userCard_SecondLayer
+						.getUserName()
+						+ "回复"
+						+ commentInfo_SecondLayer.getpUserCard().getUserName()
+						+ ":" + commentInfo_SecondLayer.getContent();
+				int start1 = 0;
+				int stop1 = start1 + userCard_SecondLayer.getUserName().length();
+				int start2=stop1 + userCard_SecondLayer.getUserName().length()-1;
+				int stop2=start2+commentInfo_SecondLayer.getpUserCard().getUserName().length();
+				CharSequence postContent1 = SpannableStringUtils
+						.getClickableFaceSpan(context, targetstr1, start1, stop1,start2,stop2,
+								puserid1,puserid2, currentuserid1);
+				holder.tv_commentcontent2.setText(postContent1);
+			}
+			// 设置该句使文本的超连接起作用
+			holder.tv_commentcontent2.setMovementMethod(LinkMovementMethod
+					.getInstance());
+			holder.rl_secondLayer.setBackgroundColor(context.getResources()
+					.getColor(R.color.base_bg));
+			holder.rl_postContent.setBackgroundColor(context.getResources()
+					.getColor(R.color.base_bg2));
+		} else {
 			holder.tv_commentcontent1.setText(commentInfo_FirstLayer
 					.getContent());
 			holder.tv_commentcontent2.setVisibility(View.GONE);
@@ -119,20 +192,8 @@ public class MyCommentListAdapter extends BaseAdapter {
 					.getColor(R.color.base_bg));
 			holder.rl_postInfo.setBackgroundColor(context.getResources()
 					.getColor(R.color.base_bg2));
-		} else {
-			holder.tv_commentcontent1.setText("回复"
-					+ userCard_SecondLayer.getUserName() + ":"
-					+ commentInfo_FirstLayer.getContent());
-			holder.tv_commentcontent2.setText(userCard_SecondLayer
-					.getUserName()
-					+ "回复"
-					+ userCard_FirstLayer.getUserName()
-					+ ":" + commentInfo_SecondLayer.getContent());
-			holder.rl_secondLayer.setBackgroundColor(context.getResources()
-					.getColor(R.color.base_bg));
-			holder.rl_postContent.setBackgroundColor(context.getResources()
-					.getColor(R.color.base_bg2));
 		}
+		holder.ucl_userCardLayout.setContext(context);
 		holder.ucl_userCardLayout.setUser(userCard_FirstLayer);
 		try {
 			holder.tv_time.setText(DisplayTimeUtil
@@ -150,11 +211,11 @@ public class MyCommentListAdapter extends BaseAdapter {
 					&& !abstractInfo.getPicListstr().isEmpty()) {
 				String[] picList = abstractInfo.getPicList();
 				url = picList[0];
-				setTYPE(2);
+				holder.iv_vip.setVisibility(View.GONE);
 			} else {
 				url = ConstantUser.getUserInfo().getUserFaceUrl();
 				if (!ConstantUser.getUserInfo().getUserLevel().equals("11")) {
-					setTYPE(2);
+					holder.iv_vip.setVisibility(View.GONE);
 				}
 			}
 		}
@@ -162,17 +223,14 @@ public class MyCommentListAdapter extends BaseAdapter {
 				R.drawable.pic_downloadfailed_bg,
 				R.drawable.pic_downloadfailed_bg);
 		imageLoaderUtil.showImage();
-		
-		if (getTYPE()==2) {
-			holder.iv_vip.setVisibility(View.GONE);
-		}
+
 		holder.btn_reply.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
 				Intent intent = new Intent(context, CommentActivity.class);
 				intent.putExtra(Constant.POST_ID,
 						commentInfo_FirstLayer.getSrcPostId());
-				intent.putExtra(Constant.USER_SEQ_ID,
-						userCard_FirstLayer.getUserSeqId());
+				intent.putExtra(Constant.USER_SEQ_ID, ConstantUser
+						.getUserInfo().getUserSeqId());
 				intent.putExtra(Constant.PCOMMENT_ID,
 						commentInfo_FirstLayer.getPostId());
 				intent.putExtra(Constant.COMMENT_LEVEL,
@@ -184,36 +242,45 @@ public class MyCommentListAdapter extends BaseAdapter {
 			public void onClick(View view) {
 				String postType = abstractInfo.getPostType();
 				String postId = abstractInfo.getPostId();
-				Intent intent=null;
+				String userSeqId = userCard.getUserSeqId();
+				Intent intent = null;
 				switch (Integer.parseInt(postType)) {
 				case 101:
 					intent = new Intent(context, PostDetailActivity.class);
-					intent.putExtra(Constant.USER_SEQ_ID, Constant.userInfo.getUserSeqId());
+					intent.putExtra(Constant.USER_SEQ_ID,
+							userSeqId);
 					intent.putExtra(Constant.POST_ID, postId);
 					break;
 				case 102:
 					intent = new Intent(context, CaseDetailActivity.class);
-					intent.putExtra(Constant.USER_SEQ_ID, Constant.userInfo.getUserSeqId());
+					intent.putExtra(Constant.USER_SEQ_ID,
+							userSeqId);
 					intent.putExtra(Constant.POST_ID, postId);
 					break;
 				case 103:
 					intent = new Intent(context, CaseDetailActivity.class);
-					intent.putExtra(Constant.USER_SEQ_ID, Constant.userInfo.getUserSeqId());
+					intent.putExtra(Constant.USER_SEQ_ID,
+							userSeqId);
 					intent.putExtra(Constant.POST_ID, postId);
 					break;
 				case 104:
 					intent = new Intent(context, PostDetailActivity.class);
-					intent.putExtra(Constant.USER_SEQ_ID, Constant.userInfo.getUserSeqId());
+					intent.putExtra(Constant.USER_SEQ_ID,
+							userSeqId);
 					intent.putExtra(Constant.POST_ID, postId);
 					break;
 				case 202:
-					intent = new Intent(context, PostDetailFowardActivity2.class);
-					intent.putExtra(Constant.USER_SEQ_ID, Constant.userInfo.getUserSeqId());
+					intent = new Intent(context,
+							PostDetailFowardActivity2.class);
+					intent.putExtra(Constant.USER_SEQ_ID,
+							userSeqId);
 					intent.putExtra(Constant.POST_ID, postId);
 					break;
 				case 204:
-					intent = new Intent(context, PostDetailFowardActivity2.class);
-					intent.putExtra(Constant.USER_SEQ_ID, Constant.userInfo.getUserSeqId());
+					intent = new Intent(context,
+							PostDetailFowardActivity2.class);
+					intent.putExtra(Constant.USER_SEQ_ID,
+							userSeqId);
 					intent.putExtra(Constant.POST_ID, postId);
 					break;
 				}
@@ -221,14 +288,6 @@ public class MyCommentListAdapter extends BaseAdapter {
 			}
 		});
 		return convertView;
-	}
-
-	public int getTYPE() {
-		return TYPE;
-	}
-
-	public void setTYPE(int tYPE) {
-		TYPE = tYPE;
 	}
 
 	private class ViewHolder {

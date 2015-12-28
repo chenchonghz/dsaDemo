@@ -72,15 +72,18 @@ public class MyCommentListActivity extends BaseActivity {
 	}
 
 	private void initLayout() {
-		lv_myPostComments = ptrl_my_comment.getRefreshableView();
 		ptrl_my_comment.setMode(Mode.BOTH);
-		ptrl_my_comment.getLoadingLayoutProxy(true, false).setPullLabel("");
-		ptrl_my_comment.getLoadingLayoutProxy(false, true).setPullLabel("");
-		ptrl_my_comment.getLoadingLayoutProxy(true, true)
-				.setRefreshingLabel("");
-		ptrl_my_comment.getLoadingLayoutProxy(true, true).setReleaseLabel("");
+		ptrl_my_comment.getLoadingLayoutProxy(true, false).setPullLabel(
+				getResources().getString(R.string.pull_down_lable_text));
+		ptrl_my_comment.getLoadingLayoutProxy(false, true).setPullLabel(
+				getResources().getString(R.string.pull_up_lable_text));
+		ptrl_my_comment.getLoadingLayoutProxy(true, true).setRefreshingLabel(
+				getResources().getString(R.string.refreshing_lable_text));
+		ptrl_my_comment.getLoadingLayoutProxy(true, true).setReleaseLabel(
+				getResources().getString(R.string.release_lable_text));
 		ptrl_my_comment.getLoadingLayoutProxy(true, true).setLoadingDrawable(
 				null);
+		lv_myPostComments = ptrl_my_comment.getRefreshableView();
 		basePostId = "0";
 		getMyPostComments();
 	}
@@ -166,6 +169,19 @@ public class MyCommentListActivity extends BaseActivity {
 										CommentInfo commentInfo_SecondLayer = JSON.parseObject(
 												object.getString("commentInfo_SecondLayer"),
 												CommentInfo.class);
+
+										String tmppusercard = object
+												.getJSONObject(
+														"commentInfo_SecondLayer")
+												.getString("pUserCard");
+										if (tmppusercard == null
+												|| tmppusercard.equals(""))
+											continue;
+										UserCard tmpuserCard = JSON
+												.parseObject(tmppusercard,
+														UserCard.class);
+										commentInfo_SecondLayer
+												.setpUserCard(tmpuserCard);
 										myPostComments
 												.setCommentInfo_SecondLayer(commentInfo_SecondLayer);
 									}
@@ -177,6 +193,18 @@ public class MyCommentListActivity extends BaseActivity {
 										CommentInfo commentInfo_FirstLayer = JSON.parseObject(
 												object.getString("commentInfo_FirstLayer"),
 												CommentInfo.class);
+										String tmppusercard = object
+												.getJSONObject(
+														"commentInfo_FirstLayer")
+												.getString("pUserCard");
+										if (tmppusercard == null
+												|| tmppusercard.equals(""))
+											continue;
+										UserCard tmpuserCard = JSON
+												.parseObject(tmppusercard,
+														UserCard.class);
+										commentInfo_FirstLayer
+												.setpUserCard(tmpuserCard);
 										myPostComments
 												.setCommentInfo_FirstLayer(commentInfo_FirstLayer);
 									}

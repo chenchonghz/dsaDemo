@@ -210,7 +210,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
-		Log.e("IndexViewAdapter", postOtherList.toString());
+//		Log.e("IndexViewAdapter", postOtherList.toString());
 		final UserCard userInfo = userList.get(position);
 		final PostInfo postInfo = postList.get(position);
 		final PostOtherImformationInfo postOtherInfo = postOtherList.get(position);
@@ -232,7 +232,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			case 0:
 				convertView = View.inflate(context, R.layout.item_casesharepost, null);
 				caseShare_Holder = new ViewHolder();
-				Log.e("IndexViewAdapter", "病例分享帖子加载布局");
 				initDoctorInfoView(convertView,caseShare_Holder);
 				initPostInfoView(convertView,caseShare_Holder);
 				initOtherInfoView(convertView,caseShare_Holder);
@@ -242,7 +241,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			case 1:
 				convertView = View.inflate(context, R.layout.item_problemhelppost, null);
 				problemHelp_Holder = new ViewHolder2();
-				Log.e("IndexViewAdapter", "疑难求助帖子加载布局");
 				initDoctorInfoView(convertView,problemHelp_Holder);
 				initPostInfoView(convertView,problemHelp_Holder);
 				initOtherInfoView(convertView,problemHelp_Holder);
@@ -251,7 +249,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			case 2:
 				convertView = View.inflate(context, R.layout.item_normalpost, null);
 				normalPost_Holder = new ViewHolder3();
-				Log.e("IndexViewAdapter", "普通帖子加载布局");
 				initGroupView(convertView,normalPost_Holder);
 				initDoctorInfoView(convertView,normalPost_Holder);
 				initPostInfoView(convertView,normalPost_Holder);
@@ -262,7 +259,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			case 3:
 				convertView = View.inflate(context, R.layout.item_transmit_normal_post, null);
 				tran_normalPost_Holder = new ViewHolder4();
-				Log.e("IndexViewAdapter", "转发普通帖子加载布局");
 				initDoctorInfoView(convertView, tran_normalPost_Holder);
 				initPostInfoView(convertView, tran_normalPost_Holder);
 				initOtherInfoView(convertView, tran_normalPost_Holder);
@@ -277,7 +273,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			case 4:
 				convertView = View.inflate(context, R.layout.item_transmit_caseshare_post, null);
 				tran_caseShare_Holder = new ViewHolder5();
-				Log.e("IndexViewAdapter", "转发病例分享帖子加载布局");
 				initDoctorInfoView(convertView, tran_caseShare_Holder);
 				initPostInfoView(convertView, tran_caseShare_Holder);
 				initOtherInfoView(convertView, tran_caseShare_Holder);
@@ -287,7 +282,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 				break;
 			case 5:
 				convertView = View.inflate(context, R.layout.item_transmit_problemhelp_post, null);
-				Log.e("IndexViewAdapter", "转发疑难求助帖子加载布局");
 				tran_problemHelp_Holder = new ViewHolder6();
 				initDoctorInfoView(convertView, tran_problemHelp_Holder);
 				initPostInfoView(convertView, tran_problemHelp_Holder);
@@ -298,7 +292,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 				break;
 			case 6:
 				convertView = View.inflate(context, R.layout.item_recommend_doctor, null);
-				Log.e("IndexViewAdapter", "推荐好友加载布局");
 				recommend_user_Holder = new ViewHolder7();
 				recommend_user_Holder.lv_recommend_doctor = (ListView)convertView.findViewById(R.id.lv_recommend_doctor);
 //				recommend_user_Holder.bt_change = (Button)convertView.findViewById(R.id.bt_change);
@@ -317,33 +310,24 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			switch (type) {
 			case 0:
 				caseShare_Holder = (ViewHolder)convertView.getTag(R.id.tag_caseshare);
-				Log.e("IndexViewAdapter", "病例分享帖子getTag");
-				Log.e("IndexViewAdapter", caseShare_Holder.toString());
 				break;
 			case 1:
 				problemHelp_Holder = (ViewHolder2)convertView.getTag(R.id.tag_problemhelp);
-				Log.e("IndexViewAdapter", "疑难求助帖子getTag");
-				Log.e("IndexViewAdapter", problemHelp_Holder.toString());
 				break;
 			case 2:
 				normalPost_Holder = (ViewHolder3)convertView.getTag(R.id.tag_normalpost);
-				Log.e("IndexViewAdapter", "普通帖子getTag");
 				break;
 			case 3:
 				tran_normalPost_Holder = (ViewHolder4)convertView.getTag(R.id.tag_transmit_normalpost);
-				Log.e("IndexViewAdapter", "转发普通帖子getTag");
 				break;
 			case 4:
 				tran_caseShare_Holder = (ViewHolder5)convertView.getTag(R.id.tag_transmit_caseshare);
-				Log.e("IndexViewAdapter", "转发病例分享帖子getTag");
 				break;
 			case 5:
 				tran_problemHelp_Holder = (ViewHolder6)convertView.getTag(R.id.tag_transmit_problemhelp);
-				Log.e("IndexViewAdapter", "转发疑难求助帖子getTag");
 				break;
 			case 6:
 				recommend_user_Holder = (ViewHolder7)convertView.getTag(R.id.tag_recommend_user);
-				Log.e("IndexViewAdapter", "用户推荐getTag");
 				break;
 			case 7:
 				viewHolder8 = (ViewHolder8)convertView.getTag();
@@ -353,7 +337,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		}
 		switch (type) {
 		case 0:
-				Log.e("IndexViewAdapter", "病例分享帖子加载数据");
 				if(userList.isEmpty()||postList.isEmpty()||postOtherList.isEmpty()){
 					return convertView;
 				}
@@ -513,7 +496,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			});
 			break;
 		case 1:
-				Log.e("IndexViewAdapter", "疑难求助病例分享帖子加载数据");
 				if(userList.isEmpty()||postList.isEmpty()||postOtherList.isEmpty()){
 					return convertView;
 				}
@@ -671,7 +653,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			});
 			break;
 		case 2:
-				Log.e("IndexViewAdapter", "普通帖子加载数据");
 				if(userList.isEmpty()||postList.isEmpty()||postOtherList.isEmpty()){
 					return convertView;
 				}
@@ -875,7 +856,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			});
 			break;
 		case 3:
-				Log.e("IndexViewAdapter", "转发普通帖子加载数据");
 				if(userList.isEmpty()||postList.isEmpty()||postOtherList.isEmpty()){
 					return convertView;
 				}
@@ -1121,7 +1101,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			});
 			break;
 		case 4:
-				Log.e("IndexViewAdapter", "转发病例分享帖子加载数据");
 				if(userList.isEmpty()||postList.isEmpty()||postOtherList.isEmpty()){
 					return convertView;
 				}
@@ -1341,7 +1320,6 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			});
 			break;
 		case 5:
-				Log.e("IndexViewAdapter", "转发疑难求助帖子加载数据");
 				if(userList.isEmpty()||postList.isEmpty()||postOtherList.isEmpty()){
 					return convertView;
 				}

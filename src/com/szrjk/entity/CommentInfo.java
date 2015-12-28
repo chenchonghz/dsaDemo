@@ -10,7 +10,7 @@ public class CommentInfo {
     private String postId;//当前评论的id
     private String postType;
     private String srcPostId;//原贴的id
-
+    
     public String getSrcPostId() {
         return srcPostId;
     }

@@ -15,7 +15,7 @@ public class RecommendContent {
 	private String isMember;
 	private String isOpen;
 	private List<UserCard> memberList;
-	private String memberNum;
+	private String memberCount;
 	private String memberType;
 	private List<CircleType> props;
 	private String status;
@@ -94,11 +94,11 @@ public class RecommendContent {
 	public void setMemberList(List<UserCard> memberList) {
 		this.memberList = memberList;
 	}
-	public String getMemberNum() {
-		return memberNum;
+	public String getMemberCount() {
+		return memberCount;
 	}
-	public void setMemberNum(String memberNum) {
-		this.memberNum = memberNum;
+	public void setMemberNum(String memberCount) {
+		this.memberCount = memberCount;
 	}
 	public String getMemberType() {
 		return memberType;
@@ -180,7 +180,7 @@ public class RecommendContent {
 				+ ", coterieName=" + coterieName + ", coterieType="
 				+ coterieType + ", createDate=" + createDate + ", creatorId="
 				+ creatorId + ", isMember=" + isMember + ", isOpen=" + isOpen
-				+ ", memberList=" + memberList + ", memberNum=" + memberNum
+				+ ", memberList=" + memberList + ", memberCount=" + memberCount
 				+ ", memberType=" + memberType + ", props=" + props
 				+ ", status=" + status + ", userSeqId=" + userSeqId
 				+ ", verifyTime=" + verifyTime + ", companyName=" + companyName

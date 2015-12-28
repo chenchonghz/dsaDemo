@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     style="@style/IndexButton"
-    android:orientation="vertical" >
-    <RelativeLayout 
+    >
+    <RelativeLayout
+        android:id="@+id/rl_userCard" 
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/view_doctorInfo_padding"
@@ -119,5 +120,13 @@
                 android:textColor="@color/font_cell"
                 android:textSize="7dp"/>           
         </RelativeLayout>
-    </RelativeLayout> 
-</LinearLayout>
+    </RelativeLayout>
+    <ImageView 
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:src="@drawable/icon_recommend"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:scaleType="centerCrop"
+        android:layout_marginRight="70dp"/> 
+</RelativeLayout>

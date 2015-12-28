@@ -5,12 +5,32 @@
     android:background="@color/base_bg"
     android:orientation="vertical" >
     
-   <com.yydcdut.sdlv.SlideAndDragListView
-       android:id="@+id/lv_messages"
-       android:layout_width="fill_parent"
-       android:layout_height="fill_parent"
-       android:divider="@color/line_list"
-       android:dividerHeight="0.5dip">
-   </com.yydcdut.sdlv.SlideAndDragListView>
+    <com.szrjk.pull.PullToRefreshScrollView
+        android:id="@+id/sl_messages" 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout 
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/base_bg"
+            android:orientation="vertical">
+
+            <com.szrjk.sdlv.SlideAndDragListView
+                android:id="@+id/lv_messages"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:layout_marginTop="@dimen/view_post_margin_11"
+                android:divider="@color/line_list"
+                android:dividerHeight="0.5dp"
+                >
+            </com.szrjk.sdlv.SlideAndDragListView>
+            <Button 
+                android:id="@+id/bt_botton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="进入新闻"/>              
+        </LinearLayout>       
+    </com.szrjk.pull.PullToRefreshScrollView>
 
 </LinearLayout>

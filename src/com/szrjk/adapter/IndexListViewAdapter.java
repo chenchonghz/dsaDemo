@@ -417,7 +417,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 				}else{
 					caseShare_Holder.iv_like.setImageResource(R.drawable.icon_laud_24);
 				}
-			caseShare_Holder.ll_doctorInfo.setOnClickListener(new OnClickListener() {
+			caseShare_Holder.rl_doctorInfo.setOnClickListener(new OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
@@ -574,7 +574,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 				}else{
 					problemHelp_Holder.iv_like.setImageResource(R.drawable.icon_laud_24);
 				}
-			problemHelp_Holder.ll_doctorInfo.setOnClickListener(new OnClickListener() {
+			problemHelp_Holder.rl_doctorInfo.setOnClickListener(new OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
@@ -766,7 +766,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					}
 				});
 
-			normalPost_Holder.ll_doctorInfo.setOnClickListener(new OnClickListener() {
+			normalPost_Holder.rl_doctorInfo.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
@@ -1009,7 +1009,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 				}
 				
 
-			tran_normalPost_Holder.ll_doctorInfo.setOnClickListener(new OnClickListener() {
+			tran_normalPost_Holder.rl_doctorInfo.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
@@ -1238,7 +1238,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 					tran_caseShare_Holder.iv_like.setImageResource(R.drawable.icon_laud_24);
 				}
 				
-			tran_caseShare_Holder.ll_doctorInfo.setOnClickListener(new OnClickListener() {
+			tran_caseShare_Holder.rl_doctorInfo.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
@@ -1464,7 +1464,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 				
 
 
-			tran_problemHelp_Holder.ll_doctorInfo.setOnClickListener(new OnClickListener() {
+			tran_problemHelp_Holder.rl_doctorInfo.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
@@ -2760,7 +2760,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		tran_problemHelp_Holder.tv_hospital = (TextView)convertView.findViewById(R.id.tv_hospital);
 		tran_problemHelp_Holder.tv_department = (TextView)convertView.findViewById(R.id.tv_department);
 		tran_problemHelp_Holder.tv_time = (TextView)convertView.findViewById(R.id.tv_posttime);
-		tran_problemHelp_Holder.ll_doctorInfo = (LinearLayout)convertView.findViewById(R.id.view_doctorinfo);
+		tran_problemHelp_Holder.rl_doctorInfo = (RelativeLayout)convertView.findViewById(R.id.view_doctorinfo);
 		tran_problemHelp_Holder.iv_headphoto_icon = (ImageView)convertView.findViewById(R.id.iv_yellow_icon);
 		tran_problemHelp_Holder.rl_readNum = (RelativeLayout)convertView.findViewById(R.id.rl_readNum);
 		tran_problemHelp_Holder.tv_readNum = (TextView)convertView.findViewById(R.id.tv_readNum);
@@ -2777,7 +2777,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		tran_caseShare_Holder.tv_hospital = (TextView)convertView.findViewById(R.id.tv_hospital);
 		tran_caseShare_Holder.tv_department = (TextView)convertView.findViewById(R.id.tv_department);
 		tran_caseShare_Holder.tv_time = (TextView)convertView.findViewById(R.id.tv_posttime);
-		tran_caseShare_Holder.ll_doctorInfo = (LinearLayout)convertView.findViewById(R.id.view_doctorinfo);
+		tran_caseShare_Holder.rl_doctorInfo = (RelativeLayout)convertView.findViewById(R.id.view_doctorinfo);
 		tran_caseShare_Holder.iv_headphoto_icon = (ImageView)convertView.findViewById(R.id.iv_yellow_icon);
 		tran_caseShare_Holder.rl_readNum = (RelativeLayout)convertView.findViewById(R.id.rl_readNum);
 		tran_caseShare_Holder.tv_readNum = (TextView)convertView.findViewById(R.id.tv_readNum);
@@ -2794,7 +2794,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		tran_normalpost_Holder.tv_hospital = (TextView)convertView.findViewById(R.id.tv_hospital);
 		tran_normalpost_Holder.tv_department = (TextView)convertView.findViewById(R.id.tv_department);
 		tran_normalpost_Holder.tv_time = (TextView)convertView.findViewById(R.id.tv_posttime);
-		tran_normalpost_Holder.ll_doctorInfo = (LinearLayout)convertView.findViewById(R.id.view_doctorinfo);
+		tran_normalpost_Holder.rl_doctorInfo = (RelativeLayout)convertView.findViewById(R.id.view_doctorinfo);
 		tran_normalpost_Holder.iv_headphoto_icon = (ImageView)convertView.findViewById(R.id.iv_yellow_icon);
 		tran_normalpost_Holder.rl_readNum = (RelativeLayout)convertView.findViewById(R.id.rl_readNum);
 		tran_normalpost_Holder.tv_readNum = (TextView)convertView.findViewById(R.id.tv_readNum);
@@ -2811,7 +2811,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		normalPost_Holder.tv_hospital = (TextView)convertView.findViewById(R.id.tv_hospital);
 		normalPost_Holder.tv_department = (TextView)convertView.findViewById(R.id.tv_department);
 		normalPost_Holder.tv_time = (TextView)convertView.findViewById(R.id.tv_posttime);
-		normalPost_Holder.ll_doctorInfo = (LinearLayout)convertView.findViewById(R.id.view_doctorinfo);
+		normalPost_Holder.rl_doctorInfo = (RelativeLayout)convertView.findViewById(R.id.view_doctorinfo);
 		normalPost_Holder.iv_headphoto_icon = (ImageView)convertView.findViewById(R.id.iv_yellow_icon);
 		normalPost_Holder.rl_readNum = (RelativeLayout)convertView.findViewById(R.id.rl_readNum);
 		normalPost_Holder.tv_readNum = (TextView)convertView.findViewById(R.id.tv_readNum);
@@ -2925,7 +2925,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		problemHelp_Holder.tv_hospital = (TextView)convertView.findViewById(R.id.tv_hospital);
 		problemHelp_Holder.tv_department = (TextView)convertView.findViewById(R.id.tv_department);
 		problemHelp_Holder.tv_time = (TextView)convertView.findViewById(R.id.tv_posttime);
-		problemHelp_Holder.ll_doctorInfo = (LinearLayout)convertView.findViewById(R.id.view_doctorinfo);
+		problemHelp_Holder.rl_doctorInfo = (RelativeLayout)convertView.findViewById(R.id.view_doctorinfo);
 		problemHelp_Holder.iv_headphoto_icon = (ImageView)convertView.findViewById(R.id.iv_yellow_icon);
 		problemHelp_Holder.rl_readNum = (RelativeLayout)convertView.findViewById(R.id.rl_readNum);
 		problemHelp_Holder.tv_readNum = (TextView)convertView.findViewById(R.id.tv_readNum);
@@ -2942,7 +2942,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		caseShare_Holder.tv_hospital = (TextView)convertView.findViewById(R.id.tv_hospital);
 		caseShare_Holder.tv_department = (TextView)convertView.findViewById(R.id.tv_department);
 		caseShare_Holder.tv_time = (TextView)convertView.findViewById(R.id.tv_posttime);
-		caseShare_Holder.ll_doctorInfo = (LinearLayout)convertView.findViewById(R.id.view_doctorinfo);
+		caseShare_Holder.rl_doctorInfo = (RelativeLayout)convertView.findViewById(R.id.view_doctorinfo);
 		caseShare_Holder.iv_headphoto_icon = (ImageView)convertView.findViewById(R.id.iv_yellow_icon);
 		caseShare_Holder.rl_readNum = (RelativeLayout)convertView.findViewById(R.id.rl_readNum);
 		caseShare_Holder.tv_readNum = (TextView)convertView.findViewById(R.id.tv_readNum);
@@ -3033,8 +3033,8 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		ImageView iv_smallPhoto,iv_backgroudpic,iv_like,iv_headphoto_icon,iv_gray;
 		TextView tv_doctorName,tv_jobTitle,tv_hospital,tv_time,tv_department,
 		tv_transmit,tv_command,tv_like,tv_postTitle,tv_completeRate,tv_readNum;
-		RelativeLayout rl_transmit,rl_command,rl_like,rl_view_post,rl_readNum;
-		LinearLayout ll_doctorInfo,ll_caseshare_post;
+		RelativeLayout rl_transmit,rl_command,rl_like,rl_view_post,rl_readNum,rl_doctorInfo;
+		LinearLayout ll_caseshare_post;
 	}
 	/**
 	 * 疑难求助的viewHolder
@@ -3045,8 +3045,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		ImageView iv_smallPhoto,iv_backgroudpic,iv_like,iv_headphoto_icon,iv_gray;
 		TextView tv_doctorName,tv_jobTitle,tv_hospital,tv_time,tv_department,tv_readNum,
 		tv_transmit,tv_command,tv_like,tv_postTitle,tv_completeRate;
-		RelativeLayout rl_transmit,rl_command,rl_like,rl_view_post,rl_readNum;
-		LinearLayout ll_doctorInfo;
+		RelativeLayout rl_transmit,rl_command,rl_like,rl_view_post,rl_readNum,rl_doctorInfo;
 	}
 	/**
 	 * 普通帖子的viewHolder
@@ -3057,9 +3056,9 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		ImageView iv_smallPhoto,iv_like,iv_headphoto_icon,iv_gray;
 		TextView tv_doctorName,tv_jobTitle,tv_hospital,tv_time,tv_department,
 		tv_transmit,tv_command,tv_like,tv_post_text,tv_group_name,tv_readNum;
-		RelativeLayout rl_transmit,rl_command,rl_like,rl_readNum;
+		RelativeLayout rl_transmit,rl_command,rl_like,rl_readNum,rl_doctorInfo;
 		IndexGridView gv_pic;
-		LinearLayout ll_doctorInfo,ll_view_normal_post,ll_group,ll_normal_post;
+		LinearLayout ll_view_normal_post,ll_group,ll_normal_post;
 	}
 	/**
 	 * 转发普通帖子的viewHolder
@@ -3071,8 +3070,8 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		TextView tv_doctorName,tv_srcDoctorName,tv_jobTitle,tv_srcJobTitle,tv_hospital,tv_srcHospital,tv_time,tv_srcTime,
 		tv_department,tv_srcDepartment,tv_transmit,tv_command,tv_like,
 		tv_src_group_name,tv_src_post_text,tv_src_text,tv_readNum;
-		LinearLayout ll_doctorInfo,ll_srcDoctorInfo,ll_src_normal_post,ll_src_group,ll_transmit_content;
-		RelativeLayout rl_transmit,rl_command,rl_like,rl_readNum;
+		LinearLayout ll_srcDoctorInfo,ll_src_normal_post,ll_src_group,ll_transmit_content;
+		RelativeLayout rl_transmit,rl_command,rl_like,rl_readNum,rl_doctorInfo;
 		IndexGridView gv_src_pic;
 		TransmitTextView tv_post_text;
 	}
@@ -3086,8 +3085,8 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		TextView tv_doctorName,tv_srcDoctorName,tv_jobTitle,tv_srcJobTitle,tv_hospital,tv_srcHospital,tv_time,tv_srcTime,
 		tv_department,tv_srcDepartment,tv_transmit,tv_command,tv_like,tv_readNum,
 		tv_src_postTitle,tv_src_completeRate,tv_srcname;
-		LinearLayout ll_doctorInfo,ll_srcDoctorInfo,ll_caseShare;
-		RelativeLayout rl_transmit,rl_command,rl_like,rl_src_view_post,rl_readNum;
+		LinearLayout ll_srcDoctorInfo,ll_caseShare;
+		RelativeLayout rl_transmit,rl_command,rl_like,rl_src_view_post,rl_readNum,rl_doctorInfo;
 		TransmitTextView tv_post_text;
 		FrameLayout fl_bg;
 	}
@@ -3101,8 +3100,8 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 		TextView tv_doctorName,tv_srcDoctorName,tv_jobTitle,tv_srcJobTitle,tv_hospital,tv_srcHospital,tv_time,tv_srcTime,
 		tv_department,tv_srcDepartment,tv_transmit,tv_command,tv_like,tv_readNum,
 		tv_src_postTitle,tv_src_completeRate,tv_srcname;
-		LinearLayout ll_doctorInfo,ll_srcDoctorInfo,ll_problemHelp;
-		RelativeLayout rl_transmit,rl_command,rl_like,rl_src_view_post,rl_readNum;
+		LinearLayout ll_srcDoctorInfo,ll_problemHelp;
+		RelativeLayout rl_transmit,rl_command,rl_like,rl_src_view_post,rl_readNum,rl_doctorInfo;
 		TransmitTextView tv_post_text;
 		FrameLayout fl_bg;
 	}

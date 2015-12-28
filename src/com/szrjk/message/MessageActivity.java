@@ -82,6 +82,13 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 		ViewUtils.inject(instance);
 		mPullToRefreshListView.setMode(Mode.PULL_FROM_START);
 		list_message = mPullToRefreshListView.getRefreshableView();
+		hv_message.showImageLLy(R.drawable.icon_messageset_40, new OnClickListener() {
+			public void onClick(View arg0) {
+				Intent intent = new Intent(instance, ChatSettingsActivity.class);
+				intent.putExtra(Constant.USER_INFO, selfUserCard);
+				startActivity(intent);
+			}
+		});
 		//获取usercard
 		Intent intent = getIntent();
 		objUserCard = (UserCard) intent.getSerializableExtra("otherusercard");

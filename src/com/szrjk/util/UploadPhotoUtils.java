@@ -154,7 +154,7 @@ public class UploadPhotoUtils {
 
 					//Bitmap bitmapCaputre = BitmapFactory.decodeFile(file.getAbsolutePath());
 					//由于启动拍照的时候，已经指定了一个file保存拍照后的图片；这里就不用返回的data（是缩略图）、file是原图（保持清晰）
-					
+					//这里的压缩非常耗时，会造成卡顿
 					Bitmap bitmapCaputre = BitmapCompressImage.getimage(file.getAbsolutePath());
 					//Bitmap bitmapCaputre=(Bitmap)data.getExtras().get("data");
 					imgUrlCallback.operImgPic(bitmapCaputre);

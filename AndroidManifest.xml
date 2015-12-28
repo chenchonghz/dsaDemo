@@ -845,8 +845,17 @@
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
         </activity>
-=======
->>>>>>> dev
+        <activity
+            android:name="com.szrjk.explore.MessageSettingActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/Theme.dhome"
+            android:windowSoftInputMode="adjustNothing" >
+        </activity>
+        
+        
+        <service 
+            android:name="com.szrjk.service.DemoService"
+            ></service>
     </application>
 
 </manifest>

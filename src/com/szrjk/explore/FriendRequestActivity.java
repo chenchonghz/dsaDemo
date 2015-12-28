@@ -66,7 +66,7 @@ public class FriendRequestActivity extends BaseActivity {
 		ViewUtils.inject(instance);
 		hv_friend_req.showImageLLy(R.drawable.icon_messageset_40,new OnClickListener() {
 			public void onClick(View arg0) {
-				ToastUtils.showMessage(instance, "国明请吃饭");
+				ToastUtils.showMessage(instance, "尚未开通");
 			}
 		});
 		RequestState = new HashMap<String, Integer>();

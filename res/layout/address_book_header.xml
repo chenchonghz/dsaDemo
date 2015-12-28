@@ -28,7 +28,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/send_header_margin"
-            android:src="@drawable/icon_addpic" />
+            android:src="@drawable/icon_mycircle_80" />
 
         <View 
             android:layout_width="match_parent"

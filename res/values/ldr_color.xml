@@ -9,4 +9,5 @@
     <color name="pop_pressed">#f0f1f5</color>
     <color name="rz_title">#293133</color>
     <color name="color_black">#000000</color>
+    <color name="settings_font_color">#8c8c8c</color>
 </resources>

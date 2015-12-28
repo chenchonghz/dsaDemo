@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -400,6 +401,25 @@ public class SendPostActivity extends BaseActivity {
 			return false;
 		}
 	};
+	
+	
+	class ImageBrocast extends BroadcastReceiver {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			
+			String ac = intent.getAction();
+			
+			if ("失败".equals(ac)) {
+				
+			}else{
+				
+			}
+			
+		}
+	}
+	
+	
+	
 	/**
 	 * 这里的3个重写方法：由于打开了拍照，低ram的手机会回收发帖这个Activity。
 	 * 当回收之后，会执行onCreate方法里面的检查草稿方法。导致把草稿恢复覆盖当前编辑的内容

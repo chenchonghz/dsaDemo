@@ -10,6 +10,7 @@ import android.content.Context;
 import com.alibaba.sdk.android.oss.callback.SaveCallback;
 import com.szrjk.config.Constant;
 import com.szrjk.entity.PhotoType;
+import com.szrjk.service.DemoService;
 
 public class ImageAsynTaskUpload {
 	private SharePerferenceUtil perferenceUtil;

@@ -65,8 +65,8 @@ public class Register2Activity extends BaseActivity implements OnClickListener
 	/**
 	 * 验证码,存储
 	 */
-	private static String tmpvcode;
-	private static long tmpvcodetime;
+//	private static String tmpvcode;
+//	private static long tmpvcodetime;
 
 	Resources resources;
 
@@ -138,46 +138,96 @@ public class Register2Activity extends BaseActivity implements OnClickListener
 		Result result = fireEye.test();
 		if (!result.passed) { return; }
 
-		String phone2=text_phonenum.getText().toString();
-		if (!phone2.equals(phone)) {
-			text_vcode.setText("");
-			return;
-		}
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("ServiceName", "checkVerificationCode");
+		Map<String, Object> busiParams = new HashMap<String, Object>();
+		busiParams.put("authAccount", phone);
+		busiParams.put("captcha", text_vcode.getText().toString());
+		paramMap.put("BusiParams", busiParams);
+
+		// 调用短信接口
+		httpPost(paramMap, new AbstractDhomeRequestCallBack()
+		{
+			@Override
+			public void start()
+			{
+				dialog.show();
+			}
+
+			@Override
+			public void loading(long total, long current, boolean isUploading)
+			{
+			}
+
+			@Override
+			public void failure(HttpException exception, JSONObject jsonObject)
+			{
+//				ErrorInfo.put("ErrorInfo", str);
+				ToastUtils.showMessage(Register2Activity.this,jsonObject.getString("ErrorInfo"));
+				dialog.dismiss();
+			}
+
+			@Override
+			public void success(JSONObject jsonObject)
+			{
+//				ErrorInfo errorObj = JSON.parseObject(
+//						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
+//				ToastUtils.showMessage(Register2Activity.this, ""+ errorObj.getErrorMessage());
+
+				dialog.dismiss();
+				// 保存数据,手机号码
+				DHomeApplication dHomeApplication = (DHomeApplication) getApplication();
+				RegisterInfo registerInfo = dHomeApplication.getRegisterInfo();
+				registerInfo.setPhone(text_phonenum.getText().toString());
+
+				// 跳转
+				Intent intent1 = new Intent(Register2Activity.this,
+						AboutYouActivity.class);
+				startActivity(intent1);
+			}
+		});
+
+
+//		String phone2=text_phonenum.getText().toString();
+//		if (!phone2.equals(phone)) {
+//			text_vcode.setText("");
+//			return;
+//		}
 		
 		// 验证码校验TODO
-		String filledvcode = text_vcode.getText().toString();// 用户填的验证码
-		long now = new Date().getTime();
-		if (tmpvcode == null || tmpvcode.isEmpty())
-		{
-			// 验证码失效
-			Toast.makeText(getApplicationContext(), "请先填写号码后发送验证码!",
-					Toast.LENGTH_SHORT).show();
-			return;
-		}
-		else if (now - tmpvcodetime > 120000)
-		{
-			Toast.makeText(getApplicationContext(), "验证码过期!",
-					Toast.LENGTH_SHORT).show();
-			return;
-		}
-		else if (!tmpvcode.equals(filledvcode))
-		{
-			Toast.makeText(getApplicationContext(), "验证码错误!",
-					Toast.LENGTH_SHORT).show();
-			return;
-		}
+//		String filledvcode = text_vcode.getText().toString();// 用户填的验证码
+//		long now = new Date().getTime();
+//		if (tmpvcode == null || tmpvcode.isEmpty())
+//		{
+//			// 验证码失效
+//			Toast.makeText(getApplicationContext(), "请先填写号码后发送验证码!",
+//					Toast.LENGTH_SHORT).show();
+//			return;
+//		}
+//		else if (now - tmpvcodetime > 120000)
+//		{
+//			Toast.makeText(getApplicationContext(), "验证码过期!",
+//					Toast.LENGTH_SHORT).show();
+//			return;
+//		}
+//		else if (!tmpvcode.equals(filledvcode))
+//		{
+//			Toast.makeText(getApplicationContext(), "验证码错误!",
+//					Toast.LENGTH_SHORT).show();
+//			return;
+//		}
 //		Toast.makeText(getApplicationContext(), "验证码成功!", Toast.LENGTH_SHORT)
 //				.show();
 
-		// 保存数据,手机号码
-		DHomeApplication dHomeApplication = (DHomeApplication) getApplication();
-		RegisterInfo registerInfo = dHomeApplication.getRegisterInfo();
-		registerInfo.setPhone(text_phonenum.getText().toString());
-
-		// 跳转
-		Intent intent1 = new Intent(Register2Activity.this,
-				AboutYouActivity.class);
-		startActivity(intent1);
+//		// 保存数据,手机号码
+//		DHomeApplication dHomeApplication = (DHomeApplication) getApplication();
+//		RegisterInfo registerInfo = dHomeApplication.getRegisterInfo();
+//		registerInfo.setPhone(text_phonenum.getText().toString());
+//
+//		// 跳转
+//		Intent intent1 = new Intent(Register2Activity.this,
+//				AboutYouActivity.class);
+//		startActivity(intent1);
 
 	}
 
@@ -192,12 +242,12 @@ public class Register2Activity extends BaseActivity implements OnClickListener
 		if (!result.passed) { return; }
 
 		// 生成验证码
-		Random r = new Random();
-		String vcode = "" + r.nextInt(9) + r.nextInt(9) + r.nextInt(9)
-				+ r.nextInt(9)+r.nextInt(9)+r.nextInt(9);//验证码生成
-		// 保存验证码
-		tmpvcode = "" + vcode;
-		tmpvcodetime = new Date().getTime();// 验证码发出时间
+//		Random r = new Random();
+//		String vcode = "" + r.nextInt(9) + r.nextInt(9) + r.nextInt(9)
+//				+ r.nextInt(9)+r.nextInt(9)+r.nextInt(9);//验证码生成
+//		// 保存验证码
+//		tmpvcode = "" + vcode;
+//		tmpvcodetime = new Date().getTime();// 验证码发出时间
 
 		phone = text_phonenum.getText().toString();
 
@@ -209,8 +259,9 @@ public class Register2Activity extends BaseActivity implements OnClickListener
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("ServiceName", "thirdPartyAuth");
 		Map<String, Object> busiParams = new HashMap<String, Object>();
-		busiParams.put("captcha", tmpvcode);
+//		busiParams.put("captcha", tmpvcode);
 		busiParams.put("busiType", "1");
+		busiParams.put("deviceId", "123");//????
 		busiParams.put("authAccount", phone);
 		paramMap.put("BusiParams", busiParams);
 

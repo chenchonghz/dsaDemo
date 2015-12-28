@@ -85,7 +85,7 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 		hv_message.showImageLLy(R.drawable.icon_messageset_40, new OnClickListener() {
 			public void onClick(View arg0) {
 				Intent intent = new Intent(instance, ChatSettingsActivity.class);
-				intent.putExtra(Constant.USER_INFO, selfUserCard);
+				intent.putExtra(Constant.USER_INFO, objUserCard);
 				startActivity(intent);
 			}
 		});

@@ -221,7 +221,10 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 						@Override
 						public void run() {
 							// Select the last row so it will scroll into view...
-							list_message.setSelectionFromTop(adapter.getCount()-1,0);
+							
+							if (adapter!=null&&adapter.getCount()!=0) {
+								list_message.setSelectionFromTop(adapter.getCount()-1,0);
+							}
 						}
 					});
 
@@ -415,7 +418,11 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 				String date =df.format(new Date());
 				TempMe.setCreateDate(date);
 				messages.add(TempMe);
-				adapter.notifyDataSetChanged();
+				if (adapter==null) {
+					setAdapter();
+				}else{
+					adapter.notifyDataSetChanged();
+				}
 				et_talk.setText("");
 				sendMessage();
 				time.cancel();

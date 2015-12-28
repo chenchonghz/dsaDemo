@@ -29,17 +29,20 @@ import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.NewsEntity;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
+import com.szrjk.pull.PullToRefreshListView;
 import com.szrjk.util.ShowDialogUtil;
 import com.szrjk.util.ToastUtils;
 
 public class NewsFragment extends Fragment{
-    private ListView lv_news;
+    private PullToRefreshListView lv_news;
 	private String title_id;
 	private ExploreMoreNewsListAdapter adapter;
 	private Dialog dialog;
 	private Context context;
 	private static final String LOADING_POST = "正在加载帖子";
 	private ArrayList<NewsEntity> newsList;
+	private int beginNum = 1;
+	private int endNum = 20;
 	private Handler handler = new Handler(){
 		@Override
 		public void handleMessage(android.os.Message msg) {
@@ -101,10 +104,19 @@ public class NewsFragment extends Fragment{
 	private void initData(View contextView) {
 		// TODO Auto-generated method stub
 		context = getActivity();
-		lv_news = (ListView)contextView.findViewById(R.id.lv_news);
-//		Bundle mBundle = getArguments();
-//		news_type = mBundle.getString("titles_id");
-//		Log.e("Explore", "帖子类型："+title_id);
+		lv_news = (PullToRefreshListView)contextView.findViewById(R.id.lv_news);
+		lv_news
+		.setMode(com.szrjk.pull.PullToRefreshBase.Mode.BOTH);
+		lv_news.getLoadingLayoutProxy(true, false).setPullLabel(getResources().getString(R.string.pull_down_lable_text));
+		lv_news.getLoadingLayoutProxy(false, true).setPullLabel(
+				getResources().getString(R.string.pull_up_lable_text));
+		lv_news.getLoadingLayoutProxy(true, true)
+		.setRefreshingLabel(
+				getResources()
+				.getString(R.string.refreshing_lable_text));
+		lv_news.getLoadingLayoutProxy(true, true)
+		.setReleaseLabel(
+				getResources().getString(R.string.release_lable_text));
 		dialog = ShowDialogUtil.createDialog(context, LOADING_POST);
 		getNews();
 	}
@@ -112,12 +124,12 @@ public class NewsFragment extends Fragment{
 	private void getNews() {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("ServiceName", "queryInfAbstracts");
+		paramMap.put("ServiceName", "queryInfoAbstracts");
 		Map<String, Object> busiParams = new HashMap<String, Object>();
-		busiParams.put("userSeqId", Constant.userInfo.getUserSeqId());
 		busiParams.put("typeId", title_id);
 		busiParams.put("baseLev", "0");
-		busiParams.put("count", String.valueOf(20));
+		busiParams.put("beginNum", String.valueOf(beginNum));
+		busiParams.put("endNum", String.valueOf(endNum));
 		paramMap.put("BusiParams", busiParams);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
 			

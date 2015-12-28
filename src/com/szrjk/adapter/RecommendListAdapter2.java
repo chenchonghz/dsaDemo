@@ -147,8 +147,8 @@ public class RecommendListAdapter2 extends BaseAdapter{
 					}else{
 						circleHolder.tv_circleName.setText("");
 					}
-					if(recommendContent.getMemberNum()!=null && !recommendContent.getMemberNum().isEmpty()){
-						circleHolder.tv_peopleNum.setText(recommendContent.getMemberNum());
+					if(recommendContent.getMemberCount()!=null && !recommendContent.getMemberCount().isEmpty()){
+						circleHolder.tv_peopleNum.setText(recommendContent.getMemberCount());
 					}else{
 						circleHolder.tv_peopleNum.setText("0");
 					}

@@ -45,6 +45,7 @@ public class DHttpService
 //			params.setHeader("messageDigest",htextecrypt);
 //			String aa  = MD5Encode(msg);
 //			reqJson = ;
+			Log.e("Http", MessageDigestUtil.MD5Encode(reqJson));
 			params.setHeader("messageDigest", MessageDigestUtil.MD5Encode(reqJson));
 
 //			String sss = MessageDigestUtil.doDecode(reqJson);

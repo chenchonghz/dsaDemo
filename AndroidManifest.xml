@@ -830,9 +830,8 @@
         <activity
             android:name="com.szrjk.dhome.AddressBookActivity"
             android:configChanges="orientation|screenSize"
-            android:windowSoftInputMode="stateHidden|adjustPan"
             android:theme="@style/Theme.dhome"
-            >
+            android:windowSoftInputMode="stateHidden|adjustPan" >
         </activity>
         <activity
             android:name="com.szrjk.explore.FriendRequestActivity"
@@ -846,6 +845,8 @@
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
         </activity>
+=======
+>>>>>>> dev
     </application>
 
 </manifest>

@@ -42,7 +42,7 @@
                 android:layout_below="@+id/tv_time"
                 android:layout_marginRight="@dimen/margin_10dp"
                 android:layout_marginTop="5dp"
-                android:background="@color/base_bg"
+                android:background="@drawable/pic_comment_bg_48"
                 android:gravity="center"
                 android:text="回复"
                 android:textColor="@color/font_cell"

@@ -59,9 +59,11 @@ public class MultipleUploadPhotoUtils {
 	private String[] arr;//图库返回的图片地址数组
 
 	/**
-	 *
-	 * @param context
-	 * @param lly_post  最外层的id
+	 * 
+	 * @param context    上下文
+	 * @param lly_post   最外层布局的id
+	 * @param maxNum	 可以选择图片的个数
+	 * @param iSelectImgCallback  ISelectImgCallback 选择之后，图片对象的回调数组，以及List对象
 	 */
 	public MultipleUploadPhotoUtils(BaseActivity context,LinearLayout lly_post,int maxNum,ISelectImgCallback iSelectImgCallback) {
 		this.context = context;
@@ -71,31 +73,28 @@ public class MultipleUploadPhotoUtils {
 			maxNum=3;
 		}
 		this.maxNum = maxNum;
-//		//弹框
+		//弹框
 		showPoP(lly_post);
 	}
-
-
 
 	/**
 	 * 拍照
 	 */
 	private Uri mOutPutFileUri;
-	private File file;
+	private File file;//保存拍照临时图片的文件
 	private void doTakePicture() throws IOException {
 		//        Intent intent = new Intent();
-		////        intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-		//        Intent getImageByCamera = new Intent("android.media.action.IMAGE_CAPTURE");
+		//        intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);第一套拍照
+		//        Intent getImageByCamera = new Intent("android.media.action.IMAGE_CAPTURE");第二套拍照
 		//        context.startActivityForResult(getImageByCamera, CAMERA_WITH_DATA);
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-		//文件夹aaaa
 		String path = Environment.getExternalStorageDirectory().toString() + "/" +"tempimage";
 		File path1 = new File(path);
 		if(!path1.exists()){
 			path1.mkdirs();
 		}
 		file = new File(path1,System.currentTimeMillis()+".jpg");
-		file.createNewFile();//这里确保file生成。酷派会出现file不存在的情况
+		file.createNewFile();//这里确保file生成。酷派f1会出现file不存在的情况；其他主流手机未发现
 		mOutPutFileUri = Uri.fromFile(file);
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, mOutPutFileUri);
 		context.startActivityForResult(intent, CAMERA_WITH_DATA);
@@ -106,16 +105,15 @@ public class MultipleUploadPhotoUtils {
 	 */
 	private void doTakePhoto() {
 		Intent intent = new Intent();
-//		intent.setClass(context, AlbumActivity.class);
-//		intent.setClass(context, MainGalleryActivity.class);
+//		intent.setClass(context, AlbumActivity.class);第一套
+//		intent.setClass(context, MainGalleryActivity.class);第二套
 		intent.setClass(context, AlbumGalleryActivity.class);
 //		Bundle bundle = new Bundle();
 //		bundle.putInt(Constant.IMGNUM, maxNum);
 		intent.putExtra("num", maxNum);
-		//		intent.putExtras(bundle);
+		//intent.putExtras(bundle);
 		context.startActivityForResult(intent, PHOTO_PICKED_WITH_DATA);
 	}
-
 
 	public void operResult(int requestCode, int resultCode, Intent data) {
 
@@ -132,11 +130,11 @@ public class MultipleUploadPhotoUtils {
 				//处理mOutPutFileUri中的完整图像
 				ImageItem takePhoto = new ImageItem();
 //				Bitmap bm = BitmapFactory.decodeFile(getImageAbsolutePath(context, mOutPutFileUri));
-				
 //				Bitmap bm = BitmapFactory.decodeFile(file.getAbsolutePath());
-				//根据路径获得bm、然后循环压缩《00kb
-				Bitmap bm = BitmapCompressImage.getimage(file.getAbsolutePath());
-				takePhoto.setBitmap(bm);
+				//Bitmap bm = BitmapCompressImage.getimage(file.getAbsolutePath());
+				//根据路径获得bm、然后循环压缩《00kb >--这里有出现个问题：返回之后压缩，由于拍照图片太大，压缩会非常卡，界面会卡很久
+				//这里就不做压缩处理，把文件的路径保存到ImageItem里面即可
+				//takePhoto.setBitmap(bm);
 				takePhoto.setAbsPaht(file.getAbsolutePath());
 				imgItems.add(takePhoto);
 			} 
@@ -170,7 +168,6 @@ public class MultipleUploadPhotoUtils {
 				
 				imgItems.add(item);
 			}
-//			Log.i("普通帖子图片个数", "imgItems.size:" + imgItems.size());
 			break;
 		}
 		//上传
@@ -178,10 +175,8 @@ public class MultipleUploadPhotoUtils {
 		msg.what = DATA_CHARGE_NOTIFY;
 		PhotoHandler handler = new PhotoHandler();
 		handler.sendMessage(msg);
-		//回调
 	}
 	/**
-	 * 
 	 * @author dlr
 	 *2015-12-12 10:27:10
 	 *循环上传 的是，从ImageItem取getBitmap（）时候，会出现Bitmap空bitmap = Bimp.revitionImageSize(imagePath);

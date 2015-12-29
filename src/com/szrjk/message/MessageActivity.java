@@ -82,6 +82,13 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 		ViewUtils.inject(instance);
 		mPullToRefreshListView.setMode(Mode.PULL_FROM_START);
 		list_message = mPullToRefreshListView.getRefreshableView();
+		hv_message.showImageLLy(R.drawable.icon_messageset_40, new OnClickListener() {
+			public void onClick(View arg0) {
+				Intent intent = new Intent(instance, ChatSettingsActivity.class);
+				intent.putExtra(Constant.USER_INFO, objUserCard);
+				startActivity(intent);
+			}
+		});
 		//获取usercard
 		Intent intent = getIntent();
 		objUserCard = (UserCard) intent.getSerializableExtra("otherusercard");
@@ -214,7 +221,10 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 						@Override
 						public void run() {
 							// Select the last row so it will scroll into view...
-							list_message.setSelectionFromTop(adapter.getCount()-1,0);
+							
+							if (adapter!=null&&adapter.getCount()!=0) {
+								list_message.setSelectionFromTop(adapter.getCount()-1,0);
+							}
 						}
 					});
 
@@ -408,7 +418,11 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 				String date =df.format(new Date());
 				TempMe.setCreateDate(date);
 				messages.add(TempMe);
-				adapter.notifyDataSetChanged();
+				if (adapter==null) {
+					setAdapter();
+				}else{
+					adapter.notifyDataSetChanged();
+				}
 				et_talk.setText("");
 				sendMessage();
 				time.cancel();

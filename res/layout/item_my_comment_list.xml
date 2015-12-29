@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/ll_firstLayer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_20dp"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:minHeight="60dp" >
+
+            <com.szrjk.widget.UserCardLayout
+                android:id="@+id/ucl_userCardLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+            </com.szrjk.widget.UserCardLayout>
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/margin_10dp"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:gravity="center"
+                android:text="12月23日"
+                android:textColor="@color/font_cell"
+                android:textSize="@dimen/font_size_xsmall" />
+
+            <Button
+                android:id="@+id/btn_reply"
+                android:layout_width="30dp"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/tv_time"
+                android:layout_marginRight="@dimen/margin_10dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/base_bg"
+                android:gravity="center"
+                android:text="回复"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_small" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_commentcontent1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:text="回复张杰"
+            android:textColor="@color/font_cell"
+            android:textSize="@dimen/font_size_middle" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_secondLayer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:background="@color/base_bg" >
+
+        <TextView
+            android:id="@+id/tv_commentcontent2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_10dp"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:text="张杰回复陈洁仪"
+            android:textColor="@color/font_cell"
+            android:textSize="@dimen/font_size_middle" />
+
+        <RelativeLayout
+            android:id="@+id/rl_postInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_commentcontent2" >
+
+            <ImageView
+                android:id="@+id/iv_portrait"
+                android:layout_width="@dimen/avatar_size_middle"
+                android:layout_height="@dimen/avatar_size_middle"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/header" />
+
+            <RelativeLayout
+                android:id="@+id/rl_postContent"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@id/iv_portrait"
+                android:background="@color/base_bg2" >
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/repeat_Id"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_middle" />
+
+                <TextView
+                    android:id="@+id/tv_postcontent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_name"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="@dimen/margin_5dp"
+                    android:layout_marginTop="@dimen/margin_5dp"
+                    android:ellipsize="end"
+                    android:lineSpacingExtra="3dp"
+                    android:lines="2"
+                    android:text="@string/repeat_text"
+                    android:textColor="@color/font_cell"
+                    android:textSize="@dimen/font_size_msmall" />
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/iv_vip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/iv_portrait"
+                android:layout_toRightOf="@id/iv_portrait"
+                android:layout_marginBottom="-5dp"
+                android:layout_marginLeft="-15dp"
+                android:layout_toLeftOf="@+id/rl_postContent"
+                android:layout_marginRight="-15dp"
+                android:src="@drawable/icon_yellow_v_32"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,287 +1,279 @@
 package com.szrjk.explore;
 
-import android.app.Activity;
-import android.app.Dialog;
-import android.content.Intent;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import android.os.Bundle;
-import android.os.Handler;
+import android.util.Log;
 import android.widget.ListView;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
-import com.szrjk.adapter.CommendListAdapter;
+import com.szrjk.adapter.MyCommentListAdapter;
 import com.szrjk.config.Constant;
+import com.szrjk.config.ConstantUser;
+import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.R;
+import com.szrjk.entity.CommentInfo;
 import com.szrjk.entity.ErrorInfo;
-import com.szrjk.entity.NewsCommentEntity;
+import com.szrjk.entity.MyPostComments;
+import com.szrjk.entity.PostInfo;
+import com.szrjk.entity.UserCard;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
-import com.szrjk.http.DHttpService;
 import com.szrjk.pull.PullToRefreshBase;
+import com.szrjk.pull.PullToRefreshBase.Mode;
+import com.szrjk.pull.PullToRefreshBase.OnRefreshListener;
 import com.szrjk.pull.PullToRefreshListView;
-import com.szrjk.util.ShowDialogUtil;
 import com.szrjk.util.ToastUtils;
-import com.umeng.common.message.Log;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
 
 /**
- * denggm on 2015/12/25.
- * DHome
+ * denggm on 2015/12/25. DHome
  */
-public class MyCommentListActivity extends Activity {
-    private MyCommentListActivity instance;
-    @ViewInject(R.id.ptrl_more_comment)
-    private PullToRefreshListView ptrl_more_comment;
-    private ListView lv_comment;
-    private String baseCommentTime;
-    private String lastCommentTime;
-    private String infId;
-    private boolean isFirstIn = true;
-    private ArrayList<NewsCommentEntity> commentsList;
-    Dialog dialog;
-    private CommendListAdapter commendAdapter;
-    private static final String LOADING_POST = "’˝‘⁄º”‘ÿ∆¿¬€";
-    private Handler handler = new Handler(){
-        @Override
-        public void handleMessage(android.os.Message msg) {
-            switch (msg.what) {
-                case Constant.HAVE_NEW_POST:
-                    commendAdapter = new CommendListAdapter(instance, commentsList);
-                    lv_comment.setAdapter(commendAdapter);
-                    break;
-                case Constant.HAVE_NEW_POST_BY_REFRESH:
-                    commendAdapter.notifyDataSetChanged();
-                    break;
-            }
-        };
-    };
+@ContentView(R.layout.activity_my_comment_list)
+public class MyCommentListActivity extends BaseActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ViewUtils.inject(this);
-        instance=this;
-        initData();
-        initListner();
-        getComments();
+	@ViewInject(R.id.ptrl_my_comment)
+	private PullToRefreshListView ptrl_my_comment;
 
+	private MyCommentListActivity instance;
 
-    }
+	private ListView lv_myPostComments;
 
-    private void initListner() {
-        // TODO Auto-generated method stub
-        ptrl_more_comment.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
+	private ArrayList<MyPostComments> myPostCommentsList = new ArrayList<MyPostComments>();
 
-            @Override
-            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
-                // TODO Auto-generated method stub
-                //œ¬¿≠À¢–¬
-                if (ptrl_more_comment.isHeaderShown()) {
-                    getComments();
-                }
-                //…œ¿≠À¢–¬
-                if (ptrl_more_comment.isFooterShown()) {
-                    getMoreComments();
-                }
-            }
-        });
-    }
+	private String basePostId;
 
-    protected void getMoreComments() {
-        // TODO Auto-generated method stub
-        try {
-            HashMap<String, Object> paramMap = new HashMap<String, Object>();
-            paramMap.put("ServiceName", "queryInfComment");
-            Map<String, Object> busiParams = new HashMap<String, Object>();
-            busiParams.put("userSeqId", Constant.userInfo.getUserSeqId());
-            busiParams.put("infId", infId);
-            busiParams.put("baseCommentTime", lastCommentTime);
-            busiParams.put("count", "10");
-            paramMap.put("BusiParams", busiParams);
-            DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+	private String maxBasePostId;
 
-                @Override
-                public void success(JSONObject jsonObject) {
-                    // TODO Auto-generated method stub
-                    if (ptrl_more_comment.isRefreshing()) {
-                        ptrl_more_comment.onRefreshComplete();
-                    }
-                    ErrorInfo errorObj = JSON.parseObject(
-                            jsonObject.getString("ErrorInfo"), ErrorInfo.class);
-                    if (Constant.REQUESTCODE.equals(errorObj.getReturnCode())) {
-                        JSONObject returnObj = jsonObject
-                                .getJSONObject("ReturnInfo");
-                        JSONArray arr = JSON.parseArray(returnObj.getString("ListOut"));
-                        if (arr != null) {
-                            if (!arr.isEmpty()) {
-                                for (int i = 0; i < arr.size(); i++) {
-                                    NewsCommentEntity comment = JSON.parseObject(arr.getString(i), NewsCommentEntity.class);
-                                    commentsList.add(comment);
-                                }
-                                if (commentsList.get(commentsList.size() - 1).getCommentTime() != null) {
-                                    lastCommentTime = commentsList.get(commentsList.size() - 1).getCommentTime();
-                                }
-                            } else {
-                                ToastUtils.showMessage(instance, "√ª”–∏¸∂‡∆¿¬€¡À");
-                            }
-                            handler.sendEmptyMessage(Constant.HAVE_NEW_POST_BY_REFRESH);
-                            Log.e("MoreNewsComment", commentsList.toString());
-                        } else {
-                            ToastUtils.showMessage(instance, "ªÒ»°∏¸∂‡∆¿¬€ ß∞‹");
-                        }
+	private String minBasePostId;
 
-                    } else {
-                        ToastUtils.showMessage(instance, "ªÒ»°∏¸∂‡∆¿¬€ ß∞‹");
-                    }
-                }
+	private String isNew = "true";
 
-                @Override
-                public void start() {
-                    // TODO Auto-generated method stub
-                }
+	protected int y;
 
-                @Override
-                public void loading(long total, long current, boolean isUploading) {
-                    // TODO Auto-generated method stub
+	protected boolean isFirst = true;
 
-                }
+	private MyCommentListAdapter myCommentListAdapter;
 
-                @Override
-                public void failure(HttpException exception, JSONObject jobj) {
-                    // TODO Auto-generated method stub
-                    if (ptrl_more_comment.isRefreshing()) {
-                        ptrl_more_comment.onRefreshComplete();
-                    }
-                    ToastUtils.showMessage(instance, "ªÒ»°∏¸∂‡∆¿¬€ ß∞‹£¨«ÎºÏ≤ÈÕ¯¬Á");
-                }
-            });
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            Log.e("MoreNewsComment", e.toString());
-        }
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		ViewUtils.inject(this);
+		instance = this;
+		initLayout();
+		setAdapter(myPostCommentsList);
+		initListener();
+	}
 
-    }
-
-    private void getComments() {
-        // TODO Auto-generated method stub
-        try {
-            commentsList = new ArrayList<NewsCommentEntity>();
-            DateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
-            String currentTime = fmt.format(new Date());
-            baseCommentTime = currentTime;
-            Log.e("MoreNewsComment", " ±º‰£∫"+baseCommentTime);
-
-            //		baseCommentTime = commentsList.get(commentsList.size()-1).getCommentTime();
-            HashMap<String, Object> paramMap = new HashMap<String, Object>();
-            paramMap.put("ServiceName", "queryInfComment");
-            Map<String, Object> busiParams = new HashMap<String, Object>();
-            busiParams.put("userSeqId", Constant.userInfo.getUserSeqId());
-            busiParams.put("infId", infId);
-            busiParams.put("baseCommentTime", baseCommentTime);
-            busiParams.put("count", "10");
-            paramMap.put("BusiParams", busiParams);
-            DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
-
-                @Override
-                public void success(JSONObject jsonObject) {
-                    // TODO Auto-generated method stub
-                    if (dialog.isShowing())
-                    {
-                        dialog.dismiss();
-                    }
-                    if (ptrl_more_comment.isRefreshing())
-                    {
-                        ptrl_more_comment.onRefreshComplete();
-                    }
-                    ErrorInfo errorObj = JSON.parseObject(
-                            jsonObject.getString("ErrorInfo"), ErrorInfo.class);
-                    if (Constant.REQUESTCODE.equals(errorObj.getReturnCode()))
-                    {
-                        JSONObject returnObj = jsonObject
-                                .getJSONObject("ReturnInfo");
-                        JSONArray arr = JSON.parseArray(returnObj.getString("ListOut"));
-                        if(arr != null){
-                            if(!arr.isEmpty()){
-                                for (int i = 0; i < arr.size(); i++) {
-                                    NewsCommentEntity comment = JSON.parseObject(arr.getString(i), NewsCommentEntity.class);
-                                    commentsList.add(comment);
-                                }
-                                if(commentsList.get(commentsList.size()-1).getCommentTime()!=null){
-                                    lastCommentTime = commentsList.get(commentsList.size()-1).getCommentTime();
-                                }
-                            }else{
-                                ToastUtils.showMessage(instance, "√ª”–∏¸∂‡∆¿¬€¡À");
-                            }
-                            handler.sendEmptyMessage(Constant.HAVE_NEW_POST);
-                            Log.e("MoreNewsComment", commentsList.toString());
-                        }else{
-                            ToastUtils.showMessage(instance, "ªÒ»°∏¸∂‡∆¿¬€ ß∞‹");
-                        }
-
-                    }else{
-                        ToastUtils.showMessage(instance, "ªÒ»°∏¸∂‡∆¿¬€ ß∞‹");
-                    }
-                }
-
-                @Override
-                public void start() {
-                    // TODO Auto-generated method stub
-                    if(isFirstIn){
-                        dialog.show();
-                        isFirstIn = false;
-                    }
-                }
-
-                @Override
-                public void loading(long total, long current, boolean isUploading) {
-                    // TODO Auto-generated method stub
-
-                }
-
-                @Override
-                public void failure(HttpException exception, JSONObject jobj) {
-                    // TODO Auto-generated method stub
-                    if (dialog.isShowing())
-                    {
-                        dialog.dismiss();
-                    }
-                    if (ptrl_more_comment.isRefreshing())
-                    {
-                        ptrl_more_comment.onRefreshComplete();
-                    }
-                    ToastUtils.showMessage(instance, "ªÒ»°∏¸∂‡∆¿¬€ ß∞‹£¨«ÎºÏ≤ÈÕ¯¬Á");
-                }
-            });
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            Log.e("MoreNewsComment", e.toString());
-        }
-
-    }
-
-    private void initData() {
-        // TODO Auto-generated method stub
-        ptrl_more_comment.setMode(PullToRefreshBase.Mode.BOTH);
-        ptrl_more_comment.getLoadingLayoutProxy(true, false).setPullLabel(getResources().getString(R.string.pull_down_lable_text));
-        ptrl_more_comment.getLoadingLayoutProxy(false, true).setPullLabel(
+	private void initLayout() {
+		ptrl_my_comment.setMode(Mode.BOTH);
+		ptrl_my_comment.getLoadingLayoutProxy(true, false).setPullLabel(
+                getResources().getString(R.string.pull_down_lable_text));
+		ptrl_my_comment.getLoadingLayoutProxy(false, true).setPullLabel(
                 getResources().getString(R.string.pull_up_lable_text));
-        ptrl_more_comment.getLoadingLayoutProxy(true, true)
-                .setRefreshingLabel(
-                        getResources()
-                                .getString(R.string.refreshing_lable_text));
-        ptrl_more_comment.getLoadingLayoutProxy(true, true)
-                .setReleaseLabel(
-                        getResources().getString(R.string.release_lable_text));
-        lv_comment = ptrl_more_comment.getRefreshableView();
-        Intent intent = getIntent();
-        infId = intent.getStringExtra("infId");
-        dialog = ShowDialogUtil.createDialog(this, LOADING_POST);
+		ptrl_my_comment.getLoadingLayoutProxy(true, true).setRefreshingLabel(
+                getResources().getString(R.string.refreshing_lable_text));
+		ptrl_my_comment.getLoadingLayoutProxy(true, true).setReleaseLabel(
+                getResources().getString(R.string.release_lable_text));
+		ptrl_my_comment.getLoadingLayoutProxy(true, true).setLoadingDrawable(
+                null);
+		lv_myPostComments = ptrl_my_comment.getRefreshableView();
+		basePostId = "0";
+		getMyPostComments();
+	}
 
-    }
+	private void getMyPostComments() {
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("ServiceName", "queryMyPostComments");
+		Map<String, Object> busiParams = new HashMap<String, Object>();
+		busiParams.put("basePostId", basePostId);
+		busiParams.put("isNew", isNew);
+		busiParams.put("userSeqId", ConstantUser.getUserInfo().getUserSeqId());
+		busiParams.put("beginNum", "0");
+		busiParams.put("endNum", "5");
+		paramMap.put("BusiParams", busiParams);
+		httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			@Override
+			public void success(JSONObject jsonObject) {
+				try {
+					dialog.dismiss();
+					ErrorInfo errorObj = JSON.parseObject(
+							jsonObject.getString("ErrorInfo"), ErrorInfo.class);
+					if (Constant.REQUESTCODE.equals(errorObj.getReturnCode())) {
+						JSONObject returnObj = jsonObject
+								.getJSONObject("ReturnInfo");
+						if (returnObj.getString("ListOut") != null
+								&& !returnObj.getString("ListOut").equals("")) {
+							JSONArray listOut = returnObj
+									.getJSONArray("ListOut");
+							JSONObject commentInfo = (JSONObject) listOut
+									.get(0);
+							ArrayList<MyPostComments> myCommentsList = new ArrayList<MyPostComments>();
+
+							JSONArray list = commentInfo
+									.getJSONArray("commentInfo");
+							if (commentInfo != null && !commentInfo.isEmpty()) {
+								/*
+									Áî±‰∫éÊúâ‰∫õÊï∞ÊçÆÂèØËÉΩ‰∏∫Á©∫ÔºåËøôÈáåÂØπËøîÂõûÁöÑÊï∞ÊçÆ‰∏Ä‰∏™Â≠óÊÆµ‰∏Ä‰∏™Â≠óÊÆµÂú∞Â§ÑÁêÜ
+								 */
+								for (int i = 0; i < list.size(); i++) {
+									JSONObject object = list.getJSONObject(i);
+									MyPostComments myPostComments = new MyPostComments();
+									if (object.getString("userCard") != null&& !object.getString("userCard").isEmpty()) {
+										UserCard userCard = JSON.parseObject(object.getString("userCard"),UserCard.class);
+										myPostComments.setUserCard(userCard);
+									}
+									if (object.getString("abstractInfo") != null
+											&& !object
+													.getString("abstractInfo")
+													.isEmpty()) {
+										PostInfo abstractInfo = JSON.parseObject(
+												object.getString("abstractInfo"),
+												PostInfo.class);
+										myPostComments
+												.setAbstractInfo(abstractInfo);
+									}
+									if (object
+											.getString("userCard_SecondLayer") != null
+											&& !object.getString(
+													"userCard_SecondLayer")
+													.isEmpty()) {
+										UserCard userCard_SecondLayer = JSON.parseObject(
+												object.getString("userCard_SecondLayer"),
+												UserCard.class);
+										myPostComments
+												.setUserCard_SecondLayer(userCard_SecondLayer);
+									}
+									if (object.getString("userCard_FirstLayer") != null
+											&& !object.getString(
+													"userCard_FirstLayer")
+													.isEmpty()) {
+										UserCard userCard_FirstLayer = JSON.parseObject(
+												object.getString("userCard_FirstLayer"),
+												UserCard.class);
+										myPostComments
+												.setUserCard_FirstLayer(userCard_FirstLayer);
+									}
+									if (object.getString("commentInfo_SecondLayer") != null&& !object.getString("commentInfo_SecondLayer").isEmpty()) {
+										CommentInfo commentInfo_SecondLayer = JSON.parseObject(
+                                                object.getString("commentInfo_SecondLayer"),
+                                                CommentInfo.class);
+
+										String tmppusercard = object.getJSONObject("commentInfo_SecondLayer").getString("pUserCard");
+                                        UserCard tmpuserCard = null;
+                                        //Âà§Êñ≠ FirstÁöÑ pusercardÊòØÂê¶Â≠òÂú®
+                                        if (tmppusercard == null|| tmppusercard.equals("")){
+                                            //‰ªÄ‰πàÈÉΩ‰∏çÂÅö
+                                        }else{
+                                            tmpuserCard = JSON.parseObject(tmppusercard,UserCard.class);
+                                        }
+										commentInfo_SecondLayer.setpUserCard(tmpuserCard);
+                                        myPostComments.setCommentInfo_SecondLayer(commentInfo_SecondLayer);
+									}
+									if (object.getString("commentInfo_FirstLayer") != null&& !object.getString("commentInfo_FirstLayer").isEmpty()) {
+										CommentInfo commentInfo_FirstLayer = JSON.parseObject(object.getString("commentInfo_FirstLayer"),CommentInfo.class);
+										String tmppusercardstr = object.getJSONObject("commentInfo_FirstLayer")
+												.getString("pUserCard");
+                                        UserCard tmpuserCard = null;
+                                        //Âà§Êñ≠ FirstÁöÑ pusercardÊòØÂê¶Â≠òÂú®
+                                        if (tmppusercardstr == null|| tmppusercardstr.equals("")){
+                                            //‰ªÄ‰πàÈÉΩ‰∏çÂÅö
+                                        }else{
+                                            tmpuserCard = JSON.parseObject(tmppusercardstr,UserCard.class);
+                                        }
+
+										commentInfo_FirstLayer
+												.setpUserCard(tmpuserCard);
+										myPostComments
+												.setCommentInfo_FirstLayer(commentInfo_FirstLayer);
+									}
+									myCommentsList.add(myPostComments);
+								}
+							}
+							if (myCommentsList != null
+									&& !myCommentsList.isEmpty()) {
+								if (isFirst) {
+									myPostCommentsList.addAll(myCommentsList);
+									isFirst = false;
+								}
+								if (ptrl_my_comment.isFooterShown()) {
+									myPostCommentsList.addAll(
+											myPostCommentsList.size(),
+											myCommentsList);
+								} else if (ptrl_my_comment.isHeaderShown()) {
+									myPostCommentsList
+											.addAll(0, myCommentsList);
+								}
+								minBasePostId = myPostCommentsList
+										.get(myPostCommentsList.size() - 1)
+										.getAbstractInfo().getPostId();
+								maxBasePostId = myPostCommentsList.get(0)
+										.getAbstractInfo().getPostId();
+								myCommentListAdapter.notifyDataSetChanged();
+							}
+							if (ptrl_my_comment.isRefreshing()) {
+								ptrl_my_comment.onRefreshComplete();
+							}
+							lv_myPostComments.setSelectionFromTop(y, 0);
+						}
+					}
+				} catch (Exception e) {
+					Log.e(TAG, "", e);
+				}
+			}
+
+			@Override
+			public void start() {
+				dialog.show();
+			}
+
+			@Override
+			public void loading(long total, long current, boolean isUploading) {
+			}
+
+			@Override
+			public void failure(HttpException exception, JSONObject jobj) {
+				dialog.dismiss();
+				ToastUtils.showMessage(instance, jobj.getString("ErrorMessage"));
+			}
+		});
+	}
+
+	protected void setAdapter(final ArrayList<MyPostComments> myPostCommentsList) {
+		myCommentListAdapter = new MyCommentListAdapter(instance,
+				myPostCommentsList);
+		lv_myPostComments.setAdapter(myCommentListAdapter);
+	}
+
+	private void initListener() {
+		ptrl_my_comment.setOnRefreshListener(new OnRefreshListener<ListView>() {
+			@Override
+			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+				// new GetDataTask().execute();
+
+				// ÂèëÈÄÅËØ∑Ê±ÇÂæóÂà∞Êñ∞È°πÁõÆÊä•Êñá
+				// ‰∏ãÊãâÂà∑Êñ∞
+				if (ptrl_my_comment.isHeaderShown()) {
+					y = 0;
+					basePostId = maxBasePostId;
+					isNew = "true";
+				}
+				// ‰∏äÊãâÂà∑Êñ∞
+				if (ptrl_my_comment.isFooterShown()) {
+					basePostId = minBasePostId;
+					y = myPostCommentsList.size() - 1;
+					isNew = "false";
+				}
+				getMyPostComments();
+				// ‰øùÂ≠òÂä†ËΩΩÁöÑ‰ΩçÁΩÆ
+				// y =myPostCommentsList.size();
+			}
+		});
+	}
 }
-

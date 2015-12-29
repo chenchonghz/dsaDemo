@@ -178,7 +178,8 @@
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="1px"
-                android:background="@color/line_scrap" />
+                android:background="@color/line_scrap"
+                android:visibility="gone" />
 
             <RelativeLayout
                 android:id="@+id/rl_letter"
@@ -186,7 +187,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/tab_height"
                 android:layout_marginTop="@dimen/more_line_top"
-                android:padding="@dimen/more_padding" >
+                android:padding="@dimen/more_padding"
+                android:visibility="gone" >
 
                 <ImageView
                     android:id="@+id/iv_letter"
@@ -220,6 +222,7 @@
                 style="@style/PopButton"
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/tab_height"
+                android:layout_marginTop="@dimen/more_line_top"
                 android:padding="@dimen/more_padding" >
 
                 <ImageView
@@ -569,7 +572,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/more_margin_left"
                     android:layout_toRightOf="@+id/iv_comment"
-                    android:text="@string/more_comment" />
+                    android:text="@string/more_replyme" />
 
                 <ImageView
                     android:layout_width="wrap_content"

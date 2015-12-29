@@ -32,6 +32,7 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.szrjk.config.Constant;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.RegisterInfo;
 import com.szrjk.fire.FireEye;
@@ -46,10 +47,10 @@ public class Register2Activity extends BaseActivity implements OnClickListener
 {
 	@ViewInject(R.id.rl_root)
 	private RelativeLayout rl_root;
-	
+
 	@ViewInject(R.id.sv_scroll)
 	private ScrollView sv_scroll;
-	
+
 	@ViewInject(R.id.btn_vcode)
 	private Button btn_vcode;
 
@@ -65,8 +66,8 @@ public class Register2Activity extends BaseActivity implements OnClickListener
 	/**
 	 * 验证码,存储
 	 */
-	private static String tmpvcode;
-	private static long tmpvcodetime;
+	//	private static String tmpvcode;
+	//	private static long tmpvcodetime;
 
 	Resources resources;
 
@@ -78,25 +79,25 @@ public class Register2Activity extends BaseActivity implements OnClickListener
 		super.onCreate(savedInstanceState);
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 		ViewUtils.inject(this);
-		
+
 		addRegisterActivitys(this);
 		text_phonenum.setFocusable(true);
-    	text_phonenum.setFocusableInTouchMode(true);
-    	text_phonenum.requestFocus();
-    	text_phonenum.setInputType(InputType.TYPE_CLASS_PHONE);
-    	text_vcode.setInputType(InputType.TYPE_CLASS_PHONE);
-    	Timer timer = new Timer();
-    	     timer.schedule(new TimerTask()
-    	     {
-    	         @Override
-				public void run() 
-    	         {
-    	             InputMethodManager inputManager =
-    	                 (InputMethodManager)text_phonenum.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-    	             inputManager.showSoftInput(text_phonenum, 0);
-    	         }
-    	     },  
-    	         998);
+		text_phonenum.setFocusableInTouchMode(true);
+		text_phonenum.requestFocus();
+		text_phonenum.setInputType(InputType.TYPE_CLASS_PHONE);
+		text_vcode.setInputType(InputType.TYPE_CLASS_PHONE);
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask()
+		{
+			@Override
+			public void run() 
+			{
+				InputMethodManager inputManager =
+						(InputMethodManager)text_phonenum.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+				inputManager.showSoftInput(text_phonenum, 0);
+			}
+		},  
+		998);
 		initLayout();
 	}
 
@@ -106,7 +107,7 @@ public class Register2Activity extends BaseActivity implements OnClickListener
 		text_vcode.addTextChangedListener(yTextWatcher);
 		btn_continue.setOnClickListener(this);
 		btn_vcode.setOnClickListener(this);
-		
+
 	}
 
 	@Override
@@ -115,14 +116,14 @@ public class Register2Activity extends BaseActivity implements OnClickListener
 		// 三个按钮都同一个动作，这个应该有更好的方式来处理的
 		switch (view.getId())
 		{
-		
-			case R.id.btn_vcode:
-				funcBtnvcode();
-				text_vcode.requestFocus();
-				break;
-			case R.id.btn_continue:
-				funcBtnContinue();
-				break;
+
+		case R.id.btn_vcode:
+			funcBtnvcode();
+			text_vcode.requestFocus();
+			break;
+		case R.id.btn_continue:
+			funcBtnContinue();
+			break;
 		}
 	}
 
@@ -138,46 +139,103 @@ public class Register2Activity extends BaseActivity implements OnClickListener
 		Result result = fireEye.test();
 		if (!result.passed) { return; }
 
-		String phone2=text_phonenum.getText().toString();
-		if (!phone2.equals(phone)) {
-			text_vcode.setText("");
-			return;
-		}
-		
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("ServiceName", "checkVerificationCode");
+		Map<String, Object> busiParams = new HashMap<String, Object>();
+		busiParams.put("authAccount", phone);
+		busiParams.put("captcha", text_vcode.getText().toString());
+		paramMap.put("BusiParams", busiParams);
+
+		// 调用短信接口
+		httpPost(paramMap, new AbstractDhomeRequestCallBack()
+		{
+			@Override
+			public void start()
+			{
+				dialog.show();
+			}
+
+			@Override
+			public void loading(long total, long current, boolean isUploading)
+			{
+			}
+
+			@Override
+			public void failure(HttpException exception, JSONObject jsonObject)
+			{
+				//				ErrorInfo.put("ErrorInfo", str);
+				ToastUtils.showMessage(Register2Activity.this,jsonObject.getString("ErrorInfo"));
+				dialog.dismiss();
+			}
+
+			@Override
+			public void success(JSONObject jsonObject)
+			{
+				//				ErrorInfo errorObj = JSON.parseObject(
+				//						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
+				//				ToastUtils.showMessage(Register2Activity.this, ""+ errorObj.getErrorMessage());
+				ErrorInfo errorObj = JSON.parseObject(
+						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
+				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode())){
+					dialog.dismiss();
+					// 保存数据,手机号码
+					DHomeApplication dHomeApplication = (DHomeApplication) getApplication();
+					RegisterInfo registerInfo = dHomeApplication.getRegisterInfo();
+					registerInfo.setPhone(text_phonenum.getText().toString());
+
+					// 跳转
+					Intent intent1 = new Intent(Register2Activity.this,
+							AboutYouActivity.class);
+					startActivity(intent1);
+				}else if(errorObj.getReturnCode().equals("1002")){
+					ToastUtils.showMessage(Register2Activity.this, "验证码输入错误");
+				}else if(errorObj.getReturnCode().equals("1001")){
+					ToastUtils.showMessage(Register2Activity.this, "验证码已失效，请重新获取验证码！");
+				}
+			}
+		});
+
+
+		//		String phone2=text_phonenum.getText().toString();
+		//		if (!phone2.equals(phone)) {
+		//			text_vcode.setText("");
+		//			return;
+		//		}
+
 		// 验证码校验TODO
-		String filledvcode = text_vcode.getText().toString();// 用户填的验证码
-		long now = new Date().getTime();
-		if (tmpvcode == null || tmpvcode.isEmpty())
-		{
-			// 验证码失效
-			Toast.makeText(getApplicationContext(), "请先填写号码后发送验证码!",
-					Toast.LENGTH_SHORT).show();
-			return;
-		}
-		else if (now - tmpvcodetime > 120000)
-		{
-			Toast.makeText(getApplicationContext(), "验证码过期!",
-					Toast.LENGTH_SHORT).show();
-			return;
-		}
-		else if (!tmpvcode.equals(filledvcode))
-		{
-			Toast.makeText(getApplicationContext(), "验证码错误!",
-					Toast.LENGTH_SHORT).show();
-			return;
-		}
-//		Toast.makeText(getApplicationContext(), "验证码成功!", Toast.LENGTH_SHORT)
-//				.show();
+		//		String filledvcode = text_vcode.getText().toString();// 用户填的验证码
+		//		long now = new Date().getTime();
+		//		if (tmpvcode == null || tmpvcode.isEmpty())
+		//		{
+		//			// 验证码失效
+		//			Toast.makeText(getApplicationContext(), "请先填写号码后发送验证码!",
+		//					Toast.LENGTH_SHORT).show();
+		//			return;
+		//		}
+		//		else if (now - tmpvcodetime > 120000)
+		//		{
+		//			Toast.makeText(getApplicationContext(), "验证码过期!",
+		//					Toast.LENGTH_SHORT).show();
+		//			return;
+		//		}
+		//		else if (!tmpvcode.equals(filledvcode))
+		//		{
+		//			Toast.makeText(getApplicationContext(), "验证码错误!",
+		//					Toast.LENGTH_SHORT).show();
+		//			return;
+		//		}
+		//		Toast.makeText(getApplicationContext(), "验证码成功!", Toast.LENGTH_SHORT)
+		//				.show();
 
-		// 保存数据,手机号码
-		DHomeApplication dHomeApplication = (DHomeApplication) getApplication();
-		RegisterInfo registerInfo = dHomeApplication.getRegisterInfo();
-		registerInfo.setPhone(text_phonenum.getText().toString());
-
-		// 跳转
-		Intent intent1 = new Intent(Register2Activity.this,
-				AboutYouActivity.class);
-		startActivity(intent1);
+		//		// 保存数据,手机号码
+		//		DHomeApplication dHomeApplication = (DHomeApplication) getApplication();
+		//		RegisterInfo registerInfo = dHomeApplication.getRegisterInfo();
+		//		registerInfo.setPhone(text_phonenum.getText().toString());
+		//
+		//		// 跳转
+		//		Intent intent1 = new Intent(Register2Activity.this,
+		//				AboutYouActivity.class);
+		//		startActivity(intent1);
 
 	}
 
@@ -192,12 +250,12 @@ public class Register2Activity extends BaseActivity implements OnClickListener
 		if (!result.passed) { return; }
 
 		// 生成验证码
-		Random r = new Random();
-		String vcode = "" + r.nextInt(9) + r.nextInt(9) + r.nextInt(9)
-				+ r.nextInt(9)+r.nextInt(9)+r.nextInt(9);//验证码生成
-		// 保存验证码
-		tmpvcode = "" + vcode;
-		tmpvcodetime = new Date().getTime();// 验证码发出时间
+		//		Random r = new Random();
+		//		String vcode = "" + r.nextInt(9) + r.nextInt(9) + r.nextInt(9)
+		//				+ r.nextInt(9)+r.nextInt(9)+r.nextInt(9);//验证码生成
+		//		// 保存验证码
+		//		tmpvcode = "" + vcode;
+		//		tmpvcodetime = new Date().getTime();// 验证码发出时间
 
 		phone = text_phonenum.getText().toString();
 
@@ -209,8 +267,9 @@ public class Register2Activity extends BaseActivity implements OnClickListener
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("ServiceName", "thirdPartyAuth");
 		Map<String, Object> busiParams = new HashMap<String, Object>();
-		busiParams.put("captcha", tmpvcode);
+		//		busiParams.put("captcha", tmpvcode);
 		busiParams.put("busiType", "1");
+		busiParams.put("deviceId", "123");//????
 		busiParams.put("authAccount", phone);
 		paramMap.put("BusiParams", busiParams);
 
@@ -230,13 +289,14 @@ public class Register2Activity extends BaseActivity implements OnClickListener
 			@Override
 			public void failure(HttpException exception, JSONObject jsonObject)
 			{
-//				ErrorInfo.put("ErrorInfo", str);
+				//				ErrorInfo.put("ErrorInfo", str);
 				ToastUtils.showMessage(Register2Activity.this,jsonObject.getString("ErrorInfo"));
 			}
 
 			@Override
 			public void success(JSONObject jsonObject)
 			{
+
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
 				ToastUtils.showMessage(Register2Activity.this, ""+ errorObj.getErrorMessage());
@@ -272,48 +332,48 @@ public class Register2Activity extends BaseActivity implements OnClickListener
 			btn_vcode.setTextColor(getResources().getColor(R.color.font_cell));
 		}
 	}
-	 TextWatcher mTextWatcher = new TextWatcher() {  
-	        private CharSequence temp;  
-	        @Override  
-	        public void onTextChanged(CharSequence s, int start, int before, int count) {  
-	             temp = s;  
-	        }  
-	        @Override  
-	        public void beforeTextChanged(CharSequence s, int start, int count,  
-	                int after) {  
-	        	
-	        }  
-	        @Override  
-	        public void afterTextChanged(Editable s) {  
-	            if (temp.length()>=1) {  
-	            	btn_vcode.setEnabled(true);
-	            	btn_vcode.setFocusable(true);
-	            }else {
-	            	btn_vcode.setEnabled(false);
-	            	btn_vcode.setFocusable(false);
-				}  
-	        }  
-	    };  
-	
-	    TextWatcher yTextWatcher = new TextWatcher() {
-	        private CharSequence temp;  
-	        @Override  
-	        public void onTextChanged(CharSequence s, int start, int before, int count) {  
-	             temp = s;  
-	        }  
-	        @Override  
-	        public void beforeTextChanged(CharSequence s, int start, int count,  
-	                int after) {  
-	        }  
-	        @Override  
-	        public void afterTextChanged(Editable s) {  
-	            if (temp.length()>=1) {  
-	            	btn_continue.setEnabled(true);
-	            	btn_continue.setFocusable(true);
-	            }else {
-	            	btn_continue.setEnabled(false);
-	            	btn_continue.setFocusable(false);
-				}    
-	        }  
-	    };  
+	TextWatcher mTextWatcher = new TextWatcher() {  
+		private CharSequence temp;  
+		@Override  
+		public void onTextChanged(CharSequence s, int start, int before, int count) {  
+			temp = s;  
+		}  
+		@Override  
+		public void beforeTextChanged(CharSequence s, int start, int count,  
+				int after) {  
+
+		}  
+		@Override  
+		public void afterTextChanged(Editable s) {  
+			if (temp.length()>=1) {  
+				btn_vcode.setEnabled(true);
+				btn_vcode.setFocusable(true);
+			}else {
+				btn_vcode.setEnabled(false);
+				btn_vcode.setFocusable(false);
+			}  
+		}  
+	};  
+
+	TextWatcher yTextWatcher = new TextWatcher() {
+		private CharSequence temp;  
+		@Override  
+		public void onTextChanged(CharSequence s, int start, int before, int count) {  
+			temp = s;  
+		}  
+		@Override  
+		public void beforeTextChanged(CharSequence s, int start, int count,  
+				int after) {  
+		}  
+		@Override  
+		public void afterTextChanged(Editable s) {  
+			if (temp.length()>=1) {  
+				btn_continue.setEnabled(true);
+				btn_continue.setFocusable(true);
+			}else {
+				btn_continue.setEnabled(false);
+				btn_continue.setFocusable(false);
+			}    
+		}  
+	};  
 }

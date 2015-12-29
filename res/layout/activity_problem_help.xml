@@ -8,6 +8,7 @@
     tools:context="com.szrjk.self.ProblemHelpActivity" >
     
     <com.szrjk.widget.HeaderView
+        android:id="@+id/hv_problemhelp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         headerattr:htextstr="@string/problemhelp_text" >

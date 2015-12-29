@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ptr="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res/com.szrjk.dhome"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_bg2"
+    android:orientation="vertical" >
+
+    <com.szrjk.widget.HeaderView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:htextstr="回复我的" >
+    </com.szrjk.widget.HeaderView>
+
+    <com.szrjk.pull.PullToRefreshListView
+        android:id="@+id/ptrl_my_comment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/base_bg2"
+        android:descendantFocusability="blocksDescendants"
+        android:divider="@color/line_scrap"
+        android:dividerHeight="1px"
+        android:fastScrollEnabled="false"
+        android:scrollbars="none"
+        ptr:ptrHeaderTextColor="@color/font_cell" >
+    </com.szrjk.pull.PullToRefreshListView>
+
+</LinearLayout>

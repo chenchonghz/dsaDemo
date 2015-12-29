@@ -9,6 +9,8 @@ import java.util.Map;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
@@ -31,9 +33,13 @@ import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
 import com.szrjk.pull.PullToRefreshListView;
 import com.szrjk.util.ShowDialogUtil;
+import com.szrjk.util.ToastUtils;
+import com.szrjk.widget.HeaderView;
 
 @ContentView(R.layout.activity_caseshare_post)
 public class CaseSharePostActivity extends BaseActivity {
+	@ViewInject(R.id.hv_caseshare)
+	private HeaderView hv_caseshare;
 	private CaseSharePostActivity instance;
 	@ViewInject(R.id.lv_caseshare_postlist)
 	private PullToRefreshListView mPullRefreshListView;
@@ -72,6 +78,11 @@ public class CaseSharePostActivity extends BaseActivity {
 			public void getPosts(String userId2, String basePostId,
 					boolean isNew, String beginNum, String endNum) {
 				doGetPosts(userId2,basePostId,isNew,beginNum,endNum);
+			}
+		});
+		hv_caseshare.showImageLLy(R.drawable.icon_messageset_40,new OnClickListener() {
+			public void onClick(View arg0) {
+				ToastUtils.showMessage(instance, "尚未开通");
 			}
 		});
 	}

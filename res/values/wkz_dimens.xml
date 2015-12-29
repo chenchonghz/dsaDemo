@@ -3,6 +3,7 @@
     <dimen name="edit_paddingRight">58dip</dimen>
     <dimen name="image_width">160dip</dimen>
     <dimen name="image_large">120dip</dimen>
+    <dimen name="image_portrait">80dip</dimen>
     <dimen name="image_medium">48dip</dimen>
     <dimen name="image_small">12dip</dimen>
     <dimen name="image_micro">8dip</dimen>

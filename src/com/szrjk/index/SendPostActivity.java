@@ -6,17 +6,17 @@ import java.util.List;
 import java.util.Map;
 
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -46,16 +46,15 @@ import com.szrjk.util.ImageItem;
 import com.szrjk.util.MultipleUploadPhotoUtils;
 import com.szrjk.util.OssUpdateImgUtil;
 import com.szrjk.util.ToastUtils;
+import com.szrjk.widget.HeaderView;
 import com.szrjk.widget.IndexGridView;
 import com.szrjk.widget.PostSendPopup;
 import com.szrjk.widget.UpdateProgressBar;
 
 @ContentView(R.layout.activity_post)
 public class SendPostActivity extends BaseActivity {
-
-	// 发送
-	@ViewInject(R.id.tv_send)
-	private TextView tv_send;
+	@ViewInject(R.id.hv_post)
+	private HeaderView hv_post;
 	// 取消
 	@ViewInject(R.id.lly_cancel)
 	private LinearLayout lly_cancel;
@@ -71,17 +70,11 @@ public class SendPostActivity extends BaseActivity {
 	@ViewInject(R.id.lly_post)
 	private LinearLayout lly_post;
 	private SendPostActivity instance;
-	private Resources resources;
 	private UserInfo userInfo;
 	private String content;
 	private InputMethodManager imm;
-
-	private Handler handler;
-
 	protected PostSendPopup sendWindow;
-
 	private MultipleUploadPhotoUtils multipleUploadPhotoUtils;
-
 	private static final int GALLERY_RESULT_TYPE = 2000;
 
 	// 相册容器
@@ -99,10 +92,10 @@ public class SendPostActivity extends BaseActivity {
 	private static final int CAMERA_WITH_DATA = 3022;
 	// 相册选择
 	private static final int PHOTO_PICKED_WITH_DATA = 3021;
-	private static final int DATA_CHARGE_NOTIFY = 1000;
 	private String ls;
 	//地址集合
 	private ArrayList<String> urlList = new ArrayList<String>();
+	private TextView sub;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -120,7 +113,6 @@ public class SendPostActivity extends BaseActivity {
 		try {
 			dialog = createDialog(this, "发送中，请稍候...");
 			userInfo = Constant.userInfo;
-			resources = getResources();
 			// 相册
 			gv_case_list.setSelector(new ColorDrawable(Color.TRANSPARENT));
 			gv_case_list.setVisibility(View.VISIBLE);
@@ -134,6 +126,34 @@ public class SendPostActivity extends BaseActivity {
 			CheckTextNumber.setEditTextChangeListener(et_content, tv_content,800);
 			et_content.setOnTouchListener(et_ls);
 			//		instance.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
+			//			hv_post.showBackBtn(text, onClickListener)
+			sub = hv_post.getTextBtn();
+			hv_post.showTextBtn("发布", new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					try {
+						closeKeyboard();
+						//防止多次点击发帖
+						sub.setClickable(false);
+						content = et_content.getText().toString().trim();
+						if (content == null || content.length() == 0) {
+							showToast(instance, "内容不能空！", 0);
+							sub	.setClickable(true);
+							return;
+						}
+						//			dialog.setCancelable(false);
+						dialog.show();
+						send();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
+			//			hv_post.setHtext(s)
+			//			hv_post.showImageLLy(resId, onClickListener)
+			//			hv_post.getTextBtn()
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -208,38 +228,7 @@ public class SendPostActivity extends BaseActivity {
 			e.printStackTrace();
 		}
 	}
-	//
-	@OnClick(R.id.lly_cancel)
-	public void cancelClick(View v) {
-		//		checkContent();
-		finish();
-	}
-	
 
-	//发帖
-	@OnClick(R.id.tv_send)
-	public void sendClick(View v) {
-		try {
-			closeKeyboard();
-			//防止多次点击发帖
-			tv_send.setClickable(false);
-			switch (v.getId()) {
-			case R.id.tv_send:
-				content = et_content.getText().toString().trim();
-				if (content == null || content.length() == 0) {
-					showToast(instance, "内容不能空！", 0);
-					tv_send.setClickable(true);
-					return;
-				}
-				//			dialog.setCancelable(false);
-				dialog.show();
-				send();
-				break;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 	// 发送帖子
 	private void send() {
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
@@ -298,7 +287,7 @@ public class SendPostActivity extends BaseActivity {
 					public void run() {
 						dialog.dismiss();
 						showToast(instance, "发帖失败、再试试呗", 0);
-						tv_send.setClickable(true);
+						sub.setClickable(true);
 						if (err.contains("Incorrect string value")) {
 							showToast(instance, "目前不支持表情发送", 0);
 						}
@@ -309,7 +298,7 @@ public class SendPostActivity extends BaseActivity {
 			@Override
 			public void success(JSONObject jsonObject) {
 				dialog.dismiss();
-				tv_send.setClickable(true);
+				sub.setClickable(true);
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
 				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode())) {
@@ -321,8 +310,8 @@ public class SendPostActivity extends BaseActivity {
 
 					Log.i("message", errorObj.getErrorMessage());
 					if (errorObj.getErrorMessage().contains("Incorrect string value")) {
-						
-						tv_send.setClickable(true);
+
+						sub.setClickable(true);
 					}
 				}
 			}
@@ -349,7 +338,7 @@ public class SendPostActivity extends BaseActivity {
 					//ArrayList<String>
 					urlList = data.getStringArrayListExtra("urllist");
 					absList = data.getStringArrayListExtra("absList");
-//					gridAdapter.setImageList(GalleryActivity.gettmpitems());
+					//					gridAdapter.setImageList(GalleryActivity.gettmpitems());
 					gridAdapter.addStringUrl(absList);
 					gridAdapter.notifyDataSetChanged();
 				}
@@ -399,19 +388,6 @@ public class SendPostActivity extends BaseActivity {
 			}
 		}
 	}
-//	private void checkContent(){
-//		String scontext = et_content.getText().toString();
-//		if (scontext.length() > 0 || gridAdapter.returnImageInfo().size() > 0) {
-//			closeKeyboard();
-//			sendWindow = new PostSendPopup(instance, sendPostClick);
-//			// 显示窗口
-//			sendWindow.showAtLocation(lly_post, Gravity.BOTTOM
-//					| Gravity.CENTER_HORIZONTAL, 0, 0);
-//		}else{
-//			gridAdapter.returnImageInfo().clear();
-//			finish();
-//		}
-//	}
 	private View.OnTouchListener et_ls = new View.OnTouchListener() {
 		@Override
 		public boolean onTouch(View v, MotionEvent event) {
@@ -425,6 +401,25 @@ public class SendPostActivity extends BaseActivity {
 			return false;
 		}
 	};
+	
+	
+	class ImageBrocast extends BroadcastReceiver {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			
+			String ac = intent.getAction();
+			
+			if ("失败".equals(ac)) {
+				
+			}else{
+				
+			}
+			
+		}
+	}
+	
+	
+	
 	/**
 	 * 这里的3个重写方法：由于打开了拍照，低ram的手机会回收发帖这个Activity。
 	 * 当回收之后，会执行onCreate方法里面的检查草稿方法。导致把草稿恢复覆盖当前编辑的内容

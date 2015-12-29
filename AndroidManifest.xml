@@ -814,6 +814,13 @@
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
         </activity>
+        
+        <activity
+            android:name="com.szrjk.explore.MyCommentListActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/Theme.dhome"
+            android:windowSoftInputMode="adjustNothing" >
+        </activity>
 
         <receiver android:name="com.szrjk.receiver.ChangePortraitBroadcastReceiver" >
             <intent-filter android:priority="1000" >
@@ -830,9 +837,8 @@
         <activity
             android:name="com.szrjk.dhome.AddressBookActivity"
             android:configChanges="orientation|screenSize"
-            android:windowSoftInputMode="stateHidden|adjustPan"
             android:theme="@style/Theme.dhome"
-            >
+            android:windowSoftInputMode="stateHidden|adjustPan" >
         </activity>
         <activity
             android:name="com.szrjk.explore.FriendRequestActivity"
@@ -845,6 +851,20 @@
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
+        </activity>
+        <activity
+            android:name="com.szrjk.explore.MessageSettingActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/Theme.dhome"
+            android:windowSoftInputMode="adjustNothing" >
+        </activity>
+
+        <service android:name="com.szrjk.service.DemoService" >
+        </service>
+
+        <activity
+            android:name="com.szrjk.dhome.BackgroundSettingActivity"
+            android:label="@string/title_activity_background_setting" >
         </activity>
     </application>
 

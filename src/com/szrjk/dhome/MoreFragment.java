@@ -27,6 +27,7 @@ import com.szrjk.config.Constant;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.MineCount;
 import com.szrjk.entity.UserInfo;
+import com.szrjk.explore.MyCommentListActivity;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
 import com.szrjk.message.MessageListActivity;
@@ -361,7 +362,8 @@ public class MoreFragment extends Fragment {
 	
 	@OnClick(R.id.rl_comment)
 	public void commentClick(View view) {
-		
+		Intent intent = new Intent(instance, MyCommentListActivity.class);
+		startActivity(intent);
 	}
 
 	@OnClick(R.id.rl_about)

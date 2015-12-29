@@ -1,71 +1,101 @@
 package com.szrjk.service;
 
-import com.alibaba.sdk.android.oss.callback.SaveCallback;
-import com.alibaba.sdk.android.oss.model.OSSException;
-import com.szrjk.entity.PhotoType;
-import com.szrjk.http.InterfaceComm;
-import com.szrjk.util.ImageUploadUtil;
-import com.szrjk.util.OssUpdateImgUtil;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
 
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.sdk.android.oss.callback.SaveCallback;
+import com.alibaba.sdk.android.oss.model.OSSException;
+import com.lidroid.xutils.exception.HttpException;
+import com.szrjk.config.Constant;
+import com.szrjk.entity.PhotoBucket;
+import com.szrjk.entity.PhotoType;
+import com.szrjk.http.AbstractDhomeRequestCallBack;
+import com.szrjk.http.DHttpService;
+import com.szrjk.util.ImageAsynTaskUpload;
+
 public class DemoService extends IntentService{
+	private DemoService instance;
 	public DemoService() {
 		super("demo");
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	protected void onHandleIntent(Intent arg0) {
-		Log.i("TAG", "startService");
-		ImageUploadUtil util = new ImageUploadUtil();
-//		ImageUploadEntity iue = (ImageUploadEntity) arg0.getSerializableExtra("image");
-//		final BaseActivity context = (BaseActivity) arg0.getSerializableExtra("context");
-//		final IImgUrlCallback imgUrlCallback = iue.getImaUrlCallback();
-		byte[] imgData = arg0.getByteArrayExtra("data");
-		
-		util.uploadPhoto(this,imgData, PhotoType.Face, new SaveCallback() {
-			@Override
-			public void onSuccess(String s) {
-				String imgUrl = OssUpdateImgUtil.facePicFilterUrl + s;
-				//                Log.e(TAG, imgUrl);
-				//上传完url之后处理   返回给ac，registerInfo实体保存头像地址
+	protected void onHandleIntent(Intent data) {
+		instance = this;
+		Log.i("", "进入>--服务上传图片");
+		byte[] bo = data.getByteArrayExtra("postbp");
+		String path = data.getStringExtra("path");
 
-//				imgUrlCallback.operImgUrl(imgUrl);
-//				context.runOnUiThread(new Runnable() {
-//					
-//					@SuppressWarnings("static-access")
-//					@Override
-//					public void run() {
-//						context.showToast(context, "上传成功", 0);
-//						
-//					}
-//				});
-				Log.i("TAG", imgUrl);
-				Log.i("Thread", ""+Thread.currentThread().getName());
-				//好像是通知阿里云，处理图片
-				InterfaceComm.dealPhoto(s, PhotoType.Face);
+		ImageAsynTaskUpload util = new ImageAsynTaskUpload();
+		util.uploadPhoto(instance, bo, path, PhotoType.Feed,new SaveCallback() {
+			@Override
+			public void onProgress(String arg0, int pro, int total) {
+			}
+			@Override
+			public void onFailure(String imageUrl, OSSException ossException) {
+				//                handler.removeCallbacks(runnable);
+				//                sb.append(OssUpdateImgUtil.feedPicFilterUrl + imageUrl + "|");
+				// 处理图片
+				//上传失败？如果突然断网，就会停止所以异步的上传，
+				Log.i("上传发帖图片失败", ossException.toString());
+				new DealPhoto(imageUrl).start();
 			}
 
 			@Override
-			public void onProgress(String s, int i, int i1) {
-			}
-
-			@Override
-			public void onFailure(String s, OSSException e) {
-				Log.i("updateFile--onFailure", e.toString());
-				Log.i("TAG", e.toString());
-//				context.runOnUiThread(new Runnable() {
-//					
-//					@Override
-//					public void run() {
-//						ToastUtils.showMessage(context, "图片上传失败,请删除后再上传");
-//					}
-//				});
+			public void onSuccess(String imageUrl) {
+				// 处理图片
+				Log.i("", "上传图片成功>--");
+				new DealPhoto(imageUrl).start();
 			}
 		});
-		
+		//		return  url;
+		//		pb_loading.setVisibility(View.GONE);
 	}
+	class DealPhoto extends Thread {
+		private String pathName;
 
+		DealPhoto(String pathName) {
+			this.pathName = pathName;
+		}
+
+		@Override
+		public void run() {
+			dealPhoto(pathName);
+		}
+
+		// 处理图片
+		private void dealPhoto(String pathName) {
+			HashMap<String, Object> paramMap = new HashMap<String, Object>();
+			paramMap.put("ServiceName", "dealPic");
+			Map<String, Object> busiParams = new HashMap<String, Object>();
+			List<PhotoBucket> buckets = new ArrayList<PhotoBucket>();
+			PhotoBucket bucket = new PhotoBucket();
+			bucket.setBucket(Constant.PHOTO_BUCKET_FEED);
+			bucket.setKey(pathName);
+			bucket.setSize(Constant.FEED_DEAL_SIZE);
+			buckets.add(bucket);
+			busiParams.put("pics", buckets);
+			paramMap.put("BusiParams", busiParams);
+			DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+				@Override
+				public void start() {			}
+				@Override
+				public void loading(long total, long current, boolean isUploading) {			}
+				@Override
+				public void failure(HttpException exception, JSONObject jobj) {	
+					Log.i("dealPhoto", jobj.toString());	}
+				@Override
+				public void success(JSONObject jsonObject) {
+					Log.i("dealPhoto", "阿里云裁剪图片成功");
+				}
+			});
+		}
+	}
 }

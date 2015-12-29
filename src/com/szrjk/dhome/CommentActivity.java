@@ -152,7 +152,7 @@ public class CommentActivity extends BaseActivity implements OnClickListener{
 			public void loading(long total, long current, boolean isUploading) {			}
 			@Override
 			public void failure(HttpException exception, JSONObject jobj) {	
-				showToast(instance, "评论失败/(ㄒoㄒ)/~~", 0);
+				showToast(instance, "评论失败", 0);
 			}
 			@Override
 			public void success(JSONObject jsonObject) {

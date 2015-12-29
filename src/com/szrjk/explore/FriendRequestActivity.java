@@ -36,9 +36,12 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -63,7 +66,7 @@ public class FriendRequestActivity extends BaseActivity {
 		ViewUtils.inject(instance);
 		hv_friend_req.showImageLLy(R.drawable.icon_messageset_40,new OnClickListener() {
 			public void onClick(View arg0) {
-				ToastUtils.showMessage(instance, "国明请吃饭");
+				ToastUtils.showMessage(instance, "尚未开通");
 			}
 		});
 		RequestState = new HashMap<String, Integer>();
@@ -76,7 +79,7 @@ public class FriendRequestActivity extends BaseActivity {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View view,
 					final int position, long arg3) {
-				DialogItem item = new DialogItem("删除该请求", R.color.black, new DialogItemCallback() {
+				DialogItem item = new DialogItem("删除该请求", R.color.font_titleanduname, new DialogItemCallback() {
 					public void DialogitemClick() {
 						deleteItem(position);
 					}
@@ -84,6 +87,10 @@ public class FriendRequestActivity extends BaseActivity {
 				List<DialogItem> list = new ArrayList<DialogItem>();
 				list.add(item);
 				CustomListDialog cld = new CustomListDialog(instance, list);
+				cld.setCanceledOnTouchOutside(true);
+//				Window dialogWindow = cld.getWindow();
+//				WindowManager.LayoutParams lp = dialogWindow.getAttributes();
+//				dialogWindow.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.TOP);
 				cld.show();
 				return false;
 			}

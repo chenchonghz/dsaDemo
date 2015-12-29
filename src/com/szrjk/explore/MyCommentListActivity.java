@@ -74,15 +74,15 @@ public class MyCommentListActivity extends BaseActivity {
 	private void initLayout() {
 		ptrl_my_comment.setMode(Mode.BOTH);
 		ptrl_my_comment.getLoadingLayoutProxy(true, false).setPullLabel(
-				getResources().getString(R.string.pull_down_lable_text));
+                getResources().getString(R.string.pull_down_lable_text));
 		ptrl_my_comment.getLoadingLayoutProxy(false, true).setPullLabel(
-				getResources().getString(R.string.pull_up_lable_text));
+                getResources().getString(R.string.pull_up_lable_text));
 		ptrl_my_comment.getLoadingLayoutProxy(true, true).setRefreshingLabel(
-				getResources().getString(R.string.refreshing_lable_text));
+                getResources().getString(R.string.refreshing_lable_text));
 		ptrl_my_comment.getLoadingLayoutProxy(true, true).setReleaseLabel(
-				getResources().getString(R.string.release_lable_text));
+                getResources().getString(R.string.release_lable_text));
 		ptrl_my_comment.getLoadingLayoutProxy(true, true).setLoadingDrawable(
-				null);
+                null);
 		lv_myPostComments = ptrl_my_comment.getRefreshableView();
 		basePostId = "0";
 		getMyPostComments();
@@ -119,15 +119,14 @@ public class MyCommentListActivity extends BaseActivity {
 							JSONArray list = commentInfo
 									.getJSONArray("commentInfo");
 							if (commentInfo != null && !commentInfo.isEmpty()) {
+								/*
+									由于有些数据可能为空，这里对返回的数据一个字段一个字段地处理
+								 */
 								for (int i = 0; i < list.size(); i++) {
 									JSONObject object = list.getJSONObject(i);
 									MyPostComments myPostComments = new MyPostComments();
-									if (object.getString("userCard") != null
-											&& !object.getString("userCard")
-													.isEmpty()) {
-										UserCard userCard = JSON.parseObject(
-												object.getString("userCard"),
-												UserCard.class);
+									if (object.getString("userCard") != null&& !object.getString("userCard").isEmpty()) {
+										UserCard userCard = JSON.parseObject(object.getString("userCard"),UserCard.class);
 										myPostComments.setUserCard(userCard);
 									}
 									if (object.getString("abstractInfo") != null
@@ -161,48 +160,34 @@ public class MyCommentListActivity extends BaseActivity {
 										myPostComments
 												.setUserCard_FirstLayer(userCard_FirstLayer);
 									}
-									if (object
-											.getString("commentInfo_SecondLayer") != null
-											&& !object.getString(
-													"commentInfo_SecondLayer")
-													.isEmpty()) {
+									if (object.getString("commentInfo_SecondLayer") != null&& !object.getString("commentInfo_SecondLayer").isEmpty()) {
 										CommentInfo commentInfo_SecondLayer = JSON.parseObject(
-												object.getString("commentInfo_SecondLayer"),
-												CommentInfo.class);
+                                                object.getString("commentInfo_SecondLayer"),
+                                                CommentInfo.class);
 
-										String tmppusercard = object
-												.getJSONObject(
-														"commentInfo_SecondLayer")
-												.getString("pUserCard");
-										if (tmppusercard == null
-												|| tmppusercard.equals(""))
-											continue;
-										UserCard tmpuserCard = JSON
-												.parseObject(tmppusercard,
-														UserCard.class);
-										commentInfo_SecondLayer
-												.setpUserCard(tmpuserCard);
-										myPostComments
-												.setCommentInfo_SecondLayer(commentInfo_SecondLayer);
+										String tmppusercard = object.getJSONObject("commentInfo_SecondLayer").getString("pUserCard");
+                                        UserCard tmpuserCard = null;
+                                        //判断 First的 pusercard是否存在
+                                        if (tmppusercard == null|| tmppusercard.equals("")){
+                                            //什么都不做
+                                        }else{
+                                            tmpuserCard = JSON.parseObject(tmppusercard,UserCard.class);
+                                        }
+										commentInfo_SecondLayer.setpUserCard(tmpuserCard);
+                                        myPostComments.setCommentInfo_SecondLayer(commentInfo_SecondLayer);
 									}
-									if (object
-											.getString("commentInfo_FirstLayer") != null
-											&& !object.getString(
-													"commentInfo_FirstLayer")
-													.isEmpty()) {
-										CommentInfo commentInfo_FirstLayer = JSON.parseObject(
-												object.getString("commentInfo_FirstLayer"),
-												CommentInfo.class);
-										String tmppusercard = object
-												.getJSONObject(
-														"commentInfo_FirstLayer")
+									if (object.getString("commentInfo_FirstLayer") != null&& !object.getString("commentInfo_FirstLayer").isEmpty()) {
+										CommentInfo commentInfo_FirstLayer = JSON.parseObject(object.getString("commentInfo_FirstLayer"),CommentInfo.class);
+										String tmppusercardstr = object.getJSONObject("commentInfo_FirstLayer")
 												.getString("pUserCard");
-										if (tmppusercard == null
-												|| tmppusercard.equals(""))
-											continue;
-										UserCard tmpuserCard = JSON
-												.parseObject(tmppusercard,
-														UserCard.class);
+                                        UserCard tmpuserCard = null;
+                                        //判断 First的 pusercard是否存在
+                                        if (tmppusercardstr == null|| tmppusercardstr.equals("")){
+                                            //什么都不做
+                                        }else{
+                                            tmpuserCard = JSON.parseObject(tmppusercardstr,UserCard.class);
+                                        }
+
 										commentInfo_FirstLayer
 												.setpUserCard(tmpuserCard);
 										myPostComments

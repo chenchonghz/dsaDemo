@@ -100,8 +100,7 @@ public class MyCommentListAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		MyPostComments myPostComments = myPostCommentsList.get(position);
-		List<PostAbstractList> postAbstractList = myPostComments
-				.getAbstractInfo().getPostAbstractList();
+		List<PostAbstractList> postAbstractList = myPostComments.getAbstractInfo().getPostAbstractList();
 		if (postAbstractList != null && !postAbstractList.isEmpty()) {
 			for (int i = 0; i < postAbstractList.size(); i++) {
 				if (postAbstractList.get(i).getPostAbstract().getPostId().equals(myPostComments.getAbstractInfo().getPostId())) {
@@ -125,6 +124,7 @@ public class MyCommentListAdapter extends BaseAdapter {
 
 		if (commentInfo_SecondLayer != null
 				&&!commentInfo_SecondLayer.equals("")) {
+			//存在二级layer
 			String puserid = userCard_SecondLayer
 					.getUserSeqId();
 			String currentuserid = Constant.userInfo.getUserSeqId();
@@ -224,6 +224,7 @@ public class MyCommentListAdapter extends BaseAdapter {
 				R.drawable.pic_downloadfailed_bg);
 		imageLoaderUtil.showImage();
 
+		//click,回复此评论
 		holder.btn_reply.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
 				Intent intent = new Intent(context, CommentActivity.class);
@@ -238,6 +239,8 @@ public class MyCommentListAdapter extends BaseAdapter {
 				((Activity) context).startActivity(intent);
 			}
 		});
+
+		//click,进入帖子详情
 		holder.rl_postContent.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
 				String postType = abstractInfo.getPostType();

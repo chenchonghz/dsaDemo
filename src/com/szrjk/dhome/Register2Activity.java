@@ -187,8 +187,10 @@ public class Register2Activity extends BaseActivity implements OnClickListener
 					Intent intent1 = new Intent(Register2Activity.this,
 							AboutYouActivity.class);
 					startActivity(intent1);
-				}else if(errorObj.getReturnCode().equals("0001")){
+				}else if(errorObj.getReturnCode().equals("1002")){
 					ToastUtils.showMessage(Register2Activity.this, "验证码输入错误");
+				}else if(errorObj.getReturnCode().equals("1001")){
+					ToastUtils.showMessage(Register2Activity.this, "验证码已失效，请重新获取验证码！");
 				}
 			}
 		});

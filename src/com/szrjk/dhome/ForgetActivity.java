@@ -206,8 +206,10 @@ public class ForgetActivity extends BaseActivity
 						et_pwd.setText("");
 						et_repwd.setText("");
 					}
-				}else if(errorObj.getReturnCode().equals("0001")){
+				}else if(errorObj.getReturnCode().equals("1002")){
 					ToastUtils.showMessage(instance, "验证码输入错误");
+				}else if(errorObj.getReturnCode().equals("1001")){
+					ToastUtils.showMessage(instance, "验证码已失效，请重新获取验证码！");
 				}
 			}
 

@@ -35,6 +35,9 @@ import com.szrjk.util.ImageLoaderUtil;
 import com.szrjk.util.SpannableStringUtils;
 import com.szrjk.widget.UserCardLayout;
 
+/**
+ * 我的评论，
+ */
 public class MyCommentListAdapter extends BaseAdapter {
     private Context context;
     private List<MyPostComments> myPostCommentsList;
@@ -113,14 +116,10 @@ public class MyCommentListAdapter extends BaseAdapter {
             abstractInfo = myPostComments.getAbstractInfo();
         }
         final UserCard userCard = myPostComments.getUserCard();
-        final UserCard userCard_FirstLayer = myPostComments
-                .getUserCard_FirstLayer();
-        UserCard userCard_SecondLayer = myPostComments
-                .getUserCard_SecondLayer();
-        final CommentInfo commentInfo_FirstLayer = myPostComments
-                .getCommentInfo_FirstLayer();
-        CommentInfo commentInfo_SecondLayer = myPostComments
-                .getCommentInfo_SecondLayer();
+        final UserCard userCard_FirstLayer = myPostComments.getUserCard_FirstLayer();
+        UserCard userCard_SecondLayer = myPostComments.getUserCard_SecondLayer();
+        final CommentInfo commentInfo_FirstLayer = myPostComments.getCommentInfo_FirstLayer();
+        CommentInfo commentInfo_SecondLayer = myPostComments.getCommentInfo_SecondLayer();
 
         if (commentInfo_SecondLayer != null && !commentInfo_SecondLayer.equals("")) {
             //存在二级layer
@@ -170,6 +169,7 @@ public class MyCommentListAdapter extends BaseAdapter {
             holder.rl_postInfo.setBackgroundColor(context.getResources().getColor(R.color.base_bg_tran));
 
         } else {
+            //没有二级layer,隐藏掉tv_commentcontent2,背景色的改变
             holder.tv_commentcontent1.setText(commentInfo_FirstLayer.getContent());
             holder.tv_commentcontent2.setVisibility(View.GONE);
             holder.rl_postContent.setBackgroundColor(context.getResources().getColor(R.color.base_bg_tran));
@@ -187,6 +187,8 @@ public class MyCommentListAdapter extends BaseAdapter {
         holder.tv_postcontent.setText(abstractInfo.getContent());
         ImageLoaderUtil imageLoaderUtil = null;
         String url = null;
+        //取源贴的url,如果帖子有图片则用图片，没有则用头像，
+        //vip的样式
         if (abstractInfo != null && !abstractInfo.equals("")) {
             if (abstractInfo.getPicListstr() != null && !abstractInfo.getPicListstr().isEmpty()) {
                 String[] picList = abstractInfo.getPicList();
@@ -199,9 +201,7 @@ public class MyCommentListAdapter extends BaseAdapter {
                 }
             }
         }
-        imageLoaderUtil = new ImageLoaderUtil(context, url, holder.iv_portrait,
-                R.drawable.pic_downloadfailed_bg,
-                R.drawable.pic_downloadfailed_bg);
+        imageLoaderUtil = new ImageLoaderUtil(context, url, holder.iv_portrait,R.drawable.pic_downloadfailed_bg,R.drawable.pic_downloadfailed_bg);
         imageLoaderUtil.showImage();
 
         //click,回复此评论

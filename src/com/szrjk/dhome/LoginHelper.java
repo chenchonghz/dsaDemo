@@ -27,10 +27,7 @@ import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.UserInfo;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
-import com.szrjk.util.BusiUtils;
-import com.szrjk.util.DesUtil;
-import com.szrjk.util.SharePerferenceUtil;
-import com.szrjk.util.ToastUtils;
+import com.szrjk.util.*;
 import com.umeng.message.PushAgent;
 
 import org.apache.http.conn.util.InetAddressUtils;
@@ -174,13 +171,7 @@ public class LoginHelper {
 		busiParams.put("systemVersion", android.os.Build.VERSION.RELEASE);// 系统版本
 		busiParams.put("mac", getLocalMacAddress());// MAC地址info.getMacAddress()设备开通Wifi连接，获取到网卡的MAC地址(但是不开通wifi，这种方法获取不到Mac地址，这种方法也是网络上使用的最多的方法)
 		busiParams.put("ip", GetHostIp());
-		String androidId = "";
-		try {
-			//序列号
-			androidId = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
-		} catch (Exception e) {
-			Log.e("error","",e);
-		}
+		String androidId = AppInfoUtils.fetchDeviceId(context);
 		busiParams.put("deviceId", androidId);
 		String gps="";
 		if (location != null) {

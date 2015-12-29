@@ -1,26 +1,45 @@
 package com.szrjk.dhome;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.szrjk.config.Constant;
+import com.szrjk.entity.ErrorInfo;
+import com.szrjk.entity.MessagesEntity;
 import com.szrjk.explore.MoreNewsActivity;
+import com.szrjk.http.AbstractDhomeRequestCallBack;
+import com.szrjk.http.DHttpService;
+import com.szrjk.message.MessageEntity;
 import com.szrjk.pull.PullToRefreshBase.Mode;
 import com.szrjk.pull.PullToRefreshScrollView;
 import com.szrjk.sdlv.Menu;
 import com.szrjk.sdlv.MenuItem;
 import com.szrjk.sdlv.SlideAndDragListView;
 import com.szrjk.sdlv.SlideAndDragListView.OnSlideListener;
+import com.szrjk.util.ShowDialogUtil;
+import com.szrjk.util.ToastUtils;
+
 
 
 public class ExploreFragment2 extends Fragment{
@@ -32,6 +51,9 @@ public class ExploreFragment2 extends Fragment{
 	private SlideAndDragListView lv_messages;
 	@ViewInject(R.id.bt_botton)
 	private Button test;
+	private Dialog dialog;
+	private static final String LOADING_POST = "正在加载推送消息";
+	private List<MessagesEntity> messageList;
 
 
 	@Override
@@ -41,7 +63,57 @@ public class ExploreFragment2 extends Fragment{
 		ViewUtils.inject(this, view);
 		initData();
 		initListner();
+		getMessagesByNetwork();
 		return view;
+	}
+
+	private void getMessagesByNetwork() {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("ServiceName", "queryMessagePush");
+		Map<String, Object> busiParams = new HashMap<String, Object>();
+		busiParams.put("userSeqId", "1000000001");
+		paramMap.put("BusiParams", busiParams);
+		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+			
+			@Override
+			public void success(JSONObject jsonObject) {
+				// TODO Auto-generated method stub
+				if(dialog.isShowing()){
+					dialog.dismiss();
+				}
+				ErrorInfo errorObj = JSON.parseObject(
+						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
+				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode()))
+				{
+					JSONObject returnObj = jsonObject
+							.getJSONObject("ReturnInfo");
+					messageList = JSON.parseArray(returnObj.getString("messageListOut"), MessagesEntity.class);
+					Log.e("ExploreFragment2", messageList.toString());
+				}
+			}
+			
+			@Override
+			public void start() {
+				// TODO Auto-generated method stub
+				dialog.show();
+			}
+			
+			@Override
+			public void loading(long total, long current, boolean isUploading) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void failure(HttpException exception, JSONObject jobj) {
+				// TODO Auto-generated method stub
+				if(dialog.isShowing()){
+					dialog.dismiss();
+				}
+				ToastUtils.showMessage(context, "获取推送消息失败，请检查网络");
+			}
+		});
 	}
 
 	private void initData() {
@@ -72,6 +144,7 @@ public class ExploreFragment2 extends Fragment{
 				.setTextSize((int) getResources().getDimension(R.dimen.font_size_middle))//set text color
 				.build());
 		lv_messages.setMenu(menu);
+		dialog = ShowDialogUtil.createDialog(context, LOADING_POST);
 	}
 
 	private void initListner() {
@@ -101,5 +174,12 @@ public class ExploreFragment2 extends Fragment{
 				startActivity(intent);
 			}
 		});
+	}
+	
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		Log.e("ExploreFragment", "onResume");
+		super.onResume();
 	}
 }

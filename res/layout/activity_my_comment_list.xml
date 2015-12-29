@@ -19,8 +19,8 @@
         android:layout_height="match_parent"
         android:background="@color/base_bg2"
         android:descendantFocusability="blocksDescendants"
-        android:divider="@color/line_scrap"
-        android:dividerHeight="1px"
+        android:divider="@color/base_bg"
+        android:dividerHeight="10dp"
         android:fastScrollEnabled="false"
         android:scrollbars="none"
         ptr:ptrHeaderTextColor="@color/font_cell" >

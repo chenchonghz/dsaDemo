@@ -127,6 +127,7 @@
         android:src="@drawable/icon_recommend"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
+        android:visibility="gone"
         android:scaleType="centerCrop"
         android:layout_marginRight="70dp"/> 
 </RelativeLayout>

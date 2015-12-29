@@ -175,4 +175,11 @@ public class ExploreFragment2 extends Fragment{
 			}
 		});
 	}
+	
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		Log.e("ExploreFragment", "onResume");
+		super.onResume();
+	}
 }

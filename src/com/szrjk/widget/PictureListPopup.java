@@ -8,8 +8,10 @@ import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.os.Message;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -17,6 +19,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.szrjk.config.Constant;
 import com.szrjk.dhome.R;
 import com.szrjk.self.more.album.AlbumGalleryActivity;
 import com.szrjk.self.more.album.AlbumsAdapter;
@@ -44,9 +47,10 @@ public class PictureListPopup extends PopupWindow implements OnClickListener{
 		view = inflater.inflate(R.layout.pop_picture_item, null);//加载布局
 		this.setContentView(view);
 		// 设置SelectPicPopupWindow弹出窗体的宽
-		this.setWidth(android.view.ViewGroup.LayoutParams.FILL_PARENT);
+		this.setWidth(android.view.ViewGroup.LayoutParams.MATCH_PARENT);
 		// 设置SelectPicPopupWindow弹出窗体的高
-		this.setHeight(android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
+		int h = (int) (Constant.screenHeight * 0.7);
+		this.setHeight(h);
 		this.setFocusable(true);
 		this.setOutsideTouchable(true);
 		ColorDrawable dw = new ColorDrawable(color.white);
@@ -108,6 +112,7 @@ public class PictureListPopup extends PopupWindow implements OnClickListener{
 	}
 
 	public void dissMissPopup(){
+		
 		this.dismiss();
 	}
 	@Override

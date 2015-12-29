@@ -600,8 +600,11 @@ public class MainActivity extends FragmentActivity implements OnClickListener , 
 						//双击事件  
 						//						ToastUtils.showMessage(instance, "双击");
 						indexFragment.mPullRefreshListView.setRefreshing();
-						indexFragment.getNewPosts(Constant.userInfo.getUserSeqId(), 
-								indexFragment.mMaxPostId, true,
+						indexFragment.userList.clear();
+						indexFragment.postList.clear();
+						indexFragment.postOtherList.clear();
+						indexFragment.getPosts(Constant.userInfo.getUserSeqId(), 
+								"0", true,
 								Constant.POST_BEGIN_NUM, Constant.POST_END_NUM);
 						time.cancel();
 					}  

@@ -42,9 +42,9 @@ public class IndexFragment extends Fragment
 	public String mMaxPostId; // 最大postId
 	private String mMinPostId; // 最小postId
 	private Context context;
-	private ArrayList<UserCard> userList; // 帖子用户信息
-	private ArrayList<PostInfo> postList; // 帖子详情
-	private ArrayList<PostOtherImformationInfo> postOtherList; // 转发、评论、赞信息
+	public ArrayList<UserCard> userList; // 帖子用户信息
+	public ArrayList<PostInfo> postList; // 帖子详情
+	public ArrayList<PostOtherImformationInfo> postOtherList; // 转发、评论、赞信息
 	private ArrayList<UserCard> recommendUserList;
 	private UserInfo userInfo;
 	private String lastUserId;

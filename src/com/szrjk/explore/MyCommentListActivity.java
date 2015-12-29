@@ -74,15 +74,15 @@ public class MyCommentListActivity extends BaseActivity {
 	private void initLayout() {
 		ptrl_my_comment.setMode(Mode.BOTH);
 		ptrl_my_comment.getLoadingLayoutProxy(true, false).setPullLabel(
-                getResources().getString(R.string.pull_down_lable_text));
+				getResources().getString(R.string.pull_down_lable_text));
 		ptrl_my_comment.getLoadingLayoutProxy(false, true).setPullLabel(
-                getResources().getString(R.string.pull_up_lable_text));
+				getResources().getString(R.string.pull_up_lable_text));
 		ptrl_my_comment.getLoadingLayoutProxy(true, true).setRefreshingLabel(
-                getResources().getString(R.string.refreshing_lable_text));
+				getResources().getString(R.string.refreshing_lable_text));
 		ptrl_my_comment.getLoadingLayoutProxy(true, true).setReleaseLabel(
-                getResources().getString(R.string.release_lable_text));
+				getResources().getString(R.string.release_lable_text));
 		ptrl_my_comment.getLoadingLayoutProxy(true, true).setLoadingDrawable(
-                null);
+				null);
 		lv_myPostComments = ptrl_my_comment.getRefreshableView();
 		basePostId = "0";
 		getMyPostComments();
@@ -112,12 +112,20 @@ public class MyCommentListActivity extends BaseActivity {
 								&& !returnObj.getString("ListOut").equals("")) {
 							JSONArray listOut = returnObj
 									.getJSONArray("ListOut");
-							JSONObject commentInfo = (JSONObject) listOut
-									.get(0);
+
+							JSONObject commentInfo = (JSONObject) listOut.get(0);
 							ArrayList<MyPostComments> myCommentsList = new ArrayList<MyPostComments>();
 
-							JSONArray list = commentInfo
-									.getJSONArray("commentInfo");
+							Object commentInfoObject = commentInfo.get("commentInfo");
+							if(commentInfoObject instanceof String&&commentInfoObject.equals("")){
+								//本来，这货应该是数组的，但是接口有时会返回“”，所以要这样判断一下
+								if (ptrl_my_comment.isRefreshing()) {
+									ptrl_my_comment.onRefreshComplete();
+								}
+								return;
+							}
+
+							JSONArray list = commentInfo.getJSONArray("commentInfo");
 							if (commentInfo != null && !commentInfo.isEmpty()) {
 								/*
 									由于有些数据可能为空，这里对返回的数据一个字段一个字段地处理
@@ -211,10 +219,9 @@ public class MyCommentListActivity extends BaseActivity {
 											.addAll(0, myCommentsList);
 								}
 								minBasePostId = myPostCommentsList
-										.get(myPostCommentsList.size() - 1)
-										.getAbstractInfo().getPostId();
-								maxBasePostId = myPostCommentsList.get(0)
-										.getAbstractInfo().getPostId();
+										.get(myPostCommentsList.size() - 1).getCommentInfo_FirstLayer().getPostId();
+//										.getAbstractInfo().getPostId();
+								maxBasePostId = myPostCommentsList.get(0).getCommentInfo_FirstLayer().getPostId();
 								myCommentListAdapter.notifyDataSetChanged();
 							}
 							if (ptrl_my_comment.isRefreshing()) {

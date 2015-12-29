@@ -14,9 +14,12 @@ public class ScreenInfo {
 		context. getWindowManager().getDefaultDisplay().getMetrics(dm);    
 //	    //窗口的宽度    
 	    int screenWidth = dm.widthPixels;
+	    int screenHeight = dm.heightPixels;
 //	    Log.i("changeportrai", screenWidth+"");
 	    Constant.screenWidth = screenWidth;
+	    Constant.screenHeight = screenHeight;
 	    Log.i("screenWidth", ""+screenWidth);
+	    Log.i("ccreenHeight", ""+screenHeight);
 	    return screenWidth;
 	}
 }

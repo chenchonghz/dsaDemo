@@ -158,6 +158,7 @@ public class Constant
 	
 	//灞忓箷瀹�
 	public static int screenWidth ;
+	public static int screenHeight ;
 	
 	//鏄惁淇濆瓨鑽夌puzz
 	public static final String ISAVECASE ="isavecase";

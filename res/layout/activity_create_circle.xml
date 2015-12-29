@@ -1,46 +1,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:headerattr="http://schemas.android.com/apk/res/com.szrjk.dhome"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/base_bg"
     android:orientation="vertical"
     tools:context=".CreateCircleActivity" >
-
-    <RelativeLayout
-        android:id="@+id/rl_title"
+	 <com.szrjk.widget.HeaderView
+        android:id="@+id/hv_title"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/header_height"
-        android:background="@color/search_bg" >
-
-        <ImageView
-            android:id="@+id/iv_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/margin_10dp"
-            android:src="@drawable/icon_back_32" />
-
-        <TextView
-            android:id="@+id/tv_coterieTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/circle_create"
-            android:textColor="@color/white"
-            android:textSize="@dimen/font_size_large" />
-
-        <TextView
-            android:id="@+id/tv_complete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/margin_10dp"
-            android:text="@string/competition"
-            android:textColor="@color/white"
-            android:textSize="@dimen/font_size_middle" />
-    </RelativeLayout>
+        android:layout_height="wrap_content"
+        headerattr:htextstr="创建圈子" >
+    </com.szrjk.widget.HeaderView>
 
     <ScrollView
         android:layout_width="match_parent"

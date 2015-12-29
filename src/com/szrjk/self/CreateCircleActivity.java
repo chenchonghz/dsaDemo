@@ -42,21 +42,14 @@ import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.util.ImageLoaderUtil;
 import com.szrjk.util.ToastUtils;
 import com.szrjk.util.UploadPhotoUtils;
+import com.szrjk.widget.HeaderView;
 
 @ContentView(R.layout.activity_create_circle)
 public class CreateCircleActivity extends BaseActivity implements OnClickListener{
 
 	protected static final int EDIT_DATA_SUCCESS = 2;
-
-	@ViewInject(R.id.iv_back)
-	private ImageView iv_back;
-	
-	@ViewInject(R.id.tv_coterieTitle)
-	private TextView tv_coterieTitle;
-	
-	//完成
-	@ViewInject(R.id.tv_complete)
-	private TextView tv_complete;
+	@ViewInject(R.id.hv_title)
+	private HeaderView hv_title;
 	
 	@ViewInject(R.id.tv_change_face)
 	private TextView tv_change_face;
@@ -121,8 +114,15 @@ public class CreateCircleActivity extends BaseActivity implements OnClickListene
 
 
 	private void editCoterie(Coterie coterie) {
-		tv_coterieTitle.setText("编辑资料");
-		tv_complete.setText("确定");
+		hv_title.setHtext("编辑圈子");
+		hv_title.showTextBtn("提交", new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				completeClick();
+				
+			}
+		});
 		BitmapUtils bitmapUtils = new BitmapUtils(instance);
 		//获得头像地址
 		coterieFaceUrl= coterie.getCoterieFaceUrl();
@@ -141,7 +141,11 @@ public class CreateCircleActivity extends BaseActivity implements OnClickListene
 		}else {
 			rb_group.setChecked(true);
 		}
-		
+		rb_public.setEnabled(false);
+		rb_private.setEnabled(false);
+		rb_single.setEnabled(false);
+		rb_group.setEnabled(false);
+		et_coterieName.setEnabled(false);
 		tv_nothing.setTextColor(instance.getResources().getColor(R.color.font_tabletitle));
 		tv_nothing.setBackground(instance.getResources().getDrawable(R.drawable.flow_text_selector));
 		if (coterie.getPropList().size()==0) {
@@ -168,6 +172,12 @@ public class CreateCircleActivity extends BaseActivity implements OnClickListene
 		tv_erke.setOnClickListener(this);
 		tv_fuke.setOnClickListener(this);
 		tv_more.setOnClickListener(this);
+		hv_title.showTextBtn("完成", new OnClickListener() {
+			public void onClick(View arg0) {
+				completeClick();
+				
+			}
+		});
 	}
 
 	TextWatcher yTextWatcher = new TextWatcher() {  
@@ -206,10 +216,6 @@ public class CreateCircleActivity extends BaseActivity implements OnClickListene
             tv_number.setText(length+"/200");
         }  
     };  
-	@OnClick(R.id.iv_back)
-	public void backClick(View view){
-		finish();
-	}
 	//科室选择类型
 //	@OnClick(R.id.tv_nothing)
 //	public void choosenothing(View view){
@@ -217,8 +223,8 @@ public class CreateCircleActivity extends BaseActivity implements OnClickListene
 //		tv_nothing.setBackground(instance.getResources().getDrawable(R.drawable.flow_dept_selector));
 //	}
 	
-	@OnClick(R.id.tv_complete)
-	public void completeClick(View view){
+
+	public void completeClick(){
 		String userSeqId = userInfo.getUserSeqId();
 		String coterieName = et_coterieName.getText().toString();
 		String coterieDesc = et_coterieDesc.getText().toString();
@@ -252,10 +258,10 @@ public class CreateCircleActivity extends BaseActivity implements OnClickListene
 			ToastUtils.showMessage(instance, "请选择圈子权限！");
 			return;
 		}
-		if (tv_complete.getText().toString().equals("完成")) {
+		if (hv_title.getTextBtn().getText().toString().equals("完成")) {
 			maintainCoterie("A",userSeqId,"",coterieFaceUrl,coterieName,coterieDesc,isOpen,coterieType);
 		}
-		if (tv_complete.getText().toString().equals("确定")) {
+		if (hv_title.getTextBtn().getText().toString().equals("提交")) {
 			maintainCoterie("U", userSeqId, coterie.getCoterieId(), coterieFaceUrl, coterieName, coterieDesc, isOpen,coterieType);
 		}
 	}
@@ -294,7 +300,7 @@ public class CreateCircleActivity extends BaseActivity implements OnClickListene
 							.getJSONObject("ReturnInfo");
 //					Coterie coterie1= JSON.parseObject(jsonObject.getString("ReturnInfo"), Coterie.class);
 					String coterieId = returnObj.getString("coterieId");
-					if (tv_complete.getText().toString().equals("完成")) {
+					if (hv_title.getTextBtn().getText().toString().equals("完成")) {
 						Toast.makeText(instance, "创建圈子成功！", Toast.LENGTH_LONG).show();
 						Intent intent=new Intent(instance, CircleInviteFirendActivity.class);
 						intent.putExtra(Constant.CIRCLE, coterieId);
@@ -302,12 +308,10 @@ public class CreateCircleActivity extends BaseActivity implements OnClickListene
 						startActivity(intent);
 						finish();
 					}
-					if (tv_complete.getText().toString().equals("确定")) {
+					if (hv_title.getTextBtn().getText().toString().equals("提交")) {
 						Toast.makeText(instance, "编辑资料成功！", Toast.LENGTH_LONG).show();
 						setResult(EDIT_DATA_SUCCESS);
-						Intent intent=new Intent(instance, CircleIntroductionActivity.class);
-						intent.putExtra(Constant.CIRCLE, coterieId);
-						startActivity(intent);
+						
 						finish();
 					}
 					//Log.i("circleInfo", circleInfo.toString());

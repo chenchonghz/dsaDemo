@@ -21,6 +21,7 @@ import com.szrjk.dhome.IPostListCallback;
 import com.szrjk.dhome.PostListComm;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.CircleInfo;
+import com.szrjk.entity.CircleType;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.PostInfo;
 import com.szrjk.entity.PostList;
@@ -94,7 +95,7 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 	public static int POSITION;
 	public static boolean ISDELETE;
 	private boolean fromCircleList = false;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)	{
 		super.onCreate(savedInstanceState);
@@ -104,7 +105,7 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 		//		initData();
 		//		String basePostId = "0";
 		objId = instance.getIntent().getStringExtra(Constant.USER_SEQ_ID);
-		
+
 		dialog = ShowDialogUtil.createDialog(this, LOADING_POST);
 		//请求数据
 		//获得intent数据
@@ -295,7 +296,7 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 			public void success(JSONObject jsonObject) {
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
-				ToastUtils.showMessage(instance, errorObj.getErrorMessage());
+//				ToastUtils.showMessage(instance, errorObj.getErrorMessage());
 				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode()))
 				{
 					JSONObject returnObj = jsonObject
@@ -304,10 +305,10 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 					setdata();
 
 				}
-//				else if(errorObj.getReturnCode().equals("0006")&& errorObj.getErrorMessage().equals("圈子["+circleId+"]不存在！")){
-//					ToastUtils.showMessage(instance, "错误圈子");
-//					instance.finish();
-//				}
+				//				else if(errorObj.getReturnCode().equals("0006")&& errorObj.getErrorMessage().equals("圈子["+circleId+"]不存在！")){
+				//					ToastUtils.showMessage(instance, "错误圈子");
+				//					instance.finish();
+				//				}
 				if (dialog.isShowing())
 				{
 					dialog.dismiss();
@@ -335,8 +336,8 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 					finish();
 				}
 				Log.e("CircleHomePage", "错误码："+returnCode);
-					
-				
+
+
 				dialog.dismiss();
 			}
 		});
@@ -585,6 +586,9 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 	protected void dissolvecircle() {
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("ServiceName", "maintainCoterieInfo");
+		List<CircleType> propList = new ArrayList<CircleType>();
+		CircleType property = new CircleType("1", circleInfo.getPropList().get(0).getPropertyId());
+		propList.add(property);
 		Map<String, Object> busiParams = new HashMap<String, Object>();
 		busiParams.put("operateType", "D");
 		Map<String, Object> coterieInfo = new HashMap<String, Object>();
@@ -594,6 +598,8 @@ public class CircleHomepageActivity extends BaseActivity implements OnClickListe
 		coterieInfo.put("coterieDesc", circleInfo.getCoterieDesc());
 		coterieInfo.put("coterieFaceUrl", circleInfo.getCoterieFaceUrl());
 		coterieInfo.put("isOpen", circleInfo.getIsOpen());
+		coterieInfo.put("coterieType", circleInfo.getCoterieType());
+		coterieInfo.put("propList", propList);
 		busiParams.put("coterieInfo", coterieInfo);
 		paramMap.put("BusiParams", busiParams);
 		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {

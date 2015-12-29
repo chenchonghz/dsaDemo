@@ -41,8 +41,6 @@ import android.widget.TextView;
 public class CircleInviteFirendActivity extends FragmentActivity implements OnClickListener {
 	@ViewInject(R.id.hv_invite)
 	private HeaderView hv_invite;
-	@ViewInject(R.id.tv_invite)
-	private TextView tv_invite;
 	@ViewInject(R.id.rly_friend)
 	private RelativeLayout rly_friend;
 	@ViewInject(R.id.tv_friend)
@@ -93,7 +91,16 @@ public class CircleInviteFirendActivity extends FragmentActivity implements OnCl
 		rly_fans.setOnClickListener(instance);
 		rly_follow.setOnClickListener(instance);
 		rly_friend.setOnClickListener(instance);
-		tv_invite.setOnClickListener(instance);
+		hv_invite.showTextBtn("邀请", new OnClickListener() {
+			public void onClick(View arg0) {
+				if (friend.size()==0) {
+					ToastUtils.showMessage(instance, "您还没有选择好友");
+				}else{
+					invite();
+//					Log.i("TAG", friend.toString());
+				}
+			}
+		});
 		lly_btn.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -175,14 +182,6 @@ public class CircleInviteFirendActivity extends FragmentActivity implements OnCl
 			clickfans();
 			vp_invite.setCurrentItem(2);
 			break;
-		case R.id.tv_invite:
-			if (friend.size()==0) {
-				ToastUtils.showMessage(instance, "您还没有选择好友");
-			}else{
-				invite();
-//				Log.i("TAG", friend.toString());
-			}
-			break;
 		}
 	}
 	private void invite() {
@@ -199,7 +198,7 @@ public class CircleInviteFirendActivity extends FragmentActivity implements OnCl
 			@Override
 			public void success(JSONObject jsonObject) {
 				dialog.dismiss();
-				tv_invite.setClickable(true);
+				hv_invite.getTextBtn().setClickable(true);
 
 				ErrorInfo errorObj = JSON.parseObject(
 						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
@@ -223,7 +222,7 @@ public class CircleInviteFirendActivity extends FragmentActivity implements OnCl
 			public void start() {
 //				dialog.setCancelable(false);
 				dialog.show();
-				tv_invite.setClickable(false);
+				hv_invite.getTextBtn().setClickable(false);
 			}
 
 			@Override
@@ -237,7 +236,7 @@ public class CircleInviteFirendActivity extends FragmentActivity implements OnCl
 					public void run() {
 						dialog.dismiss();
 						ToastUtils.showMessage(instance, "邀请失败，再试一次");
-						tv_invite.setClickable(true);
+						hv_invite.getTextBtn().setClickable(true);
 					}
 				});
 

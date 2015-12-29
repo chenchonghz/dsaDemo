@@ -104,6 +104,7 @@ public class AddressBookAdapter extends BaseAdapter implements SectionIndexer{
 		viewHolder.tv_jobtitle.setText(data.getProfessionalTitle());
 		viewHolder.tv_hospital.setText(data.getCompanyName());
 		viewHolder.tv_department.setText(data.getDeptName());
+		
 		return view;
 
 	}
@@ -119,6 +120,7 @@ public class AddressBookAdapter extends BaseAdapter implements SectionIndexer{
 		RelativeLayout rl_zmu;
 		ImageView iv_smallphoto;
 		ImageView iv_yellow_icon;
+		RelativeLayout rl_item;
 	}
 
 

@@ -17,8 +17,8 @@ public class PictureLoader {
 	public static final int Album = 1002;
 	/**
 	 * 
-	 * @param context  必须是baActivity 类型
-	 * @return			返回拍照之后的图片
+	 * @param context  必须是BaaeActivity 类型
+	 * @return			type:File 返回拍照之后的图片
 	 */
 	public static File getCamera(BaseActivity context){
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

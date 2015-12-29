@@ -3,6 +3,7 @@
 
     <style name="checkbox" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/checkbox_selector</item>
+       
     </style>
 
     <style name="Theme.dhome" parent="@android:style/Theme.Black">

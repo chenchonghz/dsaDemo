@@ -217,6 +217,7 @@ public class TFriendRequest extends AbstractUserEntity<TFriendRequest>{
 				if(tm.getSelfUserId().equals(userid)){
 					RequestList item = new RequestList();
 					UserCard tempUC= new UserCard();
+					tempUC.setUserSeqId(tm.getObjUserid());
 					tempUC.setUserName(tm.getObjUsername());
 					tempUC.setCompanyName(tm.getObjUserHospital());
 					tempUC.setProfessionalTitle(tm.getObjUserPtitle());

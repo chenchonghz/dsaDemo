@@ -851,11 +851,14 @@
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
         </activity>
-        
-        
-        <service 
-            android:name="com.szrjk.service.DemoService"
-            ></service>
+
+        <service android:name="com.szrjk.service.DemoService" >
+        </service>
+
+        <activity
+            android:name="com.szrjk.dhome.BackgroundSettingActivity"
+            android:label="@string/title_activity_background_setting" >
+        </activity>
     </application>
 
 </manifest>

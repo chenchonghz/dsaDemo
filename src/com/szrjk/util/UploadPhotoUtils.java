@@ -1,5 +1,8 @@
 package com.szrjk.util;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -11,6 +14,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 import com.alibaba.sdk.android.oss.callback.SaveCallback;
 import com.alibaba.sdk.android.oss.model.OSSException;
 import com.szrjk.dhome.BaseActivity;
@@ -23,9 +27,6 @@ import com.szrjk.self.more.album.AlbumGalleryActivity;
 import com.szrjk.self.more.album.CropPictureActivity;
 import com.szrjk.util.clip.ClipActivity;
 import com.szrjk.widget.AddPhotoPopup;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
 
 /**
  * denggm on 2015/10/28.
@@ -355,5 +356,4 @@ public class UploadPhotoUtils {
 			e.printStackTrace();
 		}
 	}
-
 }

@@ -27,6 +27,7 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.config.Constant;
+import com.szrjk.dhome.BackgroundSettingActivity;
 import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.DoctorActivity;
 import com.szrjk.dhome.IndexGalleryActivity;
@@ -188,13 +189,12 @@ public class MainAuthenticationActivity extends BaseActivity implements OnClickL
 			bt_new.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					startActivity(new Intent(instance,ChatSettingsActivity.class));
-					
+					startActivity(new Intent(instance,BackgroundSettingActivity.class));
 				}
 			});
+			
 			return v;
 		}
-
 	}
 
 	@Override

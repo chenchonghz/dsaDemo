@@ -11,6 +11,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,6 +57,7 @@ public class BaseActivity extends Activity
 		instance = this;
 		initData();
 		dialog= createDialog(this, "请稍候...");
+		Log.e("TAG",this.getClass().toString());
 	}
 
 	private void initData()

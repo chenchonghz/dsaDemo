@@ -165,14 +165,14 @@ public class MyCommentListAdapter extends BaseAdapter {
             // 设置该句使文本的超连接起作用
             holder.tv_commentcontent2.setMovementMethod(LinkMovementMethod.getInstance());
             holder.tv_commentcontent2.setVisibility(View.VISIBLE);
+            //            holder.rl_secondLayer.setBackgroundColor(context.getResources().getColor(R.color.base_bg));
             holder.rl_postContent.setBackgroundColor(context.getResources().getColor(R.color.base_bg2));
-//            holder.rl_secondLayer.setBackgroundColor(context.getResources().getColor(R.color.base_bg));
-            holder.rl_postInfo.setBackgroundColor(context.getResources().getColor(R.color.base_bg));
+            holder.rl_postInfo.setBackgroundColor(context.getResources().getColor(R.color.base_bg_tran));
 
         } else {
             holder.tv_commentcontent1.setText(commentInfo_FirstLayer.getContent());
             holder.tv_commentcontent2.setVisibility(View.GONE);
-            holder.rl_postContent.setBackgroundColor(context.getResources().getColor(R.color.base_bg));
+            holder.rl_postContent.setBackgroundColor(context.getResources().getColor(R.color.base_bg_tran));
             holder.rl_postInfo.setBackgroundColor(context.getResources().getColor(R.color.base_bg2));
         }
         holder.ucl_userCardLayout.setContext(context);

@@ -41,7 +41,7 @@ public class TMessage extends AbstractUserEntity<TMessage>{
 	private String objUserfacelevel;
 	@Column(column = "lasttime")
 	private String lasttime;
-
+	
 
 
 
@@ -239,9 +239,7 @@ public class TMessage extends AbstractUserEntity<TMessage>{
 
 	public List<TMessage> getlist(Activity activity) throws DbException{
 		List<TMessage> list =  userdb.findAll(Selector.from(TMessage.class));
-
 		return list;
-
 	}
 	public List<TMessage> getlist(Activity activity,String userid) throws DbException{
 		List<TMessage> list =  userdb.findAll(Selector.from(TMessage.class));

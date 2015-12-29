@@ -41,7 +41,8 @@
                         android:layout_width="fill_parent"
                         android:layout_height="40dip"
                         android:background="@null"
-                        android:drawableLeft="@drawable/icon_circle"
+                        android:drawableLeft="@drawable/icon_user"
+                        android:drawablePadding="2dp"
                         android:hint="手机号码"
                         android:inputType="number"
                         android:maxLength="11"
@@ -63,7 +64,8 @@
                         android:layout_height="40dip"
                         android:layout_below="@id/et_name"
                         android:background="@null"
-                        android:drawableLeft="@drawable/icon_circle"
+                        android:drawableLeft="@drawable/icon_password"
+                        android:drawablePadding="2dp"
                         android:hint="密码"
                         android:inputType="textPassword"
                         android:paddingLeft="5dip"
@@ -78,16 +80,17 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dip"
-                android:paddingLeft="40dip"
-                android:paddingRight="40dip" >
+                android:paddingLeft="33dip"
+                android:paddingRight="33dip"
+                android:gravity="center_vertical" >
 
                 <CheckBox
                     android:id="@+id/cb_save"
-                    style="@style/checkbox"
                     android:layout_width="wrap_content"
-                    android:layout_height="20dip"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
                     android:checked="true"
-                    android:paddingLeft="@dimen/login_left"
+                    android:drawablePadding="2dp"
                     android:text="记住密码"
                     android:textColor="#b5b5b5"
                     android:textSize="14sp" >
@@ -98,6 +101,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
+                    android:layout_marginTop="2dp"
                     android:text="忘记密码"
                     android:textColor="#b5b5b5"
                     android:textSize="14sp" >
@@ -156,14 +160,15 @@
                     android:layout_height="wrap_content"
                     android:text="还没有账号，点击这里"
                     android:textColor="#b5b5b5"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
+
                 <TextView
                     android:id="@+id/btnReg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="注册"
                     android:textColor="#f47264"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout

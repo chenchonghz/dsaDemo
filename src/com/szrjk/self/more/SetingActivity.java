@@ -145,7 +145,7 @@ public class SetingActivity extends BaseActivity {
 		ToastUtils.showMessage(instance, "等待需求更改");
 		Intent intent = new Intent(instance, CircleRequestActivity.class);
 		startActivity(intent);
-		send();
+//		send();
 		//		Intent intent = new Intent(instance, ChangePortraitActivity.class);
 		//		Bundle bundle = new Bundle();
 		//		// 把图片地址的urlList传递过去

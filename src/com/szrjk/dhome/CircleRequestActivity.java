@@ -56,14 +56,13 @@ public class CircleRequestActivity extends Activity {
 			}
 		});
 		RequestState = new HashMap<String, Integer>();
-		getRequests();
+		getNewRequests();
 	}
-	private void getRequests() {
+	private void getNewRequests() {
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("ServiceName", "getCoterieInvitations");
+		paramMap.put("ServiceName", "dealCoterieInvitation");
 		Map<String, Object> busiParams = new HashMap<String, Object>();
 		busiParams.put("userSeqId",Constant.userInfo.getUserSeqId());
-		busiParams.put("invitationType", "");
 		busiParams.put("beginNum","0");
 		busiParams.put("endNum","100");
 		paramMap.put("BusiParams", busiParams);
@@ -80,19 +79,12 @@ public class CircleRequestActivity extends Activity {
 					if (returnObj==null) {
 					}else{
 						requestList=JSON.parseArray(
-								returnObj.getString("returnList"),CircleRequest.class);
+								returnObj.getString("notifyList"),CircleRequest.class);
 						for (CircleRequest rl:requestList) {
 							StringBuffer sb = new StringBuffer(rl.getObjUserSeqId());
 							sb.append(rl.getCoterieId());
 							Log.i("TAG", sb.toString());
 							RequestState.put(sb.toString(), 0);
-//							//邀请
-//							if (rl.getInvitationType().equals("I")) {
-//								RequestState.put(rl.getUserCard().getUserSeqId(), 0);
-//							//请求
-//							}else if (rl.getInvitationType().equals("R")) {
-//								RequestState.put(rl.getUserCard().getUserSeqId(), 4);
-//							}
 						}
 						setAdapter(requestList,RequestState);
 					}
@@ -146,43 +138,8 @@ public class CircleRequestActivity extends Activity {
 			}
 		});
 	}
+	//长按删除逻辑
 	public void deleteItem(final int position){
-		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("ServiceName", "dealCoterieInvitation");
-		Map<String, Object> busiParams = new HashMap<String, Object>();
-		busiParams.put("userSeqId",requestList.get(position).getUserSeqId());//目标用户ID是上一层传过来
-		busiParams.put("invitationId", requestList.get(position).getInvitationId());
-		busiParams.put("coterieId", requestList.get(position).getCoterieId());
-		busiParams.put("isAgree", "N");
-		paramMap.put("BusiParams", busiParams);
-		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
-			@Override
-			public void success(JSONObject jsonObject) {
-				ErrorInfo errorObj = JSON.parseObject(
-						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
-				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode()))
-				{
-					Toast.makeText(instance, "已忽略", Toast.LENGTH_SHORT).show();
-					adapter.notifyDataSetChanged();
-				}
-			}
-
-			@Override
-			public void start() {
-
-			}
-
-			@Override
-			public void loading(long total, long current, boolean isUploading) {
-
-			}
-
-			@Override
-			public void failure(HttpException exception, JSONObject jobj) {
-
-			}
-		});
-	
 	}
 	
 

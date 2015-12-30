@@ -2,6 +2,12 @@ package com.szrjk.entity;
 
 import java.io.Serializable;
 
+import android.util.Log;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.umeng.message.proguard.U;
+
 
 /**
  * 用户名片实体类
@@ -93,9 +99,35 @@ public class UserCard implements Serializable{
 				+ ", userName=" + userName + ", userType=" + userType
 				+ ", userLevel=" + userLevel + ", isFocus=" + isFocus + "]";
 	}
-
+	//将usercard转换为json字符串
+	public static String Usercard2Json(UserCard userCard){
+		String jsonresult = "";
+		JSONObject object = new JSONObject();
+		JSONObject jsonUsercard = new JSONObject();
+		jsonUsercard.put("userSeqId", userCard.getUserSeqId());
+		jsonUsercard.put("userFaceUrl", userCard.getUserFaceUrl());
+		jsonUsercard.put("userName", userCard.getUserName());
+		jsonUsercard.put("professionalTitle", userCard.getProfessionalTitle());
+		jsonUsercard.put("companyName", userCard.getCompanyName());
+		jsonUsercard.put("deptName", userCard.getDeptName());
+		jsonUsercard.put("userLevel", userCard.getUserLevel());
+		jsonUsercard.put("userType", userCard.getUserType());
+		object.put("userCard", jsonUsercard);
+		jsonresult = object.toString();
+		Log.i("UserCard", jsonresult);
+		return jsonresult;
+	}
+	//将json字符串转换为usercard
+	public static UserCard json2UserCard(String jsonresult){
+		JSONObject obj = JSONObject.parseObject(jsonresult);
+		JSONObject objcard = obj.getJSONObject("userCard");
+		Log.i("UserCard", objcard.toString());
+		UserCard userCard = JSON.parseObject(objcard.toString(), UserCard.class);
+		Log.i("UserCard", userCard.toString());
+		return userCard;
+		
+	}
 	
-
 	
 
 	

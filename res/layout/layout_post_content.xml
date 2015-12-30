@@ -50,7 +50,6 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/padding"
                 android:paddingRight="@dimen/padding"
-                android:paddingBottom="@dimen/margin_top"
                 >
         </LinearLayout>
     </RelativeLayout>

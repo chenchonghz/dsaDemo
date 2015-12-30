@@ -49,7 +49,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/margin_top"
             android:paddingLeft="@dimen/padding"
             android:paddingRight="@dimen/padding" >
         </LinearLayout>
@@ -67,12 +66,11 @@
             android:id="@+id/tv_uname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/base_bg"
             android:gravity="center_vertical"
             android:lineSpacingExtra="@dimen/textview_linespace"
             android:paddingLeft="@dimen/view_post_padding_11"
             android:paddingRight="@dimen/view_post_padding_11"
-            android:paddingTop="@dimen/view_post_padding_6"
+            android:background="@color/base_bg_tran"
             android:singleLine="true"
             android:text="邓国明 "
             android:textColor="@color/font_titleanduname"

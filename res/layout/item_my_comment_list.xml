@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_10dp"
             android:text="回复张杰"
-            android:textColor="@color/font_cell"
+            android:textColor="@color/font_titleanduname"
             android:textSize="@dimen/font_size_middle" />
     </LinearLayout>
 

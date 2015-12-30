@@ -248,6 +248,7 @@ public class SearchView extends LinearLayout implements OnClickListener {
 			break;
 		case R.id.lly_back:
 			((Activity) mContext).finish();
+			if(SearchMainActivity.instance!=null)SearchMainActivity.instance.finish();
 			break;
 		case R.id.lly_search:
 			String search = etInput.getText().toString();

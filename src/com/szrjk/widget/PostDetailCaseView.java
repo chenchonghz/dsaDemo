@@ -76,8 +76,7 @@ public class PostDetailCaseView extends RelativeLayout {
 
 		tvDetailTitle.setText(title);
 
-		SharedPreferences mySharedPreferences = context.getSharedPreferences(
-				"text_size", Context.MODE_PRIVATE);
+		SharedPreferences mySharedPreferences = context.getSharedPreferences("text_size", Context.MODE_PRIVATE);
 		// 用putString的方法保存数据
 		String size = mySharedPreferences.getString("size", "");
 		float textSize = tvDetailedContent.getTextSize();

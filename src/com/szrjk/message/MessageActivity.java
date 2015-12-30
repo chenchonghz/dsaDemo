@@ -509,4 +509,5 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 	//		time.start();
 	//		super.onResume();
 	//	}
+
 }

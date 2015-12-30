@@ -39,7 +39,6 @@ public class FriendRequestFragment extends Fragment {
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_friend_request, null);
 		ViewUtils.inject(this, view);
-		friendActivity = (FriendActivity) getActivity();
 		RequestState = new HashMap<String, Integer>();
 		getrequest();
 		return view;
@@ -71,9 +70,7 @@ public class FriendRequestFragment extends Fragment {
 							returnObj.getString("requestList"),RequestList.class);
 					Log.i("TAG", requestlist.size()+"");
 					if (requestlist.size()==0) {
-						FriendActivity.changeremind(2);
 					}else{
-						FriendActivity.changeremind(1);
 //						Log.i("TAG", requestlist.toString());
 						for (RequestList rl:requestlist) {
 							RequestState.put(rl.getUserCard().getUserSeqId(), 0);

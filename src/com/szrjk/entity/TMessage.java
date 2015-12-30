@@ -294,11 +294,12 @@ public class TMessage extends AbstractUserEntity<TMessage>{
 			String date =df.format(new Date());
 			tm.setLasttime(date);
 			userdb.save(tm);
+			
 			Log.i("TAG", tm.toString());
 		}
 	}
 	//返回背景url
-	public String getBackground(UserCard objUserCard,String bgURL) throws DbException{
+	public String getBackground(UserCard objUserCard) throws DbException{
 		List<TMessage> ulist = userdb.findAll(Selector.from(TMessage.class)
 				.where("ObjUserID", "=",objUserCard.getUserSeqId()));
 		if (ulist!=null&&ulist.size()!=0) {

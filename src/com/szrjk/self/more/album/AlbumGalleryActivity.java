@@ -16,10 +16,14 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow.OnDismissListener;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +43,8 @@ import com.szrjk.widget.PictureListPopup;
 @ContentView(R.layout.activity_album_gallery)
 public class AlbumGalleryActivity extends BaseActivity {
 
+	@ViewInject(R.id.id_bottom_ly)
+	private RelativeLayout id_bottom_ly;
 	@ViewInject(R.id.tv_name)
 	private TextView tv_name;
 	@ViewInject(R.id.ll_backtoalbum)
@@ -83,7 +89,7 @@ public class AlbumGalleryActivity extends BaseActivity {
 		Collections.sort(dataList);
 		Collections.reverse(dataList);
 
-//		Log.i("dataList[0]", dataList.get(0).toString());
+		//		Log.i("dataList[0]", dataList.get(0).toString());
 
 		viewAdapter = new AlbumGalleryAdapter(instance, dataList,tv_comp,num);
 
@@ -100,22 +106,22 @@ public class AlbumGalleryActivity extends BaseActivity {
 		//				startActivity(intent);
 		//			}
 		//		});
-//		ll_backtoalbum.setOnClickListener(new OnClickListener() {
-//			@Override
-//			public void onClick(View view) {
-//				Intent intent=new Intent(instance, AlbumsActivity.class);
-//				//				intent.putExtra("recentphoto", dataList.get(0).getImagePath());
-//				//				intent.putExtra("count", dataList.size());
-//				AlbumsActivity.recentphoto=dataList.get(0).getImagePath();
-//				Log.i("测试1", ""+dataList.get(0).getImagePath());
-//				Log.i("测试2", "");
-//				AlbumsActivity.count=dataList.size();
-//				Log.i("测试3", ""+dataList.size());
-//				intent.putExtra("num", num);
-//				startActivity(intent);
-//				finish();
-//			}
-//		});
+		//		ll_backtoalbum.setOnClickListener(new OnClickListener() {
+		//			@Override
+		//			public void onClick(View view) {
+		//				Intent intent=new Intent(instance, AlbumsActivity.class);
+		//				//				intent.putExtra("recentphoto", dataList.get(0).getImagePath());
+		//				//				intent.putExtra("count", dataList.size());
+		//				AlbumsActivity.recentphoto=dataList.get(0).getImagePath();
+		//				Log.i("测试1", ""+dataList.get(0).getImagePath());
+		//				Log.i("测试2", "");
+		//				AlbumsActivity.count=dataList.size();
+		//				Log.i("测试3", ""+dataList.size());
+		//				intent.putExtra("num", num);
+		//				startActivity(intent);
+		//				finish();
+		//			}
+		//		});
 		tv_comp.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
@@ -142,10 +148,12 @@ public class AlbumGalleryActivity extends BaseActivity {
 		ll_backtoalbum.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				PictureListPopup popup = new PictureListPopup(instance, ll_backtoalbum, contentList,mHandler);
-				popup.showAtLocation(ll_backtoalbum, Gravity.LEFT, 0, 0);
+//				PictureListPopup popup = new PictureListPopup(instance, ll_backtoalbum, contentList,mHandler);
+//				popup.showAtLocation(ll_backtoalbum, Gravity.BOTTOM, 0, -200);
+				finish();
 			}
 		});
+		getViewHeight();
 	}
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -174,7 +182,7 @@ public class AlbumGalleryActivity extends BaseActivity {
 		});
 		photoUpAlbumHelper.execute(false);//异步线程执行
 	}
-	
+
 	//点击pop返回之后，切换相册列表
 	private Handler mHandler = new Handler()
 	{
@@ -199,16 +207,63 @@ public class AlbumGalleryActivity extends BaseActivity {
 			}
 		}
 	};
-	
+
 	public PhotoUpImageBucket getHeadItem(){
 		PhotoUpImageBucket photoUpImageBucket=new PhotoUpImageBucket();
 		photoUpImageBucket.setBucketName("最近照片");
-    	photoUpImageBucket.setCount(dataList.size());
-    	ArrayList<PhotoUpImageItem> imageList = new ArrayList<PhotoUpImageItem>();
-    	PhotoUpImageItem photoUpImageItem = new PhotoUpImageItem();
-    	photoUpImageItem.setImagePath(dataList.get(0).getImagePath());
-    	imageList.add(0, photoUpImageItem);
-    	photoUpImageBucket.setImageList(imageList);
-    	return photoUpImageBucket;
+		photoUpImageBucket.setCount(dataList.size());
+		ArrayList<PhotoUpImageItem> imageList = new ArrayList<PhotoUpImageItem>();
+		PhotoUpImageItem photoUpImageItem = new PhotoUpImageItem();
+		photoUpImageItem.setImagePath(dataList.get(0).getImagePath());
+		imageList.add(0, photoUpImageItem);
+		photoUpImageBucket.setImageList(imageList);
+		return photoUpImageBucket;
+	}
+
+	private int px;//获得底部控件的高度
+	public void getViewHeight(){
+		ViewTreeObserver vtos = id_bottom_ly.getViewTreeObserver();    
+		vtos.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {  
+			@Override    
+			public void onGlobalLayout() {  
+				id_bottom_ly.getViewTreeObserver().removeGlobalOnLayoutListener(this);  
+				px = id_bottom_ly.getHeight();
+				Log.i("h", px+"");
+				initEvent();//pop的点击事件，获得高度之后设置 
+			}    
+		});
+	}
+
+	private PictureListPopup popup;
+	protected void initEvent() {
+		//由于showAsDropDown，sdk 17以上可以正常使用，16未测试，但是低的有异常
+		//				mListImageDirPopupWindow.showAsDropDown(mBottomLy, 0, 0);
+		//基于点击的控件     位置                                     x偏移 y偏移，0底部，++往上
+		id_bottom_ly.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				popup = new PictureListPopup(instance, id_bottom_ly, contentList,mHandler);
+				popup.setAnimationStyle(R.style.anim_popup_dir);
+				//		popup.showAtLocation(ll_backtoalbum, Gravity.BOTTOM, 0, -200);
+				popup.showAtLocation(id_bottom_ly, Gravity.BOTTOM, 0, px);
+				// 设置背景颜色变暗
+				WindowManager.LayoutParams lp = getWindow().getAttributes();
+				lp.alpha = .3f;
+				getWindow().setAttributes(lp);
+				
+				
+				popup.setOnDismissListener(new OnDismissListener()		{
+					@Override
+					public void onDismiss()
+					{
+						// 设置背景颜色变亮
+						WindowManager.LayoutParams lp = getWindow().getAttributes();
+						lp.alpha = 1.0f;
+						getWindow().setAttributes(lp);
+					}
+				});
+			}
+		});
+		
 	}
 }

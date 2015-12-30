@@ -27,10 +27,7 @@ import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.UserInfo;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
-import com.szrjk.util.BusiUtils;
-import com.szrjk.util.DesUtil;
-import com.szrjk.util.SharePerferenceUtil;
-import com.szrjk.util.ToastUtils;
+import com.szrjk.util.*;
 import com.umeng.message.PushAgent;
 
 import org.apache.http.conn.util.InetAddressUtils;
@@ -159,10 +156,7 @@ public class LoginHelper {
 		int width = display.getWidth();
 		int height = display.getHeight();
 
-		LocationManager GpsManager = (LocationManager) context
-				.getSystemService(Context.LOCATION_SERVICE);
-		Location location = GpsManager
-				.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("ServiceName", "gatherAppInfo");
 		Map<String, Object> busiParams = new HashMap<String, Object>();
@@ -172,27 +166,12 @@ public class LoginHelper {
 		busiParams.put("channelType", "1");
 		busiParams.put("version", BusiUtils.getVersionName(context));
 		busiParams.put("systemVersion", android.os.Build.VERSION.RELEASE);// 系统版本
-		busiParams.put("mac", getLocalMacAddress());// MAC地址info.getMacAddress()设备开通Wifi连接，获取到网卡的MAC地址(但是不开通wifi，这种方法获取不到Mac地址，这种方法也是网络上使用的最多的方法)
-		busiParams.put("ip", GetHostIp());
-		String androidId = "";
-		try {
-			//序列号
-			androidId = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
-		} catch (Exception e) {
-			Log.e("error","",e);
-		}
+		busiParams.put("mac", AppInfoUtils.getLocalMacAddress());// MAC地址info.getMacAddress()设备开通Wifi连接，获取到网卡的MAC地址(但是不开通wifi，这种方法获取不到Mac地址，这种方法也是网络上使用的最多的方法)
+		busiParams.put("ip", AppInfoUtils.GetHostIp());
+		String androidId = AppInfoUtils.fetchDeviceId(context);
 		busiParams.put("deviceId", androidId);
-		String gps="";
-		if (location != null) {
-			gps = "精度:" + location.getAccuracy() + ",高度 :"
-					+ location.getAltitude() + ",导向 :" + location.getBearing()
-					+ ",速度 :" + location.getSpeed() + ", 纬度 :"
-					+ location.getLatitude() + ",经度 :"
-					+ location.getLongitude();
-			busiParams.put("gps", gps);
-		}else {
-			busiParams.put("gps", gps);
-		}
+		busiParams.put("gps", AppInfoUtils.gpsdesc(context));
+
 		//		Log.i("saveClientMessage2",
 		//				"photoType " + android.os.Build.MODEL + ",phoneResolution "
 		//						+ width + "*" + height + ",version "
@@ -225,71 +204,7 @@ public class LoginHelper {
 		});
 	}
 
-	public static String getLocalMacAddress() {
-		String Mac=null;
-		try{
 
-			String path="sys/class/net/wlan0/address";
-			if((new File(path)).exists())
-			{
-				FileInputStream fis = new FileInputStream(path);
-				byte[] buffer = new byte[8192];
-				int byteCount = fis.read(buffer);
-				if(byteCount>0)
-				{
-					Mac = new String(buffer, 0, byteCount, "utf-8");
-				}
-			}
-			if(Mac==null||Mac.length()==0)
-			{
-				path="sys/class/net/eth0/address";
-				FileInputStream fis_name = new FileInputStream(path);
-				byte[] buffer_name = new byte[8192];
-				int byteCount_name = fis_name.read(buffer_name);
-				if(byteCount_name>0)
-				{
-					Mac = new String(buffer_name, 0, byteCount_name, "utf-8");
-				}
-			}
-			if(Mac.length()==0||Mac==null){
-				return "";
-			}
-			return  Mac.trim();
-		}catch(Exception io){
-			Log.e("daming.zou**exception*", ""+io.toString(),io);
-		}
-		return "";
-		//		WifiManager wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-		//		WifiInfo info = wifi.getConnectionInfo();
-		//		if (info.getMacAddress() != null) {
-		//			return info.getMacAddress().toString();
-		//		}
-	}
-
-	public static String GetHostIp() {
-		try {
-			for (Enumeration<NetworkInterface> en = NetworkInterface
-					.getNetworkInterfaces(); en.hasMoreElements();) {
-				NetworkInterface intf = en.nextElement();
-				for (Enumeration<InetAddress> enumIpAddr = intf
-						.getInetAddresses(); enumIpAddr.hasMoreElements();) {
-					InetAddress inetAddress = enumIpAddr.nextElement();
-					if (!inetAddress.isLoopbackAddress()
-							&& InetAddressUtils.isIPv4Address(inetAddress
-									.getHostAddress())) {
-						if (!inetAddress.getHostAddress().toString()
-								.equals("null")
-								&& inetAddress.getHostAddress() != null) {
-							return inetAddress.getHostAddress().toString().trim();
-						}
-					}
-				}
-			}
-		} catch (SocketException ex) {
-			Log.e("WifiPreference IpAddress", ex.toString());
-		}
-		return "";
-	}
 
 	//	// 根据IP获取本地Mac
 	//	public static String getLocalMacAddressFromIp(Context context) {

@@ -28,9 +28,10 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/rl_item"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/view_post_padding_6"
+        android:paddingBottom="@dimen/view_doctorInfo_padding"
         android:paddingLeft="@dimen/view_doctorInfo_padding"
         android:paddingRight="@dimen/view_doctorInfo_padding"
         android:paddingTop="@dimen/view_doctorInfo_padding" >

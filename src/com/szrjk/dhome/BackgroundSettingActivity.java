@@ -6,6 +6,7 @@ import java.io.IOException;
 import com.lidroid.xutils.BitmapUtils;
 import com.szrjk.self.more.album.AlbumGalleryActivity;
 import com.szrjk.util.BitmapCompressImage;
+import com.szrjk.util.PictureLoader;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -22,7 +23,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
-public class BackgroundSettingActivity extends Activity implements OnClickListener{
+public class BackgroundSettingActivity extends BaseActivity implements OnClickListener{
 
 	private View bt1;
 	private View bt2;
@@ -48,30 +49,10 @@ public class BackgroundSettingActivity extends Activity implements OnClickListen
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.button1:
-			Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-			String path = Environment.getExternalStorageDirectory().toString() + "/" +"tempimage";
-			File path1 = new File(path);
-			if(!path1.exists()){
-				path1.mkdirs();
-			}
-			file = new File(path1,System.currentTimeMillis()+".jpg");
-			try {
-				file.createNewFile();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}//这里确保file生成。酷派会出现file不存在的情况
-			mOutPutFileUri = Uri.fromFile(file);
-			intent.putExtra(MediaStore.EXTRA_OUTPUT, mOutPutFileUri);
-			this.startActivityForResult(intent, 100);
-			
+			file = PictureLoader.getCamera(this);
 			break;
 		case R.id.button2:
-
-			Intent intent2 = new Intent();
-			intent2.setClass(this, AlbumGalleryActivity.class);
-			intent2.putExtra("num", 1);
-			startActivityForResult(intent2, 200);
+			PictureLoader.getAlbum(this, 1);
 			break;
 		default:
 			break;
@@ -86,24 +67,22 @@ public class BackgroundSettingActivity extends Activity implements OnClickListen
 		}
 		
 		switch (requestCode) {
-		case 100:
+		case PictureLoader.CAMERA:
 			
 			if (!file.exists()) {
 				return;
 			}
 			Bitmap b1 = BitmapCompressImage.getimage(file.getAbsolutePath());
-//			Drawable background = DF
 			Drawable drawable =new BitmapDrawable(b1);
 			rl.setBackground(drawable);
 		
 			break;
-		case 200:
-			
+		case PictureLoader.Album:
 			if (data == null) {
-				
 				return;
 			}
-			String[] arr = data.getStringArrayExtra("arr");
+			String[] arr = PictureLoader.getIntentData(data);
+			
 			Bitmap b2 = BitmapCompressImage.getimage(arr[0]);
 //			Drawable background = DF
 			Drawable drawable2 =new BitmapDrawable(b2);

@@ -2411,7 +2411,7 @@ public class IndexListViewAdapter extends BaseAdapter implements Serializable{
 			public void updateDrawState(TextPaint ds) {
 				super.updateDrawState(ds);
 				ds.setUnderlineText(false);
-				ds.setColor(context.getResources().getColor(R.color.font_titleanduname));
+				ds.setColor(context.getResources().getColor(R.color.font_tran));
 			}
 		}, content_start,content_end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		

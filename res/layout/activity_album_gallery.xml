@@ -13,7 +13,7 @@
         <LinearLayout
             android:id="@+id/ll_backtoalbum"
             style="@style/SendButton"
-            android:layout_width="80dp"
+            android:layout_width="50dp"
             android:layout_height="@dimen/header_height"
             android:layout_centerVertical="true"
             android:background="@drawable/button_send_selector"
@@ -28,6 +28,7 @@
                 android:src="@drawable/icon_back_32" />
 
             <TextView
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -83,5 +84,34 @@
         android:visibility="gone"
         android:textColor="@color/black" />
 
-    
+    <RelativeLayout
+        android:id="@+id/id_bottom_ly"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:layout_alignParentBottom="true"
+        android:background="#e0000000"
+        android:clickable="true" >
+
+        <TextView
+            android:id="@+id/id_choose_dir"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dip"
+            android:text="所有图片"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/id_total_count"
+            android:layout_width="50dip"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="0张"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
 </RelativeLayout>

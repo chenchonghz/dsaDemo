@@ -9,7 +9,6 @@
         android:id="@+id/ll_src_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/base_bg"
         android:orientation="vertical"
         android:visibility="gone" >
 

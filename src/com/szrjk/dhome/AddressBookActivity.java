@@ -116,32 +116,12 @@ public class AddressBookActivity extends BaseActivity {
 		sortListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					final int position, long id) {
-				//这里要利用adapter.getItem(position)来获取当前position所对应的对象
-				//				LinearLayout item = (LinearLayout) adapter.getItem(position);
-				//获得里面的子控件，因为点击字母的item，不需要跳转、
-				TextView tv_c = (TextView) view.findViewById(R.id.catalog);
-				TextView tv_title = (TextView) view.findViewById(R.id.title);
-
-				//android:descendantFocusability="blocksDescendants"
-				int visi = tv_c.getVisibility();
-				//				@ExportedProperty(mapping={@IntToString(from=0, to="VISIBLE"), 
-				//				@IntToString(from=4, to="INVISIBLE"), @IntToString(from=8, to="GONE")})
-				if (visi == 0) {
-					//					tv_c.setClickable(false);
-					//							Intent intent = new Intent(instance,DiseasesDetailedActivity.class);
-					//							intent.putExtra(Constant.Library, sourceDateList.get(position));
-					//							startActivity(intent);
-				}
-				else {
-
-					//					Intent intent = new Intent(instance,DiseasesDetailedActivity.class);
-					//					//				(LibraryEntity)adapter.getItem(position)
-					//					intent.putExtra(Constant.Library, sourceDateList.get(position));
-					//					startActivity(intent);
-				}
-
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				AddressListEntity item = sourceDateList.get(position);
+				Intent intent = new Intent(instance,OtherPeopleActivity.class);
+				intent.putExtra(Constant.USER_SEQ_ID, item.getUserCard().getUserSeqId());
+				startActivity(intent);
+				finish();
 			}
 		});
 

@@ -61,7 +61,7 @@ public class FriendRequestActivity extends BaseActivity {
 	private HashMap<String, Integer> RequestState;
 	private HashMap<String, Integer> newRequestState;
 	private FriendRequestAdapter adapter;
-	private List<RequestList> oldrequest ;
+	private List<RequestList> oldrequest;
 	private List<RequestList> newrequest ;
 
 	@Override
@@ -90,6 +90,7 @@ public class FriendRequestActivity extends BaseActivity {
 	private void getoldrequest() throws DbException {
 		oldrequest = new TFriendRequest().getlist(Constant.userInfo.getUserSeqId());
 		RequestState = new TFriendRequest().getStatelist(Constant.userInfo.getUserSeqId());
+		requestlist.addAll(oldrequest);
 	}
 	//拉取新的请求列表
 	private void getnewrequest() {
@@ -116,34 +117,38 @@ public class FriendRequestActivity extends BaseActivity {
 					//					}else{
 					//						FriendActivity.changeremind(1);
 					//						Log.i("TAG", requestlist.toString());
-					for (RequestList rl:newrequest) {
-						newRequestState.put(rl.getUserCard().getUserSeqId(), 0);
-						RequestState.put(rl.getUserCard().getUserSeqId(), 0);
-					}
-					//将新表放入数据库
-					try {
-						new TFriendRequest().addrequest(newrequest, newRequestState);
-					} catch (DbException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					//需要混合旧表和新表
-					for (int i = 0; i < newrequest.size(); i++) {
-						int a = 0;
-						for (int j = 0; j <requestlist.size(); j++) {
-							if (requestlist.get(j).getUserCard().getUserSeqId()
-									.equals(newrequest.get(i).getUserCard().getUserSeqId())) 
-							{
-								requestlist.remove(j);
-								requestlist.add(0,newrequest.get(i));
-								a=1;
-								break;
+					if (newrequest!=null&&newrequest.size()!=0) {
+						for (RequestList rl:newrequest) {
+							newRequestState.put(rl.getUserCard().getUserSeqId(), 0);
+							RequestState.put(rl.getUserCard().getUserSeqId(), 0);
+						}
+						//将新表放入数据库
+						try {
+							new TFriendRequest().addrequest(newrequest, newRequestState);
+						} catch (DbException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						//需要混合旧表和新表
+						for (int i = 0; i < newrequest.size(); i++) {
+							int a = 0;
+							for (int j = 0; j <requestlist.size(); j++) {
+								if (requestlist.get(j).getUserCard().getUserSeqId()
+										.equals(newrequest.get(i).getUserCard().getUserSeqId())) 
+								{
+									requestlist.remove(j);
+									requestlist.add(0,newrequest.get(i));
+									a=1;
+									break;
+								}
+							}
+							if (a==0) {
+								requestlist.add(0, newrequest.get(i));
 							}
 						}
-						if (a==0) {
-							requestlist.add(0, newrequest.get(i));
-						}
 					}
+					Log.i("TAG", requestlist.toString());
+					Log.i("TAG", RequestState.toString());
 					setAdapter(requestlist, RequestState);
 
 					//					}

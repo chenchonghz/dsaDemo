@@ -10,6 +10,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
@@ -404,17 +405,25 @@ public class OtherPeopleActivity extends BaseActivity implements OnClickListener
 	}
 
 	protected void updateUI(OtherHomePageInfo homePageInfo) throws DbException {
-		
-		BitmapUtils bitmapUtils = new BitmapUtils(instance);
-		if(homePageInfo.getBackgroundUrl()==null||
-				homePageInfo.getBackgroundUrl().isEmpty()){
-			String uri_bg =getString(R.string.bg_1).toString();
-			bitmapUtils.display(iv_other_user_background, uri_bg);
-
-		}else{
-			bitmapUtils.display(iv_other_user_background, homePageInfo.getBackgroundUrl());
-
+		try {
+			ImageLoaderUtil imageLoaderUtil2bg = new ImageLoaderUtil(
+					instance, homePageInfo.getBackgroundUrl(), 
+					iv_other_user_background, R.drawable.pic_popupmask, R.drawable.pic_popupmask);
+			imageLoaderUtil2bg.showImage();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			Log.e("ImageLoader", e.toString());
 		}
+//		BitmapUtils bitmapUtils = new BitmapUtils(instance);
+//		if(homePageInfo.getBackgroundUrl()==null||
+//				homePageInfo.getBackgroundUrl().isEmpty()){
+//			String uri_bg =getString(R.string.bg_1).toString();
+//			bitmapUtils.display(iv_other_user_background, uri_bg);
+//
+//		}else{
+//			bitmapUtils.display(iv_other_user_background, homePageInfo.getBackgroundUrl());
+//
+//		}
 		if(homePageInfo.getUserFaceUrl()==null||
 				homePageInfo.getUserFaceUrl().isEmpty()){
 			iv_self_avatar.setImageResource(R.drawable.icon_headfailed);

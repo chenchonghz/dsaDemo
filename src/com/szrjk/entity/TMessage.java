@@ -1,6 +1,8 @@
 package com.szrjk.entity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
@@ -41,8 +43,8 @@ public class TMessage extends AbstractUserEntity<TMessage>{
 	private String objUserfacelevel;
 	@Column(column = "lasttime")
 	private String lasttime;
-	
-
+	@Column(column = "messageBackground")
+	private String messageBackground;
 
 
 	public int getId() {
@@ -128,6 +130,15 @@ public class TMessage extends AbstractUserEntity<TMessage>{
 		this.objUserfacelevel = objUserfacelevel;
 	}
 
+	public String getMessageBackground() {
+		return messageBackground;
+	}
+
+	public void setMessageBackground(String messageBackground) {
+		this.messageBackground = messageBackground;
+	}
+
+
 	@Override
 	public String toString() {
 		return "TMessage [id=" + id + ", selfUserId=" + selfUserId
@@ -135,7 +146,8 @@ public class TMessage extends AbstractUserEntity<TMessage>{
 				+ ", objUserPtitle=" + objUserPtitle + ", objUserHospital="
 				+ objUserHospital + ", objUserdept=" + objUserdept
 				+ ", objUserfaceurl=" + objUserfaceurl + ", objUserfacelevel="
-				+ objUserfacelevel + ", lasttime=" + lasttime + "]";
+				+ objUserfacelevel + ", lasttime=" + lasttime
+				+ ", messageBackground=" + messageBackground + "]";
 	}
 
 	//	@Override
@@ -253,6 +265,53 @@ public class TMessage extends AbstractUserEntity<TMessage>{
 		}
 		return templist;
 
+	}
+	//写入背景url
+	public void addBackground(UserCard objUserCard,String bgURL) throws DbException{
+		List<TMessage> ulist = userdb.findAll(Selector.from(TMessage.class)
+				.where("ObjUserID", "=",objUserCard.getUserSeqId()));
+		if (ulist!=null&&ulist.size()!=0) {
+			for (TMessage tm:ulist) {
+				if (tm.getSelfUserId().equals(Constant.userInfo.getUserSeqId())) {
+					tm.setMessageBackground(bgURL);
+					userdb.update(tm, "messageBackground");
+					Log.i("TAG", "update complete");
+					break;
+				}
+			}
+		}else{
+			TMessage tm= new TMessage();
+			tm.setSelfUserId(Constant.userInfo.getUserSeqId());
+			tm.setObjUserid(objUserCard.getUserSeqId());
+			tm.setObjUsername(objUserCard.getUserName());
+			tm.setObjUserPtitle(objUserCard.getProfessionalTitle());
+			tm.setObjUserHospital(objUserCard.getCompanyName());
+			tm.setObjUserdept(objUserCard.getDeptName());
+			tm.setObjUserfaceurl(objUserCard.getUserFaceUrl());
+			tm.setObjUserfacelevel(objUserCard.getUserLevel());
+			tm.setMessageBackground(bgURL);
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String date =df.format(new Date());
+			tm.setLasttime(date);
+			userdb.save(tm);
+			Log.i("TAG", tm.toString());
+		}
+	}
+	//返回背景url
+	public String getBackground(UserCard objUserCard,String bgURL) throws DbException{
+		List<TMessage> ulist = userdb.findAll(Selector.from(TMessage.class)
+				.where("ObjUserID", "=",objUserCard.getUserSeqId()));
+		if (ulist!=null&&ulist.size()!=0) {
+			for (TMessage tm:ulist) {
+				if (tm.getSelfUserId().equals(Constant.userInfo.getUserSeqId())) {
+					String url = tm.getMessageBackground();
+					Log.i("TAG", "search complete");
+					return url;
+				}
+			}
+			
+		}
+		return null;
 	}
 
 }

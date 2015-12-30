@@ -30,7 +30,7 @@ import java.util.Map;
 
 
 /**
- * 帖子 内容样式（包括名片),里面自己区分 普通，病历分享
+ * 帖子 转发的内容样式（包括名片),里面自己区分 普通，病历分享
  */
 public class PostContentForwardLayout extends RelativeLayout
 {
@@ -79,6 +79,18 @@ public class PostContentForwardLayout extends RelativeLayout
 
 		String postType = postAbstractInfo.getPostAbstract().getPostType();
 		this.ppostAbstractInfo = postAbstractInfo;
+
+		if(postAbstractInfo.getIsDelete()!=null&&postAbstractInfo.getIsDelete().equals("true")){
+			//已经被删除了
+			rl_post_foward_normal.setVisibility(View.VISIBLE);
+
+			String title1 = "";
+			String postContent = "抱歉，此帖子已被作者删除";
+			pdcv1 = new PostDetailCaseView(context,title1,postContent,null);
+			ll_case_detail_list.addView(pdcv1);
+			return;
+		}
+
 		final String postid = postAbstractInfo.getPostAbstract().getPostId();
 		final String userSeqId = postAbstractInfo.getPostAbstract().getUserSeqId();
 		ll_case_detail_list.removeAllViews();
@@ -94,6 +106,7 @@ public class PostContentForwardLayout extends RelativeLayout
 			ll_case_detail_list.addView(pdcv1);
 
 		}else if(postType.equals(Constant.CIRCLE_POST)){
+			//圈子帖子
 			rl_post_foward_normal.setVisibility(View.VISIBLE);
 			String title1 = "";
 			String postContent = postAbstractInfo.getPostAbstract().getContent();

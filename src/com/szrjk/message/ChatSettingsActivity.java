@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,8 +17,8 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.ViewUtils;
-import com.lidroid.xutils.exception.DbException;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.config.Constant;
@@ -76,6 +77,7 @@ public class ChatSettingsActivity extends BaseActivity implements OnClickListene
 		instance = this;
 		Intent data = this.getIntent();
 		Bundle u = data.getExtras();
+		//第三方名片；来源：聊天界面
 		obj = (UserCard) u.getSerializable(Constant.USER_INFO);
 		//		Log.i("", obj.toString());
 		setListener();
@@ -102,7 +104,6 @@ public class ChatSettingsActivity extends BaseActivity implements OnClickListene
 	/**显示sendWindow**/
 	private void showPop(){
 		//		sendWindow = new PostSendPopup(instance, sendPostClick);
-
 		List<PopupItem> pilist = new ArrayList<PopupItem>();
 		PopupItem pi1 = new PopupItem();
 		pi1.setItemname("拍照");//设置名称
@@ -139,12 +140,11 @@ public class ChatSettingsActivity extends BaseActivity implements OnClickListene
 				showPop();
 				break;
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		try {
@@ -152,7 +152,6 @@ public class ChatSettingsActivity extends BaseActivity implements OnClickListene
 				Log.i("", "么有返回数据");
 				return;
 			}
-
 			switch (requestCode) {
 			case PictureLoader.CAMERA:
 				//拍照完之后，处理图片
@@ -161,25 +160,30 @@ public class ChatSettingsActivity extends BaseActivity implements OnClickListene
 					Log.i("","imgFile异常");
 					return;
 				}
-				//写入数据库
-				new TMessage().addBackground(obj, imgFile.getAbsolutePath());
-				Log.i("",imgFile.getAbsolutePath());
+				Log.i("背景",imgFile.getAbsolutePath());
+				
+				Intent intent1 = new Intent(instance,BackgroundPreviewActivity.class);
+				intent1.putExtra("path", imgFile.getAbsolutePath());
+				intent1.putExtra("obj", obj);
+				startActivity(intent1);
 				break;
 			case PictureLoader.Album:
 				String[] arr = PictureLoader.getIntentData(data);
 				if (arr == null) {
 					Log.i("","arr异常");
+					return;
 				}
-				//写入数据库
-				new TMessage().addBackground(obj, arr[0]);
-//				showToast(instance, arr[0], 0);
-				Log.i("",arr[0]);
+				Log.i("背景",arr[0]);
+				Intent intent2 = new Intent(instance,BackgroundPreviewActivity.class);
+				intent2.putExtra("path", arr[0]);
+				intent2.putExtra("obj", obj);
+				startActivity(intent2);
 				break;
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
+	
+	
 }

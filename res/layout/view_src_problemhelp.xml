@@ -15,7 +15,6 @@
         android:textColor="@color/font_titleanduname"
         android:lineSpacingExtra="@dimen/textview_linespace"
         android:gravity="center_vertical"
-        android:background="@color/base_bg"
         android:singleLine="true"
         />
    <FrameLayout

@@ -24,6 +24,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.szrjk.adapter.MessagesListAdapter;
 import com.szrjk.config.Constant;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.MessagesEntity;
@@ -37,6 +38,7 @@ import com.szrjk.sdlv.Menu;
 import com.szrjk.sdlv.MenuItem;
 import com.szrjk.sdlv.SlideAndDragListView;
 import com.szrjk.sdlv.SlideAndDragListView.OnSlideListener;
+import com.szrjk.util.DisplaySizeUtil;
 import com.szrjk.util.ShowDialogUtil;
 import com.szrjk.util.ToastUtils;
 
@@ -90,6 +92,8 @@ public class ExploreFragment2 extends Fragment{
 							.getJSONObject("ReturnInfo");
 					messageList = JSON.parseArray(returnObj.getString("messageListOut"), MessagesEntity.class);
 					Log.e("ExploreFragment2", messageList.toString());
+					MessagesListAdapter adapter = new MessagesListAdapter(context, messageList, 11);
+					lv_messages.setAdapter(adapter);
 				}
 			}
 			
@@ -128,21 +132,23 @@ public class ExploreFragment2 extends Fragment{
 		sl_messages.getLoadingLayoutProxy(true, false)
 		.setReleaseLabel(
 				getResources().getString(R.string.release_lable_text));
-		Menu menu = new Menu((int) getResources().getDimension(R.dimen.view_listMenu_height), new ColorDrawable(Color.WHITE), true);
-		menu.addItem(new MenuItem.Builder().setWidth((int) getResources().getDimension(R.dimen.view_listMenu_btn_width))//单个菜单button的宽度
-				.setBackground(new ColorDrawable(getResources().getColor(R.color.base_bg)))//设置菜单的背景
-				.setDirection(MenuItem.DIRECTION_RIGHT)
-				.setText("置顶")//set text string
-				.setTextColor(getResources().getColor(R.color.font_titleanduname))//set text color
-				.setTextSize((int) getResources().getDimension(R.dimen.font_size_middle))//set text color
-				.build());
+		Log.e("ExploreFragment", "字px:"+DisplaySizeUtil.sp2px(context, 10));
+		Menu menu = new Menu((int) getResources().getDimension(R.dimen.view_listMenu_height), new ColorDrawable(Color.WHITE), false);
 		menu.addItem(new MenuItem.Builder().setWidth((int) getResources().getDimension(R.dimen.view_listMenu_btn_width))
 				.setBackground(new ColorDrawable(Color.RED))
 				.setDirection(MenuItem.DIRECTION_RIGHT)//设置方向 (默认方向为DIRECTION_LEFT)
 				.setText("删除")//set text string
-				.setTextColor(getResources().getColor(R.color.font_titleanduname))//set text color
-				.setTextSize((int) getResources().getDimension(R.dimen.font_size_middle))//set text color
+				.setTextColor(getResources().getColor(R.color.white))//set text color
+				.setTextSize((int) getResources().getDimension(R.dimen.font_size_ssmall))//set text color
 				.build());
+		menu.addItem(new MenuItem.Builder().setWidth((int) getResources().getDimension(R.dimen.view_listMenu_btn_width))//单个菜单button的宽度
+				.setBackground(new ColorDrawable(getResources().getColor(R.color.silde_btn_1)))//设置菜单的背景
+				.setDirection(MenuItem.DIRECTION_RIGHT)
+				.setText("置顶")//set text string
+				.setTextColor(getResources().getColor(R.color.white))//set text color
+				.setTextSize((int) getResources().getDimension(R.dimen.font_size_ssmall))//set text color
+				.build());
+		
 		lv_messages.setMenu(menu);
 		dialog = ShowDialogUtil.createDialog(context, LOADING_POST);
 	}

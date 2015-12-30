@@ -30,7 +30,6 @@ public class TFriendRequest extends AbstractUserEntity<TFriendRequest>{
 	@Column(column = "selfID")
 	private String selfUserId;
 
-	//好友请求里的usercard
 	//id
 	@Column(column = "ObjUserID")
 	private String objUserid;
@@ -64,6 +63,7 @@ public class TFriendRequest extends AbstractUserEntity<TFriendRequest>{
 	//请求desc
 	@Column(column = "requestDesc")
 	private String requestDesc;
+	
 	public int getId() {
 		return id;
 	}
@@ -217,6 +217,7 @@ public class TFriendRequest extends AbstractUserEntity<TFriendRequest>{
 				if(tm.getSelfUserId().equals(userid)){
 					RequestList item = new RequestList();
 					UserCard tempUC= new UserCard();
+					tempUC.setUserSeqId(tm.getObjUserid());
 					tempUC.setUserName(tm.getObjUsername());
 					tempUC.setCompanyName(tm.getObjUserHospital());
 					tempUC.setProfessionalTitle(tm.getObjUserPtitle());

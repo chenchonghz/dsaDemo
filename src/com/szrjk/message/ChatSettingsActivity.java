@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.exception.DbException;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.config.Constant;
@@ -24,6 +25,7 @@ import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.IPopupItemCallback;
 import com.szrjk.entity.PopupItem;
+import com.szrjk.entity.TMessage;
 import com.szrjk.entity.UserCard;
 import com.szrjk.util.ImageLoaderUtil;
 import com.szrjk.util.PictureLoader;
@@ -37,34 +39,36 @@ import com.szrjk.widget.ListPopup;
 public class ChatSettingsActivity extends BaseActivity implements OnClickListener {
 	@ViewInject(R.id.rl_chat)
 	private LinearLayout rl_chat;
-	
+
 	@ViewInject(R.id.bt_chatclean)
 	private Button bt_chatclean;
-	
+
 	@ViewInject(R.id.iv_smallphoto)
 	private ImageView iv_smallphoto;
-	
+
 	@ViewInject(R.id.iv_yellow_icon)
 	private ImageView iv_yellow_icon;
-	
+
 	@ViewInject(R.id.tv_name)
 	private TextView tv_name;
-	
+
 	@ViewInject(R.id.tv_jobtitle)
 	private TextView tv_jobtitle;
-	
+
 	@ViewInject(R.id.tv_hospital)
 	private TextView tv_hospital;
-	
+
 	@ViewInject(R.id.tv_department)
 	private TextView tv_department;
 
 	private ChatSettingsActivity instance;
-	
+
 	@ViewInject(R.id.rl_setbackground)
 	private RelativeLayout rl_setbackground;
-	
+
 	private File imgFile;
+
+	private UserCard obj;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -72,8 +76,8 @@ public class ChatSettingsActivity extends BaseActivity implements OnClickListene
 		instance = this;
 		Intent data = this.getIntent();
 		Bundle u = data.getExtras();
-		UserCard obj = (UserCard) u.getSerializable(Constant.USER_INFO);
-//		Log.i("", obj.toString());
+		obj = (UserCard) u.getSerializable(Constant.USER_INFO);
+		//		Log.i("", obj.toString());
 		setListener();
 		initLayout(obj);
 	}
@@ -107,6 +111,7 @@ public class ChatSettingsActivity extends BaseActivity implements OnClickListene
 			@Override
 			public void itemClickFunc(PopupWindow popupWindow) {
 				imgFile = PictureLoader.getCamera(instance);
+
 				popupWindow.dismiss();
 			}
 		});
@@ -120,7 +125,7 @@ public class ChatSettingsActivity extends BaseActivity implements OnClickListene
 				popupWindow.dismiss();
 			}
 		});
-		
+
 		pilist.add(pi1);
 		pilist.add(pi2);
 		new ListPopup(instance,pilist,rl_chat);
@@ -134,7 +139,7 @@ public class ChatSettingsActivity extends BaseActivity implements OnClickListene
 				showPop();
 				break;
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -147,22 +152,34 @@ public class ChatSettingsActivity extends BaseActivity implements OnClickListene
 				Log.i("", "么有返回数据");
 				return;
 			}
-			
+
 			switch (requestCode) {
 			case PictureLoader.CAMERA:
 				//拍照完之后，处理图片
-				showToast(instance, imgFile.getAbsolutePath(), 0);
-				
+//				showToast(instance, imgFile.getAbsolutePath(), 0);
+				if (!imgFile.exists()) {
+					Log.i("","imgFile异常");
+					return;
+				}
+				//写入数据库
+				new TMessage().addBackground(obj, imgFile.getAbsolutePath());
+				Log.i("",imgFile.getAbsolutePath());
 				break;
 			case PictureLoader.Album:
 				String[] arr = PictureLoader.getIntentData(data);
-				showToast(instance, arr[0], 0);
+				if (arr == null) {
+					Log.i("","arr异常");
+				}
+				//写入数据库
+				new TMessage().addBackground(obj, arr[0]);
+//				showToast(instance, arr[0], 0);
+				Log.i("",arr[0]);
 				break;
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 }

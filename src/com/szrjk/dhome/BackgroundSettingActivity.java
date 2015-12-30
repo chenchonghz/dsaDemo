@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import com.lidroid.xutils.BitmapUtils;
+import com.szrjk.entity.TMessage;
 import com.szrjk.self.more.album.AlbumGalleryActivity;
 import com.szrjk.util.BitmapCompressImage;
 import com.szrjk.util.PictureLoader;
@@ -50,6 +51,8 @@ public class BackgroundSettingActivity extends BaseActivity implements OnClickLi
 		switch (v.getId()) {
 		case R.id.button1:
 			file = PictureLoader.getCamera(this);
+			
+//			new TMessage().getBackground(objUserCard, bgURL)
 			break;
 		case R.id.button2:
 			PictureLoader.getAlbum(this, 1);

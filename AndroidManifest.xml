@@ -683,7 +683,7 @@
             android:name="com.szrjk.message.MessageActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.dhome"
-            android:windowSoftInputMode="adjustResize|stateHidden" >
+            android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
         <activity
             android:name="com.szrjk.util.corpimageview.CropImageActivity"

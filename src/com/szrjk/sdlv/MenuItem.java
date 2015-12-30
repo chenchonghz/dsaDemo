@@ -27,6 +27,8 @@ public final class MenuItem {
         this.background = background;
         this.direction = direction;
     }
+    
+    
 
     public static class Builder {
         private int width = 50;

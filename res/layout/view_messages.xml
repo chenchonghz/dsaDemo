@@ -3,6 +3,7 @@
     android:id="@+id/ll_message"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_gravity="center"
     style="@style/IndexButton"
     android:orientation="vertical" >
 
@@ -12,13 +13,13 @@
         android:paddingBottom="@dimen/view_post_padding_6"
         android:paddingLeft="@dimen/view_doctorInfo_padding"
         android:paddingRight="@dimen/view_doctorInfo_padding"
-        android:paddingTop="8dp" >
+        android:paddingTop="4dp" >
 
         <ImageView
             android:id="@+id/iv_smallphoto"
             android:layout_width="@dimen/avatar_doctor_small_width"
             android:layout_height="@dimen/avatar_doctor_small_height"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="6dp"
             android:scaleType="centerCrop"
             android:src="@drawable/aaa" />
 
@@ -29,17 +30,19 @@
             android:layout_marginLeft="28dp"
             android:layout_marginTop="32dp"
             android:src="@drawable/icon_yellow_v_24"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
         <Button
             android:id="@+id/bt_unread_num"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginLeft="30dp"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginLeft="34dp"
             android:background="@drawable/icon_remind01"
             android:textColor="@color/white"
+            android:text="99"
+            android:gravity="center"
             android:textSize="@dimen/font_size_xsmall"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
         <LinearLayout
             android:layout_width="wrap_content"

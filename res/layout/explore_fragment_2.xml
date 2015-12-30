@@ -22,7 +22,7 @@
                 android:background="@color/white"
                 android:layout_marginTop="@dimen/view_post_margin_11"
                 android:divider="@color/line_list"
-                android:dividerHeight="0.5dp"
+                android:dividerHeight="0.3dp"
                 >
             </com.szrjk.sdlv.SlideAndDragListView>
             <Button 

@@ -873,6 +873,13 @@
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
         </activity>
+        
+        <activity
+            android:name="com.szrjk.message.BackgroundPreviewActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/Theme.dhome"
+            android:windowSoftInputMode="adjustNothing" >
+        </activity>
     </application>
 
 </manifest>

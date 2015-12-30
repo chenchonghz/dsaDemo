@@ -99,7 +99,7 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 		Intent intent = getIntent();
 		objUserCard = (UserCard) intent.getSerializableExtra("otherusercard");
 		try {
-			String url =new TMessage().getBackground(objUserCard, "123");
+			String url =new TMessage().getBackground(objUserCard);
 			if (url == null) {
 				Log.i("","图片地址空");
 				messageView.setBackgroundColor(this.getResources().getColor(R.color.base_bg));

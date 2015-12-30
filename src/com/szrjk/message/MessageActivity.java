@@ -28,12 +28,16 @@ import com.szrjk.pull.PullToRefreshBase;
 import com.szrjk.pull.PullToRefreshBase.Mode;
 import com.szrjk.pull.PullToRefreshBase.OnRefreshListener;
 import com.szrjk.pull.PullToRefreshListView;
+import com.szrjk.util.BitmapCompressImage;
 import com.szrjk.util.ToastUtils;
 import com.szrjk.widget.HeaderView;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -45,10 +49,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 @ContentView(R.layout.activity_message)
 public class MessageActivity extends BaseActivity implements OnClickListener {
 	@ViewInject(R.id.rly_message)
-	private View messageView;
+	private RelativeLayout messageView;
 	@ViewInject(R.id.hv_message)
 	private HeaderView hv_message;
 	@ViewInject(R.id.lv_message)
@@ -82,6 +87,7 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 		ViewUtils.inject(instance);
 		mPullToRefreshListView.setMode(Mode.PULL_FROM_START);
 		list_message = mPullToRefreshListView.getRefreshableView();
+		
 		hv_message.showImageLLy(R.drawable.icon_messageset_40, new OnClickListener() {
 			public void onClick(View arg0) {
 				Intent intent = new Intent(instance, ChatSettingsActivity.class);
@@ -92,6 +98,23 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 		//获取usercard
 		Intent intent = getIntent();
 		objUserCard = (UserCard) intent.getSerializableExtra("otherusercard");
+		try {
+			String url =new TMessage().getBackground(objUserCard, "123");
+			if (url == null) {
+				Log.i("","图片地址空");
+				messageView.setBackgroundColor(this.getResources().getColor(R.color.base_bg));
+			}else{
+				
+			Bitmap b1 = BitmapCompressImage.getimage(url);
+			Drawable drawable =new BitmapDrawable(b1);
+			messageView.setBackground(drawable);
+			}
+		
+			
+		} catch (DbException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		//设一个假的usercard
 		if (objUserCard ==null) {
 			//			setUsercard();

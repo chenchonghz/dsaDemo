@@ -67,7 +67,7 @@
         android:layout_height="match_parent"
         android:layout_above="@id/rly_sendMessage"
         android:layout_below="@id/hv_message"
-        android:background="@color/base_bg"
+        android:background="@null"
         android:divider="@null"
         android:fastScrollEnabled="true"
         android:scrollbarStyle="insideInset"

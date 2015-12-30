@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
+import android.view.View.MeasureSpec;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.FrameLayout;
@@ -75,6 +76,8 @@ class ItemMainLayout extends FrameLayout {
         addView(mItemCustomLayout, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         mTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
     }
+    
+    
 
     /**
      * 得到CustomView
@@ -124,6 +127,7 @@ class ItemMainLayout extends FrameLayout {
             measureChild(getChildAt(i), widthMeasureSpec, MeasureSpec.makeMeasureSpec(mHeight, MeasureSpec.EXACTLY));
         }
     }
+    
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
@@ -404,4 +408,6 @@ class ItemMainLayout extends FrameLayout {
     protected interface OnItemDeleteListenerProxy {
         void onDelete(View view);
     }
+    
+    
 }

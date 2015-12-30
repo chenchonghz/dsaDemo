@@ -60,6 +60,8 @@ public class MessagesListAdapter extends BaseAdapter{
 		     viewHolder = (ViewHolder) convertView.getTag();
 		}
 		MessagesEntity message = messageList.get(position);
+		viewHolder.tv_messageName.setText(message.getPushTitle());
+		viewHolder.tv_messageContent.setText(message.getPushContent());
 		
 		// TODO Auto-generated method stub
 		return convertView;

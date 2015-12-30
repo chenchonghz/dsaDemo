@@ -9,6 +9,7 @@
     <dimen name="font_size_msmall">12sp</dimen>
     <!-- 正文 -->
     <dimen name="font_size_xsmall">10sp</dimen>
+    <dimen name="font_size_ssmall">5sp</dimen>
     <dimen name="search_bg_height">30dip</dimen>
     <dimen name="search_height">30dip</dimen>
     <dimen name="search_txt_padding_left">6dip</dimen>

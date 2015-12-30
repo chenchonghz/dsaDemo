@@ -18,8 +18,23 @@ import com.szrjk.simplifyspan.unit.SpecialClickableUnit;
 import com.szrjk.simplifyspan.unit.SpecialLabelUnit;
 import com.szrjk.simplifyspan.unit.SpecialTextUnit;
 
+
 public class UserNameJumpUtil {
 
+	/**
+	 *
+	 * @param context
+	 * @param tv_post_text textView
+	 * @param content  string 内容
+	 * @param userName
+	 * @param userSeqId
+	 * @param userLevel
+	 * @param userType
+	 * @param postInfo 没用到
+	 * @param position 没用到
+	 * @param iPullPostListCallback  点击名字的返回
+	 * @return
+	 */
 	public static SimplifySpanBuild getContentText(final Context context,
 			TextView tv_post_text, String content, String userName,
 			final String userSeqId, String userLevel, final String userType,
@@ -29,7 +44,7 @@ public class UserNameJumpUtil {
 				tv_post_text);
 		simplifySpanBuild.appendSpecialUnit(new SpecialTextUnit(userName,
 				context.getResources().getColor(R.color.link_text_color))
-				.setSpecialTextBackgroundColor(context.getResources().getColor(R.color.base_bg))
+				.setSpecialTextBackgroundColor(context.getResources().getColor(R.color.base_bg_tran))
 				.setSpecialClickableUnit(new SpecialClickableUnit(
 						new OnClickableSpanListener() {
 							@Override

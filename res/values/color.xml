@@ -45,7 +45,7 @@
     <color name="base_bg">#f2f2f2</color>
     <color name="base_bg2">#ffffff</color>
 
-    <!--转发的颜色-->
+    <!--转发的背景颜色-->
     <color name="base_bg_tran">#f7f7f7</color>
 
     <!--背景3可点击按钮背景-->

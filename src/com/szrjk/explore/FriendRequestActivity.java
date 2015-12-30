@@ -8,6 +8,7 @@ import java.util.Map;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.exception.DbException;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -22,6 +23,7 @@ import com.szrjk.entity.DialogItem;
 import com.szrjk.entity.DialogItemCallback;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.RequestList;
+import com.szrjk.entity.TFriendRequest;
 import com.szrjk.entity.UserCard;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
@@ -57,8 +59,11 @@ public class FriendRequestActivity extends BaseActivity {
 	private List<RequestList> requestlist ; 
 	private FriendRequestActivity instance;
 	private HashMap<String, Integer> RequestState;
+	private HashMap<String, Integer> newRequestState;
 	private FriendRequestAdapter adapter;
-	
+	private List<RequestList> oldrequest ;
+	private List<RequestList> newrequest ;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -70,7 +75,96 @@ public class FriendRequestActivity extends BaseActivity {
 			}
 		});
 		RequestState = new HashMap<String, Integer>();
-		getrequest();
+		newRequestState = new HashMap<String, Integer>();
+		oldrequest  =  new ArrayList<RequestList>();
+		requestlist = new ArrayList<RequestList>();
+		try {
+			getoldrequest();
+		} catch (DbException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		getnewrequest();
+	}
+	//获得数据库内的请求列表
+	private void getoldrequest() throws DbException {
+		oldrequest = new TFriendRequest().getlist(Constant.userInfo.getUserSeqId());
+		RequestState = new TFriendRequest().getStatelist(Constant.userInfo.getUserSeqId());
+	}
+	//拉取新的请求列表
+	private void getnewrequest() {
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("ServiceName", "getUnhandledUserFriendRequest");
+		Map<String, Object> busiParams = new HashMap<String, Object>();
+		busiParams.put("userSeqId",Constant.userInfo.getUserSeqId());
+		paramMap.put("BusiParams", busiParams);
+		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
+
+			@Override
+			public void success(JSONObject jsonObject) {
+				ErrorInfo errorObj = JSON.parseObject(
+						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
+				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode()))
+				{
+					JSONObject returnObj = jsonObject
+							.getJSONObject("ReturnInfo");
+					newrequest =JSON.parseArray(
+							returnObj.getString("requestList"),RequestList.class);
+					//					if (requestlist.size()==0) {
+					//						FriendActivity.changeremind(2);
+					//						ToastUtils.showMessage(instance, "没有请求");
+					//					}else{
+					//						FriendActivity.changeremind(1);
+					//						Log.i("TAG", requestlist.toString());
+					for (RequestList rl:newrequest) {
+						newRequestState.put(rl.getUserCard().getUserSeqId(), 0);
+						RequestState.put(rl.getUserCard().getUserSeqId(), 0);
+					}
+					//将新表放入数据库
+					try {
+						new TFriendRequest().addrequest(newrequest, newRequestState);
+					} catch (DbException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					//需要混合旧表和新表
+					for (int i = 0; i < newrequest.size(); i++) {
+						int a = 0;
+						for (int j = 0; j <requestlist.size(); j++) {
+							if (requestlist.get(j).getUserCard().getUserSeqId()
+									.equals(newrequest.get(i).getUserCard().getUserSeqId())) 
+							{
+								requestlist.remove(j);
+								requestlist.add(0,newrequest.get(i));
+								a=1;
+								break;
+							}
+						}
+						if (a==0) {
+							requestlist.add(0, newrequest.get(i));
+						}
+					}
+					setAdapter(requestlist, RequestState);
+
+					//					}
+
+				}
+			}
+
+			@Override
+			public void start() {
+			}
+
+			@Override
+			public void loading(long total, long current, boolean isUploading) {
+
+			}
+
+			@Override
+			public void failure(HttpException exception, JSONObject jobj) {
+
+			}
+		});
 	}
 	private void setAdapter(List<RequestList> requestlist,HashMap<String, Integer> RequestState ) {
 		adapter = new FriendRequestAdapter(instance, requestlist,RequestState);
@@ -88,9 +182,9 @@ public class FriendRequestActivity extends BaseActivity {
 				list.add(item);
 				CustomListDialog cld = new CustomListDialog(instance, list);
 				cld.setCanceledOnTouchOutside(true);
-//				Window dialogWindow = cld.getWindow();
-//				WindowManager.LayoutParams lp = dialogWindow.getAttributes();
-//				dialogWindow.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.TOP);
+				//				Window dialogWindow = cld.getWindow();
+				//				WindowManager.LayoutParams lp = dialogWindow.getAttributes();
+				//				dialogWindow.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.TOP);
 				cld.show();
 				return false;
 			}
@@ -118,130 +212,19 @@ public class FriendRequestActivity extends BaseActivity {
 					intent.putExtra(Constant.USER_SEQ_ID, userCard.getUserSeqId());
 					instance.startActivity(intent);
 				}
-				
-			}
-		});
-	}
-	private void getrequest() {
-		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("ServiceName", "getUnhandledUserFriendRequest");
-		Map<String, Object> busiParams = new HashMap<String, Object>();
-		busiParams.put("userSeqId",Constant.userInfo.getUserSeqId());
-		paramMap.put("BusiParams", busiParams);
-		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
-
-			@Override
-			public void success(JSONObject jsonObject) {
-				ErrorInfo errorObj = JSON.parseObject(
-						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
-				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode()))
-				{
-					JSONObject returnObj = jsonObject
-							.getJSONObject("ReturnInfo");
-					requestlist =JSON.parseArray(
-							returnObj.getString("requestList"),RequestList.class);
-					Log.i("TAG", requestlist.size()+"");
-					if (requestlist.size()==0) {
-//						FriendActivity.changeremind(2);
-						ToastUtils.showMessage(instance, "没有请求");
-					}else{
-//						FriendActivity.changeremind(1);
-//						Log.i("TAG", requestlist.toString());
-						for (RequestList rl:requestlist) {
-							RequestState.put(rl.getUserCard().getUserSeqId(), 0);
-						}
-						setAdapter(requestlist,RequestState);
-
-					}
-
-				}
-			}
-
-			@Override
-			public void start() {
-			}
-
-			@Override
-			public void loading(long total, long current, boolean isUploading) {
-
-			}
-
-			@Override
-			public void failure(HttpException exception, JSONObject jobj) {
 
 			}
 		});
 	}
+	//删除子项
 	public void deleteItem(final int position){
-		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("ServiceName", "handleUserFriendRequest");
-		Map<String, Object> busiParams = new HashMap<String, Object>();
-		busiParams.put("userSeqId", Constant.userInfo.getUserSeqId());
-		busiParams.put("srcUserSeqId",requestlist.get(position).getUserCard().getUserSeqId());
-		busiParams.put("operateType", String.valueOf(3));
-		paramMap.put("BusiParams", busiParams);
-		Log.i("TAG", paramMap.toString());
-		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
-			@Override
-			public void success(JSONObject jsonObject) {
-				ErrorInfo errorObj = JSON.parseObject(
-						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
-				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode()))
-				{
-					Toast.makeText(instance, "已忽略", Toast.LENGTH_SHORT).show();
-					requestlist.remove(position);
-					adapter.notifyDataSetChanged();
-				}
-			}
-
-			@Override
-			public void start() {
-
-			}
-			@Override
-			public void loading(long total, long current, boolean isUploading) {
-
-			}
-			@Override
-			public void failure(HttpException exception, JSONObject jobj) {
-				ToastUtils.showMessage(instance, "请求失败");
-			}
-		});
+		try {
+			new TFriendRequest().deleteRequest(requestlist.get(position));
+			requestlist.remove(position);
+			adapter.notifyDataSetChanged();
+		} catch (DbException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-//	private void sendIgnore() {
-//		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-//		paramMap.put("ServiceName", "handleUserFriendRequest");
-//		Map<String, Object> busiParams = new HashMap<String, Object>();
-//		busiParams.put("userSeqId", Constant.userInfo.getUserSeqId());
-//		busiParams.put("srcUserSeqId",requestlist.get(position).getUserCard().getUserSeqId());
-//		busiParams.put("operateType", String.valueOf(3));
-//		paramMap.put("BusiParams", busiParams);
-//		Log.i("TAG", paramMap.toString());
-//		DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
-//			@Override
-//			public void success(JSONObject jsonObject) {
-//				ErrorInfo errorObj = JSON.parseObject(
-//						jsonObject.getString("ErrorInfo"), ErrorInfo.class);
-//				if (Constant.REQUESTCODE.equals(errorObj.getReturnCode()))
-//				{
-//					Toast.makeText(instance, "已忽略", Toast.LENGTH_SHORT).show();
-//					state.put(list.get(position).getUserCard().getUserSeqId(), 3);
-//					notifyDataSetChanged();
-//				}
-//			}
-//
-//			@Override
-//			public void start() {
-//
-//			}
-//			@Override
-//			public void loading(long total, long current, boolean isUploading) {
-//
-//			}
-//			@Override
-//			public void failure(HttpException exception, JSONObject jobj) {
-//				ToastUtils.showMessage(instance, "请求失败");
-//			}
-//		});
-//	}
 }

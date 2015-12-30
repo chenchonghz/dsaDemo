@@ -118,7 +118,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@id/iv_avatar_repeat"
-            android:background="@color/input_bg" >
+            android:background="@color/base_bg_tran" >
 
             <TextView
                 android:id="@+id/tv_Id_repeat"

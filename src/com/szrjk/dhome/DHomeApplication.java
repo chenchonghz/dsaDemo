@@ -194,6 +194,7 @@ public class DHomeApplication extends Application
 		(new TDept()).initTable(db);
 		(new TProfessionalTitle()).initTable(db);
 		(new TMessage()).initTable(userdb);
+		(new TFriendRequest()).initTable(userdb);
 		//
 		//		/**************************************** 省市数据 *************************************************/
 		//		try

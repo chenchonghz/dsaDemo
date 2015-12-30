@@ -40,6 +40,7 @@ import com.szrjk.fire.Result;
 import com.szrjk.fire.StaticPattern;
 import com.szrjk.fire.ValuePattern;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
+import com.szrjk.util.AppInfoUtils;
 import com.szrjk.util.ToastUtils;
 
 @ContentView(R.layout.activity_register2)
@@ -269,7 +270,7 @@ public class Register2Activity extends BaseActivity implements OnClickListener
 		Map<String, Object> busiParams = new HashMap<String, Object>();
 		//		busiParams.put("captcha", tmpvcode);
 		busiParams.put("busiType", "1");
-		busiParams.put("deviceId", "123");//????
+		busiParams.put("deviceId", AppInfoUtils.fetchDeviceId(Register2Activity.this));//????
 		busiParams.put("authAccount", phone);
 		paramMap.put("BusiParams", busiParams);
 

@@ -13,16 +13,6 @@
         headerattr:htextstr="邀请好友" >
     </com.szrjk.widget.HeaderView>
 
-    <TextView
-        android:id="@+id/tv_invite"
-        android:layout_width="60dip"
-        android:layout_height="@dimen/header_height"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/button_pop_selector"
-        android:gravity="center"
-        android:text="邀请"
-        android:textColor="@color/black"
-        android:textSize="@dimen/font_size_middle" />
 
     <LinearLayout
         android:id="@+id/lly_invite"

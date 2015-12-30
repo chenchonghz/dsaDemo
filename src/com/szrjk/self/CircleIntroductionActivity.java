@@ -290,7 +290,8 @@ public class CircleIntroductionActivity extends BaseActivity {
 	public void clickEditData(View view) {
 		Intent intent = new Intent(instance, CreateCircleActivity.class);
 		intent.putExtra("COTERIE", coterie);
-		startActivityForResult(intent, EDIT_DATA_SUCCESS);
+//		startActivityForResult(intent, EDIT_DATA_SUCCESS);
+		startActivityForResult(intent,EDIT_DATA_SUCCESS);
 	}
 
 	@Override
@@ -306,8 +307,11 @@ public class CircleIntroductionActivity extends BaseActivity {
 			coterieMemberPortraitGridAdapter.notifyDataSetChanged();
 			break;
 		case EDIT_DATA_SUCCESS:
-			finish();
-			break;
+			if (resultCode==EDIT_DATA_SUCCESS) {
+				loadCoterieData(coterieId);
+				break;
+			}
+		
 		}
 	};
 

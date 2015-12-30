@@ -34,6 +34,7 @@ import com.szrjk.dhome.R;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.UserInfo;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
+import com.szrjk.util.AppInfoUtils;
 import com.szrjk.util.ToastUtils;
 
 @ContentView(R.layout.activity_change_phone)
@@ -212,7 +213,7 @@ public class ChangePhoneActivity extends BaseActivity implements OnClickListener
 				Map<String, Object> busiParams = new HashMap<String, Object>();
 				//			busiParams.put("captcha", tmpvcode);
 				busiParams.put("authAccount", phone);
-				busiParams.put("deviceId", "123");
+				busiParams.put("deviceId", AppInfoUtils.fetchDeviceId(ChangePhoneActivity.this));
 				busiParams.put("busiType", "1");
 				paramMap.put("BusiParams", busiParams);
 

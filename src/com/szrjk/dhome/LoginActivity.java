@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,6 +26,7 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.szrjk.config.Constant;
+import com.szrjk.dhome.R.drawable;
 import com.szrjk.entity.IPopupItemCallback;
 import com.szrjk.entity.PopupItem;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
@@ -83,6 +85,16 @@ public class LoginActivity extends BaseActivity implements OnClickListener
 		perferenceUtil = SharePerferenceUtil.getInstance(instance,
 				Constant.USER_INFO);
 		dialog = createDialog(this, "登录中，请稍候...");
+		//设置图片宽度
+		Drawable user = getResources().getDrawable(R.drawable.icon_user);
+		user.setBounds(0, 0, 44, 44);
+		et_name.setCompoundDrawables(user, null, null, null);
+		Drawable psw = getResources().getDrawable(R.drawable.icon_password);
+		psw.setBounds(0, 0, 44, 44);
+		et_pwd.setCompoundDrawables(psw, null, null, null);
+		Drawable checkbox = getResources().getDrawable(R.drawable.checkbox_selector);
+		checkbox.setBounds(0, 0,96,48);
+		cb_save.setCompoundDrawables(checkbox, null, null, null);
 		btn_rg.setOnClickListener(this);
 		btn_lg.setOnClickListener(this);
 		tv_forget.setOnClickListener(this);

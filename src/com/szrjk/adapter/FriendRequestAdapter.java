@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.lidroid.xutils.exception.DbException;
 import com.lidroid.xutils.exception.HttpException;
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.OtherPeopleActivity;
@@ -13,6 +14,7 @@ import com.szrjk.dhome.R;
 import com.szrjk.dhome.SelfActivity;
 import com.szrjk.entity.ErrorInfo;
 import com.szrjk.entity.RequestList;
+import com.szrjk.entity.TFriendRequest;
 import com.szrjk.entity.UserCard;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
@@ -178,6 +180,9 @@ public class FriendRequestAdapter extends BaseAdapter {
 		}
 		return type;
 	}
+	public HashMap<String,Integer> getstate(){
+		return state;
+	}
 
 	class requestBtnListener implements OnClickListener{
 		private int position;
@@ -282,6 +287,12 @@ public class FriendRequestAdapter extends BaseAdapter {
 							jsonObject.getString("ErrorInfo"), ErrorInfo.class);
 					if (Constant.REQUESTCODE.equals(errorObj.getReturnCode()))
 					{
+						try {
+							new TFriendRequest().agreeRequest(list.get(position).getUserCard().getUserSeqId());
+						} catch (DbException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						Toast.makeText(mContext, "添加成功", Toast.LENGTH_SHORT).show();
 						state.put(list.get(position).getUserCard().getUserSeqId(), 2);
 						notifyDataSetChanged();

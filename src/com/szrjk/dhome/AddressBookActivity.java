@@ -118,20 +118,25 @@ public class AddressBookActivity extends BaseActivity {
 			sortListView.addHeaderView(header);
 		}
 		//item点击事件
-		sortListView.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				AddressListEntity item = sourceDateList.get(position);
-				Intent intent = new Intent(instance,OtherPeopleActivity.class);
-				intent.putExtra(Constant.USER_SEQ_ID, item.getUserCard().getUserSeqId());
-				startActivity(intent);
-				finish();
-			}
-		});
+//		sortListView.setOnItemClickListener(new OnItemClickListener() {
+//
+//			@Override
+//			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//				try {
+//					AddressListEntity item = sourceDateList.get(position);
+//					Log.i("item	",item.toString());
+//				}catch (Exception e){
+//					e.printStackTrace();
+//				}
+//				//Intent intent = new Intent(instance,OtherPeopleActivity.class);
+//				//intent.putExtra(Constant.USER_SEQ_ID, item.getUserCard().getUserSeqId());
+//				//startActivity(intent);
+//				//finish();
+//			}
+//		});
 
 		adapter = new AddressBookAdapter(this, sourceDateList);
-		sortListView.setAdapter(adapter); 
+		sortListView.setAdapter(adapter);
 
 
 		mClearEditText = (ClearEditText) findViewById(R.id.filter_edit);
@@ -147,7 +152,7 @@ public class AddressBookActivity extends BaseActivity {
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
+										  int after) {
 
 			}
 
@@ -157,10 +162,10 @@ public class AddressBookActivity extends BaseActivity {
 		});
 	}
 
-	/**
-	 * 根据输入框中的值来过滤数据并更新ListView
-	 * @param filterStr
-	 */
+//	/**
+//	 * 根据输入框中的值来过滤数据并更新ListView
+//	 * @param filterStr
+//	 */
 	//	private void filterData(String filterStr){
 	//		List<LibraryEntity> filterDateList = new ArrayList<LibraryEntity>();
 	//
@@ -202,7 +207,7 @@ public class AddressBookActivity extends BaseActivity {
 					//					Log.i("friendlist", sourceDateList.toString());
 					Collections.sort(sourceDateList, pinyinComparator);
 					adapter = new AddressBookAdapter(instance, sourceDateList);
-					sortListView.setAdapter(adapter); 
+					sortListView.setAdapter(adapter);
 					fl_content.setVisibility(View.VISIBLE);
 				}else if("0006".equals(errorObj.getReturnCode())){
 					Log.i("好友列表", "异常");
@@ -273,8 +278,29 @@ public class AddressBookActivity extends BaseActivity {
 				sortModel.setSortLetters(sortString.toUpperCase());
 			}else{
 				sortModel.setSortLetters("#");
+
 			}
 			//			SourceDateList.add(sortModel);
+		}
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		try {
+			if (resultCode != RESULT_OK){
+				Log.i("","data 异常");
+			}
+			switch (requestCode){
+				case 3003:
+					String isF = data.getStringExtra("isFriend");
+					if ("no".equals(isF)){
+						int index = data.getIntExtra("index",0);
+						adapter.removeItem(index);
+					}
+					break;
+			}
+		}catch (Exception e){
+			e.printStackTrace();
 		}
 	}
 }

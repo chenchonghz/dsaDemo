@@ -1,11 +1,11 @@
 package com.szrjk.adapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -13,25 +13,32 @@ import android.widget.RelativeLayout;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 
-import com.lidroid.xutils.BitmapUtils;
+import com.szrjk.config.Constant;
+import com.szrjk.dhome.AddressBookActivity;
+import com.szrjk.dhome.BaseActivity;
+import com.szrjk.dhome.OtherPeopleActivity;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.AddressCard;
 import com.szrjk.entity.AddressListEntity;
 import com.szrjk.util.ImageLoaderUtil;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AddressBookAdapter extends BaseAdapter implements SectionIndexer{
+	private String TAG = "AddressBookAdapter";
 	private List<AddressListEntity> list = null;
-	private Context mContext;
-	public AddressBookAdapter(Context mContext, List<AddressListEntity> sourceDateList) {
+	private AddressBookActivity mContext;
+	public AddressBookAdapter(AddressBookActivity mContext, List<AddressListEntity> sourceDateList) {
 		this.mContext = mContext;
 		if (sourceDateList == null) {
 			this.list = new ArrayList<AddressListEntity>();
 		}else{
 			this.list = sourceDateList;
 		}
-		
+
 	}
-	
+
 	/**
 	 * ��ListView��ݷ���仯ʱ,���ô˷���������ListView
 	 * @param list
@@ -72,14 +79,15 @@ public class AddressBookAdapter extends BaseAdapter implements SectionIndexer{
 			viewHolder.tv_jobtitle = (TextView) view.findViewById(R.id.tv_jobtitle);
 			viewHolder.tv_hospital = (TextView) view.findViewById(R.id.tv_hospital);
 			viewHolder.tv_department = (TextView) view.findViewById(R.id.tv_department);
+			viewHolder.rl_item = (RelativeLayout) view.findViewById(R.id.rl_item);
 			view.setTag(viewHolder);
 		} else {
 			viewHolder = (ViewHolder) view.getTag();
 		}
-		
+
 		//���position��ȡ���������ĸ��Char asciiֵ
 		int section = getSectionForPosition(position);
-		
+
 		//���ǰλ�õ��ڸ÷�������ĸ��Char��λ�� ������Ϊ�ǵ�һ�γ���
 		if(position == getPositionForSection(section)){
 			viewHolder.tvLetter.setVisibility(View.VISIBLE);
@@ -89,8 +97,8 @@ public class AddressBookAdapter extends BaseAdapter implements SectionIndexer{
 			viewHolder.tvLetter.setVisibility(View.GONE);
 			viewHolder.rl_zmu.setVisibility(View.GONE);
 		}
-		
-		AddressCard data = list.get(position).getUserCard();
+
+		final  AddressCard data = list.get(position).getUserCard();
 		//bitmapUtils.display(viewHolder.iv_smallphoto, data.getUserFaceUrl());
 		ImageLoaderUtil loaderUtil = new ImageLoaderUtil(mContext, data.getUserFaceUrl(),
 				viewHolder.iv_smallphoto,R.drawable. pic_downloadfailed_bg, R.drawable.pic_downloadfailed_bg);
@@ -104,11 +112,19 @@ public class AddressBookAdapter extends BaseAdapter implements SectionIndexer{
 		viewHolder.tv_jobtitle.setText(data.getProfessionalTitle());
 		viewHolder.tv_hospital.setText(data.getCompanyName());
 		viewHolder.tv_department.setText(data.getDeptName());
-		
+		viewHolder.rl_item.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				Intent intent = new Intent(mContext,OtherPeopleActivity.class);
+				Log.i(TAG, "onClick: " + data.toString());
+				intent.putExtra(Constant.USER_SEQ_ID, data.getUserSeqId());
+				intent.putExtra("index",position);
+				mContext.startActivityForResult(intent,3003);
+				//mContext.finish();
+			}
+		});
 		return view;
-
 	}
-	
+
 
 
 	final static class ViewHolder {
@@ -144,13 +160,13 @@ public class AddressBookAdapter extends BaseAdapter implements SectionIndexer{
 				return i;
 			}
 		}
-		
+
 		return -1;
 	}
-	
+
 	/**
 	 * ��ȡӢ�ĵ�����ĸ����Ӣ����ĸ��#���档
-	 * 
+	 *
 	 * @param str
 	 * @return
 	 */
@@ -167,5 +183,10 @@ public class AddressBookAdapter extends BaseAdapter implements SectionIndexer{
 	@Override
 	public Object[] getSections() {
 		return null;
+	}
+
+	public void removeItem(int p){
+		list.remove(p);
+		notifyDataSetChanged();
 	}
 }

@@ -30,15 +30,15 @@ import com.szrjk.entity.LibraryEntity;
 import com.szrjk.entity.PaperListInfo;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.util.ChangeWebViewFontSize;
+import com.szrjk.widget.HeaderView;
 
 @ContentView(R.layout.activity_diseasesdetailed)
 public class DiseasesDetailedActivity extends BaseActivity {
-	
+	@ViewInject(R.id.hv_dis)
+	private HeaderView hv_dis;
 	private DiseasesDetailedActivity instance;
 	private LibraryEntity detaileInfo;
 	private PaperListInfo paper;
-	@ViewInject(R.id.headerview_text_id)
-	private TextView headerview_text_id;
 	private String id;
 	@ViewInject(R.id.tv_con)
 	private TextView tv_con;
@@ -59,22 +59,23 @@ public class DiseasesDetailedActivity extends BaseActivity {
 		paper = (PaperListInfo) intent.getSerializableExtra("paper");
 		detaileInfo = (LibraryEntity) intent.getSerializableExtra(Constant.Library);
 		id = intent.getStringExtra("searchID");
+		TextView tv_title = hv_dis.getTextBtn();
 		if (detaileInfo==null&&id==null) {
 			String st = paper.getPaperTitle();
 			int slen = st.length();
 			if (slen > 5) {
-				headerview_text_id.setText(st.substring(0, 5) + "...");
+				tv_title.setText(st.substring(0, 5) + "...");
 			}else{
-				headerview_text_id.setText(detaileInfo.getName());
+				tv_title.setText(detaileInfo.getName());
 			}
 			id = paper.getKnowledgeId();
 		}else if(id==null){
 			String st = detaileInfo.getName();
 			int slen = st.length();
 			if (slen > 5) {
-				headerview_text_id.setText(st.substring(0, 5) + "...");
+				tv_title.setText(st.substring(0, 5) + "...");
 			}else{
-				headerview_text_id.setText(detaileInfo.getName());
+				tv_title.setText(detaileInfo.getName());
 			}
 			id = detaileInfo.getId();
 		}else{
@@ -84,9 +85,9 @@ public class DiseasesDetailedActivity extends BaseActivity {
 			Log.i("TAG", st);
 			int slen = st.length();
 			if (slen > 5) {
-				headerview_text_id.setText(st.substring(0, 5) + "...");
+				tv_title.setText(st.substring(0, 5) + "...");
 			}else{
-				headerview_text_id.setText(st);
+				tv_title.setText(st);
 			}
 		}
 //		showToast(instance, detaileInfo.toString(), 0);

@@ -41,10 +41,13 @@ import com.szrjk.sortlistview.PinyinComparator;
 import com.szrjk.sortlistview.SideBar;
 import com.szrjk.sortlistview.SideBar.OnTouchingLetterChangedListener;
 import com.szrjk.sortlistview.SortAdapter;
+import com.szrjk.widget.HeaderView;
 
 @ContentView(R.layout.activity_diseaseslist)
 public class DiseasesListActivity extends BaseActivity {
 
+	@ViewInject(R.id.hv_lib)
+	private HeaderView hv_lib;
 	private DiseasesListActivity instance;
 	private SortAdapter adapter;
 	private ClearEditText mClearEditText;
@@ -57,9 +60,6 @@ public class DiseasesListActivity extends BaseActivity {
 
 	@ViewInject(R.id.fl_content)
 	private FrameLayout fl_content;
-
-	@ViewInject(R.id.headerview_text_id)
-	private TextView headerview_text_id;
 
 	@ViewInject(R.id.btn_back)
 	private ImageView btn_back;
@@ -90,7 +90,8 @@ public class DiseasesListActivity extends BaseActivity {
 		Intent intent = instance.getIntent();
 		LibraryEntity linfo = (LibraryEntity) intent.getSerializableExtra(Constant.Library);
 		findDiseasesInfo(linfo.getId());
-		headerview_text_id.setText(linfo.getName());
+		TextView textView= hv_lib.getTextBtn();
+		textView.setText(linfo.getName());
 		initViews();
 		//获得疾病列表
 	}

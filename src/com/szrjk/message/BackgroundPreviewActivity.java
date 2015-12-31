@@ -19,12 +19,16 @@ import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.szrjk.dhome.BaseActivity;
-import com.szrjk.dhome.IntroduceActivity;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.TMessage;
 import com.szrjk.entity.UserCard;
 import com.szrjk.widget.HeaderView;
-
+/**
+ * @author ldr
+ * 2015-12-30 15:23:35
+ * description：用户选择图片之后的界面预览
+ * 传入参数：path
+ */
 @ContentView(R.layout.activity_background_preview)
 public class BackgroundPreviewActivity extends BaseActivity {
 

@@ -84,7 +84,7 @@ public class SearchMoreActivity extends FragmentActivity implements OnClickListe
 	@ViewInject(R.id.vp_search)
 	private ViewPager vp_search;
 	
-	private SearchMoreActivity instance;
+	public static SearchMoreActivity instance;
 	private List<TextView> tv_list = new ArrayList<TextView>();
 	private List<View> v_list = new ArrayList<View>();
 	private int[]id = {

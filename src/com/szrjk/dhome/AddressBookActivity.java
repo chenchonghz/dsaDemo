@@ -73,6 +73,7 @@ public class AddressBookActivity extends BaseActivity {
 	private Dialog alertdialog;
 	private AddressBookAdapter adapter;
 	private ClearEditText mClearEditText;
+	private boolean visi;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -81,6 +82,8 @@ public class AddressBookActivity extends BaseActivity {
 		//实例化汉字转拼音类
 		characterParser = CharacterParser.getInstance();
 		pinyinComparator = new AddressBookPinyinComparator();
+		//获得是否圈子可见
+		visi = this.getIntent().getBooleanExtra("visibility", true);
 		findDiseasesInfo();
 		initViews();
 	}
@@ -101,17 +104,19 @@ public class AddressBookActivity extends BaseActivity {
 		});
 
 		sortListView = (ListView) findViewById(R.id.country_lvcountry);
-		//加载头部
-		View header = View.inflate(instance, R.layout.address_book_header, null);
-		RelativeLayout rl = (RelativeLayout) header.findViewById(R.id.rl_addressbook_header);
-		rl.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				startActivity(new Intent(instance,MyCircleActivity.class));
-			}
-		});
-		sortListView.addHeaderView(header);
-		
+		//通讯录接入显示头部圈子。我的主页点击进入：不显示圈子
+		if (visi) {
+			//加载头部
+			View header = View.inflate(instance, R.layout.address_book_header, null);
+			RelativeLayout rl = (RelativeLayout) header.findViewById(R.id.rl_addressbook_header);
+			rl.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					startActivity(new Intent(instance,MyCircleActivity.class));
+				}
+			});
+			sortListView.addHeaderView(header);
+		}
 		//item点击事件
 		sortListView.setOnItemClickListener(new OnItemClickListener() {
 

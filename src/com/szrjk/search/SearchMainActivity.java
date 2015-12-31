@@ -29,6 +29,8 @@ public class SearchMainActivity extends BaseActivity implements SearchView.Searc
 	@ViewInject(R.id.tv_text)
 	private TextView tv;
 
+	public static SearchMainActivity instance;
+
 	/** 
 	 * 热搜框列表adapter 
 	 */  
@@ -91,6 +93,7 @@ public class SearchMainActivity extends BaseActivity implements SearchView.Searc
 		et_search.setFocusable(true);
 		et_search.setFocusableInTouchMode(true);
 		et_search.requestFocus();
+		instance = this;
 		initData();  
 		initViews(); 
 	}

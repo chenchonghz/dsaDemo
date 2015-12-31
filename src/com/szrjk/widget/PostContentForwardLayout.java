@@ -80,6 +80,7 @@ public class PostContentForwardLayout extends RelativeLayout
 		String postType = postAbstractInfo.getPostAbstract().getPostType();
 		this.ppostAbstractInfo = postAbstractInfo;
 
+		ll_case_detail_list.removeAllViews();
 		if(postAbstractInfo.getIsDelete()!=null&&postAbstractInfo.getIsDelete().equals("true")){
 			//已经被删除了
 			rl_post_foward_normal.setVisibility(View.VISIBLE);
@@ -93,7 +94,7 @@ public class PostContentForwardLayout extends RelativeLayout
 
 		final String postid = postAbstractInfo.getPostAbstract().getPostId();
 		final String userSeqId = postAbstractInfo.getPostAbstract().getUserSeqId();
-		ll_case_detail_list.removeAllViews();
+
 		if(postType.equals(Constant.NORMAL_POST)){
 			//普通贴子
 			rl_post_foward_normal.setVisibility(View.VISIBLE);

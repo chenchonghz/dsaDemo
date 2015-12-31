@@ -10,6 +10,7 @@ import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.exception.DbException;
 import com.lidroid.xutils.exception.HttpException;
@@ -105,9 +106,11 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 				messageView.setBackgroundColor(this.getResources().getColor(R.color.base_bg));
 			}else{
 				
-			Bitmap b1 = BitmapCompressImage.getimage(url);
-			Drawable drawable =new BitmapDrawable(b1);
-			messageView.setBackground(drawable);
+//			Bitmap b1 = BitmapCompressImage.getimage(url);
+//			Drawable drawable =new BitmapDrawable(b1);
+//			messageView.setBackground(drawable);
+				BitmapUtils bitmapUtils = new BitmapUtils(instance);
+				bitmapUtils.display(messageView,url);
 			}
 		
 			
@@ -510,4 +513,16 @@ public class MessageActivity extends BaseActivity implements OnClickListener {
 	//		super.onResume();
 	//	}
 
+	@Override
+	protected void onNewIntent(Intent intent) {
+		//这里是做设置背景图片的处理
+		try {
+			String path = new TMessage().getBackground(objUserCard);
+			BitmapUtils bitmapUtils = new BitmapUtils(instance);
+			bitmapUtils.display(messageView,path);
+		} catch (DbException e) {
+			e.printStackTrace();
+		}
+		super.onNewIntent(intent);
+	}
 }

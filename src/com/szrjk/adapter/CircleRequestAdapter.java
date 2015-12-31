@@ -20,12 +20,14 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.lidroid.xutils.exception.DbException;
 import com.lidroid.xutils.exception.HttpException;
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.CircleInfo;
 import com.szrjk.entity.CircleRequest;
 import com.szrjk.entity.ErrorInfo;
+import com.szrjk.entity.TCircleRequest;
 import com.szrjk.entity.UserCard;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
@@ -38,14 +40,20 @@ public class CircleRequestAdapter extends BaseAdapter {
 	private List<CircleRequest> list;
 	private LayoutInflater mInflater;
 	//	private static HashMap<String, Boolean> isSelected;
-	//此处String 是由UserID与CircleID拼接而成
+	//此处String 是由objUserID与CircleID拼接而成
 	private HashMap<String, Integer> state;
-	//I=邀请   R=请求
-	private static final int TYPE_AGREE = 0;
-	private static final int TYPE_INGORE = 1;
-	private static final int TYPE_AGREED = 2;
-	private static final int TYPE_INGORED = 3;
-	private static final int TYPE_MAX_COUNT = TYPE_INGORED + 1; 
+	//state
+	private static final int STATE_AGREE = 0;
+	private static final int STATE_AGREED = 1;
+	//type
+	//* 11: 邀请加入圈子 ； * 12: 请求加入圈子 ；* 14: 加入圈子成功；* 21: 成员退出；* 22: 群主踢出成员； * 23: 解散圈子
+	private static final int TYPE_INVITE = 11;
+	private static final int TYPE_REQUEST = 12;
+	private static final int TYPE_JOIN_SUCCESS = 14;
+	private static final int TYPE_MENBER_QUIT =21;
+	private static final int TYPE_KICK_OUT =22;
+	private static final int TYPE_DISSOLVE =23;
+	private static final int TYPE_MAX_COUNT = 6; 
 
 
 	public CircleRequestAdapter(Context mContext, List<CircleRequest> list,
@@ -91,6 +99,7 @@ public class CircleRequestAdapter extends BaseAdapter {
 		// TODO Auto-generated method stub
 		return TYPE_MAX_COUNT;
 	}
+	//获得hash表对应的
 	public String getKey(int position){
 		StringBuffer sb = new StringBuffer(list.get(position).getObjUserSeqId());
 		sb.append(list.get(position).getCoterieId());
@@ -101,12 +110,14 @@ public class CircleRequestAdapter extends BaseAdapter {
 	@Override
 	public int getItemViewType(int position) {
 		int type = 0;
-		String key = getKey(position);
-		switch (state.get(key)) {
-		case 0:type = TYPE_AGREE;break;
-		case 1:type = TYPE_INGORE;break;
-		case 2:type = TYPE_AGREED;break;
-		case 3:type = TYPE_INGORED;break;
+		String Rtype = list.get(position).getNotifyType();
+		switch (Integer.valueOf(Rtype)) {
+		case 11:type = TYPE_INVITE;break;//邀请
+		case 12:type = TYPE_REQUEST;break;//请求
+		case 14:type = TYPE_JOIN_SUCCESS;break;//加入成功
+		case 21:type = TYPE_MENBER_QUIT;break;//用户退出
+		case 22:type = TYPE_KICK_OUT;break;//被踢
+		case 23:type = TYPE_DISSOLVE;break;//解散
 		}
 		return type;
 	}
@@ -132,26 +143,21 @@ public class CircleRequestAdapter extends BaseAdapter {
 		viewHolder.usercard.setUser(userCard);
 		viewHolder.usercard.changeline(userCard);
 		try {
-			viewHolder.tv_date.setText(DisplayTimeUtil.displayTimeString(list.get(position).getCreateDate()));
+			viewHolder.tv_date.setText(DisplayTimeUtil.displayTimeString(list.get(position).getOpTime()));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-//		else{
-//			RelativeLayout.LayoutParams layoutParams = 
-//					new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 
-//							RelativeLayout.LayoutParams.WRAP_CONTENT);
-//			layoutParams.addRule(RelativeLayout.BELOW, R.id.request_usercard);
-//			layoutParams.setMargins(118, -30, 0, 0);
-//			viewHolder.tv_date.setLayoutParams(layoutParams);
-//		}
-		if (list.get(position).getInvitationType().equals("I")) {
-			viewHolder.tv_invitationType.setText("邀请您加入");
-		}else if (list.get(position).getInvitationType().equals("R")) {
-			viewHolder.tv_invitationType.setText("请求加入");
+		switch (type) {
+		case TYPE_INVITE:viewHolder.tv_invitationType.setText("邀请您加入圈");break;//邀请
+		case TYPE_REQUEST:viewHolder.tv_invitationType.setText("请求加入圈");break;//请求
+		case TYPE_JOIN_SUCCESS:viewHolder.tv_invitationType.setText("同意你加入圈");break;//加入成功
+		case TYPE_MENBER_QUIT:viewHolder.tv_invitationType.setText("已经退出圈");break;//用户退出
+		case TYPE_KICK_OUT:viewHolder.tv_invitationType.setText("将您请出圈");break;//被踢
+		case TYPE_DISSOLVE:viewHolder.tv_invitationType.setText("解散了圈");break;//解散
 		}
 		viewHolder.tv_circle_name.setText(list.get(position).getCoterieName());
+		//圈子用户名片过长的换行处理
 		if (userCard.getCompanyName().length()+userCard.getDeptName().length()>18) {
 			RelativeLayout.LayoutParams layoutParams = 
 					new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, 
@@ -166,20 +172,37 @@ public class CircleRequestAdapter extends BaseAdapter {
 			layoutParams2.setMargins(118, 0, 0, 0);
 			viewHolder.rly_fromCircle.setLayoutParams(layoutParams2);
 		}
+
 		viewHolder.rly_fromCircle.setOnClickListener(new requestBtnListener(viewHolder, position));
-		//		viewHolder.btn_agree.setOnClickListener(new requestBtnListener(viewHolder,position));
-		//		viewHolder.btn_ignore.setOnClickListener(new requestBtnListener(viewHolder,position));
-		//		viewHolder.btn_agree.setOnLongClickListener(new requestBtnLongListener(viewHolder, position));
+		//按钮设置
 		switch (type) {
-		case TYPE_AGREE:
-			viewHolder.btn_agree.setOnClickListener(new requestBtnListener(viewHolder,position));
-			viewHolder.btn_agree.setOnLongClickListener(new requestBtnLongListener(viewHolder, position));
-			break;
-		case TYPE_AGREED:
-			viewHolder.btn_agree.setBackgroundResource(R.drawable.icon_request2);
-			viewHolder.btn_agree.setText("已同意");
-			viewHolder.btn_agree.setClickable(false);
-			break;
+		case TYPE_INVITE:
+			switch (state.get(getKey(position))) {
+			case STATE_AGREE:
+				viewHolder.btn_agree.setOnClickListener(new requestBtnListener(viewHolder,position));
+				break;
+			case STATE_AGREED:
+				viewHolder.btn_agree.setBackgroundResource(R.drawable.icon_request2);
+				viewHolder.btn_agree.setText("已同意");
+				viewHolder.btn_agree.setClickable(false);
+				break;
+			}
+		case TYPE_REQUEST:
+			switch (state.get(getKey(position))) {
+			case STATE_AGREE:
+				viewHolder.btn_agree.setOnClickListener(new requestBtnListener(viewHolder,position));
+				break;
+			case STATE_AGREED:
+				viewHolder.btn_agree.setBackgroundResource(R.drawable.icon_request2);
+				viewHolder.btn_agree.setText("已同意");
+				viewHolder.btn_agree.setClickable(false);
+				break;
+			}
+		case TYPE_JOIN_SUCCESS:viewHolder.btn_agree.setVisibility(View.GONE);break;//加入成功
+		case TYPE_MENBER_QUIT:viewHolder.btn_agree.setVisibility(View.GONE);break;//用户退出
+		case TYPE_KICK_OUT:viewHolder.btn_agree.setVisibility(View.GONE);break;//被踢
+		case TYPE_DISSOLVE:viewHolder.btn_agree.setVisibility(View.GONE);break;//解散
+
 		}
 		return convertview;
 	}
@@ -230,14 +253,7 @@ public class CircleRequestAdapter extends BaseAdapter {
 		public void onClick(View view) {
 			switch (view.getId()) {
 			case R.id.bt_request:
-				//				if (isAgree==0) {
-				//					viewHolder.btn_agree.setBackgroundResource(R.drawable.icon_request2);
-				//					viewHolder.btn_agree.setText("已同意");
 				sendAgree();
-				//					isSelected.put(list.get(position).getCoterieId(), true);
-				//					checkRequset();
-				//					isAgree =1;
-				//				}
 				break;
 			case R.id.rly_fromcircle:
 				getcircle(position);
@@ -264,7 +280,7 @@ public class CircleRequestAdapter extends BaseAdapter {
 			paramMap.put("ServiceName", "dealCoterieInvitation");
 			Map<String, Object> busiParams = new HashMap<String, Object>();
 			busiParams.put("userSeqId",list.get(position).getUserSeqId());//目标用户ID是上一层传过来
-			busiParams.put("invitationId", list.get(position).getInvitationId());
+			busiParams.put("pkId", list.get(position).getPkID());
 			busiParams.put("coterieId", list.get(position).getCoterieId());
 			busiParams.put("isAgree", "Y");
 			paramMap.put("BusiParams", busiParams);
@@ -275,46 +291,15 @@ public class CircleRequestAdapter extends BaseAdapter {
 							jsonObject.getString("ErrorInfo"), ErrorInfo.class);
 					if (Constant.REQUESTCODE.equals(errorObj.getReturnCode()))
 					{
+						CircleRequest item = list.get(position);
+						try {
+							new TCircleRequest().agreeRequest(item.getObjUserSeqId(), item.getCoterieId(), item.getNotifyType());
+						} catch (DbException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						Toast.makeText(mContext, "已同意", Toast.LENGTH_SHORT).show();
-						state.put(getKey(position), 2);
-						notifyDataSetChanged();
-					}
-				}
-
-				@Override
-				public void start() {
-
-				}
-
-				@Override
-				public void loading(long total, long current, boolean isUploading) {
-
-				}
-
-				@Override
-				public void failure(HttpException exception, JSONObject jobj) {
-
-				}
-			});
-		}
-		private void sendIgnore() {
-			HashMap<String, Object> paramMap = new HashMap<String, Object>();
-			paramMap.put("ServiceName", "dealCoterieInvitation");
-			Map<String, Object> busiParams = new HashMap<String, Object>();
-			busiParams.put("userSeqId",list.get(position).getUserSeqId());//目标用户ID是上一层传过来
-			busiParams.put("invitationId", list.get(position).getInvitationId());
-			busiParams.put("coterieId", list.get(position).getCoterieId());
-			busiParams.put("isAgree", "N");
-			paramMap.put("BusiParams", busiParams);
-			DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
-				@Override
-				public void success(JSONObject jsonObject) {
-					ErrorInfo errorObj = JSON.parseObject(
-							jsonObject.getString("ErrorInfo"), ErrorInfo.class);
-					if (Constant.REQUESTCODE.equals(errorObj.getReturnCode()))
-					{
-						Toast.makeText(mContext, "已忽略", Toast.LENGTH_SHORT).show();
-						state.put(getKey(position), 3);
+						state.put(getKey(position), 1);
 						notifyDataSetChanged();
 					}
 				}

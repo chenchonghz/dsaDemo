@@ -277,7 +277,8 @@ public class MoreFragment extends Fragment {
 
 	@OnClick(R.id.ll_friend)
 	public void friendClick(View view) {
-		Intent intent = new Intent(instance, FriendActivity.class);
+		Intent intent = new Intent(instance, AddressBookActivity.class);
+		intent.putExtra("visibility", false);
 		startActivity(intent);
 	}
 

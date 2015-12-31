@@ -233,43 +233,6 @@ public class FriendRequestAdapter extends BaseAdapter {
 //			}
 //		}
 
-		private void sendIgnore() {
-			HashMap<String, Object> paramMap = new HashMap<String, Object>();
-			paramMap.put("ServiceName", "handleUserFriendRequest");
-			Map<String, Object> busiParams = new HashMap<String, Object>();
-			busiParams.put("userSeqId", Constant.userInfo.getUserSeqId());
-			busiParams.put("srcUserSeqId",list.get(position).getUserCard().getUserSeqId());
-			busiParams.put("operateType", String.valueOf(3));
-			paramMap.put("BusiParams", busiParams);
-			Log.i("TAG", paramMap.toString());
-			DHttpService.httpPost(paramMap, new AbstractDhomeRequestCallBack() {
-				@Override
-				public void success(JSONObject jsonObject) {
-					ErrorInfo errorObj = JSON.parseObject(
-							jsonObject.getString("ErrorInfo"), ErrorInfo.class);
-					if (Constant.REQUESTCODE.equals(errorObj.getReturnCode()))
-					{
-						Toast.makeText(mContext, "已忽略", Toast.LENGTH_SHORT).show();
-						state.put(list.get(position).getUserCard().getUserSeqId(), 3);
-						notifyDataSetChanged();
-					}
-				}
-
-				@Override
-				public void start() {
-
-				}
-				@Override
-				public void loading(long total, long current, boolean isUploading) {
-
-				}
-				@Override
-				public void failure(HttpException exception, JSONObject jobj) {
-					ToastUtils.showMessage(mContext, "请求失败");
-				}
-			});
-
-		}
 
 		private void sendAgree() {
 			HashMap<String, Object> paramMap = new HashMap<String, Object>();

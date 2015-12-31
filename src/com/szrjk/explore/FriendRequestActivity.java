@@ -131,6 +131,7 @@ public class FriendRequestActivity extends BaseActivity {
 						}
 						//需要混合旧表和新表
 						for (int i = 0; i < newrequest.size(); i++) {
+							//判断此item表内是否存在：0不存在，1存在
 							int a = 0;
 							for (int j = 0; j <requestlist.size(); j++) {
 								if (requestlist.get(j).getUserCard().getUserSeqId()

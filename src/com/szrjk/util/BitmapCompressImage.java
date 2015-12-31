@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
+import android.util.Log;
 
 public class BitmapCompressImage {
 	
@@ -52,7 +53,10 @@ public class BitmapCompressImage {
 	 * @return
 	 */
 	public static Bitmap compressImage(Bitmap image) {
-
+		if (image == null){
+			Log.i("comp img","bp is null");
+			return null;
+		}
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		image.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
 		int options = 100;

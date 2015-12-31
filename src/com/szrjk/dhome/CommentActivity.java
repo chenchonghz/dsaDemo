@@ -1,8 +1,5 @@
 package com.szrjk.dhome;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -31,14 +28,20 @@ import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.util.CheckTextNumber;
 import com.szrjk.util.ShowDialogUtil;
 import com.szrjk.widget.BootstrapEditText;
+import com.szrjk.widget.HeaderView;
 import com.szrjk.widget.PopWindowComment;
+
+import java.util.HashMap;
+import java.util.Map;
 /**
- * 
  * @author ldr、
+ * time:2015-12-31 14:44:45
  */
 @ContentView(R.layout.activity_comment)
-public class CommentActivity extends BaseActivity implements OnClickListener{
-	
+public class CommentActivity extends BaseActivity {
+
+	@ViewInject(R.id.hv_comment)
+	private HeaderView hv_comment;
 	@ViewInject(R.id.ll_comment)
 	private LinearLayout ll_comment;
 	private Dialog dialog;
@@ -95,23 +98,28 @@ public class CommentActivity extends BaseActivity implements OnClickListener{
 			commentLevel = "0" ;
 			Log.i("commentLevel", commentLevel);
 		}
-		iv_back.setOnClickListener(this);
-		tv_issue.setOnClickListener(this);
 		//检查字数
 		CheckTextNumber.setEditTextChangeListener(et_content, tv_content, 500);
+		setHeader();
 	}
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.iv_back:
-			onBackPressed();
-			break;
-		case R.id.tv_issue:
-			//检测是否输入了内容。如果没问题就提交服务器、销毁ac
-			checkData();
-			break;
 
-		}
+	private void setHeader() {
+		//返回
+		hv_comment.setBtnBackOnClick(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				onBackPressed();
+			}
+		});
+
+		//确定
+		hv_comment.showTextBtn("发布", new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				//检测是否输入了内容。如果没问题就提交服务器、销毁ac
+				checkData();
+			}
+		});
 	}
 
 	private void checkData() {

@@ -36,9 +36,9 @@ import com.szrjk.self.more.album.PhotoUpAlbumHelper.GetAlbumList;
 import com.szrjk.util.AlbumHelper;
 import com.szrjk.widget.PictureListPopup;
 /**
- * 
  * @author Administrator
  * 新图库
+ * time:2015-12-31 14:37:28
  */
 @ContentView(R.layout.activity_album_gallery)
 public class AlbumGalleryActivity extends BaseActivity {

@@ -25,10 +25,15 @@ import com.szrjk.dhome.BaseActivity;
 import com.szrjk.dhome.R;
 import com.szrjk.widget.DeptButton;
 import com.szrjk.widget.FlowDeptLayout;
+import com.szrjk.widget.HeaderView;
 
 @ContentView(R.layout.activity_dept_gv)
 public class DepartmentGVActivity extends BaseActivity
 {
+	//头部控件
+	@ViewInject(R.id.hv_dept)
+	private HeaderView hv_dept;
+
 	@ViewInject(R.id.gv_dep)
 	private com.szrjk.widget.IndexGridView  gv_dep;
 
@@ -117,7 +122,36 @@ public class DepartmentGVActivity extends BaseActivity
 			gridViewAdapter = new DeptGridViewAdapter(this, listKey,listValue,gv_dep);
 			gv_dep.setAdapter(gridViewAdapter);
 		}
+		setHeader();
 	}
+
+	private void setHeader() {
+		//返回按钮
+		hv_dept.setBtnBackOnClick(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent i = new Intent();
+				Bundle b = new Bundle();
+				b.putString("DeptValues", "null");
+				b.putString("DeptIds", "null");
+				intent.putExtras(bundle);
+				setResult(Activity.RESULT_OK,i);
+				finish();
+			}
+		});
+		//确定按钮
+		hv_dept.showTextBtn("确定", new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				try{
+					returnData();
+				}catch (Exception e){
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
 	//设置点击事件、包含删除操作
 	@OnItemClick(R.id.gv_dep)
 	public void checkItemClick(AdapterView<?> adapterView, View view, int position,long id) {
@@ -579,18 +613,6 @@ public class DepartmentGVActivity extends BaseActivity
 		addButton(view);
 	}
 
-
-	@OnClick(R.id.tv_submit)
-	public void submitClick(View v)
-	{
-		switch (v.getId())
-		{
-		case R.id.tv_submit:
-			returnData();
-			break;
-		}
-	}
-
 	private void returnData() {
 		if (listKey.isEmpty()) {
 			finish();
@@ -621,19 +643,6 @@ public class DepartmentGVActivity extends BaseActivity
 			finish();
 		}
 	}
-	@OnClick(R.id.btn_back)
-	public void onBack(View v){
-		Intent i = new Intent();
-		Bundle b = new Bundle();
-		b.putString("DeptValues", "null");
-		b.putString("DeptIds", "null");
-		intent.putExtras(bundle);
-		setResult(Activity.RESULT_OK,i);
-		finish();
-	}
-
-
-
 	private void getTextviewHeight() {
 		ViewTreeObserver vto2 = tv_xxgnk.getViewTreeObserver();    
 		vto2.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {  

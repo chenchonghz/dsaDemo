@@ -49,8 +49,6 @@ import com.szrjk.widget.ListPopup;
 public class MainAuthenticationActivity extends BaseActivity implements OnClickListener{
 
 	private MainAuthenticationActivity instance;
-	@ViewInject(R.id.lly_cancel)//返回 
-	private LinearLayout lly_cancle;
 	@ViewInject(R.id.lv_auth)
 	private ListView lv_auth;
 	@ViewInject(R.id.bt_new)
@@ -67,7 +65,6 @@ public class MainAuthenticationActivity extends BaseActivity implements OnClickL
 		ViewUtils.inject(this);
 		getUserAuthenticationInfo();
 		bt_new.setOnClickListener(this);
-		lly_cancle.setOnClickListener(this);
 	}
 
 	private void getUserAuthenticationInfo(){
@@ -190,6 +187,7 @@ public class MainAuthenticationActivity extends BaseActivity implements OnClickL
 				@Override
 				public void onClick(View v) {
 					startActivity(new Intent(instance,BackgroundSettingActivity.class));
+//					startActivity(new Intent(instance,OtherActivity.class));
 				}
 			});
 			
@@ -204,9 +202,6 @@ public class MainAuthenticationActivity extends BaseActivity implements OnClickL
 			switch (v.getId()) {
 			case R.id.bt_new:
 				showPopNew(bt_new);
-				break;
-			case R.id.lly_cancel:
-				finish();
 				break;
 			}
 		} catch (Exception e) {

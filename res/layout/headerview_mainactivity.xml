@@ -19,6 +19,7 @@
     <ImageView
         android:id="@+id/iv_add"
         android:layout_width="wrap_content"
+        style="@style/PopButton"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
@@ -29,6 +30,7 @@
     <ImageView
         android:id="@+id/iv_search"
         android:layout_width="wrap_content"
+        style="@style/PopButton"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/margin_20dp"
@@ -38,6 +40,7 @@
 
     <ImageView
         android:id="@+id/iv_linklist"
+        style="@style/PopButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"

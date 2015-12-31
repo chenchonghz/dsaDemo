@@ -57,7 +57,7 @@ public class CaseSharePostActivity extends BaseActivity {
 		instance = this;
 		ViewUtils.inject(instance);
 		initActivityData();
-		
+
 	}
 
 	private void initActivityData() {

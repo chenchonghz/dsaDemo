@@ -39,7 +39,6 @@
             android:hint="关键字"
             android:imeOptions="actionSearch"
             android:inputType="text"
-            android:paddingBottom="5dp"
             android:paddingLeft="@dimen/search_txt_padding_left"
             android:singleLine="true"
             android:textSize="@dimen/font_size_middle" />
@@ -50,18 +49,18 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="-50dp"
+            android:layout_marginRight="20dp"
             style="@style/PopButton"
-            android:src="@drawable/dir_choose"
+            android:src="@drawable/icon_delete_28_2x"
             android:visibility="gone" />
 
         <LinearLayout
             android:id="@+id/lly_search"
             style="@style/PopButton"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="@dimen/header_height"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="10dp"
             android:gravity="center">
-
             <!--<ImageView
                 android:id="@+id/iv_search"
                 android:layout_width="wrap_content"
@@ -69,9 +68,9 @@
                 android:src="@drawable/icon_search_gray36" />-->
 
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:textSize="16dp" android:text="搜索" />
+                      android:textColor="@color/font_titleanduname"
+                      android:textSize="16dp" android:text="搜索" />
         </LinearLayout>
-
     </LinearLayout>
 	<View 
 	    android:layout_width="match_parent"
@@ -79,7 +78,7 @@
 	    android:background="@color/search_bottom_bg"
 	    android:layout_marginTop="-6dip"
 	    android:layout_marginLeft="50dip"
-	    android:layout_marginRight="12dip"
+	    android:layout_marginRight="50dip"
 	    android:layout_below="@id/lly_searchView"/>
     <ListView
         android:id="@+id/lv_search_tips"

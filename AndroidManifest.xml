@@ -880,6 +880,16 @@
             android:theme="@style/Theme.dhome"
             android:windowSoftInputMode="adjustNothing" >
         </activity>
+
+        <activity
+                android:name="com.szrjk.explore.CaseSharePostMessageActivity"
+                android:configChanges="orientation|screenSize"
+                android:theme="@style/Theme.dhome"
+                android:windowSoftInputMode="adjustNothing" >
+        </activity>
+
+
+
     </application>
 
 </manifest>

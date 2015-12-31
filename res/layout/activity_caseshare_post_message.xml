@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:headerattr="http://schemas.android.com/apk/res/com.szrjk.dhome"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_bg"
+    android:orientation="vertical"
+    tools:context="com.szrjk.self.CaseSharePostActivity" >
+    
+    <com.szrjk.widget.HeaderView
+        android:id="@+id/hv_caseshare"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        headerattr:htextstr="@string/caseshare_text" >
+    </com.szrjk.widget.HeaderView>
+    
+     <com.szrjk.pull.PullToRefreshListView
+        android:id="@+id/lv_caseshare_postlist"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:divider="@color/base_bg"
+        android:dividerHeight="10dp"
+        android:descendantFocusability="blocksDescendants"
+        android:fastScrollEnabled="false" />
+
+
+</LinearLayout>

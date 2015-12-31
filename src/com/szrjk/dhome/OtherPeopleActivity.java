@@ -1,11 +1,5 @@
 package com.szrjk.dhome;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -20,9 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.exception.DbException;
 import com.lidroid.xutils.exception.HttpException;
@@ -45,6 +39,12 @@ import com.szrjk.self.more.MyAttentionActivity;
 import com.szrjk.self.more.MyFansActivity;
 import com.szrjk.util.ImageLoaderUtil;
 import com.szrjk.util.ToastUtils;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 @ContentView(R.layout.activity_otherpeople)
 public class OtherPeopleActivity extends BaseActivity implements OnClickListener {
 
@@ -111,6 +111,8 @@ public class OtherPeopleActivity extends BaseActivity implements OnClickListener
 	private PostListComm postListComm;
 	private String objId;
 	private Dialog dialog;
+	public String isFriends ;
+	private int index;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)	{
 		super.onCreate(savedInstanceState);
@@ -124,6 +126,7 @@ public class OtherPeopleActivity extends BaseActivity implements OnClickListener
 		userInfo = Constant.userInfo;
 		userId = Constant.userInfo.getUserSeqId();
 		objId = instance.getIntent().getStringExtra(Constant.USER_SEQ_ID);
+		index = this.getIntent().getIntExtra("index",0);
 		//请求数据
 		postListComm = new PostListComm(instance, objId, mPullRefreshListView, new IPostListCallback() {
 			@Override
@@ -493,6 +496,10 @@ public class OtherPeopleActivity extends BaseActivity implements OnClickListener
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.iv_back:
+			Intent intent = new Intent(instance,AddressBookActivity.class);
+			intent.putExtra("index",index);
+			intent.putExtra("isFriend",isFriends);
+			setResult(RESULT_OK,intent);
 			instance.finish();
 			break;
 		case R.id.fl_focus:
@@ -505,10 +512,10 @@ public class OtherPeopleActivity extends BaseActivity implements OnClickListener
 			sendFriendRequest();
 			break;
 		case R.id.iv_self_avatar:
-			Intent intent = new Intent(instance,UserAvatarImageChangerActivity.class);
-			intent.putExtra("image", homePageInfo.getUserFaceUrl());
-			intent.putExtra("code", Constant.PICTURE_OTHER_CODE);
-			startActivity(intent);
+			Intent intent1 = new Intent(instance,UserAvatarImageChangerActivity.class);
+			intent1.putExtra("image", homePageInfo.getUserFaceUrl());
+			intent1.putExtra("code", Constant.PICTURE_OTHER_CODE);
+			startActivity(intent1);
 			break;
 		case R.id.fl_message:
 			//			showToast(instance, "未开发，测试跳转系统管理员主页", 0);
@@ -589,6 +596,8 @@ public class OtherPeopleActivity extends BaseActivity implements OnClickListener
 						fl_message.setVisibility(View.GONE);
 						//						iv_addfriends.setImageResource(R.drawable.icon_addfriends);
 						//						tv_addFriends.setText(R.string.addfriends);
+						//取消了好友;就标记，因为返回通讯录的时候，之前的好友还显示着
+						isFriends = "no";
 						findUserInfo();
 					}
 				}
@@ -633,6 +642,7 @@ public class OtherPeopleActivity extends BaseActivity implements OnClickListener
 				if(Constant.REQUESTCODE.equals(errorObj.getReturnCode())){
 					if (state.equals("D")) {
 						showToast(instance, "取消关注成功", 1);
+						isFriends = "no";
 						findUserInfo();
 						//						iv_focus.setImageResource(R.drawable.icon_addfocus);
 						//						tv_focus.setText(R.string.addfocus);
@@ -650,5 +660,13 @@ public class OtherPeopleActivity extends BaseActivity implements OnClickListener
 
 	}
 
+	@Override
+	public void onBackPressed() {
+		Intent intent = new Intent(instance,AddressBookActivity.class);
+		intent.putExtra("index",index);
+		intent.putExtra("isFriend",isFriends);
+		setResult(RESULT_OK,intent);
+		finish();
+	}
 }
 

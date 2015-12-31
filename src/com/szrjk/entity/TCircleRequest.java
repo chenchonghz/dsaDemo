@@ -253,7 +253,7 @@ public class TCircleRequest extends AbstractUserEntity<TCircleRequest>{
 		}
 		return statelist;
 	}
-	//更改请求状态（同意→已同意）
+	//更改请求状态（同意→已同意） 传参：通知发起人id，圈子id，通知类型
 	public void agreeRequest(String Objuserid,String circleID,String NotifyType) throws DbException{
 		List<TCircleRequest> ulist = userdb.findAll(Selector.from(TCircleRequest.class)
 				.where("objUserSeqId", "=",Objuserid)
@@ -293,7 +293,7 @@ public class TCircleRequest extends AbstractUserEntity<TCircleRequest>{
 			Log.i("TAG", "delete all complete");
 		}
 	}
-	//获得hash表对应的键值
+	//获得hash表的key值
 	public String getKey(String userID,String circleID){
 		StringBuffer sb = new StringBuffer(userID);
 		sb.append(circleID);

@@ -20,12 +20,14 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.lidroid.xutils.exception.DbException;
 import com.lidroid.xutils.exception.HttpException;
 import com.szrjk.config.Constant;
 import com.szrjk.dhome.R;
 import com.szrjk.entity.CircleInfo;
 import com.szrjk.entity.CircleRequest;
 import com.szrjk.entity.ErrorInfo;
+import com.szrjk.entity.TCircleRequest;
 import com.szrjk.entity.UserCard;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
@@ -289,6 +291,13 @@ public class CircleRequestAdapter extends BaseAdapter {
 							jsonObject.getString("ErrorInfo"), ErrorInfo.class);
 					if (Constant.REQUESTCODE.equals(errorObj.getReturnCode()))
 					{
+						CircleRequest item = list.get(position);
+						try {
+							new TCircleRequest().agreeRequest(item.getObjUserSeqId(), item.getCoterieId(), item.getNotifyType());
+						} catch (DbException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						Toast.makeText(mContext, "已同意", Toast.LENGTH_SHORT).show();
 						state.put(getKey(position), 1);
 						notifyDataSetChanged();

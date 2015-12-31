@@ -8,6 +8,7 @@ import java.util.Map;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.exception.DbException;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -17,6 +18,8 @@ import com.szrjk.entity.CircleRequest;
 import com.szrjk.entity.DialogItem;
 import com.szrjk.entity.DialogItemCallback;
 import com.szrjk.entity.ErrorInfo;
+import com.szrjk.entity.TCircleRequest;
+import com.szrjk.entity.TFriendRequest;
 import com.szrjk.http.AbstractDhomeRequestCallBack;
 import com.szrjk.http.DHttpService;
 import com.szrjk.self.CircleHomepageActivity;
@@ -45,6 +48,7 @@ public class CircleRequestActivity extends Activity {
 	private HashMap<String, Integer> RequestState;
 	private CircleRequestActivity instance;
 	private CircleRequestAdapter adapter;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -55,9 +59,24 @@ public class CircleRequestActivity extends Activity {
 				ToastUtils.showMessage(instance, "国明请吃饭");
 			}
 		});
+		//初始化表
 		RequestState = new HashMap<String, Integer>();
-		getNewRequests();
+		getOldRequests();
+
 	}
+	//获取数据库的通知列表和状态表
+	private void getOldRequests() {
+		try {
+			requestList = new TCircleRequest().getlist(Constant.userInfo.getUserSeqId());
+			RequestState = new TCircleRequest().getStatelist(Constant.userInfo.getUserSeqId());
+			getNewRequests();
+		} catch (DbException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	//从后台拉取新的通知
 	private void getNewRequests() {
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("ServiceName", "dealCoterieInvitation");
@@ -78,13 +97,51 @@ public class CircleRequestActivity extends Activity {
 							.getJSONObject("ReturnInfo");
 					if (returnObj==null) {
 					}else{
-						requestList=JSON.parseArray(
+						List<CircleRequest> NewRequestList=JSON.parseArray(
 								returnObj.getString("notifyList"),CircleRequest.class);
-						for (CircleRequest rl:requestList) {
+						HashMap<String, Integer > NewRequestState = new HashMap<String, Integer>();
+						for (CircleRequest rl:NewRequestList) {
 							StringBuffer sb = new StringBuffer(rl.getObjUserSeqId());
 							sb.append(rl.getCoterieId());
 							Log.i("TAG", sb.toString());
-							RequestState.put(sb.toString(), 0);
+							NewRequestState.put(sb.toString(), 0);
+						}
+						//将新表放进数据库
+						try {
+							new TCircleRequest().addrequest(NewRequestList, NewRequestState);
+						} catch (DbException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						//混合两个表
+						for (int i = 0; i < NewRequestList.size(); i++) {
+							//判断此item表内是否存在：0不存在，1存在
+							int a = 0;
+							for (int j = 0; j <requestList.size(); j++) {
+								if (requestList.get(j).getUserSeqId()
+										.equals(NewRequestList.get(i).getUserSeqId())
+										&&requestList.get(j).getCoterieId()
+										.equals(NewRequestList.get(i).getCoterieId())
+										&&requestList.get(j).getNotifyType()
+										.equals(NewRequestList.get(i).getNotifyType())) 
+								{
+									requestList.remove(j);
+									requestList.add(0,NewRequestList.get(i));
+									a=1;
+									break;
+								}
+							}
+							if (a==0) {
+								requestList.add(0, NewRequestList.get(i));
+							}
+							//如果是圈子邀请或者圈子请求，写入状态值
+							if (NewRequestList.get(i).getNotifyType().equals("11")
+									||NewRequestList.get(i).getNotifyType().equals("12")) 
+							{
+								String key = getKey(NewRequestList.get(i).getObjUserSeqId(), 
+										NewRequestList.get(i).getCoterieId());
+								RequestState.put(key,NewRequestState.get(key));
+							}
 						}
 						setAdapter(requestList,RequestState);
 					}
@@ -117,7 +174,7 @@ public class CircleRequestActivity extends Activity {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				Intent intent = new Intent(instance, CircleHomepageActivity.class);
-
+				
 			}
 		});
 		lv_circle_request.setOnItemLongClickListener(new OnItemLongClickListener() {
@@ -140,7 +197,21 @@ public class CircleRequestActivity extends Activity {
 	}
 	//长按删除逻辑
 	public void deleteItem(final int position){
+		try {
+			new TCircleRequest().deleteRequest(requestList.get(position));
+			requestList.remove(position);
+			adapter.notifyDataSetChanged();
+		} catch (DbException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	
+	//获得hash表的key值
+	public String getKey(String userID,String circleID){
+		StringBuffer sb = new StringBuffer(userID);
+		sb.append(circleID);
+		String key = sb.toString();
+		return key;
+	}
 
 }
